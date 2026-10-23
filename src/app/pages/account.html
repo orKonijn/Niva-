@@ -31,17 +31,17 @@
       </ul>
       <div class="flex flex-wrap gap-3">
         <button
-          class="account-button"
+          class="account-button gap-2"
           [disabled]="linking() || !session.config().google || methods().includes('google')"
           (click)="link('google')"
         >
-          קישור Google</button
+          <niva-provider-logo provider="google" />קישור Google</button
         ><button
-          class="account-button"
+          class="account-button gap-2"
           [disabled]="linking() || !session.config().apple || methods().includes('apple')"
           (click)="link('apple')"
         >
-          קישור Apple</button
+          <niva-provider-logo provider="apple" />קישור Apple</button
         ><a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
       </div>
       <p class="mb-0 mt-4 text-xs">

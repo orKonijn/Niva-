@@ -16,19 +16,19 @@
       <div class="my-6 grid gap-3">
         <button
           type="button"
-          class="account-button"
+          class="account-button gap-2"
           [disabled]="busy() || !session.config().google"
           (click)="social('google')"
         >
-          המשך עם Google
+          <niva-provider-logo provider="google" />המשך עם Google
         </button>
         <button
           type="button"
-          class="account-button"
+          class="account-button gap-2"
           [disabled]="busy() || !session.config().apple"
           (click)="social('apple')"
         >
-          המשך עם Apple
+          <niva-provider-logo provider="apple" />המשך עם Apple
         </button>
       </div>
       @if (!session.config().google || !session.config().apple) {

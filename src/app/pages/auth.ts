@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
+import { ProviderLogo } from '../shared/provider-logo';
 import { AccountSession, safeReturn } from '../core/account-session';
 @Component({
-  imports: [FormsModule, RouterLink, Brand],
+  imports: [FormsModule, RouterLink, Brand, ProviderLogo],
   templateUrl: './auth.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

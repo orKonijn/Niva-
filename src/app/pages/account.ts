@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
+import { ProviderLogo } from '../shared/provider-logo';
 import { AppStore, type ImportPreview } from '../core/app-store';
 import { AccountSession } from '../core/account-session';
 import { categoryLabel, districtLabel, workStylesLabel } from '../core/preferences';
 @Component({
-  imports: [FormsModule, RouterLink, Brand],
+  imports: [FormsModule, RouterLink, Brand, ProviderLogo],
   templateUrl: './account.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
