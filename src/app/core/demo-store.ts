@@ -1,106 +1,19 @@
+import { Job } from './models/job';
+import { DemoApplication } from './models/demo-application';
+import { JOBS } from './data/sample-jobs';
+export type { Job } from './models/job';
+export { JOBS } from './data/sample-jobs';
 import { Injectable, computed, signal } from '@angular/core';
-export interface Job {
-  id: string;
-  title: string;
-  company: string;
-  initials: string;
-  color: string;
-  location: string;
-  model: string;
-  category: string;
-  posted: string;
-  description: string;
-  skills: string[];
-  reason: string;
-}
-export interface Preferences {
-  role: string;
-  location: string;
-  model: string;
-  exclusions: string;
-}
-export interface DemoApplication {
-  jobId: string;
-  approvedAt: string;
-}
-export const JOBS: readonly Job[] = [
-  {
-    id: 'product-designer',
-    title: 'Product Designer',
-    company: 'Forma Studio',
-    initials: 'f',
-    color: '#7758bf',
-    location: 'תל אביב',
-    model: 'היברידי',
-    category: 'design',
-    posted: 'לפני שעתיים',
-    description:
-      'עיצוב חוויות דיגיטליות משלב המחקר ועד למוצר. עבודה בצוות קטן שמאמין בפרטים גדולים, יחד עם אנשי פיתוח ומוצר.',
-    skills: ['Figma', 'UX research', 'Design systems'],
-    reason: 'עיצוב מוצר, עבודה היברידית וצוות רב תחומי',
-  },
-  {
-    id: 'frontend-engineer',
-    title: 'Frontend Engineer',
-    company: 'Orbit',
-    initials: 'o',
-    color: '#256b59',
-    location: 'תל אביב',
-    model: 'היברידי',
-    category: 'engineering',
-    posted: 'לפני 4 שעות',
-    description:
-      'פיתוח ממשקים נגישים ומהירים למוצר שעוזר לצוותים לעבוד טוב יותר. אחריות על רכיבים, בדיקות ושיתוף פעולה עם צוות העיצוב.',
-    skills: ['Angular', 'TypeScript', 'Accessibility'],
-    reason: 'פיתוח ממשקים, TypeScript ומודל עבודה היברידי',
-  },
-  {
-    id: 'ux-designer',
-    title: 'UX/UI Designer',
-    company: 'Monday Lane',
-    initials: 'm',
-    color: '#c46b39',
-    location: 'מרחוק',
-    model: 'מרחוק',
-    category: 'design',
-    posted: 'היום',
-    description:
-      'הובלת מחקר ועיצוב עבור חוויית עבודה פשוטה וברורה. יצירת מסעות משתמש, אב טיפוס וממשקים רספונסיביים.',
-    skills: ['Prototyping', 'User research', 'Figma'],
-    reason: 'מחקר משתמשים, עיצוב חוויות ועבודה מרחוק',
-  },
-  {
-    id: 'product-manager',
-    title: 'Product Manager',
-    company: 'Bloom',
-    initials: 'b',
-    color: '#3978ad',
-    location: 'הרצליה',
-    model: 'במשרד',
-    category: 'product',
-    posted: 'היום',
-    description:
-      'עבודה קרובה עם לקוחות וצוותי פיתוח, זיהוי הזדמנויות והובלת מוצרים מאפיון ועד השקה.',
-    skills: ['Discovery', 'Analytics', 'Roadmaps'],
-    reason: 'ניהול מוצר ועבודה קרובה לצוותי פיתוח',
-  },
-  {
-    id: 'fullstack-developer',
-    title: 'Full Stack Developer',
-    company: 'Northstar',
-    initials: 'n',
-    color: '#6c70b5',
-    location: 'חיפה',
-    model: 'היברידי',
-    category: 'engineering',
-    posted: 'אתמול',
-    description:
-      'בניית שירותי ווב ויישומים אמינים. תרומה לארכיטקטורה, סקירות קוד ופיתוח יכולות חדשות מקצה לקצה.',
-    skills: ['TypeScript', 'Node.js', 'SQL'],
-    reason: 'פיתוח ווב, שירותי צד שרת ושיתוף פעולה בצוות',
-  },
-];
-const defaults: Preferences = { role: 'all', location: 'all', model: 'all', exclusions: '' };
+import {
+  Preferences,
+  defaultPreferences,
+  migratePreferences,
+  validPreferences,
+  matchesPreferences,
+} from './preferences';
+export type { Preferences } from './preferences';
+
+const defaults = defaultPreferences();
 @Injectable({ providedIn: 'root' })
 export class DemoStore {
   readonly jobs = JOBS;
@@ -111,34 +24,78 @@ export class DemoStore {
   readonly saved = signal<string[]>([]);
   readonly paused = signal(false);
   readonly notice = signal('');
-  readonly eligibleJobs = computed(() => {
-    const p = this.preferences();
-    const excluded = p.exclusions
-      .split(',')
-      .map((s) => s.trim().toLowerCase())
-      .filter(Boolean);
-    return this.jobs.filter(
-      (j) =>
-        (p.role === 'all' || j.category === p.role) &&
-        (p.location === 'all' || j.location === p.location) &&
-        (p.model === 'all' || j.model === p.model) &&
-        !excluded.some((e) => j.company.toLowerCase().includes(e)),
-    );
-  });
-  constructor() {
-    this.restore();
+  readonly eligibleJobs = computed(() =>
+    this.jobs.filter((job) => matchesPreferences(job, this.preferences())),
+  );
+  get resetGeneration(): string {
+    return this.generation;
   }
-  private restore(): void {
+  private generation = '';
+  readonly visibleSavedJobs = computed(() =>
+    this.jobs.filter((j) => this.saved().includes(j.id) && !this.excluded(j)),
+  );
+  readonly suppressedSavedCount = computed(
+    () => this.saved().length - this.visibleSavedJobs().length,
+  );
+  private excluded(job: Job): boolean {
+    return this.preferences()
+      .exclusions.split(',')
+      .map((x) => x.trim().toLowerCase())
+      .filter(Boolean)
+      .some((x) => job.company.toLowerCase().includes(x));
+  }
+  constructor() {
+    this.synchronize();
+    window.addEventListener('storage', this.onStorage);
+    window.addEventListener('focus', this.onFocus);
+  }
+  ngOnDestroy(): void {
+    window.removeEventListener('storage', this.onStorage);
+    window.removeEventListener('focus', this.onFocus);
+  }
+  private readonly onStorage = (event: StorageEvent): void => {
+    if (event.key === null || event.key === 'niva.demo.v1' || event.key === 'niva.demo.generation')
+      this.synchronize();
+  };
+  private readonly onFocus = (): void => {
+    this.synchronize();
+  };
+  private clearMemory(): void {
+    this.preferences.set({ ...defaults });
+    this.saved.set([]);
+    this.applications.set([]);
+    this.paused.set(false);
+  }
+  private synchronize(): boolean {
     try {
-      const value: unknown = JSON.parse(localStorage.getItem('niva.demo.v1') ?? 'null');
+      const generation = localStorage.getItem('niva.demo.generation') ?? '';
+      if (generation !== this.generation) {
+        this.name.set('');
+        this.resumeName.set('');
+      }
+      this.generation = generation;
+      const raw = localStorage.getItem('niva.demo.v1');
+      this.clearMemory();
+      this.restore(raw);
+      return true;
+    } catch {
+      this.notice.set('האחסון המקומי אינו זמין. שינויים ואישורים חסומים.');
+      return false;
+    }
+  }
+  private restore(raw: string | null): void {
+    try {
+      const value: unknown = JSON.parse(raw ?? 'null');
       if (!value || typeof value !== 'object') return;
       const v = value as Record<string, unknown>;
       if (Array.isArray(v['saved']))
-        this.saved.set(
-          v['saved'].filter(
-            (x): x is string => typeof x === 'string' && JOBS.some((j) => j.id === x),
+        this.saved.set([
+          ...new Set(
+            v['saved'].filter(
+              (x): x is string => typeof x === 'string' && JOBS.some((j) => j.id === x),
+            ),
           ),
-        );
+        ]);
       if (Array.isArray(v['applications']))
         this.applications.set(
           v['applications']
@@ -153,72 +110,112 @@ export class DemoStore {
             .filter((x, i, all) => all.findIndex((a) => a.jobId === x.jobId) === i),
         );
       if (typeof v['paused'] === 'boolean') this.paused.set(v['paused']);
-      const p = v['preferences'];
-      if (p && typeof p === 'object') {
-        const raw = p as Record<string, unknown>;
-        this.preferences.set({
-          role: ['all', 'design', 'engineering', 'product'].includes(String(raw['role']))
-            ? String(raw['role'])
-            : 'all',
-          location: ['all', 'תל אביב', 'הרצליה', 'חיפה', 'מרחוק'].includes(String(raw['location']))
-            ? String(raw['location'])
-            : 'all',
-          model: ['all', 'היברידי', 'מרחוק', 'במשרד'].includes(String(raw['model']))
-            ? String(raw['model'])
-            : 'all',
-          exclusions: typeof raw['exclusions'] === 'string' ? raw['exclusions'].slice(0, 500) : '',
-        });
-      }
+      this.preferences.set(migratePreferences(v['preferences']));
     } catch {
       /* Invalid or unavailable storage does not prevent using the demo. */
     }
   }
-  private persist(): void {
+  /** All participating tabs serialize read/modify/write under the same origin lock. */
+  private async mutate(
+    action: () => boolean,
+    expectedGeneration = this.generation,
+  ): Promise<boolean> {
+    const generation = expectedGeneration;
+    if (!navigator.locks) {
+      this.notice.set('הדפדפן אינו תומך בתיאום בטוח בין לשוניות. שינויים ואישורים חסומים.');
+      return false;
+    }
     try {
-      localStorage.setItem(
-        'niva.demo.v1',
-        JSON.stringify({
-          preferences: this.preferences(),
-          applications: this.applications(),
-          saved: this.saved(),
-          paused: this.paused(),
-        }),
-      );
+      return await navigator.locks.request('niva.demo.mutation', () => {
+        const current = localStorage.getItem('niva.demo.generation') ?? '';
+        if (!this.synchronize()) return false;
+        if (current !== generation) {
+          this.notice.set('הנתונים אופסו בלשונית אחרת. יש לבדוק ולנסות שוב.');
+          return false;
+        }
+        if (!action()) return false;
+        localStorage.setItem(
+          'niva.demo.v1',
+          JSON.stringify({
+            version: 2,
+            preferences: this.preferences(),
+            applications: this.applications(),
+            saved: this.saved(),
+            paused: this.paused(),
+          }),
+        );
+        this.notice.set('');
+        return true;
+      });
     } catch {
-      this.notice.set('השינויים זמינים לביקור הזה בלבד. האחסון המקומי אינו זמין.');
+      this.synchronize();
+      this.notice.set('השינוי לא נשמר. האחסון או תיאום הלשוניות אינם זמינים; לא נרשם אישור.');
+      return false;
     }
   }
-  savePreferences(value: Preferences): void {
-    this.preferences.set({ ...value });
-    this.persist();
+  savePreferences(value: Preferences, expectedGeneration = this.generation): Promise<boolean> {
+    if (!validPreferences(value)) return Promise.resolve(false);
+    const copy = { ...value, workStyles: [...value.workStyles] };
+    return this.mutate(() => {
+      if (!validPreferences(copy)) return false;
+      this.preferences.set({
+        ...copy,
+        workStyles: [...new Set(copy.workStyles)],
+        exclusions: copy.exclusions.slice(0, 500),
+      });
+      return true;
+    }, expectedGeneration);
   }
-  toggleSaved(id: string): void {
-    if (!this.jobs.some((j) => j.id === id)) return;
-    this.saved.update((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id]));
-    this.persist();
+
+  toggleSaved(id: string): Promise<boolean> {
+    return this.mutate(() => {
+      if (!this.jobs.some((j) => j.id === id)) return false;
+      this.saved.update((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id]));
+      return true;
+    });
   }
-  togglePause(): void {
-    this.paused.update((x) => !x);
-    this.persist();
+  togglePause(): Promise<boolean> {
+    const paused = !this.paused();
+    return this.mutate(() => {
+      this.paused.set(paused);
+      return true;
+    });
   }
   approved(id: string): boolean {
     return this.applications().some((a) => a.jobId === id);
   }
-  approve(id: string): boolean {
-    if (this.paused() || this.approved(id) || !this.eligibleJobs().some((j) => j.id === id))
-      return false;
-    this.applications.update((a) => [{ jobId: id, approvedAt: new Date().toISOString() }, ...a]);
-    this.persist();
-    return true;
+  approve(id: string): Promise<boolean> {
+    return this.mutate(() => {
+      if (this.paused() || this.approved(id) || !this.eligibleJobs().some((j) => j.id === id))
+        return false;
+      this.applications.update((a) => [{ jobId: id, approvedAt: new Date().toISOString() }, ...a]);
+      return true;
+    });
   }
-  reset(): void {
-    this.applications.set([]);
-    this.saved.set([]);
-    this.preferences.set({ ...defaults });
-    this.paused.set(false);
+  async reset(): Promise<'cleared' | 'session-only'> {
     this.name.set('');
     this.resumeName.set('');
-    this.notice.set('');
-    this.persist();
+    this.clearMemory();
+    try {
+      if (!navigator.locks) throw new Error('Coordination unavailable');
+      await navigator.locks.request('niva.demo.mutation', () => {
+        // Commit a reset barrier first. A failed deletion must never report durable success.
+        const generation = crypto.randomUUID();
+        localStorage.setItem('niva.demo.generation', generation);
+        this.generation = generation;
+        localStorage.removeItem('niva.demo.v1');
+        this.clearMemory();
+        this.name.set('');
+        this.resumeName.set('');
+      });
+      this.notice.set('');
+      return 'cleared';
+    } catch {
+      this.clearMemory();
+      this.name.set('');
+      this.resumeName.set('');
+      this.notice.set('נוקה הביקור הנוכחי בלבד. המחיקה מהאחסון נכשלה; נתונים קודמים עשויים לחזור.');
+      return 'session-only';
+    }
   }
 }

@@ -28,7 +28,7 @@ test('onboarding can finish without a CV and preferences affect the job list', a
   await page.getByRole('button', { name: 'ממשיכים עם פרופיל לדוגמה' }).click();
   await page.getByLabel('תחום שמעניין אותך').selectOption('design');
   await page.getByRole('button', { name: 'ממשיכים לסיכום' }).click();
-  await page.getByRole('checkbox').check();
+  await page.getByRole('checkbox', { name: /הבנתי שזו|בדקתי את/ }).check();
   await page.getByRole('button', { name: 'לסביבה האישית שלי' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('דנה');
   await page.goto('/app/jobs');
@@ -40,7 +40,7 @@ test('review requires acknowledgement, persists once and supports pause', async 
   await page.goto('/app/jobs/product-designer');
   const approve = page.getByRole('button', { name: 'אישור בהדגמה', exact: true });
   await expect(approve).toBeDisabled();
-  await page.getByRole('checkbox').check();
+  await page.getByRole('checkbox', { name: /הבנתי שזו|בדקתי את/ }).check();
   await approve.click();
   await expect(page.getByText('המשרה אושרה בהדגמה', { exact: true })).toBeVisible();
   await page.reload();
@@ -49,8 +49,9 @@ test('review requires acknowledgement, persists once and supports pause', async 
   await expect(page.locator('.application-row')).toHaveCount(1);
   await page.goto('/app');
   await page.getByRole('button', { name: 'השהיית פעילות' }).click();
+  await expect(page.getByRole('button', { name: 'חידוש הפעילות' })).toBeVisible();
   await page.goto('/app/jobs/frontend-engineer');
-  await page.getByRole('checkbox').check();
+  await page.getByRole('checkbox', { name: /הבנתי שזו|בדקתי את/ }).check();
   await expect(page.getByRole('button', { name: 'אישור בהדגמה', exact: true })).toBeDisabled();
   await page.goto('/app');
   await page.screenshot({
@@ -68,8 +69,9 @@ test('search, saved jobs, exclusions, upload validation and reset work', async (
   await page.goto('/app/preferences');
   await page.getByLabel('חברות שעדיף לא להציג', { exact: false }).fill('Forma');
   await page.getByRole('button', { name: 'שמירת ההעדפות' }).click();
+  await expect(page.getByText('ההעדפות נשמרו.', { exact: false })).toBeVisible();
   await page.goto('/app/jobs');
-  await expect(page.locator('niva-job-card')).toHaveCount(4);
+  await expect(page.locator('niva-job-card')).toHaveCount(10);
   await page.goto('/app/profile');
   await page
     .getByLabel('בחירת קובץ קורות חיים', { exact: true })
@@ -77,6 +79,7 @@ test('search, saved jobs, exclusions, upload validation and reset work', async (
   await expect(page.getByRole('alert')).toContainText('PDF או DOCX');
   await page.getByRole('button', { name: 'איפוס נתוני ההדגמה', exact: true }).click();
   await page.getByRole('button', { name: 'כן, איפוס הנתונים' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'נמחקו' })).toBeVisible();
   await page.goto('/app/applications');
   await expect(page.getByText('כאן תתחיל הדרך שלך')).toBeVisible();
 });

@@ -1,0 +1,40 @@
+<div class="form-grid grid">
+  <label
+    >תחום שמעניין אותך<select
+      name="role"
+      [ngModelOptions]="{ standalone: true }"
+      [ngModel]="draft().role"
+      (ngModelChange)="setRole($event)"
+    >
+      <option value="all">כל התחומים</option>
+      @for (category of categories; track category.id) {
+        <option [value]="category.id">{{ category.label }}</option>
+      }
+    </select></label
+  >
+  <label
+    >מחוז מועדף<select
+      name="district"
+      [ngModelOptions]="{ standalone: true }"
+      [ngModel]="draft().district"
+      (ngModelChange)="setDistrict($event)"
+    >
+      <option value="all">כל המחוזות</option>
+      @for (district of districts; track district.id) {
+        <option [value]="district.id">{{ district.label }}</option>
+      }
+    </select></label
+  >
+  <niva-work-style-fields [value]="draft().workStyles" (valueChange)="setStyles($event)" />
+  <label
+    >חברות שעדיף לא להציג <span class="muted text-muted">(לא חובה)</span
+    ><input
+      name="exclusions"
+      maxlength="500"
+      placeholder="שמות חברות, מופרדים בפסיק"
+      [ngModelOptions]="{ standalone: true }"
+      [ngModel]="draft().exclusions"
+      (ngModelChange)="setExclusions($event)"
+    /><small>למשל: החברה הנוכחית שלך. נשמר רק במכשיר הזה.</small></label
+  >
+</div>

@@ -2,23 +2,16 @@
   "color": {
     "ink": "#142441",
     "action": "#245ADD",
-    "canvas": "#EDF4FF",
-    "mutedText": "#52627B",
-    "border": "#D9E3F1",
+    "canvas": "#f7faff",
+    "mutedText": "#596980",
+    "border": "#dfe7f2",
     "success": "#16634B",
     "error": "#B42318",
-    "warning": "#8A4B08"
+    "warning": "#7e4d13",
+    "pale": "#edf4ff",
+    "surface": "#ffffff"
   },
-  "spacing": [
-    4,
-    8,
-    12,
-    16,
-    24,
-    32,
-    48,
-    64
-  ],
+  "spacing": [4, 8, 12, 16, 24, 32, 48, 64],
   "radius": {
     "control": 12,
     "card": 20,
@@ -26,7 +19,8 @@
   },
   "font": {
     "he": "Heebo",
-    "en": "Inter"
+    "en": "Arial, sans-serif",
+    "workspaceMetadataMin": 12
   },
   "breakpoints": {
     "tablet": 768,
@@ -34,5 +28,28 @@
   },
   "containerMax": 1280,
   "direction": "rtl",
-  "version": "1.0"
+  "version": "1.2",
+  "note": "Reference values: root CSS variables are the runtime source. Remaining spacing/radius values are design guidance, not enforced tokens.",
+  "themes": {
+    "light": {
+      "surface": "#ffffff",
+      "canvas": "#f7faff",
+      "ink": "#142441",
+      "muted": "#596980",
+      "pale": "#edf4ff",
+      "line": "#dfe7f2",
+      "action": "#245add",
+      "link": "#245add"
+    },
+    "dark": {
+      "surface": "#172338",
+      "canvas": "#0e1727",
+      "ink": "#edf3ff",
+      "muted": "#bbc9df",
+      "pale": "#21324d",
+      "line": "#40516b",
+      "action": "#315fd6",
+      "link": "#a8c8ff"
+    }
+  }
 }

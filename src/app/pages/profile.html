@@ -1,0 +1,112 @@
+<niva-page-heading
+  kicker="הסיפור שלך"
+  heading="הפרופיל שלי"
+  description="פרטים לביקור הנוכחי, ובחירות שנשארות בשליטתך."
+>
+</niva-page-heading>
+<div class="profile-grid grid grid-cols-[1fr_1fr] gap-[25px] max-[1200px]:grid-cols-[1fr]">
+  <form
+    class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
+    (ngSubmit)="save()"
+  >
+    <h2>נעים להכיר</h2>
+    <label
+      >איך לקרוא לך?<input
+        name="name"
+        [(ngModel)]="name"
+        maxlength="50"
+        autocomplete="given-name"
+        placeholder="השם שלך"
+    /></label>
+    <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+      השם נשמר בזיכרון בלבד עד רענון הדף.
+    </p>
+    <label
+      class="upload-zone flex flex-col items-center justify-center gap-[10px] p-[27px_15px] text-center compact"
+      ><niva-icon name="document" /><strong
+        ><bdi>{{ store.resumeName() || 'בחירת קובץ קורות חיים' }}</bdi></strong
+      ><small>PDF או DOCX, עד 10MB. התוכן לא נקרא או מועלה.</small
+      ><input
+        type="file"
+        accept=".pdf,.docx"
+        (change)="select($event)"
+        aria-label="בחירת קובץ קורות חיים"
+    /></label>
+    @if (store.resumeName()) {
+      <button
+        type="button"
+        class="plain-button p-[8px_0] text-muted"
+        (click)="store.resumeName.set('')"
+      >
+        הסרת בחירת קורות חיים
+      </button>
+    }
+    @if (error()) {
+      <p
+        class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+        role="alert"
+      >
+        {{ error() }}
+      </p>
+    }
+    <button
+      class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+      type="submit"
+    >
+      שמירת שם לביקור הנוכחי
+    </button>
+    @if (saved()) {
+      <p class="success-text text-success text-[12px]" role="status">
+        הפרטים עודכנו לביקור הנוכחי.
+      </p>
+    }
+  </form>
+  <section
+    class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
+  >
+    <h2>הנתונים המקומיים שלך</h2>
+    <p>העדפות חיפוש, משרות שמורות ואישורי הדגמה נשמרים בדפדפן הזה. אין חשבון משתמש או שרת מחובר.</p>
+    <div class="stack-actions grid gap-[13px] my-[24px]">
+      <button
+        class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"
+        (click)="export()"
+      >
+        <niva-icon name="document" /> הורדת נתוני ההדגמה</button
+      ><button
+        class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"
+        (click)="cookies.reopen()"
+      >
+        <niva-icon name="settings" /> העדפות עוגיות
+      </button>
+    </div>
+    <div class="danger-zone">
+      <h3>מתחילים מחדש</h3>
+      <p>האיפוס מוחק את ההעדפות ורישומי ההדגמה מהמכשיר.</p>
+      @if (confirmReset()) {
+        <p role="alert">לאפס את נתוני ההדגמה? לא ניתן לשחזר את הבחירות.</p>
+        <div class="form-actions flex items-center gap-[22px] flex-wrap max-[768px]:gap-[16px]">
+          <button
+            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover danger-button button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+            (click)="reset()"
+          >
+            כן, איפוס הנתונים</button
+          ><button class="plain-button p-[8px_0] text-muted" (click)="confirmReset.set(false)">
+            ביטול
+          </button>
+        </div>
+      } @else {
+        <button
+          class="plain-button p-[8px_0] text-muted danger-text text-error"
+          (click)="confirmReset.set(true)"
+        >
+          איפוס נתוני ההדגמה
+        </button>
+      }
+    </div>
+    @if (resetDone()) {
+      <p [class.success-text]="resetCleared()" [class.form-error]="!resetCleared()" role="status">
+        {{ resetDone() }}
+      </p>
+    }
+  </section>
+</div>

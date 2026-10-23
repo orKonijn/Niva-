@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ThemeControl } from './theme-control';
 @Component({
   selector: 'niva-brand',
-  imports: [RouterLink],
-  template:
-    '<a routerLink="/" class="brand" aria-label="Niva דף הבית"><span class="brand-mark">n</span><span dir="ltr">niva<span class="brand-dot">.</span></span></a>',
+  imports: [RouterLink, ThemeControl],
+  templateUrl: './brand.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Brand {}

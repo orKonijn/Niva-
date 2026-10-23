@@ -1,16 +1,23 @@
 <div class="marketing">
-  <header class="site-header container">
+  <header
+    class="site-header h-[105px] items-center justify-between max-[768px]:h-[82px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+  >
     <niva-brand />
     <nav aria-label="ניווט ראשי" [class.is-open]="menu()">
       <a href="#how-it-works" (click)="menu.set(false)">איך זה עובד</a
       ><a href="#in-control" (click)="menu.set(false)">למה Niva</a
       ><a href="#faq" (click)="menu.set(false)">שאלות נפוצות</a>
     </nav>
-    <div class="header-actions">
-      <a routerLink="/app" class="login-link">לסביבת ההדגמה</a
-      ><a routerLink="/signup" class="button button-small">בואו נתחיל <niva-icon name="arrow" /></a
+    <div
+      class="header-actions flex gap-[24px] items-center max-[1200px]:gap-[15px] max-[768px]:gap-[9px]"
+    >
+      <a routerLink="/app" class="login-link text-[13px] text-muted">לסביבת ההדגמה</a
+      ><a
+        routerLink="/signup"
+        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+        >בואו נתחיל <niva-icon name="arrow" /></a
       ><button
-        class="icon-button mobile-menu"
+        class="icon-button justify-center items-center min-w-[44px] min-h-[44px] bg-transparent rounded-[11px] hover:bg-pale mobile-menu hidden max-[768px]:inline-flex"
         aria-label="פתיחת תפריט"
         [attr.aria-expanded]="menu()"
         (click)="menu.set(!menu())"
@@ -19,32 +26,68 @@
       </button>
     </div>
   </header>
-  <main id="main">
-    <section class="hero container">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="live-dot"></span> העוזרת האישית לחיפוש העבודה שלך</span>
+  <main id="main" tabindex="-1">
+    <section
+      class="hero grid grid-cols-[1fr_1fr] items-center gap-[52px] min-h-[650px] py-[62px_80px] max-[1200px]:gap-[32px] max-[901px]:min-h-[auto] max-[901px]:py-[55px_70px] max-[901px]:gap-[20px] max-[768px]:flex max-[768px]:flex-col max-[768px]:gap-[30px] max-[768px]:pt-[40px] max-[768px]:pb-[60px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+    >
+      <div class="hero-copy relative z-[1] max-[768px]:text-center max-[768px]:max-w-[550px]">
+        <span
+          class="eyebrow inline-flex items-center gap-[9px] rounded-[30px] p-[7px_13px] bg-pale text-[12px] text-muted font-medium max-[768px]:text-[12px] max-[768px]:p-[6px_12px]"
+          ><span class="live-dot w-[6px] h-[6px] rounded-[50%]"></span> העוזרת האישית לחיפוש העבודה
+          שלך</span
+        >
         <h1>פחות חיפוש.<br /><span>יותר הזדמנויות.</span></h1>
-        <p class="hero-description">
+        <p
+          class="hero-description text-[18px] max-w-[475px] leading-[1.85] max-[1200px]:text-[16px] max-[768px]:text-[15px] max-[768px]:leading-[1.95] max-[768px]:mx-auto max-[768px]:max-w-[460px]"
+        >
           הצעד הבא בקריירה שלך לא צריך להיות עבודה במשרה מלאה. מכירים אותך, מוצאים התאמות, ומתקדמים
           יחד — בקצב שלך.
         </p>
-        <div class="hero-actions">
-          <a class="button" routerLink="/signup"
+        <div
+          class="hero-actions flex gap-[24px] items-center mt-[29px] max-[1200px]:gap-[15px] max-[901px]:flex-wrap max-[768px]:justify-center max-[768px]:gap-[20px] max-[768px]:mt-[24px]"
+        >
+          <a
+            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+            routerLink="/signup"
             >מתחילים עם קורות החיים <niva-icon name="arrow" /></a
-          ><a href="#how-it-works" class="text-link"
-            ><span class="play-circle"><niva-icon name="play" /></span> איך זה עובד?</a
+          ><a
+            href="#how-it-works"
+            class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+            ><span class="play-circle w-[30px] h-[30px] grid place-items-center rounded-[50%]"
+              ><niva-icon name="play"
+            /></span>
+            איך זה עובד?</a
           >
         </div>
-        <div class="hero-reassurance">
+        <p class="hero-demo-disclosure text-muted">
+          הדגמה עם משרות לדוגמה. קורות חיים אינם מעובדים ולא נשלחות מועמדויות.
+          <a
+            routerLink="/app/jobs"
+            class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+            >לגלות משרות לדוגמה</a
+          >
+        </p>
+        <div
+          class="hero-reassurance mt-[22px] max-[901px]:flex-wrap max-[768px]:justify-center max-[768px]:mt-[20px]"
+        >
           <span><niva-icon name="check" /> כל הגשה באישור שלך</span
           ><span><niva-icon name="check" /> הפרטים שלך בשליטתך</span>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <span class="hero-spark spark-one">✦</span><span class="hero-spark spark-two">✧</span>
-        <div class="mascot-frame">
+      <div
+        class="hero-visual relative h-[420px] flex items-center justify-center max-[1200px]:h-[390px] max-[901px]:h-[330px] max-[768px]:w-[min(470px,_100%)] max-[768px]:h-[340px] max-[768px]:m-[13px_auto_0]"
+      >
+        <div
+          class="orbit absolute rounded-[50%] z-[-1] orbit-one w-[440px] h-[440px] max-[1200px]:w-[370px] max-[1200px]:h-[370px] max-[901px]:w-[290px] max-[901px]:h-[290px] max-[768px]:w-[320px] max-[768px]:h-[320px]"
+        ></div>
+        <div
+          class="orbit absolute rounded-[50%] z-[-1] orbit-two w-[500px] h-[310px] max-[1200px]:w-[400px] max-[1200px]:h-[260px] max-[901px]:w-[320px] max-[901px]:h-[230px] max-[768px]:w-[350px] max-[768px]:h-[240px]"
+        ></div>
+        <span class="hero-spark absolute text-brand spark-one">✦</span
+        ><span class="hero-spark absolute text-brand spark-two text-[45px] max-[768px]:text-[32px]"
+          >✧</span
+        >
+        <div class="mascot-frame overflow-hidden rounded-[46%_46%_42%_42%]">
           <img
             src="assets/niva-hero.webp"
             width="900"
@@ -53,20 +96,29 @@
             fetchpriority="high"
           />
         </div>
-        <div class="floating-card match-float">
-          <span class="round-icon green"><niva-icon name="check" /></span>
+        <div
+          class="floating-card absolute bg-surface rounded-[16px] flex items-center gap-[11px] z-[2] match-float p-[16px_18px] min-w-[293px] max-[1200px]:min-w-[250px] max-[901px]:min-w-[0] max-[901px]:p-[12px] max-[768px]:p-[13px_15px] max-[768px]:min-w-[255px]"
+        >
+          <span class="round-icon items-center justify-center shrink-[0] green"
+            ><niva-icon name="check"
+          /></span>
           <div><strong>נמצאה הזדמנות חדשה</strong><span>עוד צעד לקראת התפקיד הבא שלך</span></div>
-          <span class="float-spark">✦</span>
+          <span class="float-spark text-muted ms-[10px] text-[22px]">✦</span>
         </div>
-        <div class="floating-card control-float">
-          <span class="round-icon blue"><niva-icon name="shield" /></span
+        <div
+          class="floating-card absolute bg-surface rounded-[16px] flex items-center gap-[11px] z-[2] control-float p-[9px_13px]"
+        >
+          <span class="round-icon items-center justify-center shrink-[0] blue"
+            ><niva-icon name="shield" /></span
           ><span>האישור האחרון? תמיד שלך.</span>
         </div>
-        <span class="visual-caption">נעים להכיר, אני Niva <span>↗</span></span>
+        <span class="visual-caption text-muted">נעים להכיר, אני Niva <span>↗</span></span>
       </div>
     </section>
-    <div class="promise-strip">
-      <div class="container">
+    <div class="promise-strip bg-canvas">
+      <div
+        class="site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+      >
         <span>פחות טאבים פתוחים.<br /><strong>יותר מקום לדבר הבא.</strong></span>
         <div>
           <niva-icon name="document" /><span>פרופיל אחד,<br /><strong>כל הניסיון שלך</strong></span>
@@ -79,45 +131,90 @@
         </div>
       </div>
     </div>
-    <section id="how-it-works" class="section container">
-      <div class="section-heading">
-        <span class="section-kicker">פשוט מתחילים</span>
+    <section
+      id="how-it-works"
+      class="section py-[96px] max-[901px]:py-[70px] max-[768px]:py-[58px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+    >
+      <div class="section-heading text-center max-w-[700px]">
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+          >פשוט מתחילים</span
+        >
         <h2>שלושה צעדים. התחלה חדשה.</h2>
         <p>את הניסיון כבר צברת. עכשיו נותנים לו להגיע למקום הנכון.</p>
       </div>
-      <div class="steps-grid">
-        <article class="step-card">
-          <span class="step-index">01</span
-          ><span class="step-icon"><niva-icon name="upload" /></span>
+      <div
+        class="steps-grid grid grid-cols-[repeat(3,_1fr)] gap-[24px] max-[768px]:grid-cols-[1fr] max-[768px]:gap-[16px]"
+      >
+        <article
+          class="step-card rounded-[22px] p-[30px] relative bg-surface max-[1200px]:p-[24px] max-[901px]:p-[21px] max-[768px]:p-[25px]"
+        >
+          <span class="step-index absolute text-[13px] text-muted">01</span
+          ><span
+            class="step-icon inline-flex items-center justify-center w-[54px] h-[54px] rounded-[16px] mb-[26px] text-[20px] max-[768px]:w-[47px] max-[768px]:h-[47px] max-[768px]:mb-[20px] max-[768px]:text-[18px]"
+            ><niva-icon name="upload"
+          /></span>
           <h3>מכירים אותך</h3>
           <p>מוסיפים קורות חיים, בודקים את הפרטים ומספרים לנו מה הצעד הבא שמעניין אותך.</p>
-          <span class="step-note">הניסיון שלך הוא נקודת ההתחלה</span>
+          <span
+            class="step-note block pt-[20px] text-[12px] text-muted max-[901px]:text-[12px] max-[768px]:text-[12px] max-[768px]:pt-[16px]"
+            >הניסיון שלך הוא נקודת ההתחלה</span
+          >
         </article>
-        <article class="step-card">
-          <span class="step-index">02</span
-          ><span class="step-icon lavender"><niva-icon name="sparkles" /></span>
+        <article
+          class="step-card rounded-[22px] p-[30px] relative bg-surface max-[1200px]:p-[24px] max-[901px]:p-[21px] max-[768px]:p-[25px]"
+        >
+          <span class="step-index absolute text-[13px] text-muted">02</span
+          ><span
+            class="step-icon inline-flex items-center justify-center w-[54px] h-[54px] rounded-[16px] mb-[26px] text-[20px] max-[768px]:w-[47px] max-[768px]:h-[47px] max-[768px]:mb-[20px] max-[768px]:text-[18px] lavender"
+            ><niva-icon name="sparkles"
+          /></span>
           <h3>מוצאים את החיבור</h3>
           <p>מגדירים תפקיד, מיקום וסגנון עבודה. מקבלים תמונה ברורה של ההזדמנויות המתאימות.</p>
-          <span class="step-note">לפי ההעדפות שלך, לא של כולם</span>
+          <span
+            class="step-note block pt-[20px] text-[12px] text-muted max-[901px]:text-[12px] max-[768px]:text-[12px] max-[768px]:pt-[16px]"
+            >לפי ההעדפות שלך, לא של כולם</span
+          >
         </article>
-        <article class="step-card">
-          <span class="step-index">03</span
-          ><span class="step-icon mint"><niva-icon name="check" /></span>
+        <article
+          class="step-card rounded-[22px] p-[30px] relative bg-surface max-[1200px]:p-[24px] max-[901px]:p-[21px] max-[768px]:p-[25px]"
+        >
+          <span class="step-index absolute text-[13px] text-muted">03</span
+          ><span
+            class="step-icon inline-flex items-center justify-center w-[54px] h-[54px] rounded-[16px] mb-[26px] text-[20px] max-[768px]:w-[47px] max-[768px]:h-[47px] max-[768px]:mb-[20px] max-[768px]:text-[18px] mint"
+            ><niva-icon name="check"
+          /></span>
           <h3>מתקדמים בשליטה</h3>
           <p>בודקים כל משרה וכל פרט, מאשרים את הבחירה ועוקבים אחרי מה שקורה במקום אחד.</p>
-          <span class="step-note">שום צעד משמעותי בלי הבחירה שלך</span>
+          <span
+            class="step-note block pt-[20px] text-[12px] text-muted max-[901px]:text-[12px] max-[768px]:text-[12px] max-[768px]:pt-[16px]"
+            >שום צעד משמעותי בלי הבחירה שלך</span
+          >
         </article>
       </div>
     </section>
-    <section id="in-control" class="section container control-section">
-      <div class="preview-window">
-        <div class="preview-top">
-          <span class="window-dots">● ● ●</span><span>ההזדמנויות שלך</span
-          ><span class="tiny-badge">תצוגה לדוגמה</span>
+    <section
+      id="in-control"
+      class="section py-[96px] max-[901px]:py-[70px] max-[768px]:py-[58px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)] control-section grid grid-cols-[1fr_1fr] gap-[95px] items-center pt-[20px] max-[1200px]:gap-[50px] max-[901px]:gap-[35px] max-[901px]:pt-[10px] max-[768px]:flex max-[768px]:flex-col max-[768px]:gap-[37px] max-[768px]:pt-[18px]"
+    >
+      <div
+        class="preview-window col-[2] rounded-[18px] bg-surface overflow-hidden max-[768px]:w-full max-[768px]:max-w-[460px]"
+      >
+        <div
+          class="preview-top flex items-center justify-between text-[12px] p-[15px_18px] text-muted max-[768px]:text-[12px]"
+        >
+          <span class="window-dots text-muted tracking-[2px] text-[12px]">● ● ●</span
+          ><span>ההזדמנויות שלך</span
+          ><span class="tiny-badge text-[12px] bg-pale p-[3px_6px] rounded-[4px] text-muted"
+            >תצוגה לדוגמה</span
+          >
         </div>
-        <div class="preview-body">
+        <div
+          class="preview-body p-[29px_23px_10px] bg-pale max-[901px]:p-[22px_15px_10px] max-[768px]:p-[25px_20px_12px]"
+        >
           <div class="preview-greeting">
-            <span class="section-kicker">ממשיכים קדימה</span>
+            <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+              >ממשיכים קדימה</span
+            >
             <h3>יש דברים טובים באופק.</h3>
             <p>כל המשרות, כל ההחלטות. במקום אחד.</p>
           </div>
@@ -128,44 +225,59 @@
             ];
             track job.name
           ) {
-            <div class="preview-job">
+            <div
+              class="preview-job items-center gap-[12px] bg-surface p-[17px_15px] max-[901px]:p-[14px_10px] max-[768px]:p-[16px_12px]"
+            >
               <span [class]="'company-avatar ' + job.color">{{ job.initial }}</span>
               <div>
                 <strong dir="ltr">{{ job.name }}</strong
                 ><small>{{ job.company }} · היברידי</small>
               </div>
-              <span class="status-badge">לבדיקה שלך</span>
+              <span
+                class="status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium"
+                >לבדיקה שלך</span
+              >
             </div>
           }
-          <a routerLink="/app" class="preview-bottom"
+          <a
+            routerLink="/app"
+            class="preview-bottom flex justify-center items-center gap-[9px] my-[22px_10px] text-[12px] text-brand"
             >לגלות את סביבת ההדגמה <niva-icon name="arrow"
           /></a>
         </div>
       </div>
-      <div class="control-copy">
-        <span class="section-kicker">יותר שקט בתהליך</span>
+      <div class="control-copy col-[1]">
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+          >יותר שקט בתהליך</span
+        >
         <h2>עוזרת חכמה.<br />ההחלטה נשארת שלך.</h2>
         <p>
           חיפוש עבודה הוא אישי. גם הדרך שלך אליו צריכה להיות כזו. Niva מרכזת את הפרטים, ואת הבחירות
           החשובות משאירה בידיים שלך.
         </p>
-        <ul class="feature-list">
+        <ul class="feature-list p-[8px_0_0]">
           <li>
-            <span class="round-icon"><niva-icon name="check" /></span>
+            <span class="round-icon items-center justify-center shrink-[0]"
+              ><niva-icon name="check"
+            /></span>
             <div>
               <strong>רואים לפני שמתקדמים</strong>
               <p>משרה, קורות חיים ותשובות — הכול ברור לפני האישור.</p>
             </div>
           </li>
           <li>
-            <span class="round-icon"><niva-icon name="settings" /></span>
+            <span class="round-icon items-center justify-center shrink-[0]"
+              ><niva-icon name="settings"
+            /></span>
             <div>
               <strong>מתאים לחיים שלך</strong>
               <p>מיקום, היברידי או מרחוק, ואפילו חברות שלא תרצו לראות.</p>
             </div>
           </li>
           <li>
-            <span class="round-icon"><niva-icon name="pause" /></span>
+            <span class="round-icon items-center justify-center shrink-[0]"
+              ><niva-icon name="pause"
+            /></span>
             <div>
               <strong>תמיד אפשר לעצור</strong>
               <p>השהיה, שינוי כיוון או התחלה חדשה. בקצב שנכון לך.</p>
@@ -174,13 +286,18 @@
         </ul>
       </div>
     </section>
-    <section id="faq" class="section container faq-section">
-      <div class="section-heading">
-        <span class="section-kicker">טוב ששאלת</span>
+    <section
+      id="faq"
+      class="section py-[96px] max-[901px]:py-[70px] max-[768px]:py-[58px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)] faq-section pt-[32px] max-[768px]:pt-[30px]"
+    >
+      <div class="section-heading text-center max-w-[700px]">
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+          >טוב ששאלת</span
+        >
         <h2>לפני שמתחילים</h2>
         <p>קצת יותר בהירות, קצת פחות סימני שאלה.</p>
       </div>
-      <div class="faq-list">
+      <div class="faq-list max-w-[800px] m-[auto]">
         @for (item of faqs; track item.q) {
           <details>
             <summary>{{ item.q }}<span aria-hidden="true">+</span></summary>
@@ -189,15 +306,25 @@
         }
       </div>
     </section>
-    <section class="container final-cta">
-      <span class="cta-spark">✦</span><span class="section-kicker">הפרק הבא שלך</span>
+    <section
+      class="site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)] final-cta relative overflow-hidden bg-pale rounded-[28px] p-[58px_24px] text-center max-[768px]:p-[40px_20px] max-[768px]:rounded-[21px]"
+    >
+      <span class="cta-spark absolute text-brand text-[60px] max-[768px]:hidden">✦</span
+      ><span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+        >הפרק הבא שלך</span
+      >
       <h2>אולי ההזדמנות הבאה<br />קרובה יותר ממה שנדמה לך.</h2>
       <p>בואו להכיר דרך נעימה יותר לחפש עבודה.</p>
-      <a class="button" routerLink="/signup">מתחילים את הדרך <niva-icon name="arrow" /></a
+      <a
+        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+        routerLink="/signup"
+        >מתחילים את הדרך <niva-icon name="arrow" /></a
       ><small>גרסת הדגמה אינטראקטיבית · ללא שליחת מועמדויות</small>
     </section>
   </main>
-  <footer class="site-footer container">
+  <footer
+    class="site-footer justify-between py-[32px_45px] max-[768px]:py-[26px_120px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+  >
     <div>
       <niva-brand />
       <p>יותר מקום לצעד הבא שלך.</p>
@@ -205,8 +332,10 @@
     <nav aria-label="קישורים נוספים">
       <a routerLink="/privacy">פרטיות</a><a routerLink="/terms">תנאי ההדגמה</a
       ><a routerLink="/accessibility">נגישות</a
-      ><button class="plain-button" (click)="cookies.reopen()">העדפות עוגיות</button>
+      ><button class="plain-button p-[8px_0] text-muted" (click)="cookies.reopen()">
+        העדפות עוגיות
+      </button>
     </nav>
-    <span class="copyright" dir="ltr">© 2026 Niva</span>
+    <span class="copyright text-muted max-[768px]:self-[center]" dir="ltr">© 2026 Niva</span>
   </footer>
 </div>

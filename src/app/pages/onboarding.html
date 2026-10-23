@@ -1,20 +1,37 @@
-<div class="onboarding-page">
-  <header class="container simple-header">
-    <niva-brand /><a routerLink="/" class="text-link">בחזרה לאתר <niva-icon name="arrow" /></a>
+<div class="onboarding-page min-h-[100vh]">
+  <header
+    class="site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)] simple-header flex justify-between items-center py-[33px] max-[768px]:py-[27px]"
+  >
+    <niva-brand /><a
+      routerLink="/"
+      class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+      >בחזרה לאתר <niva-icon name="arrow"
+    /></a>
   </header>
-  <main id="main" class="onboarding-layout container">
-    <aside class="onboarding-aside">
-      <span class="section-kicker">נעים להכיר</span>
+  <main
+    id="main"
+    tabindex="-1"
+    class="onboarding-layout grid grid-cols-[0.9fr_1.1fr] gap-[75px] py-[35px_100px] items-center max-w-[1140px] max-[1200px]:gap-[40px] max-[901px]:grid-cols-[0.7fr_1fr] max-[901px]:gap-[28px] max-[768px]:flex max-[768px]:flex-col max-[768px]:gap-[23px] max-[768px]:pt-[15px] max-[768px]:pb-[130px] site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)]"
+  >
+    <aside class="onboarding-aside max-[768px]:text-center">
+      <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+        >נעים להכיר</span
+      >
       <h1>מתחילים מהסיפור שלך.</h1>
       <p>קצת עליך, קצת על מה שמחפשים.<br />ומכאן — ממשיכים יחד.</p>
       <img src="assets/niva-hero.webp" width="600" height="337" alt="Niva כאן לעזור להתחיל" />
-      <div class="aside-promise">
+      <div class="aside-promise gap-[12px] bg-surface rounded-[13px] p-[16px] text-muted">
         <niva-icon name="shield" />
         <p>זו התנסות מקומית. אין צורך ביצירת חשבון, והקבצים לא מועלים לשרת.</p>
       </div>
     </aside>
-    <section class="onboarding-card">
-      <ol class="stepper" aria-label="שלבי ההתחלה">
+    <section
+      class="onboarding-card bg-surface rounded-[23px] p-[35px] min-w-[0] max-[1200px]:p-[28px] max-[901px]:p-[25px_22px] max-[768px]:w-full max-[768px]:p-[25px_20px] max-[768px]:rounded-[18px]"
+    >
+      <ol
+        class="stepper justify-between p-[0] m-[0_0_38px] pb-[27px] max-[768px]:mb-[28px] max-[768px]:pb-[23px]"
+        aria-label="שלבי ההתחלה"
+      >
         @for (
           label of ['מכירים אותך', 'העדפות חיפוש', 'יוצאים לדרך'];
           track label;
@@ -32,23 +49,28 @@
       </ol>
       @if (step() === 0) {
         <div class="step-content">
-          <span class="section-kicker">שלב 1 מתוך 3</span>
-          <h2>הניסיון שלך, במקום אחד.</h2>
+          <span
+            id="step-progress"
+            class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+            >שלב 1 מתוך 3</span
+          >
+          <h2 tabindex="-1" aria-describedby="step-progress">הניסיון שלך, במקום אחד.</h2>
           <p>אפשר להוסיף שם וקובץ כדי להכיר את התהליך, או להמשיך עם פרופיל לדוגמה.</p>
           <label
-            >איך לקרוא לך? <span class="muted">(לא חובה)</span
+            >איך לקרוא לך? <span class="muted text-muted">(לא חובה)</span
             ><input
               [(ngModel)]="name"
               maxlength="50"
               autocomplete="given-name"
               placeholder="השם שלך" /></label
           ><label
-            class="upload-zone"
+            class="upload-zone flex flex-col items-center justify-center gap-[10px] p-[27px_15px] text-center"
             [class.dragging]="dragging()"
             (dragover)="$event.preventDefault(); dragging.set(true)"
             (dragleave)="dragging.set(false)"
             (drop)="drop($event)"
-            ><span class="round-icon blue"><niva-icon name="upload" /></span
+            ><span class="round-icon items-center justify-center shrink-[0] blue"
+              ><niva-icon name="upload" /></span
             ><strong>{{ filename() || 'מוסיפים קורות חיים' }}</strong
             ><span>גוררים לכאן או בוחרים מהמכשיר</span
             ><small dir="ltr">PDF / DOCX · Up to 10 MB</small
@@ -58,13 +80,26 @@
               (change)="select($event)"
               aria-label="בחירת קובץ קורות חיים להדגמה"
           /></label>
-          <p class="form-hint">
+          @if (filename()) {
+            <button class="plain-button p-[8px_0] text-muted" (click)="filename.set('')">
+              הסרת בחירת קורות חיים
+            </button>
+          }
+          <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
             <niva-icon name="shield" /> רק סוג הקובץ והגודל נבדקים. התוכן אינו נקרא או נשמר.
           </p>
           @if (error()) {
-            <p class="form-error" role="alert">{{ error() }}</p>
+            <p
+              class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+              role="alert"
+            >
+              {{ error() }}
+            </p>
           }
-          <button class="button full-width" (click)="next()">
+          <button
+            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
+            (click)="next()"
+          >
             {{ filename() ? 'ממשיכים להעדפות' : 'ממשיכים עם פרופיל לדוגמה' }}
             <niva-icon name="arrow" />
           </button>
@@ -72,53 +107,76 @@
       }
       @if (step() === 1) {
         <div class="step-content">
-          <span class="section-kicker">שלב 2 מתוך 3</span>
-          <h2>מה הצעד הבא שמעניין אותך?</h2>
+          <span
+            id="step-progress"
+            class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+            >שלב 2 מתוך 3</span
+          >
+          <h2 tabindex="-1" aria-describedby="step-progress">מה הצעד הבא שמעניין אותך?</h2>
           <p>אין תשובה אחת נכונה. אפשר לשנות את ההעדפות גם אחר כך.</p>
           <niva-preference-fields [value]="draft" (valueChange)="draft = $event" />
-          <div class="form-actions">
-            <button class="button" (click)="next()">
+          <div class="form-actions flex items-center gap-[22px] flex-wrap max-[768px]:gap-[16px]">
+            <button
+              class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+              (click)="next()"
+            >
               ממשיכים לסיכום <niva-icon name="arrow" /></button
-            ><button class="plain-button" (click)="step.set(0)">חזרה</button>
+            ><button class="plain-button p-[8px_0] text-muted" (click)="go(0)">חזרה</button>
           </div>
         </div>
       }
       @if (step() === 2) {
         <form class="step-content" (ngSubmit)="finish()">
-          <span class="section-kicker">שלב 3 מתוך 3</span>
-          <h2>איזה כיף. אפשר לצאת לדרך.</h2>
+          <span
+            id="step-progress"
+            class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+            >שלב 3 מתוך 3</span
+          >
+          <h2 tabindex="-1" aria-describedby="step-progress">איזה כיף. אפשר לצאת לדרך.</h2>
           <p>הסביבה שלך מוכנה. לפני שנכנסים, הנה מה שחשוב לדעת.</p>
-          <div class="summary-card">
-            <span class="round-icon green"><niva-icon name="check" /></span>
+          <div class="summary-card flex items-start gap-[15px] bg-canvas rounded-[14px] p-[20px]">
+            <span class="round-icon items-center justify-center shrink-[0] green"
+              ><niva-icon name="check"
+            /></span>
             <div>
               <strong>{{ name.trim() || 'פרופיל לדוגמה' }}</strong>
               <p>{{ filename() || 'ללא קובץ קורות חיים' }}</p>
               <p>
-                {{ draft.model === 'all' ? 'פתוחים לכל סגנונות העבודה' : draft.model }} ·
-                {{ draft.location === 'all' ? 'כל המיקומים' : draft.location }}
+                {{ workStylesLabel(draft.workStyles) }} · {{ districtLabel(draft.district) }} ·
+                {{ categoryLabel(draft.role) }}
               </p>
             </div>
           </div>
-          <div class="info-box">
+          <div class="info-box bg-pale rounded-[13px] p-[18px] gap-[10px] items-start">
             <strong>הכול כאן להדגמה</strong>
             <p>
               המשרות והחברות לדוגמה. אין אימות זהות, חילוץ מידע מקורות חיים, שירות AI או שליחה
               למעסיקים. אפשר לגלות את התהליך ולשמור העדפות במכשיר.
             </p>
           </div>
-          <label class="checkbox-label"
+          <label class="checkbox-label font-normal leading-[1.9]"
             ><input type="checkbox" [(ngModel)]="agreed" name="demoAgreement" required /><span
               >הבנתי שזו התנסות מקומית ללא שליחת מועמדויות.
               <a routerLink="/privacy" target="_blank" rel="noopener">מידע על פרטיות</a></span
             ></label
           >
           @if (error()) {
-            <p role="alert" class="form-error">{{ error() }}</p>
+            <p
+              role="alert"
+              class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+            >
+              {{ error() }}
+            </p>
           }
-          <div class="form-actions">
-            <button type="submit" class="button">
+          <div class="form-actions flex items-center gap-[22px] flex-wrap max-[768px]:gap-[16px]">
+            <button
+              type="submit"
+              class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+            >
               לסביבה האישית שלי <niva-icon name="arrow" /></button
-            ><button type="button" class="plain-button" (click)="step.set(1)">חזרה לעריכה</button>
+            ><button type="button" class="plain-button p-[8px_0] text-muted" (click)="go(1)">
+              חזרה לעריכה
+            </button>
           </div>
         </form>
       }
