@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { afterNextRender, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { Icon } from '../shared/icon';
 import { PreferenceFields } from '../shared/preference-fields';
 import { DemoStore, Preferences } from '../core/demo-store';
+import { districtLabel, workStylesLabel, categoryLabel } from '../core/preferences';
 import { validateResume } from '../core/resume-validation';
 @Component({
   imports: [FormsModule, RouterLink, Brand, Icon, PreferenceFields],
@@ -12,13 +14,18 @@ import { validateResume } from '../core/resume-validation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Onboarding {
+  readonly districtLabel = districtLabel;
+  readonly workStylesLabel = workStylesLabel;
+  readonly categoryLabel = categoryLabel;
   readonly store = inject(DemoStore);
   readonly router = inject(Router);
   readonly step = signal(0);
   readonly error = signal('');
-  readonly filename = signal('');
+  readonly filename = signal(this.store.resumeName());
+  private readonly injector = inject(Injector);
   readonly dragging = signal(false);
-  name = '';
+  name = this.store.name();
+  readonly draftGeneration = this.store.resetGeneration;
   draft: Preferences = { ...this.store.preferences() };
   agreed = false;
   select(event: Event): void {
@@ -38,20 +45,29 @@ export class Onboarding {
     this.error.set(error ?? '');
     if (!error) {
       this.filename.set(file.name);
-      this.store.resumeName.set(file.name);
     }
   }
   next(): void {
     this.error.set('');
-    this.step.update((s) => Math.min(2, s + 1));
+    this.go(Math.min(2, this.step() + 1));
   }
-  finish(): void {
+  go(step: number): void {
+    this.step.set(step);
+    afterNextRender(() => document.querySelector<HTMLElement>('.step-content h2')?.focus(), {
+      injector: this.injector,
+    });
+  }
+  async finish(): Promise<void> {
     if (!this.agreed) {
       this.error.set('כדי להמשיך, יש לאשר שזו סביבת הדגמה.');
       return;
     }
+    if (!(await this.store.savePreferences(this.draft, this.draftGeneration))) {
+      this.error.set('ההעדפות לא נשמרו. יש לפתוח את ההגדרה מחדש ולנסות שוב.');
+      return;
+    }
     this.store.name.set(this.name.trim().slice(0, 50));
-    this.store.savePreferences(this.draft);
+    this.store.resumeName.set(this.filename());
     void this.router.navigateByUrl('/app');
   }
 }

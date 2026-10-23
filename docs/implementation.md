@@ -23,12 +23,20 @@ All routes are lazy loaded. Shared UI uses standalone components and state uses 
 4. Implement immutable approved payloads, server-side idempotency, queueing, pause checks, submission confirmation evidence, reconciliation and human-action states.
 5. Add provider-backed notifications, operational support, data-rights controls, security review, manual accessibility testing and pilot monitoring.
 
-The specification remains the product direction; this milestone is an executable frontend foundation rather than the full P0 service. No billing or public hosting configuration has been activated.
+The specification remains the product direction; this milestone is an executable frontend foundation rather than the full P0 service. No billing is connected. A private Sites deployment is configured for this interactive demo.
 
 ## Hosting
 
-`npm run build` outputs `dist/niva/browser`. Deploy its contents to a static host with SPA fallback to `index.html`, HTTPS and an appropriate security-header policy. The preview script binds to loopback and is for local review only. GitHub upload does not automatically publish the site. For GitHub Pages under `/Niva-/`, use `npm run build -- --base-href /Niva-/` and configure route fallback; a host with native SPA rewrites is preferable for this route structure. Do not expose the development server publicly.
+`npm run build` outputs `dist`. Deploy its contents to a static host with SPA fallback to `index.html`, HTTPS and an appropriate security-header policy. The preview script binds to loopback and is for local review only. GitHub upload does not automatically publish the site. For GitHub Pages under `/Niva-/`, use `npm run build -- --base-href /Niva-/` and configure route fallback; a host with native SPA rewrites is preferable for this route structure. Do not expose the development server publicly.
 
 ## Design assets
 
 The hero is an original generated image from the planning phase, optimized to WebP. The final prompt is in `docs/design/image-generation-prompt.txt`. Fonts are self-hosted Heebo via Fontsource; its upstream license is included by the package. The wordmark and icons are code-native SVG. Final brand and trademark clearance is a product task. The PDF includes the original planning boards; current implementation screenshots are separate.
+
+## Reliability repairs
+
+See [repair implementation and verification](repair-verification.md) for finding-by-finding status, Web Locks coordination, reset outcomes, browser coverage, screenshots and remaining limitations.
+
+## Districts and themes
+
+See [districts, work styles, fields and appearance](preferences-and-themes.md) for the canonical v2 preference schema, legacy mappings, URL filters, theme tokens, first-paint initialization and current test evidence. The separate theme preference survives demo reset.

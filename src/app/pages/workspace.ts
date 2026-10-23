@@ -1,16 +1,50 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ElementRef, HostListener, viewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { Icon } from '../shared/icon';
 import { DemoStore } from '../core/demo-store';
 @Component({
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, Brand, Icon],
+  imports: [NgTemplateOutlet, RouterOutlet, RouterLink, RouterLinkActive, Brand, Icon],
   templateUrl: './workspace.html',
+  styleUrl: './workspace.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Workspace {
   readonly store = inject(DemoStore);
   readonly menu = signal(false);
+  readonly drawer = viewChild.required<ElementRef<HTMLDialogElement>>('drawer');
+  private trigger: HTMLElement | null = null;
+  openMenu(event: Event): void {
+    this.trigger = event.currentTarget as HTMLElement;
+    this.menu.set(true);
+    this.drawer().nativeElement.showModal();
+    this.drawer()
+      .nativeElement.querySelector<HTMLButtonElement>('[aria-label="סגירת תפריט"]')
+      ?.focus();
+  }
+  closeMenu(): void {
+    this.drawer().nativeElement.close();
+    this.menu.set(false);
+    this.trigger?.focus();
+  }
+  backdrop(event: MouseEvent): void {
+    if (event.target === this.drawer().nativeElement) this.closeMenu();
+  }
+  trapFocus(event: KeyboardEvent): void {
+    if (event.key !== 'Tab') return;
+    const controls = Array.from(
+      this.drawer().nativeElement.querySelectorAll<HTMLElement>('a[href],button:not([disabled])'),
+    ).filter((element) => element.getClientRects().length);
+    if (!controls.length) return;
+    event.preventDefault();
+    const index = controls.indexOf(document.activeElement as HTMLElement);
+    controls[(index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length]?.focus();
+  }
+  @HostListener('window:resize') resized(): void {
+    if (window.innerWidth > 767 && this.menu()) this.closeMenu();
+  }
   readonly links = [
     { path: '/app', name: 'סקירה כללית', icon: 'grid', exact: true },
     { path: '/app/jobs', name: 'משרות בשבילך', icon: 'search', exact: false },

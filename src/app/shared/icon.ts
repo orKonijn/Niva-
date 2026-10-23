@@ -23,10 +23,8 @@ const paths: Record<string, string> = {
 };
 @Component({
   selector: 'niva-icon',
-  template:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path [attr.d]="path()" /></svg>',
-  styles:
-    ':host{display:inline-flex;width:1.35em;height:1.35em;flex-shrink:0}svg{width:100%;height:100%}',
+  templateUrl: './icon.html',
+  styleUrl: './icon.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Icon {

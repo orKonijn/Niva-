@@ -1,0 +1,164 @@
+<a
+  routerLink="/app/jobs"
+  class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong back-link mb-[22px]"
+  >בחזרה לכל המשרות <niva-icon name="arrow"
+/></a>
+@if (job(); as job) {
+  <div
+    class="page-heading flex items-center justify-between gap-[24px] max-[901px]:flex-wrap max-[768px]:gap-[20px]"
+  >
+    <div class="detail-job-title flex items-center gap-[18px] min-w-[0] max-[768px]:gap-[13px]">
+      <span
+        class="company-avatar inline-flex items-center justify-center shrink-[0] large"
+        [style.background]="job.color"
+        >{{ job.initials }}</span
+      >
+      <div>
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+          >משרה לדוגמה</span
+        >
+        <h1>
+          <bdi>{{ job.title }}</bdi>
+        </h1>
+        <p>
+          <bdi>{{ job.company }}</bdi> · {{ districtLabel(job.district) }} ·
+          {{ workStyleLabel(job.workStyle) }}
+        </p>
+      </div>
+    </div>
+    <button
+      class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+      (click)="store.toggleSaved(job.id)"
+    >
+      <niva-icon name="heart" />{{
+        store.saved().includes(job.id) ? 'הסרה מהשמורות' : 'שמירת משרה'
+      }}
+    </button>
+  </div>
+  <div
+    class="detail-grid grid grid-cols-[1.2fr_1fr] gap-[25px] max-[1200px]:grid-cols-[1fr] max-[768px]:gap-[20px]"
+  >
+    <section
+      class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
+    >
+      <h2>קצת על התפקיד</h2>
+      <p>{{ job.description }}</p>
+      <h3>מה מביאים לתפקיד?</h3>
+      <div class="skills flex gap-[8px] flex-wrap">
+        @for (skill of job.skills; track skill) {
+          <span dir="ltr">{{ skill }}</span>
+        }
+      </div>
+      <div class="info-box bg-pale rounded-[13px] p-[18px] gap-[10px] items-start">
+        <niva-icon name="sparkles" />
+        <div>
+          <strong>כיוון שכדאי לבדוק</strong>
+          <p>{{ job.reason }}. הסבר זה הוא חלק מנתוני ההדגמה, ולא ניתוח AI של קורות החיים שלך.</p>
+        </div>
+      </div>
+      <h3>במילים שלך</h3>
+      <label
+        >הערה לבדיקת המועמדות <span class="muted text-muted">(לא חובה, להדגמה בלבד)</span
+        ><textarea
+          [(ngModel)]="note"
+          maxlength="1500"
+          rows="4"
+          placeholder="מה חשוב לך לבדוק לגבי התפקיד? לא נשמר ולא נשלח."
+        ></textarea>
+      </label>
+    </section>
+    <section
+      class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px] review-panel sticky"
+    >
+      <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+        >עוצרים לרגע ובודקים</span
+      >
+      <h2>לפני שמאשרים</h2>
+      <dl class="review-list">
+        <div>
+          <dt>חברה</dt>
+          <dd>
+            <bdi>{{ job.company }}</bdi> · לדוגמה
+          </dd>
+        </div>
+        <div>
+          <dt>קורות חיים</dt>
+          <dd>
+            <bdi>{{ store.resumeName() || 'פרופיל לדוגמה — ללא קובץ' }}</bdi>
+          </dd>
+        </div>
+        <div>
+          <dt>יעד השליחה</dt>
+          <dd>אין חיבור חיצוני בהדגמה</dd>
+        </div>
+        <div>
+          <dt>מה יקרה באישור?</dt>
+          <dd>יישמר רישום מקומי בלבד</dd>
+        </div>
+      </dl>
+      @if (store.approved(job.id)) {
+        <div class="success-box bg-success-soft rounded-[12px] p-[19px] text-center" role="status">
+          <niva-icon name="check" /><strong>המשרה אושרה בהדגמה</strong>
+          <p>לא נשלח מידע לחברה. אפשר למצוא את הרישום בהיסטוריה שלך.</p>
+        </div>
+        <a
+          routerLink="/app/applications"
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
+          >לרישומי ההדגמה <niva-icon name="arrow"
+        /></a>
+      } @else {
+        <label class="checkbox-label font-normal leading-[1.9]"
+          ><input type="checkbox" [(ngModel)]="acknowledged" /><span
+            >בדקתי את הפרטים והבנתי שלא תישלח מועמדות אמיתית.</span
+          ></label
+        >
+        @if (!eligible()) {
+          <p
+            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+            role="alert"
+          >
+            המשרה אינה תואמת להעדפות הנוכחיות, ולכן לא ניתן לאשר אותה. אפשר לעדכן את ההעדפות.
+          </p>
+        }
+        @if (store.paused()) {
+          <p
+            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+            role="status"
+          >
+            האישורים מושהים. יש לחדש פעילות בסקירה לפני האישור.
+          </p>
+        }
+        <button
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
+          [disabled]="!acknowledged || store.paused() || !eligible()"
+          (click)="approve()"
+        >
+          אישור בהדגמה <niva-icon name="check" />
+        </button>
+        @if (error()) {
+          <p
+            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+            role="alert"
+          >
+            {{ error() }}
+          </p>
+        }
+        <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+          כל בחירה בשליטה שלך. תמיד.
+        </p>
+      }
+    </section>
+  </div>
+} @else {
+  <section
+    class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
+  >
+    <h1>המשרה לא נמצאה</h1>
+    <p>אפשר לחזור לרשימה ולגלות הזדמנויות אחרות.</p>
+    <a
+      routerLink="/app/jobs"
+      class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+      >לכל המשרות</a
+    >
+  </section>
+}

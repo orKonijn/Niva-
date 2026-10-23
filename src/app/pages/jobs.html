@@ -1,0 +1,96 @@
+<niva-page-heading
+  kicker="מוצאים את החיבור"
+  heading="ההזדמנויות שלך"
+  description="כל משרה היא אפשרות להתחלה חדשה. בודקים מה מתאים לך."
+>
+  <a
+    routerLink="/app/preferences"
+    class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+    ><niva-icon name="settings" /> העדפות חיפוש</a
+  >
+</niva-page-heading>
+<div
+  class="filter-panel flex items-center gap-[20px] bg-surface p-[20px] rounded-[16px] max-[901px]:items-stretch max-[901px]:flex-col max-[768px]:p-[15px] flex-wrap"
+>
+  <div class="search-input flex items-center gap-[12px] text-muted">
+    <niva-icon name="search" /><input
+      aria-label="חיפוש תפקיד או חברה"
+      placeholder="איזה תפקיד או חברה מעניינים אותך?"
+      [ngModel]="query()"
+      (ngModelChange)="setFilter({ q: $event || null }, true)"
+    />
+  </div>
+  <label class="filter-label flex flex-row items-center gap-[12px] max-[901px]:justify-between"
+    >מחוז במסך<select
+      [ngModel]="district()"
+      (ngModelChange)="setFilter({ district: $event === 'all' ? null : $event })"
+    >
+      <option value="all">כל המחוזות</option>
+      @for (district of districts; track district.id) {
+        <option [value]="district.id">{{ district.label }}</option>
+      }
+    </select></label
+  >
+  <label class="filter-label flex flex-row items-center gap-[12px] max-[901px]:justify-between"
+    >תחום במסך<select
+      [ngModel]="category()"
+      (ngModelChange)="setFilter({ category: $event === 'all' ? null : $event })"
+    >
+      <option value="all">כל התחומים</option>
+      @for (category of categories; track category.id) {
+        <option [value]="category.id">{{ category.label }}</option>
+      }
+    </select></label
+  >
+  <niva-work-style-fields [value]="workStyles()" (valueChange)="setStyles($event)" />
+</div>
+<p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+  הסינון במסך נוסף להעדפות הקבועות. תחום ומחוז חייבים להתאים יחד; סגנונות העבודה נבדקים לפי אחד
+  מהנבחרים.
+</p>
+<div class="section-row flex items-center justify-between gap-[20px]">
+  <div class="segmented flex gap-[4px]" aria-label="תצוגת משרות">
+    <button
+      [class.selected]="!savedOnly()"
+      [attr.aria-pressed]="!savedOnly()"
+      (click)="setFilter({ saved: null })"
+    >
+      כל המשרות</button
+    ><button
+      [class.selected]="savedOnly()"
+      [attr.aria-pressed]="savedOnly()"
+      (click)="setFilter({ saved: 'true' })"
+    >
+      השמורות שלי <span>{{ store.visibleSavedJobs().length }}</span>
+    </button>
+  </div>
+  <span class="muted text-muted" role="status">{{ filtered().length }} משרות לדוגמה</span>
+</div>
+@if (store.suppressedSavedCount()) {
+  <p role="status">{{ store.suppressedSavedCount() }} משרות שמורות מוסתרות לפי החרגות החברות.</p>
+}
+<div
+  class="jobs-grid grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-[20px] max-[1200px]:gap-[15px] max-[901px]:grid-cols-[1fr]"
+>
+  @for (job of filtered(); track job.id) {
+    <niva-job-card [job]="job" />
+  } @empty {
+    <section
+      class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
+    >
+      <niva-icon name="search" />
+      <h2>עדיין לא מצאנו כאן התאמה</h2>
+      <p>אפשר לנסות מילות חיפוש אחרות או לשנות את ההעדפות.</p>
+      <button
+        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+        (click)="clear()"
+      >
+        ניקוי הסינון במסך</button
+      ><a
+        routerLink="/app/preferences"
+        class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+        >עדכון העדפות קבועות</a
+      >
+    </section>
+  }
+</div>

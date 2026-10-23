@@ -1,0 +1,58 @@
+<niva-page-heading
+  kicker="מסתכלים על הדרך"
+  heading="ההגשות שלי"
+  description="כל מה שבחרת לאשר בהדגמה, במקום אחד. לא נשלחו מועמדויות בפועל."
+>
+  <span class="count-pill bg-pale text-brand text-[12px] p-[9px_15px] rounded-[25px]"
+    >{{ records().length }} רישומים</span
+  >
+</niva-page-heading>
+@if (records().length) {
+  <div class="application-list grid gap-[14px]">
+    @for (record of records(); track record.jobId) {
+      <article
+        class="application-row flex items-center gap-[20px] bg-surface p-[22px] rounded-[15px] max-[901px]:flex-wrap max-[901px]:gap-[15px] max-[768px]:p-[19px] max-[768px]:gap-[12px]"
+      >
+        <span
+          class="company-avatar inline-flex items-center justify-center shrink-[0]"
+          [style.background]="record.job?.color"
+          >{{ record.job?.initials }}</span
+        >
+        <div class="application-title flex-[1]">
+          <h2>
+            <a [routerLink]="['/app/jobs', record.jobId]"
+              ><bdi>{{ record.job?.title }}</bdi></a
+            >
+          </h2>
+          <span
+            ><bdi>{{ record.job?.company }}</bdi></span
+          >
+        </div>
+        <span
+          class="status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium"
+          ><niva-icon name="check" /> אושר בהדגמה</span
+        ><time [attr.datetime]="record.approvedAt">{{
+          record.approvedAt | date: 'dd/MM/yyyy HH:mm'
+        }}</time>
+      </article>
+    }
+  </div>
+  <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+    הרישומים נשמרים בדפדפן בלבד. מחיקת נתוני הדפדפן תמחק אותם.
+  </p>
+} @else {
+  <section
+    class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
+  >
+    <span class="round-icon items-center justify-center shrink-[0] blue"
+      ><niva-icon name="briefcase"
+    /></span>
+    <h2>כאן תתחיל הדרך שלך</h2>
+    <p>אחרי בדיקה ואישור של משרה לדוגמה, היא תופיע כאן.</p>
+    <a
+      routerLink="/app/jobs"
+      class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+      >מגלים משרות <niva-icon name="arrow"
+    /></a>
+  </section>
+}

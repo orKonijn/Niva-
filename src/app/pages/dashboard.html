@@ -1,0 +1,94 @@
+<div
+  class="page-heading flex items-center justify-between gap-[24px] max-[901px]:flex-wrap max-[768px]:gap-[20px]"
+>
+  <div>
+    <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+      >הזדמנויות חדשות מחכות לך</span
+    >
+    <h1>
+      היי{{ store.name() ? ' ' + store.name() : '' }}, טוב לראות אותך
+      <span class="wave text-[25px]">✦</span>
+    </h1>
+    <p>הצעד הבא שלך מתחיל בדיוק כאן.</p>
+  </div>
+  <button
+    class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+    (click)="store.togglePause()"
+  >
+    <niva-icon [name]="store.paused() ? 'play' : 'pause'" />{{
+      store.paused() ? 'חידוש הפעילות' : 'השהיית פעילות'
+    }}
+  </button>
+</div>
+<section
+  class="welcome-panel items-center justify-between bg-pale p-[29px_32px] overflow-hidden gap-[20px] max-[1200px]:p-[25px] max-[768px]:p-[25px_22px]"
+>
+  <div>
+    <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+      >עושים מקום לדבר הבא</span
+    >
+    <h2>חיפוש עבודה, עם קצת יותר שקט.</h2>
+    <p>מגלים הזדמנויות, בודקים את הפרטים ומתקדמים כשזה מרגיש נכון.</p>
+    <a
+      routerLink="/app/jobs"
+      class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+      >למשרות שמחכות לך <niva-icon name="arrow"
+    /></a>
+  </div>
+  <img src="assets/niva-hero.webp" width="320" height="180" alt="" />
+</section>
+<section
+  class="stats-grid grid grid-cols-[repeat(3,_1fr)] gap-[18px] mb-[40px] max-[768px]:gap-[10px] max-[768px]:mb-[30px] max-[768px]:grid-cols-[repeat(auto-fit,_minmax(145px,_1fr))]"
+  aria-label="סיכום הפעילות"
+>
+  <a routerLink="/app/jobs" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+    ><span class="round-icon items-center justify-center shrink-[0] blue"
+      ><niva-icon name="search" /></span
+    ><span>משרות לפי ההעדפות</span><strong>{{ store.eligibleJobs().length }}</strong
+    ><small>מתוך מאגר ההדגמה</small></a
+  ><a
+    routerLink="/app/jobs"
+    [queryParams]="{ saved: 'true' }"
+    class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+    ><span class="round-icon items-center justify-center shrink-[0] lavender"
+      ><niva-icon name="heart" /></span
+    ><span>משרות ששמרת</span><strong>{{ store.visibleSavedJobs().length }}</strong
+    ><small>מוצגות לאחר החרגות חברות</small></a
+  ><a routerLink="/app/applications" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+    ><span class="round-icon items-center justify-center shrink-[0] green"
+      ><niva-icon name="check" /></span
+    ><span>אושרו בהדגמה</span><strong>{{ store.applications().length }}</strong
+    ><small>לא נשלחו למעסיקים</small></a
+  >
+</section>
+<div class="section-row flex items-center justify-between gap-[20px]">
+  <div>
+    <h2>אולי כאן מתחיל הפרק הבא</h2>
+    <p>משרות לדוגמה לפי ההעדפות שבחרת</p>
+  </div>
+  <a
+    routerLink="/app/jobs"
+    class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+    >לכל המשרות <niva-icon name="arrow"
+  /></a>
+</div>
+<div
+  class="jobs-grid grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-[20px] max-[1200px]:gap-[15px] max-[901px]:grid-cols-[1fr]"
+>
+  @for (job of recommended(); track job.id) {
+    <niva-job-card [job]="job" />
+  } @empty {
+    <div
+      class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
+    >
+      <niva-icon name="search" />
+      <h3>נרחיב קצת את האופק?</h3>
+      <p>אין משרות לדוגמה שמתאימות לכל ההעדפות הנוכחיות.</p>
+      <a
+        routerLink="/app/preferences"
+        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+        >עדכון העדפות</a
+      >
+    </div>
+  }
+</div>

@@ -1,14 +1,30 @@
-<a class="skip-link" href="#main">דילוג לתוכן</a>
+<a
+  class="skip-link fixed z-[100] bg-action text-on-action p-[14px] rounded-[12px]"
+  href="#main"
+  (click)="skipToContent($event)"
+  >דילוג לתוכן</a
+>
 <router-outlet />
 @if (!cookies.decided()) {
-  <section class="cookie-banner" aria-label="בחירת עוגיות">
+  <section
+    class="cookie-banner fixed z-[50] flex items-center gap-[16px] bg-surface rounded-[18px] max-[768px]:grid max-[768px]:grid-cols-[1fr_1fr] max-[768px]:gap-[12px] max-[768px]:rounded-[14px]"
+    aria-label="בחירת עוגיות"
+  >
     <div>
       <strong>הפרטיות שלך, הבחירה שלך</strong>
       <p>הגרסה הזו שומרת רק העדפות הדגמה במכשיר. אין כלי מעקב או עוגיות פרסום.</p>
     </div>
-    <button class="button button-small button-outline" (click)="cookies.choose('necessary')">
+    <button
+      class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"
+      (click)="cookies.choose('necessary')"
+    >
       רק הכרחיות
     </button>
-    <button class="button button-small" (click)="cookies.choose('all')">שמירת הבחירה</button>
+    <button
+      class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+      (click)="cookies.choose('all')"
+    >
+      שמירת הבחירה
+    </button>
   </section>
 }

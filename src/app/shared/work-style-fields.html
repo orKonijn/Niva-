@@ -1,0 +1,21 @@
+<fieldset
+  class="work-style-fields min-w-[0] rounded-[12px]"
+  [attr.aria-describedby]="descriptionId"
+>
+  <legend>סגנונות עבודה</legend>
+  <div class="work-style-options flex-wrap">
+    @for (style of options; track style.id) {
+      <label class="checkbox-label font-normal leading-[1.9]"
+        ><input
+          type="checkbox"
+          [checked]="selected().includes(style.id)"
+          (change)="toggle(style.id)"
+        />{{ style.label }}</label
+      >
+    }
+  </div>
+  <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]" [id]="descriptionId">
+    אפשר לבחור כמה סגנונות. ללא בחירה — כל סגנונות העבודה מוצגים. מספיק שהמשרה תתאים לאחד הסגנונות
+    שנבחרו.
+  </p>
+</fieldset>

@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 
 // Local preview only. Production hosting must provide HTTPS and SPA rewrites.
-const root = resolve('dist/niva/browser');
+const root = resolve('dist');
 const port = Number(process.env.PORT ?? 4300);
 const types = {
   '.html': 'text/html; charset=utf-8',

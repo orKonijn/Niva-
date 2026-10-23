@@ -1,0 +1,56 @@
+<article
+  class="job-card h-full bg-surface rounded-[18px] p-[23px] hover:border-muted max-[1200px]:p-[18px] max-[768px]:p-[21px]"
+>
+  <div class="job-card-top flex items-center gap-[13px]">
+    <span
+      class="company-avatar inline-flex items-center justify-center shrink-[0]"
+      [style.background]="job().color"
+      >{{ job().initials }}</span
+    >
+    <div class="job-title flex-[1] min-w-[0]">
+      <h3>
+        <a [routerLink]="['/app/jobs', job().id]"
+          ><bdi>{{ job().title }}</bdi></a
+        >
+      </h3>
+      <span
+        ><bdi>{{ job().company }}</bdi> <span class="muted text-muted">· חברת הדגמה</span></span
+      >
+    </div>
+    <button
+      class="icon-button inline-flex justify-center items-center min-w-[44px] min-h-[44px] bg-transparent rounded-[11px] hover:bg-pale save-button self-[flex-start] text-[14px]"
+      [class.saved]="store.saved().includes(job().id)"
+      [attr.aria-label]="store.saved().includes(job().id) ? 'הסרת המשרה מהשמורות' : 'שמירת המשרה'"
+      [attr.aria-pressed]="store.saved().includes(job().id)"
+      (click)="store.toggleSaved(job().id)"
+    >
+      <niva-icon name="heart" />
+    </button>
+  </div>
+  <div class="job-meta flex-wrap my-[20px_16px] text-muted">
+    <span><niva-icon name="pin" />{{ districtLabel(job().district) }}</span
+    ><span><niva-icon name="briefcase" />{{ workStyleLabel(job().workStyle) }}</span
+    ><span><niva-icon name="clock" />{{ job().posted }}</span>
+  </div>
+  @if (!store.eligibleJobs().includes(job())) {
+    <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+      מחוץ להעדפות הנוכחיות · האישור כפוף להעדפות
+    </p>
+  }
+  <p
+    class="job-reason flex items-start gap-[7px] bg-pale p-[10px_11px] rounded-[9px] leading-[1.8]"
+  >
+    <niva-icon name="sparkles" />{{ job().reason }}
+  </p>
+  <div class="job-card-bottom flex items-center justify-between gap-[10px] pt-[15px]">
+    <span
+      class="status-badge items-center justify-center gap-[5px] rounded-[7px] p-[5px_9px] font-medium"
+      [class.blue-badge]="!store.approved(job().id)"
+      >{{ store.approved(job().id) ? 'אושר בהדגמה' : 'משרה לדוגמה' }}</span
+    ><a
+      [routerLink]="['/app/jobs', job().id]"
+      class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+      >לבדיקת המשרה <niva-icon name="arrow"
+    /></a>
+  </div>
+</article>
