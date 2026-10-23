@@ -1,0 +1,14 @@
+<a class="skip-link" href="#main">דילוג לתוכן</a>
+<router-outlet />
+@if (!cookies.decided()) {
+  <section class="cookie-banner" aria-label="בחירת עוגיות">
+    <div>
+      <strong>הפרטיות שלך, הבחירה שלך</strong>
+      <p>הגרסה הזו שומרת רק העדפות הדגמה במכשיר. אין כלי מעקב או עוגיות פרסום.</p>
+    </div>
+    <button class="button button-small button-outline" (click)="cookies.choose('necessary')">
+      רק הכרחיות
+    </button>
+    <button class="button button-small" (click)="cookies.choose('all')">שמירת הבחירה</button>
+  </section>
+}

@@ -1,0 +1,212 @@
+<div class="marketing">
+  <header class="site-header container">
+    <niva-brand />
+    <nav aria-label="ניווט ראשי" [class.is-open]="menu()">
+      <a href="#how-it-works" (click)="menu.set(false)">איך זה עובד</a
+      ><a href="#in-control" (click)="menu.set(false)">למה Niva</a
+      ><a href="#faq" (click)="menu.set(false)">שאלות נפוצות</a>
+    </nav>
+    <div class="header-actions">
+      <a routerLink="/app" class="login-link">לסביבת ההדגמה</a
+      ><a routerLink="/signup" class="button button-small">בואו נתחיל <niva-icon name="arrow" /></a
+      ><button
+        class="icon-button mobile-menu"
+        aria-label="פתיחת תפריט"
+        [attr.aria-expanded]="menu()"
+        (click)="menu.set(!menu())"
+      >
+        <niva-icon [name]="menu() ? 'close' : 'menu'" />
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> העוזרת האישית לחיפוש העבודה שלך</span>
+        <h1>פחות חיפוש.<br /><span>יותר הזדמנויות.</span></h1>
+        <p class="hero-description">
+          הצעד הבא בקריירה שלך לא צריך להיות עבודה במשרה מלאה. מכירים אותך, מוצאים התאמות, ומתקדמים
+          יחד — בקצב שלך.
+        </p>
+        <div class="hero-actions">
+          <a class="button" routerLink="/signup"
+            >מתחילים עם קורות החיים <niva-icon name="arrow" /></a
+          ><a href="#how-it-works" class="text-link"
+            ><span class="play-circle"><niva-icon name="play" /></span> איך זה עובד?</a
+          >
+        </div>
+        <div class="hero-reassurance">
+          <span><niva-icon name="check" /> כל הגשה באישור שלך</span
+          ><span><niva-icon name="check" /> הפרטים שלך בשליטתך</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <span class="hero-spark spark-one">✦</span><span class="hero-spark spark-two">✧</span>
+        <div class="mascot-frame">
+          <img
+            src="assets/niva-hero.webp"
+            width="900"
+            height="506"
+            alt="העוזרת Niva מחזיקה קורות חיים"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="floating-card match-float">
+          <span class="round-icon green"><niva-icon name="check" /></span>
+          <div><strong>נמצאה הזדמנות חדשה</strong><span>עוד צעד לקראת התפקיד הבא שלך</span></div>
+          <span class="float-spark">✦</span>
+        </div>
+        <div class="floating-card control-float">
+          <span class="round-icon blue"><niva-icon name="shield" /></span
+          ><span>האישור האחרון? תמיד שלך.</span>
+        </div>
+        <span class="visual-caption">נעים להכיר, אני Niva <span>↗</span></span>
+      </div>
+    </section>
+    <div class="promise-strip">
+      <div class="container">
+        <span>פחות טאבים פתוחים.<br /><strong>יותר מקום לדבר הבא.</strong></span>
+        <div>
+          <niva-icon name="document" /><span>פרופיל אחד,<br /><strong>כל הניסיון שלך</strong></span>
+        </div>
+        <div>
+          <niva-icon name="search" /><span>חיפוש ממוקד,<br /><strong>לפי מה שחשוב לך</strong></span>
+        </div>
+        <div>
+          <niva-icon name="shield" /><span>שליטה מלאה,<br /><strong>מהרגע הראשון</strong></span>
+        </div>
+      </div>
+    </div>
+    <section id="how-it-works" class="section container">
+      <div class="section-heading">
+        <span class="section-kicker">פשוט מתחילים</span>
+        <h2>שלושה צעדים. התחלה חדשה.</h2>
+        <p>את הניסיון כבר צברת. עכשיו נותנים לו להגיע למקום הנכון.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-index">01</span
+          ><span class="step-icon"><niva-icon name="upload" /></span>
+          <h3>מכירים אותך</h3>
+          <p>מוסיפים קורות חיים, בודקים את הפרטים ומספרים לנו מה הצעד הבא שמעניין אותך.</p>
+          <span class="step-note">הניסיון שלך הוא נקודת ההתחלה</span>
+        </article>
+        <article class="step-card">
+          <span class="step-index">02</span
+          ><span class="step-icon lavender"><niva-icon name="sparkles" /></span>
+          <h3>מוצאים את החיבור</h3>
+          <p>מגדירים תפקיד, מיקום וסגנון עבודה. מקבלים תמונה ברורה של ההזדמנויות המתאימות.</p>
+          <span class="step-note">לפי ההעדפות שלך, לא של כולם</span>
+        </article>
+        <article class="step-card">
+          <span class="step-index">03</span
+          ><span class="step-icon mint"><niva-icon name="check" /></span>
+          <h3>מתקדמים בשליטה</h3>
+          <p>בודקים כל משרה וכל פרט, מאשרים את הבחירה ועוקבים אחרי מה שקורה במקום אחד.</p>
+          <span class="step-note">שום צעד משמעותי בלי הבחירה שלך</span>
+        </article>
+      </div>
+    </section>
+    <section id="in-control" class="section container control-section">
+      <div class="preview-window">
+        <div class="preview-top">
+          <span class="window-dots">● ● ●</span><span>ההזדמנויות שלך</span
+          ><span class="tiny-badge">תצוגה לדוגמה</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-greeting">
+            <span class="section-kicker">ממשיכים קדימה</span>
+            <h3>יש דברים טובים באופק.</h3>
+            <p>כל המשרות, כל ההחלטות. במקום אחד.</p>
+          </div>
+          @for (
+            job of [
+              { name: 'Product Designer', company: 'Forma Studio', initial: 'f', color: 'purple' },
+              { name: 'Frontend Engineer', company: 'Orbit', initial: 'o', color: 'green' },
+            ];
+            track job.name
+          ) {
+            <div class="preview-job">
+              <span [class]="'company-avatar ' + job.color">{{ job.initial }}</span>
+              <div>
+                <strong dir="ltr">{{ job.name }}</strong
+                ><small>{{ job.company }} · היברידי</small>
+              </div>
+              <span class="status-badge">לבדיקה שלך</span>
+            </div>
+          }
+          <a routerLink="/app" class="preview-bottom"
+            >לגלות את סביבת ההדגמה <niva-icon name="arrow"
+          /></a>
+        </div>
+      </div>
+      <div class="control-copy">
+        <span class="section-kicker">יותר שקט בתהליך</span>
+        <h2>עוזרת חכמה.<br />ההחלטה נשארת שלך.</h2>
+        <p>
+          חיפוש עבודה הוא אישי. גם הדרך שלך אליו צריכה להיות כזו. Niva מרכזת את הפרטים, ואת הבחירות
+          החשובות משאירה בידיים שלך.
+        </p>
+        <ul class="feature-list">
+          <li>
+            <span class="round-icon"><niva-icon name="check" /></span>
+            <div>
+              <strong>רואים לפני שמתקדמים</strong>
+              <p>משרה, קורות חיים ותשובות — הכול ברור לפני האישור.</p>
+            </div>
+          </li>
+          <li>
+            <span class="round-icon"><niva-icon name="settings" /></span>
+            <div>
+              <strong>מתאים לחיים שלך</strong>
+              <p>מיקום, היברידי או מרחוק, ואפילו חברות שלא תרצו לראות.</p>
+            </div>
+          </li>
+          <li>
+            <span class="round-icon"><niva-icon name="pause" /></span>
+            <div>
+              <strong>תמיד אפשר לעצור</strong>
+              <p>השהיה, שינוי כיוון או התחלה חדשה. בקצב שנכון לך.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="faq" class="section container faq-section">
+      <div class="section-heading">
+        <span class="section-kicker">טוב ששאלת</span>
+        <h2>לפני שמתחילים</h2>
+        <p>קצת יותר בהירות, קצת פחות סימני שאלה.</p>
+      </div>
+      <div class="faq-list">
+        @for (item of faqs; track item.q) {
+          <details>
+            <summary>{{ item.q }}<span aria-hidden="true">+</span></summary>
+            <p>{{ item.a }}</p>
+          </details>
+        }
+      </div>
+    </section>
+    <section class="container final-cta">
+      <span class="cta-spark">✦</span><span class="section-kicker">הפרק הבא שלך</span>
+      <h2>אולי ההזדמנות הבאה<br />קרובה יותר ממה שנדמה לך.</h2>
+      <p>בואו להכיר דרך נעימה יותר לחפש עבודה.</p>
+      <a class="button" routerLink="/signup">מתחילים את הדרך <niva-icon name="arrow" /></a
+      ><small>גרסת הדגמה אינטראקטיבית · ללא שליחת מועמדויות</small>
+    </section>
+  </main>
+  <footer class="site-footer container">
+    <div>
+      <niva-brand />
+      <p>יותר מקום לצעד הבא שלך.</p>
+    </div>
+    <nav aria-label="קישורים נוספים">
+      <a routerLink="/privacy">פרטיות</a><a routerLink="/terms">תנאי ההדגמה</a
+      ><a routerLink="/accessibility">נגישות</a
+      ><button class="plain-button" (click)="cookies.reopen()">העדפות עוגיות</button>
+    </nav>
+    <span class="copyright" dir="ltr">© 2026 Niva</span>
+  </footer>
+</div>

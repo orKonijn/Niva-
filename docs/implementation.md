@@ -1,0 +1,34 @@
+# Development status
+
+## First milestone
+
+This repository implements the initial Angular and TypeScript frontend from the Niva specification. It contains a responsive Hebrew RTL marketing website, three-step setup, dashboard, sample jobs, local review approvals, saved jobs, search and filters, preferences, local data export/reset, and supporting information pages.
+
+All routes are lazy loaded. Shared UI uses standalone components and state uses Angular signals. Application state and static sample jobs are isolated in `DemoStore` so a later API integration does not need to be embedded into templates. The local demo does not provide authentication or authorization. `/login` deliberately points to the clearly labelled demonstration flow, not a fake login form.
+
+## Boundaries
+
+- No account creation, email verification, password handling, backend, AI inference or job-platform requests.
+- CV selection validates extension, browser MIME metadata and size. It does not read, scan, extract, persist or upload the file content. This client validation is not a security control for a future upload API.
+- The candidate name and selected filename are held in memory only. Preferences, exclusions, saved sample job IDs, approval timestamps and pause state are stored locally. Cookie preference is a separate local entry. No analytics SDK is included.
+- Approval creates a `local-demo` record, never a submitted status. Duplicate, unknown, excluded and paused approvals are blocked by the store as well as the interface. Real authorization, idempotency and audit requirements must be implemented on the server.
+- Resume setup does not resume across a browser refresh; only preferences and demonstration history persist. Production resumable onboarding is a later server feature.
+- The public documents describe this demonstration only. Production legal notices, contact owner, privacy retention and provider disclosures require approval before a real service is enabled.
+
+## Next milestones
+
+1. Select hosting, identity provider, storage region, processors and first approved job integration. Confirm ownership, budget and data retention.
+2. Implement server authentication and tenant authorization; private uploads with malware scanning; candidate-confirmed CV parsing; versioned profile and preference APIs.
+3. Replace the static job repository with a destination adapter and source freshness metadata. Review permissions and supported capabilities before advertising coverage.
+4. Implement immutable approved payloads, server-side idempotency, queueing, pause checks, submission confirmation evidence, reconciliation and human-action states.
+5. Add provider-backed notifications, operational support, data-rights controls, security review, manual accessibility testing and pilot monitoring.
+
+The specification remains the product direction; this milestone is an executable frontend foundation rather than the full P0 service. No billing or public hosting configuration has been activated.
+
+## Hosting
+
+`npm run build` outputs `dist/niva/browser`. Deploy its contents to a static host with SPA fallback to `index.html`, HTTPS and an appropriate security-header policy. The preview script binds to loopback and is for local review only. GitHub upload does not automatically publish the site. For GitHub Pages under `/Niva-/`, use `npm run build -- --base-href /Niva-/` and configure route fallback; a host with native SPA rewrites is preferable for this route structure. Do not expose the development server publicly.
+
+## Design assets
+
+The hero is an original generated image from the planning phase, optimized to WebP. The final prompt is in `docs/design/image-generation-prompt.txt`. Fonts are self-hosted Heebo via Fontsource; its upstream license is included by the package. The wordmark and icons are code-native SVG. Final brand and trademark clearance is a product task. The PDF includes the original planning boards; current implementation screenshots are separate.

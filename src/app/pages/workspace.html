@@ -1,0 +1,73 @@
+<div class="workspace">
+  <aside class="app-sidebar" [class.mobile-open]="menu()">
+    <div class="sidebar-brand">
+      <niva-brand /><button
+        class="icon-button mobile-menu"
+        aria-label="סגירת תפריט"
+        (click)="menu.set(false)"
+      >
+        <niva-icon name="close" />
+      </button>
+    </div>
+    <span class="sidebar-label">המרחב שלך</span>
+    <nav aria-label="ניווט בסביבת ההדגמה">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          (click)="menu.set(false)"
+          ><niva-icon [name]="link.icon" />{{ link.name }}
+          @if (link.path === '/app/jobs') {
+            <span class="nav-count">{{ store.eligibleJobs().length }}</span>
+          }
+        </a>
+      }
+    </nav>
+    <div class="sidebar-help">
+      <span class="round-icon"><niva-icon name="sparkles" /></span
+      ><strong>צעד קטן, כיוון חדש.</strong>
+      <p>אפשר לעדכן את ההעדפות בכל רגע.</p>
+      <a routerLink="/app/preferences" class="text-link" (click)="menu.set(false)"
+        >מדייקים את החיפוש <niva-icon name="arrow"
+      /></a>
+    </div>
+    <a routerLink="/" class="sidebar-exit"><niva-icon name="logout" /> בחזרה לאתר</a
+    ><small class="sidebar-version">Niva · גרסת פיתוח 0.1</small>
+  </aside>
+  <div class="workspace-body">
+    <header class="app-topbar">
+      <div class="app-topbar-title">
+        <button
+          class="icon-button mobile-menu"
+          aria-label="פתיחת תפריט"
+          [attr.aria-expanded]="menu()"
+          (click)="menu.set(!menu())"
+        >
+          <niva-icon name="menu" /></button
+        ><span>המסע שלך. בקצב שלך.</span>
+      </div>
+      <div class="topbar-user">
+        <span class="demo-pill">סביבת הדגמה</span
+        ><span class="user-avatar">{{ store.name().charAt(0) || 'נ' }}</span>
+      </div>
+    </header>
+    <div class="demo-notice">
+      <niva-icon name="shield" /><span
+        >הכול כאן להיכרות: המשרות לדוגמה, והאישורים נשמרים רק במכשיר שלך. לא נשלחות מועמדויות.</span
+      >
+    </div>
+    @if (store.paused()) {
+      <div class="pause-notice" role="status">
+        <niva-icon name="pause" /> הפעילות מושהית. אפשר להמשיך לגלות משרות ולחדש אישורים מהסקירה.
+      </div>
+    }
+    @if (store.notice()) {
+      <div class="pause-notice" role="status">{{ store.notice() }}</div>
+    }
+    <main id="main" class="app-main"><router-outlet /></main>
+    <footer class="app-footer">
+      <span>Niva · כל צעד בשליטה שלך</span><a routerLink="/privacy">פרטיות</a>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<rect width="1200" height="760" fill="#F5F8FD"/>
+<text x="50" y="65" font-family="Arial" font-size="32" fill="#142441">Niva information architecture</text>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#52627B"/></marker></defs>
+<path d="M600.0,185 L205.0,275" stroke="#52627B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<path d="M600.0,185 L600.0,275" stroke="#52627B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<path d="M600.0,420 L995.0,275" stroke="#52627B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<path d="M995.0,420 L995.0,550" stroke="#52627B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="425" y="105" width="350" height="80" rx="18" fill="white" stroke="#B7C9E7" stroke-width="2"/>
+<text x="600.0" y="138" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Public website</text>
+<rect x="40" y="275" width="330" height="145" rx="18" fill="white" stroke="#B7C9E7" stroke-width="2"/>
+<text x="205.0" y="308" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Discover</text>
+<text x="205.0" y="335" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Home / How it works / FAQ</text>
+<text x="205.0" y="362" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Privacy / Terms / Accessibility</text>
+<rect x="435" y="275" width="330" height="145" rx="18" fill="white" stroke="#B7C9E7" stroke-width="2"/>
+<text x="600.0" y="308" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Identity</text>
+<text x="600.0" y="335" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Signup / Login / Verify</text>
+<text x="600.0" y="362" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Recovery</text>
+<rect x="830" y="275" width="330" height="145" rx="18" fill="white" stroke="#B7C9E7" stroke-width="2"/>
+<text x="995.0" y="308" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Application</text>
+<text x="995.0" y="335" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Overview / Jobs / Applications</text>
+<text x="995.0" y="362" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Profile / Preferences / Settings</text>
+<rect x="830" y="550" width="330" height="115" rx="18" fill="white" stroke="#B7C9E7" stroke-width="2"/>
+<text x="995.0" y="583" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Onboarding</text>
+<text x="995.0" y="610" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">CV &gt; Profile &gt; Preferences</text>
+<text x="995.0" y="637" text-anchor="middle" font-family="Arial" font-size="20" fill="#142441">Review setup</text>
+</svg>

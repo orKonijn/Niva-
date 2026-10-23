@@ -1,0 +1,38 @@
+{
+  "color": {
+    "ink": "#142441",
+    "action": "#245ADD",
+    "canvas": "#EDF4FF",
+    "mutedText": "#52627B",
+    "border": "#D9E3F1",
+    "success": "#16634B",
+    "error": "#B42318",
+    "warning": "#8A4B08"
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radius": {
+    "control": 12,
+    "card": 20,
+    "panel": 28
+  },
+  "font": {
+    "he": "Heebo",
+    "en": "Inter"
+  },
+  "breakpoints": {
+    "tablet": 768,
+    "desktop": 1200
+  },
+  "containerMax": 1280,
+  "direction": "rtl",
+  "version": "1.0"
+}
