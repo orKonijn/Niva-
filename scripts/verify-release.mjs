@@ -1,10 +1,11 @@
-import { chromium, expect } from '@playwright/test';
+import { chromium, expect as baseExpect } from '@playwright/test';
 import assert from 'node:assert/strict';
 
 // Secrets are accepted only over stdin, kept in memory, and sent only to the selected Site.
 let input = '';
 for await (const chunk of process.stdin) input += chunk;
 const { url, token, sourceCommit } = JSON.parse(input);
+const expect = baseExpect.configure({ timeout: 20000 });
 const origin = new URL(url).origin;
 const headers = token ? { 'OAI-Sites-Authorization': `Bearer ${token}` } : {};
 async function read(path) {

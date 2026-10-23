@@ -1061,10 +1061,11 @@
   .filter-panel .filter-label {
     flex: 1 1 180px;
   }
-  @media (max-width: 767px) {
+  @media (max-width: 900px) {
     .filter-panel .search-input,
-    .filter-panel .filter-label {
-      flex-basis: 100%;
+    .filter-panel .filter-label,
+    .filter-panel > niva-work-style-fields {
+      flex: 0 1 auto;
     }
   }
   @media (max-width: 767px) {

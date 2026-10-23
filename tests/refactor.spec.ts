@@ -48,6 +48,12 @@ test('outline actions remain readable and menu controls only appear on mobile', 
   ).toBe(true);
   await expect(page.getByRole('button', { name: 'סגירת תפריט' })).toBeHidden();
   await expect(page.getByRole('button', { name: 'פתיחת תפריט' })).toBeHidden();
+  await page.setViewportSize({ width: 810, height: 1000 });
+  expect(
+    await page
+      .locator('.filter-panel')
+      .evaluate((element) => element.getBoundingClientRect().height),
+  ).toBeLessThan(500);
   await page.setViewportSize({ width: 390, height: 800 });
   await expect(page.getByRole('button', { name: 'פתיחת תפריט' })).toBeVisible();
 });

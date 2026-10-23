@@ -14,7 +14,7 @@ Templates own layout, spacing, responsive behavior and interaction utilities. Cu
 
 Logical margins, padding and borders preserve Hebrew RTL. Mixed-language job titles and company names retain `bdi`. The visible theme control is one changing icon next to the logo, cycling System → Light → Dark, with an accessible current/next-state label. Early `theme-init.js` applies the saved theme before Angular loads.
 
-The refinement increases form text to 14px, raises workspace metadata to 12px, adds shared 30/34px page headings, improves field borders, and keeps 44px save controls. It retains demo disclosures, self-hosted fonts, existing artwork and truthful content.
+The refinement increases form text to 14px, raises workspace metadata to 12px, adds shared 30/34px page headings, improves field borders, and keeps 44px save controls. Tablet filters switch to natural-height stacked controls instead of retaining desktop flex bases; a focused height regression covers 810px. It retains demo disclosures, self-hosted fonts, existing artwork and truthful content.
 
 ## Verification
 
