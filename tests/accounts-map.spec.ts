@@ -131,6 +131,20 @@ test('protected routes return safely, password visibility and failure/cancellati
   await page.getByRole('button', { name: 'שמירת סיסמה חדשה' }).click();
   await expect(page.getByRole('alert')).toContainText('לא ניתן');
 });
+test('static hosting clearly disables account methods and retains guest navigation', async ({
+  page,
+}) => {
+  await page.route('**/api/config', (route) =>
+    route.fulfill({ contentType: 'text/html', body: '<html></html>' }),
+  );
+  await page.goto('/login');
+  await expect(page.getByRole('status')).toContainText('ללא שרת חשבונות פעיל');
+  await expect(page.getByRole('button', { name: 'כניסה לחשבון', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'המשך עם Google' })).toBeDisabled();
+  await page.getByRole('link', { name: 'המשך בהדגמה ללא חשבון' }).click();
+  await expect(page).toHaveURL(/\/app$/);
+});
+
 test('Google/Apple boundary mocks show unavailable/failure states without claiming real OAuth', async ({
   page,
 }) => {

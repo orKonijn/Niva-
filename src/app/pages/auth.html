@@ -38,7 +38,12 @@
       }
       <p class="text-center text-xs">או באמצעות דוא״ל וסיסמה נפרדת ל־Niva, גם עם כתובת Gmail</p>
     }
-    @if (!session.config().email) {
+    @if (!session.loading() && !session.config().accounts) {
+      <p class="rounded-control bg-warning-soft p-4 text-sm" role="status">
+        זו גרסת תצוגה ללא שרת חשבונות פעיל. התחברות ושמירה בחשבון אינן זמינות כאן עדיין. אפשר להמשיך
+        בהדגמה; הנתונים בה נשמרים במכשיר הזה בלבד.
+      </p>
+    } @else if (!session.config().email) {
       <p class="rounded-control bg-warning-soft p-4 text-sm" role="status">
         דוא״ל טרם הוגדר בשרת. הרשמה, כניסה ואיפוס סיסמה אינם זמינים כאן עדיין.
       </p>
