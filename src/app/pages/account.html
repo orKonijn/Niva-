@@ -1,0 +1,133 @@
+<div class="min-h-screen bg-canvas px-5 py-8">
+  <header class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4">
+    <niva-brand /><a routerLink="/app" class="text-sm text-brand">למשרות ולחשבון שלי</a
+    ><button type="button" class="account-button" (click)="signOut()">יציאה מהחשבון</button>
+  </header>
+  <main id="main" tabindex="-1" class="mx-auto mt-10 max-w-3xl space-y-6">
+    <h1 class="text-3xl">החשבון והנתונים שלי</h1>
+    <p>
+      החיבור פעיל עבור <bdi class="break-all">{{ session.user()?.email }}</bdi
+      >. נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. קורות חיים אינם נשמרים.
+    </p>
+    @if (store.accountLoading()) {
+      <p role="status">טוענים את נתוני החשבון…</p>
+    }
+    <section class="account-panel">
+      <h2 class="mb-4 text-xl">שיטות התחברות מחוברות</h2>
+      <ul class="mb-5 list-inside list-disc">
+        @for (method of methods(); track method) {
+          <li>
+            {{
+              method === 'credential'
+                ? 'דוא״ל וסיסמה'
+                : method === 'google'
+                  ? 'Google'
+                  : method === 'apple'
+                    ? 'Apple'
+                    : method
+            }}
+          </li>
+        }
+      </ul>
+      <div class="flex flex-wrap gap-3">
+        <button
+          class="account-button"
+          [disabled]="linking() || !session.config().google || methods().includes('google')"
+          (click)="link('google')"
+        >
+          קישור Google</button
+        ><button
+          class="account-button"
+          [disabled]="linking() || !session.config().apple || methods().includes('apple')"
+          (click)="link('apple')"
+        >
+          קישור Apple</button
+        ><a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
+      </div>
+      <p class="mb-0 mt-4 text-xs">
+        קישור דורש חיבור פעיל ואימות אצל הספק. כתובת דוא״ל זהה אינה ממזגת חשבונות אוטומטית. נתמכות
+        גם כתובות פרטיות של Apple.
+      </p>
+    </section>
+    <section class="account-panel">
+      <h2 class="mb-4 text-xl">ייבוא חד־פעמי מההדגמה במכשיר</h2>
+      <p>
+        אין העלאה אוטומטית. אפשר לבדוק תצוגה מקדימה ולבחור לייבא. לא יועלו שמות קבצים או תוכן קורות
+        חיים. העדפות החיפוש בחשבון יוחלפו בבחירות המקומיות; משרות והיסטוריה ימוזגו ללא כפילויות.
+      </p>
+      @if (store.account().importedAt) {
+        <p role="status">הייבוא לחשבון הזה כבר בוצע.</p>
+      } @else {
+        <button
+          class="account-button"
+          [disabled]="!store.accountReady() || store.busy()"
+          (click)="previewImport()"
+        >
+          בדיקת נתונים לפני ייבוא
+        </button>
+      }
+      @if (preview(); as data) {
+        <div class="mt-5 rounded-control border border-line bg-pale p-5">
+          <h3 class="text-lg">תצוגה מקדימה</h3>
+          <p>
+            {{ data.counts.saved }} משרות שמורות · {{ data.counts.demoApprovals }} אישורי הדגמה ·
+            {{ data.data.paused ? 'פעילות מושהית' : 'פעילות פעילה' }}
+          </p>
+          <p>
+            {{ categoryLabel(data.data.preferences.role) }} ·
+            {{ districtLabel(data.data.preferences.district) }} ·
+            {{ workStylesLabel(data.data.preferences.workStyles) }}
+          </p>
+          <p>חברות מוחרגות: {{ data.data.preferences.exclusions || 'ללא' }}</p>
+          <p class="text-xs">אישורים נשארים רישומי הדגמה ולא ייחשבו להגשות אמיתיות.</p>
+          <div class="flex flex-wrap gap-3">
+            <button
+              class="account-button account-primary"
+              [disabled]="store.busy()"
+              (click)="import()"
+            >
+              אישור ייבוא לחשבון</button
+            ><button class="account-button" (click)="preview.set(null)">ביטול ייבוא</button>
+          </div>
+        </div>
+      }
+    </section>
+    <section class="account-panel">
+      <h2 class="mb-4 text-xl">ניהול נתונים ופרטיות</h2>
+      <p>
+        אימות נעשה בשרת באמצעות Better Auth. Google ו־Apple משתתפים רק כאשר בוחרים להתחבר דרכם. מפות
+        נטענות מ־OpenStreetMap רק בפתיחת המפה, וחושפות לספק את כתובת ה־IP ואזור המפה. אין בקשת מיקום
+        מהמכשיר.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a class="account-button" routerLink="/app/profile">ניקוי נתוני ההדגמה במכשיר</a
+        ><button class="account-button text-error" (click)="confirmDelete.set(true)">
+          מחיקת הנתונים השמורים בחשבון
+        </button>
+      </div>
+      @if (confirmDelete()) {
+        <div class="mt-5" role="alert">
+          <p>
+            למחוק את ההעדפות, הפרופיל השמור, המשרות ואישורי ההדגמה בשרת? הנתונים במכשיר ושיטות
+            ההתחברות לא יימחקו.
+          </p>
+          <button
+            class="account-button text-error"
+            [disabled]="store.busy()"
+            (click)="removeData()"
+          >
+            כן, מחיקת נתוני החשבון</button
+          ><button class="account-button ms-3" (click)="confirmDelete.set(false)">ביטול</button>
+        </div>
+      }
+    </section>
+    @if (message()) {
+      <p role="status" class="rounded-control bg-success-soft p-4 text-success">{{ message() }}</p>
+    }
+    @if (error() || store.notice() || session.notice()) {
+      <p role="alert" class="rounded-control bg-error-soft p-4 text-error">
+        {{ error() || store.notice() || session.notice() }}
+      </p>
+    }
+  </main>
+</div>

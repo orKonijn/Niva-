@@ -14,10 +14,20 @@
     /></span>
     <div>
       <h2>העדפות החיפוש שלך</h2>
-      <p>הבחירות נשמרות רק בדפדפן הזה.</p>
+      <p>
+        {{
+          store.isAccount()
+            ? 'הבחירות נשמרות בחשבון ומסתנכרנות בין מכשירים.'
+            : 'הבחירות נשמרות רק בדפדפן הזה.'
+        }}
+      </p>
     </div>
   </div>
-  <niva-preference-fields [value]="draft" (valueChange)="draft = $event; saved.set(false)" />
+  <niva-preference-fields
+    [accountOwned]="store.isAccount()"
+    [value]="draft"
+    (valueChange)="draft = $event; saved.set(false)"
+  />
   <div class="form-actions flex items-center gap-[22px] flex-wrap max-[768px]:gap-[16px]">
     <button
       class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"

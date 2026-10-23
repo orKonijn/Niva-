@@ -16,6 +16,7 @@ import { WorkStyleFields } from './work-style-fields';
   templateUrl: './preference-fields.html',
 })
 export class PreferenceFields {
+  readonly accountOwned = input(false);
   readonly value = input.required<Preferences>();
   readonly valueChange = output<Preferences>();
   readonly draft = linkedSignal(() => this.value());

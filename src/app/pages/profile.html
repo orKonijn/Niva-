@@ -18,8 +18,19 @@
         autocomplete="given-name"
         placeholder="השם שלך"
     /></label>
+    @if (store.isAccount()) {
+      <label
+        >כותרת מקצועית<input
+          name="headline"
+          [(ngModel)]="headline"
+          maxlength="140"
+          autocomplete="organization-title"
+      /></label>
+    }
     <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-      השם נשמר בזיכרון בלבד עד רענון הדף.
+      {{
+        store.isAccount() ? 'השם נשמר בפרופיל החשבון בשרת.' : 'השם נשמר בזיכרון בלבד עד רענון הדף.'
+      }}
     </p>
     <label
       class="upload-zone flex flex-col items-center justify-center gap-[10px] p-[27px_15px] text-center compact"
@@ -53,19 +64,25 @@
       class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
       type="submit"
     >
-      שמירת שם לביקור הנוכחי
+      {{ store.isAccount() ? 'שמירת שם בחשבון' : 'שמירת שם לביקור הנוכחי' }}
     </button>
     @if (saved()) {
       <p class="success-text text-success text-[12px]" role="status">
-        הפרטים עודכנו לביקור הנוכחי.
+        {{ store.isAccount() ? 'הפרטים נשמרו בחשבון.' : 'הפרטים עודכנו לביקור הנוכחי.' }}
       </p>
     }
   </form>
   <section
     class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
   >
-    <h2>הנתונים המקומיים שלך</h2>
-    <p>העדפות חיפוש, משרות שמורות ואישורי הדגמה נשמרים בדפדפן הזה. אין חשבון משתמש או שרת מחובר.</p>
+    <h2>{{ store.isAccount() ? 'ייצוא וניהול נתונים' : 'הנתונים המקומיים שלך' }}</h2>
+    <p>
+      {{
+        store.isAccount()
+          ? 'נתוני החשבון נשמרים בשרת. ניקוי ההדגמה במכשיר אינו מוחק נתוני חשבון. למחיקת נתונים בשרת יש להשתמש בהגדרות החשבון.'
+          : 'העדפות חיפוש, משרות שמורות ואישורי הדגמה נשמרים בדפדפן הזה במצב אורח.'
+      }}
+    </p>
     <div class="stack-actions grid gap-[13px] my-[24px]">
       <button
         class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"

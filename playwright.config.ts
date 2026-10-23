@@ -23,6 +23,12 @@ export default defineConfig({
       : []),
   ],
   webServer: {
+    env: {
+      NODE_ENV: 'test',
+      NIVA_BROWSER_TESTS: '1',
+      NIVA_MAIL_MODE: 'local',
+      NIVA_DATA_DIR: '.test-data/browser',
+    },
     command: 'npm run preview',
     url: 'http://127.0.0.1:4300',
     reuseExistingServer: !process.env['CI'],

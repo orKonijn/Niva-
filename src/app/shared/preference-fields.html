@@ -35,6 +35,9 @@
       [ngModelOptions]="{ standalone: true }"
       [ngModel]="draft().exclusions"
       (ngModelChange)="setExclusions($event)"
-    /><small>למשל: החברה הנוכחית שלך. נשמר רק במכשיר הזה.</small></label
+    /><small
+      >למשל: החברה הנוכחית שלך.
+      {{ accountOwned() ? 'נשמר בחשבון שלך.' : 'נשמר רק במכשיר הזה.' }}</small
+    ></label
   >
 </div>

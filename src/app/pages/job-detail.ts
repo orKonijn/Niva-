@@ -2,18 +2,21 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { DemoStore } from '../core/demo-store';
+import { AppStore } from '../core/app-store';
 import { districtLabel, workStyleLabel } from '../core/preferences';
 import { Icon } from '../shared/icon';
+import { directionsUrl, locationText } from '../core/job-locations';
 @Component({
   imports: [FormsModule, RouterLink, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './job-detail.html',
 })
 export class JobDetail {
+  readonly directionsUrl = directionsUrl;
+  readonly locationText = locationText;
   readonly districtLabel = districtLabel;
   readonly workStyleLabel = workStyleLabel;
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
   readonly params = toSignal(inject(ActivatedRoute).paramMap);
   readonly job = computed(() => this.store.jobs.find((j) => j.id === this.params()?.get('id')));
   readonly eligible = computed(() =>

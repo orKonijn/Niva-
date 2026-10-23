@@ -1,7 +1,7 @@
 import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoStore } from '../core/demo-store';
+import { AppStore } from '../core/app-store';
 import { CookiePreferences } from '../core/cookie-preferences';
 import { Theme } from '../core/theme';
 import { Icon } from '../shared/icon';
@@ -12,18 +12,22 @@ import { validateResume } from '../core/resume-validation';
   templateUrl: './profile.html',
 })
 export class Profile {
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
   readonly cookies = inject(CookiePreferences);
   readonly theme = inject(Theme);
   name = this.store.name();
+  headline = this.store.account().profile.headline;
+  private profileRevision = this.store.account().revision;
   readonly saved = signal(false);
   readonly error = signal('');
   readonly confirmReset = signal(false);
   readonly resetDone = signal('');
   readonly resetCleared = signal(false);
-  save(): void {
-    this.store.name.set(this.name.trim());
-    this.saved.set(true);
+  async save(): Promise<void> {
+    this.saved.set(
+      await this.store.saveProfile(this.name.trim(), this.headline.trim(), this.profileRevision),
+    );
+    if (this.saved()) this.profileRevision = this.store.account().revision;
   }
   select(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -54,6 +58,8 @@ export class Profile {
           {
             version: 2,
             mode: 'local-demo',
+            storageScope: this.store.isAccount() ? 'account' : 'device',
+            profile: this.store.isAccount() ? this.store.account().profile : undefined,
             appearance: { theme: this.theme.preference() },
             preferences: this.store.preferences(),
             savedJobIds: this.store.saved(),

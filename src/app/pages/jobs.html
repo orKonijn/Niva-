@@ -69,6 +69,26 @@
 @if (store.suppressedSavedCount()) {
   <p role="status">{{ store.suppressedSavedCount() }} משרות שמורות מוסתרות לפי החרגות החברות.</p>
 }
+<div class="mb-5 flex flex-wrap gap-3" role="group" aria-label="רשימה או מפה">
+  <button
+    type="button"
+    class="account-button"
+    [attr.aria-pressed]="!mapView()"
+    (click)="setFilter({ view: null })"
+  >
+    רשימה</button
+  ><button
+    type="button"
+    class="account-button"
+    [attr.aria-pressed]="mapView()"
+    (click)="setFilter({ view: 'map' })"
+  >
+    מפה
+  </button>
+</div>
+@if (mapView()) {
+  <niva-job-map [jobs]="filtered()" />
+}
 <div
   class="jobs-grid grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-[20px] max-[1200px]:gap-[15px] max-[901px]:grid-cols-[1fr]"
 >

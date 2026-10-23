@@ -1,5 +1,7 @@
 # Development status
 
+This document records the original frontend milestone. For the current account backend, real sign-in routes, persistent data, map, setup and verification status, see [Accounts and map implementation](accounts-map.md). The original no-auth description below applies to the earlier guest-only milestone.
+
 ## First milestone
 
 This repository implements the initial Angular and TypeScript frontend from the Niva specification. It contains a responsive Hebrew RTL marketing website, three-step setup, dashboard, sample jobs, local review approvals, saved jobs, search and filters, preferences, local data export/reset, and supporting information pages.

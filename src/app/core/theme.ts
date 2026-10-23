@@ -4,8 +4,23 @@ export const parseTheme = (value: unknown): ThemePreference =>
   value === 'light' || value === 'dark' ? value : 'system';
 @Injectable({ providedIn: 'root' })
 export class Theme {
+  accountSelection: ((value: ThemePreference) => void) | null = null;
+  applyAccount(value: ThemePreference): void {
+    this.preference.set(value);
+    this.apply();
+  }
+  restoreGuest(): void {
+    this.preference.set(this.read());
+    this.apply();
+  }
   private readonly media = window.matchMedia('(prefers-color-scheme: dark)');
-  readonly preference = signal<ThemePreference>(this.read());
+  readonly preference = signal<ThemePreference>(this.readInitial());
+  private readInitial(): ThemePreference {
+    const value = document
+      .querySelector('meta[name="niva-account-theme"]')
+      ?.getAttribute('content');
+    return value ? parseTheme(value) : this.read();
+  }
   readonly notice = signal('');
   constructor() {
     this.apply();
@@ -32,6 +47,10 @@ export class Theme {
     this.preference.set(preference);
     this.apply();
     try {
+      if (this.accountSelection) {
+        this.accountSelection(preference);
+        return;
+      }
       localStorage.setItem('niva.theme', preference);
       this.notice.set('');
     } catch {
@@ -42,6 +61,7 @@ export class Theme {
     if (this.preference() === 'system') this.apply();
   };
   private readonly onStorage = (event: StorageEvent): void => {
+    if (this.accountSelection) return;
     if (event.key === 'niva.theme' || event.key === null) {
       this.preference.set(this.read());
       this.apply();

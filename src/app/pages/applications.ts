@@ -2,7 +2,7 @@ import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { DemoStore } from '../core/demo-store';
+import { AppStore } from '../core/app-store';
 import { Icon } from '../shared/icon';
 @Component({
   imports: [PageHeading, DatePipe, RouterLink, Icon],
@@ -10,7 +10,7 @@ import { Icon } from '../shared/icon';
   templateUrl: './applications.html',
 })
 export class Applications {
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
   readonly records = computed(() =>
     this.store
       .applications()

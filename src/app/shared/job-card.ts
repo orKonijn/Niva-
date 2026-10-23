@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DemoStore, Job } from '../core/demo-store';
+import { AppStore, Job } from '../core/app-store';
 import { districtLabel, workStyleLabel } from '../core/preferences';
 import { Icon } from './icon';
 @Component({
@@ -14,5 +14,5 @@ export class JobCard {
   readonly job = input.required<Job>();
   readonly districtLabel = districtLabel;
   readonly workStyleLabel = workStyleLabel;
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
 }

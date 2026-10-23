@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { Icon } from '../shared/icon';
 import { PreferenceFields } from '../shared/preference-fields';
-import { DemoStore, Preferences } from '../core/demo-store';
+import { AppStore, Preferences } from '../core/app-store';
 import { districtLabel, workStylesLabel, categoryLabel } from '../core/preferences';
 import { validateResume } from '../core/resume-validation';
 @Component({
@@ -17,7 +17,7 @@ export class Onboarding {
   readonly districtLabel = districtLabel;
   readonly workStylesLabel = workStylesLabel;
   readonly categoryLabel = categoryLabel;
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
   readonly router = inject(Router);
   readonly step = signal(0);
   readonly error = signal('');
@@ -66,7 +66,7 @@ export class Onboarding {
       this.error.set('ההעדפות לא נשמרו. יש לפתוח את ההגדרה מחדש ולנסות שוב.');
       return;
     }
-    this.store.name.set(this.name.trim().slice(0, 50));
+    void this.store.saveProfile(this.name.trim().slice(0, 50));
     this.store.resumeName.set(this.filename());
     void this.router.navigateByUrl('/app');
   }

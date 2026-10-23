@@ -1,0 +1,138 @@
+<div class="min-h-screen bg-canvas px-5 py-8">
+  <header class="mx-auto flex max-w-5xl items-center justify-between gap-4">
+    <niva-brand /><a class="text-sm text-brand" routerLink="/app">המשך בהדגמה ללא חשבון</a>
+  </header>
+  <main
+    id="main"
+    tabindex="-1"
+    class="mx-auto mt-12 max-w-[480px] rounded-card border border-line bg-surface p-6 shadow-card sm:p-10"
+  >
+    <p class="mb-2 text-sm font-medium text-brand">הצעד הבא שלך, גם במכשיר הבא</p>
+    <h1 class="mb-4 text-3xl">{{ heading() }}</h1>
+    <p class="text-sm">
+      בחשבון נשמרים העדפות, משרות שמורות ואישורי הדגמה. קורות חיים אינם מועלים ולא נשלחות מועמדויות.
+    </p>
+    @if (mode() === 'login' || mode() === 'register') {
+      <div class="my-6 grid gap-3">
+        <button
+          type="button"
+          class="account-button"
+          [disabled]="busy() || !session.config().google"
+          (click)="social('google')"
+        >
+          המשך עם Google
+        </button>
+        <button
+          type="button"
+          class="account-button"
+          [disabled]="busy() || !session.config().apple"
+          (click)="social('apple')"
+        >
+          המשך עם Apple
+        </button>
+      </div>
+      @if (!session.config().google || !session.config().apple) {
+        <p class="text-xs">
+          ספקים מושבתים עד להגדרת המפתחות בשרת. אין לבקש או להזין כאן את סיסמת Google או Apple.
+        </p>
+      }
+      <p class="text-center text-xs">או באמצעות דוא״ל וסיסמה נפרדת ל־Niva, גם עם כתובת Gmail</p>
+    }
+    @if (!session.config().email) {
+      <p class="rounded-control bg-warning-soft p-4 text-sm" role="status">
+        דוא״ל טרם הוגדר בשרת. הרשמה, כניסה ואיפוס סיסמה אינם זמינים כאן עדיין.
+      </p>
+    }
+    @if (session.config().emailDelivery === 'local-outbox') {
+      <p role="note" class="rounded-control bg-pale p-4 text-sm">
+        תצורת בדיקה מקומית: הודעות אימות ואיפוס נשמרות בתיבת בדיקה בשרת ואינן נשלחות בדוא״ל.
+      </p>
+    }
+    <form (ngSubmit)="submit()" class="grid gap-4">
+      <fieldset
+        class="grid min-w-0 gap-4 border-0 p-0"
+        [disabled]="busy() || !session.config().email"
+      >
+        @if (mode() === 'register') {
+          <label
+            >שם להצגה<input
+              name="name"
+              [(ngModel)]="name"
+              autocomplete="name"
+              maxlength="50"
+              required
+          /></label>
+        }
+        @if (mode() !== 'reset') {
+          <label
+            >כתובת דוא״ל<input
+              name="email"
+              [(ngModel)]="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              dir="ltr"
+              maxlength="254"
+              required
+          /></label>
+        }
+        @if (mode() !== 'forgot') {
+          <div>
+            <label for="account-password">סיסמה ל־Niva</label>
+            <div class="flex items-center gap-2">
+              <input
+                id="account-password"
+                name="password"
+                [(ngModel)]="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                [autocomplete]="mode() === 'login' ? 'current-password' : 'new-password'"
+                dir="ltr"
+                minlength="12"
+                maxlength="128"
+                required
+                aria-describedby="password-help"
+              /><button
+                type="button"
+                class="account-button shrink-0"
+                [attr.aria-pressed]="showPassword()"
+                (click)="showPassword.set(!showPassword())"
+              >
+                {{ showPassword() ? 'הסתרה' : 'הצגה' }}
+              </button>
+            </div>
+            <p id="password-help" class="mb-0 mt-2 text-xs">
+              12–128 תווים. סיסמה ייעודית לחשבון Niva.
+            </p>
+          </div>
+        }
+        <button type="submit" class="account-button account-primary">
+          {{
+            busy()
+              ? 'רגע, מטפלים בבקשה…'
+              : mode() === 'login'
+                ? 'כניסה לחשבון'
+                : mode() === 'register'
+                  ? 'יצירת חשבון'
+                  : mode() === 'forgot'
+                    ? 'שליחת הוראות איפוס'
+                    : 'שמירת סיסמה חדשה'
+          }}
+        </button>
+      </fieldset>
+    </form>
+    @if (error()) {
+      <p class="mt-4 rounded-control bg-error-soft p-4 text-sm text-error" role="alert">
+        {{ error() }}
+      </p>
+    }
+    @if (message()) {
+      <p class="mt-4 rounded-control bg-success-soft p-4 text-sm text-success" role="status">
+        {{ message() }}
+      </p>
+    }
+    <nav aria-label="אפשרויות חשבון" class="mt-6 flex flex-wrap gap-5 text-sm text-brand">
+      <a routerLink="/login">כניסה</a><a routerLink="/register">יצירת חשבון</a
+      ><a routerLink="/forgot-password">שכחתי סיסמה</a><a routerLink="/privacy">פרטיות</a>
+    </nav>
+  </main>
+</div>

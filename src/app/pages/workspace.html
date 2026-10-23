@@ -85,8 +85,9 @@
         >
       </div>
       <div class="topbar-user flex items-center gap-[17px] max-[768px]:gap-[9px]">
-        <span class="demo-pill bg-pale text-muted rounded-[30px] p-[5px_11px] max-[768px]:px-[8px]"
-          >סביבת הדגמה</span
+        <span
+          class="demo-pill bg-pale text-muted rounded-[30px] p-[5px_11px] max-[768px]:px-[8px]"
+          >{{ store.isAccount() ? 'חשבון מחובר' : 'סביבת הדגמה' }}</span
         ><span
           class="user-avatar grid place-items-center w-[35px] h-[35px] text-purple rounded-[50%] text-[14px] max-[768px]:w-[31px] max-[768px]:h-[31px] max-[768px]:text-[12px]"
           >{{ store.name().charAt(0) || 'נ' }}</span
@@ -95,7 +96,16 @@
     </header>
     <div class="demo-notice" role="region" aria-label="מידע על ההדגמה">
       <niva-icon name="shield" /><span
-        >הכול כאן להיכרות: המשרות לדוגמה, והאישורים נשמרים רק במכשיר שלך. לא נשלחות מועמדויות.</span
+        >{{
+          store.isAccount()
+            ? 'נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. המשרות והאישורים הם הדגמה בלבד; לא נשלחות מועמדויות.'
+            : 'הכול כאן להיכרות: המשרות לדוגמה, והאישורים נשמרים רק במכשיר שלך. לא נשלחות מועמדויות.'
+        }}
+        <a
+          [routerLink]="store.isAccount() ? '/account' : '/login'"
+          class="font-semibold underline"
+          >{{ store.isAccount() ? 'ניהול חשבון ויציאה' : 'כניסה לחשבון ושמירה בין מכשירים' }}</a
+        ></span
       >
     </div>
     @if (store.paused()) {
@@ -111,7 +121,15 @@
       tabindex="-1"
       class="app-main max-w-[1300px] p-[42px] m-[auto] min-h-[calc(100vh_-_220px)] max-[1200px]:p-[30px_25px] max-[768px]:p-[28px_20px_45px]"
     >
-      <router-outlet />
+      @if (store.session.loading() || (store.isAccount() && !store.accountReady())) {
+        <section class="account-panel" role="status">
+          <h1 class="text-2xl">בודקים את מצב החיבור</h1>
+          <p>נתוני החשבון נטענים מהשרת. נתוני החשבון וההדגמה במכשיר מופרדים.</p>
+          <button class="account-button" (click)="store.refresh()">ניסיון טעינה מחדש</button>
+        </section>
+      } @else {
+        <router-outlet />
+      }
     </main>
     <footer
       class="app-footer flex justify-between text-muted p-[24px_42px] max-[768px]:p-[20px_20px_120px]"

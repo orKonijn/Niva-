@@ -1,0 +1,91 @@
+<section class="mb-6 rounded-card border border-line bg-surface p-4 sm:p-6" aria-label="מפת משרות">
+  <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+    <h2 class="text-xl">הזדמנויות על המפה</h2>
+    <button type="button" class="account-button" [disabled]="!groups().length" (click)="fit()">
+      התאמת המפה לתוצאות
+    </button>
+  </div>
+  <p class="text-sm">
+    כל המשרות והשיוך לעיר הם נתוני הדגמה. הסמנים מציינים אזור עירוני משוער בלבד, לא כתובת של מעסיק.
+    הסינון קובע אילו משרות מוצגות; מוצגים כל מיקומיהן הידועים. הרשימה למטה זמינה גם ללא מפה.
+  </p>
+  @if (status() === 'loading') {
+    <p role="status">טוענים מפה…</p>
+  }
+  @if (status() === 'unavailable') {
+    <p role="status" class="rounded-control bg-warning-soft p-4 text-sm">
+      המפה או אריחי הרקע אינם זמינים כרגע. אפשר להמשיך באמצעות רשימת המיקומים ורשימת המשרות.
+    </p>
+  }
+  @if (!groups().length) {
+    <p role="status">אין מיקומים עם קואורדינטות מאומתות בתוצאות האלה.</p>
+  }
+  <div
+    #canvas
+    class="relative z-0 h-[360px] w-full overflow-hidden rounded-control border border-line sm:h-[440px]"
+    role="region"
+    aria-label="מפת אזורים משוערים. סמנים נגישים במקלדת, ורשימה חלופית זמינה בהמשך."
+    dir="ltr"
+  ></div>
+  <div class="mt-5 grid gap-4 sm:grid-cols-2" aria-label="רשימת מיקומים נגישה">
+    @for (group of groups(); track group.key) {
+      <section class="rounded-control border border-line p-4">
+        <button
+          type="button"
+          class="account-button mb-3"
+          [attr.aria-pressed]="selected() === group.key"
+          (click)="select(group.key)"
+        >
+          {{ group.office.city }} · {{ group.jobs.length }} משרות באזור
+        </button>
+        <p class="text-xs">מיקום עירוני משוער · נתוני הדגמה</p>
+        @for (job of group.jobs; track job.id) {
+          <p class="mb-2 text-sm">
+            <a class="text-brand underline" [routerLink]="['/app/jobs', job.id]"
+              ><bdi>{{ job.title }}</bdi> · <bdi>{{ job.company }}</bdi></a
+            >
+          </p>
+        }
+        @if (directionsUrl(group.office); as url) {
+          <a
+            class="inline-flex min-h-11 items-center text-sm text-brand underline"
+            [href]="url"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ניווט לאזור המשוער ב־Google Maps (חלון חדש)</a
+          >
+        }
+      </section>
+    }
+  </div>
+  @if (remote().length) {
+    <section class="mt-5">
+      <h3 class="text-lg">עבודה מרחוק — ללא משרד על המפה</h3>
+      @for (job of remote(); track job.id) {
+        <a
+          class="block min-h-11 py-3 text-sm text-brand underline"
+          [routerLink]="['/app/jobs', job.id]"
+          ><bdi>{{ job.title }}</bdi> · <bdi>{{ job.company }}</bdi></a
+        >
+      }
+    </section>
+  }
+  @if (missing().length) {
+    <section class="mt-5">
+      <h3 class="text-lg">כתובת או קואורדינטות לא זמינות</h3>
+      @for (job of missing(); track job.id) {
+        <a
+          class="block min-h-11 py-3 text-sm text-brand underline"
+          [routerLink]="['/app/jobs', job.id]"
+          ><bdi>{{ job.title }}</bdi> · <bdi>{{ job.company }}</bdi></a
+        >
+      }
+    </section>
+  }
+  <p class="mb-0 mt-4 text-xs">
+    קואורדינטות עירוניות:
+    <a class="underline" href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer"
+      >GeoNames, CC BY 4.0</a
+    >. אין שימוש באיכון או בגאוקודינג בזמן החיפוש.
+  </p>
+</section>

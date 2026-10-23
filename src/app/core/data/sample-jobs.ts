@@ -1,5 +1,6 @@
 import { Job } from '../models/job';
-export const JOBS: readonly Job[] = [
+import { sampleOffices } from './sample-locations';
+const fixtures: readonly Omit<Job, 'offices'>[] = [
   {
     id: 'product-designer',
     title: 'Product Designer',
@@ -161,3 +162,7 @@ export const JOBS: readonly Job[] = [
     posted: 'היום',
   },
 ];
+export const JOBS: readonly Job[] = fixtures.map((job) => ({
+  ...job,
+  offices: sampleOffices(job),
+}));

@@ -35,6 +35,43 @@
       }}
     </button>
   </div>
+  <section class="account-panel mb-6" aria-label="מיקומי המשרה">
+    <h2 class="mb-4 text-xl">מיקומים וכתובת</h2>
+    @if (job.workStyle === 'remote') {
+      <p>עבודה מרחוק. לא שויכה למשרה כתובת משרד או נקודה מלאכותית על המפה.</p>
+    }
+    @for (office of job.offices; track office.id) {
+      <div class="mb-4">
+        <p class="mb-1">{{ locationText(office) }} · {{ districtLabel(office.district) }}</p>
+        <p class="mb-1 text-xs">
+          {{ office.demonstration ? 'מיקום לדוגמה, ללא כתובת מעסיק אמיתית. ' : ''
+          }}{{
+            office.precision === 'city'
+              ? 'מיקום עירוני משוער; רחוב ומספר לא נמסרו.'
+              : office.precision === 'unknown'
+                ? 'כתובת או קואורדינטות לא נמסרו.'
+                : 'כתובת מדויקת לפי מקור המשרה.'
+          }}
+        </p>
+        @if (directionsUrl(office); as url) {
+          <a
+            class="inline-flex min-h-11 items-center text-sm text-brand underline"
+            [href]="url"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{
+              office.precision === 'city'
+                ? 'פתיחת ניווט לאזור המשוער (חלון חדש)'
+                : 'פתיחת הוראות הגעה (חלון חדש)'
+            }}</a
+          >
+        }
+      </div>
+    }
+    @if (!job.offices.length && job.workStyle !== 'remote') {
+      <p>טרם נמסרו פרטי כתובת.</p>
+    }
+  </section>
   <div
     class="detail-grid grid grid-cols-[1.2fr_1fr] gap-[25px] max-[1200px]:grid-cols-[1fr] max-[768px]:gap-[20px]"
   >
@@ -93,7 +130,9 @@
         </div>
         <div>
           <dt>מה יקרה באישור?</dt>
-          <dd>יישמר רישום מקומי בלבד</dd>
+          <dd>
+            {{ store.isAccount() ? 'יישמר רישום הדגמה בחשבון בלבד' : 'יישמר רישום מקומי בלבד' }}
+          </dd>
         </div>
       </dl>
       @if (store.approved(job.id)) {

@@ -1,6 +1,6 @@
 # Niva
 
-A Hebrew-first job search assistant built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The initial release is a working frontend demo based on the illustrated Niva website specification.
+A Hebrew-first job search assistant built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The Angular UI includes a separate guest demo, locally runnable secure accounts, persistent account data and a job map. Real OAuth/email/hosting configuration is required before deployment.
 
 ![Niva desktop homepage](docs/screenshots/home-preview.png)
 
@@ -10,17 +10,18 @@ Use Node.js 24.15+ (24.x) and npm.
 
 ```sh
 npm ci
-npm start
-```
-
-Open [localhost:4200](http://localhost:4200). For an optimized production preview:
-
-```sh
 npm run build
 npm run preview
 ```
 
-The preview runs at [localhost:4300](http://localhost:4300).
+Open [127.0.0.1:4300](http://127.0.0.1:4300). The preview applies versioned migrations and serves Angular and the account API from one origin. To test email locally without sending real messages, set `NIVA_MAIL_MODE=local` before the preview command; see the [account guide](docs/accounts-map.md) for the local outbox and Angular development proxy setup.
+
+```sh
+npm run db:migrate
+npm run api
+```
+
+The API command serves an existing build and database. Unconfigured Google, Apple and email methods remain visibly unavailable; there is no fake sign-in.
 
 ## Included
 
@@ -29,16 +30,21 @@ The preview runs at [localhost:4300](http://localhost:4300).
 - Candidate dashboard, sample jobs, search, work-model filters and saved jobs.
 - Job details and explicit demo approval, with duplicate, exclusion and pause checks.
 - Local approval history, editable preferences, temporary profile details, JSON export and reset.
+- Separate verified accounts with cookie sessions, durable account-owned preferences/profile/theme, explicit demo-data import and account-data deletion.
+- Lazy Leaflet map with approximate demonstration cities, grouped markers, multiple offices, remote/missing-location sections and a usable list fallback.
 - Lazy-loaded standalone components, Angular signals, strict templates and self-hosted fonts.
 - Unit and browser journey tests, automated axe accessibility checks, desktop/mobile screenshots and GitHub Actions validation.
 
-**Demo boundary:** no authentication, CV upload/parsing, AI service, live job feed, employer communication or payment processing is connected. Approving a sample job only records a local demonstration entry. The UI labels this throughout. CV content is never read or uploaded. Personal names and filenames are not persisted across a refresh.
+**Demo boundary:** all jobs and approvals remain demonstrations. The account API persists user choices; it does not connect CV upload/parsing, AI, live job feeds, employer communication or payments. Approving a sample job records a demonstration entry on the device or in the signed-in account. CV content is never read or uploaded. Guest names and selected filenames remain temporary; account name/headline fields are intentionally durable.
 
 ## Checks
 
 ```sh
 npm test
+npm run test:server
 npm run typecheck:tests
+npm run typecheck:server
+npm run typecheck:e2e
 npm run build
 npx playwright install chromium
 npm run test:e2e
@@ -51,6 +57,7 @@ Browser tests run the production build at port 4300. Build first. They cover onb
 
 ```text
 src/app/core/      Typed state, models, sample data, migrations and theme service
+server/           Better Auth, session-owned account API and versioned SQLite migrations
 src/app/shared/    Brand, icons, job cards, page headings and shared preference controls
 src/app/pages/     Landing, setup, candidate workspace and information pages
 public/assets/    Optimized original hero artwork
@@ -65,10 +72,11 @@ docs/             Specification, design assets and implementation roadmap
 - [Illustrated website specification](docs/website-specification.pdf)
 - [Editable specification](docs/website-specification.md)
 - [Implementation status and next milestones](docs/implementation.md)
+- [Accounts, maps, database migrations and provider setup](docs/accounts-map.md)
 - [Design tokens](docs/design/design-tokens.json)
 - [Tailwind architecture and verification](docs/tailwind-refactor.md)
 
-The production build is in `dist`. Hosting must rewrite application routes to `index.html`; see the implementation guide. The interactive demo is configured for private Sites hosting; the original GitHub repository is not a deployment target. The next milestone is server authentication, private CV processing and the first approved job-destination integration.
+The production build is in `dist`. Hosting must rewrite application routes to `index.html`; see the implementation guide. The interactive demo is configured for private Sites hosting; the original GitHub repository is not a deployment target. This branch adds a Node/SQLite backend but has not been deployed. The existing static Sites configuration cannot run it; see the account guide for the required hosting decision. CV processing and employer integrations remain out of scope.
 
 ## Dependency note
 
