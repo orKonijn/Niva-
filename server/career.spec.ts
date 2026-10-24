@@ -71,6 +71,31 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
+  it('recovers a partially initialized source table and retains ingestion for the Worker lifetime', async () => {
+    const { db } = setup();
+    await db.run("INSERT INTO niva_sources(id) VALUES('greenhouse-appsflyer')");
+    mockSources();
+    const work: Promise<unknown>[] = [];
+    const app = createCareer({
+      db,
+      secret: 'secret',
+      env: {},
+      identity: async () => null,
+      state: async () => emptyAccountState(),
+      keepAlive: (p) => work.push(p),
+    });
+    const response = await app.request('https://niva.test/api/feed');
+    expect(response.status).toBe(200);
+    const result = await response.json();
+    expect(result.total).toBe(2);
+    expect(result.health).toHaveLength(2);
+    expect(result.health.every((s: { checked_at: string | null }) => !!s.checked_at)).toBe(true);
+    expect(work).toHaveLength(1);
+    await Promise.all(work);
+    await app.request('https://niva.test/api/feed');
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
   it('migrates historical hosted job snapshots without losing closed saved-job data', async () => {
     const old = new DatabaseSync(':memory:');
     try {

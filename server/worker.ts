@@ -13,10 +13,14 @@ export default {
   async scheduled(_event: unknown, env: PilotEnv) {
     await ingest(d1CareerDb(env.DB));
   },
-  async fetch(request: Request, env: PilotEnv): Promise<Response> {
+  async fetch(
+    request: Request,
+    env: PilotEnv,
+    execution?: { waitUntil(work: Promise<unknown>): void },
+  ): Promise<Response> {
     try {
       const url = new URL(request.url);
-      const pilot = createPilot(env);
+      const pilot = createPilot(env, execution);
       if (url.pathname.startsWith('/api/')) return pilot.app.fetch(request);
       if (!['GET', 'HEAD'].includes(request.method))
         return new Response('Method not allowed', { status: 405, headers });

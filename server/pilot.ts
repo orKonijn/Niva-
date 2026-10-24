@@ -101,7 +101,10 @@ export async function pilotFeed(db: D1Database): Promise<Feed> {
   })();
   return feedPending;
 }
-export function createPilot(env: PilotEnv) {
+export function createPilot(
+  env: PilotEnv,
+  execution?: { waitUntil(work: Promise<unknown>): void },
+) {
   if (!env.DB || !env.NIVA_IMPORT_SECRET || env.NIVA_IMPORT_SECRET.length < 32)
     throw new Error('PILOT_NOT_CONFIGURED');
   const app = new Hono();
@@ -127,6 +130,7 @@ export function createPilot(env: PilotEnv) {
       db: d1CareerDb(env.DB),
       secret: env.NIVA_IMPORT_SECRET,
       env,
+      keepAlive: (work) => execution?.waitUntil(work),
       identity: async (request) => platformUser(request)?.id ?? null,
       state: (owner) => readState(env.DB, owner),
     }),
