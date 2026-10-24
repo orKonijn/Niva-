@@ -21,6 +21,7 @@ export class AccountPage {
   readonly error = signal('');
   readonly confirmDelete = signal(false);
   readonly linking = signal(false);
+  readonly actionBusy = signal(false);
   readonly categoryLabel = categoryLabel;
   readonly districtLabel = districtLabel;
   readonly workStylesLabel = workStylesLabel;
@@ -43,14 +44,19 @@ export class AccountPage {
     if (await this.session.signOut()) await this.router.navigateByUrl('/login');
   }
   async previewImport(): Promise<void> {
+    if (this.actionBusy()) return;
+    this.actionBusy.set(true);
     this.error.set('');
     try {
       this.preview.set(await this.store.previewImport());
     } catch {
       this.error.set('לא ניתן להכין ייבוא. ייתכן שהייבוא כבר בוצע או שהחיבור פג.');
+    } finally {
+      this.actionBusy.set(false);
     }
   }
   async import(): Promise<void> {
+    if (this.store.busy()) return;
     const preview = this.preview();
     if (preview && (await this.store.import(preview))) {
       this.preview.set(null);
@@ -58,6 +64,7 @@ export class AccountPage {
     }
   }
   async removeData(): Promise<void> {
+    if (this.store.busy()) return;
     if (await this.store.deleteAccountData()) {
       this.confirmDelete.set(false);
       this.message.set(

@@ -94,7 +94,12 @@ export function validPreferences(value: Preferences): boolean {
   );
 }
 export function matchesPreferences(
-  job: { category: Category; district: District; workStyle: WorkStyle; company: string },
+  job: {
+    category: Category | 'other';
+    district: District;
+    workStyle: WorkStyle | 'unknown';
+    company: string;
+  },
   value: Preferences,
 ): boolean {
   const excluded = value.exclusions
@@ -104,7 +109,8 @@ export function matchesPreferences(
   return (
     (value.role === 'all' || job.category === value.role) &&
     (value.district === 'all' || job.district === value.district) &&
-    (!value.workStyles.length || value.workStyles.includes(job.workStyle)) &&
+    (!value.workStyles.length ||
+      (isWorkStyle(job.workStyle) && value.workStyles.includes(job.workStyle))) &&
     !excluded.some((x) => job.company.toLowerCase().includes(x))
   );
 }
@@ -112,7 +118,7 @@ export const districtLabel = (value: District | 'all'): string =>
   DISTRICTS.find((x) => x.id === value)?.label ?? 'כל המחוזות';
 export const categoryLabel = (value: Category | 'all'): string =>
   CATEGORIES.find((x) => x.id === value)?.label ?? 'כל התחומים';
-export const workStyleLabel = (value: WorkStyle): string =>
-  WORK_STYLES.find((x) => x.id === value)?.label ?? '';
+export const workStyleLabel = (value: WorkStyle | 'unknown'): string =>
+  WORK_STYLES.find((x) => x.id === value)?.label ?? 'סגנון עבודה לא נמסר';
 export const workStylesLabel = (values: WorkStyle[]): string =>
   values.length ? values.map(workStyleLabel).join(' / ') : 'כל סגנונות העבודה';

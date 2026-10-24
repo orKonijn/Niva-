@@ -6,8 +6,10 @@ import { CookiePreferences } from '../core/cookie-preferences';
 import { Theme } from '../core/theme';
 import { Icon } from '../shared/icon';
 import { validateResume } from '../core/resume-validation';
+import { protectUnsaved } from '../core/unsaved';
+import { FormStatus } from '../shared/form-status';
 @Component({
-  imports: [PageHeading, FormsModule, Icon],
+  imports: [PageHeading, FormsModule, Icon, FormStatus],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './profile.html',
 })
@@ -23,11 +25,28 @@ export class Profile {
   readonly confirmReset = signal(false);
   readonly resetDone = signal('');
   readonly resetCleared = signal(false);
+  readonly saving = signal(false);
+  readonly saveError = signal('');
+  private baseline = JSON.stringify([this.name, this.headline]);
+  hasUnsavedChanges(): boolean {
+    return JSON.stringify([this.name, this.headline]) !== this.baseline;
+  }
+  constructor() {
+    protectUnsaved(() => this.hasUnsavedChanges());
+  }
   async save(): Promise<void> {
+    if (this.saving()) return;
+    this.saving.set(true);
+    this.saved.set(false);
+    this.saveError.set('');
     this.saved.set(
       await this.store.saveProfile(this.name.trim(), this.headline.trim(), this.profileRevision),
     );
-    if (this.saved()) this.profileRevision = this.store.account().revision;
+    if (this.saved()) {
+      this.profileRevision = this.store.account().revision;
+      this.baseline = JSON.stringify([this.name, this.headline]);
+    } else this.saveError.set('הפרופיל לא נשמר. הפרטים שהקלדת נשארו כאן; אפשר לנסות שוב.');
+    this.saving.set(false);
   }
   select(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -43,6 +62,7 @@ export class Profile {
     const result = await this.store.reset();
     this.resetCleared.set(result === 'cleared');
     this.name = '';
+    this.baseline = JSON.stringify([this.name, this.headline]);
     this.saved.set(false);
     this.confirmReset.set(false);
     this.resetDone.set(
@@ -57,12 +77,20 @@ export class Profile {
         JSON.stringify(
           {
             version: 2,
-            mode: 'local-demo',
+            mode: this.store.catalogMode() === 'real' ? 'pilot' : 'local-demo',
             storageScope: this.store.isAccount() ? 'account' : 'device',
             profile: this.store.isAccount() ? this.store.account().profile : undefined,
             appearance: { theme: this.theme.preference() },
             preferences: this.store.preferences(),
             savedJobIds: this.store.saved(),
+            savedJobs: this.store.jobs
+              .filter((j) => this.store.saved().includes(j.id))
+              .map((j) => ({
+                id: j.id,
+                kind: j.source ? 'real' : 'demo',
+                source: j.source?.name,
+                applicationUrl: j.source?.applicationUrl,
+              })),
             demoApprovals: this.store.applications(),
             paused: this.store.paused(),
           },
@@ -75,7 +103,8 @@ export class Profile {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'niva-demo-data.json';
+    a.download =
+      this.store.catalogMode() === 'real' ? 'niva-account-data.json' : 'niva-demo-data.json';
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }

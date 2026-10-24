@@ -10,6 +10,7 @@ import {
   isCategory,
   isDistrict,
   normalizeWorkStyles,
+  isWorkStyle,
   WorkStyle,
 } from '../core/preferences';
 import { WorkStyleFields } from '../shared/work-style-fields';
@@ -44,6 +45,8 @@ export class Jobs {
   });
   constructor() {
     const params = this.route.snapshot.queryParamMap;
+    if (params.get('source') === 'real' || params.get('source') === 'demo')
+      this.store.useCatalog(params.get('source') as 'real' | 'demo');
     if (params.has('model'))
       this.setFilter(
         {
@@ -63,7 +66,8 @@ export class Jobs {
     (this.savedOnly() ? this.store.visibleSavedJobs() : this.store.eligibleJobs()).filter(
       (j) =>
         (!this.savedOnly() || this.store.saved().includes(j.id)) &&
-        (!this.workStyles().length || this.workStyles().includes(j.workStyle)) &&
+        (!this.workStyles().length ||
+          (isWorkStyle(j.workStyle) && this.workStyles().includes(j.workStyle))) &&
         (this.district() === 'all' || this.district() === j.district) &&
         (this.category() === 'all' || this.category() === j.category) &&
         `${j.title} ${j.company} ${j.skills.join(' ')}`

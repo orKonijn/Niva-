@@ -4,11 +4,13 @@ import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { createAuth, type AuthOptions } from './auth';
 import { StateError, stateRepository } from './state';
+import { loadFeed, localRealCatalog } from './job-feed';
+import { JOBS } from '../src/app/core/data/sample-jobs';
 
 export function createBackend(database: DatabaseSync, options: AuthOptions) {
   database.exec('PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;');
   const auth = createAuth(database, options);
-  const states = stateRepository(database, options.secret);
+  const states = stateRepository(database, options.secret, () => [...JOBS, ...localRealCatalog()]);
   const app = new Hono();
   app.use('/api/*', async (c, next) => {
     c.header('Cache-Control', 'no-store');
@@ -38,6 +40,13 @@ export function createBackend(database: DatabaseSync, options: AuthOptions) {
         return c.json({ error: 'FRESH_SESSION_REQUIRED' }, 401);
     }
     return auth.handler(c.req.raw);
+  });
+  app.get('/api/jobs', async (c) => {
+    try {
+      return c.json(await loadFeed());
+    } catch {
+      return c.json({ error: 'FEED_UNAVAILABLE' }, 503);
+    }
   });
   app.get('/api/session', async (c) => {
     const session = await auth.api.getSession({ headers: c.req.raw.headers });

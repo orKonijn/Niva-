@@ -9,6 +9,58 @@
     ><niva-icon name="settings" /> העדפות חיפוש</a
   >
 </niva-page-heading>
+<section class="mb-5 rounded-card border border-line bg-surface p-5" aria-label="מקור המשרות">
+  <div class="mb-3 flex flex-wrap gap-3">
+    <button
+      type="button"
+      class="account-button"
+      [attr.aria-pressed]="store.catalogMode() === 'real'"
+      (click)="store.useCatalog('real'); setFilter({ source: 'real' })"
+    >
+      משרות אמיתיות
+    </button>
+    <button
+      type="button"
+      class="account-button"
+      [attr.aria-pressed]="store.catalogMode() === 'demo'"
+      (click)="store.useCatalog('demo'); setFilter({ source: 'demo' })"
+    >
+      נתוני הדגמה
+    </button>
+  </div>
+  @if (store.catalogMode() === 'real') {
+    <p class="mb-2 text-sm">
+      פיילוט ממוקד: משרות AppsFlyer בהרצליה דרך Greenhouse. אין כיסוי של כל שוק העבודה. הגשה מתבצעת
+      באתר המקור בלבד.
+    </p>
+    <p class="mb-2 text-xs">
+      סיווג התחום לפי כותרת התפקיד. סגנון העבודה לא נמסר; בחירת סגנון מסוים תסתיר משרות ללא מידע זה.
+      משרות שמורות שהוסרו מהמקור נשארות בתצוגת השמורות בלבד.
+    </p>
+    @if (store.feedCheckedAt()) {
+      <p class="text-xs mb-2">
+        בדיקה אחרונה: <bdi>{{ store.feedCheckedAt() }}</bdi
+        >{{ store.feedStale() ? ' · מוצג עותק קודם; יש לבדוק זמינות באתר המקור.' : '' }}
+      </p>
+    }
+    <button
+      type="button"
+      class="account-button"
+      [disabled]="store.jobsLoading()"
+      (click)="store.loadJobs()"
+    >
+      {{ store.jobsLoading() ? 'טוענים מהמקור…' : 'רענון משרות' }}
+    </button>
+    @if (store.jobsError()) {
+      <p role="alert" class="form-error mt-3">{{ store.jobsError() }}</p>
+    }
+    @if (!store.isAccount()) {
+      <a class="text-brand underline ms-4" routerLink="/login">כניסה לשמירה בחשבון</a>
+    }
+  } @else {
+    <p class="mb-0 text-sm">משרות וחברות לדוגמה בלבד. נתוני ההדגמה אינם נכללים במשרות האמיתיות.</p>
+  }
+</section>
 <div
   class="filter-panel flex items-center gap-[20px] bg-surface p-[20px] rounded-[16px] max-[901px]:items-stretch max-[901px]:flex-col max-[768px]:p-[15px] flex-wrap"
 >
@@ -64,7 +116,10 @@
       השמורות שלי <span>{{ store.visibleSavedJobs().length }}</span>
     </button>
   </div>
-  <span class="muted text-muted" role="status">{{ filtered().length }} משרות לדוגמה</span>
+  <span class="muted text-muted" role="status"
+    >{{ filtered().length }}
+    {{ store.catalogMode() === 'real' ? 'משרות מהמקור' : 'משרות לדוגמה' }}</span
+  >
 </div>
 @if (store.suppressedSavedCount()) {
   <p role="status">{{ store.suppressedSavedCount() }} משרות שמורות מוסתרות לפי החרגות החברות.</p>

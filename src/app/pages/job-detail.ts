@@ -18,7 +18,11 @@ export class JobDetail {
   readonly workStyleLabel = workStyleLabel;
   readonly store = inject(AppStore);
   readonly params = toSignal(inject(ActivatedRoute).paramMap);
-  readonly job = computed(() => this.store.jobs.find((j) => j.id === this.params()?.get('id')));
+  readonly job = computed(() => this.store.findJob(this.params()?.get('id') ?? ''));
+  constructor() {
+    if (inject(ActivatedRoute).snapshot.paramMap.get('id')?.startsWith('greenhouse-'))
+      this.store.useCatalog('real');
+  }
   readonly eligible = computed(() =>
     this.store.eligibleJobs().some((j) => j.id === this.job()?.id),
   );

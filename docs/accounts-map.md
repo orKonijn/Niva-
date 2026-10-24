@@ -1,6 +1,8 @@
 # Accounts, persistence and maps
 
-This branch adds a locally runnable account backend and map to the merged Angular application. **It has not been deployed.** The existing Sites URL continues to serve the previous guest demo. This work does not authorize employer submissions, CV upload/processing, AI, paid services or DNS changes.
+This guide records the original Node/account and static publication milestones. The current hosted Worker/D1 pilot is described in [the pilot guide](pilot.md); its deployment section supersedes the historic static-only limitation below.
+
+The original milestone added a locally runnable account backend and map to the Angular application, initially without deploying its account backend. The subsequent hosted pilot is documented in [pilot.md](pilot.md). Employer submissions, CV upload/processing, AI, paid services and DNS changes remain outside scope.
 
 ## Architecture
 

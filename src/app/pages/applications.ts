@@ -12,8 +12,6 @@ import { Icon } from '../shared/icon';
 export class Applications {
   readonly store = inject(AppStore);
   readonly records = computed(() =>
-    this.store
-      .applications()
-      .map((a) => ({ ...a, job: this.store.jobs.find((j) => j.id === a.jobId) })),
+    this.store.applications().map((a) => ({ ...a, job: this.store.findJob(a.jobId) })),
   );
 }

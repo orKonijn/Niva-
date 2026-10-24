@@ -101,7 +101,7 @@ export class JobMap {
       const content = document.createElement('div');
       content.dir = 'rtl';
       const title = document.createElement('strong');
-      title.textContent = `${group.office.city} · מיקום עירוני משוער לדוגמה`;
+      title.textContent = `${group.office.city} · מיקום עירוני משוער${group.office.demonstration ? ' לדוגמה' : ' לפי המקור'}`;
       content.append(title);
       for (const job of group.jobs) {
         const link = document.createElement('a');

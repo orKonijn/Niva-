@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { accountGuard } from './core/account-guard';
+import { unsavedGuard } from './core/unsaved';
 
 export const routes: Routes = [
   {
@@ -69,11 +70,13 @@ export const routes: Routes = [
       },
       {
         path: 'preferences',
+        canDeactivate: [unsavedGuard],
         title: 'ההעדפות שלך — Niva',
         loadComponent: () => import('./pages/preferences').then((m) => m.PreferencesPage),
       },
       {
         path: 'profile',
+        canDeactivate: [unsavedGuard],
         title: 'הפרופיל שלך — Niva',
         loadComponent: () => import('./pages/profile').then((m) => m.Profile),
       },

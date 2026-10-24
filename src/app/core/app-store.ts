@@ -32,7 +32,65 @@ export class AppStore {
   readonly busy = signal(false);
   readonly accountNotice = signal('');
   readonly isAccount = computed(() => !!this.session.user());
-  readonly jobs = this.demo.jobs;
+  private readonly selectedCatalog = signal<'real' | 'demo' | null>(null);
+  readonly catalogMode = computed(
+    () => this.selectedCatalog() ?? (this.session.config().realJobs ? 'real' : 'demo'),
+  );
+  readonly realJobs = signal<Job[]>([]);
+  readonly archivedJobs = signal<Job[]>([]);
+  readonly jobsLoading = signal(false);
+  readonly jobsError = signal('');
+  readonly feedCheckedAt = signal('');
+  readonly feedStale = signal(false);
+  get jobs(): readonly Job[] {
+    return this.catalogMode() === 'real'
+      ? [...this.realJobs(), ...this.archivedJobs()]
+      : this.demo.jobs;
+  }
+  findJob(id: string) {
+    return [...this.jobs, ...this.demo.jobs].find((j) => j.id === id);
+  }
+  useCatalog(mode: 'real' | 'demo'): void {
+    this.selectedCatalog.set(mode);
+    if (mode === 'real') void this.loadJobs();
+  }
+  async loadJobs(): Promise<void> {
+    if (this.jobsLoading()) return;
+    const owner = this.session.userId();
+    this.jobsLoading.set(true);
+    this.jobsError.set('');
+    try {
+      const response = await fetch('/api/jobs', { credentials: 'same-origin', cache: 'no-store' });
+      if (!response.ok) throw new Error();
+      const feed = (await response.json()) as {
+        jobs: Job[];
+        archived?: Job[];
+        fetchedAt: string;
+        stale: boolean;
+      };
+      if (
+        !Array.isArray(feed.jobs) ||
+        !feed.jobs.every(
+          (j) =>
+            j.source?.kind === 'real' &&
+            /^greenhouse-appsflyer-\d+$/.test(j.id) &&
+            new URL(j.source.applicationUrl).hostname === 'careers.appsflyer.com' &&
+            j.source.applicationUrl.startsWith('https://'),
+        )
+      )
+        throw new Error();
+      this.realJobs.set(feed.jobs);
+      if (owner === this.session.userId()) this.archivedJobs.set(feed.archived ?? []);
+      this.feedCheckedAt.set(feed.fetchedAt);
+      this.feedStale.set(feed.stale);
+    } catch {
+      this.jobsError.set(
+        'לא ניתן לרענן משרות מהמקור. אפשר לנסות שוב; משרות שכבר נטענו נשארות מוצגות.',
+      );
+    } finally {
+      this.jobsLoading.set(false);
+    }
+  }
   readonly preferences = computed(() =>
     this.isAccount() ? this.account().preferences : this.demo.preferences(),
   );
@@ -45,15 +103,20 @@ export class AppStore {
     this.isAccount() ? this.account().profile.name : this.demo.name(),
   );
   readonly resumeName = this.demo.resumeName;
-  readonly notice = computed(() => (this.isAccount() ? this.accountNotice() : this.demo.notice()));
+  readonly notice = computed(
+    () => this.accountNotice() || (this.isAccount() ? '' : this.demo.notice()),
+  );
   readonly eligibleJobs = computed(() =>
-    this.jobs.filter((job) => matchesPreferences(job, this.preferences())),
+    this.jobs.filter(
+      (job) => job.source?.active !== false && matchesPreferences(job, this.preferences()),
+    ),
   );
   readonly visibleSavedJobs = computed(() =>
     this.jobs.filter((job) => this.saved().includes(job.id) && !this.excluded(job)),
   );
   readonly suppressedSavedCount = computed(
-    () => this.saved().length - this.visibleSavedJobs().length,
+    () =>
+      this.jobs.filter((j) => this.saved().includes(j.id)).length - this.visibleSavedJobs().length,
   );
   private accountGeneration = crypto.randomUUID();
   get resetGeneration(): string {
@@ -65,11 +128,17 @@ export class AppStore {
   private readonly refreshTimer: ReturnType<typeof setInterval>;
   constructor() {
     effect(() => {
+      this.session.userId();
+      if (!this.session.loading() && this.session.config().realJobs)
+        untracked(() => void this.loadJobs());
+    });
+    effect(() => {
       if (this.session.loading()) return;
       const userId = this.session.userId();
       untracked(() => {
         this.accountGeneration = crypto.randomUUID();
         this.account.set(emptyAccountState());
+        this.archivedJobs.set([]);
         this.accountReady.set(false);
         this.accountNotice.set('');
         this.resumeName.set('');
@@ -198,6 +267,10 @@ export class AppStore {
       : this.demo.savePreferences(value, expected);
   }
   toggleSaved(jobId: string): Promise<boolean> {
+    if (jobId.startsWith('greenhouse-') && !this.isAccount()) {
+      this.accountNotice.set('לשמירת משרות אמיתיות יש להתחבר לחשבון.');
+      return Promise.resolve(false);
+    }
     return this.isAccount()
       ? this.change({ type: 'saved', jobId, value: !this.saved().includes(jobId) })
       : this.demo.toggleSaved(jobId);

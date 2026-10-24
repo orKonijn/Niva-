@@ -65,7 +65,125 @@ export function normalizeImport(input: unknown) {
     paused: raw['paused'] === true,
   };
 }
-export function stateRepository(db: DatabaseSync, secret: string) {
+export function importReceipt(
+  secret: string,
+  userId: string,
+  data: unknown,
+  revision: number,
+): string {
+  return createHmac('sha256', secret)
+    .update(JSON.stringify({ userId, data, revision }))
+    .digest('hex');
+}
+export function applyStateOperation(
+  userId: string,
+  original: AccountState,
+  input: unknown,
+  secret: string,
+  catalog: readonly import('../src/app/core/models/job').Job[] = JOBS,
+): AccountState {
+  const body = object(input);
+  const op = object(body['operation']);
+  const revision = body['revision'];
+  if (!Number.isSafeInteger(revision) || Number(revision) < 0 || 'userId' in body || 'userId' in op)
+    throw new StateError(400, 'INVALID_INPUT');
+  const state = structuredClone(original);
+  if (state.revision !== revision) throw new StateError(409, 'CONFLICT');
+  const job = (id: unknown) => {
+    const value = catalog.find((j) => j.id === id);
+    if (!value) throw new StateError(400, 'UNKNOWN_JOB');
+    if (op['type'] === 'approve' && value.source) throw new StateError(400, 'DEMO_ONLY');
+    return value;
+  };
+  switch (op['type']) {
+    case 'preferences': {
+      const value = object(op['value']);
+      if (
+        !validPreferences(value as unknown as AccountState['preferences']) ||
+        String(value['exclusions']).length > 500
+      )
+        throw new StateError(400, 'INVALID_PREFERENCES');
+      state.preferences = migratePreferences(value);
+      break;
+    }
+    case 'saved': {
+      const id = job(op['jobId']).id;
+      if (typeof op['value'] !== 'boolean') throw new StateError(400, 'INVALID_INPUT');
+      state.saved = op['value']
+        ? [...new Set([...state.saved, id])]
+        : state.saved.filter((x) => x !== id);
+      break;
+    }
+    case 'pause':
+      if (typeof op['value'] !== 'boolean') throw new StateError(400, 'INVALID_INPUT');
+      state.paused = op['value'];
+      break;
+    case 'approve': {
+      const value = job(op['jobId']);
+      if (state.paused || !matchesPreferences(value, state.preferences))
+        throw new StateError(409, 'APPROVAL_BLOCKED');
+      if (!state.applications.some((a) => a.jobId === value.id))
+        state.applications.push({
+          jobId: value.id,
+          approvedAt: new Date().toISOString(),
+          kind: 'local-demo',
+        });
+      break;
+    }
+    case 'profile': {
+      const value = object(op['value']);
+      state.profile = {
+        name: string(value['name'], 50),
+        headline: string(value['headline'], 140),
+      };
+      break;
+    }
+    case 'theme':
+      if (!['system', 'light', 'dark'].includes(String(op['value'])))
+        throw new StateError(400, 'INVALID_THEME');
+      state.theme = op['value'] as AccountState['theme'];
+      break;
+    case 'import': {
+      if (state.importedAt) throw new StateError(409, 'ALREADY_IMPORTED');
+      const data = normalizeImport(op['data']);
+      const supplied = string(op['receipt'], 64);
+      const expected = importReceipt(secret, userId, data, state.revision);
+      if (
+        supplied.length !== expected.length ||
+        !timingSafeEqual(Buffer.from(supplied), Buffer.from(expected))
+      )
+        throw new StateError(400, 'INVALID_PREVIEW');
+      state.preferences = data.preferences;
+      state.saved = [...new Set([...state.saved, ...data.saved])];
+      state.applications.push(
+        ...data.applications.filter((a) => !state.applications.some((x) => x.jobId === a.jobId)),
+      );
+      state.paused ||= data.paused;
+      state.importedAt = new Date().toISOString();
+      break;
+    }
+    case 'delete-data': {
+      const cleared = emptyAccountState();
+      Object.assign(state, cleared, {
+        revision: Number(revision),
+        importedAt: state.importedAt,
+      });
+      break;
+    }
+    default:
+      throw new StateError(400, 'UNKNOWN_OPERATION');
+  }
+
+  if (state.saved.length > 1000) throw new StateError(400, 'TOO_MANY_SAVED');
+  state.revision++;
+  return state;
+}
+
+export function stateRepository(
+  db: DatabaseSync,
+  secret: string,
+  catalog: () => readonly import('../src/app/core/models/job').Job[] = () => JOBS,
+) {
   function read(userId: string): AccountState {
     const row = db
       .prepare('SELECT revision, data, imported_at FROM niva_account_state WHERE user_id = ?')
@@ -94,101 +212,9 @@ export function stateRepository(db: DatabaseSync, secret: string) {
     };
   }
   function mutate(userId: string, input: unknown): AccountState {
-    const body = object(input);
-    const revision = body['revision'];
-    const op = object(body['operation']);
-    if (
-      !Number.isSafeInteger(revision) ||
-      Number(revision) < 0 ||
-      'userId' in body ||
-      'userId' in op
-    )
-      throw new StateError(400, 'INVALID_INPUT');
     db.exec('BEGIN IMMEDIATE');
     try {
-      const state = read(userId);
-      if (state.revision !== revision) throw new StateError(409, 'CONFLICT');
-      switch (op['type']) {
-        case 'preferences': {
-          const value = object(op['value']);
-          if (
-            !validPreferences(value as unknown as AccountState['preferences']) ||
-            String(value['exclusions']).length > 500
-          )
-            throw new StateError(400, 'INVALID_PREFERENCES');
-          state.preferences = migratePreferences(value);
-          break;
-        }
-        case 'saved': {
-          const id = job(op['jobId']).id;
-          if (typeof op['value'] !== 'boolean') throw new StateError(400, 'INVALID_INPUT');
-          state.saved = op['value']
-            ? [...new Set([...state.saved, id])]
-            : state.saved.filter((x) => x !== id);
-          break;
-        }
-        case 'pause':
-          if (typeof op['value'] !== 'boolean') throw new StateError(400, 'INVALID_INPUT');
-          state.paused = op['value'];
-          break;
-        case 'approve': {
-          const value = job(op['jobId']);
-          if (state.paused || !matchesPreferences(value, state.preferences))
-            throw new StateError(409, 'APPROVAL_BLOCKED');
-          if (!state.applications.some((a) => a.jobId === value.id))
-            state.applications.push({
-              jobId: value.id,
-              approvedAt: new Date().toISOString(),
-              kind: 'local-demo',
-            });
-          break;
-        }
-        case 'profile': {
-          const value = object(op['value']);
-          state.profile = {
-            name: string(value['name'], 50),
-            headline: string(value['headline'], 140),
-          };
-          break;
-        }
-        case 'theme':
-          if (!['system', 'light', 'dark'].includes(String(op['value'])))
-            throw new StateError(400, 'INVALID_THEME');
-          state.theme = op['value'] as AccountState['theme'];
-          break;
-        case 'import': {
-          if (state.importedAt) throw new StateError(409, 'ALREADY_IMPORTED');
-          const data = normalizeImport(op['data']);
-          const supplied = string(op['receipt'], 64);
-          const expected = receipt(userId, data, state.revision);
-          if (
-            supplied.length !== expected.length ||
-            !timingSafeEqual(Buffer.from(supplied), Buffer.from(expected))
-          )
-            throw new StateError(400, 'INVALID_PREVIEW');
-          state.preferences = data.preferences;
-          state.saved = [...new Set([...state.saved, ...data.saved])];
-          state.applications.push(
-            ...data.applications.filter(
-              (a) => !state.applications.some((x) => x.jobId === a.jobId),
-            ),
-          );
-          state.paused ||= data.paused;
-          state.importedAt = new Date().toISOString();
-          break;
-        }
-        case 'delete-data': {
-          const cleared = emptyAccountState();
-          Object.assign(state, cleared, {
-            revision: Number(revision),
-            importedAt: state.importedAt,
-          });
-          break;
-        }
-        default:
-          throw new StateError(400, 'UNKNOWN_OPERATION');
-      }
-      state.revision++;
+      const state = applyStateOperation(userId, read(userId), input, secret, catalog());
       db.prepare(
         'INSERT INTO niva_account_state (user_id, revision, data, imported_at, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET revision=excluded.revision, data=excluded.data, imported_at=excluded.imported_at, updated_at=excluded.updated_at',
       ).run(

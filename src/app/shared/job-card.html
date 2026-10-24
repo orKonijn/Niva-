@@ -14,7 +14,10 @@
         >
       </h3>
       <span
-        ><bdi>{{ job().company }}</bdi> <span class="muted text-muted">· חברת הדגמה</span></span
+        ><bdi>{{ job().company }}</bdi>
+        <span class="muted text-muted"
+          >· {{ job().source ? 'מקור: Greenhouse' : 'חברת הדגמה' }}</span
+        ></span
       >
     </div>
     <button
@@ -22,6 +25,7 @@
       [class.saved]="store.saved().includes(job().id)"
       [attr.aria-label]="store.saved().includes(job().id) ? 'הסרת המשרה מהשמורות' : 'שמירת המשרה'"
       [attr.aria-pressed]="store.saved().includes(job().id)"
+      [disabled]="store.busy() || (store.isAccount() && !store.accountReady())"
       (click)="store.toggleSaved(job().id)"
     >
       <niva-icon name="heart" />
@@ -46,7 +50,15 @@
     <span
       class="status-badge items-center justify-center gap-[5px] rounded-[7px] p-[5px_9px] font-medium"
       [class.blue-badge]="!store.approved(job().id)"
-      >{{ store.approved(job().id) ? 'אושר בהדגמה' : 'משרה לדוגמה' }}</span
+      >{{
+        job().source
+          ? job().source!.active
+            ? 'משרה אמיתית'
+            : 'הוסרה מהמקור'
+          : store.approved(job().id)
+            ? 'אושר בהדגמה'
+            : 'משרה לדוגמה'
+      }}</span
     ><a
       [routerLink]="['/app/jobs', job().id]"
       class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"

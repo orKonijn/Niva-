@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { ProviderLogo } from '../shared/provider-logo';
@@ -33,6 +33,7 @@ export class AuthPage {
   password = '';
   name = '';
   readonly returnTo = safeReturn(this.route.snapshot.queryParamMap.get('returnTo'));
+  readonly platformSignIn = `/signin-with-chatgpt?return_to=${encodeURIComponent(this.returnTo)}`;
   constructor() {
     if (
       this.route.snapshot.queryParamMap.has('oauth') ||
@@ -42,8 +43,12 @@ export class AuthPage {
     if (this.route.snapshot.queryParamMap.has('verified'))
       this.message.set('אם האימות הושלם, אפשר להתחבר באמצעות הסיסמה.');
   }
-  async submit(): Promise<void> {
+  async submit(form?: NgForm): Promise<void> {
     if (this.busy()) return;
+    if (form?.invalid) {
+      form.form.markAllAsTouched();
+      return;
+    }
     this.busy.set(true);
     this.error.set('');
     this.message.set('');

@@ -5,7 +5,7 @@
 >
 </niva-page-heading>
 <form
-  class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px] narrow-panel max-w-[800px]"
+  class="niva-form panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px] narrow-panel max-w-[800px]"
   (ngSubmit)="save()"
 >
   <div class="panel-heading flex items-center gap-[15px]">
@@ -32,13 +32,16 @@
     <button
       class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
       type="submit"
+      [disabled]="saving() || store.busy() || (store.isAccount() && !store.accountReady())"
     >
-      שמירת ההעדפות <niva-icon name="check" />
+      {{ saving() ? 'שומרים…' : 'שמירת ההעדפות' }} <niva-icon name="check" />
     </button>
     @if (saved()) {
       <span class="success-text text-success text-[12px]" role="status"
-        >ההעדפות נשמרו. {{ store.eligibleJobs().length }} משרות לדוגמה מתאימות כעת.</span
+        >ההעדפות נשמרו. {{ store.eligibleJobs().length }} משרות
+        {{ store.catalogMode() === 'demo' ? 'לדוגמה' : 'מהמקור' }} מתאימות כעת.</span
       >
     }
   </div>
+  <niva-form-status [error]="error()" />
 </form>

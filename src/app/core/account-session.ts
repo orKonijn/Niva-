@@ -6,6 +6,8 @@ export interface AccountUser {
   emailVerified: boolean;
 }
 export interface AuthConfiguration {
+  platform?: 'sites';
+  realJobs?: boolean;
   emailDelivery?: 'local-outbox' | 'smtp' | 'configured' | 'unavailable';
   accounts: boolean;
   email: boolean;
@@ -94,6 +96,11 @@ export class AccountSession {
   }
   async signOut(): Promise<boolean> {
     this.generation++;
+    if (this.config().platform === 'sites') {
+      this.clear();
+      location.assign('/signout-with-chatgpt?return_to=%2Flogin');
+      return false;
+    }
     try {
       await this.auth('sign-out', {});
       this.clear();

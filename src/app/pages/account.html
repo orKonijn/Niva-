@@ -18,13 +18,15 @@
         @for (method of methods(); track method) {
           <li>
             {{
-              method === 'credential'
-                ? 'דוא״ל וסיסמה'
-                : method === 'google'
-                  ? 'Google'
-                  : method === 'apple'
-                    ? 'Apple'
-                    : method
+              method === 'chatgpt'
+                ? 'ChatGPT — זהות מאומתת של האתר'
+                : method === 'credential'
+                  ? 'דוא״ל וסיסמה'
+                  : method === 'google'
+                    ? 'Google'
+                    : method === 'apple'
+                      ? 'Apple'
+                      : method
             }}
           </li>
         }
@@ -41,10 +43,16 @@
           [disabled]="linking() || !session.config().apple || methods().includes('apple')"
           (click)="link('apple')"
         >
-          <niva-provider-logo provider="apple" />קישור Apple</button
-        ><a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
+          <niva-provider-logo provider="apple" />קישור Apple
+        </button>
+        @if (session.config().email) {
+          <a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
+        }
       </div>
       <p class="mb-0 mt-4 text-xs">
+        @if (session.config().platform === 'sites') {
+          בפיילוט הזה ההתחברות מנוהלת דרך ChatGPT. אין סיסמה נפרדת לאיפוס ב־Niva.
+        }
         קישור דורש חיבור פעיל ואימות אצל הספק. כתובת דוא״ל זהה אינה ממזגת חשבונות אוטומטית. נתמכות
         גם כתובות פרטיות של Apple.
       </p>
@@ -60,7 +68,7 @@
       } @else {
         <button
           class="account-button"
-          [disabled]="!store.accountReady() || store.busy()"
+          [disabled]="!store.accountReady() || store.busy() || actionBusy()"
           (click)="previewImport()"
         >
           בדיקת נתונים לפני ייבוא
@@ -95,9 +103,13 @@
     <section class="account-panel">
       <h2 class="mb-4 text-xl">ניהול נתונים ופרטיות</h2>
       <p>
-        אימות נעשה בשרת באמצעות Better Auth. Google ו־Apple משתתפים רק כאשר בוחרים להתחבר דרכם. מפות
-        נטענות מ־OpenStreetMap רק בפתיחת המפה, וחושפות לספק את כתובת ה־IP ואזור המפה. אין בקשת מיקום
-        מהמכשיר.
+        {{
+          session.config().platform === 'sites'
+            ? 'בפיילוט המתארח הזיהוי נעשה באמצעות ChatGPT ונתוני החשבון נשמרים ב־Cloudflare D1.'
+            : 'אימות נעשה בשרת באמצעות Better Auth.'
+        }}
+        Google ו־Apple משתתפים רק כאשר הוגדרו ובוחרים להתחבר דרכם. מפות נטענות מ־OpenStreetMap רק
+        בפתיחת המפה, וחושפות לספק את כתובת ה־IP ואזור המפה. אין בקשת מיקום מהמכשיר.
       </p>
       <div class="flex flex-wrap gap-3">
         <a class="account-button" routerLink="/app/profile">ניקוי נתוני ההדגמה במכשיר</a

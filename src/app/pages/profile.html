@@ -1,17 +1,22 @@
 <niva-page-heading
   kicker="הסיפור שלך"
   heading="הפרופיל שלי"
-  description="פרטים לביקור הנוכחי, ובחירות שנשארות בשליטתך."
+  [description]="
+    store.isAccount()
+      ? 'הפרטים המקצועיים נשמרים בחשבון ומסתנכרנים בין מכשירים.'
+      : 'במצב אורח השם נשמר לביקור הנוכחי בלבד.'
+  "
 >
 </niva-page-heading>
 <div class="profile-grid grid grid-cols-[1fr_1fr] gap-[25px] max-[1200px]:grid-cols-[1fr]">
   <form
-    class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
+    class="niva-form panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
     (ngSubmit)="save()"
   >
     <h2>נעים להכיר</h2>
     <label
-      >איך לקרוא לך?<input
+      >איך לקרוא לך? <span class="text-xs text-muted">(לא חובה)</span
+      ><input
         name="name"
         [(ngModel)]="name"
         maxlength="50"
@@ -25,6 +30,7 @@
           [(ngModel)]="headline"
           maxlength="140"
           autocomplete="organization-title"
+          placeholder="למשל: מפתחת תוכנה או בודק QA"
       /></label>
     }
     <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
@@ -63,9 +69,11 @@
     <button
       class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
       type="submit"
+      [disabled]="saving() || store.busy() || (store.isAccount() && !store.accountReady())"
     >
-      {{ store.isAccount() ? 'שמירת שם בחשבון' : 'שמירת שם לביקור הנוכחי' }}
+      {{ saving() ? 'שומרים…' : store.isAccount() ? 'שמירת שם בחשבון' : 'שמירת שם לביקור הנוכחי' }}
     </button>
+    <niva-form-status [error]="saveError()" />
     @if (saved()) {
       <p class="success-text text-success text-[12px]" role="status">
         {{ store.isAccount() ? 'הפרטים נשמרו בחשבון.' : 'הפרטים עודכנו לביקור הנוכחי.' }}
@@ -88,7 +96,8 @@
         class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"
         (click)="export()"
       >
-        <niva-icon name="document" /> הורדת נתוני ההדגמה</button
+        <niva-icon name="document" />
+        {{ store.catalogMode() === 'real' ? 'הורדת הנתונים שלי' : 'הורדת נתוני ההדגמה' }}</button
       ><button
         class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale"
         (click)="cookies.reopen()"

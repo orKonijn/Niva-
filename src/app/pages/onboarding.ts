@@ -24,6 +24,7 @@ export class Onboarding {
   readonly filename = signal(this.store.resumeName());
   private readonly injector = inject(Injector);
   readonly dragging = signal(false);
+  readonly saving = signal(false);
   name = this.store.name();
   readonly draftGeneration = this.store.resetGeneration;
   draft: Preferences = { ...this.store.preferences() };
@@ -58,16 +59,24 @@ export class Onboarding {
     });
   }
   async finish(): Promise<void> {
+    if (this.saving()) return;
     if (!this.agreed) {
       this.error.set('כדי להמשיך, יש לאשר שזו סביבת הדגמה.');
       return;
     }
+    this.saving.set(true);
     if (!(await this.store.savePreferences(this.draft, this.draftGeneration))) {
       this.error.set('ההעדפות לא נשמרו. יש לפתוח את ההגדרה מחדש ולנסות שוב.');
+      this.saving.set(false);
       return;
     }
-    void this.store.saveProfile(this.name.trim().slice(0, 50));
+    if (!(await this.store.saveProfile(this.name.trim().slice(0, 50)))) {
+      this.error.set('ההעדפות נשמרו, אך הפרופיל לא נשמר. הפרטים נשארו כאן; נסו שוב.');
+      this.saving.set(false);
+      return;
+    }
     this.store.resumeName.set(this.filename());
     void this.router.navigateByUrl('/app');
+    this.saving.set(false);
   }
 }

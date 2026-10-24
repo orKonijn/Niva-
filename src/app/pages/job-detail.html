@@ -14,9 +14,9 @@
         >{{ job.initials }}</span
       >
       <div>
-        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
-          >משרה לדוגמה</span
-        >
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]">{{
+          job.source ? 'משרה אמיתית · מקור מעסיק' : 'משרה לדוגמה'
+        }}</span>
         <h1>
           <bdi>{{ job.title }}</bdi>
         </h1>
@@ -27,6 +27,7 @@
       </div>
     </div>
     <button
+      [disabled]="store.busy()"
       class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
       (click)="store.toggleSaved(job.id)"
     >
@@ -35,6 +36,45 @@
       }}
     </button>
   </div>
+  @if (job.source; as source) {
+    <section class="account-panel mb-6" aria-label="מקור המשרה והגשה">
+      <h2 class="mb-3 text-xl">הפרטים המקוריים, ההחלטה שלך</h2>
+      <p>
+        מקור:
+        <a
+          class="text-brand underline"
+          [href]="source.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ source.name }}</a
+        >
+        · מיקום במקור: <bdi>{{ source.location }}</bdi>
+      </p>
+      <p class="text-sm">
+        עודכן במקור: <bdi>{{ source.updatedAt }}</bdi> · נבדק אצלנו:
+        <bdi>{{ source.fetchedAt }}</bdi>
+      </p>
+      <p class="text-sm">
+        {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. אין ציון התאמה
+        או ניתוח קורות חיים.
+      </p>
+      @if (!source.active) {
+        <p role="status" class="rounded-control bg-warning-soft p-4">
+          המשרה הוסרה מהתוצאות האחרונות. העותק השמור נשמר לעיונך; ייתכן שהקישור כבר אינו פעיל.
+        </p>
+      }
+      <a
+        class="account-button account-primary"
+        [href]="source.applicationUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        >פתיחת המשרה והגשה באתר המקור (חלון חדש)</a
+      >
+      <p class="mt-3 mb-0 text-xs">
+        פתיחת הקישור אינה הגשת מועמדות. Niva אינה שולחת פרופיל, קובץ או בקשה למעסיק.
+      </p>
+    </section>
+  }
   <section class="account-panel mb-6" aria-label="מיקומי המשרה">
     <h2 class="mb-4 text-xl">מיקומים וכתובת</h2>
     @if (job.workStyle === 'remote') {
@@ -79,115 +119,130 @@
       class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
     >
       <h2>קצת על התפקיד</h2>
-      <p>{{ job.description }}</p>
-      <h3>מה מביאים לתפקיד?</h3>
-      <div class="skills flex gap-[8px] flex-wrap">
-        @for (skill of job.skills; track skill) {
-          <span dir="ltr">{{ skill }}</span>
-        }
-      </div>
-      <div class="info-box bg-pale rounded-[13px] p-[18px] gap-[10px] items-start">
-        <niva-icon name="sparkles" />
-        <div>
-          <strong>כיוון שכדאי לבדוק</strong>
-          <p>{{ job.reason }}. הסבר זה הוא חלק מנתוני ההדגמה, ולא ניתוח AI של קורות החיים שלך.</p>
+      <p class="whitespace-pre-line" dir="auto">{{ job.description }}</p>
+      @if (!job.source) {
+        <h3>מה מביאים לתפקיד?</h3>
+        <div class="skills flex gap-[8px] flex-wrap">
+          @for (skill of job.skills; track skill) {
+            <span dir="ltr">{{ skill }}</span>
+          }
         </div>
-      </div>
-      <h3>במילים שלך</h3>
-      <label
-        >הערה לבדיקת המועמדות <span class="muted text-muted">(לא חובה, להדגמה בלבד)</span
-        ><textarea
-          [(ngModel)]="note"
-          maxlength="1500"
-          rows="4"
-          placeholder="מה חשוב לך לבדוק לגבי התפקיד? לא נשמר ולא נשלח."
-        ></textarea>
-      </label>
-    </section>
-    <section
-      class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px] review-panel sticky"
-    >
-      <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
-        >עוצרים לרגע ובודקים</span
-      >
-      <h2>לפני שמאשרים</h2>
-      <dl class="review-list">
-        <div>
-          <dt>חברה</dt>
-          <dd>
-            <bdi>{{ job.company }}</bdi> · לדוגמה
-          </dd>
+        <div class="info-box bg-pale rounded-[13px] p-[18px] gap-[10px] items-start">
+          <niva-icon name="sparkles" />
+          <div>
+            <strong>כיוון שכדאי לבדוק</strong>
+            <p>{{ job.reason }}. הסבר זה הוא חלק מנתוני ההדגמה, ולא ניתוח AI של קורות החיים שלך.</p>
+          </div>
         </div>
-        <div>
-          <dt>קורות חיים</dt>
-          <dd>
-            <bdi>{{ store.resumeName() || 'פרופיל לדוגמה — ללא קובץ' }}</bdi>
-          </dd>
-        </div>
-        <div>
-          <dt>יעד השליחה</dt>
-          <dd>אין חיבור חיצוני בהדגמה</dd>
-        </div>
-        <div>
-          <dt>מה יקרה באישור?</dt>
-          <dd>
-            {{ store.isAccount() ? 'יישמר רישום הדגמה בחשבון בלבד' : 'יישמר רישום מקומי בלבד' }}
-          </dd>
-        </div>
-      </dl>
-      @if (store.approved(job.id)) {
-        <div class="success-box bg-success-soft rounded-[12px] p-[19px] text-center" role="status">
-          <niva-icon name="check" /><strong>המשרה אושרה בהדגמה</strong>
-          <p>לא נשלח מידע לחברה. אפשר למצוא את הרישום בהיסטוריה שלך.</p>
-        </div>
-        <a
-          routerLink="/app/applications"
-          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
-          >לרישומי ההדגמה <niva-icon name="arrow"
-        /></a>
-      } @else {
-        <label class="checkbox-label font-normal leading-[1.9]"
-          ><input type="checkbox" [(ngModel)]="acknowledged" /><span
-            >בדקתי את הפרטים והבנתי שלא תישלח מועמדות אמיתית.</span
-          ></label
-        >
-        @if (!eligible()) {
-          <p
-            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
-            role="alert"
-          >
-            המשרה אינה תואמת להעדפות הנוכחיות, ולכן לא ניתן לאשר אותה. אפשר לעדכן את ההעדפות.
-          </p>
-        }
-        @if (store.paused()) {
-          <p
-            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
-            role="status"
-          >
-            האישורים מושהים. יש לחדש פעילות בסקירה לפני האישור.
-          </p>
-        }
-        <button
-          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
-          [disabled]="!acknowledged || store.paused() || !eligible()"
-          (click)="approve()"
-        >
-          אישור בהדגמה <niva-icon name="check" />
-        </button>
-        @if (error()) {
-          <p
-            class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
-            role="alert"
-          >
-            {{ error() }}
-          </p>
-        }
-        <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-          כל בחירה בשליטה שלך. תמיד.
-        </p>
+        <h3>במילים שלך</h3>
+        <label
+          >הערה לבדיקת המועמדות <span class="muted text-muted">(לא חובה, להדגמה בלבד)</span
+          ><textarea
+            [(ngModel)]="note"
+            maxlength="1500"
+            rows="4"
+            placeholder="מה חשוב לך לבדוק לגבי התפקיד? לא נשמר ולא נשלח."
+          ></textarea>
+        </label>
       }
     </section>
+    @if (!job.source) {
+      <section
+        class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px] review-panel sticky"
+      >
+        <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
+          >עוצרים לרגע ובודקים</span
+        >
+        <h2>לפני שמאשרים</h2>
+        <dl class="review-list">
+          <div>
+            <dt>חברה</dt>
+            <dd>
+              <bdi>{{ job.company }}</bdi> · לדוגמה
+            </dd>
+          </div>
+          <div>
+            <dt>קורות חיים</dt>
+            <dd>
+              <bdi>{{ store.resumeName() || 'פרופיל לדוגמה — ללא קובץ' }}</bdi>
+            </dd>
+          </div>
+          <div>
+            <dt>יעד השליחה</dt>
+            <dd>אין חיבור חיצוני בהדגמה</dd>
+          </div>
+          <div>
+            <dt>מה יקרה באישור?</dt>
+            <dd>
+              {{ store.isAccount() ? 'יישמר רישום הדגמה בחשבון בלבד' : 'יישמר רישום מקומי בלבד' }}
+            </dd>
+          </div>
+        </dl>
+        @if (store.approved(job.id)) {
+          <div
+            class="success-box bg-success-soft rounded-[12px] p-[19px] text-center"
+            role="status"
+          >
+            <niva-icon name="check" /><strong>המשרה אושרה בהדגמה</strong>
+            <p>לא נשלח מידע לחברה. אפשר למצוא את הרישום בהיסטוריה שלך.</p>
+          </div>
+          <a
+            routerLink="/app/applications"
+            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
+            >לרישומי ההדגמה <niva-icon name="arrow"
+          /></a>
+        } @else {
+          <label class="checkbox-label font-normal leading-[1.9]"
+            ><input type="checkbox" [(ngModel)]="acknowledged" /><span
+              >בדקתי את הפרטים והבנתי שלא תישלח מועמדות אמיתית.</span
+            ></label
+          >
+          @if (!eligible()) {
+            <p
+              class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+              role="alert"
+            >
+              המשרה אינה תואמת להעדפות הנוכחיות, ולכן לא ניתן לאשר אותה. אפשר לעדכן את ההעדפות.
+            </p>
+          }
+          @if (store.paused()) {
+            <p
+              class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+              role="status"
+            >
+              האישורים מושהים. יש לחדש פעילות בסקירה לפני האישור.
+            </p>
+          }
+          <button
+            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover full-width w-full"
+            [disabled]="!acknowledged || store.paused() || !eligible()"
+            (click)="approve()"
+          >
+            אישור בהדגמה <niva-icon name="check" />
+          </button>
+          @if (error()) {
+            <p
+              class="form-error text-error text-[12px] p-[12px_14px] rounded-[10px] bg-error-soft mt-[14px]"
+              role="alert"
+            >
+              {{ error() }}
+            </p>
+          }
+          <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
+            כל בחירה בשליטה שלך. תמיד.
+          </p>
+        }
+      </section>
+    }
   </div>
+} @else if (store.jobsLoading()) {
+  <p role="status">טוענים את פרטי המשרה מהמקור…</p>
+} @else if (store.jobsError()) {
+  <section class="account-panel">
+    <h1>לא ניתן לטעון את המשרה כרגע</h1>
+    <p role="alert">{{ store.jobsError() }}</p>
+    <button class="account-button" (click)="store.loadJobs()">ניסיון נוסף</button>
+  </section>
 } @else {
   <section
     class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
