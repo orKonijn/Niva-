@@ -1,6 +1,6 @@
 import type { Job } from './models/job';
 import { matchesPreferences, type Preferences } from './preferences';
-export const MATCH_VERSION = 'evidence-v2';
+export const MATCH_VERSION = 'evidence-v3';
 export const SKILLS: Record<string, RegExp> = {
   JavaScript: /\bjavascript\b|ג׳אווהסקריפט/i,
   TypeScript: /\btypescript\b|טייפסקריפט/i,
@@ -21,18 +21,36 @@ export const SKILLS: Record<string, RegExp> = {
 /** Conservative clause-level terminology evidence. Ambiguous/negative clauses stay unknown. */
 export function positiveEvidence(text: string): { skill: string; text: string }[] {
   const found = new Map<string, string>();
-  for (const clause of text
+  const tokenNegation =
+    /(?:^|[^\p{L}\p{M}\p{N}_])(?:ו)?(?:לא|ללא|בלי|אין|מעולם|טרם|אולי|אינני|אינו|אינה)(?=$|[^\p{L}\p{M}\p{N}_])/u;
+  const clauses = text
+    .normalize('NFC')
     .replace(/[’‘]/g, "'")
-    .split(/\n|[.;!?]|\bbut\b|\bhowever\b|אבל|עם זאת/i)) {
-    const scope = clause.replace(/\bnot only\b|לא רק/gi, '');
-    if (
-      /\b(?:not|never|no|without|lack(?:ing)?|don't|doesn't|didn't|haven't|hasn't|cannot|can't|maybe|might|unsure)\b|לא(?! רק)|ללא|אין|מעולם|טרם|אולי|אינני|אינו/i.test(
-        scope,
+    .split(/\n|[.;!?]|\bbut\b|\bhowever\b|(?<![\p{L}\p{M}])(?:אבל|אלא|עם זאת)(?![\p{L}\p{M}])/iu);
+  const englishNegation =
+    /\b(?:not|never|no|without|lack(?:ing)?|don't|doesn't|didn't|haven't|hasn't|cannot|can't|maybe|might|unsure)\b/i;
+  for (const contrast of clauses.flatMap((c) =>
+    c.split(/\bwhereas\b|(?<![\p{L}\p{M}])אך(?![\p{L}\p{M}])/iu),
+  )) {
+    let inheritedNegative = false;
+    for (const clause of contrast.split(/[,،]/)) {
+      const scope = clause
+        .normalize('NFD')
+        .replace(/\p{M}/gu, '')
+        .replace(/\bnot only\b|(?<![\p{L}\p{M}])(?:ו)?לא\s+רק(?![\p{L}\p{M}])/giu, '');
+      const negative = tokenNegation.test(scope) || englishNegation.test(scope);
+      if (negative) inheritedNegative = true;
+      else if (
+        /\b(?:I (?:built|used|know|developed|have)|experience with)\b|(?:^|[^\p{L}])(?:עבדתי|פיתחתי|בניתי|ניסיון)(?![\p{L}])/iu.test(
+          scope,
+        )
       )
-    )
-      continue;
-    for (const [skill, pattern] of Object.entries(SKILLS))
-      if (pattern.test(clause) && !found.has(skill)) found.set(skill, clause.trim().slice(0, 300));
+        inheritedNegative = false;
+      if (negative || inheritedNegative) continue;
+      for (const [skill, pattern] of Object.entries(SKILLS))
+        if (pattern.test(clause.normalize('NFD').replace(/\p{M}/gu, '')) && !found.has(skill))
+          found.set(skill, clause.trim().slice(0, 300));
+    }
   }
   return [...found].map(([skill, text]) => ({ skill, text }));
 }

@@ -22,6 +22,13 @@
       "when": 1792866103015,
       "tag": "0002_bored_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1792884209807,
+      "tag": "0003_late_sentinel",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,12 @@
 # Niva working instructions
 
+## Progress updates and verification
+
+- For every task, explain the intended work in the conversation before starting, then post concise updates as each meaningful step begins or completes. Say what you are doing, what you found and what comes next. Keep the user informed during longer work; do not wait until the final answer to describe the steps.
+- Run the complete relevant verification suite once near the end, before the final handoff. Do not run the whole suite after every edit. During implementation, use focused checks only when needed to investigate a specific failure or unresolved risk.
+- After final checks pass, repeat or broaden checks only when subsequent code changes, failures or unresolved concerns justify it. For documentation-only work, use appropriate formatting/link/evidence checks rather than unrelated application tests.
+- Keep the changelog and genuine before-and-after image requirements below. These rules do not authorize committing, pushing or deploying when the current task prohibits those actions.
+
 ## Required change records and images
 
 The user requires every future change to include a changelog entry and before-and-after images.

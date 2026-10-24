@@ -33,6 +33,7 @@ export function repairHarness(adapter: 'node' | 'd1', env: CareerEnvironment = {
       '001_account_data.sql',
       '003_career.sql',
       '004_lifecycle.sql',
+      '005_career_erasure.sql',
     ])
       sqlite.exec(readFileSync('server/migrations/' + file, 'utf8'));
   let before: (sql: string) => Promise<void> = async () => {};
@@ -135,6 +136,7 @@ export function repairHarness(adapter: 'node' | 'd1', env: CareerEnvironment = {
   };
   return {
     sqlite,
+    app,
     db,
     owner,
     req,

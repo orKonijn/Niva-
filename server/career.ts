@@ -31,6 +31,8 @@ export interface CareerEnvironment {
   NIVA_RESUME_PROCESSOR_KEY?: string;
   NIVA_RESUME_PROCESSOR_NAME?: string;
   NIVA_INGEST_SECRET?: string;
+  NIVA_OPERATOR_ID?: string;
+  NIVA_ALERT_URL?: string;
 }
 export interface CareerDependencies {
   db: CareerDb;
@@ -104,6 +106,15 @@ export function createCareer(deps: CareerDependencies) {
     await runMaintenance(db, { sources: false, trigger: 'manual' });
     return c.json({ ok: true });
   });
+  app.get('/api/maintenance/health', async (c) => {
+    if (
+      !env.NIVA_INGEST_SECRET ||
+      env.NIVA_INGEST_SECRET.length < 32 ||
+      c.req.header('authorization') !== `Bearer ${env.NIVA_INGEST_SECRET}`
+    )
+      return c.json({ error: 'UNAUTHORIZED' }, 401);
+    return c.json(await maintenanceHealth(db, Date.now(), env));
+  });
   app.get('/api/feed', async (c) => {
     const owner = await deps.identity(c.req.raw);
     await quota(db, `feed:${owner ?? 'anonymous'}`, 120, 60000);
@@ -141,6 +152,13 @@ export function createCareer(deps: CareerDependencies) {
     c.set('owner', owner);
     c.set('epoch', await lifecycle(db, owner));
     c.header('X-Niva-Lifecycle', c.get('epoch'));
+    const ownerState = (
+      await db.all<{ erasure: string }>(
+        'SELECT erasure FROM niva_career_owners WHERE owner=?',
+        owner,
+      )
+    )[0];
+    c.header('X-Niva-Erasure', ownerState.erasure);
     if (
       c.req.method !== 'GET' &&
       (c.req.header('origin') !== new URL(c.req.url).origin ||
@@ -151,7 +169,56 @@ export function createCareer(deps: CareerDependencies) {
     await quota(db, `requests:${owner}`, 120, 60000);
     return next();
   });
-  app.get('/api/career/operations', async (c) => c.json(await maintenanceHealth(db)));
+  app.get('/api/career/operations', async (c) =>
+    c.json(await maintenanceHealth(db, Date.now(), env)),
+  );
+  app.get('/api/career/snapshot', async (c) => {
+    const owner = c.get('owner');
+    // Owner epoch plus document rows are read under one SQLite statement for a coherent snapshot.
+    const rows = await db.all<{
+      epoch: string;
+      erasure: string;
+      active_resume_id: string | null;
+      data: string | null;
+      id: string | null;
+    }>(
+      "SELECT o.epoch,o.erasure,o.active_resume_id,d.data,d.id FROM niva_career_owners o LEFT JOIN niva_documents d ON d.owner=o.owner AND d.epoch=o.epoch AND d.kind='resume' AND d.expires_at>? WHERE o.owner=? ORDER BY d.id",
+      Date.now(),
+      owner,
+    );
+    const current = rows[0];
+    if (!current) throw new CareerError(409, 'LIFECYCLE_CHANGED');
+    const safe = rows
+      .filter((r) => r.data)
+      .map((row) => {
+        const { originalBase64, ...resume } = JSON.parse(row.data!) as ResumeVersion;
+        void originalBase64;
+        return {
+          ...resume,
+          active: row.id === current.active_resume_id && resume.confirmed === true,
+        };
+      });
+    c.header('X-Niva-Lifecycle', current.epoch);
+    c.header('X-Niva-Erasure', current.erasure);
+    return c.json({
+      epoch: current.epoch,
+      erasure: current.erasure,
+      revision: versionOf([current.epoch, current.active_resume_id, safe]),
+      resumes: safe,
+      config: {
+        ai: !!(env.OPENAI_API_KEY && env.NIVA_AI_MODEL),
+        uploads: !!(
+          env.NIVA_RESUME_PROCESSOR_URL &&
+          env.NIVA_RESUME_PROCESSOR_KEY &&
+          env.NIVA_RESUME_PROCESSOR_NAME
+        ),
+        processor: env.NIVA_RESUME_PROCESSOR_NAME ?? '',
+        retentionDays: RETENTION_DAYS,
+        maxUploadBytes: MAX_UPLOAD,
+      },
+      operations: await maintenanceHealth(db, Date.now(), env),
+    });
+  });
   app.get('/api/career/config', (c) =>
     c.json({
       ai: !!(env.OPENAI_API_KEY && env.NIVA_AI_MODEL),
@@ -624,9 +691,10 @@ export function createCareer(deps: CareerDependencies) {
             if (event.type === 'response.output_text.delta' && event.delta) {
               answer += event.delta;
               if (answer.length > 12000) throw new Error('STREAM_TOO_LARGE');
+              // Never expose unvalidated model content. Progress carries no advice/citations.
               await stream.writeSSE({
-                event: 'delta',
-                data: JSON.stringify({ text: event.delta }),
+                event: 'progress',
+                data: JSON.stringify({ state: 'checking' }),
               });
             }
             if (event.type === 'response.completed') completed = true;
@@ -641,7 +709,10 @@ export function createCareer(deps: CareerDependencies) {
         if (!completed || signal.aborted) throw new Error('INCOMPLETE');
         // Only server-resolved citations are accepted; generated URLs are never actionable.
         const cited = [...answer.matchAll(/\[job:([^\]]+)\]/g)].map((m) => m[1]);
-        if (cited.some((id) => !jobs.some((job) => job.id === id)) || /https?:\/\//i.test(answer))
+        if (
+          cited.some((id) => !jobs.some((job) => job.id === id)) ||
+          /(?:https?:\/\/|www\.)/i.test(answer)
+        )
           throw new Error('UNGROUNDED_CITATION');
         const references: JobReference[] = jobs
           .filter((j) => cited.includes(j.id))
@@ -658,12 +729,22 @@ export function createCareer(deps: CareerDependencies) {
           { role: 'assistant', text: answer, references },
         );
         await putRecord(db, owner, 'chat', id, conversation, false, c.get('epoch'));
+        for (let offset = 0; offset < answer.length; offset += 240)
+          await stream.writeSSE({
+            event: 'delta',
+            data: JSON.stringify({ text: answer.slice(offset, offset + 240) }),
+          });
         await stream.writeSSE({ event: 'done', data: JSON.stringify({ conversationId: id }) });
-      } catch {
+      } catch (error) {
         if (!signal.aborted)
           await stream.writeSSE({
             event: 'failure',
-            data: JSON.stringify({ error: 'AI_UNAVAILABLE' }),
+            data: JSON.stringify({
+              error:
+                error instanceof Error && error.message === 'UNGROUNDED_CITATION'
+                  ? 'AI_REJECTED'
+                  : 'AI_UNAVAILABLE',
+            }),
           });
       } finally {
         controller.abort();

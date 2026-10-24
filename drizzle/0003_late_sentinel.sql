@@ -1,0 +1,1 @@
+ALTER TABLE `niva_career_owners` ADD `erasure` text DEFAULT '0' NOT NULL;

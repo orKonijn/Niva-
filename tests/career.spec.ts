@@ -82,6 +82,17 @@ async function fixture(page: Page, { ai = false } = {}) {
   await page.route('**/api/career/**', async (r) => {
     const path = new URL(r.request().url()).pathname;
     const body = r.request().method() === 'POST' ? r.request().postDataJSON() : {};
+    if (path.endsWith('/snapshot'))
+      return r.fulfill({
+        json: {
+          epoch: 'fixture',
+          erasure: 'account0',
+          revision: 'fixture',
+          resumes,
+          config: { ai, uploads: false, processor: '', retentionDays: 30, maxUploadBytes: 750000 },
+          operations: null,
+        },
+      });
     if (path.endsWith('/config'))
       return r.fulfill({
         json: { ai, uploads: false, processor: '', retentionDays: 30, maxUploadBytes: 750000 },

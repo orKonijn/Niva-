@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "runMode": "plan-only",
+  "productionUrlForbidden": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "cases": [
+    {
+      "id": "identity-isolation",
+      "scope": "actual staging Worker/D1",
+      "procedure": [
+        "Create two independently verified staging identities using disposable accounts.",
+        "With Alice credentials create synthetic resume/profile/save data. With Bob credentials request each known Alice resume/export/conversation ID.",
+        "Try forged oai-authenticated-user-id headers without a session and Bob session plus Alice headers on both the hosted gate and the direct Worker origin."
+      ],
+      "pass": [
+        "Bob never receives Alice data; requests deny with 401/403/404.",
+        "Direct origin is inaccessible or independently authenticates; host strips spoofed identity headers."
+      ],
+      "requires": ["two independent staging identities", "hosting-origin inventory"],
+      "status": "unverified"
+    },
+    {
+      "id": "actual-d1-concurrency",
+      "scope": "actual staging Worker/D1",
+      "procedure": [
+        "Seed 19 synthetic versions in an approved disposable staging account.",
+        "Use a provider-controlled scanner barrier plus concurrent create/edit/tailor requests.",
+        "Release the barrier and read authoritative snapshot. Repeat account-delete/create and review/activate interleavings."
+      ],
+      "pass": [
+        "At most 20 versions; rejected create reports VERSION_LIMIT.",
+        "No pre-erasure writes reappear; at most one valid active resume; old token cannot release a newer lease."
+      ],
+      "requires": ["disposable staging DB", "controlled synthetic processor"],
+      "status": "unverified"
+    },
+    {
+      "id": "restore-and-retention",
+      "scope": "actual staging storage and operations",
+      "procedure": [
+        "Back up/export a disposable staging DB using the hosting-supported backup mechanism.",
+        "Restore into a separately named isolated DB; verify two-owner isolation and active pointer.",
+        "Delete a synthetic version/account, verify immediate read denial and delayed-write rejection; expire synthetic records and observe physical cleanup within 60 minutes.",
+        "Document backup expiry and the process preventing erased data from being re-exposed after restore."
+      ],
+      "pass": [
+        "Restored ownership and lifecycle invariants pass.",
+        "Documented recovery objectives and backup/provider deletion policies approved; erased data is not re-exposed."
+      ],
+      "requires": ["hosting backup access", "named recovery operator"],
+      "status": "unverified"
+    },
+    {
+      "id": "maintenance-and-alerts",
+      "scope": "actual unattended scheduling",
+      "procedure": [
+        "Configure approved writer service access independently of visitor identity.",
+        "Run ingestion every five minutes and a separate cleanup-only job every five minutes.",
+        "Observe two due Greenhouse/Lever cycles (10/15 minutes), removed-job closure and provider outage retaining stale records.",
+        "From an independent watchdog trigger missed runs and an unreachable app; verify a real operator receives and acknowledges alert."
+      ],
+      "pass": [
+        "Source timestamps advance twice; cleanup meets one-hour target even during provider failure.",
+        "Identified operator acknowledges delivery; missed app scheduling cannot also silence the independent watchdog."
+      ],
+      "requires": ["unattended service authorization", "named operator", "approved alert receiver"],
+      "status": "unverified"
+    },
+    {
+      "id": "chosen-model-quality",
+      "scope": "chosen real model, synthetic content only",
+      "procedure": [
+        "Run the synthetic corpus with explicit model/version, token caps and approved spending limit.",
+        "Have a Hebrew speaker rate factual claims, language, missing-evidence wording and citation relevance.",
+        "Include prompt injection in resume/job/history, excluded employers, unknown facts, disabled resume attachment with prior history, cancellation and invalid/incomplete responses.",
+        "Record usage/cost/latency from actual provider responses and compare with the approved budget."
+      ],
+      "pass": [
+        "No cross-owner/excluded recommendations or invented facts/citations accepted in the corpus.",
+        "Human Hebrew/factuality assessment passes stated criteria; actual usage stays within budget."
+      ],
+      "requires": ["approved model credentials and budget", "Hebrew evaluator"],
+      "status": "unverified"
+    },
+    {
+      "id": "scanner-isolation",
+      "scope": "chosen real isolated processor, synthetic safety corpus only",
+      "procedure": [
+        "Assess sandbox/network/filesystem isolation and provider retention terms before activation.",
+        "Exercise malformed, encrypted, truncated, oversized, excessive-page, decompression-bomb and vendor-approved safe malware-test fixtures in the isolated staging processor.",
+        "Interrupt/cancel/timeout and erase during processing; inspect only synthetic outcome/retention logs."
+      ],
+      "pass": [
+        "Unsafe/unknown files are rejected; no document execution/network escape; bounded extraction and cleanup verified.",
+        "Provider deletion/retention and original-byte exports are verified with synthetic data."
+      ],
+      "requires": ["independently assessed scanner", "approved synthetic safety corpus"],
+      "status": "unverified"
+    }
+  ]
+}

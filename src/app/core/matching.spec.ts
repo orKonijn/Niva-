@@ -68,3 +68,35 @@ it('never moves an achievement separated from its employer by blank lines', () =
     'Candidate\n\nEmployer A 2020–2022\n\nPython SQL achievements\n\nEmployer B 2023–2026\n\nManual QA';
   expect(tailorExtractive(text, job).text).toBe(text);
 });
+
+it('does not mistake affirmative Hebrew words for negation tokens', () => {
+  for (const text of [
+    'ניסיון מלא ב-Python וב-SQL',
+    'מילאתי תפקיד Python ו-SQL',
+    'לא רק Python אלא גם SQL',
+    'Not only Python but SQL',
+  ])
+    expect(skillEvidence(text)).toEqual(expect.arrayContaining(['Python', 'SQL']));
+});
+it('scopes Hebrew and English negatives with inspectable positive contrast', () => {
+  expect(skillEvidence('אין לי ניסיון ב-Python אבל עבדתי עם SQL')).toEqual(['SQL']);
+  expect(skillEvidence('לא עבדתי עם Python')).toEqual([]);
+  expect(skillEvidence('ללא SQL')).toEqual([]);
+  expect(skillEvidence('אולי Python')).toEqual([]);
+});
+
+it('keeps a negated comma list unknown until an explicit positive clause', () => {
+  expect(skillEvidence('No Python, SQL')).toEqual([]);
+  expect(skillEvidence('אין ניסיון ב-Python, SQL')).toEqual([]);
+  expect(skillEvidence('No Python, I built SQL services')).toEqual(['SQL']);
+  expect(skillEvidence('לֹא השתמשתי ב־Python')).toEqual([]);
+});
+
+it('recognizes standalone Hebrew conjunction negatives and positive אלא contrast', () => {
+  expect(skillEvidence('וללא Python')).toEqual([]);
+  expect(skillEvidence('ולא השתמשתי ב-SQL')).toEqual([]);
+  expect(skillEvidence('ולא רק Python אלא גם SQL')).toEqual(
+    expect.arrayContaining(['Python', 'SQL']),
+  );
+  expect(skillEvidence('לא Python אלא SQL')).toEqual(['SQL']);
+});

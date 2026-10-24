@@ -1,6 +1,7 @@
 import { lifecycle } from './lifecycle';
 import type { CareerDb } from './career-db';
 export const RETENTION_DAYS = 30;
+export const MAX_RESUME_VERSIONS = 20;
 export class CareerError extends Error {
   constructor(
     public status: number,
@@ -58,7 +59,7 @@ export async function putRecord(
   const payload = JSON.stringify(kind === 'resume' ? { ...(data as object), active: false } : data);
   const rows = create
     ? await db.all(
-        `INSERT INTO niva_documents(owner,kind,id,data,expires_at,epoch) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) ON CONFLICT(owner,kind,id) DO NOTHING RETURNING id`,
+        `INSERT INTO niva_documents(owner,kind,id,data,expires_at,epoch) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) AND (? <> 'resume' OR (SELECT count(*) FROM niva_documents WHERE owner=? AND kind='resume' AND epoch=? AND expires_at>?) < ?) ON CONFLICT(owner,kind,id) DO NOTHING RETURNING id`,
         owner,
         kind,
         id,
@@ -67,6 +68,11 @@ export async function putRecord(
         epoch,
         owner,
         epoch,
+        kind,
+        owner,
+        epoch,
+        Date.now(),
+        MAX_RESUME_VERSIONS,
       )
     : await db.all(
         `UPDATE niva_documents SET data=? WHERE owner=? AND kind=? AND id=? AND expires_at>? AND epoch=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) RETURNING id`,
@@ -81,6 +87,17 @@ export async function putRecord(
       );
   if (!rows.length) {
     await assertLifecycle(db, owner, epoch);
+    if (create && kind === 'resume') {
+      const count = (
+        await db.all<{ n: number }>(
+          "SELECT count(*) n FROM niva_documents WHERE owner=? AND kind='resume' AND epoch=? AND expires_at>?",
+          owner,
+          epoch,
+          Date.now(),
+        )
+      )[0].n;
+      if (count >= MAX_RESUME_VERSIONS) throw new CareerError(409, 'VERSION_LIMIT');
+    }
     if (kind !== 'score') throw new CareerError(409, 'RECORD_CHANGED');
   }
 }

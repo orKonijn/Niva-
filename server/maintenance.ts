@@ -64,7 +64,11 @@ export async function runMaintenance(
     throw new Error('INGESTION_FAILED');
   }
 }
-export async function maintenanceHealth(db: CareerDb, now = Date.now()) {
+export async function maintenanceHealth(
+  db: CareerDb,
+  now = Date.now(),
+  operator?: { NIVA_OPERATOR_ID?: string; NIVA_ALERT_URL?: string },
+) {
   const rows = await db.all<{
     id: string;
     started_at: number | null;
@@ -73,11 +77,20 @@ export async function maintenanceHealth(db: CareerDb, now = Date.now()) {
     trigger: string;
     removed: number;
   }>('SELECT * FROM niva_maintenance');
+  const ingestion = rows.find((r) => r.id === 'ingestion');
   const retention = rows.find((r) => r.id === 'retention');
   const scheduled = rows.filter((r) => r.id === 'scheduler' && r.succeeded_at);
   return {
     rows,
+    alerts: {
+      configured: !!(operator?.NIVA_OPERATOR_ID && operator?.NIVA_ALERT_URL),
+      operator: operator?.NIVA_OPERATOR_ID ?? null,
+      deliveryVerified: false,
+      independentWatchdogRequired: true,
+    },
     scheduledObserved: scheduled.length > 0,
+    ingestionOverdue: !ingestion?.succeeded_at || now - ingestion.succeeded_at > 20 * 60000,
+    ingestionBoundMinutes: 20,
     schedulerOverdue:
       !scheduled[0]?.succeeded_at || now - scheduled[0].succeeded_at > CLEANUP_BOUND_MS,
     cleanupFailed: !!retention?.error,

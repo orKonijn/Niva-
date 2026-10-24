@@ -1,0 +1,158 @@
+{
+  "scope": "genuine local synthetic UI/executed evidence; not production service verification",
+  "pairs": [
+    {
+      "scenario": "review25-capacity",
+      "before": "docs/screenshots/changes/review25-capacity/before.png",
+      "after": "docs/screenshots/changes/review25-capacity/after.png",
+      "beforeSha256": "cf546e9a3b85c728fcb40645e697de2e26ecccb73f7b36b8d1470984cf4b8bbd",
+      "afterSha256": "a4cc08a65bcc01859f341a0e496fba62fa64f44c7c83e4d6aa88ec191c1af55c",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:44.448900+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:48.625976+00:00"
+    },
+    {
+      "scenario": "review25-draft-desktop",
+      "before": "docs/screenshots/changes/review25-draft-desktop/before.png",
+      "after": "docs/screenshots/changes/review25-draft-desktop/after.png",
+      "beforeSha256": "dc34d912f9e8dd602127d5a0ef00e3cd398ae4092b6ed82691cee2b095ae566d",
+      "afterSha256": "de76ec58bb6cdb39ed114681e5bc246a053b3763c0ef46b6e4ac3bcdf200d9dc",
+      "beforeFileTimestampUtc": "2026-10-24T23:20:54.391371+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:44.602706+00:00"
+    },
+    {
+      "scenario": "review25-draft-mobile",
+      "before": "docs/screenshots/changes/review25-draft-mobile/before.png",
+      "after": "docs/screenshots/changes/review25-draft-mobile/after.png",
+      "beforeSha256": "743846f0ebda26bbf2fa1bcd72a1616990a48e022a626a488fe8a5dd89457b59",
+      "afterSha256": "a978b02df4e111a765270c26127228e4437f7ecde39089bb96a215fde755fd8d",
+      "beforeFileTimestampUtc": "2026-10-24T23:20:54.862088+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:44.999914+00:00"
+    },
+    {
+      "scenario": "review25-hebrew-desktop-dark",
+      "before": "docs/screenshots/changes/review25-hebrew-desktop-dark/before.png",
+      "after": "docs/screenshots/changes/review25-hebrew-desktop-dark/after.png",
+      "beforeSha256": "d7b44a356c88170342366977f66e3cee64879d909651ffd4b2b52dfaa8cf625c",
+      "afterSha256": "f3bd8ec7648ada94e78895c0bb23b9a76ca0eb10c82ee172fdb15f00d22162fd",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.024329+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.205581+00:00"
+    },
+    {
+      "scenario": "review25-hebrew-desktop-light",
+      "before": "docs/screenshots/changes/review25-hebrew-desktop-light/before.png",
+      "after": "docs/screenshots/changes/review25-hebrew-desktop-light/after.png",
+      "beforeSha256": "62232f2ea085fa303b72d430ad6b2987e887690abdb514a69da1ac2099c1c0b8",
+      "afterSha256": "b890e966855e2c217f9c574e26187eab2e05b6a30e598ee8b2153424e3b79f6c",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:42.325978+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:46.553953+00:00"
+    },
+    {
+      "scenario": "review25-hebrew-mobile-dark",
+      "before": "docs/screenshots/changes/review25-hebrew-mobile-dark/before.png",
+      "after": "docs/screenshots/changes/review25-hebrew-mobile-dark/after.png",
+      "beforeSha256": "7dc7dfd296a8f692c1e3248252f1159d7486f89b72a5ddfaa07d311bc3f78b4e",
+      "afterSha256": "a29162231024a7fa0b4919b11ef2aa6a29d10895e1d3305693d7aa774d130caa",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:44.139477+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:48.334143+00:00"
+    },
+    {
+      "scenario": "review25-hebrew-mobile-light",
+      "before": "docs/screenshots/changes/review25-hebrew-mobile-light/before.png",
+      "after": "docs/screenshots/changes/review25-hebrew-mobile-light/after.png",
+      "beforeSha256": "1ada9c087f21443923f53d9647fe2d00abfb9e86196750b0dd538f6e5b856c35",
+      "afterSha256": "320cf2799482dba3f04188843c4db1ed0790edc6f6e15535d5c1c49baf1306cc",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.588767+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.765332+00:00"
+    },
+    {
+      "scenario": "review25-maintenance-desktop-dark",
+      "before": "docs/screenshots/changes/review25-maintenance-desktop-dark/before.png",
+      "after": "docs/screenshots/changes/review25-maintenance-desktop-dark/after.png",
+      "beforeSha256": "dbe336c4eb460da3ef88d4f6ea501af3f5e9851d54e2df0723360f4f22108b61",
+      "afterSha256": "466d4f3309a9cbd5582bf015879d6ca66056e971cb6d27ba7af50374197f5557",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:42.833360+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.008969+00:00"
+    },
+    {
+      "scenario": "review25-maintenance-desktop-light",
+      "before": "docs/screenshots/changes/review25-maintenance-desktop-light/before.png",
+      "after": "docs/screenshots/changes/review25-maintenance-desktop-light/after.png",
+      "beforeSha256": "5aaf9f08330f93dacb188e173eafee45576f5077d83832e222e0257a4bf7e8fd",
+      "afterSha256": "4eb20f0ddc8c41e73072b2db1d193fb725cb0311192a7cb157c94ad4f24dbbfb",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:42.133320+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:46.359479+00:00"
+    },
+    {
+      "scenario": "review25-maintenance-mobile-dark",
+      "before": "docs/screenshots/changes/review25-maintenance-mobile-dark/before.png",
+      "after": "docs/screenshots/changes/review25-maintenance-mobile-dark/after.png",
+      "beforeSha256": "87ec811b2402694c89a8aaa58e3239659366761829bc33d0c73f195e3cfe1036",
+      "afterSha256": "24ddbb2be702bc19b7703ffa3bc7be4fd98de17050c8e3d1f98af91cdcf0934e",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.985006+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:48.161383+00:00"
+    },
+    {
+      "scenario": "review25-maintenance-mobile-light",
+      "before": "docs/screenshots/changes/review25-maintenance-mobile-light/before.png",
+      "after": "docs/screenshots/changes/review25-maintenance-mobile-light/after.png",
+      "beforeSha256": "0f5ad5ba81e641b06164bce8e8eb3db7c222d1a50850e7d4b19e6e183831bc47",
+      "afterSha256": "dd0e09534fcac35b68d2f8f5248e50de8f06b530393792f87e082c48c8b0ef38",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.434157+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.609475+00:00"
+    },
+    {
+      "scenario": "review25-operations-handoff",
+      "before": "docs/screenshots/changes/review25-operations-handoff/before.png",
+      "after": "docs/screenshots/changes/review25-operations-handoff/after.png",
+      "beforeSha256": "7c00bb9c614fa24aa59ac7b31519ba954b2e2663f56597574236b6776ab65a0c",
+      "afterSha256": "e8dfa4eaef62a1e2b5c8bc065905159bf8e82bbd4066aa03a20d01224f95bd7d",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:44.565632+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:48.750822+00:00"
+    },
+    {
+      "scenario": "review25-rejected-answer-desktop-dark",
+      "before": "docs/screenshots/changes/review25-rejected-answer-desktop-dark/before.png",
+      "after": "docs/screenshots/changes/review25-rejected-answer-desktop-dark/after.png",
+      "beforeSha256": "fb732377e68e55a15b6a89b3b0fc9193d58eeb5276fdb1a34d327d7dfbad1a5b",
+      "afterSha256": "43beddd6dee04e64a62c495cef57d75f640bfc190f94592c9a636a782a14bbb9",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.245939+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.421559+00:00"
+    },
+    {
+      "scenario": "review25-rejected-answer-desktop-light",
+      "before": "docs/screenshots/changes/review25-rejected-answer-desktop-light/before.png",
+      "after": "docs/screenshots/changes/review25-rejected-answer-desktop-light/after.png",
+      "beforeSha256": "3662ea120baba84b8cac39af9c0cb9a91182e9f94bad4166417ed5dd8b98d130",
+      "afterSha256": "dedecf8b7045ad2b90f65ec44681fd189a85b4d0d7ba846e416d112b3aea9cbf",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:42.595611+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:46.771353+00:00"
+    },
+    {
+      "scenario": "review25-rejected-answer-mobile-dark",
+      "before": "docs/screenshots/changes/review25-rejected-answer-mobile-dark/before.png",
+      "after": "docs/screenshots/changes/review25-rejected-answer-mobile-dark/after.png",
+      "beforeSha256": "fb86bf7e07075d450740b386a256f93821b4b85e2f34b822c8afcaf479e5cf98",
+      "afterSha256": "5816f94664cd8fe4e1b2810e72eeb3b464b8e18df4fcf495c0bd56f20ad7e641",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:44.349007+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:48.524521+00:00"
+    },
+    {
+      "scenario": "review25-rejected-answer-mobile-light",
+      "before": "docs/screenshots/changes/review25-rejected-answer-mobile-light/before.png",
+      "after": "docs/screenshots/changes/review25-rejected-answer-mobile-light/after.png",
+      "beforeSha256": "c4d6624e7caa68f4542ac5641de06f7aae62ddd07f8370260e20cd4c345009a9",
+      "afterSha256": "149c147ed508093c413d621696ed8f30cbe06550afa6dc92f8aa919c40de1df7",
+      "beforeFileTimestampUtc": "2026-10-24T23:21:43.797589+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:47.975523+00:00"
+    },
+    {
+      "scenario": "review25-sync",
+      "before": "docs/screenshots/changes/review25-sync/before.png",
+      "after": "docs/screenshots/changes/review25-sync/after.png",
+      "beforeSha256": "6e534c6a16237c30db978aa8e52e1b25248d248767c384ec5dc454bdec8abd56",
+      "afterSha256": "716f825d34e9bce82887a93050e9bf0d02f49c286661e6fa4684bcd74e3d8372",
+      "beforeFileTimestampUtc": "2026-10-24T23:20:54.052349+00:00",
+      "afterFileTimestampUtc": "2026-10-24T23:53:44.323055+00:00"
+    }
+  ]
+}

@@ -7,5 +7,5 @@
     "allowImportingTsExtensions": true,
     "lib": ["ES2023", "DOM", "DOM.Iterable"]
   },
-  "include": ["server/**/*.ts", "src/types/worker-assets.d.ts", "db/**/*.ts"]
+  "include": ["server/**/*.ts", "src/types/worker-assets.d.ts", "db/**/*.ts", "scripts/**/*.mts"]
 }

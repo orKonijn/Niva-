@@ -157,6 +157,7 @@ export async function migrateDatabase(database: DatabaseSync, options: AuthOptio
     '002_auth_constraints',
     '003_career',
     '004_lifecycle',
+    '005_career_erasure',
   ]) {
     if (!database.prepare('SELECT id FROM niva_migrations WHERE id=?').get(id)) {
       database.exec('BEGIN IMMEDIATE');

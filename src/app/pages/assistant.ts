@@ -7,6 +7,7 @@ import {
   effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -58,16 +59,40 @@ export class Assistant {
       this.busy.set(false);
       this.consent = false;
       this.includeResume = false;
-      if (this.career.ready()) void this.load();
+    });
+    effect(() => {
+      if (this.career.ready()) untracked(() => void this.load());
+    });
+    effect(() => {
+      const change = this.career.changes();
+      if (!change) return;
+      untracked(() => {
+        if (
+          change.kind === 'resume' ||
+          (change.kind === 'conversation' && change.id === this.conversationId())
+        ) {
+          this.fresh();
+          this.message = '';
+          this.lastMessage = '';
+        }
+        void this.load(true);
+      });
     });
   }
-  async load() {
+  async load(reconcile = false) {
     const owner = this.career.session.userId();
     const generation = this.generation;
     try {
       const conversations = await this.career.request<Conversation[]>('conversations');
-      if (generation === this.generation && owner === this.career.session.userId())
+      if (generation === this.generation && owner === this.career.session.userId()) {
         this.conversations.set(conversations);
+        if (
+          reconcile &&
+          this.conversationId() &&
+          !conversations.some((c) => c.id === this.conversationId())
+        )
+          this.fresh();
+      }
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
     }
@@ -189,8 +214,11 @@ export class Assistant {
       this.message = '';
       await this.load();
     } catch (e) {
-      if (generation === this.generation)
+      if (generation === this.generation) {
+        this.partial.set('');
+        this.jobs.set([]);
         this.error.set(e instanceof Error ? e.message : 'השיחה לא הושלמה.');
+      }
     } finally {
       if (generation === this.generation) this.busy.set(false);
     }

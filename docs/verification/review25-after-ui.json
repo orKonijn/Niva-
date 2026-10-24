@@ -1,0 +1,25 @@
+{
+  "syntheticFixtures": true,
+  "cases": [
+    {
+      "mobile": false,
+      "draft": "UNSAVED synthetic candidate A edits Python SQL",
+      "afterDeletingOtherVersion": "UNSAVED synthetic candidate A edits Python SQL",
+      "lost": false,
+      "pageErrors": []
+    },
+    {
+      "mobile": true,
+      "draft": "UNSAVED synthetic candidate A edits Python SQL",
+      "afterDeletingOtherVersion": "UNSAVED synthetic candidate A edits Python SQL",
+      "lost": false,
+      "pageErrors": []
+    }
+  ],
+  "activeSync": {
+    "serverActive": "B",
+    "clientAStillActive": false,
+    "resumeListReads": 3,
+    "routeRoundTrip": true
+  }
+}

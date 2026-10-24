@@ -37,6 +37,7 @@ beforeEach(() => {
   sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync('server/migrations/003_career.sql', 'utf8'));
   sqlite.exec(readFileSync('server/migrations/004_lifecycle.sql', 'utf8'));
+  sqlite.exec(readFileSync('server/migrations/005_career_erasure.sql', 'utf8'));
 });
 afterEach(() => {
   sqlite.close();

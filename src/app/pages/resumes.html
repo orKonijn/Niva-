@@ -31,20 +31,38 @@
     <h2>מצב תחזוקה</h2>
     <p>
       {{
-        ops.scheduledObserved && !ops.schedulerOverdue
-          ? 'נצפתה תחזוקה מתוזמנת לאחרונה.'
-          : 'לא נצפתה תחזוקה מתוזמנת עדכנית. נדרשת בדיקת מפעיל.'
+        (ops.ingestionOverdue ?? ops.schedulerOverdue) || ops.cleanupOverdue
+          ? 'העדכונים וניקוי הנתונים מתעכבים. מידע שפג תוקפו חסום לקריאה; מומלץ להמתין או לפנות לתמיכה.'
+          : 'תחזוקת הנתונים פעלה לאחרונה.'
       }}
     </p>
-    <p>
-      {{
-        ops.cleanupOverdue
-          ? 'ניקוי פיזי לא אושר בשעה האחרונה. יש לפנות למפעיל; נתונים שפג תוקפם חסומים לקריאה.'
-          : 'ניקוי השמירה פעל בשעה האחרונה.'
-      }}
-      יעד הניקוי: {{ ops.cleanupBoundMinutes }} דקות. זהו יעד תפעולי, לא הבטחה בשירות ללא תזמון
-      פעיל.
-    </p>
+    <details>
+      <summary>פרטים טכניים למפעיל</summary>
+      <p>
+        {{
+          ops.scheduledObserved && !ops.schedulerOverdue
+            ? 'נצפה תזמון עדכני.'
+            : 'לא נצפה תזמון עדכני.'
+        }}
+        יעד ניקוי פיזי: {{ ops.cleanupBoundMinutes }} דקות, בכפוף לתזמון פעיל.
+      </p>
+      <p>
+        {{
+          ops.alerts?.configured
+            ? 'הוגדר יעד התראה. מסירה בפועל דורשת בדיקת מפעיל.'
+            : 'לא הוגדר יעד התראה ומפעיל במערכת. נדרשת הגדרה לפני הרחבת השימוש.'
+        }}
+      </p>
+      @for (row of ops.rows || []; track row.id) {
+        <p>
+          <bdi>{{ row.id }}</bdi> · הצלחה אחרונה:
+          <time [attr.title]="row.succeeded_at ? newDate(row.succeeded_at) : ''">{{
+            row.succeeded_at ? localDate(newDate(row.succeeded_at)) : 'לא נצפתה'
+          }}</time>
+          · <bdi>{{ row.error || 'ללא שגיאה רשומה' }}</bdi>
+        </p>
+      }
+    </details>
   </section>
 }
 <div class="career-columns">

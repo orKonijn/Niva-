@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-24T23:20:46.787Z",
+  "adapters": {
+    "node": {
+      "concurrentCreationStatuses": [201, 201],
+      "resumeCount": 21
+    },
+    "d1": {
+      "concurrentCreationStatuses": [201, 201],
+      "resumeCount": 21
+    }
+  },
+  "invalidStream": {
+    "deltaBeforeFailure": true,
+    "stream": "event: context\ndata: {\"conversationId\":\"6d7b9468-8a90-475e-8535-fa6ff1a15878\",\"jobs\":[]}\n\nevent: delta\ndata: {\"text\":\"UNVERIFIED RECOMMENDATION [job:invented]\"}\n\nevent: failure\ndata: {\"error\":\"AI_UNAVAILABLE\"}\n\n",
+    "persistedMessages": []
+  },
+  "previousNegation": [],
+  "affirmativeHebrew": [],
+  "tailoringExact": true,
+  "liveSources": {
+    "at": "2026-10-24T23:20:48.996Z",
+    "total": 28,
+    "health": [
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-24T23:20:46.821Z",
+        "error": null,
+        "next_at": 1792884646821
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-24T23:20:46.821Z",
+        "error": null,
+        "next_at": 1792884946821
+      }
+    ],
+    "counts": {
+      "AppsFlyer": 22,
+      "WalkMe": 6
+    }
+  },
+  "employerLink": {
+    "original": "https://careers.appsflyer.com/jobs/position/8394076002?gh_jid=8394076002",
+    "status": 200,
+    "finalUrl": "https://careers.appsflyer.com/jobs/position/8394076002/application-security-engineer/?gh_jid=&rd=1"
+  }
+}

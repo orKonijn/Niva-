@@ -29,11 +29,14 @@ export function deletionRows(owner: string, epoch: string, id?: string) {
       sql: 'UPDATE niva_documents SET epoch=? WHERE owner=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?)',
       args: [next, owner, owner, next],
     });
-  } else
+  } else {
+    rows[0].sql = rows[0].sql.replace('SET epoch=?', 'SET erasure=?,epoch=?');
+    rows[0].args.unshift(next);
     rows.push({
       sql: 'DELETE FROM niva_documents WHERE owner=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?)',
       args: [owner, owner, next],
     });
+  }
   // Leases deliberately survive data deletion until their operation releases/expires.
   return { next, rows };
 }

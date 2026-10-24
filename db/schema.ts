@@ -82,6 +82,7 @@ export const careerOwners = sqliteTable('niva_career_owners', {
   owner: text('owner').primaryKey(),
   epoch: text('epoch').notNull().default('0'),
   activeResumeId: text('active_resume_id'),
+  erasure: text('erasure').notNull().default('0'),
 });
 export const careerLeases = sqliteTable('niva_career_leases', {
   owner: text('owner').primaryKey(),

@@ -58,11 +58,17 @@
       }
       @if (partial()) {
         <article class="chat-message">
-          <h3>Niva — {{ busy() ? 'כותבת…' : 'תשובה חלקית שלא נשמרה' }}</h3>
+          <h3>Niva — {{ busy() ? 'משלימה תשובה שנבדקה…' : 'תשובה שלא הושלמה' }}</h3>
           <p dir="auto">{{ partial() }}</p>
         </article>
       }
     </div>
+    @if (busy()) {
+      <p role="status" aria-live="polite">
+        מכינה תשובה ובודקת את ההפניות. התשובה תוצג לאחר השלמת הבדיקה. בדיקת הפניות אינה מבטיחה דיוק
+        עובדתי.
+      </p>
+    }
     @if (error()) {
       <p role="alert">{{ error() }}</p>
     }

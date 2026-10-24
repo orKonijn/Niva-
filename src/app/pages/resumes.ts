@@ -7,6 +7,7 @@ import {
   effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -20,6 +21,7 @@ import { AppStore } from '../core/app-store';
 })
 export class Resumes {
   readonly localDate = localDate;
+  readonly newDate = (value: number) => new Date(value).toISOString();
   readonly career = inject(CareerStore);
   readonly store = inject(AppStore);
   readonly route = inject(ActivatedRoute);
@@ -57,6 +59,25 @@ export class Resumes {
       this.processingConsent = false;
       this.reviewed = false;
     });
+    effect(() => {
+      const versions = this.career.resumes();
+      untracked(() => {
+        for (const id of this.drafts.keys())
+          if (!versions.some((r) => r.id === id)) this.drafts.delete(id);
+        const current = this.selected();
+        if (!current) return;
+        const updated = versions.find((r) => r.id === current.id);
+        if (!updated) {
+          this.selected.set(null);
+          this.editText = '';
+          this.reviewed = false;
+        } else {
+          if (this.editText === current.text) this.editText = updated.text;
+          this.selected.set(updated);
+        }
+      });
+    });
+    void this.career.refresh();
     if (this.jobId) void this.store.ensureJob(this.jobId);
   }
   async action(work: () => Promise<void>) {
