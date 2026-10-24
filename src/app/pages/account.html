@@ -31,81 +31,97 @@
           </li>
         }
       </ul>
-      <div class="flex flex-wrap gap-3">
-        <button
-          class="account-button gap-2"
-          [disabled]="linking() || !session.config().google || methods().includes('google')"
-          (click)="link('google')"
-        >
-          <niva-provider-logo provider="google" />קישור Google</button
-        ><button
-          class="account-button gap-2"
-          [disabled]="linking() || !session.config().apple || methods().includes('apple')"
-          (click)="link('apple')"
-        >
-          <niva-provider-logo provider="apple" />קישור Apple
-        </button>
-        @if (session.config().email) {
-          <a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
-        }
-      </div>
-      <p class="mb-0 mt-4 text-xs">
-        @if (session.config().platform === 'sites') {
-          בפיילוט הזה ההתחברות מנוהלת דרך ChatGPT. אין סיסמה נפרדת לאיפוס ב־Niva.
-        }
-        קישור דורש חיבור פעיל ואימות אצל הספק. כתובת דוא״ל זהה אינה ממזגת חשבונות אוטומטית. נתמכות
-        גם כתובות פרטיות של Apple.
-      </p>
-    </section>
-    <section class="account-panel">
-      <h2 class="mb-4 text-xl">ייבוא חד־פעמי מההדגמה במכשיר</h2>
-      <p>
-        אין העלאה אוטומטית. אפשר לבדוק תצוגה מקדימה ולבחור לייבא. לא יועלו שמות קבצים או תוכן קורות
-        חיים. העדפות החיפוש בחשבון יוחלפו בבחירות המקומיות; משרות והיסטוריה ימוזגו ללא כפילויות.
-      </p>
-      @if (store.account().importedAt) {
-        <p role="status">הייבוא לחשבון הזה כבר בוצע.</p>
-      } @else {
-        <button
-          class="account-button"
-          [disabled]="!store.accountReady() || store.busy() || actionBusy()"
-          (click)="previewImport()"
-        >
-          בדיקת נתונים לפני ייבוא
-        </button>
-      }
-      @if (preview(); as data) {
-        <div class="mt-5 rounded-control border border-line bg-pale p-5">
-          <h3 class="text-lg">תצוגה מקדימה</h3>
-          <p>
-            {{ data.counts.saved }} משרות שמורות · {{ data.counts.demoApprovals }} אישורי הדגמה ·
-            {{ data.data.paused ? 'פעילות מושהית' : 'פעילות פעילה' }}
-          </p>
-          <p>
-            {{ categoryLabel(data.data.preferences.role) }} ·
-            {{ districtLabel(data.data.preferences.district) }} ·
-            {{ workStylesLabel(data.data.preferences.workStyles) }}
-          </p>
-          <p>חברות מוחרגות: {{ data.data.preferences.exclusions || 'ללא' }}</p>
-          <p class="text-xs">אישורים נשארים רישומי הדגמה ולא ייחשבו להגשות אמיתיות.</p>
-          <div class="flex flex-wrap gap-3">
-            <button
-              class="account-button account-primary"
-              [disabled]="store.busy()"
-              (click)="import()"
-            >
-              אישור ייבוא לחשבון</button
-            ><button class="account-button" (click)="preview.set(null)">ביטול ייבוא</button>
-          </div>
+      @if (session.config().platform !== 'sites') {
+        <div class="flex flex-wrap gap-3">
+          <button
+            class="account-button gap-2"
+            [disabled]="linking() || !session.config().google || methods().includes('google')"
+            (click)="link('google')"
+          >
+            <niva-provider-logo provider="google" />קישור Google</button
+          ><button
+            class="account-button gap-2"
+            [disabled]="linking() || !session.config().apple || methods().includes('apple')"
+            (click)="link('apple')"
+          >
+            <niva-provider-logo provider="apple" />קישור Apple
+          </button>
+          @if (session.config().email) {
+            <a class="account-button" routerLink="/forgot-password">איפוס סיסמה</a>
+          }
         </div>
       }
+      <p class="mb-0 mt-4 text-xs">
+        @if (session.config().platform === 'sites') {
+          ההתחברות מנוהלת דרך ChatGPT. אין סיסמה נפרדת לאיפוס ב־Niva.
+        } @else {
+          קישור דורש חיבור פעיל ואימות אצל הספק. כתובת דוא״ל זהה אינה ממזגת חשבונות אוטומטית. נתמכות
+          גם כתובות פרטיות של Apple.
+        }
+      </p>
     </section>
+    <details class="account-panel" [open]="!session.config().realJobs">
+      <summary class="cursor-pointer font-medium">נתונים קודמים מהמכשיר</summary>
+      <section class="mt-5">
+        <h2 class="mb-4 text-xl">ייבוא חד־פעמי מההדגמה במכשיר</h2>
+        <p>
+          אין העלאה אוטומטית. אפשר לבדוק תצוגה מקדימה ולבחור לייבא. לא יועלו שמות קבצים או תוכן
+          קורות חיים. העדפות החיפוש בחשבון יוחלפו בבחירות המקומיות; משרות והיסטוריה ימוזגו ללא
+          כפילויות.
+        </p>
+        @if (store.account().importedAt) {
+          <p role="status">הייבוא לחשבון הזה כבר בוצע.</p>
+        } @else {
+          <button
+            class="account-button"
+            [disabled]="!store.accountReady() || store.busy() || actionBusy()"
+            (click)="previewImport()"
+          >
+            בדיקת נתונים לפני ייבוא
+          </button>
+        }
+        @if (preview(); as data) {
+          <div class="mt-5 rounded-control border border-line bg-pale p-5">
+            <h3 class="text-lg">תצוגה מקדימה</h3>
+            <p>
+              {{ data.counts.saved }} משרות שמורות · {{ data.counts.demoApprovals }} אישורי הדגמה ·
+              {{ data.data.paused ? 'פעילות מושהית' : 'פעילות פעילה' }}
+            </p>
+            <p>
+              {{ categoryLabel(data.data.preferences.role) }} ·
+              {{ districtLabel(data.data.preferences.district) }} ·
+              {{ workStylesLabel(data.data.preferences.workStyles) }}
+            </p>
+            <p>חברות מוחרגות: {{ data.data.preferences.exclusions || 'ללא' }}</p>
+            <p class="text-xs">אישורים נשארים רישומי הדגמה ולא ייחשבו להגשות אמיתיות.</p>
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="account-button account-primary"
+                [disabled]="store.busy()"
+                (click)="import()"
+              >
+                אישור ייבוא לחשבון</button
+              ><button class="account-button" (click)="preview.set(null)">ביטול ייבוא</button>
+            </div>
+          </div>
+        }
+        <p class="mt-4 text-sm">
+          <a class="text-brand underline" routerLink="/app/applications"
+            >היסטוריית אישורי ההדגמה הקודמים</a
+          >
+          ·
+          <a class="text-brand underline" routerLink="/app/jobs" [queryParams]="{ source: 'demo' }"
+            >נתוני הדגמה נפרדים</a
+          >
+        </p>
+      </section>
+    </details>
     <section class="account-panel">
       <h2 class="mb-4 text-xl">ניהול נתונים ופרטיות</h2>
       <p>
         {{
           session.config().platform === 'sites'
-            ? 'בפיילוט המתארח הזיהוי נעשה באמצעות ChatGPT ונתוני החשבון נשמרים ב־Cloudflare D1.'
+            ? 'הזיהוי נעשה באמצעות ChatGPT ונתוני החשבון נשמרים ב־Cloudflare D1.'
             : 'אימות נעשה בשרת באמצעות Better Auth.'
         }}
         Google ו־Apple משתתפים רק כאשר הוגדרו ובוחרים להתחבר דרכם. מפות נטענות מ־OpenStreetMap רק

@@ -89,7 +89,7 @@ export const routes: Routes = [
   },
   {
     path: 'terms',
-    title: 'תנאי הדגמה — Niva',
+    title: 'תנאי השימוש — Niva',
     loadComponent: () => import('./pages/information').then((m) => m.Information),
   },
   {

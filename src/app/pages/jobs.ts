@@ -45,6 +45,8 @@ export class Jobs {
   });
   constructor() {
     const params = this.route.snapshot.queryParamMap;
+    if (this.store.session.config().realJobs && params.get('source') !== 'demo')
+      this.store.useCatalog('real');
     if (params.get('source') === 'real' || params.get('source') === 'demo')
       this.store.useCatalog(params.get('source') as 'real' | 'demo');
     if (params.has('model'))

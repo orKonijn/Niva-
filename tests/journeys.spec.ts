@@ -10,7 +10,9 @@ test('homepage is accessible, has no horizontal overflow and explains demo scope
 }, info) => {
   await expect(page.getByRole('heading', { level: 1 })).toContainText('פחות חיפוש');
   await page.locator('summary').filter({ hasText: 'מה קורה לקורות החיים שלי?' }).click();
-  await expect(page.getByText('בהדגמה נבדקים רק סוג הקובץ', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('בחירת קובץ בודקת רק את הסוג והגודל', { exact: false }),
+  ).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
@@ -23,7 +25,7 @@ test('homepage is accessible, has no horizontal overflow and explains demo scope
   await page.screenshot({ path: `test-results/home-${info.project.name}.png`, fullPage: true });
 });
 test('onboarding can finish without a CV and preferences affect the job list', async ({ page }) => {
-  await page.getByRole('link', { name: 'מתחילים עם קורות החיים', exact: true }).click();
+  await page.goto('/signup');
   await page.getByLabel('איך לקרוא לך?', { exact: false }).fill('דנה');
   await page.getByRole('button', { name: 'ממשיכים עם פרופיל לדוגמה' }).click();
   await page.getByLabel('תחום שמעניין אותך').selectOption('design');

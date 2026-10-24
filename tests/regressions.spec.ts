@@ -153,7 +153,7 @@ test('CV metadata is committed on completion, restored on revisit and explicitly
     await page.getByRole('button', { name: 'פתיחת תפריט', exact: true }).click();
     await page.getByRole('dialog').getByRole('link', { name: 'בחזרה לאתר', exact: true }).click();
   }
-  await page.getByRole('link', { name: 'מתחילים עם קורות החיים', exact: true }).click();
+  await page.goto('/signup');
   await expect(page.locator('.upload-zone strong')).toHaveText('sample.pdf');
   await page.getByRole('button', { name: 'הסרת בחירת קורות חיים' }).click();
   await page.getByRole('button', { name: 'ממשיכים עם פרופיל לדוגמה' }).click();

@@ -10,28 +10,32 @@
   >
 </niva-page-heading>
 <section class="mb-5 rounded-card border border-line bg-surface p-5" aria-label="מקור המשרות">
-  <div class="mb-3 flex flex-wrap gap-3">
-    <button
-      type="button"
-      class="account-button"
-      [attr.aria-pressed]="store.catalogMode() === 'real'"
-      (click)="store.useCatalog('real'); setFilter({ source: 'real' })"
-    >
-      משרות אמיתיות
-    </button>
-    <button
-      type="button"
-      class="account-button"
-      [attr.aria-pressed]="store.catalogMode() === 'demo'"
-      (click)="store.useCatalog('demo'); setFilter({ source: 'demo' })"
-    >
-      נתוני הדגמה
-    </button>
-  </div>
+  @if (!store.session.config().realJobs || store.catalogMode() === 'demo') {
+    <div class="mb-3 flex flex-wrap gap-3">
+      <button
+        type="button"
+        class="account-button"
+        [attr.aria-pressed]="store.catalogMode() === 'real'"
+        (click)="store.useCatalog('real'); setFilter({ source: 'real' })"
+      >
+        משרות אמיתיות
+      </button>
+      <button
+        type="button"
+        class="account-button"
+        [attr.aria-pressed]="store.catalogMode() === 'demo'"
+        (click)="store.useCatalog('demo'); setFilter({ source: 'demo' })"
+      >
+        נתוני הדגמה
+      </button>
+    </div>
+  } @else {
+    <h2 class="mb-3 text-lg">משרות פתוחות מהמקור</h2>
+  }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      פיילוט ממוקד: משרות AppsFlyer בהרצליה דרך Greenhouse. אין כיסוי של כל שוק העבודה. הגשה מתבצעת
-      באתר המקור בלבד.
+      מקור המשרות: AppsFlyer בהרצליה דרך Greenhouse. הכיסוי מוגבל למעסיק הזה. הגשה מתבצעת באתר המקור
+      בלבד.
     </p>
     <p class="mb-2 text-xs">
       סיווג התחום לפי כותרת התפקיד. סגנון העבודה לא נמסר; בחירת סגנון מסוים תסתיר משרות ללא מידע זה.

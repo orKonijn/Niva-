@@ -1,6 +1,6 @@
 # Niva
 
-A Hebrew-first job search pilot built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. A separate guest/demo catalog and the local Node/Better Auth server are retained. Google/Apple/email methods require their own configuration; they are not presented as working on the hosted pilot.
+A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Google/Apple/email methods require their own configuration; hosted sign-in currently uses ChatGPT.
 
 See the [pilot walkthrough, architecture, source accuracy and verification](docs/pilot.md). The earlier [account guide](docs/accounts-map.md) documents local SMTP/OAuth configuration and the original implementation milestone.
 

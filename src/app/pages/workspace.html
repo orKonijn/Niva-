@@ -15,21 +15,23 @@
         </button>
       </div>
       <span class="sidebar-label text-muted px-[14px] mb-[16px]">המרחב שלך</span>
-      <nav aria-label="ניווט בסביבת ההדגמה">
+      <nav aria-label="ניווט בחשבון">
         @for (link of links; track link.path) {
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="active"
-            ariaCurrentWhenActive="page"
-            [routerLinkActiveOptions]="{ exact: link.exact }"
-            (click)="closeMenu()"
-            ><niva-icon [name]="link.icon" />{{ link.name }}
-            @if (link.path === '/app/jobs') {
-              <span class="nav-count ms-[auto] bg-surface p-[2px_7px] rounded-[5px]">{{
-                store.eligibleJobs().length
-              }}</span>
-            }
-          </a>
+          @if (store.catalogMode() !== 'real' || link.path !== '/app/applications') {
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              [routerLinkActiveOptions]="{ exact: link.exact }"
+              (click)="closeMenu()"
+              ><niva-icon [name]="link.icon" />{{ link.name }}
+              @if (link.path === '/app/jobs') {
+                <span class="nav-count ms-[auto] bg-surface p-[2px_7px] rounded-[5px]">{{
+                  store.eligibleJobs().length
+                }}</span>
+              }
+            </a>
+          }
         }
       </nav>
       <div class="sidebar-help bg-pale p-[18px_15px] max-[901px]:px-[12px]">
@@ -48,7 +50,7 @@
         routerLink="/"
         class="sidebar-exit flex items-center gap-[12px] p-[5px_14px] text-[12px] text-muted min-h-[44px]"
         ><niva-icon name="logout" /> בחזרה לאתר</a
-      ><small class="sidebar-version text-center text-muted mt-[20px]">Niva · גרסת פיתוח 0.1</small>
+      ><small class="sidebar-version text-center text-muted mt-[20px]">Niva</small>
     </aside>
   </ng-template>
   <div class="desktop-navigation"><ng-container [ngTemplateOutlet]="navigation" /></div>
@@ -56,7 +58,7 @@
     #drawer
     id="workspace-navigation"
     class="navigation-dialog bg-surface"
-    aria-label="ניווט בסביבת ההדגמה"
+    aria-label="ניווט בחשבון"
     (close)="menu.set(false)"
     (cancel)="$event.preventDefault(); closeMenu()"
     (click)="backdrop($event)"
@@ -87,14 +89,20 @@
       <div class="topbar-user flex items-center gap-[17px] max-[768px]:gap-[9px]">
         <span
           class="demo-pill bg-pale text-muted rounded-[30px] p-[5px_11px] max-[768px]:px-[8px]"
-          >{{ store.isAccount() ? 'חשבון מחובר' : 'סביבת הדגמה' }}</span
+          >{{
+            store.isAccount()
+              ? 'חשבון מחובר'
+              : store.catalogMode() === 'real'
+                ? 'חיפוש משרות'
+                : 'סביבת הדגמה'
+          }}</span
         ><span
           class="user-avatar grid place-items-center w-[35px] h-[35px] text-purple rounded-[50%] text-[14px] max-[768px]:w-[31px] max-[768px]:h-[31px] max-[768px]:text-[12px]"
           >{{ store.name().charAt(0) || 'נ' }}</span
         >
       </div>
     </header>
-    <div class="demo-notice" role="region" aria-label="מידע על ההדגמה">
+    <div class="demo-notice" role="region" aria-label="שמירה ופרטיות">
       <niva-icon name="shield" /><span
         >{{
           store.isAccount()
@@ -112,7 +120,7 @@
         ></span
       >
     </div>
-    @if (store.paused()) {
+    @if (store.paused() && store.catalogMode() === 'demo') {
       <div class="pause-notice" role="status">
         <niva-icon name="pause" /> הפעילות מושהית. אפשר להמשיך לגלות משרות ולחדש אישורים מהסקירה.
       </div>

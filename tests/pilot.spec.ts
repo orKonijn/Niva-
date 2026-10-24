@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { emptyAccountState } from '../src/app/core/models/account-state';
 const job = {
   id: 'greenhouse-appsflyer-123',
   title: 'Pilot API fixture — Data Engineer',
@@ -40,6 +41,57 @@ const job = {
 };
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('niva.cookie-choice', 'necessary'));
+});
+test('hosted normal experience defaults to source jobs and keeps legacy demo data out of the main flow', async ({
+  page,
+}) => {
+  await page.route('**/api/config', (r) =>
+    r.fulfill({
+      json: {
+        accounts: true,
+        platform: 'sites',
+        realJobs: true,
+        email: false,
+        google: false,
+        apple: false,
+      },
+    }),
+  );
+  await page.route('**/api/session', (r) =>
+    r.fulfill({
+      json: {
+        user: {
+          id: 'sites:fixture',
+          name: 'בדיקה',
+          email: 'fixture@example.test',
+          emailVerified: true,
+        },
+      },
+    }),
+  );
+  await page.route('**/api/account/state', (r) => r.fulfill({ json: emptyAccountState() }));
+  await page.route('**/api/account/methods', (r) => r.fulfill({ json: { methods: ['chatgpt'] } }));
+  await page.route('**/api/jobs', (r) =>
+    r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
+  );
+  await page.goto('/');
+  await expect(
+    page.getByRole('link', { name: 'מתחילים לחפש עבודה', exact: false }),
+  ).toHaveAttribute('href', '/login');
+  await page.goto('/app');
+  await expect(page.locator('niva-job-card')).toHaveCount(1);
+  await expect(page.getByRole('link', { name: 'ההגשות שלי', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'השהיית פעילות', exact: true })).toHaveCount(0);
+  await page.goto('/app/jobs');
+  await expect(page.locator('niva-job-card')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'נתוני הדגמה', exact: true })).toHaveCount(0);
+  await expect(page.getByText(/פיילוט|גרסת פיתוח/)).toHaveCount(0);
+  await page.goto('/login');
+  await expect(page.getByRole('link', { name: 'המשך לחשבון שלי' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'המשך עם Google' })).toHaveCount(0);
+  await page.goto('/account');
+  await page.locator('summary').filter({ hasText: 'נתונים קודמים מהמכשיר' }).click();
+  await expect(page.getByRole('heading', { name: 'ייבוא חד־פעמי מההדגמה במכשיר' })).toBeVisible();
 });
 test('production layout loads under the hosted script CSP without inline stylesheet activation', async ({
   page,

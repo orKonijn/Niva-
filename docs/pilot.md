@@ -1,4 +1,8 @@
-# Niva real-data pilot
+# Niva live job-search application
+
+The normal hosted experience opens real source jobs and account features by default. Landing-page actions lead to sign-in; the homepage preview uses actual retrieved listings. Demo switches, sample approval statistics and pause controls are excluded from the main real-job flow. Existing sample data, history, pause state and import remain available separately under the account's collapsed legacy-data section. Nothing is reclassified as a real application submission. The hosted display title is now **Niva — חיפוש עבודה**; the existing URL and audience are preserved.
+
+Normal-experience verification: 156 browser cases passed across all four configurations; after the final landing-page copy/navigation changes, 44 focused journey and hosted-flow cases passed again. Frontend/server tests remained 38/18 passing, with type, format and production-build checks passing. No schema or authentication-provider configuration was changed for this release.
 
 The hosted pilot uses the existing Niva Site, audience and URL. It now runs an Angular frontend plus a Cloudflare Worker, with D1 binding `DB`. Google/Apple/email credentials are not present in the hosted environment. The available hosted login is **Continue with ChatGPT**, using Sites dispatch's verified identity. This does not claim Google or Apple OAuth has been configured. The Node/Better Auth implementation remains available locally, including verified email/password when SMTP is configured.
 

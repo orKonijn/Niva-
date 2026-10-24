@@ -141,8 +141,8 @@ test('static hosting clearly disables account methods and retains guest navigati
   await expect(page.getByRole('status')).toContainText('ללא שרת חשבונות פעיל');
   await expect(page.getByRole('button', { name: 'כניסה לחשבון', exact: true })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'המשך עם Google' })).toBeDisabled();
-  await page.getByRole('link', { name: 'המשך בהדגמה ללא חשבון' }).click();
-  await expect(page).toHaveURL(/\/app$/);
+  await page.getByRole('link', { name: 'לצפייה במשרות' }).click();
+  await expect(page).toHaveURL(/\/app\/jobs$/);
 });
 
 test('Google/Apple boundary mocks show unavailable/failure states without claiming real OAuth', async ({
