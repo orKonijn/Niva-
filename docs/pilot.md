@@ -63,3 +63,13 @@ A direct, unmocked feed check at 09:40 UTC returned **22 Israeli listings**. The
 | ------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------ |
 | Pilot sign-in                                                      | [Screenshot](screenshots/pilot/pilot-login-desktop.png)       | [Screenshot](screenshots/pilot/pilot-login-mobile.png)       |
 | Preferences                                                        | [Screenshot](screenshots/pilot/pilot-preferences-desktop.png) | [Screenshot](screenshots/pilot/pilot-preferences-mobile.png) |
+
+## Deployed verification — 24 October 2026
+
+The pilot is deployed at [the existing Niva URL](https://niva-demo-ziv-20261023.ork77.chatgpt.site/app/jobs?source=real). The Site's owner-only audience is unchanged. Live D1 inspection confirmed all four migration-owned tables under binding `DB`.
+
+After the first hosted check exposed a stylesheet activation script blocked by CSP, production CSS was changed to load directly. `scripts/check-production-html.mjs` now rejects inline script/style-activation dependencies, and a browser regression exercises the actual script CSP. **20 focused pilot browser checks passed** across desktop/mobile Chromium, Firefox and WebKit after that fix. The security policy was retained. GitHub CI passed for the implementation and CSP fix.
+
+The real, authenticated hosted journey was then checked in the in-app browser: ChatGPT sign-in, profile save/reload, category/district preference save/reload, fetching 22 real jobs, saving one real job, retrieving it after reload and after sign-out/sign-in, original employer link/details, and the live approximate-city map in light/dark themes. Temporary profile/preferences/saved-job test changes were restored; no existing data was deleted. The default System theme was restored. No Niva-origin browser error messages or Worker errors were recorded during the final check. This is one actual authenticated browser session; cross-user isolation and independent-device coverage remain automated rather than a second live human identity.
+
+Live screenshots: [saved-job view](screenshots/pilot/live-saved-job.png), [dark map](screenshots/pilot/live-map-dark.png), [light map](screenshots/pilot/live-map-light.png). These use actual hosted data and live OSM tiles, unlike the fixture screenshots above. No application was submitted.
