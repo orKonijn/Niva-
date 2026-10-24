@@ -11,9 +11,9 @@
     <div
       class="header-actions flex gap-[24px] items-center max-[1200px]:gap-[15px] max-[768px]:gap-[9px]"
     >
-      <a routerLink="/app" class="login-link text-[13px] text-muted">לסביבת ההדגמה</a
+      <a routerLink="/login" class="login-link text-[13px] text-muted">כניסה לחשבון</a
       ><a
-        routerLink="/signup"
+        routerLink="/login"
         class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
         >בואו נתחיל <niva-icon name="arrow" /></a
       ><button
@@ -40,16 +40,16 @@
         <p
           class="hero-description text-[18px] max-w-[475px] leading-[1.85] max-[1200px]:text-[16px] max-[768px]:text-[15px] max-[768px]:leading-[1.95] max-[768px]:mx-auto max-[768px]:max-w-[460px]"
         >
-          הצעד הבא בקריירה שלך לא צריך להיות עבודה במשרה מלאה. מכירים אותך, מוצאים התאמות, ומתקדמים
-          יחד — בקצב שלך.
+          הצעד הבא בקריירה שלך לא צריך להיות עבודה במשרה מלאה. מגדירים מה חשוב לך, מגלים משרות
+          מהמקור ושומרים את ההזדמנויות שמתאימות לכיוון שלך.
         </p>
         <div
           class="hero-actions flex gap-[24px] items-center mt-[29px] max-[1200px]:gap-[15px] max-[901px]:flex-wrap max-[768px]:justify-center max-[768px]:gap-[20px] max-[768px]:mt-[24px]"
         >
           <a
             class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
-            routerLink="/signup"
-            >מתחילים עם קורות החיים <niva-icon name="arrow" /></a
+            routerLink="/login"
+            >מתחילים לחפש עבודה <niva-icon name="arrow" /></a
           ><a
             href="#how-it-works"
             class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
@@ -60,17 +60,17 @@
           >
         </div>
         <p class="hero-demo-disclosure text-muted">
-          הדגמה עם משרות לדוגמה. קורות חיים אינם מעובדים ולא נשלחות מועמדויות.
+          משרות ממקור מעסיק ושמירה בחשבון. מגישים מועמדות באתר המקור; קורות חיים אינם מועלים ל־Niva.
           <a
             routerLink="/app/jobs"
             class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
-            >לגלות משרות לדוגמה</a
+            >לכל המשרות</a
           >
         </p>
         <div
           class="hero-reassurance mt-[22px] max-[901px]:flex-wrap max-[768px]:justify-center max-[768px]:mt-[20px]"
         >
-          <span><niva-icon name="check" /> כל הגשה באישור שלך</span
+          <span><niva-icon name="check" /> הגשה באתר המקור</span
           ><span><niva-icon name="check" /> הפרטים שלך בשליטתך</span>
         </div>
       </div>
@@ -154,7 +154,7 @@
             ><niva-icon name="upload"
           /></span>
           <h3>מכירים אותך</h3>
-          <p>מוסיפים קורות חיים, בודקים את הפרטים ומספרים לנו מה הצעד הבא שמעניין אותך.</p>
+          <p>נכנסים לחשבון ומוסיפים שם וכותרת מקצועית. ההעדפות והמשרות השמורות נשארות איתך.</p>
           <span
             class="step-note block pt-[20px] text-[12px] text-muted max-[901px]:text-[12px] max-[768px]:text-[12px] max-[768px]:pt-[16px]"
             >הניסיון שלך הוא נקודת ההתחלה</span
@@ -184,7 +184,7 @@
             ><niva-icon name="check"
           /></span>
           <h3>מתקדמים בשליטה</h3>
-          <p>בודקים כל משרה וכל פרט, מאשרים את הבחירה ועוקבים אחרי מה שקורה במקום אחד.</p>
+          <p>בודקים את פרטי המשרה, שומרים מה שמעניין ופותחים את אתר המקור להגשה.</p>
           <span
             class="step-note block pt-[20px] text-[12px] text-muted max-[901px]:text-[12px] max-[768px]:text-[12px] max-[768px]:pt-[16px]"
             >שום צעד משמעותי בלי הבחירה שלך</span
@@ -204,9 +204,9 @@
         >
           <span class="window-dots text-muted tracking-[2px] text-[12px]">● ● ●</span
           ><span>ההזדמנויות שלך</span
-          ><span class="tiny-badge text-[12px] bg-pale p-[3px_6px] rounded-[4px] text-muted"
-            >תצוגה לדוגמה</span
-          >
+          ><span class="tiny-badge text-[12px] bg-pale p-[3px_6px] rounded-[4px] text-muted">{{
+            session.config().realJobs ? 'משרות מהמקור' : 'תצוגה להמחשה'
+          }}</span>
         </div>
         <div
           class="preview-body p-[29px_23px_10px] bg-pale max-[901px]:p-[22px_15px_10px] max-[768px]:p-[25px_20px_12px]"
@@ -218,20 +218,14 @@
             <h3>יש דברים טובים באופק.</h3>
             <p>כל המשרות, כל ההחלטות. במקום אחד.</p>
           </div>
-          @for (
-            job of [
-              { name: 'Product Designer', company: 'Forma Studio', initial: 'f', color: 'purple' },
-              { name: 'Frontend Engineer', company: 'Orbit', initial: 'o', color: 'green' },
-            ];
-            track job.name
-          ) {
+          @for (job of store.eligibleJobs().slice(0, 2); track job.id) {
             <div
               class="preview-job items-center gap-[12px] bg-surface p-[17px_15px] max-[901px]:p-[14px_10px] max-[768px]:p-[16px_12px]"
             >
-              <span [class]="'company-avatar ' + job.color">{{ job.initial }}</span>
+              <span class="company-avatar purple">{{ job.initials }}</span>
               <div>
-                <strong dir="ltr">{{ job.name }}</strong
-                ><small>{{ job.company }} · היברידי</small>
+                <strong dir="auto">{{ job.title }}</strong
+                ><small>{{ job.company }} · {{ job.source ? 'מהמקור' : 'להמחשה בלבד' }}</small>
               </div>
               <span
                 class="status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium"
@@ -240,9 +234,9 @@
             </div>
           }
           <a
-            routerLink="/app"
+            routerLink="/app/jobs"
             class="preview-bottom flex justify-center items-center gap-[9px] my-[22px_10px] text-[12px] text-brand"
-            >לגלות את סביבת ההדגמה <niva-icon name="arrow"
+            >לכל המשרות <niva-icon name="arrow"
           /></a>
         </div>
       </div>
@@ -250,7 +244,7 @@
         <span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
           >יותר שקט בתהליך</span
         >
-        <h2>עוזרת חכמה.<br />ההחלטה נשארת שלך.</h2>
+        <h2>חיפוש ממוקד.<br />ההחלטה נשארת שלך.</h2>
         <p>
           חיפוש עבודה הוא אישי. גם הדרך שלך אליו צריכה להיות כזו. Niva מרכזת את הפרטים, ואת הבחירות
           החשובות משאירה בידיים שלך.
@@ -262,7 +256,7 @@
             /></span>
             <div>
               <strong>רואים לפני שמתקדמים</strong>
-              <p>משרה, קורות חיים ותשובות — הכול ברור לפני האישור.</p>
+              <p>תיאור המשרה, מועד העדכון וקישור ההגשה — לפני המעבר לאתר המעסיק.</p>
             </div>
           </li>
           <li>
@@ -271,16 +265,16 @@
             /></span>
             <div>
               <strong>מתאים לחיים שלך</strong>
-              <p>מיקום, היברידי או מרחוק, ואפילו חברות שלא תרצו לראות.</p>
+              <p>תחום, מחוז, סגנון עבודה כשהוא נמסר במקור וחברות שלא תרצו לראות.</p>
             </div>
           </li>
           <li>
             <span class="round-icon items-center justify-center shrink-[0]"
-              ><niva-icon name="pause"
+              ><niva-icon name="settings"
             /></span>
             <div>
-              <strong>תמיד אפשר לעצור</strong>
-              <p>השהיה, שינוי כיוון או התחלה חדשה. בקצב שנכון לך.</p>
+              <strong>הבחירות נשארות שלך</strong>
+              <p>מעדכנים העדפות ומנהלים משרות שמורות מתוך החשבון. בקצב שנכון לך.</p>
             </div>
           </li>
         </ul>
@@ -317,9 +311,9 @@
       <p>בואו להכיר דרך נעימה יותר לחפש עבודה.</p>
       <a
         class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
-        routerLink="/signup"
+        routerLink="/login"
         >מתחילים את הדרך <niva-icon name="arrow" /></a
-      ><small>גרסת הדגמה אינטראקטיבית · ללא שליחת מועמדויות</small>
+      ><small>משרות מהמקור · שמירה בחשבון · הגשה באתר המעסיק</small>
     </section>
   </main>
   <footer
@@ -330,7 +324,7 @@
       <p>יותר מקום לצעד הבא שלך.</p>
     </div>
     <nav aria-label="קישורים נוספים">
-      <a routerLink="/privacy">פרטיות</a><a routerLink="/terms">תנאי ההדגמה</a
+      <a routerLink="/privacy">פרטיות</a><a routerLink="/terms">תנאי השימוש</a
       ><a routerLink="/accessibility">נגישות</a
       ><button class="plain-button p-[8px_0] text-muted" (click)="cookies.reopen()">
         העדפות עוגיות

@@ -16,7 +16,10 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: npm run typecheck:tests
+      - run: npm run typecheck:server
+      - run: npm run typecheck:e2e
       - run: npm test
+      - run: npm run test:server
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e

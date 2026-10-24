@@ -1,0 +1,200 @@
+<div class="min-h-screen bg-canvas px-5 py-8">
+  <header class="mx-auto flex max-w-5xl items-center justify-between gap-4">
+    <niva-brand /><a class="text-sm text-brand" routerLink="/app/jobs">לצפייה במשרות</a>
+  </header>
+  <main
+    id="main"
+    tabindex="-1"
+    class="mx-auto mt-12 max-w-[480px] rounded-card border border-line bg-surface p-6 shadow-card sm:p-10"
+  >
+    <p class="mb-2 text-sm font-medium text-brand">הצעד הבא שלך, גם במכשיר הבא</p>
+    <h1 class="mb-4 text-3xl">
+      {{ session.config().platform === 'sites' ? 'החשבון שלך ב־Niva' : heading() }}
+    </h1>
+    <p class="text-sm">
+      הפרופיל, ההעדפות והמשרות השמורות נשמרים בחשבון שלך. קורות חיים אינם מועלים ל־Niva.
+    </p>
+    @if (session.config().platform === 'sites') {
+      <section
+        class="my-6 rounded-control border border-line bg-pale p-4"
+        aria-label="כניסה מאובטחת"
+      >
+        <h2 class="mb-2 text-lg">נכנסים וממשיכים מהיכן שעצרת</h2>
+        <p class="text-sm">
+          כניסה מאובטחת דרך ChatGPT שומרת את הפרופיל, ההעדפות והמשרות בחשבון. אין צורך בסיסמה נוספת.
+        </p>
+        @if (session.user()) {
+          <a class="account-button account-primary w-full" [routerLink]="returnTo"
+            >המשך לחשבון שלי</a
+          >
+        } @else {
+          <a class="account-button account-primary w-full" [href]="platformSignIn" target="_top"
+            >המשך עם ChatGPT</a
+          >
+        }
+        <p class="mt-3 mb-0 text-xs">ההתחברות מנוהלת דרך ChatGPT. אין צורך בסיסמה נפרדת ל־Niva.</p>
+      </section>
+    }
+    @if (session.config().platform !== 'sites' && (mode() === 'login' || mode() === 'register')) {
+      <div class="my-6 grid gap-3">
+        <button
+          type="button"
+          class="account-button gap-2"
+          [disabled]="busy() || !session.config().google"
+          (click)="social('google')"
+        >
+          <niva-provider-logo provider="google" />המשך עם Google
+        </button>
+        <button
+          type="button"
+          class="account-button gap-2"
+          [disabled]="busy() || !session.config().apple"
+          (click)="social('apple')"
+        >
+          <niva-provider-logo provider="apple" />המשך עם Apple
+        </button>
+      </div>
+      @if (!session.config().google || !session.config().apple) {
+        <p class="text-xs">
+          ספקים מושבתים עד להגדרת המפתחות בשרת. אין לבקש או להזין כאן את סיסמת Google או Apple.
+        </p>
+      }
+      <p class="text-center text-xs">או באמצעות דוא״ל וסיסמה נפרדת ל־Niva, גם עם כתובת Gmail</p>
+    }
+    @if (session.config().platform !== 'sites') {
+      @if (!session.loading() && !session.config().accounts) {
+        <p class="rounded-control bg-warning-soft p-4 text-sm" role="status">
+          זו גרסת תצוגה ללא שרת חשבונות פעיל. התחברות ושמירה בחשבון אינן זמינות כאן עדיין. אפשר
+          להמשיך בהדגמה; הנתונים בה נשמרים במכשיר הזה בלבד.
+        </p>
+      } @else if (!session.config().email) {
+        <p class="rounded-control bg-warning-soft p-4 text-sm" role="status">
+          דוא״ל טרם הוגדר בשרת. הרשמה, כניסה ואיפוס סיסמה אינם זמינים כאן עדיין.
+        </p>
+      }
+      @if (session.config().emailDelivery === 'local-outbox') {
+        <p role="note" class="rounded-control bg-pale p-4 text-sm">
+          תצורת בדיקה מקומית: הודעות אימות ואיפוס נשמרות בתיבת בדיקה בשרת ואינן נשלחות בדוא״ל.
+        </p>
+      }
+      <form #authForm="ngForm" (ngSubmit)="submit(authForm)" class="niva-form" novalidate>
+        <fieldset
+          class="grid min-w-0 gap-4 border-0 p-0"
+          [disabled]="busy() || !session.config().email"
+        >
+          @if (mode() === 'register') {
+            <label
+              >שם להצגה <span class="text-xs text-muted">(חובה)</span
+              ><input
+                #nameField="ngModel"
+                [attr.aria-invalid]="nameField.invalid && (nameField.touched || authForm.submitted)"
+                aria-describedby="name-validation"
+                name="name"
+                [(ngModel)]="name"
+                autocomplete="name"
+                maxlength="50"
+                required
+            /></label>
+            @if (nameField.invalid && (nameField.touched || authForm.submitted)) {
+              <p id="name-validation" class="field-error">יש להזין שם להצגה, עד 50 תווים.</p>
+            }
+          }
+          @if (mode() !== 'reset') {
+            <label
+              >כתובת דוא״ל <span class="text-xs text-muted">(חובה)</span
+              ><input
+                #emailField="ngModel"
+                email
+                [attr.aria-invalid]="
+                  emailField.invalid && (emailField.touched || authForm.submitted)
+                "
+                aria-describedby="email-validation"
+                name="email"
+                [(ngModel)]="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                dir="ltr"
+                maxlength="254"
+                required
+            /></label>
+            @if (emailField.invalid && (emailField.touched || authForm.submitted)) {
+              <p id="email-validation" class="field-error">
+                יש להזין כתובת תקינה, למשל name@example.com.
+              </p>
+            }
+          }
+          @if (mode() !== 'forgot') {
+            <div>
+              <label for="account-password"
+                >סיסמה ל־Niva <span class="text-xs text-muted">(חובה)</span></label
+              >
+              <div class="flex items-center gap-2">
+                <input
+                  id="account-password"
+                  aria-label="סיסמה ל־Niva"
+                  #passwordField="ngModel"
+                  [attr.aria-invalid]="
+                    passwordField.invalid && (passwordField.touched || authForm.submitted)
+                  "
+                  name="password"
+                  [(ngModel)]="password"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  [autocomplete]="mode() === 'login' ? 'current-password' : 'new-password'"
+                  dir="ltr"
+                  minlength="12"
+                  maxlength="128"
+                  required
+                  aria-describedby="password-help"
+                /><button
+                  type="button"
+                  class="account-button shrink-0"
+                  [attr.aria-pressed]="showPassword()"
+                  (click)="showPassword.set(!showPassword())"
+                >
+                  {{ showPassword() ? 'הסתרה' : 'הצגה' }}
+                </button>
+              </div>
+              <p id="password-help" class="mb-0 mt-2 text-xs">
+                12–128 תווים. סיסמה ייעודית לחשבון Niva.
+              </p>
+              @if (passwordField.invalid && (passwordField.touched || authForm.submitted)) {
+                <p class="field-error">נדרשת סיסמה באורך 12–128 תווים.</p>
+              }
+            </div>
+          }
+          <button type="submit" class="account-button account-primary">
+            {{
+              busy()
+                ? 'רגע, מטפלים בבקשה…'
+                : mode() === 'login'
+                  ? 'כניסה לחשבון'
+                  : mode() === 'register'
+                    ? 'יצירת חשבון'
+                    : mode() === 'forgot'
+                      ? 'שליחת הוראות איפוס'
+                      : 'שמירת סיסמה חדשה'
+            }}
+          </button>
+        </fieldset>
+      </form>
+    }
+    @if (error()) {
+      <p class="mt-4 rounded-control bg-error-soft p-4 text-sm text-error" role="alert">
+        {{ error() }}
+      </p>
+    }
+    @if (message()) {
+      <p class="mt-4 rounded-control bg-success-soft p-4 text-sm text-success" role="status">
+        {{ message() }}
+      </p>
+    }
+    <nav aria-label="אפשרויות חשבון" class="mt-6 flex flex-wrap gap-5 text-sm text-brand">
+      @if (session.config().platform !== 'sites') {
+        <a routerLink="/login">כניסה</a><a routerLink="/register">יצירת חשבון</a
+        ><a routerLink="/forgot-password">שכחתי סיסמה</a>
+      }
+      <a routerLink="/privacy">פרטיות</a>
+    </nav>
+  </main>
+</div>

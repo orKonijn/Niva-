@@ -1,4 +1,7 @@
 <div class="form-grid grid">
+  <p class="field-note col-span-full">
+    כל הבחירות הן רשות. ללא סינון מוצגות כל האפשרויות; החרגות חברות הן אישיות.
+  </p>
   <label
     >תחום שמעניין אותך<select
       name="role"
@@ -35,6 +38,9 @@
       [ngModelOptions]="{ standalone: true }"
       [ngModel]="draft().exclusions"
       (ngModelChange)="setExclusions($event)"
-    /><small>למשל: החברה הנוכחית שלך. נשמר רק במכשיר הזה.</small></label
+    /><small
+      >למשל: החברה הנוכחית שלך.
+      {{ accountOwned() ? 'נשמר בחשבון שלך.' : 'נשמר רק במכשיר הזה.' }}</small
+    ></label
   >
 </div>

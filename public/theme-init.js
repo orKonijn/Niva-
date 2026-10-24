@@ -7,6 +7,11 @@
   } catch {
     /* System theme is still usable when persistence is blocked. */
   }
+  const accountTheme = document
+    .querySelector('meta[name="niva-account-theme"]')
+    ?.getAttribute('content');
+  if (accountTheme === 'light' || accountTheme === 'dark' || accountTheme === 'system')
+    preference = accountTheme;
   const resolved =
     preference === 'system'
       ? matchMedia('(prefers-color-scheme: dark)').matches

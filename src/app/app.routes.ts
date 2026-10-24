@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { accountGuard } from './core/account-guard';
+import { unsavedGuard } from './core/unsaved';
 
 export const routes: Routes = [
   {
@@ -11,7 +13,36 @@ export const routes: Routes = [
     title: 'מתחילים עם Niva',
     loadComponent: () => import('./pages/onboarding').then((m) => m.Onboarding),
   },
-  { path: 'login', redirectTo: 'signup', pathMatch: 'full' },
+  {
+    path: 'login',
+    title: 'כניסה לחשבון — Niva',
+    data: { mode: 'login' },
+    loadComponent: () => import('./pages/auth').then((m) => m.AuthPage),
+  },
+  {
+    path: 'register',
+    title: 'יצירת חשבון — Niva',
+    data: { mode: 'register' },
+    loadComponent: () => import('./pages/auth').then((m) => m.AuthPage),
+  },
+  {
+    path: 'forgot-password',
+    title: 'איפוס סיסמה — Niva',
+    data: { mode: 'forgot' },
+    loadComponent: () => import('./pages/auth').then((m) => m.AuthPage),
+  },
+  {
+    path: 'reset-password',
+    title: 'סיסמה חדשה — Niva',
+    data: { mode: 'reset' },
+    loadComponent: () => import('./pages/auth').then((m) => m.AuthPage),
+  },
+  {
+    path: 'account',
+    title: 'החשבון שלי — Niva',
+    canActivate: [accountGuard],
+    loadComponent: () => import('./pages/account').then((m) => m.AccountPage),
+  },
   {
     path: 'app',
     loadComponent: () => import('./pages/workspace').then((m) => m.Workspace),
@@ -39,11 +70,13 @@ export const routes: Routes = [
       },
       {
         path: 'preferences',
+        canDeactivate: [unsavedGuard],
         title: 'ההעדפות שלך — Niva',
         loadComponent: () => import('./pages/preferences').then((m) => m.PreferencesPage),
       },
       {
         path: 'profile',
+        canDeactivate: [unsavedGuard],
         title: 'הפרופיל שלך — Niva',
         loadComponent: () => import('./pages/profile').then((m) => m.Profile),
       },
@@ -56,7 +89,7 @@ export const routes: Routes = [
   },
   {
     path: 'terms',
-    title: 'תנאי הדגמה — Niva',
+    title: 'תנאי השימוש — Niva',
     loadComponent: () => import('./pages/information').then((m) => m.Information),
   },
   {

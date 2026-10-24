@@ -4,16 +4,22 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build && node scripts/write-build-info.mjs",
+    "start": "ng serve --host 127.0.0.1 --proxy-config proxy.conf.json",
+    "build": "ng build && node scripts/write-build-info.mjs && node scripts/check-production-html.mjs && node scripts/build-worker.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "preview": "node scripts/serve.mjs",
-    "format": "prettier --write src scripts tests *.json *.ts README.md docs/implementation.md .github/workflows/ci.yml",
-    "format:check": "prettier --check src scripts tests *.json *.ts README.md docs/implementation.md .github/workflows/ci.yml",
-    "typecheck:tests": "tsc --project tsconfig.spec.json --noEmit"
+    "preview": "tsx server/migrate.ts && tsx server/index.ts",
+    "format": "prettier --write src server scripts tests public/theme-init.js *.json *.ts README.md docs/implementation.md docs/accounts-map.md .github/workflows/ci.yml db drizzle/meta/*.json docs/pilot.md",
+    "format:check": "prettier --check src server scripts tests public/theme-init.js *.json *.ts README.md docs/implementation.md docs/accounts-map.md .github/workflows/ci.yml db drizzle/meta/*.json docs/pilot.md",
+    "typecheck:tests": "tsc --project tsconfig.spec.json --noEmit",
+    "db:migrate": "tsx server/migrate.ts",
+    "api": "tsx server/index.ts",
+    "test:server": "vitest run --config vitest.server.config.ts",
+    "typecheck:server": "tsc --project tsconfig.server.json --noEmit",
+    "typecheck:e2e": "tsc --project tsconfig.e2e.json --noEmit",
+    "db:generate": "drizzle-kit generate"
   },
   "private": true,
   "packageManager": "npm@11.17.0",
@@ -21,7 +27,10 @@
     "node": ">=24.15.0 <25"
   },
   "overrides": {
-    "vite": "^8.3.5"
+    "vite": "^8.3.5",
+    "@esbuild-kit/core-utils": {
+      "esbuild": "^0.28.2"
+    }
   },
   "dependencies": {
     "@angular/common": "^22.2.0",
@@ -31,6 +40,12 @@
     "@angular/platform-browser": "^22.2.0",
     "@angular/router": "^22.2.0",
     "@fontsource/heebo": "^5.3.0",
+    "@hono/node-server": "^2.1.5",
+    "better-auth": "^1.7.12",
+    "drizzle-orm": "^0.45.4",
+    "hono": "^4.13.13",
+    "leaflet": "^1.9.4",
+    "nodemailer": "^10.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -39,12 +54,20 @@
     "@angular/cli": "^22.2.4",
     "@angular/compiler-cli": "^22.2.0",
     "@axe-core/playwright": "^4.14.0",
+    "@cloudflare/workers-types": "^5.20261023.1",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.19.2",
+    "@types/nodemailer": "^8.0.2",
+    "drizzle-kit": "^0.31.11",
+    "esbuild": "^0.28.2",
+    "jose": "^6.2.13",
     "jsdom": "^30.1.3",
     "postcss": "^8.5.31",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vitest": "^5.0.5"
   }

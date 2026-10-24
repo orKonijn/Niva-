@@ -11,14 +11,16 @@
     </h1>
     <p>הצעד הבא שלך מתחיל בדיוק כאן.</p>
   </div>
-  <button
-    class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
-    (click)="store.togglePause()"
-  >
-    <niva-icon [name]="store.paused() ? 'play' : 'pause'" />{{
-      store.paused() ? 'חידוש הפעילות' : 'השהיית פעילות'
-    }}
-  </button>
+  @if (store.catalogMode() === 'demo') {
+    <button
+      class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+      (click)="store.togglePause()"
+    >
+      <niva-icon [name]="store.paused() ? 'play' : 'pause'" />{{
+        store.paused() ? 'חידוש הפעילות' : 'השהיית פעילות'
+      }}
+    </button>
+  }
 </div>
 <section
   class="welcome-panel items-center justify-between bg-pale p-[29px_32px] overflow-hidden gap-[20px] max-[1200px]:p-[25px] max-[768px]:p-[25px_22px]"
@@ -45,7 +47,7 @@
     ><span class="round-icon items-center justify-center shrink-[0] blue"
       ><niva-icon name="search" /></span
     ><span>משרות לפי ההעדפות</span><strong>{{ store.eligibleJobs().length }}</strong
-    ><small>מתוך מאגר ההדגמה</small></a
+    ><small>{{ store.catalogMode() === 'real' ? 'ממקור המעסיק' : 'מתוך מאגר ההדגמה' }}</small></a
   ><a
     routerLink="/app/jobs"
     [queryParams]="{ saved: 'true' }"
@@ -54,17 +56,33 @@
       ><niva-icon name="heart" /></span
     ><span>משרות ששמרת</span><strong>{{ store.visibleSavedJobs().length }}</strong
     ><small>מוצגות לאחר החרגות חברות</small></a
-  ><a routerLink="/app/applications" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
-    ><span class="round-icon items-center justify-center shrink-[0] green"
-      ><niva-icon name="check" /></span
-    ><span>אושרו בהדגמה</span><strong>{{ store.applications().length }}</strong
-    ><small>לא נשלחו למעסיקים</small></a
   >
+  @if (store.catalogMode() === 'real') {
+    <a routerLink="/app/profile" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+      ><span class="round-icon items-center justify-center shrink-[0] green"
+        ><niva-icon name="document" /></span
+      ><span>הפרופיל וההעדפות</span><strong>הכיוון שלך</strong
+      ><small>ניהול הפרטים והבחירות</small></a
+    >
+  } @else {
+    <a routerLink="/app/applications" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+      ><span class="round-icon items-center justify-center shrink-[0] green"
+        ><niva-icon name="check" /></span
+      ><span>אושרו בהדגמה</span><strong>{{ store.applications().length }}</strong
+      ><small>לא נשלחו למעסיקים</small></a
+    >
+  }
 </section>
 <div class="section-row flex items-center justify-between gap-[20px]">
   <div>
     <h2>אולי כאן מתחיל הפרק הבא</h2>
-    <p>משרות לדוגמה לפי ההעדפות שבחרת</p>
+    <p>
+      {{
+        store.catalogMode() === 'real'
+          ? 'משרות מהמקור לפי ההעדפות שבחרת'
+          : 'משרות לדוגמה לפי ההעדפות שבחרת'
+      }}
+    </p>
   </div>
   <a
     routerLink="/app/jobs"
@@ -83,7 +101,9 @@
     >
       <niva-icon name="search" />
       <h3>נרחיב קצת את האופק?</h3>
-      <p>אין משרות לדוגמה שמתאימות לכל ההעדפות הנוכחיות.</p>
+      <p>
+        אין משרות שמתאימות לכל ההעדפות הנוכחיות. אפשר לשנות סינון או לבדוק את מצב המקור במסך המשרות.
+      </p>
       <a
         routerLink="/app/preferences"
         class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"

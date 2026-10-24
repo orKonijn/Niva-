@@ -4,7 +4,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { Icon } from '../shared/icon';
-import { DemoStore } from '../core/demo-store';
+import { AppStore } from '../core/app-store';
 @Component({
   imports: [NgTemplateOutlet, RouterOutlet, RouterLink, RouterLinkActive, Brand, Icon],
   templateUrl: './workspace.html',
@@ -12,7 +12,7 @@ import { DemoStore } from '../core/demo-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Workspace {
-  readonly store = inject(DemoStore);
+  readonly store = inject(AppStore);
   readonly menu = signal(false);
   readonly drawer = viewChild.required<ElementRef<HTMLDialogElement>>('drawer');
   private trigger: HTMLElement | null = null;
