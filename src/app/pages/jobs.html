@@ -62,18 +62,21 @@
   }
 </section>
 <div
-  class="filter-panel flex items-center gap-[20px] bg-surface p-[20px] rounded-[16px] max-[901px]:items-stretch max-[901px]:flex-col max-[768px]:p-[15px] flex-wrap"
+  class="filter-panel grid grid-cols-[minmax(0,1.35fr)_repeat(2,minmax(0,1fr))] items-start gap-5 bg-surface p-5 rounded-[16px] max-[901px]:grid-cols-1 max-[768px]:p-[15px]"
 >
-  <div class="search-input flex items-center gap-[12px] text-muted">
-    <niva-icon name="search" /><input
-      aria-label="חיפוש תפקיד או חברה"
-      placeholder="איזה תפקיד או חברה מעניינים אותך?"
-      [ngModel]="query()"
-      (ngModelChange)="setFilter({ q: $event || null }, true)"
-    />
-  </div>
-  <label class="filter-label flex flex-row items-center gap-[12px] max-[901px]:justify-between"
-    >מחוז במסך<select
+  <label class="filter-label"
+    ><span>חיפוש תפקיד או חברה</span
+    ><span class="search-input flex items-center gap-[12px] text-muted">
+      <niva-icon name="search" /><input
+        aria-label="חיפוש תפקיד או חברה"
+        placeholder="איזה תפקיד או חברה מעניינים אותך?"
+        [ngModel]="query()"
+        (ngModelChange)="setFilter({ q: $event || null }, true)"
+      /> </span
+  ></label>
+  <label class="filter-label"
+    ><span>מחוז במסך</span
+    ><select
       [ngModel]="district()"
       (ngModelChange)="setFilter({ district: $event === 'all' ? null : $event })"
     >
@@ -83,8 +86,9 @@
       }
     </select></label
   >
-  <label class="filter-label flex flex-row items-center gap-[12px] max-[901px]:justify-between"
-    >תחום במסך<select
+  <label class="filter-label"
+    ><span>תחום במסך</span
+    ><select
       [ngModel]="category()"
       (ngModelChange)="setFilter({ category: $event === 'all' ? null : $event })"
     >
