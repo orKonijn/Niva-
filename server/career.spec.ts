@@ -3,7 +3,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { sqliteCareerDb } from './career-db';
 import { createCareer, type CareerEnvironment, validUpload } from './career';
-import { discoveryPage, ingest, normalizeLever, SOURCES } from './discovery';
+import { discoveryPage, ingest, importLegacyJobs, normalizeLever, SOURCES } from './discovery';
 import { emptyAccountState } from '../src/app/core/models/account-state';
 import { defaultPreferences } from '../src/app/core/preferences';
 import type { ResumeVersion } from '../src/app/core/models/career';
@@ -71,7 +71,7 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
-  it('migrates historical hosted job snapshots without losing closed saved-job data', () => {
+  it('migrates historical hosted job snapshots without losing closed saved-job data', async () => {
     const old = new DatabaseSync(':memory:');
     try {
       old.exec(readFileSync('drizzle/0000_solid_valkyrie.sql', 'utf8'));
@@ -80,6 +80,7 @@ describe('durable discovery', () => {
         .prepare('INSERT INTO niva_pilot_jobs(id,data,active) VALUES(?,?,0)')
         .run(job.id, JSON.stringify(job));
       old.exec(readFileSync('drizzle/0001_charming_peter_parker.sql', 'utf8'));
+      await importLegacyJobs(sqliteCareerDb(old));
       const row = old.prepare('SELECT data,active FROM niva_jobs WHERE id=?').get(job.id)!;
       expect(row['active']).toBe(0);
       expect(JSON.parse(String(row['data'])).source.applicationUrl).toBe(

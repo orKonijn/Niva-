@@ -92,8 +92,8 @@ See [implementation evidence](docs/repair-verification.md) for F01–F13 status,
 
 Niva now includes 11 fictional jobs across nine professional fields and all six Israeli districts, shared multi-style checkboxes, and a persistent Light/Dark/System theme control. Older city and single-style preferences migrate without clearing demo records. See [behavior, migration and verification](docs/preferences-and-themes.md).
 
-## Career extension (local, not yet deployed)
+## Career extension
 
 The local implementation adds two-source durable discovery with cursor pagination, explicit refresh and source health; versioned, candidate-confirmed resume text and extractive tailoring; explainable terminology matching; and an optional server-side streaming career assistant. PDF/DOCX uploads fail closed until a real scanning/parsing service is configured. AI sending remains unavailable without a server API key and explicit model. No new paid services or hosted schedule have been activated.
 
-See [career-assistant.md](docs/career-assistant.md) for trying each workflow, configuration placeholders, source coverage/cadence, retention/deletion, scoring methodology, provider limitations and screenshots. This task explicitly prohibits pushing/deploying; the live Site remains unchanged.
+See [career-assistant.md](docs/career-assistant.md) for trying each workflow, configuration placeholders, source coverage/cadence, retention/deletion, scoring methodology, provider limitations and screenshots. Publication was subsequently authorized. Runtime AI/scanning credentials and hosted scheduling remain separate setup requirements.

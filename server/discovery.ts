@@ -141,7 +141,22 @@ export async function boundedJson(response: Response, maximum = 4_000_000): Prom
   }
   return JSON.parse(new TextDecoder().decode(buffer));
 }
+export async function importLegacyJobs(db: CareerDb): Promise<void> {
+  if (
+    !(await db.all("SELECT name FROM sqlite_master WHERE type='table' AND name='niva_pilot_jobs'"))
+      .length
+  )
+    return;
+  await db.run(`INSERT INTO niva_jobs(id,source_id,canonical,company,title,district,category,style,search,active,version,data)
+    SELECT id,'greenhouse-appsflyer',json_extract(data,'$.source.applicationUrl'),lower(json_extract(data,'$.company')),lower(json_extract(data,'$.title')),
+    coalesce(json_extract(data,'$.district'),'unknown'),coalesce(json_extract(data,'$.category'),'other'),coalesce(json_extract(data,'$.workStyle'),'unknown'),
+    lower(json_extract(data,'$.title') || ' ' || json_extract(data,'$.company')),active,coalesce(json_extract(data,'$.source.version'),'legacy-' || id),data
+    FROM niva_pilot_jobs WHERE json_valid(data) AND json_extract(data,'$.source.applicationUrl') IS NOT NULL
+    AND json_extract(data,'$.title') IS NOT NULL AND json_extract(data,'$.company') IS NOT NULL LIMIT 1000 ON CONFLICT(id) DO NOTHING`);
+}
 export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
+  // Bounded historical data import is an ingestion operation, never a schema migration.
+  await importLegacyJobs(db);
   for (const source of SOURCES) {
     await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
     const lease = await db.all(

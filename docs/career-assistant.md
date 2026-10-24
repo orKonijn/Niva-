@@ -1,6 +1,6 @@
 # Career assistant extension — local implementation and handoff
 
-This change is local only. It has **not been pushed or deployed**. Existing Sites identity, Site ID, audience, account preferences, saved jobs, approval history, employer exclusions, themes and maps are retained. No paid plan, provider key, scheduler or hosting access was activated.
+The implementation was verified locally and publication was subsequently authorized. Existing Sites identity, Site ID, audience, account preferences, saved jobs, approval history, employer exclusions, themes and maps are retained. No paid plan, provider key, scanner or scheduler was activated by publication.
 
 ## Try it
 
@@ -108,3 +108,5 @@ Operational costs are model token usage plus storage/Worker/ingestion and scanni
 ### Recorded results
 
 The final verification passed 42 frontend unit tests, 31 server tests, and the complete 184-case Chromium desktop/mobile, Firefox and WebKit browser suite. After the last avatar/theme-transition contrast repair, 48 affected feed/card/chat/resume/CSP browser checks passed again, including both-theme axe checks. Server/test/e2e type checking, formatting, whitespace checks and production build passed. The real local account browser journey verifies resume review, activation, reload persistence and account-data deletion through the actual Node/SQLite backend. D1 adapter tests exercise the same operations using the existing SQLite-backed D1 test harness. See [career-checks.json](verification/career-checks.json). Browser screenshots are fixtures as described above; real AI/scanning and a hosted schedule remain unverified.
+
+Historical hosted snapshots are copied by a bounded, idempotent ingestion operation (up to 1,000 legacy records). Hosted schema migrations contain schema changes only.
