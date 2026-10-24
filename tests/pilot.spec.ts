@@ -41,6 +41,38 @@ const job = {
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('niva.cookie-choice', 'necessary'));
 });
+test('production layout loads under the hosted script CSP without inline stylesheet activation', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.route('**/api/jobs', (r) =>
+    r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
+  );
+  await page.route('**/app/jobs?source=real', async (route) => {
+    const response = await route.fetch();
+    await route.fulfill({
+      response,
+      headers: {
+        ...response.headers(),
+        'content-security-policy': "script-src 'self'; style-src 'self' 'unsafe-inline'",
+      },
+    });
+  });
+  await page.goto('/app/jobs?source=real');
+  await expect(page.locator('niva-job-card')).toHaveCount(1);
+  await expect(page.locator('.job-card')).toHaveCSS('border-radius', '18px');
+  await expect(page.locator('.workspace')).toHaveCSS(
+    'display',
+    page.viewportSize()!.width <= 768 ? 'block' : 'grid',
+  );
+  expect(
+    await page
+      .locator('link[rel="stylesheet"]')
+      .evaluateAll((links) => links.every((link) => (link as HTMLLinkElement).media !== 'print')),
+  ).toBe(true);
+  expect(errors).toEqual([]);
+});
 test('real-feed UI boundary fixture remains separate from demo, preserves unknown style and original link', async ({
   page,
 }, info) => {
