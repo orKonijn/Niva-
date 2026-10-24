@@ -1,5 +1,8 @@
 # Niva repair implementation — 23 October 2026
 
+> Current scope and deployment truth: [current-status.md](current-status.md). This guide includes historical milestone evidence. The 24 October review repairs are local only and have not been pushed or deployed.
+
+
 Historical repair report; see [the current district and theme update](preferences-and-themes.md) for subsequent behavior and verification.
 
 Baseline: `e1ff28ff25710e13d0c782d4beed0c274ccb9793`. The checkout was clean before work. No applicable AGENTS.md was found. Existing dependencies and lockfile were retained; `npm ci` was unnecessary because dependencies were already installed. No push was made to the original GitHub repository. The user's current request authorizes publishing a private interactive demo through Sites.

@@ -28,6 +28,10 @@
       [disabled]="busy() || !career.active()"
     />לצרף את טקסט קורות החיים מהגרסה הפעילה והמאושרת ל־OpenAI</label
   >
+  <p>
+    ביטול צירוף קורות החיים חל על צירוף חדש בלבד. מידע שנכלל בהודעות קודמות נשאר בהיסטוריה שנשלחת.
+    לשיחה ללא ההיסטוריה יש לבחור ״שיחה חדשה״; מחיקת השיחה מסירה אותה מ־Niva.
+  </p>
   @if (!career.config().ai) {
     <p role="status">
       שירות הבינה המלאכותית טרם הוגדר. אין תשובה מדומה. חיפוש המשרות וכלי קורות החיים זמינים בנפרד.
@@ -106,11 +110,32 @@
       <ul>
         @for (job of jobs(); track job.id) {
           <li>
-            <a [routerLink]="['/app/jobs', job.id]"
-              ><bdi>{{ job.title }} — {{ job.company }}</bdi></a
-            ><small
+            @if (job.status !== 'unavailable' && job.status !== 'excluded') {
+              <a [routerLink]="['/app/jobs', job.id]"
+                ><bdi>{{ job.title }} — {{ job.company }}</bdi></a
+              >
+            } @else {
+              <span>{{ job.title }}</span>
+            }
+            <small
               ><bdi>[job:{{ job.id }}]</bdi></small
             >
+            @if (job.status) {
+              <span>
+                ·
+                {{
+                  job.status === 'current'
+                    ? 'נוכחית'
+                    : job.status === 'changed'
+                      ? 'המשרה השתנתה מאז התשובה'
+                      : job.status === 'closed'
+                        ? 'המשרה נסגרה'
+                        : 'אינה זמינה להצגה'
+                }}
+                · גרסה בתשובה: <bdi>{{ job.version }}</bdi> · נבדקה:
+                <time [attr.title]="job.checkedAt">{{ localDate(job.checkedAt) }}</time></span
+              >
+            }
           </li>
         }
       </ul>
@@ -124,7 +149,7 @@
           <span dir="auto">{{ conversation.messages[0]?.text?.slice(0, 70) || 'שיחה' }}</span>
         </button>
         <p>
-          <bdi>{{ conversation.createdAt.slice(0, 10) }}</bdi>
+          <time [attr.title]="conversation.createdAt">{{ localDate(conversation.createdAt) }}</time>
         </p>
         <button class="account-button" [disabled]="busy()" (click)="deleteId.set(conversation.id)">
           מחיקת שיחה

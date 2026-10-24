@@ -1,3 +1,5 @@
+import { runMaintenance, maintenanceHealth } from './maintenance';
+import { lifecycle, deletionRows } from './lifecycle';
 import { Hono } from 'hono';
 import { streamSSE } from 'hono/streaming';
 import { randomUUID } from 'node:crypto';
@@ -9,10 +11,11 @@ import {
   putRecord,
   quota,
   readRecord,
+  assertLifecycle,
   RETENTION_DAYS,
 } from './career-records';
 import type { AccountState } from '../src/app/core/models/account-state';
-import type { Conversation, ResumeVersion } from '../src/app/core/models/career';
+import type { Conversation, ResumeVersion, JobReference } from '../src/app/core/models/career';
 import {
   preferenceMatch,
   resumeMatch,
@@ -74,7 +77,7 @@ const textValue = (value: unknown) => {
 };
 export function createCareer(deps: CareerDependencies) {
   const { db, secret, env } = deps;
-  const app = new Hono<{ Variables: { owner: string } }>();
+  const app = new Hono<{ Variables: { owner: string; epoch: string } }>();
   app.use('*', async (c, next) => {
     c.header('Cache-Control', 'private, no-store');
     c.header('X-Content-Type-Options', 'nosniff');
@@ -88,7 +91,17 @@ export function createCareer(deps: CareerDependencies) {
       auth !== `Bearer ${env.NIVA_INGEST_SECRET}`
     )
       return c.json({ error: 'UNAUTHORIZED' }, 401);
-    await ingest(db);
+    await runMaintenance(db, { trigger: 'manual' });
+    return c.json({ ok: true });
+  });
+  app.post('/api/maintenance/run', async (c) => {
+    if (
+      !env.NIVA_INGEST_SECRET ||
+      env.NIVA_INGEST_SECRET.length < 32 ||
+      c.req.header('authorization') !== `Bearer ${env.NIVA_INGEST_SECRET}`
+    )
+      return c.json({ error: 'UNAUTHORIZED' }, 401);
+    await runMaintenance(db, { sources: false, trigger: 'manual' });
     return c.json({ ok: true });
   });
   app.get('/api/feed', async (c) => {
@@ -112,7 +125,12 @@ export function createCareer(deps: CareerDependencies) {
     const owner = await deps.identity(c.req.raw);
     if (
       !job ||
-      (!job.source?.active && (!owner || !(await deps.state(owner)).saved.includes(job.id)))
+      (!job.source?.active &&
+        (!owner ||
+          (!(await deps.state(owner)).saved.includes(job.id) &&
+            !(await listRecords<Conversation>(db, owner, 'chat')).some((chat) =>
+              chat.messages.some((m) => m.references?.some((r) => r.id === job.id)),
+            ))))
     )
       return c.json({ error: 'NOT_FOUND' }, 404);
     return c.json(job);
@@ -121,6 +139,8 @@ export function createCareer(deps: CareerDependencies) {
     const owner = await deps.identity(c.req.raw);
     if (!owner) return c.json({ error: 'UNAUTHORIZED' }, 401);
     c.set('owner', owner);
+    c.set('epoch', await lifecycle(db, owner));
+    c.header('X-Niva-Lifecycle', c.get('epoch'));
     if (
       c.req.method !== 'GET' &&
       (c.req.header('origin') !== new URL(c.req.url).origin ||
@@ -131,6 +151,7 @@ export function createCareer(deps: CareerDependencies) {
     await quota(db, `requests:${owner}`, 120, 60000);
     return next();
   });
+  app.get('/api/career/operations', async (c) => c.json(await maintenanceHealth(db)));
   app.get('/api/career/config', (c) =>
     c.json({
       ai: !!(env.OPENAI_API_KEY && env.NIVA_AI_MODEL),
@@ -234,7 +255,7 @@ export function createCareer(deps: CareerDependencies) {
       kind: 'original',
       ...(file ? { name: file.name, mime: file.mime, originalBase64: file.base64 } : {}),
     };
-    await putRecord(db, owner, 'resume', resume.id, resume, true);
+    await putRecord(db, owner, 'resume', resume.id, resume, true, c.get('epoch'));
     const { originalBase64, ...safe } = resume;
     void originalBase64;
     return c.json(safe, 201);
@@ -261,11 +282,20 @@ export function createCareer(deps: CareerDependencies) {
         mime: undefined,
         createdAt: new Date().toISOString(),
       };
-      await putRecord(db, owner, 'resume', edited.id, edited, true);
+      await putRecord(db, owner, 'resume', edited.id, edited, true, c.get('epoch'));
       return c.json(edited);
     }
+    const updated = await db.all(
+      "UPDATE niva_documents SET data=json_set(data,'$.confirmed',json('true')) WHERE owner=? AND kind='resume' AND id=? AND epoch=? AND expires_at>? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) RETURNING id",
+      owner,
+      resume.id,
+      c.get('epoch'),
+      Date.now(),
+      owner,
+      c.get('epoch'),
+    );
+    if (!updated.length) throw new CareerError(409, 'LIFECYCLE_CHANGED');
     resume.confirmed = true;
-    await putRecord(db, owner, 'resume', resume.id, resume);
     return c.json({ ...resume, originalBase64: undefined });
   });
   app.post('/api/career/resumes/:id/activate', async (c) => {
@@ -274,26 +304,26 @@ export function createCareer(deps: CareerDependencies) {
     const body = await c.req.json();
     if (!resume.confirmed || body.confirmed !== true)
       throw new CareerError(400, 'CONFIRMATION_REQUIRED');
-    // One SQL statement makes the active version unique even across concurrent tabs.
-    await db.run(
-      "UPDATE niva_documents SET data=json_set(data,'$.active',json(CASE WHEN id=? THEN 'true' ELSE 'false' END)) WHERE owner=? AND kind='resume' AND expires_at>?",
+    const changed = await db.all(
+      "UPDATE niva_career_owners SET active_resume_id=? WHERE owner=? AND epoch=? AND EXISTS(SELECT 1 FROM niva_documents WHERE owner=? AND kind='resume' AND id=? AND epoch=? AND expires_at>? AND json_extract(data,'$.confirmed')=1) RETURNING owner",
       resume.id,
       owner,
+      c.get('epoch'),
+      owner,
+      resume.id,
+      c.get('epoch'),
       Date.now(),
     );
+    if (!changed.length) throw new CareerError(409, 'LIFECYCLE_CHANGED');
     return c.json({ ok: true });
   });
   app.post('/api/career/resumes/:id/delete', async (c) => {
     const owner = c.get('owner');
     await readRecord(db, owner, 'resume', c.req.param('id'));
-    await db.batch([
-      {
-        sql: "DELETE FROM niva_documents WHERE owner=? AND kind='resume' AND id=?",
-        args: [owner, c.req.param('id')],
-      },
-      { sql: "DELETE FROM niva_documents WHERE owner=? AND kind='score'", args: [owner] },
-      { sql: "DELETE FROM niva_documents WHERE owner=? AND kind='chat'", args: [owner] },
-    ]);
+    const deletion = deletionRows(owner, c.get('epoch'), c.req.param('id'));
+    await db.batch(deletion.rows);
+    await assertLifecycle(db, owner, deletion.next);
+    c.header('X-Niva-Lifecycle', deletion.next);
     return c.json({ ok: true });
   });
   app.get('/api/career/resumes/:id/export', async (c) => {
@@ -332,13 +362,14 @@ export function createCareer(deps: CareerDependencies) {
       text: result.text,
       explanation: result.explanation,
       missing: result.missing,
+      highlights: result.highlights,
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + RETENTION_DAYS * 86400000).toISOString(),
       kind: 'tailored',
       confirmed: false,
       active: false,
     };
-    await putRecord(db, owner, 'resume', tailored.id, tailored, true);
+    await putRecord(db, owner, 'resume', tailored.id, tailored, true, c.get('epoch'));
     return c.json(tailored, 201);
   });
   app.get('/api/career/match/:id', async (c) => {
@@ -357,11 +388,14 @@ export function createCareer(deps: CareerDependencies) {
       resume?.text,
     ]);
     const cached = await db.all<{ data: string }>(
-      'SELECT data FROM niva_documents WHERE owner=? AND kind=? AND id=? AND expires_at>?',
+      'SELECT data FROM niva_documents WHERE owner=? AND kind=? AND id=? AND expires_at>? AND epoch=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?)',
       owner,
       'score',
       key,
       Date.now(),
+      c.get('epoch'),
+      owner,
+      c.get('epoch'),
     );
     if (cached[0]) return c.json(JSON.parse(cached[0].data));
     await quota(db, `scores:${owner}`, 300);
@@ -372,19 +406,61 @@ export function createCareer(deps: CareerDependencies) {
       jobVersion: job.source?.version ?? null,
       method: MATCH_VERSION,
     };
-    await putRecord(db, owner, 'score', key, score, true);
+    await putRecord(db, owner, 'score', key, score, true, c.get('epoch'));
     return c.json(score);
   });
-  app.get('/api/career/conversations', async (c) =>
-    c.json(await listRecords<Conversation>(db, c.get('owner'), 'chat')),
-  );
-  app.post('/api/career/conversations/:id/delete', async (c) => {
-    await readRecord(db, c.get('owner'), 'chat', c.req.param('id'));
-    await db.run(
-      "DELETE FROM niva_documents WHERE owner=? AND kind='chat' AND id=?",
-      c.get('owner'),
-      c.req.param('id'),
+  app.get('/api/career/conversations', async (c) => {
+    const chats = await listRecords<Conversation>(db, c.get('owner'), 'chat');
+    const catalog = await catalogJobs(db);
+    const state = await deps.state(c.get('owner'));
+    return c.json(
+      chats.map((chat) => ({
+        ...chat,
+        messages: chat.messages.map((message) => ({
+          ...message,
+          references: message.references?.map((ref) => {
+            const job = catalog.find((j) => j.id === ref.id);
+            const excluded = job && preferenceMatch(job, state.preferences).excluded;
+            return {
+              ...ref,
+              ...(excluded ? { title: 'משרה שהוחרגה', company: '' } : {}),
+              status: excluded
+                ? 'excluded'
+                : !job
+                  ? 'unavailable'
+                  : !job.source?.active
+                    ? 'closed'
+                    : job.source.version !== ref.version
+                      ? 'changed'
+                      : 'current',
+              currentVersion: job?.source?.version,
+              currentCheckedAt: job?.source?.fetchedAt,
+            };
+          }),
+        })),
+      })),
     );
+  });
+  app.post('/api/career/conversations/:id/delete', async (c) => {
+    const owner = c.get('owner');
+    await readRecord(db, owner, 'chat', c.req.param('id'));
+    const next = randomUUID();
+    await db.batch([
+      {
+        sql: 'UPDATE niva_career_owners SET epoch=? WHERE owner=? AND epoch=?',
+        args: [next, owner, c.get('epoch')],
+      },
+      {
+        sql: "DELETE FROM niva_documents WHERE owner=? AND kind='chat' AND id=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?)",
+        args: [owner, c.req.param('id'), owner, next],
+      },
+      {
+        sql: 'UPDATE niva_documents SET epoch=? WHERE owner=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?)',
+        args: [next, owner, owner, next],
+      },
+    ]);
+    await assertLifecycle(db, owner, next);
+    c.header('X-Niva-Lifecycle', next);
     return c.json({ ok: true });
   });
   app.post('/api/career/chat', async (c) => {
@@ -413,7 +489,8 @@ export function createCareer(deps: CareerDependencies) {
     const page = await discoveryPage(db, secret, { limit: '8' }, state.preferences);
     const jobId = typeof body['jobId'] === 'string' ? body['jobId'] : conversation.jobId;
     const selected = (await catalogJobs(db)).find((j) => j.id === jobId && j.source?.active);
-    if (jobId && !selected) throw new CareerError(404, 'JOB_UNAVAILABLE');
+    if (jobId && (!selected || preferenceMatch(selected, state.preferences).excluded))
+      throw new CareerError(404, 'JOB_UNAVAILABLE');
     conversation.jobId = selected?.id;
     const resumes =
       body['includeResume'] === true ? await listRecords<ResumeVersion>(db, owner, 'resume') : [];
@@ -455,14 +532,26 @@ export function createCareer(deps: CareerDependencies) {
       totalMatches: page.total,
       sourceHealth: page.health,
     };
+    const leaseToken = randomUUID();
     const lock = await db.all(
-      "INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES(?,'lease','chat','{}',?) ON CONFLICT(owner,kind,id) DO UPDATE SET expires_at=excluded.expires_at WHERE niva_documents.expires_at<? RETURNING id",
+      'INSERT INTO niva_career_leases(owner,token,epoch,expires_at) SELECT ?,?,?,? WHERE EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) ON CONFLICT(owner) DO UPDATE SET token=excluded.token,epoch=excluded.epoch,expires_at=excluded.expires_at WHERE niva_career_leases.expires_at<? RETURNING owner',
       owner,
+      leaseToken,
+      c.get('epoch'),
       Date.now() + 60000,
+      owner,
+      c.get('epoch'),
       Date.now(),
     );
     if (!lock.length) throw new CareerError(429, 'RATE_LIMITED');
-    if (!body['conversationId']) await putRecord(db, owner, 'chat', id, conversation, true);
+    try {
+      if (!body['conversationId'])
+        await putRecord(db, owner, 'chat', id, conversation, true, c.get('epoch'));
+      await assertLifecycle(db, owner, c.get('epoch'));
+    } catch (e) {
+      await db.run('DELETE FROM niva_career_leases WHERE owner=? AND token=?', owner, leaseToken);
+      throw e;
+    }
     const controller = new AbortController();
     const signal = AbortSignal.any([
       controller.signal,
@@ -495,17 +584,11 @@ export function createCareer(deps: CareerDependencies) {
         signal,
       });
     } catch {
-      await db.run(
-        "DELETE FROM niva_documents WHERE owner=? AND kind='lease' AND id='chat'",
-        owner,
-      );
+      await db.run('DELETE FROM niva_career_leases WHERE owner=? AND token=?', owner, leaseToken);
       throw new CareerError(503, 'AI_UNAVAILABLE');
     }
     if (!upstream.ok || !upstream.body) {
-      await db.run(
-        "DELETE FROM niva_documents WHERE owner=? AND kind='lease' AND id='chat'",
-        owner,
-      );
+      await db.run('DELETE FROM niva_career_leases WHERE owner=? AND token=?', owner, leaseToken);
       throw new CareerError(upstream.status === 429 ? 429 : 503, 'AI_UNAVAILABLE');
     }
     return streamSSE(c, async (stream) => {
@@ -556,12 +639,25 @@ export function createCareer(deps: CareerDependencies) {
           }
         }
         if (!completed || signal.aborted) throw new Error('INCOMPLETE');
+        // Only server-resolved citations are accepted; generated URLs are never actionable.
+        const cited = [...answer.matchAll(/\[job:([^\]]+)\]/g)].map((m) => m[1]);
+        if (cited.some((id) => !jobs.some((job) => job.id === id)) || /https?:\/\//i.test(answer))
+          throw new Error('UNGROUNDED_CITATION');
+        const references: JobReference[] = jobs
+          .filter((j) => cited.includes(j.id))
+          .map((j) => ({
+            id: j.id,
+            title: j.title,
+            company: j.company,
+            version: j.source!.version!,
+            checkedAt: j.source!.fetchedAt,
+          }));
         // Persist only completed responses. Deleting an in-flight conversation must not resurrect it.
         conversation.messages.push(
           { role: 'user', text: message },
-          { role: 'assistant', text: answer },
+          { role: 'assistant', text: answer, references },
         );
-        await putRecord(db, owner, 'chat', id, conversation);
+        await putRecord(db, owner, 'chat', id, conversation, false, c.get('epoch'));
         await stream.writeSSE({ event: 'done', data: JSON.stringify({ conversationId: id }) });
       } catch {
         if (!signal.aborted)
@@ -572,10 +668,7 @@ export function createCareer(deps: CareerDependencies) {
       } finally {
         controller.abort();
         await reader.cancel().catch(() => {});
-        await db.run(
-          "DELETE FROM niva_documents WHERE owner=? AND kind='lease' AND id='chat'",
-          owner,
-        );
+        await db.run('DELETE FROM niva_career_leases WHERE owner=? AND token=?', owner, leaseToken);
       }
     });
   });

@@ -1,4 +1,4 @@
-import { ingest } from './discovery';
+import { runMaintenance } from './maintenance';
 import { d1CareerDb } from './career-db';
 import { createPilot, platformUser, type PilotEnv } from './pilot';
 import assets from 'niva:assets';
@@ -11,7 +11,7 @@ const headers = {
 };
 export default {
   async scheduled(_event: unknown, env: PilotEnv) {
-    await ingest(d1CareerDb(env.DB));
+    await runMaintenance(d1CareerDb(env.DB), { trigger: 'scheduled' });
   },
   async fetch(
     request: Request,

@@ -1,3 +1,5 @@
+import { uniqueJobs } from './job-identity';
+import { CareerStore } from './career-store';
 import {
   Injectable,
   computed,
@@ -24,6 +26,7 @@ export interface ImportPreview {
 @Injectable({ providedIn: 'root' })
 export class AppStore {
   readonly demo = inject(DemoStore);
+  private readonly career = inject(CareerStore);
   readonly session = inject(AccountSession);
   private readonly theme = inject(Theme);
   readonly account = signal<AccountState>(emptyAccountState());
@@ -42,6 +45,9 @@ export class AppStore {
   readonly jobsError = signal('');
   readonly feedCheckedAt = signal('');
   readonly feedStale = signal(false);
+  readonly coverage = signal<{ category: string; district: string; style: string; n: number }[]>(
+    [],
+  );
   readonly feedTotal = signal(0);
   readonly nextCursor = signal<string | null>(null);
   readonly feedChanged = signal(false);
@@ -136,6 +142,7 @@ export class AppStore {
         fetchedAt: string;
         stale: boolean;
         total?: number;
+        coverage?: { category: string; district: string; style: string; n: number }[];
         nextCursor?: string | null;
         snapshot?: string;
         health?: { id: string; checked_at: string | null; error: string | null; next_at: number }[];
@@ -163,6 +170,7 @@ export class AppStore {
       this.feedCheckedAt.set(feed.fetchedAt);
       this.feedStale.set(feed.stale);
       this.feedTotal.set(feed.total ?? feed.jobs.length);
+      this.coverage.set(feed.coverage ?? []);
       this.nextCursor.set(feed.nextCursor ?? null);
       this.feedSnapshot = feed.snapshot ?? '';
       this.sourceHealth.set(feed.health ?? []);
@@ -217,7 +225,7 @@ export class AppStore {
     ),
   );
   readonly visibleSavedJobs = computed(() =>
-    this.jobs.filter((job) => this.saved().includes(job.id) && !this.excluded(job)),
+    uniqueJobs(this.jobs.filter((job) => this.saved().includes(job.id) && !this.excluded(job))),
   );
   readonly suppressedSavedCount = computed(
     () =>
@@ -410,7 +418,10 @@ export class AppStore {
     return this.demo.reset();
   }
   async deleteAccountData(): Promise<boolean> {
-    return this.change({ type: 'delete-data' });
+    this.career.clear();
+    const result = await this.change({ type: 'delete-data' });
+    if (result) await this.career.load();
+    return result;
   }
   async previewImport(): Promise<ImportPreview> {
     return this.request<ImportPreview>('import-preview', {

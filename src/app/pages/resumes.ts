@@ -1,3 +1,4 @@
+import { localDate } from '../core/local-date';
 import { protectUnsaved } from '../core/unsaved';
 import {
   ChangeDetectionStrategy,
@@ -18,6 +19,7 @@ import { AppStore } from '../core/app-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Resumes {
+  readonly localDate = localDate;
   readonly career = inject(CareerStore);
   readonly store = inject(AppStore);
   readonly route = inject(ActivatedRoute);
@@ -34,13 +36,21 @@ export class Resumes {
   editText = '';
   processingConsent = false;
   reviewed = false;
+  private readonly drafts = new Map<string, string>();
   hasUnsavedChanges() {
-    return !!this.text.trim() || (!!this.selected() && this.editText !== this.selected()!.text);
+    return (
+      !!this.text.trim() ||
+      this.drafts.size > 0 ||
+      (!!this.selected() && this.editText !== this.selected()!.text)
+    );
   }
   constructor() {
     protectUnsaved(() => this.hasUnsavedChanges());
     effect(() => {
       this.career.session.userId();
+      this.career.generation();
+      this.drafts.clear();
+      this.name = 'קורות החיים שלי';
       this.selected.set(null);
       this.text = '';
       this.editText = '';
@@ -63,8 +73,17 @@ export class Resumes {
   }
   select(resume: ResumeVersion) {
     if (!this.career.resumes().some((r) => r.id === resume.id)) return;
+    const old = this.selected();
+    if (old?.id === resume.id) {
+      this.selected.set(resume);
+      return;
+    }
+    if (old) {
+      if (this.editText !== old.text) this.drafts.set(old.id, this.editText);
+      else this.drafts.delete(old.id);
+    }
     this.selected.set(resume);
-    this.editText = resume.text;
+    this.editText = this.drafts.get(resume.id) ?? resume.text;
     this.reviewed = false;
   }
   async create() {
@@ -83,10 +102,13 @@ export class Resumes {
     const file = input.files?.[0];
     input.value = '';
     if (!file) return;
+    const generation = this.career.generation();
     await this.action(async () => {
       if (file.size > this.career.config().maxUploadBytes) throw new Error('הקובץ גדול מ־750KB.');
       if (!this.processingConsent) throw new Error('יש לאשר את העברת הקובץ לסריקה ופענוח.');
       const bytes = new Uint8Array(await file.arrayBuffer());
+      if (generation !== this.career.generation())
+        throw new Error('נתוני החשבון השתנו. יש לבחור מחדש את הקובץ.');
       let binary = '';
       for (const b of bytes) binary += String.fromCharCode(b);
       const resume = await this.career.request<ResumeVersion>('resumes', {
@@ -107,6 +129,8 @@ export class Resumes {
         text: this.editText,
         confirmed: true,
       });
+      this.drafts.delete(resume.id);
+      this.selected.set(null);
       await this.career.load();
       this.select(result);
       this.notice.set('העובדות אושרו. הפעלה דורשת בחירה נפרדת.');
@@ -125,6 +149,10 @@ export class Resumes {
   async tailor() {
     const resume = this.selected();
     if (!resume) return;
+    if (this.editText !== resume.text) {
+      this.notice.set('יש לשמור ולאשר את העריכה לפני התאמה.');
+      return;
+    }
     await this.action(async () => {
       const result = await this.career.request<ResumeVersion>('tailor', {
         resumeId: resume.id,
@@ -141,6 +169,7 @@ export class Resumes {
     await this.action(async () => {
       await this.career.request(`resumes/${id}/delete`, {});
       this.deleteCandidate.set(null);
+      this.drafts.delete(id);
       if (this.selected()?.id === id) this.selected.set(null);
       await this.career.load();
       this.notice.set(

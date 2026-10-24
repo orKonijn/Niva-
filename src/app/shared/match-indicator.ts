@@ -25,6 +25,12 @@ import { CareerStore } from '../core/career-store';
       <p>
         עדות למונחים: <bdi>{{ resume().strengths.join(', ') || 'לא נמצאו מונחים משותפים' }}</bdi>
       </p>
+      @for (evidence of resume().evidence; track evidence.skill) {
+        <p>
+          <bdi>{{ evidence.skill }}</bdi
+          >: <q dir="auto">{{ evidence.text }}</q>
+        </p>
+      }
       <p>
         מידע חסר: <bdi>{{ resume().missing.join(', ') || 'אין מונחים נוספים במילון' }}</bdi
         >. חוסר עדות אינו היעדר ניסיון.
@@ -33,7 +39,8 @@ import { CareerStore } from '../core/career-store';
       <a routerLink="/app/resumes">בדיקה ואישור קורות חיים לקבלת הסבר</a>
     }
     <p>
-      שיטה: evidence-v1. מילון מונחים מוגבל בעברית ובאנגלית; אזכור אינו הוכחת מומחיות. גרסת משרה:
+      שיטה: evidence-v2. מילון מונחים מוגבל בעברית ובאנגלית; סעיפים עם שלילה או אי־ודאות אינם נחשבים
+      עדות חיובית; אזכור אינו הוכחת מומחיות. גרסת משרה:
       <bdi>{{ job().source?.version || 'מקור נוכחי' }}</bdi
       >.
     </p>

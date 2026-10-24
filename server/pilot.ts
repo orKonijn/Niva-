@@ -1,3 +1,4 @@
+import { lifecycle, deletionRows } from './lifecycle';
 import { createCareer, type CareerEnvironment } from './career';
 import { d1CareerDb } from './career-db';
 import { catalogJobs } from './discovery';
@@ -198,22 +199,41 @@ export function createPilot(
         ...JOBS,
         ...(await catalog(env.DB)),
       ]);
-      // A single compare-and-swap statement atomically handles first insert and concurrent updates.
-      const result = await env.DB.prepare(
-        'INSERT INTO niva_pilot_states(user_id,revision,data,imported_at,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET revision=excluded.revision,data=excluded.data,imported_at=excluded.imported_at,updated_at=excluded.updated_at WHERE niva_pilot_states.revision=? RETURNING revision',
-      )
-        .bind(
-          user.id,
-          next.revision,
-          JSON.stringify(next),
-          next.importedAt,
-          new Date().toISOString(),
-          state.revision,
-        )
-        .first();
-      if (!result) throw new StateError(409, 'CONFLICT');
-      if (input.operation?.type === 'delete-data')
-        await env.DB.prepare('DELETE FROM niva_documents WHERE owner=?').bind(user.id).run();
+      const accountSql =
+        'INSERT INTO niva_pilot_states(user_id,revision,data,imported_at,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET revision=excluded.revision,data=excluded.data,imported_at=excluded.imported_at,updated_at=excluded.updated_at WHERE niva_pilot_states.revision=? RETURNING revision';
+      const values = [
+        user.id,
+        next.revision,
+        JSON.stringify(next),
+        next.importedAt,
+        new Date().toISOString(),
+        state.revision,
+      ];
+      if (input.operation?.type === 'delete-data') {
+        const epoch = await lifecycle(d1CareerDb(env.DB), user.id);
+        const deletion = deletionRows(user.id, epoch);
+        const first = deletion.rows[0];
+        first.sql +=
+          ' AND (EXISTS(SELECT 1 FROM niva_pilot_states WHERE user_id=? AND revision=?) OR (?=0 AND NOT EXISTS(SELECT 1 FROM niva_pilot_states WHERE user_id=?)))';
+        first.args.push(user.id, state.revision, state.revision, user.id);
+        const guardedAccount =
+          'INSERT INTO niva_pilot_states(user_id,revision,data,imported_at,updated_at) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) ON CONFLICT(user_id) DO UPDATE SET revision=excluded.revision,data=excluded.data,imported_at=excluded.imported_at,updated_at=excluded.updated_at WHERE niva_pilot_states.revision=? RETURNING revision';
+        const results = await env.DB.batch([
+          ...deletion.rows.map((row) => env.DB.prepare(row.sql).bind(...row.args)),
+          env.DB.prepare(guardedAccount).bind(
+            ...values.slice(0, 5),
+            user.id,
+            deletion.next,
+            state.revision,
+          ),
+        ]);
+        if (!results.at(-1)?.results.length) throw new StateError(409, 'CONFLICT');
+      } else {
+        const result = await env.DB.prepare(accountSql)
+          .bind(...values)
+          .first();
+        if (!result) throw new StateError(409, 'CONFLICT');
+      }
       return c.json(next);
     }
     return c.json({ error: 'NOT_FOUND' }, 404);

@@ -1,3 +1,4 @@
+import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 import type { CareerDb } from './career-db';
 import { normalizeFeed, plainText, classify } from './job-feed';
@@ -228,15 +229,13 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
           job.workStyle,
           job.source!.updatedAt,
         ]);
-        const canonical = new URL(job.source!.applicationUrl);
-        canonical.search = '';
-        canonical.hash = '';
+        const canonical = canonicalJobUrl(job.source!.applicationUrl);
         rows.push({
           sql: 'INSERT INTO niva_jobs(id,source_id,canonical,company,title,district,category,style,search,active,version,data) VALUES(?,?,?,?,?,?,?,?,?,1,?,?) ON CONFLICT(id) DO UPDATE SET canonical=excluded.canonical,company=excluded.company,title=excluded.title,district=excluded.district,category=excluded.category,style=excluded.style,search=excluded.search,active=1,version=excluded.version,data=excluded.data',
           args: [
             job.id,
             source.id,
-            canonical.href,
+            canonical,
             job.company.toLowerCase(),
             job.title.toLowerCase(),
             job.district,
@@ -271,7 +270,6 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
       );
     }
   }
-  await db.run('DELETE FROM niva_documents WHERE expires_at<?', now);
 }
 export async function catalogJobs(db: CareerDb): Promise<Job[]> {
   return (await db.all<{ data: string; active: number }>('SELECT data,active FROM niva_jobs')).map(
@@ -368,21 +366,19 @@ export async function discoveryPage(
     clauses.push(`id IN (${saved.length ? saved.map(() => '?').join(',') : 'NULL'})`);
     args.push(...saved);
   }
-  // Conservative cross-source deduplication: same canonical URL, or same employer/title/location.
-  clauses.push(
-    `id=(SELECT MIN(j2.id) FROM niva_jobs j2 WHERE j2.active=niva_jobs.active AND (j2.canonical=niva_jobs.canonical OR (j2.company=niva_jobs.company AND j2.title=niva_jobs.title AND j2.district=niva_jobs.district AND j2.style=niva_jobs.style)))`,
-  );
+  // Choose a representative within the already-authorized/filtered identity set.
   const where = clauses.join(' AND ');
+  const ranked = `WITH eligible AS (SELECT * FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
   const count =
     (
       await db.all<{ total: number }>(
-        `SELECT count(*) AS total FROM niva_jobs WHERE ${where}`,
+        `${ranked} SELECT count(*) AS total FROM ranked WHERE representative=1`,
         ...args,
       )
     )[0]?.total ?? 0;
   const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
   const rows = await db.all<{ id: string; data: string; active: number }>(
-    `SELECT id,data,active FROM niva_jobs WHERE ${where} AND id>? ORDER BY id LIMIT ?`,
+    `${ranked} SELECT id,data,active FROM ranked WHERE representative=1 AND id>? ORDER BY id LIMIT ?`,
     ...args,
     after,
     limit + 1,
@@ -396,12 +392,8 @@ export async function discoveryPage(
   });
   for (const job of jobs) {
     const attributed = await db.all<{ data: string }>(
-      'SELECT data FROM niva_jobs WHERE active=1 AND (canonical=? OR (company=? AND title=? AND district=? AND style=?))',
-      new URL(job.source!.applicationUrl).href.split('?')[0],
-      job.company.toLowerCase(),
-      job.title.toLowerCase(),
-      job.district,
-      job.workStyle,
+      'SELECT data FROM niva_jobs WHERE canonical=?',
+      canonicalJobUrl(job.source!.applicationUrl),
     );
     job.source!.attribution = attributed.map((r) => {
       const j = JSON.parse(r.data) as Job;
@@ -421,6 +413,15 @@ export async function discoveryPage(
       if (!jobs.some((j) => j.id === job.id)) archived.push(job);
     }
   }
+  const exclusions = (preferences?.exclusions ?? '')
+    .split(',')
+    .map((x) => x.trim().toLowerCase())
+    .filter(Boolean);
+  const coverageWhere = ['active=1', ...exclusions.map(() => 'instr(company,?)=0')].join(' AND ');
+  const coverage = await db.all<{ category: string; district: string; style: string; n: number }>(
+    `SELECT category,district,style,count(DISTINCT canonical) AS n FROM niva_jobs WHERE ${coverageWhere} GROUP BY category,district,style`,
+    ...exclusions,
+  );
   const payload = Buffer.from(
     JSON.stringify({ snapshot, filterKey, after: page.at(-1)?.id }),
   ).toString('base64url');
@@ -428,6 +429,7 @@ export async function discoveryPage(
     jobs,
     archived,
     total: count,
+    coverage,
     nextCursor: more
       ? `${payload}.${createHmac('sha256', secret).update(payload).digest('hex')}`
       : null,

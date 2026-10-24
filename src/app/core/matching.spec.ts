@@ -46,3 +46,25 @@ describe('evidence matching', () => {
     expect(result.text).toContain('Employer B\nPython SQL, 2023');
   });
 });
+
+for (const text of [
+  'I do not know Python. I have never used SQL.',
+  "I don't know Python",
+  'אין לי ידע בפייתון',
+  'מעולם לא השתמשתי ב־SQL',
+  'Maybe Python',
+  'אולי פייתון',
+])
+  it('leaves negative or uncertain evidence unknown: ' + text, () =>
+    expect(skillEvidence(text)).toEqual([]),
+  );
+it('keeps positive snippets and mixed contrast clauses inspectable', () => {
+  const score = resumeMatch(job, 'I do not know SQL, but I built Python services.', true);
+  expect(score.strengths).toEqual(['Python']);
+  expect(score.evidence[0].text).toBe('I built Python services');
+});
+it('never moves an achievement separated from its employer by blank lines', () => {
+  const text =
+    'Candidate\n\nEmployer A 2020–2022\n\nPython SQL achievements\n\nEmployer B 2023–2026\n\nManual QA';
+  expect(tailorExtractive(text, job).text).toBe(text);
+});

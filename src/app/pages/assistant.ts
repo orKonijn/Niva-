@@ -1,3 +1,4 @@
+import { localDate } from '../core/local-date';
 import { AppStore } from '../core/app-store';
 import {
   ChangeDetectionStrategy,
@@ -10,13 +11,14 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CareerStore, careerError } from '../core/career-store';
-import type { Conversation, ChatMessage } from '../core/models/career';
+import type { Conversation, ChatMessage, JobReference } from '../core/models/career';
 @Component({
   imports: [FormsModule, RouterLink],
   templateUrl: './assistant.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Assistant {
+  readonly localDate = localDate;
   readonly career = inject(CareerStore);
   readonly route = inject(ActivatedRoute);
   readonly messages = signal<ChatMessage[]>([]);
@@ -24,7 +26,9 @@ export class Assistant {
   readonly busy = signal(false);
   readonly error = signal('');
   readonly conversations = signal<Conversation[]>([]);
-  readonly jobs = signal<{ id: string; title: string; company: string }[]>([]);
+  readonly jobs = signal<
+    (Pick<JobReference, 'id' | 'title' | 'company'> & Partial<JobReference>)[]
+  >([]);
   readonly conversationId = signal<string | null>(null);
   readonly deleteId = signal<string | null>(null);
   readonly jobId = this.route.snapshot.queryParamMap.get('job') ?? '';
@@ -40,6 +44,10 @@ export class Assistant {
     if (this.jobId) void this.store.ensureJob(this.jobId);
     effect(() => {
       this.career.session.userId();
+      this.career.generation();
+      this.message = '';
+      this.lastMessage = '';
+      this.deleteId.set(null);
       this.generation++;
       this.abort?.abort();
       this.messages.set([]);
@@ -50,14 +58,16 @@ export class Assistant {
       this.busy.set(false);
       this.consent = false;
       this.includeResume = false;
-      void this.load();
+      if (this.career.ready()) void this.load();
     });
   }
   async load() {
     const owner = this.career.session.userId();
+    const generation = this.generation;
     try {
       const conversations = await this.career.request<Conversation[]>('conversations');
-      if (owner === this.career.session.userId()) this.conversations.set(conversations);
+      if (generation === this.generation && owner === this.career.session.userId())
+        this.conversations.set(conversations);
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
     }
@@ -82,6 +92,11 @@ export class Assistant {
     this.fresh();
     this.conversationId.set(conversation.id);
     this.messages.set(conversation.messages);
+    this.jobs.set([
+      ...new Map(
+        conversation.messages.flatMap((m) => m.references || []).map((r) => [r.id, r]),
+      ).values(),
+    ]);
   }
   async remove() {
     const id = this.deleteId();

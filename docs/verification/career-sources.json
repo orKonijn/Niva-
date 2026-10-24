@@ -1,18 +1,18 @@
 {
-  "verifiedAt": "2026-10-24T10:40:06.617Z",
+  "verifiedAt": "2026-10-24T18:38:41.391Z",
   "total": 28,
   "health": [
     {
       "id": "greenhouse-appsflyer",
-      "checked_at": "2026-10-24T10:40:00.198Z",
+      "checked_at": "2026-10-24T18:38:38.923Z",
       "error": null,
-      "next_at": 1792839000198
+      "next_at": 1792867718923
     },
     {
       "id": "lever-walkme",
-      "checked_at": "2026-10-24T10:40:00.198Z",
+      "checked_at": "2026-10-24T18:38:38.923Z",
       "error": null,
-      "next_at": 1792839300198
+      "next_at": 1792868018923
     }
   ],
   "sources": [

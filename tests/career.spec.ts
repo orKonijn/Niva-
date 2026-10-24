@@ -93,14 +93,15 @@ async function fixture(page: Page, { ai = false } = {}) {
       const next: ResumeVersion = {
         ...original,
         id: 'tailored-fixture',
+        name: original.name + ' — התאמה',
         parentId: original.id,
         jobId: jobs[0].id,
         jobVersion: 'fixture-v1',
-        text: 'Candidate\n\nPython SQL Playwright at Example B\n2023–2026\n\nManual QA at Example A\n2020–2022',
+        text: original.text,
         kind: 'tailored',
         active: false,
         confirmed: false,
-        explanation: 'פסקאות שלמות מוינו, ללא הוספת עובדות. בדיקת ממשק.',
+        explanation: 'סדר המקור נשמר, ללא הוספת עובדות. בדיקת ממשק.',
       };
       resumes.push(next);
       return r.fulfill({ json: next, status: 201 });
@@ -331,4 +332,70 @@ test('stopping chat aborts the request and preserves a retry without saving a pa
     'Please help with interview questions',
   );
   await expect(page.getByRole('button', { name: 'ניסיון חוזר', exact: true })).toBeEnabled();
+});
+
+test('resume switching and repeated selection preserve unsaved edits; tailoring requires saved facts', async ({
+  page,
+}) => {
+  await fixture(page);
+  await page.goto('/app/resumes?job=greenhouse-appsflyer-101');
+  await page.getByRole('button', { name: original.name, exact: true }).click();
+  await page.getByRole('button', { name: 'יצירת טיוטה מותאמת למשרה', exact: true }).click();
+  const tailored = page.getByLabel('אחרי — טיוטה לעריכה', { exact: true });
+  await tailored.fill(original.text + '\nUnsaved tailored fact');
+  await page.getByRole('button', { name: original.name, exact: true }).click();
+  const editor = page.getByLabel('טקסט לבדיקה ולתיקון', { exact: true });
+  await editor.fill(original.text + '\nUnsaved original fact');
+  await page.getByRole('button', { name: original.name, exact: true }).click();
+  await expect(editor).toHaveValue(original.text + '\nUnsaved original fact');
+  await page.getByRole('button', { name: 'יצירת טיוטה מותאמת למשרה', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('לשמור ולאשר');
+  await page
+    .locator('.career-version')
+    .filter({ hasText: 'טיוטה לבדיקה' })
+    .getByRole('button')
+    .first()
+    .click();
+  await expect(tailored).toHaveValue(original.text + '\nUnsaved tailored fact');
+});
+test('reopening a conversation restores verified links with changed and closed status', async ({
+  page,
+}) => {
+  await fixture(page, { ai: true });
+  await page.route('**/api/career/conversations', (r) =>
+    r.fulfill({
+      json: [
+        {
+          id: 'persisted-chat',
+          createdAt: '2026-10-24T10:00:00Z',
+          expiresAt: '2026-11-24T10:00:00Z',
+          messages: [
+            { role: 'user', text: 'Saved conversation' },
+            {
+              role: 'assistant',
+              text: 'Checked [job:greenhouse-appsflyer-101]',
+              references: [
+                {
+                  id: jobs[0].id,
+                  title: jobs[0].title,
+                  company: jobs[0].company,
+                  version: 'old-v1',
+                  checkedAt: '2026-10-24T10:00:00Z',
+                  status: 'closed',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }),
+  );
+  await page.goto('/app/assistant');
+  await page.getByRole('button', { name: 'Saved conversation', exact: true }).click();
+  await expect(page.getByRole('link', { name: /משרת בדיקת ממשק — QA Automation/ })).toHaveAttribute(
+    'href',
+    '/app/jobs/' + jobs[0].id,
+  );
+  await expect(page.getByText(/המשרה נסגרה/)).toBeVisible();
+  await expect(page.getByText(/ביטול צירוף קורות החיים/)).toBeVisible();
 });

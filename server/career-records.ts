@@ -1,3 +1,4 @@
+import { lifecycle } from './lifecycle';
 import type { CareerDb } from './career-db';
 export const RETENTION_DAYS = 30;
 export class CareerError extends Error {
@@ -9,14 +10,21 @@ export class CareerError extends Error {
   }
 }
 export async function listRecords<T>(db: CareerDb, owner: string, kind: string): Promise<T[]> {
-  return (
-    await db.all<{ data: string }>(
-      'SELECT data FROM niva_documents WHERE owner=? AND kind=? AND expires_at>? ORDER BY id',
-      owner,
-      kind,
-      Date.now(),
-    )
-  ).map((r) => JSON.parse(r.data) as T);
+  await lifecycle(db, owner);
+  const rows = await db.all<{ data: string; id: string; active_resume_id: string | null }>(
+    `SELECT d.data,d.id,o.active_resume_id FROM niva_documents d JOIN niva_career_owners o ON o.owner=d.owner AND o.epoch=d.epoch WHERE d.owner=? AND d.kind=? AND d.expires_at>? ORDER BY d.id`,
+    owner,
+    kind,
+    Date.now(),
+  );
+  return rows.map((row) => {
+    const data = JSON.parse(row.data);
+    return (
+      kind === 'resume'
+        ? { ...data, active: row.id === row.active_resume_id && data.confirmed === true }
+        : data
+    ) as T;
+  });
 }
 export async function readRecord<T>(
   db: CareerDb,
@@ -24,17 +32,18 @@ export async function readRecord<T>(
   kind: string,
   id: string,
 ): Promise<T> {
-  const row = (
-    await db.all<{ data: string }>(
-      'SELECT data FROM niva_documents WHERE owner=? AND kind=? AND id=? AND expires_at>?',
-      owner,
-      kind,
-      id,
-      Date.now(),
-    )
-  )[0];
-  if (!row) throw new CareerError(404, 'NOT_FOUND');
-  return JSON.parse(row.data) as T;
+  const record = (await listRecords<T & { id: string }>(db, owner, kind)).find(
+    (row) => row.id === id,
+  );
+  if (!record) throw new CareerError(404, 'NOT_FOUND');
+  return record;
+}
+export async function assertLifecycle(db: CareerDb, owner: string, epoch: string) {
+  if (
+    !(await db.all('SELECT owner FROM niva_career_owners WHERE owner=? AND epoch=?', owner, epoch))
+      .length
+  )
+    throw new CareerError(409, 'LIFECYCLE_CHANGED');
 }
 export async function putRecord(
   db: CareerDb,
@@ -43,30 +52,36 @@ export async function putRecord(
   id: string,
   data: unknown,
   create = false,
+  expectedEpoch?: string,
 ) {
-  const sql = create
-    ? 'INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES(?,?,?,?,?)' +
-      (kind === 'score' ? ' ON CONFLICT(owner,kind,id) DO NOTHING' : '')
-    : 'UPDATE niva_documents SET data=? WHERE owner=? AND kind=? AND id=? AND expires_at>?';
-  if (create)
-    await db.run(
-      sql,
-      owner,
-      kind,
-      id,
-      JSON.stringify(data),
-      Date.now() + RETENTION_DAYS * 86400000,
-    );
-  else {
-    const rows = await db.all(
-      sql + ' RETURNING id',
-      JSON.stringify(data),
-      owner,
-      kind,
-      id,
-      Date.now(),
-    );
-    if (!rows.length) throw new CareerError(404, 'NOT_FOUND');
+  const epoch = expectedEpoch ?? (await lifecycle(db, owner));
+  const payload = JSON.stringify(kind === 'resume' ? { ...(data as object), active: false } : data);
+  const rows = create
+    ? await db.all(
+        `INSERT INTO niva_documents(owner,kind,id,data,expires_at,epoch) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) ON CONFLICT(owner,kind,id) DO NOTHING RETURNING id`,
+        owner,
+        kind,
+        id,
+        payload,
+        Date.now() + RETENTION_DAYS * 86400000,
+        epoch,
+        owner,
+        epoch,
+      )
+    : await db.all(
+        `UPDATE niva_documents SET data=? WHERE owner=? AND kind=? AND id=? AND expires_at>? AND epoch=? AND EXISTS(SELECT 1 FROM niva_career_owners WHERE owner=? AND epoch=?) RETURNING id`,
+        payload,
+        owner,
+        kind,
+        id,
+        Date.now(),
+        epoch,
+        owner,
+        epoch,
+      );
+  if (!rows.length) {
+    await assertLifecycle(db, owner, epoch);
+    if (kind !== 'score') throw new CareerError(409, 'RECORD_CHANGED');
   }
 }
 export async function quota(db: CareerDb, key: string, maximum: number, windowMs = 86400000) {

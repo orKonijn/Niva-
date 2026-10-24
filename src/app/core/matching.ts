@@ -1,6 +1,6 @@
 import type { Job } from './models/job';
 import { matchesPreferences, type Preferences } from './preferences';
-export const MATCH_VERSION = 'evidence-v1';
+export const MATCH_VERSION = 'evidence-v2';
 export const SKILLS: Record<string, RegExp> = {
   JavaScript: /\bjavascript\b|ג׳אווהסקריפט/i,
   TypeScript: /\btypescript\b|טייפסקריפט/i,
@@ -18,19 +18,26 @@ export const SKILLS: Record<string, RegExp> = {
   Figma: /\bfigma\b|פיגמה/i,
   'Product Management': /product management|product manager|ניהול מוצר/i,
 };
-export function skillEvidence(text: string): string[] {
-  const positive = text
-    .split(/\n|[.;]/)
-    .filter(
-      (line) =>
-        !/(?:\bno\b|\bwithout\b|\bnever\b|ללא|אין לי)\s.{0,50}(?:experience|knowledge|ניסיון|ידע)|^\s*(?:no|without|ללא|אין לי)\b/i.test(
-          line,
-        ),
+/** Conservative clause-level terminology evidence. Ambiguous/negative clauses stay unknown. */
+export function positiveEvidence(text: string): { skill: string; text: string }[] {
+  const found = new Map<string, string>();
+  for (const clause of text
+    .replace(/[’‘]/g, "'")
+    .split(/\n|[.;!?]|\bbut\b|\bhowever\b|אבל|עם זאת/i)) {
+    const scope = clause.replace(/\bnot only\b|לא רק/gi, '');
+    if (
+      /\b(?:not|never|no|without|lack(?:ing)?|don't|doesn't|didn't|haven't|hasn't|cannot|can't|maybe|might|unsure)\b|לא(?! רק)|ללא|אין|מעולם|טרם|אולי|אינני|אינו/i.test(
+        scope,
+      )
     )
-    .join('\n');
-  return Object.entries(SKILLS)
-    .filter(([, pattern]) => pattern.test(positive))
-    .map(([skill]) => skill);
+      continue;
+    for (const [skill, pattern] of Object.entries(SKILLS))
+      if (pattern.test(clause) && !found.has(skill)) found.set(skill, clause.trim().slice(0, 300));
+  }
+  return [...found].map(([skill, text]) => ({ skill, text }));
+}
+export function skillEvidence(text: string): string[] {
+  return positiveEvidence(text).map((e) => e.skill);
 }
 export function preferenceMatch(job: Job, p: Preferences) {
   const factors = [
@@ -95,6 +102,7 @@ export function resumeMatch(job: Job, text: string, confirmed: boolean) {
     method: MATCH_VERSION,
     comparable: confirmed && requirements.length >= 2,
     strengths,
+    evidence: positiveEvidence(text).filter((e) => confirmed && strengths.includes(e.skill)),
     missing,
     label:
       !confirmed || requirements.length < 2
@@ -103,23 +111,14 @@ export function resumeMatch(job: Job, text: string, confirmed: boolean) {
     coverage: confirmed && requirements.length >= 2 ? strengths.length / requirements.length : null,
   };
 }
-/** Extractive tailoring: move complete paragraphs; never detach dates from an employer. */
+/** Preserve exact fact associations; blank lines cannot establish employment boundaries. */
 export function tailorExtractive(text: string, job: Job) {
-  const lines = text.split(/\n\s*\n/);
-  const requirements = skillEvidence(`${job.title}\n${job.description}`);
-  // Preserve the header and complete paragraph blocks, including original internal ordering.
-  const head = lines.shift() ?? '';
-  const ordered = lines
-    .map((line, index) => ({
-      line,
-      index,
-      weight: skillEvidence(line).filter((s) => requirements.includes(s)).length,
-    }))
-    .sort((a, b) => b.weight - a.weight || a.index - b.index);
+  const match = resumeMatch(job, text, true);
   return {
-    text: [head, ...ordered.map((l) => l.line)].join('\n\n'),
+    text,
     explanation:
-      'מיון פסקאות שלמות לפי מונחים במשרה. התוכן וסדר השורות בכל פסקה נשמרו ללא שינוי; יש לבדוק רצף ותאריכים לפני אישור. ללא פסקאות נפרדות ייתכן שלא יהיה שינוי.',
-    missing: resumeMatch(job, text, true).missing,
+      'סדר הטקסט והעובדות נשמר במלואו. גבולות סעיפי תעסוקה אינם ודאיים; מוצגות עדויות רלוונטיות לבדיקה, ללא העברת הישגים בין מעסיקים.',
+    missing: match.missing,
+    highlights: match.evidence,
   };
 }

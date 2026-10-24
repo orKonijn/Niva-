@@ -65,6 +65,7 @@ export const documents = sqliteTable(
     id: text('id').notNull(),
     data: text('data').notNull(),
     expiresAt: integer('expires_at').notNull(),
+    epoch: text('epoch').notNull().default('0'),
   },
   (table) => [
     primaryKey({ columns: [table.owner, table.kind, table.id] }),
@@ -75,4 +76,24 @@ export const careerLimits = sqliteTable('niva_career_limits', {
   key: text('key').primaryKey(),
   count: integer('count').notNull(),
   window: integer('window').notNull(),
+});
+
+export const careerOwners = sqliteTable('niva_career_owners', {
+  owner: text('owner').primaryKey(),
+  epoch: text('epoch').notNull().default('0'),
+  activeResumeId: text('active_resume_id'),
+});
+export const careerLeases = sqliteTable('niva_career_leases', {
+  owner: text('owner').primaryKey(),
+  token: text('token').notNull(),
+  epoch: text('epoch').notNull(),
+  expiresAt: integer('expires_at').notNull(),
+});
+export const maintenance = sqliteTable('niva_maintenance', {
+  id: text('id').primaryKey(),
+  startedAt: integer('started_at'),
+  succeededAt: integer('succeeded_at'),
+  error: text('error'),
+  removed: integer('removed').notNull().default(0),
+  trigger: text('trigger').notNull(),
 });

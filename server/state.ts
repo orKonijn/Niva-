@@ -1,3 +1,4 @@
+import { deleteCareerSync } from './lifecycle';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { emptyAccountState, type AccountState } from '../src/app/core/models/account-state';
@@ -229,7 +230,7 @@ export function stateRepository(
         typeof input === 'object' &&
         (input as { operation?: { type?: string } }).operation?.type === 'delete-data'
       )
-        db.prepare('DELETE FROM niva_documents WHERE owner=?').run(userId);
+        deleteCareerSync(db, userId);
       db.exec('COMMIT');
       return state;
     } catch (error) {

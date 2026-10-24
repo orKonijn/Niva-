@@ -222,7 +222,7 @@
     >
       <niva-icon name="search" />
       <h2>עדיין לא מצאנו כאן התאמה</h2>
-      <p>אפשר לנסות מילות חיפוש אחרות או לשנות את ההעדפות.</p>
+      <p>{{ emptyExplanation() }}</p>
       <button
         class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
         (click)="clear()"

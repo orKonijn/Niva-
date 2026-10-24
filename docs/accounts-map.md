@@ -1,6 +1,8 @@
 # Accounts, persistence and maps
 
-> Historical baseline/deployed behavior. The newer career extension is local only; see [career-assistant.md](career-assistant.md) for feed, resume, matching, chat, configuration and retention changes.
+> Current scope and deployment truth: [current-status.md](current-status.md). This guide includes historical milestone evidence. The 24 October review repairs are local only and have not been pushed or deployed.
+
+> Historical baseline/deployed behavior. The career extension was subsequently published; the review repairs remain local only; see [career-assistant.md](career-assistant.md) for feed, resume, matching, chat, configuration and retention changes.
 
 This guide records the original Node/account and static publication milestones. The current hosted Worker/D1 pilot is described in [the pilot guide](pilot.md); its deployment section supersedes the historic static-only limitation below.
 

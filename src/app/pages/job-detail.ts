@@ -1,3 +1,4 @@
+import { localDate } from '../core/local-date';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatchIndicator } from '../shared/match-indicator';
@@ -13,6 +14,7 @@ import { directionsUrl, locationText } from '../core/job-locations';
   templateUrl: './job-detail.html',
 })
 export class JobDetail {
+  readonly localDate = localDate;
   readonly directionsUrl = directionsUrl;
   readonly locationText = locationText;
   readonly districtLabel = districtLabel;

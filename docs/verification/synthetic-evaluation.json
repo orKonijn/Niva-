@@ -1,0 +1,136 @@
+{
+  "scope": "Synthetic offline regressions only; SQLite-backed D1 contract double; no real model or scanner calls",
+  "totalTests": 32,
+  "passedTests": 32,
+  "failedTests": 0,
+  "cases": [
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed create",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed edit",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed tailor",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed score",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed chat",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) account deletion rejects delayed scanner",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) review cannot undo a newer activation; expiry and deletion invalidate selection",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) completed chat cannot restore a conversation after account deletion; lease survives until release",
+      "status": "passed"
+    },
+    {
+      "name": "node lifecycle races (synthetic database) maintenance performs successive due checks and cleanup through source failures",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed create",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed edit",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed tailor",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed score",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed chat",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) account deletion rejects delayed scanner",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) review cannot undo a newer activation; expiry and deletion invalidate selection",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) completed chat cannot restore a conversation after account deletion; lease survives until release",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lifecycle races (synthetic database) maintenance performs successive due checks and cleanup through source failures",
+      "status": "passed"
+    },
+    {
+      "name": "D1 stale account revision and failed deletion batch preserve private data",
+      "status": "passed"
+    },
+    {
+      "name": "preserves distinct requisitions and a saved non-minimum canonical duplicate consistently",
+      "status": "passed"
+    },
+    {
+      "name": "persists verified answer references and resolves changed/closed jobs on reopen",
+      "status": "passed"
+    },
+    {
+      "name": "synthetic safety: rejects fabricated citation",
+      "status": "passed"
+    },
+    {
+      "name": "synthetic safety: rejects generated URL",
+      "status": "passed"
+    },
+    {
+      "name": "synthetic safety: rejects incomplete answer",
+      "status": "passed"
+    },
+    {
+      "name": "synthetic safety: isolates injected resume data, keeps old history, honors attachment toggle and quota",
+      "status": "passed"
+    },
+    {
+      "name": "node old chat completion cannot resurrect a deleted conversation or release a newer lease",
+      "status": "passed"
+    },
+    {
+      "name": "d1 old chat completion cannot resurrect a deleted conversation or release a newer lease",
+      "status": "passed"
+    },
+    {
+      "name": "synthetic safety: excluded selected employer is rejected before any provider call",
+      "status": "passed"
+    },
+    {
+      "name": "D1 concurrent account revision conflict leaves lifecycle and private records untouched",
+      "status": "passed"
+    },
+    {
+      "name": "Node deletion rolls back state and lifecycle together on storage failure",
+      "status": "passed"
+    },
+    {
+      "name": "node lazily migrates multiple legacy active flags without changing text",
+      "status": "passed"
+    },
+    {
+      "name": "d1 lazily migrates multiple legacy active flags without changing text",
+      "status": "passed"
+    }
+  ]
+}

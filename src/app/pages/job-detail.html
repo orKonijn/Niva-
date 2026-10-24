@@ -65,8 +65,9 @@
         · מיקום במקור: <bdi>{{ source.location }}</bdi>
       </p>
       <p class="text-sm">
-        עודכן במקור: <bdi>{{ source.updatedAt }}</bdi> · נבדק אצלנו:
-        <bdi>{{ source.fetchedAt }}</bdi>
+        עודכן במקור:
+        <time [attr.title]="source.updatedAt">{{ localDate(source.updatedAt) }}</time> · נבדק אצלנו:
+        <time [attr.title]="source.fetchedAt">{{ localDate(source.fetchedAt) }}</time>
       </p>
       <p class="text-sm">
         {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. הסבר ההתאמה

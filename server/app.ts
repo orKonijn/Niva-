@@ -151,7 +151,13 @@ export async function migrateDatabase(database: DatabaseSync, options: AuthOptio
   database.exec(
     'CREATE TABLE IF NOT EXISTS niva_migrations (id TEXT PRIMARY KEY, applied_at TEXT NOT NULL)',
   );
-  for (const id of ['000_auth', '001_account_data', '002_auth_constraints', '003_career']) {
+  for (const id of [
+    '000_auth',
+    '001_account_data',
+    '002_auth_constraints',
+    '003_career',
+    '004_lifecycle',
+  ]) {
     if (!database.prepare('SELECT id FROM niva_migrations WHERE id=?').get(id)) {
       database.exec('BEGIN IMMEDIATE');
       try {

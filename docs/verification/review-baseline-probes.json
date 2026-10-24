@@ -1,0 +1,52 @@
+{
+  "activeRace": {
+    "reviewStatus": 200,
+    "activateStatus": 200,
+    "activeIds": ["a", "b"]
+  },
+  "deletionRace": {
+    "countAfterDelete": 0,
+    "createStatus": 201,
+    "countAfterCreate": 1
+  },
+  "dedup": {
+    "stored": ["greenhouse-appsflyer-101", "greenhouse-appsflyer-102"],
+    "discoveryTotal": 1,
+    "savedTotal": 0,
+    "savedJobs": [],
+    "archived": ["greenhouse-appsflyer-102"]
+  },
+  "refresh": {
+    "upstreamCalls": 0,
+    "stale": true,
+    "total": 1
+  },
+  "tailoring": "Candidate\n\nPython SQL\n\nEmployer A\n\n2020-2022\n\nEmployer B\n\n2023-2026",
+  "negation": ["Python", "SQL"],
+  "liveSources": {
+    "at": "2026-10-24T18:20:45.354Z",
+    "total": 28,
+    "health": [
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-24T18:20:42.989Z",
+        "error": null,
+        "next_at": 1792866642989
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-24T18:20:42.989Z",
+        "error": null,
+        "next_at": 1792866942989
+      }
+    ],
+    "counts": {
+      "AppsFlyer": 22,
+      "WalkMe": 6
+    }
+  },
+  "employerLink": {
+    "url": "https://careers.appsflyer.com/jobs/position/8394076002?gh_jid=8394076002",
+    "status": 301
+  }
+}

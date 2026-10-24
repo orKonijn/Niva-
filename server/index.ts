@@ -1,4 +1,4 @@
-import { ingest } from './discovery';
+import { runMaintenance } from './maintenance';
 import { sqliteCareerDb } from './career-db';
 import { serve } from '@hono/node-server';
 import { getConnInfo } from '@hono/node-server/conninfo';
@@ -17,7 +17,9 @@ if (
   throw new Error('Run npm run db:migrate before starting the API.');
 if (process.env['NIVA_SCHEDULE_INGESTION'] !== '0' && !options.browserTestMode) {
   const update = () =>
-    ingest(sqliteCareerDb(database)).catch(() => console.error('Job ingestion failed'));
+    runMaintenance(sqliteCareerDb(database), { trigger: 'scheduled' }).catch(() =>
+      console.error('Job ingestion failed'),
+    );
   void update();
   setInterval(() => void update(), 60000).unref();
 }

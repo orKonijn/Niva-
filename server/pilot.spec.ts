@@ -36,7 +36,10 @@ function setup() {
           return { results: sqlite.prepare(sql).all(...(values as never[])) };
         },
         async run() {
-          return { success: true, meta: sqlite.prepare(sql).run(...(values as never[])) };
+          const query = sqlite.prepare(sql);
+          if (query.columns().length)
+            return { success: true, results: query.all(...(values as never[])) };
+          return { success: true, results: [], meta: query.run(...(values as never[])) };
         },
       };
       return statement;

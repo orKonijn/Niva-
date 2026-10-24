@@ -1,3 +1,4 @@
+import { localDate } from '../core/local-date';
 import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -11,7 +12,6 @@ import {
   isDistrict,
   normalizeWorkStyles,
   isWorkStyle,
-  matchesPreferences,
   WorkStyle,
 } from '../core/preferences';
 import { CareerStore } from '../core/career-store';
@@ -26,6 +26,7 @@ import { JobMap } from '../shared/job-map';
   templateUrl: './jobs.html',
 })
 export class Jobs {
+  readonly localDate = localDate;
   readonly store = inject(AppStore);
   readonly route = inject(ActivatedRoute);
   readonly router = inject(Router);
@@ -94,10 +95,10 @@ export class Jobs {
   readonly savedOnly = computed(() => this.params().get('saved') === 'true');
   readonly mapView = computed(() => this.params().get('view') === 'map');
   readonly matching = computed(() =>
-    (this.savedOnly()
-      ? this.store.visibleSavedJobs()
-      : this.store.catalogMode() === 'real' && this.store.session.config().discovery
-        ? this.store.realJobs().filter((job) => matchesPreferences(job, this.store.preferences()))
+    (this.store.catalogMode() === 'real' && this.store.session.config().discovery
+      ? this.store.realJobs()
+      : this.savedOnly()
+        ? this.store.visibleSavedJobs()
         : this.store.eligibleJobs()
     ).filter(
       (j) =>
@@ -130,6 +131,26 @@ export class Jobs {
       replaceUrl,
     });
   }
+  readonly emptyExplanation = computed(() => {
+    if (this.store.catalogMode() !== 'real')
+      return 'אלה נתוני הדגמה במכשיר. אפשר לשנות את הסינון במסך.';
+    if (this.store.jobsError() || this.store.sourceHealth().some((s) => s.error))
+      return 'חלק מהמקורות אינם זמינים. אפס תוצאות אינו מוכיח שאין משרות; אפשר לרענן ולבדוק את אתר המקור.';
+    const coverage = this.store.coverage();
+    const p = this.store.preferences();
+    const category = this.category() === 'all' ? p.role : this.category();
+    const district = this.district() === 'all' ? p.district : this.district();
+    if (category !== 'all' && !coverage.some((c) => c.category === category))
+      return 'בכיסוי המצומצם הנוכחי, אחרי החרגות החברות, לא נמצאו משרות בתחום המבוקש. זה אינו חיפוש בכלל שוק העבודה.';
+    if (district !== 'all' && !coverage.some((c) => c.district === district))
+      return 'במקורות הנוכחיים, אחרי החרגות החברות, אין כרגע משרות במחוז המבוקש.';
+    if (
+      (this.workStyles().length || p.workStyles.length) &&
+      coverage.some((c) => c.style === 'unknown')
+    )
+      return 'הסינון מסתיר גם משרות שסגנון העבודה שלהן לא נמסר במקור. אפשר לבדוק את ההעדפות במפורש.';
+    return 'הכיסוי מוגבל לשני לוחות מעסיקים. שילוב הסינון במסך, ההעדפות וההחרגות לא הניב תוצאות. ניתן לנקות רק את הסינון במסך; ההעדפות נשמרות.';
+  });
   clear(): void {
     this.setFilter({
       q: null,
