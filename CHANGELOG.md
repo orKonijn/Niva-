@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the published application remains version 16.
+
 This log uses **Sites release numbers 1–16**, not semantic package versions (`package.json` remains `0.1.0`). Version 16 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
