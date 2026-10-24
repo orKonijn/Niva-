@@ -1,0 +1,47 @@
+{
+  "implementationCommit": "b6173cdb11134c58894482e5fc4ba75a8e2469d0",
+  "branch": "codex/review-repairs",
+  "deployed": false,
+  "checks": {
+    "frontend": 53,
+    "server": 65,
+    "provenance": 1,
+    "browserFull": 192,
+    "browserTargeted": 56,
+    "syntheticRepairSuite": 32,
+    "typechecks": ["tests", "server", "e2e"],
+    "format": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed"
+  },
+  "browserProjects": [
+    "desktop Chromium",
+    "iPhone-viewport Chromium",
+    "desktop Firefox",
+    "desktop WebKit"
+  ],
+  "cleanImplementationBuild": {
+    "repository": "orKonijn/Niva-",
+    "sourceCommit": "b6173cdb11134c58894482e5fc4ba75a8e2469d0",
+    "githubCommit": "b6173cdb11134c58894482e5fc4ba75a8e2469d0",
+    "sitesCommit": null,
+    "sourceTree": "bf1896fb7dce77da1aa325eafb6db942b8740734",
+    "sourceContentDigest": "d2a3efee1f2566b019c31f3c6d05c7b216c40ce06dc00c3a9b8e06ce77ed1752",
+    "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+    "clientArtifactDigest": "55011f1fec032840709e0ad101177482aff505d19bdfbd002181e3ec97569c31",
+    "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+    "builtAt": "2026-10-24T18:44:56.586Z",
+    "dirty": false,
+    "mappedSourceVerified": false,
+    "provenanceStatus": "github-checkout"
+  },
+  "workerArtifactSha256": "a975dfda473b1f7422127251a1bef333d6f6c814140ac20d6fe2c81abc632983",
+  "workerDigestScope": "exact dist/server/index.js bytes from recorded clean implementation build, including embedded build metadata",
+  "handoffVerified": true,
+  "limits": [
+    "No repaired hosted deployment",
+    "D1 and identity boundary simulated locally",
+    "No real AI/scanner/OAuth/SMTP verification",
+    "No hosted scheduler, backup restore, physical device or Hebrew screen reader verification"
+  ]
+}
