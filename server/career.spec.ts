@@ -71,6 +71,23 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
+  it('repairs only the old never-fetched bootstrap state and uses Worker-supported manual redirects', async () => {
+    const { db } = setup();
+    await db.run(
+      "INSERT INTO niva_sources(id,error,next_at) VALUES('greenhouse-appsflyer','SOURCE_UNAVAILABLE',?)",
+      Date.now() + 86400000,
+    );
+    const fetcher = vi.fn(async (url: string, init: RequestInit) => {
+      expect(init.redirect).toBe('manual');
+      return Response.json(url.includes('greenhouse') ? gh : lever);
+    });
+    vi.stubGlobal('fetch', fetcher);
+    await ingest(db);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    await ingest(db);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+
   it('recovers a partially initialized source table and retains ingestion for the Worker lifetime', async () => {
     const { db } = setup();
     await db.run("INSERT INTO niva_sources(id) VALUES('greenhouse-appsflyer')");

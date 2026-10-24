@@ -157,6 +157,15 @@ export async function importLegacyJobs(db: CareerDb): Promise<void> {
 export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
   // Bounded historical data import is an ingestion operation, never a schema migration.
   await importLegacyJobs(db);
+  // One-time repair of bootstrap failures from the unsupported Worker redirect:error policy.
+  // Those requests failed at construction, before contacting providers. Preserve real 429 backoff.
+  const repaired = await db.all(
+    "INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES('system','maintenance','manual-redirect-v1','{}',9007199254740991) ON CONFLICT(owner,kind,id) DO NOTHING RETURNING id",
+  );
+  if (repaired.length)
+    await db.run(
+      "UPDATE niva_sources SET next_at=0,lease_until=0 WHERE checked_at IS NULL AND error='SOURCE_UNAVAILABLE'",
+    );
   for (const source of SOURCES) {
     await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
     const lease = await db.all(
@@ -171,7 +180,7 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
       const response = await fetch(source.url, {
         headers: { Accept: 'application/json' },
         signal: AbortSignal.timeout(12000),
-        redirect: 'error',
+        redirect: 'manual',
       });
       if (!response.ok) {
         const retry = Math.min(

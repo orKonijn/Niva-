@@ -203,7 +203,7 @@ export function createCareer(deps: CareerDependencies) {
           maxExpandedBytes: 5000000,
         }),
         signal: AbortSignal.any([c.req.raw.signal, AbortSignal.timeout(20000)]),
-        redirect: 'error',
+        redirect: 'manual',
       });
       if (!response.ok) throw new CareerError(503, 'PROCESSOR_UNAVAILABLE');
       const result = (await boundedJson(response, 150000)) as {
