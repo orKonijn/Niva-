@@ -46,7 +46,7 @@
   <a routerLink="/app/jobs" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
     ><span class="round-icon items-center justify-center shrink-[0] blue"
       ><niva-icon name="search" /></span
-    ><span>משרות לפי ההעדפות</span><strong>{{ store.eligibleJobs().length }}</strong
+    ><span>משרות שנטענו לפי ההעדפות</span><strong>{{ store.eligibleJobs().length }}</strong
     ><small>{{ store.catalogMode() === 'real' ? 'ממקור המעסיק' : 'מתוך מאגר ההדגמה' }}</small></a
   ><a
     routerLink="/app/jobs"

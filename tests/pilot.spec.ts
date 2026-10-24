@@ -51,6 +51,7 @@ test('hosted normal experience defaults to source jobs and keeps legacy demo dat
         accounts: true,
         platform: 'sites',
         realJobs: true,
+        discovery: true,
         email: false,
         google: false,
         apple: false,
@@ -71,7 +72,7 @@ test('hosted normal experience defaults to source jobs and keeps legacy demo dat
   );
   await page.route('**/api/account/state', (r) => r.fulfill({ json: emptyAccountState() }));
   await page.route('**/api/account/methods', (r) => r.fulfill({ json: { methods: ['chatgpt'] } }));
-  await page.route('**/api/jobs', (r) =>
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
   );
   await page.goto('/');
@@ -98,7 +99,7 @@ test('production layout loads under the hosted script CSP without inline stylesh
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.route('**/api/jobs', (r) =>
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
   );
   await page.route('**/app/jobs?source=real', async (route) => {
@@ -128,7 +129,7 @@ test('production layout loads under the hosted script CSP without inline stylesh
 test('real-feed UI boundary fixture remains separate from demo, preserves unknown style and original link', async ({
   page,
 }, info) => {
-  await page.route('**/api/jobs', (r) =>
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
   );
   await page.goto('/app/jobs?source=real');
@@ -199,6 +200,7 @@ test('hosted identity configuration offers a top-level real sign-in path and no 
         accounts: true,
         platform: 'sites',
         realJobs: true,
+        discovery: true,
         email: false,
         google: false,
         apple: false,
@@ -206,7 +208,7 @@ test('hosted identity configuration offers a top-level real sign-in path and no 
     }),
   );
   await page.route('**/api/session', (r) => r.fulfill({ json: { user: null } }));
-  await page.route('**/api/jobs', (r) =>
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: false } }),
   );
   await page.goto('/login?returnTo=%2Fapp%2Fprofile');
@@ -229,14 +231,14 @@ test('hosted identity configuration offers a top-level real sign-in path and no 
   });
 });
 test('real-feed failure gives a retry and does not substitute demo results', async ({ page }) => {
-  await page.route('**/api/jobs', (r) =>
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ status: 503, json: { error: 'FEED_UNAVAILABLE' } }),
   );
   await page.goto('/app/jobs?source=real');
   await expect(page.getByRole('alert')).toContainText('לא ניתן לרענן');
   await expect(page.locator('niva-job-card')).toHaveCount(0);
-  await page.unroute('**/api/jobs');
-  await page.route('**/api/jobs', (r) =>
+  await page.unroute('**/api/feed**');
+  await page.route('**/api/feed**', (r) =>
     r.fulfill({ json: { jobs: [job], fetchedAt: job.source.fetchedAt, stale: true } }),
   );
   await page.getByRole('button', { name: 'רענון משרות' }).click();

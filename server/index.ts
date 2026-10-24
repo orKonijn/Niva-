@@ -1,3 +1,5 @@
+import { ingest } from './discovery';
+import { sqliteCareerDb } from './career-db';
 import { serve } from '@hono/node-server';
 import { getConnInfo } from '@hono/node-server/conninfo';
 import { serveStatic } from '@hono/node-server/serve-static';
@@ -13,6 +15,12 @@ if (
     .get()
 )
   throw new Error('Run npm run db:migrate before starting the API.');
+if (process.env['NIVA_SCHEDULE_INGESTION'] !== '0' && !options.browserTestMode) {
+  const update = () =>
+    ingest(sqliteCareerDb(database)).catch(() => console.error('Job ingestion failed'));
+  void update();
+  setInterval(() => void update(), 60000).unref();
+}
 const { app: api, auth, states } = createBackend(database, options);
 const app = new Hono();
 app.use('*', async (c, next) => {

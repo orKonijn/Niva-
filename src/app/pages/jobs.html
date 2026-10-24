@@ -34,12 +34,12 @@
   }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      מקור המשרות: AppsFlyer בהרצליה דרך Greenhouse. הכיסוי מוגבל למעסיק הזה. הגשה מתבצעת באתר המקור
-      בלבד.
+      מקורות: AppsFlyer / Greenhouse ו־WalkMe / Lever. כיסוי של מעסיקים אלה בישראל בלבד. הגשה מתבצעת
+      באתר המקור בלבד.
     </p>
     <p class="mb-2 text-xs">
-      סיווג התחום לפי כותרת התפקיד. סגנון העבודה לא נמסר; בחירת סגנון מסוים תסתיר משרות ללא מידע זה.
-      משרות שמורות שהוסרו מהמקור נשארות בתצוגת השמורות בלבד.
+      סיווג התחום לפי כותרת התפקיד. סגנון העבודה מוצג רק כשהמקור מסר אותו; בחירת סגנון מסוים תסתיר
+      משרות ללא מידע זה. משרות שמורות שהוסרו מהמקור נשארות בתצוגת השמורות בלבד.
     </p>
     @if (store.feedCheckedAt()) {
       <p class="text-xs mb-2">
@@ -53,8 +53,40 @@
       [disabled]="store.jobsLoading()"
       (click)="store.loadJobs()"
     >
-      {{ store.jobsLoading() ? 'טוענים מהמקור…' : 'רענון משרות' }}
+      {{ store.jobsLoading() ? 'בודקים עדכונים…' : 'רענון משרות' }}
     </button>
+    @if (store.session.config().discovery) {
+      <p class="mt-3 text-xs">
+        הרענון בודק את מסד הנתונים של Niva; אינו מפעיל כל מקור מחדש. מקור Greenhouse נבדק לכל היותר
+        כל 10 דקות ו־Lever כל 15 דקות, כשהתזמון בשרת מופעל. כאן מוצג מועד הבדיקה בפועל.
+      </p>
+      @for (source of store.sourceHealth(); track source.id) {
+        <p class="text-xs">
+          <bdi>{{ source.id === 'lever-walkme' ? 'WalkMe / Lever' : 'AppsFlyer / Greenhouse' }}</bdi
+          >:
+          {{
+            source.error
+              ? 'העדכון נכשל; מוצג המידע האחרון'
+              : source.checked_at
+                ? 'נבדק'
+                : 'טרם נבדק'
+          }}
+          <bdi>{{ source.checked_at }}</bdi>
+        </p>
+      }
+      @if (store.feedChanged()) {
+        <p role="status">
+          יש שינוי במאגר שעשוי להשפיע על התוצאות.
+          <button
+            class="account-button"
+            [disabled]="store.jobsLoading()"
+            (click)="store.loadJobs()"
+          >
+            הצגת התוצאות המעודכנות
+          </button>
+        </p>
+      }
+    }
     @if (store.jobsError()) {
       <p role="alert" class="form-error mt-3">{{ store.jobsError() }}</p>
     }
@@ -125,10 +157,21 @@
     </button>
   </div>
   <span class="muted text-muted" role="status"
-    >{{ filtered().length }}
+    >{{ filtered().length
+    }}{{
+      store.session.config().discovery && store.catalogMode() === 'real'
+        ? ' מתוך ' + store.feedTotal()
+        : ''
+    }}
     {{ store.catalogMode() === 'real' ? 'משרות מהמקור' : 'משרות לדוגמה' }}</span
   >
 </div>
+@if (savedOnly()) {
+  <p class="text-sm">
+    שמורות הן היסטוריית הבחירות שלך ועשויות להיות מחוץ להעדפות הקבועות. החרגות החברות והסינון במסך
+    עדיין חלים; מצב הזמינות מוצג לכל משרה.
+  </p>
+}
 @if (store.suppressedSavedCount()) {
   <p role="status">{{ store.suppressedSavedCount() }} משרות שמורות מוסתרות לפי החרגות החברות.</p>
 }
@@ -149,6 +192,22 @@
     מפה
   </button>
 </div>
+@if (store.catalogMode() === 'real') {
+  <label class="career-field"
+    >מיון התוצאות שנטענו<select
+      [ngModel]="params().get('sort') || 'source'"
+      (ngModelChange)="setFilter({ sort: $event === 'source' ? null : $event })"
+    >
+      <option value="source">סדר המאגר</option>
+      <option value="relevance" [disabled]="!career.active()">
+        כיסוי מונחים בקורות החיים — תוצאות שנטענו בלבד
+      </option>
+    </select></label
+  >
+  <p class="text-xs mb-4">
+    הרשימה והמפה משתמשות באותן תוצאות שנטענו. משרות ללא קואורדינטות מוצגות בסיכום המפה.
+  </p>
+}
 @if (mapView()) {
   <niva-job-map [jobs]="filtered()" />
 }
@@ -177,3 +236,19 @@
     </section>
   }
 </div>
+
+@if (store.catalogMode() === 'real' && store.session.config().discovery) {
+  <div class="career-actions mt-6" role="status">
+    @if (store.nextCursor()) {
+      <button
+        class="account-button account-primary"
+        [disabled]="store.jobsLoading()"
+        (click)="store.loadMore()"
+      >
+        {{ store.jobsLoading() ? 'טוענים…' : 'טעינת משרות נוספות' }}
+      </button>
+    } @else if (!store.jobsLoading()) {
+      <p>כל התוצאות הזמינות לסינון זה נטענו.</p>
+    }
+  </div>
+}

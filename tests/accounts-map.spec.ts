@@ -44,6 +44,36 @@ async function registerAndLogin(page: Page, email: string) {
   await expect(page.getByRole('heading', { level: 1 })).toContainText('היי');
 }
 test.beforeEach(async ({ page }) => quietCookies(page));
+
+test('real local account persists reviewed resume versions across reload and deletes them with account data', async ({
+  page,
+}) => {
+  await registerAndLogin(page, `resume-${crypto.randomUUID()}@example.test`);
+  await page.goto('/app/resumes');
+  const text = 'Browser verification candidate\n\nPython and SQL at Example Employer\n2021–2026';
+  await page.getByLabel('טקסט קורות החיים', { exact: true }).fill(text);
+  await page.getByRole('button', { name: 'שמירת טיוטה לבדיקה', exact: true }).click();
+  await expect(page.getByRole('heading', { name: /בדיקת הגרסה/ })).toBeVisible();
+  await page.getByRole('checkbox', { name: /בדקתי את הטקסט/ }).check();
+  await page.getByRole('button', { name: 'אישור עובדות ושמירת עריכה כגרסה', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('העובדות אושרו');
+  await page.getByRole('checkbox', { name: /בדקתי את הטקסט/ }).check();
+  await page.getByRole('button', { name: 'הפיכת הגרסה המאושרת לפעילה', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('הגרסה הפעילה עודכנה');
+  await page.reload();
+  await expect(page.locator('.career-version')).toContainText('פעילה');
+  await page.getByRole('button', { name: 'קורות החיים שלי', exact: true }).click();
+  await expect(page.getByLabel('טקסט לבדיקה ולתיקון', { exact: true })).toHaveValue(text);
+  await page.goto('/account');
+  await page.getByRole('button', { name: 'מחיקת הנתונים השמורים בחשבון', exact: true }).click();
+  await page.getByRole('button', { name: 'כן, מחיקת נתוני החשבון', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('נמחקו');
+  await page.goto('/app/resumes');
+  await expect(page.locator('.career-version')).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.stringify({ ...localStorage }))).not.toContain(
+    'Example Employer',
+  );
+});
 test('real email registration/verification and independent sessions synchronize account data', async ({
   page,
   browser,

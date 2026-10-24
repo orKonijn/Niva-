@@ -7,7 +7,8 @@
     <h1 class="text-3xl">החשבון והנתונים שלי</h1>
     <p>
       החיבור פעיל עבור <bdi class="break-all">{{ session.user()?.email }}</bdi
-      >. נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. קורות חיים אינם נשמרים.
+      >. נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. קורות חיים ושיחות מנוהלים בנפרד, עם שמירה
+      מוגבלת ל־30 יום.
     </p>
     @if (store.accountLoading()) {
       <p role="status">טוענים את נתוני החשבון…</p>
@@ -119,6 +120,10 @@
     <section class="account-panel">
       <h2 class="mb-4 text-xl">ניהול נתונים ופרטיות</h2>
       <p>
+        <a class="text-brand underline" href="/api/career/export">ייצוא קורות חיים ושיחות (JSON)</a>
+        · <a class="text-brand underline" routerLink="/app/resumes">ניהול גרסאות וקובצי מקור</a>
+      </p>
+      <p>
         {{
           session.config().platform === 'sites'
             ? 'הזיהוי נעשה באמצעות ChatGPT ונתוני החשבון נשמרים ב־Cloudflare D1.'
@@ -136,8 +141,8 @@
       @if (confirmDelete()) {
         <div class="mt-5" role="alert">
           <p>
-            למחוק את ההעדפות, הפרופיל השמור, המשרות ואישורי ההדגמה בשרת? הנתונים במכשיר ושיטות
-            ההתחברות לא יימחקו.
+            למחוק את ההעדפות, הפרופיל השמור, המשרות, אישורי ההדגמה, קורות החיים והשיחות בשרת?
+            הנתונים במכשיר ושיטות ההתחברות לא יימחקו.
           </p>
           <button
             class="account-button text-error"

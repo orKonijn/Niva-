@@ -42,6 +42,53 @@ export class AppStore {
   readonly jobsError = signal('');
   readonly feedCheckedAt = signal('');
   readonly feedStale = signal(false);
+  readonly feedTotal = signal(0);
+  readonly nextCursor = signal<string | null>(null);
+  readonly feedChanged = signal(false);
+  readonly sourceHealth = signal<
+    { id: string; checked_at: string | null; error: string | null; next_at: number }[]
+  >([]);
+  private feedQuery: Record<string, string> = {};
+  private feedPreferenceKey = '';
+  private feedGeneration = 0;
+  private feedAbort: AbortController | null = null;
+  private feedSnapshot = '';
+  setFeedQuery(query: Record<string, string>, preferenceKey = ''): void {
+    if (
+      JSON.stringify(query) === JSON.stringify(this.feedQuery) &&
+      preferenceKey === this.feedPreferenceKey
+    )
+      return;
+    this.feedPreferenceKey = preferenceKey;
+    this.feedQuery = query;
+    void this.loadJobs();
+  }
+  async checkFeed(): Promise<void> {
+    if (!this.session.config().discovery || this.jobsLoading() || this.catalogMode() !== 'real')
+      return;
+    const generation = this.feedGeneration;
+    try {
+      const response = await fetch(
+        '/api/feed?' + new URLSearchParams({ ...this.feedQuery, limit: '1' }),
+        { signal: AbortSignal.timeout(10000), cache: 'no-store' },
+      );
+      if (response.ok) {
+        const result = await response.json();
+        if (
+          generation === this.feedGeneration &&
+          this.feedSnapshot &&
+          result.snapshot !== this.feedSnapshot
+        )
+          this.feedChanged.set(true);
+      }
+    } catch {
+      /* Polling is best-effort; explicit refresh provides actionable errors. */
+    }
+  }
+  async loadMore(): Promise<void> {
+    if (this.nextCursor() && !this.jobsLoading()) await this.loadJobs(true);
+  }
+
   get jobs(): readonly Job[] {
     return this.catalogMode() === 'real'
       ? [...this.realJobs(), ...this.archivedJobs()]
@@ -54,41 +101,99 @@ export class AppStore {
     this.selectedCatalog.set(mode);
     if (mode === 'real') void this.loadJobs();
   }
-  async loadJobs(): Promise<void> {
-    if (this.jobsLoading()) return;
+  async loadJobs(more = false): Promise<void> {
+    if (more && this.jobsLoading()) return;
+    this.feedAbort?.abort();
+    const controller = new AbortController();
+    this.feedAbort = controller;
+    const generation = ++this.feedGeneration;
     const owner = this.session.userId();
     this.jobsLoading.set(true);
     this.jobsError.set('');
     try {
-      const response = await fetch('/api/jobs', { credentials: 'same-origin', cache: 'no-store' });
-      if (!response.ok) throw new Error();
+      const discovery = this.session.config().discovery;
+      const query = new URLSearchParams({
+        ...this.feedQuery,
+        limit: String(more ? 12 : Math.min(50, Math.max(12, this.realJobs().length))),
+        ...(more && this.nextCursor() ? { cursor: this.nextCursor()! } : {}),
+      });
+      const response = await fetch(discovery ? '/api/feed?' + query : '/api/jobs', {
+        credentials: 'same-origin',
+        cache: 'no-store',
+        signal: AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]),
+      });
+      if (!response.ok)
+        throw new Error(
+          response.status === 409
+            ? 'CURSOR_EXPIRED'
+            : response.status === 429
+              ? 'RATE_LIMITED'
+              : 'FEED_UNAVAILABLE',
+        );
       const feed = (await response.json()) as {
         jobs: Job[];
         archived?: Job[];
         fetchedAt: string;
         stale: boolean;
+        total?: number;
+        nextCursor?: string | null;
+        snapshot?: string;
+        health?: { id: string; checked_at: string | null; error: string | null; next_at: number }[];
       };
       if (
         !Array.isArray(feed.jobs) ||
-        !feed.jobs.every(
-          (j) =>
-            j.source?.kind === 'real' &&
-            /^greenhouse-appsflyer-\d+$/.test(j.id) &&
-            new URL(j.source.applicationUrl).hostname === 'careers.appsflyer.com' &&
-            j.source.applicationUrl.startsWith('https://'),
-        )
+        !feed.jobs.every((j) => {
+          if (j.source?.kind !== 'real' || !j.source.applicationUrl.startsWith('https://'))
+            return false;
+          const url = new URL(j.source.applicationUrl);
+          return (
+            (/^greenhouse-appsflyer-\d+$/.test(j.id) && url.hostname === 'careers.appsflyer.com') ||
+            (/^lever-walkme-[a-z0-9-]+$/i.test(j.id) &&
+              url.hostname === 'jobs.lever.co' &&
+              url.pathname.startsWith('/walkme/'))
+          );
+        })
       )
         throw new Error();
-      this.realJobs.set(feed.jobs);
-      if (owner === this.session.userId()) this.archivedJobs.set(feed.archived ?? []);
+      if (generation !== this.feedGeneration || owner !== this.session.userId()) return;
+      this.realJobs.set([
+        ...new Map([...(more ? this.realJobs() : []), ...feed.jobs].map((j) => [j.id, j])).values(),
+      ]);
+      this.archivedJobs.set(feed.archived ?? []);
       this.feedCheckedAt.set(feed.fetchedAt);
       this.feedStale.set(feed.stale);
-    } catch {
-      this.jobsError.set(
-        'לא ניתן לרענן משרות מהמקור. אפשר לנסות שוב; משרות שכבר נטענו נשארות מוצגות.',
-      );
+      this.feedTotal.set(feed.total ?? feed.jobs.length);
+      this.nextCursor.set(feed.nextCursor ?? null);
+      this.feedSnapshot = feed.snapshot ?? '';
+      this.sourceHealth.set(feed.health ?? []);
+      this.feedChanged.set(false);
+    } catch (error) {
+      if (generation === this.feedGeneration && !controller.signal.aborted)
+        this.jobsError.set(
+          error instanceof Error && error.message === 'CURSOR_EXPIRED'
+            ? 'המאגר השתנה. יש לרענן את התוצאות לפני טעינת עמוד נוסף.'
+            : error instanceof Error && error.message === 'RATE_LIMITED'
+              ? 'הגעת למגבלת הבקשות. אפשר לנסות שוב בעוד דקה.'
+              : 'לא ניתן לרענן משרות מהמקור. אפשר לנסות שוב; משרות שכבר נטענו נשארות מוצגות.',
+        );
     } finally {
-      this.jobsLoading.set(false);
+      if (generation === this.feedGeneration) this.jobsLoading.set(false);
+    }
+  }
+  async ensureJob(id: string): Promise<void> {
+    if (!this.session.config().discovery || this.findJob(id) || !/^(greenhouse|lever)-/.test(id))
+      return;
+    const owner = this.session.userId();
+    try {
+      const response = await fetch('/api/listings/' + encodeURIComponent(id), {
+        signal: AbortSignal.timeout(10000),
+      });
+      if (response.ok) {
+        const job = (await response.json()) as Job;
+        if (owner === this.session.userId()) this.archivedJobs.update((jobs) => [...jobs, job]);
+      }
+    } catch {
+      this.jobsError.set('לא ניתן לטעון את פרטי המשרה.');
     }
   }
   readonly preferences = computed(() =>
@@ -128,20 +233,23 @@ export class AppStore {
   private readonly refreshTimer: ReturnType<typeof setInterval>;
   constructor() {
     effect(() => {
-      this.session.userId();
-      if (!this.session.loading() && this.session.config().realJobs)
-        untracked(() => void this.loadJobs());
-    });
-    effect(() => {
       if (this.session.loading()) return;
       const userId = this.session.userId();
       untracked(() => {
         this.accountGeneration = crypto.randomUUID();
         this.account.set(emptyAccountState());
         this.archivedJobs.set([]);
+        this.feedGeneration++;
+        this.feedAbort?.abort();
+        this.realJobs.set([]);
+        this.nextCursor.set(null);
+        this.feedTotal.set(0);
+        this.feedPreferenceKey = '';
+        this.jobsLoading.set(false);
         this.accountReady.set(false);
         this.accountNotice.set('');
         this.resumeName.set('');
+        if (this.session.config().realJobs) void this.loadJobs();
         if (userId) {
           this.theme.accountSelection = (value) => {
             void this.change({ type: 'theme', value });
@@ -316,6 +424,7 @@ export class AppStore {
     return this.change({ type: 'import', data: preview.data, receipt: preview.receipt });
   }
   ngOnDestroy(): void {
+    this.feedAbort?.abort();
     clearInterval(this.refreshTimer);
     window.removeEventListener('focus', this.onFocus);
   }

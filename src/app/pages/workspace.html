@@ -26,9 +26,11 @@
               (click)="closeMenu()"
               ><niva-icon [name]="link.icon" />{{ link.name }}
               @if (link.path === '/app/jobs') {
-                <span class="nav-count ms-[auto] bg-surface p-[2px_7px] rounded-[5px]">{{
-                  store.eligibleJobs().length
-                }}</span>
+                <span
+                  title="משרות שנטענו"
+                  class="nav-count ms-[auto] bg-surface p-[2px_7px] rounded-[5px]"
+                  >{{ store.eligibleJobs().length }}</span
+                >
               }
             </a>
           }

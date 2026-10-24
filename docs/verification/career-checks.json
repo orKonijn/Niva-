@@ -1,0 +1,25 @@
+{
+  "verifiedAt": "2026-10-24T17:46:29Z",
+  "scope": "local only; no push or deployment",
+  "branch": "codex/career-assistant",
+  "frontendUnitTests": 42,
+  "serverTests": 31,
+  "fullBrowserSuite": {
+    "passed": 184,
+    "projects": ["desktop Chromium", "mobile Chromium", "Firefox", "WebKit"]
+  },
+  "postContrastFixFocusedBrowserChecks": 48,
+  "typeChecks": ["server", "unit tests", "browser tests"],
+  "productionBuild": "passed; direct CSS under existing CSP",
+  "formatCheck": "passed after normalization",
+  "realProviders": {
+    "Greenhouse AppsFlyer": "22 Israeli listings at recorded source check",
+    "Lever WalkMe": "6 Israeli listings at recorded source check"
+  },
+  "mockedOrUnverified": [
+    "OpenAI response quality and production credentials",
+    "real malware scanner and bounded document parser",
+    "hosted scheduler activation"
+  ],
+  "screenshots": "Explicitly labeled UI fixtures, not real candidate resumes or verified AI responses"
+}

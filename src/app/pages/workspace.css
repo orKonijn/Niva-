@@ -9,6 +9,22 @@
   overflow-y: auto;
   color: var(--ink);
 }
+.desktop-navigation {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.desktop-navigation .app-sidebar {
+  position: static;
+  height: auto;
+  min-height: 100dvh;
+}
+.desktop-navigation .app-sidebar > * {
+  flex-shrink: 0;
+}
 .navigation-dialog::backdrop {
   background: #14244180;
 }

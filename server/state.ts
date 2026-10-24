@@ -224,6 +224,12 @@ export function stateRepository(
         state.importedAt,
         new Date().toISOString(),
       );
+      if (
+        input &&
+        typeof input === 'object' &&
+        (input as { operation?: { type?: string } }).operation?.type === 'delete-data'
+      )
+        db.prepare('DELETE FROM niva_documents WHERE owner=?').run(userId);
       db.exec('COMMIT');
       return state;
     } catch (error) {

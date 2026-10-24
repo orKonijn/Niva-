@@ -1,5 +1,7 @@
 # Niva live job-search application
 
+> Historical baseline/deployed behavior. The newer career extension is local only; see [career-assistant.md](career-assistant.md) for feed, resume, matching, chat, configuration and retention changes.
+
 The normal hosted experience opens real source jobs and account features by default. Landing-page actions lead to sign-in; the homepage preview uses actual retrieved listings. Demo switches, sample approval statistics and pause controls are excluded from the main real-job flow. Existing sample data, history, pause state and import remain available separately under the account's collapsed legacy-data section. Nothing is reclassified as a real application submission. The hosted display title is now **Niva — חיפוש עבודה**; the existing URL and audience are preserved.
 
 Normal-experience verification: 156 browser cases passed across all four configurations; after the final landing-page copy/navigation changes, 44 focused journey and hosted-flow cases passed again. Frontend/server tests remained 38/18 passing, with type, format and production-build checks passing. No schema or authentication-provider configuration was changed for this release.

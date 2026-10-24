@@ -8,6 +8,7 @@ export interface AccountUser {
 export interface AuthConfiguration {
   platform?: 'sites';
   realJobs?: boolean;
+  discovery?: boolean;
   emailDelivery?: 'local-outbox' | 'smtp' | 'configured' | 'unavailable';
   accounts: boolean;
   email: boolean;

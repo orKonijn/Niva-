@@ -1,5 +1,7 @@
 # Development status
 
+> Historical baseline/deployed behavior. The newer career extension is local only; see [career-assistant.md](career-assistant.md) for feed, resume, matching, chat, configuration and retention changes.
+
 This document records the original frontend milestone. For the current account backend, real sign-in routes, persistent data, map, setup and verification status, see [Accounts and map implementation](accounts-map.md). The original no-auth description below applies to the earlier guest-only milestone.
 
 ## First milestone

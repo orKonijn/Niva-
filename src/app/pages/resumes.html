@@ -1,0 +1,184 @@
+<div class="career-heading">
+  <div>
+    <span class="section-kicker">הניסיון שלך, במילים שלך</span>
+    <h1>קורות החיים שלך</h1>
+    <p>בודקים את העובדות, מדגישים את הרלוונטי ומאשרים כל גרסה.</p>
+  </div>
+  <a routerLink="/app/assistant" class="account-button">עזרה בניסוח ובתרגול ריאיון</a>
+</div>
+<section class="account-panel" aria-label="שמירה ועיבוד קורות חיים">
+  <h2>פרטיות ושליטה</h2>
+  <p>
+    טקסט וגרסאות נשמרים בחשבון ל־30 יום ממועד יצירתם, ואז אינם נגישים ונמחקים בניקוי הבא. ניתן לייצא
+    ולמחוק בכל עת. לא שולחים קורות חיים למעסיק.
+  </p>
+  <p>
+    התאמה בסיסית ממיינת פסקאות שלמות מהמקור בלי לשנות עובדות, בתוך Niva. אין העברה לבינה מלאכותית
+    בפעולה זו. בצ׳אט נדרשת הסכמה נפרדת לשיתוף עם OpenAI.
+  </p>
+  <p>
+    ייצוא זמין כטקסט UTF-8 נגיש וניתן לבחירה. המקור נשמר. אין הבטחה לריאיון או לעמידה בכל מערכת ATS.
+  </p>
+</section>
+@if (career.error()) {
+  <p role="alert">{{ career.error() }}</p>
+}
+@if (notice()) {
+  <p role="status" class="account-panel">{{ notice() }}</p>
+}
+<div class="career-columns">
+  <section class="account-panel">
+    <h2>מתחילים מטקסט</h2>
+    <form (ngSubmit)="create()">
+      <label class="career-field"
+        >שם הגרסה<input name="resumeName" [(ngModel)]="name" maxlength="120" required
+      /></label>
+      <label class="career-field"
+        >טקסט קורות החיים<textarea
+          name="resumeText"
+          dir="auto"
+          [(ngModel)]="text"
+          minlength="20"
+          maxlength="30000"
+          rows="9"
+          required
+        ></textarea>
+      </label>
+      <button class="account-button account-primary" [disabled]="busy() || text.trim().length < 20">
+        שמירת טיוטה לבדיקה
+      </button>
+    </form>
+    <hr class="my-5" />
+    <h3>או קובץ PDF / DOCX</h3>
+    @if (career.config().uploads) {
+      <p>
+        הקובץ יועבר ל־<bdi>{{ career.config().processor }}</bdi> לסריקת נוזקות ופענוח מוגבל. עד
+        750KB, עד 20 עמודים. אין להשתמש במסמכים המכילים מידע שאינך רוצה להעביר לשירות זה.
+      </p>
+      <label class="career-check"
+        ><input type="checkbox" [(ngModel)]="processingConsent" />אני מאשר/ת העברה לשירות הסריקה
+        והפענוח המוצג</label
+      >
+    } @else {
+      <p>העלאת קבצים אינה זמינה: שירות הסריקה והפענוח טרם הוגדר. ניתן להדביק טקסט בבטחה.</p>
+    }
+    <label class="career-field"
+      >קובץ לבדיקה<input
+        type="file"
+        accept=".pdf,.docx"
+        [disabled]="busy() || !career.config().uploads || !processingConsent"
+        (change)="upload($event)"
+    /></label>
+  </section>
+  <section class="account-panel">
+    <h2>הגרסאות שלי</h2>
+    <p>עד 20 גרסאות. אישור עובדות והפעלת גרסה הן פעולות נפרדות.</p>
+    @for (resume of career.resumes(); track resume.id) {
+      <div class="career-version">
+        <button
+          class="account-button"
+          [attr.aria-pressed]="selected()?.id === resume.id"
+          (click)="select(resume)"
+        >
+          <bdi>{{ resume.name }}</bdi>
+        </button>
+        <p>
+          {{ resume.active ? 'פעילה · ' : ''
+          }}{{ resume.confirmed ? 'עובדות אושרו' : 'טיוטה לבדיקה' }} ·
+          {{ resume.kind === 'original' ? 'מקור' : resume.kind === 'tailored' ? 'התאמה' : 'עריכה' }}
+        </p>
+        <p>
+          תוקף: <bdi>{{ resume.expiresAt.slice(0, 10) }}</bdi>
+        </p>
+        <button class="account-button" (click)="deleteCandidate.set(resume.id)" [disabled]="busy()">
+          מחיקת גרסה
+        </button>
+      </div>
+    } @empty {
+      <p>אין עדיין גרסאות. מתחילים בהדבקת הטקסט ובדיקה שלו.</p>
+    }
+  </section>
+</div>
+@if (deleteCandidate()) {
+  <section class="account-panel" role="region" aria-label="אישור מחיקת גרסה">
+    <h2>למחוק את הגרסה?</h2>
+    <p>
+      המחיקה אינה ניתנת לביטול. יימחקו גם ציונים ושיחות שעשויים להכיל את הטקסט. גרסאות נגזרות הן
+      עותקים נפרדים.
+    </p>
+    <button class="account-button" (click)="deleteCandidate.set(null)">ביטול</button
+    ><button class="account-button" [disabled]="busy()" (click)="remove()">
+      אישור מחיקה לצמיתות
+    </button>
+  </section>
+}
+@if (selected(); as resume) {
+  <section class="account-panel" aria-label="בדיקה והשוואת גרסאות">
+    <h2>
+      בדיקת הגרסה: <bdi>{{ resume.name }}</bdi>
+    </h2>
+    @if (resume.explanation) {
+      <p>{{ resume.explanation }}</p>
+      <p>
+        מידע שכדאי להשלים אם קיים בניסיון שלך: <bdi>{{ resume.missing?.join(', ') }}</bdi
+        >. מידע חסר אינו היעדר ניסיון.
+      </p>
+    }
+    <div class="career-columns">
+      @if (before(); as original) {
+        <div>
+          <h3>לפני — מקור ללא שינוי</h3>
+          <pre class="career-text" dir="auto">{{ original.text }}</pre>
+        </div>
+      }
+      <label class="career-field"
+        >{{ before() ? 'אחרי — טיוטה לעריכה' : 'טקסט לבדיקה ולתיקון'
+        }}<textarea
+          rows="15"
+          dir="auto"
+          [(ngModel)]="editText"
+          [disabled]="busy()"
+          maxlength="30000"
+        ></textarea>
+      </label>
+    </div>
+    <label class="career-check"
+      ><input type="checkbox" [(ngModel)]="reviewed" [disabled]="busy()" />בדקתי את הטקסט. כל
+      הכישורים, המעסיקים, התאריכים וההישגים נכונים; אני מאשר/ת את הפעולה הבאה</label
+    >
+    <div class="career-actions">
+      <button class="account-button" [disabled]="busy() || !reviewed" (click)="review()">
+        אישור עובדות ושמירת עריכה כגרסה</button
+      ><button
+        class="account-button account-primary"
+        [disabled]="busy() || !reviewed || !resume.confirmed || editText !== resume.text"
+        (click)="activate()"
+      >
+        הפיכת הגרסה המאושרת לפעילה</button
+      ><a class="account-button" [href]="'/api/career/resumes/' + resume.id + '/export'"
+        >הורדת טקסט</a
+      >
+      @if (resume.mime) {
+        <a class="account-button" [href]="'/api/career/resumes/' + resume.id + '/original'"
+          >הורדת קובץ המקור</a
+        >
+      }
+    </div>
+    @if (job(); as job) {
+      <div class="mt-5">
+        <h3>
+          התאמה למשרה: <bdi>{{ job.title }}</bdi>
+        </h3>
+        <p>
+          מיון פסקאות שלמות לפי מונחים במשרה, ללא הוספת עובדות. הגרסה המקורית לא תוחלף. יש לבדוק את
+          סדר הסעיפים אחרי המיון.
+        </p>
+        <button class="account-button" [disabled]="busy() || !resume.confirmed" (click)="tailor()">
+          יצירת טיוטה מותאמת למשרה
+        </button>
+      </div>
+    } @else {
+      <p><a routerLink="/app/jobs">בחירת משרה להתאמת קורות חיים</a></p>
+    }
+  </section>
+}

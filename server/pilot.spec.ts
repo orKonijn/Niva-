@@ -79,6 +79,31 @@ function setup() {
 }
 afterEach(() => vi.unstubAllGlobals());
 describe('hosted pilot adapter (verified identity boundary is mocked locally)', () => {
+  it('isolates career documents through the D1 adapter and includes them in account-data deletion', async () => {
+    const { request, sqlite } = setup();
+    const response = await request('career/resumes', 'alice', {
+      name: 'CV',
+      text: 'Candidate with Python and SQL experience',
+    });
+    expect(response.status).toBe(201);
+    const resume = (await response.json()) as { id: string; text: string };
+    expect(await (await request('career/resumes', 'bob')).json()).toEqual([]);
+    expect((await request(`career/resumes/${resume.id}/export`, 'bob')).status).toBe(404);
+    await request(`career/resumes/${resume.id}/review`, 'alice', {
+      text: resume.text,
+      confirmed: true,
+    });
+    await request(`career/resumes/${resume.id}/activate`, 'alice', { confirmed: true });
+    expect((await (await request('career/resumes', 'alice')).json())[0].active).toBe(true);
+    expect(
+      (await request('account/state', 'alice', { revision: 0, operation: { type: 'delete-data' } }))
+        .status,
+    ).toBe(200);
+    expect(sqlite.prepare('SELECT * FROM niva_documents WHERE owner=?').all('sites:alice')).toEqual(
+      [],
+    );
+    expect((await request(`career/resumes/${resume.id}/export`, 'alice')).status).toBe(404);
+  });
   it('normalizes only real Israeli employer posts, preserves uncertainty, rejects malicious URLs', () => {
     const jobs = normalizeFeed(raw);
     expect(jobs).toHaveLength(1);

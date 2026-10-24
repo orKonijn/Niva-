@@ -2,7 +2,7 @@ import { Category, District, WorkStyle } from '../preferences';
 export interface JobLocation {
   id: string;
   country: 'IL';
-  district: District;
+  district: District | 'unknown';
   city: string;
   street?: string;
   houseNumber?: string;
@@ -20,7 +20,7 @@ export interface Job {
   company: string;
   initials: string;
   color: string;
-  district: District;
+  district: District | 'unknown';
   workStyle: WorkStyle | 'unknown';
   category: Category | 'other';
   posted: string;
@@ -30,6 +30,10 @@ export interface Job {
   offices: JobLocation[];
   source?: {
     kind: 'real';
+    sourceId?: string;
+    publishedAt?: string;
+    version?: string;
+    attribution?: { name: string; url: string }[];
     name: string;
     url: string;
     applicationUrl: string;

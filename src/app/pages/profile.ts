@@ -1,5 +1,6 @@
 import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppStore } from '../core/app-store';
 import { CookiePreferences } from '../core/cookie-preferences';
@@ -9,7 +10,7 @@ import { validateResume } from '../core/resume-validation';
 import { protectUnsaved } from '../core/unsaved';
 import { FormStatus } from '../shared/form-status';
 @Component({
-  imports: [PageHeading, FormsModule, Icon, FormStatus],
+  imports: [PageHeading, FormsModule, Icon, FormStatus, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './profile.html',
 })

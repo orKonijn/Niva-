@@ -5,6 +5,7 @@
     <span
       class="company-avatar inline-flex items-center justify-center shrink-[0]"
       [style.background]="job().color"
+      [style.color]="job().source ? '#142441' : null"
       >{{ job().initials }}</span
     >
     <div class="job-title flex-[1] min-w-[0]">
@@ -16,7 +17,7 @@
       <span
         ><bdi>{{ job().company }}</bdi>
         <span class="muted text-muted"
-          >· {{ job().source ? 'מקור: Greenhouse' : 'חברת הדגמה' }}</span
+          >· {{ job().source ? job().source!.name : 'חברת הדגמה' }}</span
         ></span
       >
     </div>
@@ -46,6 +47,16 @@
   >
     <niva-icon name="sparkles" />{{ job().reason }}
   </p>
+  @if (job().source) {
+    <niva-match-indicator [job]="job()" />
+    <div class="career-actions">
+      <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
+        >שיחה על המשרה</a
+      ><a class="account-button" routerLink="/app/resumes" [queryParams]="{ job: job().id }"
+        >התאמת קורות חיים</a
+      >
+    </div>
+  }
   <div class="job-card-bottom flex items-center justify-between gap-[10px] pt-[15px]">
     <span
       class="status-badge items-center justify-center gap-[5px] rounded-[7px] p-[5px_9px] font-medium"

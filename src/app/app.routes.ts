@@ -54,6 +54,19 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/dashboard').then((m) => m.Dashboard),
       },
       {
+        path: 'assistant',
+        title: 'העוזרת שלך — Niva',
+        canActivate: [accountGuard],
+        loadComponent: () => import('./pages/assistant').then((m) => m.Assistant),
+      },
+      {
+        path: 'resumes',
+        canDeactivate: [unsavedGuard],
+        title: 'קורות החיים שלך — Niva',
+        canActivate: [accountGuard],
+        loadComponent: () => import('./pages/resumes').then((m) => m.Resumes),
+      },
+      {
         path: 'jobs',
         title: 'משרות שמתאימות לך — Niva',
         loadComponent: () => import('./pages/jobs').then((m) => m.Jobs),

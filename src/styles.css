@@ -34,3 +34,5 @@
   --radius-control: 0.75rem;
   --shadow-card: 0 8px 32px rgb(20 36 65 / 0.06);
 }
+
+@import './styles/career.css';

@@ -1,0 +1,145 @@
+<div class="career-heading">
+  <div>
+    <span class="section-kicker">כיוון לצעד הבא</span>
+    <h1>מדברים עם Niva</h1>
+    <p>חיפוש במשרות שבמאגר, הבנת דרישות, ניסוח והכנה לריאיון — בעברית ובאנגלית.</p>
+  </div>
+  <button class="account-button" (click)="fresh()">שיחה חדשה</button>
+</div>
+<section class="account-panel">
+  <h2>לפני השיחה</h2>
+  <p>
+    ההודעות, הפרופיל, העדפות החיפוש ופרטי המשרות הרלוונטיות יועברו ל־OpenAI. קורות חיים יצורפו רק
+    בבחירה נפרדת של הגרסה הפעילה והמאושרת. אין שימוש במידע מחשבונות אחרים.
+  </p>
+  <p>
+    שיחות נשמרות ב־Niva ל־30 יום. אפשר למחוק שיחה כאן. הבקשה לספק מוגדרת ללא שמירת תגובה לשימוש
+    חוזר; מדיניות הספק עשויה לכלול שמירה לצורכי אבטחה. יש לבדוק מידע לפני שימוש. לא נשלחות מועמדויות
+    ולא משתנות העדפות בצ׳אט.
+  </p>
+  <label class="career-check"
+    ><input type="checkbox" [(ngModel)]="consent" [disabled]="busy()" />אני מסכים/ה לעיבוד הנתונים
+    המפורטים על ידי OpenAI</label
+  >
+  <label class="career-check"
+    ><input
+      type="checkbox"
+      [(ngModel)]="includeResume"
+      [disabled]="busy() || !career.active()"
+    />לצרף את טקסט קורות החיים מהגרסה הפעילה והמאושרת ל־OpenAI</label
+  >
+  @if (!career.config().ai) {
+    <p role="status">
+      שירות הבינה המלאכותית טרם הוגדר. אין תשובה מדומה. חיפוש המשרות וכלי קורות החיים זמינים בנפרד.
+    </p>
+  }
+  @if (jobId) {
+    <p>
+      הקשר משרה: <bdi>{{ selectedJob()?.title || 'בודקים את פרטי המשרה' }}</bdi
+      >. השרת בודק שהמשרה עדיין זמינה.
+    </p>
+  }
+</section>
+<div class="career-columns career-chat-layout">
+  <section class="account-panel">
+    <h2>השיחה שלך</h2>
+    <div class="chat-messages" role="log" aria-label="הודעות השיחה" aria-relevant="additions text">
+      @for (item of messages(); track $index) {
+        <article class="chat-message" [class.chat-user]="item.role === 'user'">
+          <h3>{{ item.role === 'user' ? 'את/ה' : 'Niva' }}</h3>
+          <p dir="auto">{{ item.text }}</p>
+        </article>
+      } @empty {
+        <p>למשל: ״עזרי לי להבין את הדרישות במשרה הזו״ או ״תרגלי איתי ריאיון באנגלית״.</p>
+      }
+      @if (partial()) {
+        <article class="chat-message">
+          <h3>Niva — {{ busy() ? 'כותבת…' : 'תשובה חלקית שלא נשמרה' }}</h3>
+          <p dir="auto">{{ partial() }}</p>
+        </article>
+      }
+    </div>
+    @if (error()) {
+      <p role="alert">{{ error() }}</p>
+    }
+    <form (ngSubmit)="send()">
+      <label class="career-field"
+        >ההודעה שלך<textarea
+          name="message"
+          rows="4"
+          dir="auto"
+          [(ngModel)]="message"
+          maxlength="2000"
+          required
+          [disabled]="busy()"
+        ></textarea>
+      </label>
+      <div class="career-actions">
+        <button
+          class="account-button account-primary"
+          [disabled]="busy() || !consent || !message.trim() || !career.config().ai"
+        >
+          {{ busy() ? 'ממתינים לתשובה…' : 'שליחה' }}
+        </button>
+        @if (busy()) {
+          <button type="button" class="account-button" (click)="stop()">עצירת תשובה</button>
+        }
+        @if (lastMessage && error()) {
+          <button
+            type="button"
+            class="account-button"
+            [disabled]="busy() || !consent || !career.config().ai"
+            (click)="send(true)"
+          >
+            ניסיון חוזר
+          </button>
+        }
+      </div>
+    </form>
+    <p>
+      לשינוי נתונים יש לבדוק ולאשר בטופס: <a routerLink="/app/preferences">העדפות</a> ·
+      <a routerLink="/app/profile">פרופיל</a>.
+    </p>
+    @if (jobs().length) {
+      <h3>משרות מהמאגר שנמסרו כהקשר</h3>
+      <p>הפניות בתשובה משתמשות במזהה המשרה. אלה קישורים שנבנו מהמאגר, ללא קישורים שנוצרו במודל.</p>
+      <ul>
+        @for (job of jobs(); track job.id) {
+          <li>
+            <a [routerLink]="['/app/jobs', job.id]"
+              ><bdi>{{ job.title }} — {{ job.company }}</bdi></a
+            ><small
+              ><bdi>[job:{{ job.id }}]</bdi></small
+            >
+          </li>
+        }
+      </ul>
+    }
+  </section>
+  <aside class="account-panel">
+    <h2>שיחות שמורות</h2>
+    @for (conversation of conversations(); track conversation.id) {
+      <div class="career-version">
+        <button class="account-button" (click)="open(conversation)" [disabled]="busy()">
+          <span dir="auto">{{ conversation.messages[0]?.text?.slice(0, 70) || 'שיחה' }}</span>
+        </button>
+        <p>
+          <bdi>{{ conversation.createdAt.slice(0, 10) }}</bdi>
+        </p>
+        <button class="account-button" [disabled]="busy()" (click)="deleteId.set(conversation.id)">
+          מחיקת שיחה
+        </button>
+      </div>
+    } @empty {
+      <p>אין שיחות שמורות.</p>
+    }
+  </aside>
+</div>
+@if (deleteId()) {
+  <section class="account-panel" aria-label="אישור מחיקת שיחה">
+    <h2>מחיקת שיחה לצמיתות?</h2>
+    <p>ההודעות יימחקו מ־Niva. המחיקה אינה מוחקת עותקים שכבר עובדו אצל הספק.</p>
+    <button class="account-button" (click)="deleteId.set(null)">ביטול</button
+    ><button class="account-button" (click)="remove()">אישור מחיקה לצמיתות</button>
+  </section>
+}

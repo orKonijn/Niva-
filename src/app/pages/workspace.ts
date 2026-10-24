@@ -49,6 +49,8 @@ export class Workspace {
     { path: '/app', name: 'סקירה כללית', icon: 'grid', exact: true },
     { path: '/app/jobs', name: 'משרות בשבילך', icon: 'search', exact: false },
     { path: '/app/applications', name: 'ההגשות שלי', icon: 'briefcase', exact: false },
+    { path: '/app/assistant', name: 'העוזרת שלך', icon: 'sparkles', exact: false },
+    { path: '/app/resumes', name: 'קורות חיים', icon: 'document', exact: false },
     { path: '/app/profile', name: 'הפרופיל שלי', icon: 'document', exact: false },
     { path: '/app/preferences', name: 'העדפות חיפוש', icon: 'settings', exact: false },
   ];

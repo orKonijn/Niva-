@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { MatchIndicator } from './match-indicator';
 import { RouterLink } from '@angular/router';
 import { AppStore, Job } from '../core/app-store';
 import { districtLabel, workStyleLabel } from '../core/preferences';
 import { Icon } from './icon';
 @Component({
   selector: 'niva-job-card',
-  imports: [RouterLink, Icon],
+  imports: [RouterLink, Icon, MatchIndicator],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './job-card.html',
   styleUrl: './job-card.css',

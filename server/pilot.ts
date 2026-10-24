@@ -1,3 +1,6 @@
+import { createCareer, type CareerEnvironment } from './career';
+import { d1CareerDb } from './career-db';
+import { catalogJobs } from './discovery';
 import type { D1Database } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
@@ -7,7 +10,7 @@ import { applyStateOperation, importReceipt, normalizeImport, StateError } from 
 import { FEED_URL, normalizeFeed, type Feed } from './job-feed';
 import type { Job } from '../src/app/core/models/job';
 
-export interface PilotEnv {
+export interface PilotEnv extends CareerEnvironment {
   DB: D1Database;
   NIVA_IMPORT_SECRET: string;
 }
@@ -41,11 +44,14 @@ async function catalog(db: D1Database): Promise<Job[]> {
   const result = await db
     .prepare('SELECT data,active FROM niva_pilot_jobs')
     .all<{ data: string; active: number }>();
-  return result.results.map((row) => {
-    const job = JSON.parse(row.data) as Job;
-    job.source!.active = row.active === 1;
-    return job;
-  });
+  return [
+    ...(await catalogJobs(d1CareerDb(db))),
+    ...result.results.map((row) => {
+      const job = JSON.parse(row.data) as Job;
+      job.source!.active = row.active === 1;
+      return job;
+    }),
+  ];
 }
 let feedPending: Promise<Feed> | undefined;
 export async function pilotFeed(db: D1Database): Promise<Feed> {
@@ -104,13 +110,31 @@ export function createPilot(env: PilotEnv) {
     c.header('X-Content-Type-Options', 'nosniff');
     await next();
   });
-  app.use(
-    '/api/*',
-    bodyLimit({ maxSize: 32768, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) }),
+  app.use('/api/*', async (c, next) =>
+    c.req.path.startsWith('/api/career/')
+      ? bodyLimit({ maxSize: 1100000, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) })(
+          c,
+          next,
+        )
+      : bodyLimit({ maxSize: 32768, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) })(
+          c,
+          next,
+        ),
+  );
+  app.route(
+    '/',
+    createCareer({
+      db: d1CareerDb(env.DB),
+      secret: env.NIVA_IMPORT_SECRET,
+      env,
+      identity: async (request) => platformUser(request)?.id ?? null,
+      state: (owner) => readState(env.DB, owner),
+    }),
   );
   app.get('/api/config', (c) =>
     c.json({
       accounts: true,
+      discovery: true,
       platform: 'sites',
       realJobs: true,
       email: false,
@@ -165,7 +189,8 @@ export function createPilot(env: PilotEnv) {
       });
     }
     if (c.req.method === 'POST' && path === '/api/account/state') {
-      const next = applyStateOperation(user.id, state, await c.req.json(), env.NIVA_IMPORT_SECRET, [
+      const input = await c.req.json();
+      const next = applyStateOperation(user.id, state, input, env.NIVA_IMPORT_SECRET, [
         ...JOBS,
         ...(await catalog(env.DB)),
       ]);
@@ -183,6 +208,8 @@ export function createPilot(env: PilotEnv) {
         )
         .first();
       if (!result) throw new StateError(409, 'CONFLICT');
+      if (input.operation?.type === 'delete-data')
+        await env.DB.prepare('DELETE FROM niva_documents WHERE owner=?').bind(user.id).run();
       return c.json(next);
     }
     return c.json({ error: 'NOT_FOUND' }, 404);

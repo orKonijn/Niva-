@@ -1,0 +1,41 @@
+{
+  "verifiedAt": "2026-10-24T10:40:06.617Z",
+  "total": 28,
+  "health": [
+    {
+      "id": "greenhouse-appsflyer",
+      "checked_at": "2026-10-24T10:40:00.198Z",
+      "error": null,
+      "next_at": 1792839000198
+    },
+    {
+      "id": "lever-walkme",
+      "checked_at": "2026-10-24T10:40:00.198Z",
+      "error": null,
+      "next_at": 1792839300198
+    }
+  ],
+  "sources": [
+    {
+      "id": "greenhouse-appsflyer",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/appsflyer/jobs?content=true",
+      "cadenceMinutes": 10,
+      "jobs": 22,
+      "categories": [
+        "engineering",
+        "other",
+        "it-support",
+        "data-analytics",
+        "product",
+        "devops-cloud"
+      ]
+    },
+    {
+      "id": "lever-walkme",
+      "endpoint": "https://api.lever.co/v0/postings/walkme?mode=json&limit=100",
+      "cadenceMinutes": 15,
+      "jobs": 6,
+      "categories": ["engineering", "data-analytics", "design", "other"]
+    }
+  ]
+}

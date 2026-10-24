@@ -10,5 +10,12 @@ import { JobCard } from '../shared/job-card';
 })
 export class Dashboard {
   readonly store = inject(AppStore);
+  constructor() {
+    if (this.store.session.config().discovery && this.store.catalogMode() === 'real')
+      this.store.setFeedQuery(
+        {},
+        JSON.stringify([this.store.session.userId(), this.store.preferences()]),
+      );
+  }
   readonly recommended = computed(() => this.store.eligibleJobs().slice(0, 2));
 }

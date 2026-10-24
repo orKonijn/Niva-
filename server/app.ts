@@ -1,3 +1,5 @@
+import { createCareer } from './career';
+import { sqliteCareerDb } from './career-db';
 import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
 import { DatabaseSync } from 'node:sqlite';
@@ -10,16 +12,47 @@ import { JOBS } from '../src/app/core/data/sample-jobs';
 export function createBackend(database: DatabaseSync, options: AuthOptions) {
   database.exec('PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;');
   const auth = createAuth(database, options);
-  const states = stateRepository(database, options.secret, () => [...JOBS, ...localRealCatalog()]);
+  const states = stateRepository(database, options.secret, () => [
+    ...JOBS,
+    ...localRealCatalog(),
+    ...database
+      .prepare('SELECT data,active FROM niva_jobs')
+      .all()
+      .map((row) => {
+        const job = JSON.parse(String(row['data']));
+        job.source.active = !!row['active'];
+        return job;
+      }),
+  ]);
   const app = new Hono();
   app.use('/api/*', async (c, next) => {
     c.header('Cache-Control', 'no-store');
     c.header('X-Content-Type-Options', 'nosniff');
     await next();
   });
-  app.use(
-    '/api/*',
-    bodyLimit({ maxSize: 32768, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) }),
+  app.use('/api/*', async (c, next) =>
+    c.req.path.startsWith('/api/career/')
+      ? bodyLimit({ maxSize: 1100000, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) })(
+          c,
+          next,
+        )
+      : bodyLimit({ maxSize: 32768, onError: (c) => c.json({ error: 'BODY_TOO_LARGE' }, 413) })(
+          c,
+          next,
+        ),
+  );
+  app.route(
+    '/',
+    createCareer({
+      db: sqliteCareerDb(database),
+      secret: options.secret,
+      env: process.env,
+      identity: async (request) => {
+        const session = await auth.api.getSession({ headers: request.headers });
+        return session?.user.emailVerified ? session.user.id : null;
+      },
+      state: async (owner) => states.read(owner),
+    }),
   );
   app.get('/api/config', (c) =>
     c.json({
@@ -28,6 +61,8 @@ export function createBackend(database: DatabaseSync, options: AuthOptions) {
       google: !!options.google,
       apple: !!options.apple,
       accounts: true,
+      discovery: true,
+      realJobs: !options.browserTestMode,
     }),
   );
   app.all('/api/auth/*', async (c) => {
@@ -116,7 +151,7 @@ export async function migrateDatabase(database: DatabaseSync, options: AuthOptio
   database.exec(
     'CREATE TABLE IF NOT EXISTS niva_migrations (id TEXT PRIMARY KEY, applied_at TEXT NOT NULL)',
   );
-  for (const id of ['000_auth', '001_account_data', '002_auth_constraints']) {
+  for (const id of ['000_auth', '001_account_data', '002_auth_constraints', '003_career']) {
     if (!database.prepare('SELECT id FROM niva_migrations WHERE id=?').get(id)) {
       database.exec('BEGIN IMMEDIATE');
       try {

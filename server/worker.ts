@@ -1,3 +1,5 @@
+import { ingest } from './discovery';
+import { d1CareerDb } from './career-db';
 import { createPilot, platformUser, type PilotEnv } from './pilot';
 import assets from 'niva:assets';
 const headers = {
@@ -8,6 +10,9 @@ const headers = {
     "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
 };
 export default {
+  async scheduled(_event: unknown, env: PilotEnv) {
+    await ingest(d1CareerDb(env.DB));
+  },
   async fetch(request: Request, env: PilotEnv): Promise<Response> {
     try {
       const url = new URL(request.url);

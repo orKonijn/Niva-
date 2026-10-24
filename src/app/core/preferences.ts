@@ -96,7 +96,7 @@ export function validPreferences(value: Preferences): boolean {
 export function matchesPreferences(
   job: {
     category: Category | 'other';
-    district: District;
+    district: District | 'unknown';
     workStyle: WorkStyle | 'unknown';
     company: string;
   },
@@ -114,8 +114,10 @@ export function matchesPreferences(
     !excluded.some((x) => job.company.toLowerCase().includes(x))
   );
 }
-export const districtLabel = (value: District | 'all'): string =>
-  DISTRICTS.find((x) => x.id === value)?.label ?? 'כל המחוזות';
+export const districtLabel = (value: District | 'all' | 'unknown'): string =>
+  value === 'unknown'
+    ? 'מחוז לא נמסר'
+    : (DISTRICTS.find((x) => x.id === value)?.label ?? 'כל המחוזות');
 export const categoryLabel = (value: Category | 'all'): string =>
   CATEGORIES.find((x) => x.id === value)?.label ?? 'כל התחומים';
 export const workStyleLabel = (value: WorkStyle | 'unknown'): string =>

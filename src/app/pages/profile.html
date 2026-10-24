@@ -38,25 +38,30 @@
         store.isAccount() ? 'השם נשמר בפרופיל החשבון בשרת.' : 'השם נשמר בזיכרון בלבד עד רענון הדף.'
       }}
     </p>
-    <label
-      class="upload-zone flex flex-col items-center justify-center gap-[10px] p-[27px_15px] text-center compact"
-      ><niva-icon name="document" /><strong
-        ><bdi>{{ store.resumeName() || 'בחירת קובץ קורות חיים' }}</bdi></strong
-      ><small>PDF או DOCX, עד 10MB. התוכן לא נקרא או מועלה.</small
-      ><input
-        type="file"
-        accept=".pdf,.docx"
-        (change)="select($event)"
-        aria-label="בחירת קובץ קורות חיים"
-    /></label>
-    @if (store.resumeName()) {
-      <button
-        type="button"
-        class="plain-button p-[8px_0] text-muted"
-        (click)="store.resumeName.set('')"
-      >
-        הסרת בחירת קורות חיים
-      </button>
+    @if (store.isAccount()) {
+      <p>קורות חיים נבדקים ומאושרים במרחב נפרד, עם גרסאות והסבר התאמה.</p>
+      <a class="account-button" routerLink="/app/resumes">ניהול קורות חיים וגרסאות</a>
+    } @else {
+      <label
+        class="upload-zone flex flex-col items-center justify-center gap-[10px] p-[27px_15px] text-center compact"
+        ><niva-icon name="document" /><strong
+          ><bdi>{{ store.resumeName() || 'בחירת קובץ קורות חיים' }}</bdi></strong
+        ><small>PDF או DOCX, עד 10MB. התוכן לא נקרא או מועלה.</small
+        ><input
+          type="file"
+          accept=".pdf,.docx"
+          (change)="select($event)"
+          aria-label="בחירת קובץ קורות חיים"
+      /></label>
+      @if (store.resumeName()) {
+        <button
+          type="button"
+          class="plain-button p-[8px_0] text-muted"
+          (click)="store.resumeName.set('')"
+        >
+          הסרת בחירת קורות חיים
+        </button>
+      }
     }
     @if (error()) {
       <p

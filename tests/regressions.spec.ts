@@ -132,7 +132,7 @@ test('URL controls refresh and history while saved jobs survive preference chang
   await expect(page).not.toHaveURL(/saved=|q=|model=/);
 });
 
-test('CV metadata is committed on completion, restored on revisit and explicitly removed', async ({
+test('CV filename remains temporary, is cleared by reload and can be explicitly removed', async ({
   page,
 }) => {
   await page.goto('/signup');
@@ -154,6 +154,12 @@ test('CV metadata is committed on completion, restored on revisit and explicitly
     await page.getByRole('dialog').getByRole('link', { name: 'בחזרה לאתר', exact: true }).click();
   }
   await page.goto('/signup');
+  await expect(page.locator('.upload-zone strong')).toHaveText('מוסיפים קורות חיים');
+  await page.getByLabel('בחירת קובץ קורות חיים להדגמה').setInputFiles({
+    name: 'sample.pdf',
+    mimeType: 'application/pdf',
+    buffer: Buffer.from('metadata-only'),
+  });
   await expect(page.locator('.upload-zone strong')).toHaveText('sample.pdf');
   await page.getByRole('button', { name: 'הסרת בחירת קורות חיים' }).click();
   await page.getByRole('button', { name: 'ממשיכים עם פרופיל לדוגמה' }).click();

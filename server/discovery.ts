@@ -1,0 +1,417 @@
+import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import type { CareerDb } from './career-db';
+import { normalizeFeed, plainText, classify } from './job-feed';
+import type { Job } from '../src/app/core/models/job';
+import {
+  defaultPreferences,
+  migratePreferences,
+  type Preferences,
+} from '../src/app/core/preferences';
+
+export const SOURCES = [
+  {
+    id: 'greenhouse-appsflyer',
+    name: 'AppsFlyer / Greenhouse',
+    url: 'https://boards-api.greenhouse.io/v1/boards/appsflyer/jobs?content=true',
+    cadence: 600_000,
+  },
+  {
+    id: 'lever-walkme',
+    name: 'WalkMe / Lever',
+    url: 'https://api.lever.co/v0/postings/walkme?mode=json&limit=100',
+    cadence: 900_000,
+  },
+] as const;
+export const versionOf = (value: unknown) =>
+  createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 24);
+const str = (v: unknown) => (typeof v === 'string' ? v : '');
+export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
+  if (!Array.isArray(payload) || payload.length >= 100) throw new Error('INCOMPLETE_SOURCE');
+  return payload.flatMap((row: Record<string, unknown>) => {
+    if (!row || typeof row !== 'object') return [];
+    const categories = row['categories'] as Record<string, unknown> | undefined;
+    const location = str(categories?.['location']);
+    // Only explicit Israeli locations; remote does not imply worldwide eligibility.
+    if (
+      !/tel aviv|israel|herzliya|haifa|jerusalem|raanana|ra'anana|petah tikva|beer sheva/i.test(
+        location,
+      )
+    )
+      return [];
+    const id = str(row['id']);
+    const title = str(row['text']).slice(0, 200);
+    if (!/^[a-z0-9-]{10,80}$/i.test(id) || !title) return [];
+    let url: URL;
+    try {
+      url = new URL(str(row['hostedUrl']));
+    } catch {
+      return [];
+    }
+    if (
+      url.protocol !== 'https:' ||
+      url.hostname !== 'jobs.lever.co' ||
+      !url.pathname.startsWith('/walkme/') ||
+      url.username ||
+      url.password
+    )
+      return [];
+    const district = /haifa/i.test(location)
+      ? 'haifa'
+      : /jerusalem/i.test(location)
+        ? 'jerusalem'
+        : /beer sheva/i.test(location)
+          ? 'south'
+          : /raanana|ra'anana|petah tikva/i.test(location)
+            ? 'central'
+            : /tel aviv|herzliya/i.test(location)
+              ? 'tel-aviv'
+              : 'unknown';
+    const style = row['workplaceType'];
+    const published =
+      typeof row['createdAt'] === 'number' && Number.isFinite(row['createdAt'])
+        ? new Date(row['createdAt']).toISOString()
+        : undefined;
+    return [
+      {
+        id: `lever-walkme-${id}`,
+        title,
+        company: 'WalkMe',
+        initials: 'WM',
+        color: '#e4f1fa',
+        district,
+        category: classify(title),
+        workStyle:
+          style === 'remote' || style === 'hybrid'
+            ? style
+            : style === 'on-site'
+              ? 'onsite'
+              : 'unknown',
+        description: plainText(
+          [
+            row['descriptionPlain'],
+            ...(Array.isArray(row['lists'])
+              ? row['lists'].map(
+                  (l: Record<string, unknown>) => `${str(l['text'])} ${plainText(l['content'])}`,
+                )
+              : []),
+          ].join('\n'),
+        ),
+        posted: published ? `פורסם: ${published.slice(0, 10)}` : 'מועד הפרסום לא נמסר',
+        skills: [],
+        offices: [],
+        reason: 'מקור: WalkMe / Lever. סיווג תחום לפי כותרת; סגנון עבודה לפי המקור.',
+        source: {
+          kind: 'real',
+          sourceId: 'lever-walkme',
+          name: 'WalkMe / Lever',
+          url: 'https://jobs.lever.co/walkme',
+          applicationUrl: url.href,
+          updatedAt: published ?? '',
+          publishedAt: published,
+          fetchedAt,
+          location,
+          active: true,
+          classification: 'תחום לפי כותרת. אין כתובת משרד מאומתת.',
+        },
+      } satisfies Job,
+    ];
+  });
+}
+export async function boundedJson(response: Response, maximum = 4_000_000): Promise<unknown> {
+  if (!response.body) throw new Error('EMPTY_RESPONSE');
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.length;
+      if (size > maximum) throw new Error('RESPONSE_TOO_LARGE');
+      chunks.push(value);
+    }
+  } finally {
+    await reader.cancel().catch(() => {});
+  }
+  const buffer = new Uint8Array(size);
+  let offset = 0;
+  for (const c of chunks) {
+    buffer.set(c, offset);
+    offset += c.length;
+  }
+  return JSON.parse(new TextDecoder().decode(buffer));
+}
+export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
+  for (const source of SOURCES) {
+    await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
+    const lease = await db.all(
+      'UPDATE niva_sources SET lease_until=? WHERE id=? AND next_at<=? AND lease_until<=? RETURNING id',
+      now + 60000,
+      source.id,
+      now,
+      now,
+    );
+    if (!lease.length) continue;
+    try {
+      const response = await fetch(source.url, {
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(12000),
+        redirect: 'error',
+      });
+      if (!response.ok) {
+        const retry = Math.min(
+          86400000,
+          Math.max(source.cadence, Number(response.headers.get('retry-after')) * 1000 || 0),
+        );
+        if (response.status === 429)
+          await db.run('UPDATE niva_sources SET next_at=? WHERE id=?', now + retry, source.id);
+        throw new Error(response.status === 429 ? 'RATE_LIMITED' : 'SOURCE_UNAVAILABLE');
+      }
+      const at = new Date(now).toISOString();
+      const payload = await boundedJson(response);
+      if (source.id === 'greenhouse-appsflyer') {
+        const rows = (payload as { jobs?: unknown[] })?.jobs;
+        if (
+          !Array.isArray(rows) ||
+          rows.length > 1000 ||
+          rows.some(
+            (row) =>
+              !row ||
+              typeof row !== 'object' ||
+              !Number.isSafeInteger((row as { id: unknown }).id) ||
+              typeof (row as { title: unknown }).title !== 'string',
+          )
+        )
+          throw new Error('INCOMPLETE_SOURCE');
+      }
+      const jobs =
+        source.id === 'greenhouse-appsflyer'
+          ? normalizeFeed(payload, at)
+          : normalizeLever(payload, at);
+      const rows: { sql: string; args: (string | number | null)[] }[] = [
+        { sql: 'UPDATE niva_jobs SET active=0 WHERE source_id=?', args: [source.id] },
+      ];
+      const unique = new Map(jobs.map((j) => [j.id, j]));
+      for (const job of unique.values()) {
+        job.source!.sourceId = source.id;
+        if (source.id === 'greenhouse-appsflyer')
+          job.reason =
+            'מקור: AppsFlyer / Greenhouse. הסיווג לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.';
+        job.source!.version = versionOf([
+          job.title,
+          job.description,
+          job.district,
+          job.workStyle,
+          job.source!.updatedAt,
+        ]);
+        const canonical = new URL(job.source!.applicationUrl);
+        canonical.search = '';
+        canonical.hash = '';
+        rows.push({
+          sql: 'INSERT INTO niva_jobs(id,source_id,canonical,company,title,district,category,style,search,active,version,data) VALUES(?,?,?,?,?,?,?,?,?,1,?,?) ON CONFLICT(id) DO UPDATE SET canonical=excluded.canonical,company=excluded.company,title=excluded.title,district=excluded.district,category=excluded.category,style=excluded.style,search=excluded.search,active=1,version=excluded.version,data=excluded.data',
+          args: [
+            job.id,
+            source.id,
+            canonical.href,
+            job.company.toLowerCase(),
+            job.title.toLowerCase(),
+            job.district,
+            job.category,
+            job.workStyle,
+            `${job.title} ${job.company} ${job.skills.join(' ')}`.toLowerCase(),
+            job.source!.version,
+            JSON.stringify(job),
+          ],
+        });
+      }
+      rows.push({
+        sql: 'UPDATE niva_sources SET checked_at=?,next_at=?,failures=0,error=NULL,lease_until=0 WHERE id=?',
+        args: [at, now + source.cadence, source.id],
+      });
+      await db.batch(rows);
+    } catch (error) {
+      const row = (
+        await db.all<{ failures: number }>(
+          'SELECT failures FROM niva_sources WHERE id=?',
+          source.id,
+        )
+      )[0];
+      const delay = Math.min(21600000, source.cadence * 2 ** Math.min(row?.failures ?? 0, 6));
+      await db.run(
+        'UPDATE niva_sources SET failures=failures+1,error=?,next_at=MAX(next_at,?),lease_until=0 WHERE id=?',
+        error instanceof Error && error.message === 'RATE_LIMITED'
+          ? 'RATE_LIMITED'
+          : 'SOURCE_UNAVAILABLE',
+        now + delay,
+        source.id,
+      );
+    }
+  }
+  await db.run('DELETE FROM niva_documents WHERE expires_at<?', now);
+}
+export async function catalogJobs(db: CareerDb): Promise<Job[]> {
+  return (await db.all<{ data: string; active: number }>('SELECT data,active FROM niva_jobs')).map(
+    (row) => {
+      const j = JSON.parse(row.data) as Job;
+      j.source!.active = !!row.active;
+      return j;
+    },
+  );
+}
+export interface FeedQuery {
+  q?: string;
+  category?: string;
+  district?: string;
+  styles?: string;
+  cursor?: string;
+  limit?: string;
+  saved?: string;
+}
+export async function discoveryPage(
+  db: CareerDb,
+  secret: string,
+  query: FeedQuery,
+  preferences: Preferences = defaultPreferences(),
+  saved: string[] = [],
+) {
+  const health = await db.all<{
+    id: string;
+    checked_at: string | null;
+    error: string | null;
+    next_at: number;
+  }>('SELECT id,checked_at,error,next_at FROM niva_sources ORDER BY id');
+  const snapshot = versionOf(await db.all('SELECT id,version,active FROM niva_jobs ORDER BY id'));
+  const filterKey = versionOf([
+    query.q,
+    query.category,
+    query.district,
+    query.styles,
+    query.saved,
+    preferences,
+    query.saved ? saved : [],
+  ]);
+  let after = '';
+  if (query.cursor) {
+    try {
+      const [payload, mac] = query.cursor.split('.');
+      const expected = createHmac('sha256', secret).update(payload).digest('hex');
+      if (
+        !mac ||
+        mac.length !== expected.length ||
+        !timingSafeEqual(Buffer.from(mac), Buffer.from(expected))
+      )
+        throw new Error();
+      const parsed = JSON.parse(Buffer.from(payload, 'base64url').toString()) as {
+        snapshot: string;
+        filterKey: string;
+        after: string;
+      };
+      if (parsed.snapshot !== snapshot || parsed.filterKey !== filterKey) throw new Error();
+      after = parsed.after;
+    } catch {
+      throw new Error('CURSOR_EXPIRED');
+    }
+  }
+  const clauses = ['active=1'];
+  const args: (string | number)[] = [];
+  const add = (sql: string, value: string) => {
+    clauses.push(sql);
+    args.push(value);
+  };
+  if (query.saved !== 'true' && preferences.role !== 'all') add('category=?', preferences.role);
+  if (query.saved !== 'true' && preferences.district !== 'all')
+    add('district=?', preferences.district);
+  const screen = migratePreferences({
+    role: query.category,
+    district: query.district,
+    workStyles: query.styles?.split(','),
+  });
+  if (screen.role !== 'all') add('category=?', screen.role);
+  if (screen.district !== 'all') add('district=?', screen.district);
+  for (const styles of [query.saved === 'true' ? [] : preferences.workStyles, screen.workStyles])
+    if (styles.length) {
+      clauses.push(`style IN (${styles.map(() => '?').join(',')})`);
+      args.push(...styles);
+    }
+  for (const x of preferences.exclusions
+    .split(',')
+    .map((x) => x.trim().toLowerCase())
+    .filter(Boolean))
+    add('instr(company,?)=0', x);
+  if (query.q) add('instr(search,?)>0', query.q.toLowerCase().slice(0, 200));
+  if (query.saved === 'true') {
+    clauses[0] = '1=1';
+    clauses.push(`id IN (${saved.length ? saved.map(() => '?').join(',') : 'NULL'})`);
+    args.push(...saved);
+  }
+  // Conservative cross-source deduplication: same canonical URL, or same employer/title/location.
+  clauses.push(
+    `id=(SELECT MIN(j2.id) FROM niva_jobs j2 WHERE j2.active=niva_jobs.active AND (j2.canonical=niva_jobs.canonical OR (j2.company=niva_jobs.company AND j2.title=niva_jobs.title AND j2.district=niva_jobs.district AND j2.style=niva_jobs.style)))`,
+  );
+  const where = clauses.join(' AND ');
+  const count =
+    (
+      await db.all<{ total: number }>(
+        `SELECT count(*) AS total FROM niva_jobs WHERE ${where}`,
+        ...args,
+      )
+    )[0]?.total ?? 0;
+  const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
+  const rows = await db.all<{ id: string; data: string; active: number }>(
+    `SELECT id,data,active FROM niva_jobs WHERE ${where} AND id>? ORDER BY id LIMIT ?`,
+    ...args,
+    after,
+    limit + 1,
+  );
+  const more = rows.length > limit;
+  const page = rows.slice(0, limit);
+  const jobs = page.map((row) => {
+    const j = JSON.parse(row.data) as Job;
+    j.source!.active = !!row.active;
+    return j;
+  });
+  for (const job of jobs) {
+    const attributed = await db.all<{ data: string }>(
+      'SELECT data FROM niva_jobs WHERE active=1 AND (canonical=? OR (company=? AND title=? AND district=? AND style=?))',
+      new URL(job.source!.applicationUrl).href.split('?')[0],
+      job.company.toLowerCase(),
+      job.title.toLowerCase(),
+      job.district,
+      job.workStyle,
+    );
+    job.source!.attribution = attributed.map((r) => {
+      const j = JSON.parse(r.data) as Job;
+      return { name: j.source!.name, url: j.source!.applicationUrl };
+    });
+  }
+  const archived: Job[] = [];
+  for (let offset = 0; offset < saved.length; offset += 50) {
+    const ids = saved.slice(offset, offset + 50);
+    const rows = await db.all<{ data: string; active: number }>(
+      `SELECT data,active FROM niva_jobs WHERE id IN (${ids.map(() => '?').join(',')})`,
+      ...ids,
+    );
+    for (const row of rows) {
+      const job = JSON.parse(row.data) as Job;
+      job.source!.active = !!row.active;
+      if (!jobs.some((j) => j.id === job.id)) archived.push(job);
+    }
+  }
+  const payload = Buffer.from(
+    JSON.stringify({ snapshot, filterKey, after: page.at(-1)?.id }),
+  ).toString('base64url');
+  return {
+    jobs,
+    archived,
+    total: count,
+    nextCursor: more
+      ? `${payload}.${createHmac('sha256', secret).update(payload).digest('hex')}`
+      : null,
+    snapshot,
+    health,
+    fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
+    stale: health.some(
+      (h) => !!h.error || !h.checked_at || Date.now() - Date.parse(h.checked_at) > 1800000,
+    ),
+  };
+}

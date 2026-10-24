@@ -1,5 +1,7 @@
 # Accounts, persistence and maps
 
+> Historical baseline/deployed behavior. The newer career extension is local only; see [career-assistant.md](career-assistant.md) for feed, resume, matching, chat, configuration and retention changes.
+
 This guide records the original Node/account and static publication milestones. The current hosted Worker/D1 pilot is described in [the pilot guide](pilot.md); its deployment section supersedes the historic static-only limitation below.
 
 The original milestone added a locally runnable account backend and map to the Angular application, initially without deploying its account backend. The subsequent hosted pilot is documented in [pilot.md](pilot.md). Employer submissions, CV upload/processing, AI, paid services and DNS changes remain outside scope.

@@ -11,6 +11,7 @@
       <span
         class="company-avatar inline-flex items-center justify-center shrink-[0] large"
         [style.background]="job.color"
+        [style.color]="job.source ? '#142441' : null"
         >{{ job.initials }}</span
       >
       <div>
@@ -36,6 +37,19 @@
       }}
     </button>
   </div>
+  @if (job.source) {
+    <niva-match-indicator [job]="job" />
+    <div class="career-actions mb-5">
+      <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job.id }"
+        >שיחה והכנה לריאיון</a
+      ><a
+        class="account-button account-primary"
+        routerLink="/app/resumes"
+        [queryParams]="{ job: job.id }"
+        >התאמת קורות החיים למשרה</a
+      >
+    </div>
+  }
   @if (job.source; as source) {
     <section class="account-panel mb-6" aria-label="מקור המשרה והגשה">
       <h2 class="mb-3 text-xl">הפרטים המקוריים, ההחלטה שלך</h2>
@@ -55,8 +69,8 @@
         <bdi>{{ source.fetchedAt }}</bdi>
       </p>
       <p class="text-sm">
-        {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. אין ציון התאמה
-        או ניתוח קורות חיים.
+        {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. הסבר ההתאמה
+        מופיע בנפרד.
       </p>
       @if (!source.active) {
         <p role="status" class="rounded-control bg-warning-soft p-4">
