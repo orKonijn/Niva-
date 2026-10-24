@@ -1,5 +1,7 @@
 # Niva review repairs and evidence-based reassessment
 
+> Historical pre-publication assessment. The repairs were subsequently published as Sites version 16. See [CHANGELOG.md](../CHANGELOG.md) and the [current operational matrix](current-status.md) for the later release status; the original local test evidence and readiness limits below remain the assessment from that pass.
+
 24 October 2026. **Local implementation only; no push or deployment.** Scores concern the repaired local source unless explicitly stated. No paid services were activated, real resumes transmitted, live access changed or existing live account data deleted.
 
 ## Release recommendation

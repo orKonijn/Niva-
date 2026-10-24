@@ -1,0 +1,159 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "siteUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "observedOn": "2026-10-24",
+  "notes": [
+    "Sites saved version numbers, not semantic package versions.",
+    "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
+    "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
+    "Source repositories have separate Git lineages; only v16 has a verified reviewed-source mapping in build metadata."
+  ],
+  "versions": [
+    {
+      "version": 16,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_ea5b869c30208191adaedacf9e9799e8",
+      "sitesCommit": "caabf08d7bdbe94b1cfa47e2677df9fd606aa0e1",
+      "deploymentId": "appgdep_6adcfde40c8c8191925a1fb63ea57520",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T18:52:00.230131+00:00",
+      "artifactDigest": "sha256:2cfc81d3cae65594fab60af0223e2af52433ade515467be2272438703ef0f725",
+      "reviewedGithubCommit": "8bb4dc1371d352d79eb1eb05a2da480c396b6241",
+      "mappedSourceVerified": true
+    },
+    {
+      "version": 15,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a70cdd6a1cec8191abbdf7dbc059e993",
+      "sitesCommit": "91d50a1267d246d8c03e46d4e9dfe7bd03c22976",
+      "deploymentId": "appgdep_6adcf1beb3708191bda7bb0ff7433966",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T18:00:22.606073+00:00",
+      "artifactDigest": "sha256:d06673e6b36e4dabc13c8d9beacf5dbabbe6c967d6433feae81b6a17c708d034"
+    },
+    {
+      "version": 14,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_04b37e7b92a881918cf26f408ca933af",
+      "sitesCommit": "2d7f9763a902885f45cdc653f784dad81a06d820",
+      "deploymentId": "appgdep_6adcf0ce0f10819188056d82a78f18c7",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T17:56:58.196295+00:00",
+      "artifactDigest": "sha256:478259eac7c44923db5ccb354621ddc1af85ee8497fd0df84a59bb2e08d53c47"
+    },
+    {
+      "version": 13,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_f9260d2128b08191a4f2a4b32f7989f4",
+      "sitesCommit": "2dcec00a4797d979d144c33f1531e4da96c73256",
+      "deploymentId": "appgdep_6adcf045fa948191a25018d4481a76d4",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T17:54:02.487257+00:00",
+      "artifactDigest": "sha256:628865b3dcc9e824dfb753ad26dd63ebbb23317327509ec66b2d54f778560f78"
+    },
+    {
+      "version": 12,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_44b1210dff048191aaef42fc7a9c8f55",
+      "sitesCommit": "73e1db943277890a20d4e0d14fe6257a54ccc4d7",
+      "deploymentId": "appgdep_6adc84b55ce081918e778585639fb1f2",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T10:15:46.072198+00:00",
+      "artifactDigest": "sha256:08c36a7057764d0481dee83e0946ce2f35db3dcb852fb9d7f4f0b9bf40c2eba2"
+    },
+    {
+      "version": 11,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_4345677c0cf08191b977c21dc8bf432d",
+      "sitesCommit": "2ba4aefa17952b05a58d3ed2045b2d4bc32dcd68",
+      "deploymentId": "appgdep_6adc83ba6c108191b94cf0beb5f3c20e",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T10:11:33.456220+00:00",
+      "artifactDigest": "sha256:6cb15ef130c50d666f13a103f34f97e49f69e4ff38c1edba2b74e74900034906"
+    },
+    {
+      "version": 10,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_986e515f08d881919c46b7c93a670592",
+      "sitesCommit": "52e0f50ad3c0ba3b500114359468f3a55057f043",
+      "deploymentId": "appgdep_6adc81aa51f88191952249baf1b9dfb9",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T10:02:47.016138+00:00",
+      "artifactDigest": "sha256:e72a14dfe1e4f51846e38ffa8540e00766b84c99570f09fe907a7b67e6c5e1bc"
+    },
+    {
+      "version": 9,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_599b465d17ac8191926a3a2aac7afd3a",
+      "sitesCommit": "4ca035b907bca74624a39633fe5ef5235b152738",
+      "deploymentId": "appgdep_6adc7f926f0081919f52e23068b39d18",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T09:53:50.941987+00:00",
+      "artifactDigest": "sha256:df1e3dc80aa81e02908acdca6961b7fe01e8e7e23cd5aa7942c3f9879298d290"
+    },
+    {
+      "version": 8,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_9b00755eef448191bcd3006e33873085",
+      "sitesCommit": "543af89f9a783631c16af1d0499046a67bfd1e52",
+      "deploymentId": "appgdep_6adc7e6a31b48191bb83875615fa478d",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-24T09:48:53.589623+00:00",
+      "artifactDigest": "sha256:db83f73271897d938df444b3faa9068549934aa96d35912cf162b96ed1879559"
+    },
+    {
+      "version": 7,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_ceac1303af1881919b525d00703f0216",
+      "sitesCommit": "324a1e42c1554788b7c9e8f9d196427f0bf7f57c",
+      "deploymentId": "appgdep_6adbe45901d88191aa3a71bcd062f6d1",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T22:51:29.998728+00:00",
+      "artifactDigest": "sha256:8dabb18e6b88e1b72e584bd17e41e0d179b326d3649f1e15e94b66a38b13c2e5"
+    },
+    {
+      "version": 6,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_25c6a5d3b97081918c97a4b87eb1b763",
+      "sitesCommit": "508ae8c54da0618390ede8c1968eabd7eb68d6eb",
+      "deploymentId": "appgdep_6adbe3a253bc8191afa7436346d7d142",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T22:48:26.894636+00:00",
+      "artifactDigest": "sha256:1586e7c8cd39a5918e2c2cf98ce8968873ad3d1d8d6b981c7f56d56e577e0cc7"
+    },
+    {
+      "version": 5,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_05a227f21548819182578a682d434f20",
+      "sitesCommit": "c0188e46432c4e146f67c9ccc793dc75e0f9d1d8",
+      "deploymentId": "appgdep_6adbc43def7081918a7329f609eab722",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T20:34:20.647746+00:00",
+      "artifactDigest": "sha256:19e6c48740fcc2ae1ee0356c6d0199938c89d22ea89ca91cecfc15b79e05b2a5"
+    },
+    {
+      "version": 4,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_d513dfceebfc8191afc7be9fee1285fd",
+      "sitesCommit": "eed35ee575c91af03c5b0f35d763e24c05f9fea1",
+      "deploymentId": "appgdep_6adbc1b3934881919d2af6a975fa7a84",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T20:23:41.853960+00:00",
+      "artifactDigest": "sha256:585b28289a56b58e948edb106ebc09c625ad2d905ed77eb50e5ef469b4b767fa"
+    },
+    {
+      "version": 3,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_56a6738fb9788191a56dbba416653d6b",
+      "sitesCommit": "1587213acb684831e5defd7111cb51f885787f57",
+      "deploymentId": "appgdep_6adb74483f6881919c099309c4344f8a",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T14:54:18.942358+00:00",
+      "artifactDigest": "sha256:8ed97c6157a16b0b529b6860d1dfb77f1f72ecff86973121a6a396ea09f88bb3"
+    },
+    {
+      "version": 2,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_587e440e7054819188086a2a2bb45ac6",
+      "sitesCommit": "cea50be6906edd48491de3ff9572cd54691bce92",
+      "deploymentId": "appgdep_6adb72c0113c8191b9d821f97006c27d",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T14:46:53.270181+00:00",
+      "artifactDigest": "sha256:8e344c06d4f24e464ad78c5df137d413667a084c50c531dfd473675c4bb274ba"
+    },
+    {
+      "version": 1,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_4fab3472ee6481918b766270c9c044c5",
+      "sitesCommit": "ea9c9c131c54f0c77ac417283153f4b81b7feb0c",
+      "deploymentId": "appgdep_6adb6ce25bcc81919fdeee3b8e1cc4bb",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-23T14:21:59.128837+00:00",
+      "artifactDigest": "sha256:3a773669f59ace25d1bd0fbd94d3b164d881663720e091915a40202b7747d1b4"
+    }
+  ]
+}

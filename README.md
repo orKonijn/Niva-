@@ -1,5 +1,7 @@
 # Niva
 
+See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 16**, including the reviewed reliability/privacy repairs. Git-only documentation updates do not create a new hosted version.
+
 A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Google/Apple/email methods require their own configuration; hosted sign-in currently uses ChatGPT.
 
 The [current capability and operational matrix](docs/current-status.md) is authoritative. Historical milestone guides do not establish current deployment status. See the [pilot walkthrough, architecture, source accuracy and verification](docs/pilot.md). The earlier [account guide](docs/accounts-map.md) documents local SMTP/OAuth configuration and the original implementation milestone.
@@ -78,7 +80,7 @@ docs/             Specification, design assets and implementation roadmap
 - [Design tokens](docs/design/design-tokens.json)
 - [Tailwind architecture and verification](docs/tailwind-refactor.md)
 
-The production build is in `dist`. The existing private Sites deployment uses a Worker/D1 adapter; Node/SQLite is the local alternative. This repair branch has **not been pushed or deployed**. Build metadata records checkout and reviewed-source identifiers, dirty state, build time and content digests. See [current operational truth and release gates](docs/current-status.md).
+The production build is in `dist`. The existing private Sites deployment uses a Worker/D1 adapter; Node/SQLite is the local alternative. The reviewed repairs were subsequently published as **Sites version 16**; [the changelog](CHANGELOG.md) records the source mapping and remaining operational limits. Build metadata records checkout and reviewed-source identifiers, dirty state, build time and content digests. See [current operational truth and release gates](docs/current-status.md).
 
 ## Dependency note
 
@@ -96,4 +98,4 @@ Niva now includes 11 fictional jobs across nine professional fields and all six 
 
 The implementation includes two-source durable discovery with cursor pagination, explicit refresh and source health; versioned, candidate-confirmed resume text and extractive tailoring; explainable terminology matching; and an optional server-side streaming career assistant. PDF/DOCX uploads fail closed until a real scanning/parsing service is configured. AI sending remains unavailable without a server API key and explicit model. No new paid services or hosted schedule have been activated.
 
-See [career-assistant.md](docs/career-assistant.md) for trying each workflow, configuration placeholders, source coverage/cadence, retention/deletion, scoring methodology, provider limitations and screenshots. The earlier career milestone was published before this repair pass. This repair pass is local only. Runtime AI/scanning credentials and hosted scheduling remain separate setup requirements.
+See [career-assistant.md](docs/career-assistant.md) for trying each workflow, configuration placeholders, source coverage/cadence, retention/deletion, scoring methodology, provider limitations and screenshots. The earlier career milestone was published before this repair pass. The repair pass was subsequently published as version 16. Runtime AI/scanning credentials and hosted scheduling remain separate setup requirements.
