@@ -1,6 +1,7 @@
 import { passesDiscovery, type DiscoveryFilters } from '../src/app/core/discovery-filters';
 import type { CandidateCriteria } from '../src/app/core/models/discovery';
 import { normalizeJobicy } from './jobicy-source';
+import { JSEARCH_SOURCES } from './jsearch-source';
 import { enrichJob } from './job-facts';
 import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
@@ -669,7 +670,7 @@ export async function discoveryPage(
     health: health.map((h) => ({
       ...h,
       partial: !!h.partial,
-      name: SOURCES.find((s) => s.id === h.id)?.name ?? h.id,
+      name: [...SOURCES, ...JSEARCH_SOURCES].find((s) => s.id === h.id)?.name ?? h.id,
     })),
     fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
     stale: health.some(
@@ -677,7 +678,10 @@ export async function discoveryPage(
         !!h.error ||
         !h.checked_at ||
         Date.now() - Date.parse(h.checked_at) >
-          Math.max(1800000, (SOURCES.find((s) => s.id === h.id)?.cadence ?? 900000) * 2),
+          Math.max(
+            1800000,
+            ([...SOURCES, ...JSEARCH_SOURCES].find((s) => s.id === h.id)?.cadence ?? 900000) * 2,
+          ),
     ),
   };
 }

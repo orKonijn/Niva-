@@ -1,6 +1,6 @@
 import { passesDiscovery } from '../core/discovery-filters';
 import { assessJob } from '../core/job-assessment';
-import { SOURCES } from '../core/source-registry';
+import { SOURCES, JSEARCH_SOURCES } from '../core/source-registry';
 import { localDate } from '../core/local-date';
 import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
@@ -40,7 +40,10 @@ export class Jobs {
     initialValue: this.route.snapshot.queryParamMap,
   });
   readonly query = computed(() => this.params().get('q') ?? '');
-  readonly sources = SOURCES;
+  readonly sources = [...SOURCES, ...JSEARCH_SOURCES];
+  readonly publisherFeeds = computed(() =>
+    this.store.sourceHealth().filter((s) => s.id.startsWith('jsearch-')),
+  );
   readonly extraKeys = [
     'eligibility',
     'country',

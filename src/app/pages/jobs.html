@@ -81,8 +81,11 @@
             <bdi>{{ source.checked_at }}</bdi>
             @if (source.partial) {
               <span>
-                · כיסוי חלקי ומתגלגל: עד 1,000 המשרות האחרונות בסבב; ייתכנו משרות נוספות באתר
-                המקור.</span
+                {{
+                  source.id.startsWith('jsearch-')
+                    ? ' · כיסוי חלקי דרך JSearch: עמוד אחד לכל שוק, בתל אביב, ניו יורק ולונדון; עדכון יומי במסגרת התוכנית החינמית.'
+                    : ' · כיסוי חלקי ומתגלגל: עד 1,000 המשרות האחרונות בסבב; ייתכנו משרות נוספות באתר המקור.'
+                }}</span
               >
             }
           </p>
@@ -130,10 +133,40 @@
 @if (store.catalogMode() === 'real') {
   <section class="account-panel mb-4" aria-label="חיפוש באתרי משרות נוספים">
     <h2 class="mb-2 text-base">עוד מקורות לחיפוש</h2>
-    <p class="text-sm">
-      LinkedIn ו־Indeed נפתחים באתר המקור. התוצאות שלהם אינן מיובאות אוטומטית ל־Niva; חיבור כזה דורש
-      הרשאת ספק מתאימה.
-    </p>
+    @if (publisherFeeds().length) {
+      <button
+        class="account-button account-primary"
+        (click)="setFilter({ provider: 'jsearch' })"
+        [attr.aria-pressed]="params().get('provider') === 'jsearch'"
+      >
+        משרות LinkedIn ו־Indeed כאן באתר
+      </button>
+      <p class="text-sm" role="status">
+        משרות מ־LinkedIn ומ־Indeed מופיעות ברשימה כאן דרך JSearch, עם שם המקור וקישור למשרה עצמה.
+      </p>
+      <p class="text-xs">
+        הכיסוי חלקי: תוצאות נבחרות מתל אביב, ניו יורק ולונדון, בעדכון יומי בהתאם למכסת הספק. רענון
+        העמוד מציג את התוצאות השמורות עד העדכון הבא. זמינות ההגשה נבדקת באתר המקור.
+      </p>
+      @for (feed of publisherFeeds(); track feed.id) {
+        <p class="text-xs">
+          <bdi>{{ feed.name }}</bdi
+          >:
+          {{
+            feed.error
+              ? 'העדכון לא הצליח; מוצגות תוצאות קודמות אם קיימות'
+              : feed.checked_at
+                ? 'מחובר · העדכון הושלם'
+                : 'החיפוש הראשון עדיין בבדיקה'
+          }}
+        </p>
+      }
+    } @else {
+      <p class="text-sm">
+        LinkedIn ו־Indeed נפתחים באתר המקור. התוצאות שלהם אינן מיובאות אוטומטית ל־Niva; חיבור כזה
+        דורש הרשאת ספק מתאימה.
+      </p>
+    }
     <div class="career-actions">
       <a
         class="account-button"
@@ -252,6 +285,7 @@
         (ngModelChange)="setFilter({ provider: $event || null })"
       >
         <option value="">כל המקורות</option>
+        <option value="jsearch">LinkedIn ו־Indeed · דרך JSearch</option>
         @for (source of sources; track source.id) {
           <option [value]="source.id">{{ source.name }}</option>
         }

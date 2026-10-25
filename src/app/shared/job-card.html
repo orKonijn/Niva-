@@ -87,7 +87,11 @@
       >
     }
     <p class="text-xs">
-      פתיחת הקישור אינה הגשת מועמדות. הזמינות נבדקת שוב כשהבדיקה ישנה מ־15 דקות.
+      {{
+        job().id.startsWith('jsearch-')
+          ? 'תוצאה דרך JSearch. פתיחת הקישור אינה הגשת מועמדות; הזמינות ומסלול ההגשה דורשים בדיקה באתר המקור.'
+          : 'פתיחת הקישור אינה הגשת מועמדות. הזמינות נבדקת שוב כשהבדיקה ישנה מ־15 דקות.'
+      }}
     </p>
     <div class="job-card-actions">
       <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
@@ -105,7 +109,9 @@
         job().source
           ? job().source!.active
             ? 'משרה אמיתית'
-            : 'הוסרה מהמקור'
+            : job().source!.availability === 'unknown'
+              ? 'יש לבדוק זמינות'
+              : 'הוסרה מהמקור'
           : store.approved(job().id)
             ? 'אושר בהדגמה'
             : 'משרה לדוגמה'

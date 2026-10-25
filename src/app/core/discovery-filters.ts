@@ -32,7 +32,13 @@ export function passesDiscovery(
   if (query.eligibility === 'blocked' && eligibility !== 'blocked') return false;
   // Explicit inspect mode is an exception to the default blocker exclusion.
   const unknown = query.missing !== 'hide';
-  if (query.provider && job.source?.sourceId !== query.provider) return false;
+  if (
+    query.provider &&
+    (query.provider === 'jsearch'
+      ? !job.source?.sourceId?.startsWith('jsearch-')
+      : job.source?.sourceId !== query.provider)
+  )
+    return false;
   if (
     query.country &&
     (f?.applicantCountries

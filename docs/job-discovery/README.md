@@ -1,5 +1,7 @@
 # Niva discovery delivery · 25 October 2026
 
+- [LinkedIn and Indeed through JSearch](jsearch.md): actual publisher cards inside Niva, shared free-plan budget, precise sampled coverage and verification boundaries. This supersedes the earlier external-links-only integration state.
+
 - [Current all-jobs/all-locations expansion](global-coverage.md): default global browsing, added employers, bounded Jobicy import and external LinkedIn/Indeed searches. This supersedes the earlier Israel-first scope below.
 
 - [Audit and primary-source matrix](research.md): observed product gaps, exact endpoints, fields, limits, rights, costs and readiness. Research preceded product edits.

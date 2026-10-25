@@ -1,6 +1,6 @@
 export interface JobSource {
   id: string;
-  provider: 'greenhouse' | 'lever' | 'jobicy';
+  provider: 'greenhouse' | 'lever' | 'jobicy' | 'jsearch';
   board: string;
   company: string;
   name: string;
@@ -145,11 +145,50 @@ export const SOURCES: readonly JobSource[] = [
     },
   },
 ];
+export const JSEARCH_SOURCES: readonly JobSource[] = ['linkedin', 'indeed'].map((publisher) => ({
+  id: `jsearch-${publisher}`,
+  provider: 'jsearch',
+  board: publisher,
+  company: publisher === 'linkedin' ? 'LinkedIn' : 'Indeed',
+  name: `${publisher === 'linkedin' ? 'LinkedIn' : 'Indeed'} · JSearch`,
+  url: 'https://api.openwebninja.com/jsearch/search-v2',
+  careersUrl: publisher === 'linkedin' ? 'https://www.linkedin.com/jobs' : 'https://www.indeed.com',
+  allowedHosts: [],
+  cadence: 86400000,
+}));
+export function trustedPublisherUrl(publisher: string, value: string): boolean {
+  try {
+    const u = new URL(value);
+    if (u.protocol !== 'https:' || u.username || u.password || u.port) return false;
+    if (publisher === 'linkedin')
+      return (
+        /^(?:[a-z]{2,3}\.)?(?:www\.)?linkedin\.com$/.test(u.hostname) &&
+        /^\/jobs\/view\/(?:[^/]+-)?\d+\/?$/.test(u.pathname)
+      );
+    return (
+      publisher === 'indeed' &&
+      /^(?:[a-z]{2,3}\.)?(?:www\.)?indeed\.(?:com|co\.uk|ca|de|fr|com\.au)$/.test(u.hostname) &&
+      ['/viewjob', '/rc/clk'].includes(u.pathname) &&
+      /^[a-zA-Z0-9_-]{6,80}$/.test(u.searchParams.get('jk') ?? '')
+    );
+  } catch {
+    return false;
+  }
+}
 /** One registry for ingestion and browser validation. Never accept arbitrary feed redirects. */
 export function trustedJobUrl(id: string, value: string): boolean {
   try {
     const url = new URL(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port) return false;
+    if (
+      JSEARCH_SOURCES.some(
+        (s) =>
+          id.startsWith(s.id + '-') &&
+          /^[a-f0-9]{24}$/.test(id.slice(s.id.length + 1)) &&
+          trustedPublisherUrl(s.board, value),
+      )
+    )
+      return true;
     return SOURCES.some((source) => {
       if (!id.startsWith(source.id + '-') || !source.allowedHosts.includes(url.hostname))
         return false;

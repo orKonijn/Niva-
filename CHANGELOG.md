@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — LinkedIn and Indeed cards through JSearch
+
+- Activate the owner's free JSearch plan and keep its key exclusively in server secrets. Import publisher-verified LinkedIn/Indeed results into normal Niva cards, with original links, source filters, details and existing save/matching behavior. A dedicated in-site button shows both publishers together. External searches remain optional.
+- Share a daily six-page sample across Tel Aviv, New York and London; cap Niva at180 requests/31days. Preserve unknown work style, partial coverage, rolling history and explicit unverified application status. No private CV/account data is sent to the provider. [Connection and limits](docs/job-discovery/jsearch.md). Verification passed:59 frontend tests,123 server tests,210 production-browser checks, Worker/provenance checks, three type checks, formatting and production build. Four focused publisher/browser checks also verify the final simplified coverage copy. Publication is pending.
+- Genuine paired evidence: desktop [light before](docs/screenshots/changes/jsearch-desktop-light/before.png) · [after](docs/screenshots/changes/jsearch-desktop-light/after.png), [dark before](docs/screenshots/changes/jsearch-desktop-dark/before.png) · [after](docs/screenshots/changes/jsearch-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/jsearch-mobile-light/before.png) · [after](docs/screenshots/changes/jsearch-mobile-light/after.png), [dark before](docs/screenshots/changes/jsearch-mobile-dark/before.png) · [after](docs/screenshots/changes/jsearch-mobile-dark/after.png). Synthetic account with short real public listings; no actual private profile or key appears in Git.
+
 ## Version 33 — All jobs and locations
 
 - Default to all roles and locations from connected employers, with 50 results per page and further pagination. Keep personal/saved views and optional wider-location/related-QA controls without rewriting account preferences. Show actual employer locations; preserve exclusions and explicit eligibility blockers.

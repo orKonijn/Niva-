@@ -1,0 +1,21 @@
+# LinkedIn and Indeed results inside Niva
+
+Implemented 25 October 2026. JSearch Basic ($0) was activated on the owner's existing OpenWeb Ninja account; the previously selected Amazon-data plan was separate. No paid plan was selected. `JSEARCH_API_KEY` is a secret in Sites runtime settings, never in source, a browser bundle, screenshots or a publication receipt. Account/profile/CV data are not sent to the provider.
+
+[JSearch](https://www.openwebninja.com/api/jsearch) returns third-party job-search data, including publisher and application options. This is not a direct LinkedIn/Indeed partnership or a complete copy of either job board. [OpenWeb Ninja terms](https://www.openwebninja.com/terms) describe broader-product API-data use subject to the provider's rights. Indeed's [publisher plugin](https://docs.indeed.com/indeed-plus/publisher-js-plugin) is a separate partner-only route, not used here.
+
+## Shipped connection
+
+- Server GET `https://api.openwebninja.com/jsearch/search-v2`, private `x-api-key` header, `num_pages=1`, country/language and fixed public search strings. The actual response is `status: OK`, `data.jobs`, `data.cursor` (not the legacy top-level data array).
+- Two publisher caches, each sampling one page in Tel Aviv/Israel, New York/US and London/UK. At most six requests/day shared across visitors, with durable leases, bounded 25-second requests and 2 MB bodies. The first page is normally up to ten results. Later cursors deliberately remain unfetched on this free plan; visible coverage is partial.
+- An atomic shared budget caps Niva at 180 requests in each 31-day window, leaving some of the advertised 200-request allowance for setup/testing. The provider's free plan has a hard limit. Other use of the same account can consume its allowance earlier; errors preserve cached data and retry no sooner than a day later. Visits refresh only due caches. This plan cannot support a new global upstream search on every visitor reload.
+- Only supplied primary publisher or application options labelled LinkedIn/Indeed are accepted, and only matching trusted job-page hosts/paths. The `via indeed` query alone does not establish publisher identity: the Israel probe returned LinkedIn results, which the Indeed normalizer correctly rejected.
+- Original publisher links, employer/title/location/description, real publication date when supplied, and explicit source attribution appear on ordinary Niva cards and details. Stable identity uses the publisher's numeric posting ID or Indeed `jk`, surviving tracking/slug changes. A dedicated button/filter shows both new publishers together; each can also be filtered individually, saved and discussed like other jobs.
+- Unknown work arrangement remains unknown; city/market context does not imply applicant eligibility. No foreign map coordinates are invented. Application-path checks remain explicitly unverified. Opening Apply leaves for the original job; no application is submitted automatically.
+- Rolling absence never proves closure. Records not rediscovered for seven days are withheld as unknown, while saved/history records and first-seen dates remain intact. A successful updated search is not a verified full application form journey.
+
+## Real observations and validation
+
+Private-key API probes returned real LinkedIn Israel results, including BigBear.ai's Senior AI Engineer (4473891895), and Indeed New York results, including Access A Ride / PM Dispatchers (`jk=66e061e082d19fdb`). These are point-in-time provider observations, not guaranteed ongoing availability. Four short public samples are in `tests/fixtures/jsearch-public-20261025.json`; full raw research payloads stay ignored. No private account/CV content is used in fixtures.
+
+Paired desktop/mobile light/dark screenshots under `docs/screenshots/changes/jsearch-*` use a synthetic account shell. Genuine before images were captured before product edits and show the external-search-only panel. After images show the connected feed controls; additional Indeed card images verify normal in-site cards. Boundary tests cover trust/identity, strict publisher matching, shared daily leases, the request budget/reset, first-seen preservation, outage preservation and unknown retirement. Final check counts and exact live imports are recorded in the changelog and publication receipt only after verification.

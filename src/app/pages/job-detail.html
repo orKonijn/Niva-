@@ -16,7 +16,11 @@
       >
       <div class="job-text min-w-0">
         <span class="section-kicker block font-semibold text-brand tracking-[0.02em]">{{
-          job.source ? 'משרה אמיתית · מקור מעסיק' : 'משרה לדוגמה'
+          job.source
+            ? job.id.startsWith('jsearch-')
+              ? 'משרה אמיתית · דרך JSearch'
+              : 'משרה אמיתית · מקור מעסיק'
+            : 'משרה לדוגמה'
         }}</span>
         <h1>
           <bdi>{{ job.title }}</bdi>

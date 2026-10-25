@@ -1,4 +1,5 @@
 import { verifyJob, reconcilePaths } from './job-verification';
+import { ingestJsearch } from './jsearch-source';
 import { trustedJobUrl } from './job-sources';
 import { runMaintenance, maintenanceHealth } from './maintenance';
 import { lifecycle, deletionRows } from './lifecycle';
@@ -27,6 +28,7 @@ import {
 } from '../src/app/core/matching';
 
 export interface CareerEnvironment {
+  JSEARCH_API_KEY?: string;
   OPENAI_API_KEY?: string;
   NIVA_AI_MODEL?: string;
   NIVA_RESUME_PROCESSOR_URL?: string;
@@ -136,6 +138,7 @@ export function createCareer(deps: CareerDependencies) {
   app.get('/api/feed', async (c) => {
     const owner = await deps.identity(c.req.raw);
     await quota(db, `feed:${owner ?? 'anonymous'}`, 120, 60000);
+    await ingestJsearch(db, env.JSEARCH_API_KEY);
     // Retry incomplete bootstrap, with durable leases/backoff still limiting upstream requests.
     const health = await db.all<{ id: string; checked_at: string | null; next_at: number }>(
       'SELECT id,checked_at,next_at FROM niva_sources',
