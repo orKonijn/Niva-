@@ -89,6 +89,8 @@ test('hosted normal experience defaults to source jobs and keeps legacy demo dat
   await expect(page.getByText(/פיילוט|גרסת פיתוח/)).toHaveCount(0);
   await page.goto('/login');
   await expect(page.getByRole('link', { name: 'המשך לחשבון שלי' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'כבר מחוברים ל־Niva' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'יציאה ובחירת שיטת כניסה' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'המשך עם Google' })).toHaveCount(0);
   await page.goto('/account');
   await page.locator('summary').filter({ hasText: 'נתונים קודמים מהמכשיר' }).click();
@@ -285,6 +287,71 @@ test('hosted Google option keeps ChatGPT available, labels unavailable Apple and
   ).toEqual([]);
 });
 for (const authMethod of ['sites', 'social'] as const) {
+  test(
+    'signed-in login explains hidden providers and switches safely from ' + authMethod,
+    async ({ page }) => {
+      let signedOut = false;
+      let attempts = 0;
+      await page.emulateMedia({ colorScheme: authMethod === 'social' ? 'dark' : 'light' });
+      await page.route('**/api/config', (r) =>
+        r.fulfill({
+          json: { accounts: true, platform: 'sites', google: true, apple: false, email: false },
+        }),
+      );
+      await page.route('**/api/session', (r) =>
+        r.fulfill({
+          json: {
+            user: signedOut
+              ? null
+              : {
+                  id: authMethod + ':synthetic',
+                  name: 'Synthetic',
+                  email: 'synthetic@example.invalid',
+                  emailVerified: true,
+                  authMethod,
+                },
+          },
+        }),
+      );
+      await page.route('**/api/account/state', (r) => r.fulfill({ json: emptyAccountState() }));
+      await page.route('**/api/auth/sign-out', (r) => {
+        attempts++;
+        if (attempts === 1) return r.fulfill({ status: 503, json: { error: 'SYNTHETIC_FAILURE' } });
+        signedOut = true;
+        return r.fulfill({ json: { success: true } });
+      });
+      await page.route('**/signout-with-chatgpt?**', (r) =>
+        r.fulfill({
+          contentType: 'text/html',
+          body: '<p>synthetic platform sign-out boundary</p>',
+        }),
+      );
+      await page.goto('/login');
+      await expect(page.getByRole('heading', { name: 'כבר מחוברים ל־Niva' })).toBeVisible();
+      await expect(
+        page.getByText('כפתורי ההתחברות מוצגים לאחר היציאה.', { exact: false }),
+      ).toBeVisible();
+      const change = page.getByRole('button', { name: 'יציאה ובחירת שיטת כניסה' });
+      await change.focus();
+      await page.keyboard.press('Enter');
+      await expect(page.getByRole('alert')).toContainText('החשבון עדיין מחובר');
+      await expect(change).toBeEnabled();
+      await expect(page.getByRole('link', { name: 'המשך לחשבון שלי' })).toBeVisible();
+      expect(
+        (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+          .violations,
+      ).toEqual([]);
+      await change.click();
+      await expect.poll(() => attempts).toBe(2);
+      if (authMethod === 'social') {
+        await expect(page.getByRole('button', { name: 'המשך עם Google' })).toBeFocused();
+        await expect(page.getByRole('button', { name: /המשך עם Apple/ })).toBeDisabled();
+        await expect(page.getByRole('heading', { name: 'כבר מחוברים ל־Niva' })).toHaveCount(0);
+      } else {
+        await expect(page).toHaveURL(/\/signout-with-chatgpt\?/);
+      }
+    },
+  );
   test(
     'hosted ' + authMethod + ' sign-out clears the optional social session',
     async ({ page }) => {

@@ -113,6 +113,24 @@ export class AuthPage {
       this.busy.set(false);
     }
   }
+  async switchAccount(): Promise<void> {
+    if (this.busy()) return;
+    this.busy.set(true);
+    this.error.set('');
+    const completed = await this.session.signOut();
+    this.busy.set(false);
+    if (completed) {
+      afterNextRender(
+        () =>
+          this.element.nativeElement
+            .querySelector<HTMLButtonElement>('[data-provider="google"]')
+            ?.focus(),
+        { injector: this.injector },
+      );
+    } else if (this.session.user()) {
+      this.error.set('היציאה לא הושלמה. החשבון עדיין מחובר; אפשר לנסות שוב.');
+    }
+  }
   async social(provider: 'google' | 'apple'): Promise<void> {
     if (this.busy()) return;
     this.busy.set(true);

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — Explain signed-in login and account switching
+
+- The Google button was hidden because the user was already signed in, not because the production deployment was missing. Show an explicit signed-in heading, explain how to reveal login methods, and add an intentional sign-out-and-choose action. Preserve existing account data and separate provider identities; do not sign out automatically. Remove the misleading ChatGPT-only description for already authenticated social users.
+- Reuse the existing sign-out flow, retain the session after a failed request, report the failure, guard duplicate actions and focus Google after successful social sign-out. Browser regressions cover both provider branches, failure recovery, keyboard activation and accessibility.
+- Verification passed: 59 frontend unit tests, all three type checks, formatting, production build and 84 relevant browser checks across desktop/mobile Chromium, Firefox and WebKit, including both themes and axe scans. Server/auth configuration is unchanged. Actual affected Chrome page [Before](docs/screenshots/changes/chrome-login-refresh/before.png) · [After](docs/screenshots/changes/chrome-login-refresh/after.png). Live publication readback is recorded after deployment; the real Chrome session is not signed out during verification.
+
 <a id="version-22"></a>
 
 ## Version 22 — Worker request-context repair

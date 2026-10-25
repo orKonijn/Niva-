@@ -19,20 +19,39 @@
         class="my-6 rounded-control border border-line bg-pale p-4"
         aria-label="כניסה מאובטחת"
       >
-        <h2 class="mb-2 text-lg">נכנסים וממשיכים מהיכן שעצרת</h2>
-        <p class="text-sm">
-          כניסה מאובטחת דרך ChatGPT שומרת את הפרופיל, ההעדפות והמשרות בחשבון. אין צורך בסיסמה נוספת.
-        </p>
         @if (session.user()) {
+          <h2 class="mb-2 text-lg">כבר מחוברים ל־Niva</h2>
+          <p class="text-sm">
+            אפשר להמשיך לחשבון הנוכחי. כדי להיכנס עם Google או לבחור חשבון אחר, יש לצאת קודם. כפתורי
+            ההתחברות מוצגים לאחר היציאה.
+          </p>
           <a class="account-button account-primary w-full" [routerLink]="returnTo"
             >המשך לחשבון שלי</a
           >
+          <button
+            type="button"
+            class="account-button mt-3 w-full"
+            [disabled]="busy()"
+            (click)="switchAccount()"
+          >
+            {{ busy() ? 'יוצאים מהחשבון…' : 'יציאה ובחירת שיטת כניסה' }}
+          </button>
+          <p class="mt-3 mb-0 text-xs">
+            הנתונים בחשבון הנוכחי נשמרים. כניסה דרך ספק אחר יוצרת חשבון נפרד ואינה מעבירה נתונים.
+          </p>
         } @else {
+          <h2 class="mb-2 text-lg">נכנסים וממשיכים מהיכן שעצרת</h2>
+          <p class="text-sm">
+            כניסה מאובטחת דרך ChatGPT שומרת את הפרופיל, ההעדפות והמשרות בחשבון. אין צורך בסיסמה
+            נוספת.
+          </p>
           <a class="account-button account-primary w-full" [href]="platformSignIn" target="_top"
             >המשך עם ChatGPT</a
           >
+          <p class="mt-3 mb-0 text-xs">
+            ההתחברות מנוהלת דרך ChatGPT. אין צורך בסיסמה נפרדת ל־Niva.
+          </p>
         }
-        <p class="mt-3 mb-0 text-xs">ההתחברות מנוהלת דרך ChatGPT. אין צורך בסיסמה נפרדת ל־Niva.</p>
       </section>
     }
     @if (
@@ -45,6 +64,7 @@
       <div class="my-6 grid gap-3">
         <button
           type="button"
+          data-provider="google"
           class="account-button gap-2"
           [disabled]="busy() || !session.config().google"
           (click)="social('google')"
