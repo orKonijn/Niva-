@@ -1,0 +1,31 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 24,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_019a38b92e8c8191984d1cc0046fc2c6",
+  "sitesCommit": "f6923e0c39a5c8cf6fcbf15053e5ed5ced1b59eb",
+  "githubCommit": "4840251",
+  "deploymentId": "appgdep_6ade1a76c2808191ac5b5a54f79e6973",
+  "status": "succeeded",
+  "publishedAt": "2026-10-25T15:04:37.399703+00:00",
+  "liveReadback": {
+    "existingChromeTab": true,
+    "greetingShowsAccountName": true,
+    "photoPresent": true,
+    "photoLoaded": true
+  },
+  "verification": {
+    "frontend": 59,
+    "server": 100,
+    "browser": 28,
+    "worker": "passed",
+    "provenance": "passed",
+    "typechecks": "passed",
+    "format": "passed",
+    "build": "passed"
+  },
+  "limitations": [
+    "Independent live Google identities were not tested; missing or failed photos use the initial."
+  ],
+  "recordScope": "Git-only publication receipt; no additional hosted version"
+}

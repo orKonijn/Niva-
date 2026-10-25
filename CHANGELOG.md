@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## Version 24 — Account name and Google profile photo
+
+Published 25 October 2026. Verified in the existing live Chrome session: the account name appears in the greeting and the Google photo loads successfully. [Publication receipt](docs/verification/publication-20261025-v24.json).
 
 - Personalize the dashboard greeting with the signed-in name when the editable profile name is blank. Preserve the chosen profile name when set. Show the Google sign-in profile photo in the header, with a name initial when the image is absent, untrusted or fails to load. Keep the editable profile independent from provider details.
 - Carry the existing authentication image through local and hosted session responses. Permit only HTTPS Google-hosted profile images in the avatar and allow those hosts in the image CSP; send no referrer. No Gmail mailbox permission or new OAuth scope is required. ChatGPT sessions without a photo keep the initial.
