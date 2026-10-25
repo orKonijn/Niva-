@@ -9,6 +9,7 @@
 @import './styles/base.css';
 @import './styles/components.css';
 @import './styles/marketing.css';
+@import './styles/mascot.css';
 @import './styles/accounts.css';
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme inline {

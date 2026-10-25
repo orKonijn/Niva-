@@ -1,0 +1,91 @@
+@layer components {
+  .step-mascot {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    object-position: center;
+    padding: 14px 20px;
+    margin-block: 18px;
+    border-radius: 18px;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgb(74 122 235 / 14%), transparent 75%), var(--canvas);
+    border: 1px solid var(--line);
+  }
+  .cta-mascot {
+    display: block;
+    width: 156px;
+    height: 156px;
+    margin: 22px auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 12px rgb(36 90 221 / 16%));
+  }
+  @media (max-width: 768px) {
+    .step-mascot {
+      height: 190px;
+    }
+    .cta-mascot {
+      width: 130px;
+      height: 130px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-copy {
+      animation: niva-arrive 600ms ease-out both;
+    }
+    .mascot-frame {
+      animation: niva-greet 4s ease-in-out 1;
+    }
+    .floating-card {
+      animation: niva-arrive 700ms 180ms ease-out both;
+    }
+    .hero-spark {
+      animation: niva-twinkle 2s ease-in-out 2;
+    }
+    .spark-two {
+      animation-delay: 150ms;
+    }
+    .step-mascot,
+    .cta-mascot {
+      transition: transform 180ms ease-out;
+    }
+    .step-card:hover .step-mascot {
+      transform: translateY(-4px);
+    }
+    .cta-mascot:hover {
+      transform: rotate(-4deg);
+    }
+  }
+}
+@keyframes niva-arrive {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes niva-greet {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  25%,
+  75% {
+    transform: translateY(-6px) rotate(-0.7deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.7deg);
+  }
+}
+@keyframes niva-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.86);
+  }
+}
