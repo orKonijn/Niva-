@@ -103,11 +103,13 @@ export function preferenceMatch(job: Job, p: Preferences) {
     factors,
     label: excluded
       ? 'חברה מוחרגת'
-      : factors.some((f) => f.status === 'conflict' || f.status === 'unknown')
+      : factors.some((f) => f.status === 'conflict')
         ? 'מחוץ לדרישות הסינון'
-        : factors.every((f) => f.status === 'unspecified')
-          ? 'העדפות: אין מספיק מידע'
-          : 'תואם לדרישות הסינון שהוגדרו',
+        : factors.some((f) => f.status === 'unknown')
+          ? 'העדפות: נדרש בירור לפרטים שלא נמסרו'
+          : factors.every((f) => f.status === 'unspecified')
+            ? 'העדפות: אין מספיק מידע'
+            : 'תואם לדרישות הסינון שהוגדרו',
   };
 }
 export function resumeMatch(job: Job, text: string, confirmed: boolean) {

@@ -475,10 +475,11 @@ export async function discoveryPage(
   for (const styles of [query.saved === 'true' ? [] : preferences.workStyles, screen.workStyles])
     if (styles.length) {
       clauses.push(
-        `(style IN (${styles.map(() => '?').join(',')})${query.unknownStyle === 'true' ? " OR style='unknown'" : ''})`,
+        `(style IN (${styles.map(() => '?').join(',')})${query.unknownStyle !== 'false' ? " OR style='unknown'" : ''})`,
       );
       args.push(...styles);
     }
+  if (query.unknownStyle === 'false') clauses.push("style<>'unknown'");
   for (const x of preferences.exclusions
     .split(',')
     .map((x) => x.trim().toLowerCase())

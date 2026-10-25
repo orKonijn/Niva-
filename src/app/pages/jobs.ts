@@ -16,6 +16,9 @@ import {
   normalizeWorkStyles,
   isWorkStyle,
   WorkStyle,
+  categoryLabel,
+  districtLabel,
+  workStylesLabel,
 } from '../core/preferences';
 import { CareerStore } from '../core/career-store';
 import { resumeMatch } from '../core/matching';
@@ -52,9 +55,15 @@ export class Jobs {
     'missing',
     'unknownStyle',
   ] as const;
-  readonly extraQuery = computed(() =>
-    Object.fromEntries(this.extraKeys.map((key) => [key, this.params().get(key) ?? ''])),
-  );
+  readonly extraQuery = computed<Record<string, string>>(() => ({
+    ...Object.fromEntries(this.extraKeys.map((key) => [key, this.params().get(key) ?? ''])),
+    unknownStyle: String(this.includeUnknownStyles()),
+  }));
+  readonly includeUnknownStyles = computed(() => this.params().get('unknownStyle') !== 'false');
+  readonly savedPreferencesSummary = computed(() => {
+    const p = this.store.preferences();
+    return `${categoryLabel(p.role)} · ${districtLabel(p.district)} · ${workStylesLabel(p.workStyles)}`;
+  });
   readonly categories = CATEGORIES;
   readonly districts = DISTRICTS;
   readonly workStyles = computed(() =>
@@ -133,8 +142,9 @@ export class Jobs {
             this.store.preferences(),
             this.store.account().profile.criteria,
           )) &&
+        (this.includeUnknownStyles() || j.workStyle !== 'unknown') &&
         (!this.workStyles().length ||
-          (j.workStyle === 'unknown' && this.params().get('unknownStyle') === 'true') ||
+          (j.workStyle === 'unknown' && this.includeUnknownStyles()) ||
           (isWorkStyle(j.workStyle) && this.workStyles().includes(j.workStyle))) &&
         (this.district() === 'all' || this.district() === j.district) &&
         (this.category() === 'all' || this.category() === j.category) &&
@@ -187,11 +197,8 @@ export class Jobs {
       return 'לא מצאנו כרגע משרות בתחום הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת. ייתכן שיש משרות באתרים אחרים ש־Niva עדיין לא מציגה.';
     if (district !== 'all' && !coverage.some((c) => c.district === district))
       return 'לא מצאנו כרגע משרות במחוז הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת.';
-    if (
-      (this.workStyles().length || p.workStyles.length) &&
-      coverage.some((c) => c.style === 'unknown')
-    )
-      return 'הסינון מסתיר גם משרות שבהן המעסיק לא ציין אם העבודה מהבית או מהמשרד. אפשר להסיר את הסינון הזה ולראות עוד משרות.';
+    if (!this.includeUnknownStyles() && coverage.some((c) => c.style === 'unknown'))
+      return 'הסינון מסתיר משרות שבהן המעסיק לא ציין את אופן העבודה. אפשר לסמן ״לכלול סגנון עבודה שלא נמסר״ כדי לבדוק גם אותן.';
     return 'לא מצאנו משרות שמתאימות לשילוב ההעדפות והסינון שבחרת. אפשר לנקות את הסינון בעמוד ולנסות שוב; ההעדפות ששמרת לא ישתנו. הרשימה כוללת רק את אתרי המעסיקים ש־Niva בודקת.';
   });
   clear(): void {

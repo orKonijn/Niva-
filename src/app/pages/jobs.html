@@ -38,8 +38,9 @@
       הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן שנדרש חשבון.
     </p>
     <p class="mb-2 text-xs">
-      תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו; סינון לפיו מסתיר גם
-      משרות שהמידע הזה חסר בהן. משרה ששמרת תישאר ברשימה שלך גם אם הוסרה מאתר המעסיק.
+      תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו. כברירת מחדל מוצגות גם
+      משרות שהמידע הזה חסר בהן, עם סימון ברור שהפרט לא נמסר. משרה ששמרת תישאר ברשימה שלך גם אם הוסרה
+      מאתר המעסיק.
     </p>
     @if (store.feedCheckedAt()) {
       <p class="text-xs mb-2">
@@ -103,6 +104,16 @@
     <p class="mb-0 text-sm">משרות וחברות לדוגמה בלבד. נתוני ההדגמה אינם נכללים במשרות האמיתיות.</p>
   }
 </section>
+@if (store.isAccount() && store.accountReady()) {
+  <section class="account-panel mb-4" aria-label="העדפות החיפוש ששמרת">
+    <h2 class="mb-2 text-base">העדפות החיפוש ששמרת</h2>
+    <p>{{ savedPreferencesSummary() }}</p>
+    <p class="text-sm">
+      הסינון בעמוד נוסף להעדפות האלה. אופן עבודה שלא נמסר אינו סתירה להעדפות ואינו התאמה מאומתת.
+    </p>
+    <a routerLink="/app/preferences" class="text-brand underline">עדכון ההעדפות השמורות</a>
+  </section>
+}
 <div
   class="filter-panel grid grid-cols-[minmax(0,1.35fr)_repeat(2,minmax(0,1fr))] items-start gap-5 bg-surface p-5 rounded-[16px] max-[901px]:grid-cols-1 max-[768px]:p-[15px]"
 >
@@ -145,8 +156,8 @@
 <label class="checkbox-label"
   ><input
     type="checkbox"
-    [ngModel]="params().get('unknownStyle') === 'true'"
-    (ngModelChange)="setFilter({ unknownStyle: $event ? 'true' : null })"
+    [ngModel]="includeUnknownStyles()"
+    (ngModelChange)="setFilter({ unknownStyle: $event ? null : 'false' })"
   />
   לכלול סגנון עבודה שלא נמסר</label
 >

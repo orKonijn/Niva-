@@ -101,6 +101,7 @@ export function matchesPreferences(
     company: string;
   },
   value: Preferences,
+  includeUnknownWorkStyle = true,
 ): boolean {
   const excluded = value.exclusions
     .split(',')
@@ -109,8 +110,9 @@ export function matchesPreferences(
   return (
     (value.role === 'all' || job.category === value.role) &&
     (value.district === 'all' || job.district === value.district) &&
-    (!value.workStyles.length ||
-      (isWorkStyle(job.workStyle) && value.workStyles.includes(job.workStyle))) &&
+    (job.workStyle === 'unknown'
+      ? includeUnknownWorkStyle
+      : !value.workStyles.length || value.workStyles.includes(job.workStyle)) &&
     !excluded.some((x) => job.company.toLowerCase().includes(x))
   );
 }

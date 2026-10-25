@@ -139,7 +139,10 @@ test('real-feed UI boundary fixture remains separate from demo, preserves unknow
   await expect(page.locator('niva-job-card')).toContainText('משרה אמיתית');
   await expect(page.locator('niva-job-card')).toContainText('סגנון עבודה לא נמסר');
   await page.getByRole('checkbox', { name: 'היברידי', exact: true }).check();
+  await expect(page.locator('niva-job-card')).toHaveCount(1);
+  await page.getByRole('checkbox', { name: 'לכלול סגנון עבודה שלא נמסר' }).uncheck();
   await expect(page.locator('niva-job-card')).toHaveCount(0);
+  await page.getByRole('checkbox', { name: 'לכלול סגנון עבודה שלא נמסר' }).check();
   await page.getByRole('checkbox', { name: 'היברידי', exact: true }).uncheck();
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await page.getByRole('button', { name: 'שמירת המשרה', exact: true }).click();

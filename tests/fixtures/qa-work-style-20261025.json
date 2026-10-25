@@ -1,0 +1,156 @@
+{
+  "verifiedAt": "2026-10-25T17:06:59.753Z",
+  "scope": "Real public employer QA listings; shortened descriptions. No private profile.",
+  "jobs": [
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "title": "QA & Automation Engineer",
+      "company": "Canopy",
+      "initials": "CA",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-06-30",
+      "description": "Join Us in Revolutionizing Oncology Care At Canopy, we’re transforming healthcare for cancer patients by shifting from episodic treatment to continuous, patient-centered care. Our technology empowers patients to manage symptoms and access s",
+      "skills": [],
+      "reason": "מקור: Canopy / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "canopycare-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-canopycare",
+        "name": "Canopy / Greenhouse",
+        "url": "https://job-boards.greenhouse.io/canopycare",
+        "applicationUrl": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+        "updatedAt": "2026-06-30T12:03:12.000Z",
+        "fetchedAt": "2026-10-25T16:59:01.891Z",
+        "location": "Tel Aviv, Israel ",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.",
+        "firstSeenAt": "2026-10-25T16:59:01.891Z",
+        "lastVerifiedAt": "2026-10-25T16:59:01.891Z",
+        "availability": "published",
+        "version": "2fa4bcd9a4ec425b67db1109",
+        "attribution": [
+          {
+            "name": "Canopy / Greenhouse",
+            "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "greenhouse-canopycare-5285235008",
+        "employerId": "greenhouse-canopycare",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": [
+          {
+            "value": "QA Automation",
+            "quote": "Experience with automation tools such as Playwright, Cypress, Selenium, or similar",
+            "provenance": "extracted",
+            "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+            "observedAt": "2026-10-25T16:59:01.891Z"
+          }
+        ],
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "title": "AI-First QA Automation Engineer ",
+      "company": "Unframe",
+      "initials": "UN",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-10-19",
+      "description": "About Unframe Unframe is an AI-first startup helping the world’s largest enterprises bring LLM-powered applications to life in days - not months. We combine the speed of a product company with the flexibility of a consultancy, helping custo",
+      "skills": [],
+      "reason": "מקור: Unframe / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "unframe-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-unframe",
+        "name": "Unframe / Greenhouse",
+        "url": "https://job-boards.eu.greenhouse.io/unframe",
+        "applicationUrl": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101",
+        "updatedAt": "2026-10-19T08:51:40.000Z",
+        "fetchedAt": "2026-10-25T16:59:01.916Z",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.",
+        "firstSeenAt": "2026-10-25T16:59:01.916Z",
+        "lastVerifiedAt": "2026-10-25T16:59:01.916Z",
+        "availability": "published",
+        "version": "ab654226eb20cf246d43eae5",
+        "attribution": [
+          {
+            "name": "Unframe / Greenhouse",
+            "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "greenhouse-unframe-5003021101",
+        "employerId": "greenhouse-unframe",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": null,
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    }
+  ]
+}
