@@ -1,0 +1,260 @@
+{
+  "verifiedAt": "2026-10-25T15:16:41.782Z",
+  "runs": [
+    {
+      "startedAt": "2026-10-25T15:16:31.347Z",
+      "durationMs": 5670,
+      "total": 188,
+      "stale": false,
+      "health": [
+        {
+          "id": "greenhouse-appsflyer",
+          "checked_at": "2026-10-25T15:16:33.101Z",
+          "error": null,
+          "next_at": 1792941991859,
+          "name": "AppsFlyer / Greenhouse"
+        },
+        {
+          "id": "greenhouse-datadog",
+          "checked_at": "2026-10-25T15:16:34.023Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Datadog / Greenhouse"
+        },
+        {
+          "id": "greenhouse-elastic",
+          "checked_at": "2026-10-25T15:16:33.786Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Elastic / Greenhouse"
+        },
+        {
+          "id": "greenhouse-forter",
+          "checked_at": "2026-10-25T15:16:35.066Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Forter / Greenhouse"
+        },
+        {
+          "id": "greenhouse-gongio",
+          "checked_at": "2026-10-25T15:16:33.101Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Gong / Greenhouse"
+        },
+        {
+          "id": "greenhouse-jfrog",
+          "checked_at": "2026-10-25T15:16:34.478Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "JFrog / Greenhouse"
+        },
+        {
+          "id": "greenhouse-optimove",
+          "checked_at": "2026-10-25T15:16:34.356Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Optimove / Greenhouse"
+        },
+        {
+          "id": "greenhouse-orcasecurity",
+          "checked_at": "2026-10-25T15:16:34.750Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Orca Security / Greenhouse"
+        },
+        {
+          "id": "greenhouse-pendo",
+          "checked_at": "2026-10-25T15:16:35.513Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Pendo / Greenhouse"
+        },
+        {
+          "id": "greenhouse-riskified",
+          "checked_at": "2026-10-25T15:16:35.463Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Riskified / Greenhouse"
+        },
+        {
+          "id": "greenhouse-similarweb",
+          "checked_at": "2026-10-25T15:16:35.137Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Similarweb / Greenhouse"
+        },
+        {
+          "id": "greenhouse-taboola",
+          "checked_at": "2026-10-25T15:16:34.062Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Taboola / Greenhouse"
+        },
+        {
+          "id": "greenhouse-torq",
+          "checked_at": "2026-10-25T15:16:34.743Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Torq / Greenhouse"
+        },
+        {
+          "id": "greenhouse-via",
+          "checked_at": "2026-10-25T15:16:35.840Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Via / Greenhouse"
+        },
+        {
+          "id": "greenhouse-wizinc",
+          "checked_at": "2026-10-25T15:16:33.077Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Wiz / Greenhouse"
+        },
+        {
+          "id": "greenhouse-yotpo",
+          "checked_at": "2026-10-25T15:16:35.183Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "Yotpo / Greenhouse"
+        },
+        {
+          "id": "lever-walkme",
+          "checked_at": "2026-10-25T15:16:34.154Z",
+          "error": null,
+          "next_at": 1792942291859,
+          "name": "WalkMe / Lever"
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-25T15:16:37.018Z",
+      "durationMs": 4764,
+      "total": 188,
+      "stale": false,
+      "health": [
+        {
+          "id": "greenhouse-appsflyer",
+          "checked_at": "2026-10-25T15:16:37.749Z",
+          "error": null,
+          "next_at": 1792941997177,
+          "name": "AppsFlyer / Greenhouse"
+        },
+        {
+          "id": "greenhouse-datadog",
+          "checked_at": "2026-10-25T15:16:38.469Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Datadog / Greenhouse"
+        },
+        {
+          "id": "greenhouse-elastic",
+          "checked_at": "2026-10-25T15:16:38.373Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Elastic / Greenhouse"
+        },
+        {
+          "id": "greenhouse-forter",
+          "checked_at": "2026-10-25T15:16:39.443Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Forter / Greenhouse"
+        },
+        {
+          "id": "greenhouse-gongio",
+          "checked_at": "2026-10-25T15:16:37.823Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Gong / Greenhouse"
+        },
+        {
+          "id": "greenhouse-jfrog",
+          "checked_at": "2026-10-25T15:16:38.947Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "JFrog / Greenhouse"
+        },
+        {
+          "id": "greenhouse-optimove",
+          "checked_at": "2026-10-25T15:16:38.842Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Optimove / Greenhouse"
+        },
+        {
+          "id": "greenhouse-orcasecurity",
+          "checked_at": "2026-10-25T15:16:39.239Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Orca Security / Greenhouse"
+        },
+        {
+          "id": "greenhouse-pendo",
+          "checked_at": "2026-10-25T15:16:39.912Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Pendo / Greenhouse"
+        },
+        {
+          "id": "greenhouse-riskified",
+          "checked_at": "2026-10-25T15:16:39.706Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Riskified / Greenhouse"
+        },
+        {
+          "id": "greenhouse-similarweb",
+          "checked_at": "2026-10-25T15:16:39.684Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Similarweb / Greenhouse"
+        },
+        {
+          "id": "greenhouse-taboola",
+          "checked_at": "2026-10-25T15:16:38.598Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Taboola / Greenhouse"
+        },
+        {
+          "id": "greenhouse-torq",
+          "checked_at": "2026-10-25T15:16:39.312Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Torq / Greenhouse"
+        },
+        {
+          "id": "greenhouse-via",
+          "checked_at": "2026-10-25T15:16:40.659Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Via / Greenhouse"
+        },
+        {
+          "id": "greenhouse-wizinc",
+          "checked_at": "2026-10-25T15:16:37.831Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Wiz / Greenhouse"
+        },
+        {
+          "id": "greenhouse-yotpo",
+          "checked_at": "2026-10-25T15:16:39.715Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "Yotpo / Greenhouse"
+        },
+        {
+          "id": "lever-walkme",
+          "checked_at": "2026-10-25T15:16:39.194Z",
+          "error": null,
+          "next_at": 1792942297177,
+          "name": "WalkMe / Lever"
+        }
+      ]
+    }
+  ],
+  "sourcesAdvancedOnSecondVisit": 17
+}

@@ -1,0 +1,31 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 25,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_881c2b0c9eb48191870bd9c7ecf4387d",
+  "sitesCommit": "b48190abdf27c15f167bf8c57ea61bddc4eccb8c",
+  "githubCommit": "f49d8f614b503764a99784f6b10d6a17c5202747",
+  "deploymentId": "appgdep_6ade1d3b9eb081919ad2f382044be08a",
+  "status": "succeeded",
+  "publishedAt": "2026-10-25T15:16:26.310444+00:00",
+  "audience": "public",
+  "liveEvidence": "visit-refresh-live-20261025.json",
+  "liveReadback": "Reloaded the existing Chrome dashboard, retained the account name/photo and loaded current jobs. Two successive production refresh API requests checked all 17 healthy sources, with all source timestamps advancing on the second request; both returned 188 jobs without stale data.",
+  "verification": {
+    "frontend": 59,
+    "server": 103,
+    "browser": 162,
+    "browserNote": "161 passed in full run; one account/resume timing failure passed on isolated retry; six visit/loading cases passed again after full-page screenshot capture.",
+    "worker": "passed",
+    "provenance": "passed",
+    "typechecks": "passed",
+    "format": "passed",
+    "build": "passed"
+  },
+  "limitations": [
+    "Coverage is the 17 connected official employer boards, not the entire web.",
+    "No additional postings appeared between the two consecutive live checks.",
+    "Provider rate limits and outages retain marked last-known listings until retry is allowed."
+  ],
+  "recordScope": "Git-only publication receipt; no additional hosted release"
+}

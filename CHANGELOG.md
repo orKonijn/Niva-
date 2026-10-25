@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## Version 25 — Fresh employer checks on every visit
+
+Published 25 October 2026. [Publication receipt](docs/verification/publication-20261025-v25.json). [Live evidence](docs/verification/visit-refresh-live-20261025.json): two consecutive fresh requests checked all 17 healthy sources; every source timestamp advanced on the second request. Both returned 188 current jobs without stale data, taking 5.7 and 4.8 seconds. No additional posting appeared in that interval. The existing Chrome dashboard loaded current jobs and retained the account name/photo.
 
 - Every site entry or full page reload now checks the connected employer boards before returning current jobs. Explicit job refresh does the same. Filter changes and pagination reuse that checked snapshot. The 17 official Greenhouse/Lever employer boards remain the coverage boundary; this does not claim a search of the entire web or guarantee that employers have posted new jobs between visits.
 - Fresh visit checks bypass healthy sources' normal 10–15 minute cadence. Four concurrent source workers fetch bounded responses, merge new/changed listings and close removed listings. Durable source leases let overlapping visits share in-progress checks across request/database adapters. Preserve provider Retry-After, failure backoff and last known listings; surface partial/stale data and actual source check times.
