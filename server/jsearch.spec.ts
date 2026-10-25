@@ -3,6 +3,8 @@ import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { sqliteCareerDb } from './career-db';
 import { ingestJsearch, normalizeJsearch } from './jsearch-source';
+import { createCareer } from './career';
+import { emptyAccountState } from '../src/app/core/models/account-state';
 import { trustedJobUrl, trustedPublisherUrl } from '../src/app/core/source-registry';
 const DAY = 86400000;
 const row = (publisher = 'LinkedIn') => ({
@@ -26,6 +28,58 @@ function database() {
 }
 afterEach(() => vi.unstubAllGlobals());
 describe('publisher feed within the free-plan budget', () => {
+  it('registers the publisher work with Worker keepAlive before awaiting it and keeps it independent of request cancellation', async () => {
+    const { sqlite, db } = database();
+    try {
+      let release!: () => void, started!: () => void;
+      const entered = new Promise<void>((r) => (started = r)),
+        gate = new Promise<void>((r) => (release = r));
+      vi.stubGlobal(
+        'fetch',
+        vi.fn(async (url: string) => {
+          if (String(url).includes('openwebninja')) {
+            started();
+            await gate;
+            return Response.json({
+              status: 'OK',
+              data: { jobs: [row(String(url).includes('linkedin') ? 'LinkedIn' : 'Indeed')] },
+            });
+          }
+          return Response.json(
+            String(url).includes('greenhouse')
+              ? { jobs: [] }
+              : String(url).includes('jobicy')
+                ? { jobs: [], hasMore: false, nextCursor: null }
+                : [],
+          );
+        }),
+      );
+      const keepAlive = vi.fn();
+      const app = createCareer({
+        db,
+        env: { JSEARCH_API_KEY: 'synthetic-key' },
+        secret: 'synthetic-secret',
+        identity: async () => null,
+        state: async () => emptyAccountState(),
+        keepAlive,
+      });
+      const controller = new AbortController();
+      const request = app.request(
+        new Request('https://niva.example/api/feed?scope=all', { signal: controller.signal }),
+      );
+      await entered;
+      expect(keepAlive).toHaveBeenCalled();
+      const publisherWork = keepAlive.mock.calls[0][0] as Promise<void>;
+      expect(publisherWork).toBeInstanceOf(Promise);
+      controller.abort();
+      release();
+      await publisherWork;
+      expect((await db.all('SELECT id FROM niva_jobs')).length).toBe(2);
+      expect((await request).status).toBe(200);
+    } finally {
+      sqlite.close();
+    }
+  });
   it('accepts actual public samples and rejects spoofed publishers and unsafe application hosts', () => {
     const actual = JSON.parse(readFileSync('tests/fixtures/jsearch-public-20261025.json', 'utf8'));
     expect(actual.jobs).toHaveLength(4);

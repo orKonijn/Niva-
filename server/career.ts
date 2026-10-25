@@ -138,7 +138,11 @@ export function createCareer(deps: CareerDependencies) {
   app.get('/api/feed', async (c) => {
     const owner = await deps.identity(c.req.raw);
     await quota(db, `feed:${owner ?? 'anonymous'}`, 120, 60000);
-    await ingestJsearch(db, env.JSEARCH_API_KEY);
+    if (env.JSEARCH_API_KEY) {
+      const publisherWork = ingestJsearch(db, env.JSEARCH_API_KEY);
+      deps.keepAlive?.(publisherWork);
+      await publisherWork;
+    }
     // Retry incomplete bootstrap, with durable leases/backoff still limiting upstream requests.
     const health = await db.all<{ id: string; checked_at: string | null; next_at: number }>(
       'SELECT id,checked_at,next_at FROM niva_sources',
