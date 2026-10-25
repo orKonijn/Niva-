@@ -8,6 +8,7 @@ export interface AccountUser {
   authMethod?: 'sites' | 'social';
 }
 export interface AuthConfiguration {
+  setupRequired?: boolean;
   platform?: 'sites';
   realJobs?: boolean;
   discovery?: boolean;

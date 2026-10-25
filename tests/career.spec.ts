@@ -280,15 +280,17 @@ test('chat consent, grounded context, provider failure and retry are accessible'
     fullPage: true,
   });
 });
-test('missing AI and scanning configuration is explicit without fake success', async ({ page }) => {
+test('missing AI configuration is explicit while local file import remains available', async ({
+  page,
+}) => {
   await fixture(page);
   await page.goto('/app/assistant');
   await expect(page.getByRole('status')).toContainText('טרם הוגדר');
   await expect(page.getByRole('button', { name: 'שליחה', exact: true })).toBeDisabled();
   await page.goto('/app/resumes');
   await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
-  await expect(page.getByText(/העלאת קבצים אינה זמינה/)).toBeVisible();
-  await expect(page.getByLabel('קובץ לבדיקה', { exact: true })).toBeDisabled();
+  await expect(page.getByText(/הקובץ נקרא בדפדפן בלבד/)).toBeVisible();
+  await expect(page.getByLabel('קובץ לבדיקה', { exact: true })).toBeEnabled();
 });
 test('late filter responses cannot replace a newer search', async ({ page }) => {
   await fixture(page);

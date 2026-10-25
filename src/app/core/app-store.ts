@@ -520,6 +520,9 @@ export class AppStore {
       ? this.change({ type: 'preferences', value }, expected, revision)
       : this.demo.savePreferences(value, expected);
   }
+  completeSetup(value: Preferences): Promise<boolean> {
+    return this.change({ type: 'complete-setup', value });
+  }
   toggleSaved(jobId: string): Promise<boolean> {
     if (jobId.startsWith('greenhouse-') && !this.isAccount()) {
       this.accountNotice.set('לשמירת משרות אמיתיות יש להתחבר לחשבון.');

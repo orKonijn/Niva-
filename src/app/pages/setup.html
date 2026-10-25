@@ -1,0 +1,91 @@
+<div class="min-h-screen bg-canvas text-ink">
+  <header class="mx-auto max-w-[1100px] px-5 flex items-center justify-between py-7">
+    <niva-brand /><a routerLink="/account" class="text-link">החשבון שלי</a>
+  </header>
+  <main id="main" tabindex="-1" class="mx-auto max-w-[820px] px-5 pb-12">
+    <span class="section-kicker">מכינים את המרחב שלך</span>
+    <h1>קודם מכירים אותך, ואז מחפשים יחד.</h1>
+    <ol class="my-6 flex gap-5 text-sm" aria-label="שלבי ההגדרה">
+      <li [attr.aria-current]="step() === 0 ? 'step' : null">1 · קורות חיים</li>
+      <li [attr.aria-current]="step() === 1 ? 'step' : null">2 · העדפות חיפוש</li>
+    </ol>
+    <p class="mb-5 text-muted">
+      לפני הכניסה למרחב האישי, מוסיפים קורות חיים ומאשרים את ההעדפות. אפשר לעדכן אותם בהמשך.
+    </p>
+    @if (loading()) {
+      <p role="status">טוענים את הפרטים שלך…</p>
+    } @else if (!store.accountReady() || career.error()) {
+      <button class="account-button" (click)="initialize()">ניסיון נוסף</button>
+    } @else if (step() === 0) {
+      <section class="account-panel">
+        <h2>שלב 1 · קורות החיים שלך</h2>
+        <p class="mb-4">
+          בוחרים PDF או DOCX, או ממלאים את הטקסט ישירות. בודקים ומתקנים לפני השמירה.
+        </p>
+        <niva-resume-file-input
+          [disabled]="busy()"
+          [context]="store.session.userId() + ':' + career.generation()"
+          (loaded)="importFile($event)"
+        />
+        <form (ngSubmit)="saveResume()">
+          <label class="career-field"
+            >שם הגרסה<input name="name" [(ngModel)]="name" maxlength="120" [disabled]="busy()"
+          /></label>
+          <label class="career-field"
+            >טקסט קורות החיים<textarea
+              name="text"
+              dir="auto"
+              rows="12"
+              [(ngModel)]="text"
+              (ngModelChange)="reviewed = false"
+              minlength="20"
+              maxlength="30000"
+              [disabled]="busy()"
+              required
+            ></textarea>
+          </label>
+          <label class="career-check"
+            ><input
+              name="reviewed"
+              type="checkbox"
+              [(ngModel)]="reviewed"
+              [disabled]="busy()"
+            />בדקתי את הטקסט והעובדות נכונות. אני מאשר/ת לשמור אותו בחשבון ולהשתמש בו כקורות החיים
+            הפעילים שלי.</label
+          >
+          <p class="field-note my-4">
+            הטקסט נשמר ל־30 יום וניתן למחיקה בכל עת. אין שליחה למעסיקים או לבינה מלאכותית בשלב זה.
+          </p>
+          <button
+            class="account-button account-primary"
+            [disabled]="busy() || !reviewed || text.trim().length < 20"
+          >
+            {{ busy() ? 'שומרים…' : 'שמירה והמשך להעדפות' }}
+          </button>
+        </form>
+      </section>
+    } @else {
+      <section class="account-panel">
+        <h2 id="setup-preferences" tabindex="-1">שלב 2 · מה מתאים לך?</h2>
+        <p class="mb-4">
+          קורות החיים נשמרו ואושרו. עכשיו בוחרים תחום, מחוז וסגנונות עבודה. אפשר להשאיר כל אפשרות
+          פתוחה.
+        </p>
+        <niva-preference-fields
+          [value]="draft"
+          [accountOwned]="true"
+          (valueChange)="draft = $event"
+        />
+        <button class="account-button account-primary mt-5" [disabled]="busy()" (click)="finish()">
+          {{ busy() ? 'שומרים…' : 'שמירת ההעדפות וכניסה למרחב שלי' }}
+        </button>
+      </section>
+    }
+    @if (error()) {
+      <p role="alert" class="form-error mt-4">{{ error() }}</p>
+    }
+    <p class="mt-6 text-sm">
+      <a routerLink="/account">ניהול חשבון ויציאה</a> · <a routerLink="/privacy">פרטיות</a>
+    </p>
+  </main>
+</div>

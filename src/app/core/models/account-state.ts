@@ -10,6 +10,7 @@ export interface AccountState {
   profile: { name: string; headline: string };
   theme: 'light' | 'dark' | 'system';
   importedAt: string | null;
+  setupCompleted?: boolean;
 }
 export const emptyAccountState = (): AccountState => ({
   revision: 0,
@@ -20,4 +21,5 @@ export const emptyAccountState = (): AccountState => ({
   profile: { name: '', headline: '' },
   theme: 'system',
   importedAt: null,
+  setupCompleted: false,
 });

@@ -61,6 +61,7 @@ export function createBackend(database: DatabaseSync, options: AuthOptions) {
       google: !!options.google,
       apple: !!options.apple,
       accounts: true,
+      setupRequired: !options.browserTestMode,
       discovery: true,
       realJobs: !options.browserTestMode,
     }),

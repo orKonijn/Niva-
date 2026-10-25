@@ -17,8 +17,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CareerStore } from '../core/career-store';
 import type { ResumeVersion } from '../core/models/career';
 import { AppStore } from '../core/app-store';
+import { ResumeFileInput } from '../shared/resume-file-input';
 @Component({
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, ResumeFileInput],
   templateUrl: './resumes.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,7 +46,6 @@ export class Resumes {
   name = 'קורות החיים שלי';
   text = '';
   editText = '';
-  processingConsent = false;
   reviewed = false;
   private readonly drafts = new Map<string, string>();
   hasUnsavedChanges() {
@@ -65,7 +65,6 @@ export class Resumes {
       this.selected.set(null);
       this.text = '';
       this.editText = '';
-      this.processingConsent = false;
       this.reviewed = false;
     });
     effect(() => {
@@ -129,34 +128,15 @@ export class Resumes {
         name: this.name,
         text: this.text,
       });
-      await this.career.load();
+      await this.career.load(true);
       this.select(resume);
       this.text = '';
     });
   }
-  async upload(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    input.value = '';
-    if (!file) return;
-    const generation = this.career.generation();
-    await this.action(async () => {
-      if (file.size > this.career.config().maxUploadBytes) throw new Error('הקובץ גדול מ־750KB.');
-      if (!this.processingConsent) throw new Error('יש לאשר את העברת הקובץ לסריקה ופענוח.');
-      const bytes = new Uint8Array(await file.arrayBuffer());
-      if (generation !== this.career.generation())
-        throw new Error('נתוני החשבון השתנו. יש לבחור מחדש את הקובץ.');
-      let binary = '';
-      for (const b of bytes) binary += String.fromCharCode(b);
-      const resume = await this.career.request<ResumeVersion>('resumes', {
-        name: file.name,
-        mime: file.type,
-        base64: btoa(binary),
-        processingConsent: true,
-      });
-      await this.career.load();
-      this.select(resume);
-    });
+  importFile(value: { name: string; text: string }) {
+    this.name = value.name;
+    this.text = value.text;
+    this.notice.set('הטקסט נקרא מהקובץ. יש לבדוק ולתקן אותו, ואז לשמור טיוטה לבדיקה.');
   }
   async review() {
     const resume = this.selected();

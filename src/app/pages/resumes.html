@@ -161,25 +161,11 @@
     </form>
     <hr class="my-5" />
     <h3>או קובץ PDF / DOCX</h3>
-    @if (career.config().uploads) {
-      <p>
-        הקובץ יועבר ל־<bdi>{{ career.config().processor }}</bdi> לסריקת נוזקות ופענוח מוגבל. עד
-        750KB, עד 20 עמודים. אין להשתמש במסמכים המכילים מידע שאינך רוצה להעביר לשירות זה.
-      </p>
-      <label class="career-check"
-        ><input type="checkbox" [(ngModel)]="processingConsent" />אני מאשר/ת העברה לשירות הסריקה
-        והפענוח המוצג</label
-      >
-    } @else {
-      <p>העלאת קבצים אינה זמינה: שירות הסריקה והפענוח טרם הוגדר. ניתן להדביק טקסט בבטחה.</p>
-    }
-    <label class="career-field"
-      >קובץ לבדיקה<input
-        type="file"
-        accept=".pdf,.docx"
-        [disabled]="busy() || !career.config().uploads || !processingConsent"
-        (change)="upload($event)"
-    /></label>
+    <niva-resume-file-input
+      [disabled]="busy()"
+      [context]="store.session.userId() + ':' + career.generation()"
+      (loaded)="importFile($event)"
+    />
   </section>
 </details>
 <details class="account-panel resume-privacy">

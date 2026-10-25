@@ -31,12 +31,12 @@ for (const theme of ['light', 'dark'] as const) {
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     const directory = `docs/screenshots/changes/visit-refresh-${info.project.name}-${theme}`;
     if (process.env['VISIT_BEFORE']) {
-        await page.screenshot({ path: `${directory}/before.png`, fullPage: true });
+      await page.screenshot({ path: `${directory}/before.png`, fullPage: true });
       return;
     }
     expect(checks).toBe(1);
     await expect(page.getByRole('button', { name: 'רענון משרות', exact: true })).toBeEnabled();
-      await page.screenshot({ path: `${directory}/after.png`, fullPage: true });
+    await page.screenshot({ path: `${directory}/after.png`, fullPage: true });
     await page.getByRole('button', { name: 'רענון משרות', exact: true }).click();
     await expect(page.locator('niva-job-card')).toContainText('משרת בדיקה 2');
     expect(checks).toBe(2);

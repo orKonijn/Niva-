@@ -11,7 +11,7 @@ test('homepage is accessible, has no horizontal overflow and explains resume pro
   await expect(page.getByRole('heading', { level: 1 })).toContainText('פחות חיפוש');
   await page.locator('summary').filter({ hasText: 'מה קורה לקורות החיים שלי?' }).click();
   await expect(
-    page.getByText('במרחב קורות החיים ניתן לשמור טקסט וגרסאות', { exact: false }),
+    page.getByText('אפשר לבחור PDF/DOCX לקריאה בדפדפן או להדביק טקסט', { exact: false }),
   ).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,

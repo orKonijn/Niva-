@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { accountGuard } from './core/account-guard';
 import { unsavedGuard } from './core/unsaved';
+import { setupGuard, setupEntryGuard } from './core/setup-guard';
 
 export const routes: Routes = [
   {
@@ -10,6 +11,7 @@ export const routes: Routes = [
   },
   {
     path: 'signup',
+    canActivate: [setupEntryGuard],
     title: 'מתחילים עם Niva',
     loadComponent: () => import('./pages/onboarding').then((m) => m.Onboarding),
   },
@@ -44,7 +46,15 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/account').then((m) => m.AccountPage),
   },
   {
+    path: 'setup',
+    title: 'מכינים את המרחב שלך — Niva',
+    canActivate: [accountGuard],
+    canDeactivate: [unsavedGuard],
+    loadComponent: () => import('./pages/setup').then((m) => m.Setup),
+  },
+  {
     path: 'app',
+    canActivate: [setupGuard],
     loadComponent: () => import('./pages/workspace').then((m) => m.Workspace),
     children: [
       {

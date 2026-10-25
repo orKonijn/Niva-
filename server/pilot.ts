@@ -7,7 +7,13 @@ import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
 import { emptyAccountState, type AccountState } from '../src/app/core/models/account-state';
 import { JOBS } from '../src/app/core/data/sample-jobs';
-import { applyStateOperation, importReceipt, normalizeImport, StateError } from './state';
+import {
+  applyStateOperation,
+  importReceipt,
+  normalizeImport,
+  StateError,
+  setupResumeSql,
+} from './state';
 import { FEED_URL, normalizeFeed, type Feed } from './job-feed';
 import type { Job } from '../src/app/core/models/job';
 import type { DeploymentEnvironment } from './deployment-policy';
@@ -157,6 +163,7 @@ export function createPilot(
   app.get('/api/config', (c) =>
     c.json({
       accounts: true,
+      setupRequired: true,
       discovery: true,
       platform: 'sites',
       realJobs: true,
@@ -237,6 +244,10 @@ export function createPilot(
     }
     if (c.req.method === 'POST' && path === '/api/account/state') {
       const input = await c.req.json();
+      if (input.operation?.type === 'complete-setup') {
+        const active = await env.DB.prepare(setupResumeSql).bind(user.id, Date.now()).first();
+        if (!active) throw new StateError(409, 'REVIEW_REQUIRED');
+      }
       const next = applyStateOperation(user.id, state, input, env.NIVA_IMPORT_SECRET, [
         ...JOBS,
         ...(await catalog(env.DB)),

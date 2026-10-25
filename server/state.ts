@@ -8,6 +8,8 @@ import {
   migratePreferences,
   validPreferences,
 } from '../src/app/core/preferences';
+export const setupResumeSql =
+  "SELECT d.id FROM niva_career_owners o JOIN niva_documents d ON d.owner=o.owner AND d.id=o.active_resume_id AND d.epoch=o.epoch WHERE o.owner=? AND d.kind='resume' AND d.expires_at>? AND json_extract(d.data,'$.confirmed')=1";
 export class StateError extends Error {
   constructor(
     public status: number,
@@ -97,7 +99,8 @@ export function applyStateOperation(
     return value;
   };
   switch (op['type']) {
-    case 'preferences': {
+    case 'preferences':
+    case 'complete-setup': {
       const value = object(op['value']);
       if (
         !validPreferences(value as unknown as AccountState['preferences']) ||
@@ -105,6 +108,7 @@ export function applyStateOperation(
       )
         throw new StateError(400, 'INVALID_PREFERENCES');
       state.preferences = migratePreferences(value);
+      if (op['type'] === 'complete-setup') state.setupCompleted = true;
       break;
     }
     case 'saved': {
@@ -215,6 +219,11 @@ export function stateRepository(
   function mutate(userId: string, input: unknown): AccountState {
     db.exec('BEGIN IMMEDIATE');
     try {
+      if (
+        (input as { operation?: { type?: string } })?.operation?.type === 'complete-setup' &&
+        !db.prepare(setupResumeSql).get(userId, Date.now())
+      )
+        throw new StateError(409, 'REVIEW_REQUIRED');
       const state = applyStateOperation(userId, read(userId), input, secret, catalog());
       db.prepare(
         'INSERT INTO niva_account_state (user_id, revision, data, imported_at, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET revision=excluded.revision, data=excluded.data, imported_at=excluded.imported_at, updated_at=excluded.updated_at',
