@@ -1,12 +1,16 @@
 # Changelog
 
-## Unreleased
+<a id="version-18"></a>
+
+## Version 18 — Job-card action layout
+
+Published **25 October 2026**. Reviewed GitHub source: `c5d8d1bc2b80c631a6a95a57236fe209378c5530`; Sites source: `6aca23298fa4d76a911e9ee0e328f5e6fe0bad17`. Deployment succeeded; [publication receipt](docs/verification/publication-20261025-v18.json). The post-publication record is a Git-only documentation update.
 
 ### Job-card action spacing — 25 October 2026
 
 - Separated the conversation/resume action row from the footer divider by 20px, with 16px above it. Equal-width buttons form a balanced two-column row; cards with 360px or less of content width stack them at full width. Scoped styles preserve the shared buttons, Hebrew RTL, theme tokens, keyboard focus and existing destinations.
 - Genuine synthetic-data comparisons: desktop [Light before](docs/screenshots/changes/job-card-actions-desktop-light/before.png) · [Light after](docs/screenshots/changes/job-card-actions-desktop-light/after.png) · [Dark before](docs/screenshots/changes/job-card-actions-desktop-dark/before.png) · [Dark after](docs/screenshots/changes/job-card-actions-desktop-dark/after.png); mobile [Light before](docs/screenshots/changes/job-card-actions-mobile-light/before.png) · [Light after](docs/screenshots/changes/job-card-actions-mobile-light/after.png) · [Dark before](docs/screenshots/changes/job-card-actions-mobile-dark/before.png) · [Dark after](docs/screenshots/changes/job-card-actions-mobile-dark/after.png).
-- Verification: 59 frontend, 79 server, 1 provenance and 208 browser checks passed; all three type checks, formatting and production build passed. The four layout/focus probes show the footer gap improved from 0px to 20px, all buttons retain at least 44px height, no horizontal overflow, and links retain their selected-job query. [Verification record](docs/verification/job-card-actions-20261025.json). Publication follows these checks. Existing provider/scheduler limitations are unchanged.
+- Verification: 59 frontend, 79 server, 1 provenance and 208 browser checks passed; all three type checks, formatting and production build passed. The four layout/focus probes show the footer gap improved from 0px to 20px, all buttons retain at least 44px height, no horizontal overflow, and links retain their selected-job query. [Verification record](docs/verification/job-card-actions-20261025.json). Published as version 18 after these checks. Existing provider/scheduler limitations are unchanged.
 
 <a id="version-17"></a>
 
@@ -35,11 +39,11 @@ The original local repair pass performed no commit, push or deployment. The subs
 
 - Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–17**, not semantic package versions (`package.json` remains `0.1.0`). Version 17 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–18**, not semantic package versions (`package.json` remains `0.1.0`). Version 18 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; version 17 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–18 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
@@ -47,6 +51,7 @@ Sites and GitHub have separate Git histories. `Sites source` identifies the exac
 
 | Version | Source date | Changes                                                             |
 | ------- | ----------- | ------------------------------------------------------------------- |
+| 18      | 2026-10-25  | [Job-card action layout](#version-18)                               |
 | 17      | 2026-10-25  | [Independent-review repairs](#version-17)                           |
 | 16      | 2026-10-24  | [Reliability, privacy and evidence repairs](#version-16)            |
 | 15      | 2026-10-24  | [Worker-compatible source retrieval](#version-15)                   |

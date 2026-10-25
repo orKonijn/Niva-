@@ -1,0 +1,22 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "siteUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "version": 18,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_086fc6047264819197731fca71994f43",
+  "sitesCommit": "6aca23298fa4d76a911e9ee0e328f5e6fe0bad17",
+  "reviewedGithubCommit": "c5d8d1bc2b80c631a6a95a57236fe209378c5530",
+  "deploymentId": "appgdep_6add49978fc08191a40bfc9cf55663a8",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T02:13:24.304199+02:00",
+  "artifactDigest": "sha256:4e07929e82012652301c042a59dbcbcfbdd356a58fa35026a60119a5ae32f28e",
+  "mappedSourceVerified": true,
+  "dirty": false,
+  "verificationEvidence": "job-card-actions-20261025.json",
+  "audience": "Existing owner-only access preserved",
+  "scope": "Job-card action layout; no backend, provider, schedule, access or data changes",
+  "recordScope": "Post-deployment Git-only receipt; no additional hosted release",
+  "liveVerification": [
+    "Authenticated jobs page renders balanced action rows with clear footer spacing",
+    "Live build-info.json matches the reviewed GitHub and Sites hashes; dirty=false, mappedSourceVerified=true"
+  ]
+}
