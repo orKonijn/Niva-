@@ -22,7 +22,7 @@
           <bdi>{{ job.title }}</bdi>
         </h1>
         <p>
-          <bdi>{{ job.company }}</bdi> · {{ districtLabel(job.district) }} ·
+          <bdi>{{ job.company }}</bdi> · {{ job.source?.location || districtLabel(job.district) }} ·
           {{ workStyleLabel(job.workStyle) }}
         </p>
       </div>
@@ -90,6 +90,11 @@
         class="text-brand underline"
         >הרשומה המקורית</a
       >
+      @if (source.descriptionFetchedAt) {
+        <p class="text-sm">
+          תיאור מלא נבדק: <bdi>{{ source.descriptionFetchedAt }}</bdi>
+        </p>
+      }
       <p class="text-sm">
         {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. הסבר ההתאמה
         מופיע בנפרד.

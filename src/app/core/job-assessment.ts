@@ -20,7 +20,10 @@ export function assessJob(
     questions: string[] = [],
     strengths: string[] = [],
     gaps: string[] = [];
-  if (job.source?.active === false || job.source?.availability === 'closed')
+  if (
+    (job.source?.active === false && job.source?.availability !== 'unknown') ||
+    job.source?.availability === 'closed'
+  )
     blockers.push('המשרה אינה מפורסמת עוד במקור');
   if (f?.deadline && Date.parse(f.deadline.value) < now) blockers.push('מועד ההגשה חלף');
   if (

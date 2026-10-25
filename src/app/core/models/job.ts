@@ -42,6 +42,8 @@ export interface Job {
     fetchedAt: string;
     firstSeenAt?: string | null;
     lastVerifiedAt?: string | null;
+    descriptionFetchedAt?: string;
+    statusCheckedAt?: string;
     availability?: 'published' | 'closed' | 'unknown';
     applicationCheck?: {
       status: 'reachable' | 'unverified' | 'unavailable';

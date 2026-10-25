@@ -70,6 +70,7 @@ export class AppStore {
       checked_at: string | null;
       error: string | null;
       next_at: number;
+      partial?: boolean;
     }[]
   >([]);
   private feedQuery: Record<string, string> = {};
@@ -152,9 +153,10 @@ export class AppStore {
     this.jobsError.set('');
     try {
       const discovery = this.session.config().discovery;
+      const pageSize = this.feedQuery['scope'] === 'all' ? 50 : 12;
       const query = new URLSearchParams({
         ...this.feedQuery,
-        limit: String(more ? 12 : Math.min(50, Math.max(12, this.realJobs().length))),
+        limit: String(more ? pageSize : Math.min(50, Math.max(pageSize, this.realJobs().length))),
         ...(more && this.nextCursor() ? { cursor: this.nextCursor()! } : {}),
         ...(refreshSources ? { refresh: '1' } : {}),
       });
@@ -190,6 +192,7 @@ export class AppStore {
           checked_at: string | null;
           error: string | null;
           next_at: number;
+          partial?: boolean;
         }[];
       };
       if (

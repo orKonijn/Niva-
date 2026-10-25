@@ -27,9 +27,13 @@
               ><niva-icon [name]="link.icon" />{{ link.name }}
               @if (link.path === '/app/jobs') {
                 <span
-                  title="משרות שנטענו"
+                  title="משרות בתוצאות החיפוש"
                   class="nav-count ms-[auto] bg-surface p-[2px_7px] rounded-[5px]"
-                  >{{ store.eligibleJobs().length }}</span
+                  >{{
+                    store.catalogMode() === 'real' && store.session.config().discovery
+                      ? store.feedTotal()
+                      : store.eligibleJobs().length
+                  }}</span
                 >
               }
             </a>

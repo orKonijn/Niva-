@@ -1,0 +1,700 @@
+{
+  "observedAt": "2026-10-25T17:25:47.349Z",
+  "scope": "Ten real public postings used to test connected-source expansion, worldwide browsing and opt-in QA/location scope. Descriptions shortened; synthetic preferences only.",
+  "jobs": [
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "title": "QA & Automation Engineer",
+      "company": "Canopy",
+      "initials": "CA",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-06-30",
+      "description": "Join Us in Revolutionizing Oncology Care At Canopy, we’re transforming healthcare for cancer patients by shifting from episodic treatment to continuous, patient-centered care. Our technology empowers patients to manage symptoms and access s",
+      "skills": [],
+      "reason": "מקור: Canopy / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "canopycare-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-canopycare",
+        "name": "Canopy / Greenhouse",
+        "url": "https://job-boards.greenhouse.io/canopycare",
+        "applicationUrl": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+        "updatedAt": "2026-06-30T12:03:12.000Z",
+        "fetchedAt": "2026-10-25T17:14:08.786Z",
+        "location": "Tel Aviv, Israel ",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.",
+        "firstSeenAt": "2026-10-25T16:59:01.891Z",
+        "lastVerifiedAt": "2026-10-25T17:14:08.786Z",
+        "availability": "published",
+        "version": "2fa4bcd9a4ec425b67db1109",
+        "attribution": [
+          {
+            "name": "Canopy / Greenhouse",
+            "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "greenhouse-canopycare-5285235008",
+        "employerId": "greenhouse-canopycare",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": [
+          {
+            "value": "QA Automation",
+            "quote": "Experience with automation tools such as Playwright, Cypress, Selenium, or similar",
+            "provenance": "extracted",
+            "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+            "observedAt": "2026-10-25T17:14:08.786Z"
+          }
+        ],
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-unframe-4904270101",
+      "title": "QA Engineer",
+      "company": "Unframe",
+      "initials": "UN",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-manual",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-10-08",
+      "description": "About Unframe Unframe is an AI-first startup helping the world’s largest enterprises bring LLM-powered applications to life in days - not months. We combine the speed of a product company with the flexibility of a consultancy, helping custo",
+      "skills": [],
+      "reason": "מקור: Unframe / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "unframe-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-unframe",
+        "name": "Unframe / Greenhouse",
+        "url": "https://job-boards.eu.greenhouse.io/unframe",
+        "applicationUrl": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101",
+        "updatedAt": "2026-10-08T16:33:38.000Z",
+        "fetchedAt": "2026-10-25T17:14:08.783Z",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.",
+        "firstSeenAt": "2026-10-25T16:59:01.916Z",
+        "lastVerifiedAt": "2026-10-25T17:14:08.783Z",
+        "availability": "published",
+        "version": "f3b1ae7ba138af6bc00c8304",
+        "attribution": [
+          {
+            "name": "Unframe / Greenhouse",
+            "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "greenhouse-unframe-4904270101",
+        "employerId": "greenhouse-unframe",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": [
+          {
+            "value": "Product Management",
+            "quote": "Work closely with developers, product managers, and AI teams to define requirements and the \"Definition of Done.\" Investigate production issues and ensure proper validation and regression coverage",
+            "provenance": "extracted",
+            "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101",
+            "observedAt": "2026-10-25T17:14:08.783Z"
+          }
+        ],
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "title": "AI-First QA Automation Engineer ",
+      "company": "Unframe",
+      "initials": "UN",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-10-19",
+      "description": "About Unframe Unframe is an AI-first startup helping the world’s largest enterprises bring LLM-powered applications to life in days - not months. We combine the speed of a product company with the flexibility of a consultancy, helping custo",
+      "skills": [],
+      "reason": "מקור: Unframe / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "unframe-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-unframe",
+        "name": "Unframe / Greenhouse",
+        "url": "https://job-boards.eu.greenhouse.io/unframe",
+        "applicationUrl": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101",
+        "updatedAt": "2026-10-19T08:51:40.000Z",
+        "fetchedAt": "2026-10-25T17:14:08.783Z",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.",
+        "firstSeenAt": "2026-10-25T16:59:01.916Z",
+        "lastVerifiedAt": "2026-10-25T17:14:08.783Z",
+        "availability": "published",
+        "version": "ab654226eb20cf246d43eae5",
+        "attribution": [
+          {
+            "name": "Unframe / Greenhouse",
+            "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "greenhouse-unframe-5003021101",
+        "employerId": "greenhouse-unframe",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": null,
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-151013",
+      "title": "Distributed Systems Testing Software Engineer, Python / Go",
+      "company": "Canonical",
+      "initials": "CA",
+      "color": "#e4f1fa",
+      "category": "qa-automation",
+      "district": "unknown",
+      "workStyle": "remote",
+      "description": "Canonical is a leading provider of open source software and operating systems to the global enterprise and technology markets. Our platform, Ubuntu, is very widely used in breakthrough enterprise initiatives such as public cloud, data scien",
+      "skills": [],
+      "offices": [],
+      "posted": "פורסם: 2026-10-20",
+      "reason": "Jobicy · עבודה מרחוק. סינון אזורי אינו הוכחת זכאות; עיכוב מקור של 3 שעות. ייתכן שנדרש חשבון אצל המקור.",
+      "source": {
+        "kind": "real",
+        "sourceId": "jobicy-israel-qa",
+        "name": "Jobicy",
+        "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+        "applicationUrl": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+        "updatedAt": "",
+        "publishedAt": "2026-10-20T03:15:13.000Z",
+        "fetchedAt": "2026-10-25T16:59:02.023Z",
+        "location": "Anywhere",
+        "classification": "קטגוריה לפי כותרת; remote אינו worldwide. מקור מתגלגל של 7 ימים.",
+        "active": true,
+        "firstSeenAt": "2026-10-25T16:59:02.023Z",
+        "lastVerifiedAt": "2026-10-25T16:59:02.023Z",
+        "availability": "published",
+        "version": "0e347ecd19d1d4a6f5a1f185",
+        "attribution": [
+          {
+            "name": "Jobicy",
+            "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "jobicy-israel-qa-151013",
+        "employerId": "jobicy-israel-qa",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": null,
+        "preferredSkills": [
+          {
+            "value": "Python",
+            "quote": "und in modern test processes and strategies Experience with Python or Go development Strong object oriented development skills Working knowledge of continuous integration tools such as Jenkins, CircleCI, GitHub Actions Knowledge of networking technologies and fundamentals Solid understanding of the ",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          },
+          {
+            "value": "Kubernetes",
+            "quote": "lines Experience with cloud technologies such as OpenStack, Kubernetes, Terraform and AWS What we offer colleagues We consider geographical location, experience, and performance in shaping compensation worldwide",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          },
+          {
+            "value": "AWS",
+            "quote": "d technologies such as OpenStack, Kubernetes, Terraform and AWS What we offer colleagues We consider geographical location, experience, and performance in shaping compensation worldwide",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          }
+        ],
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": {
+          "value": "full-time",
+          "provenance": "supplied",
+          "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+          "observedAt": "2026-10-25T16:59:02.023Z",
+          "quote": "Jobicy API field"
+        },
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-155928",
+      "title": "Senior Software Development Engineer in Test (SDET)",
+      "company": "Flex",
+      "initials": "FL",
+      "color": "#e4f1fa",
+      "category": "qa-automation",
+      "district": "unknown",
+      "workStyle": "remote",
+      "description": "Flex is a growth-stage, NYC headquartered FinTech company that is building the payment layer for life's essential bills, giving households one place to see, split, and pay their bills around how they live and get paid. By offering greater c",
+      "skills": [],
+      "offices": [],
+      "posted": "פורסם: 2026-10-19",
+      "reason": "Jobicy · עבודה מרחוק. סינון אזורי אינו הוכחת זכאות; עיכוב מקור של 3 שעות. ייתכן שנדרש חשבון אצל המקור.",
+      "source": {
+        "kind": "real",
+        "sourceId": "jobicy-israel-qa",
+        "name": "Jobicy",
+        "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+        "applicationUrl": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+        "updatedAt": "",
+        "publishedAt": "2026-10-19T17:09:57.000Z",
+        "fetchedAt": "2026-10-25T16:59:02.023Z",
+        "location": "Anywhere",
+        "classification": "קטגוריה לפי כותרת; remote אינו worldwide. מקור מתגלגל של 7 ימים.",
+        "active": true,
+        "firstSeenAt": "2026-10-25T16:59:02.023Z",
+        "lastVerifiedAt": "2026-10-25T16:59:02.023Z",
+        "availability": "published",
+        "version": "36977c24609cb2b9a51c925c",
+        "attribution": [
+          {
+            "name": "Jobicy",
+            "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2"
+          }
+        ]
+      },
+      "facts": {
+        "postingId": "jobicy-israel-qa-155928",
+        "employerId": "jobicy-israel-qa",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": [
+          {
+            "value": "QA Automation",
+            "quote": "perience 5+ years of experience in software development and test automation Advanced proficiency in multiple programming languages and test automation frameworks Deep experience designing, building, and maintaining automation frameworks (e.g., Playwright, Cypress, Selenium, RestAssured) Strong exper",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          },
+          {
+            "value": "SQL",
+            "quote": "alysis Solid understanding of database systems and advanced SQL Experience with observability and monitoring tools (e.g., DataDog, NewRelic) Excellent cross-functional communication and mentorship skills Strong written and verbal communication skills",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          }
+        ],
+        "preferredSkills": null,
+        "minimumYears": {
+          "value": 5,
+          "quote": "Computer Science or related field, or equivalent experience 5+ years of experience in software development and test automation Advanced proficiency in multiple programming languages and test automation frameworks Deep experience designing, building, and maintaining automation frameworks (e.g., Playw",
+          "provenance": "extracted",
+          "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+          "observedAt": "2026-10-25T16:59:02.023Z"
+        },
+        "seniority": {
+          "value": "senior",
+          "quote": "Senior Software Development Engineer in Test (SDET)",
+          "provenance": "inferred",
+          "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+          "observedAt": "2026-10-25T16:59:02.023Z"
+        },
+        "qualifications": [
+          {
+            "value": "Key qualifications Bachelor’s degree in Computer Science or related field, or equivalent experience 5+ years of experience in software development and test automation Advanced proficiency in multiple ",
+            "quote": "Key qualifications Bachelor’s degree in Computer Science or related field, or equivalent experience 5+ years of experience in software development and test automation Advanced proficiency in multiple programming languages and test automation frameworks Deep experience designing, building, and mainta",
+            "provenance": "extracted",
+            "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+            "observedAt": "2026-10-25T16:59:02.023Z"
+          }
+        ],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": {
+          "value": "full-time",
+          "provenance": "supplied",
+          "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+          "observedAt": "2026-10-25T16:59:02.023Z",
+          "quote": "Jobicy API field"
+        },
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": {
+          "value": {
+            "min": 115600,
+            "max": 170000,
+            "currency": "USD",
+            "period": "year",
+            "origin": "unknown"
+          },
+          "provenance": "supplied",
+          "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+          "observedAt": "2026-10-25T16:59:02.023Z",
+          "quote": "Jobicy API field"
+        },
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-transmitsecurity-8887486002",
+      "title": "QA & Automation Lead",
+      "company": "Transmit Security",
+      "initials": "TR",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-10-20",
+      "description": "We offer the industry’s only platform that fuses customer identity and anti-fraud solutions – customer identity management, identity verification, and fraud prevention.&nbsp; We sell to industries with large, consumer-facing businesses such",
+      "skills": [],
+      "reason": "מקור: Transmit Security / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "transmitsecurity-tel-aviv-32.0853",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "תל אביב",
+          "latitude": 32.0853,
+          "longitude": 34.7818,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/search.html?q=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&country=IL"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-transmitsecurity",
+        "name": "Transmit Security / Greenhouse",
+        "url": "https://transmitsecurity.com/about/careers",
+        "applicationUrl": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002",
+        "updatedAt": "2026-10-20T08:47:46.000Z",
+        "fetchedAt": "2026-10-25T17:18:16.697Z",
+        "location": "Tel Aviv-Yafo, Gush Dan, Israel",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור."
+      },
+      "facts": {
+        "postingId": "greenhouse-transmitsecurity-8887486002",
+        "employerId": "greenhouse-transmitsecurity",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": null,
+        "preferredSkills": null,
+        "minimumYears": null,
+        "seniority": {
+          "value": "lead",
+          "quote": "QA & Automation Lead",
+          "provenance": "inferred",
+          "url": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002",
+          "observedAt": "2026-10-25T17:18:16.697Z"
+        },
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-wedev-4652209101",
+      "title": "Junior QA Tester",
+      "company": "WeDev",
+      "initials": "WE",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-manual",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-09-28",
+      "description": "Company Description WeDev Technologies is a software development agency specializing in designing and developing complex web-based software solutions. Our company excels in 2 main areas: Building and maintaining eCommerce shops using the Sh",
+      "skills": [],
+      "reason": "מקור: WeDev / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-wedev",
+        "name": "WeDev / Greenhouse",
+        "url": "https://job-boards.eu.greenhouse.io/wedev",
+        "applicationUrl": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+        "updatedAt": "2026-09-28T07:17:50.000Z",
+        "fetchedAt": "2026-10-25T17:19:03.635Z",
+        "location": "Holon, Israel",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור."
+      },
+      "facts": {
+        "postingId": "greenhouse-wedev-4652209101",
+        "employerId": "greenhouse-wedev",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": null,
+        "preferredSkills": [
+          {
+            "value": "JavaScript",
+            "quote": "cations Basic understanding of web technologies (HTML, CSS, JavaScript) Familiarity with how websites work across different browsers and devices Strong attention to detail and ability to spot inconsistencies or errors Ability to follow test plans and document results clearly Good communication skill",
+            "provenance": "extracted",
+            "url": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+            "observedAt": "2026-10-25T17:19:03.635Z"
+          }
+        ],
+        "minimumYears": null,
+        "seniority": {
+          "value": "junior",
+          "quote": "Junior QA Tester",
+          "provenance": "inferred",
+          "url": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+          "observedAt": "2026-10-25T17:19:03.635Z"
+        },
+        "qualifications": [],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": {
+          "value": "full-time",
+          "quote": "full-time",
+          "provenance": "extracted",
+          "url": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+          "observedAt": "2026-10-25T17:19:03.635Z"
+        },
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "title": "QA Automation Engineer - CDH",
+      "company": "Veeva",
+      "initials": "VE",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "category": "qa-automation",
+      "workStyle": "unknown",
+      "description": "Veeva Systems is a mission-driven organization and pioneer in industry cloud, helping life sciences companies bring therapies to patients faster. As one of the fastest-growing SaaS companies in history, we surpassed $3B in revenue in our la",
+      "posted": "פורסם: 2026-02-18",
+      "skills": [],
+      "offices": [],
+      "reason": "מקור: Veeva / Lever. סיווג תחום לפי כותרת; סגנון עבודה לפי המקור.",
+      "source": {
+        "kind": "real",
+        "sourceId": "lever-veeva-israel",
+        "name": "Veeva / Lever",
+        "url": "https://jobs.lever.co/veeva",
+        "applicationUrl": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+        "updatedAt": "2026-02-18T18:51:16.847Z",
+        "publishedAt": "2026-02-18T18:51:16.847Z",
+        "fetchedAt": "2026-10-25T17:22:37.650Z",
+        "location": "Israel - Kiryat Ono",
+        "active": true,
+        "classification": "תחום לפי כותרת. אין כתובת משרד מאומתת."
+      },
+      "facts": {
+        "postingId": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+        "employerId": "lever-veeva-israel",
+        "requisitionId": null,
+        "department": null,
+        "responsibilities": null,
+        "requiredSkills": [
+          {
+            "value": "AWS",
+            "quote": "s) Work on CI/CD tools (Git, Jenkins, JIRA) daily Leveraged AWS cloud services—including S3 and message queues—alongside REST APIs and relational databases to build scalable backend solutions Requirements Bachelor’s degree in Computer Science with a GPA of 83 or higher, or completion of military ser",
+            "provenance": "extracted",
+            "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+            "observedAt": "2026-10-25T17:22:37.650Z"
+          }
+        ],
+        "preferredSkills": [
+          {
+            "value": "AWS",
+            "quote": "h Rest API services Familiarity with Spark Familiarity with AWS services Familiarity with CI/CD tools Interviewing with Veeva We value your time and believe in a transparent hiring process",
+            "provenance": "extracted",
+            "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+            "observedAt": "2026-10-25T17:22:37.650Z"
+          }
+        ],
+        "minimumYears": null,
+        "seniority": null,
+        "qualifications": [
+          {
+            "value": "What You'll Do Be part of an excellent agile team Create detailed test plans Write and maintain integration, sanity, and regression tests for our products and services Create and maintain documented c",
+            "quote": "What You'll Do Be part of an excellent agile team Create detailed test plans Write and maintain integration, sanity, and regression tests for our products and services Create and maintain documented coverage of tests Review and analyze test results Take part in all scrum activities (estimation sessi",
+            "provenance": "extracted",
+            "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+            "observedAt": "2026-10-25T17:22:37.650Z"
+          }
+        ],
+        "licenses": [],
+        "clearance": null,
+        "languages": null,
+        "employmentType": null,
+        "applicantCountries": null,
+        "timezone": null,
+        "sponsorship": null,
+        "authorizationCountry": null,
+        "salary": null,
+        "deadline": null
+      }
+    },
+    {
+      "id": "greenhouse-appsflyer-8793847002",
+      "title": "Account Manager - Growth",
+      "company": "AppsFlyer",
+      "initials": "AP",
+      "color": "#e4f1fa",
+      "district": "unknown",
+      "category": "other",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-09-10",
+      "description": "תיאור המשרה המלא זמין בקישור המקורי באתר המעסיק.",
+      "skills": [],
+      "reason": "מקור: AppsFlyer / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-appsflyer",
+        "name": "AppsFlyer / Greenhouse",
+        "url": "https://careers.appsflyer.com",
+        "applicationUrl": "https://careers.appsflyer.com/jobs/position/8793847002?gh_jid=8793847002",
+        "updatedAt": "2026-09-10T07:37:54.000Z",
+        "fetchedAt": "2026-10-25T17:32:50.609Z",
+        "location": "Seoul",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור."
+      }
+    },
+    {
+      "id": "greenhouse-appsflyer-8537441002",
+      "title": "Backend Engineer",
+      "company": "AppsFlyer",
+      "initials": "AP",
+      "color": "#e4f1fa",
+      "district": "unknown",
+      "category": "engineering",
+      "workStyle": "unknown",
+      "posted": "עודכן במקור: 2026-07-08",
+      "description": "תיאור המשרה המלא זמין בקישור המקורי באתר המעסיק.",
+      "skills": [],
+      "reason": "מקור: AppsFlyer / Greenhouse. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [],
+      "source": {
+        "kind": "real",
+        "sourceId": "greenhouse-appsflyer",
+        "name": "AppsFlyer / Greenhouse",
+        "url": "https://careers.appsflyer.com",
+        "applicationUrl": "https://careers.appsflyer.com/jobs/position/8537441002?gh_jid=8537441002",
+        "updatedAt": "2026-07-08T14:46:21.000Z",
+        "fetchedAt": "2026-10-25T17:32:50.609Z",
+        "location": "Kyiv",
+        "active": true,
+        "classification": "תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור."
+      }
+    }
+  ]
+}

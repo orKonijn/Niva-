@@ -39,7 +39,12 @@ const cities: { pattern: RegExp; city: string; district: District; lat: number; 
   },
   { pattern: /yokneam|yokne.am/i, city: 'יקנעם', district: 'north', lat: 32.6591, lng: 35.1046 },
 ];
-export function normalizeGreenhouse(payload: unknown, source: JobSource, at: string): Job[] {
+export function normalizeGreenhouse(
+  payload: unknown,
+  source: JobSource,
+  at: string,
+  scope: 'israel' | 'global' = 'israel',
+): Job[] {
   const rows = (payload as { jobs?: unknown[] } | null)?.jobs;
   const total = (payload as { meta?: { total?: unknown } } | null)?.meta?.total;
   if (
@@ -56,14 +61,14 @@ export function normalizeGreenhouse(payload: unknown, source: JobSource, at: str
   )
     throw Error('INCOMPLETE_SOURCE');
   // Preserve existing AppsFlyer IDs, locations and historical saved-job references.
-  if (source.board === 'appsflyer') return normalizeFeed(payload, at);
+  if (source.board === 'appsflyer' && scope === 'israel') return normalizeFeed(payload, at);
   const jobs = new Map<string, Job>();
   for (const item of rows) {
     const row = item as Record<string, unknown>;
     const location = text((row['location'] as { name?: unknown })?.name);
     const found = cities.filter((c) => c.pattern.test(location));
     // A global remote label alone is never evidence of Israeli eligibility.
-    if (!/\bisrael\b/i.test(location) && !found.length) continue;
+    if (scope === 'israel' && !/\bisrael\b/i.test(location) && !found.length) continue;
     let url: URL;
     try {
       url = new URL(text(row['absolute_url']));
@@ -90,7 +95,12 @@ export function normalizeGreenhouse(payload: unknown, source: JobSource, at: str
       company: source.company,
       initials: source.company.slice(0, 2).toUpperCase(),
       color: '#e4f1fa',
-      district: districts.length === 1 ? districts[0] : 'unknown',
+      district:
+        districts.length === 1
+          ? districts[0]
+          : !districts.length && /\bholon\b|kiryat[ -]?ono/i.test(location)
+            ? 'tel-aviv'
+            : 'unknown',
       category: classify(title),
       workStyle: /\bremote\b/i.test(location) ? 'remote' : 'unknown',
       posted: `עודכן במקור: ${updated.slice(0, 10)}`,

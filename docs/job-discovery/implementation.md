@@ -1,5 +1,7 @@
 # Implemented trust foundation and operational boundaries
 
+Current geographical scope and expanded sources: [all jobs and locations](global-coverage.md). This supersedes the Israel-first scope and QA-only Jobicy feed below; the evidence and scoring limits still apply.
+
 25 October 2026. Read [research](research.md) and [design](design.md) together with this delivery record. A proposed target is not a measured production SLA.
 
 ## Implemented

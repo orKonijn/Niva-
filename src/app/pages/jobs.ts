@@ -54,11 +54,32 @@ export class Jobs {
     'provider',
     'missing',
     'unknownStyle',
+    'scope',
+    'area',
+    'related',
+    'location',
   ] as const;
   readonly extraQuery = computed<Record<string, string>>(() => ({
     ...Object.fromEntries(this.extraKeys.map((key) => [key, this.params().get(key) ?? ''])),
     unknownStyle: String(this.includeUnknownStyles()),
+    scope: this.browseAll() ? 'all' : 'personal',
   }));
+  readonly browseAll = computed(
+    () =>
+      this.store.catalogMode() === 'real' &&
+      this.store.session.config().discovery &&
+      this.params().get('scope') !== 'personal',
+  );
+  readonly qaPreferences = computed(() =>
+    ['qa-manual', 'qa-automation'].includes(this.store.preferences().role),
+  );
+  externalSearch(provider: 'linkedin' | 'indeed') {
+    const query = this.query().trim();
+    return provider === 'linkedin'
+      ? 'https://www.linkedin.com/jobs/search/?' +
+          new URLSearchParams(query ? { keywords: query } : {}).toString()
+      : 'https://www.indeed.com/jobs?' + new URLSearchParams(query ? { q: query } : {}).toString();
+  }
   readonly includeUnknownStyles = computed(() => this.params().get('unknownStyle') !== 'false');
   readonly savedPreferencesSummary = computed(() => {
     const p = this.store.preferences();

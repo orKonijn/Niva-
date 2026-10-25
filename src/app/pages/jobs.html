@@ -34,8 +34,9 @@
   }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      המשרות מגיעות מאתרי גיוס של מעסיקים בישראל ב־Greenhouse וב־Lever, ומלוח המשרות מרחוק Jobicy.
-      הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן שנדרש חשבון.
+      המשרות מגיעות מלוחות מעסיקים ב־Greenhouse וב־Lever בישראל ובמדינות נוספות, ומלוח המשרות מרחוק
+      Jobicy. הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן שנדרש
+      חשבון.
     </p>
     <p class="mb-2 text-xs">
       תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו. כברירת מחדל מוצגות גם
@@ -78,6 +79,12 @@
                   : 'טרם נבדק'
             }}
             <bdi>{{ source.checked_at }}</bdi>
+            @if (source.partial) {
+              <span>
+                · כיסוי חלקי ומתגלגל: עד 1,000 המשרות האחרונות בסבב; ייתכנו משרות נוספות באתר
+                המקור.</span
+              >
+            }
           </p>
         }
       </details>
@@ -106,12 +113,42 @@
 </section>
 @if (store.isAccount() && store.accountReady()) {
   <section class="account-panel mb-4" aria-label="העדפות החיפוש ששמרת">
-    <h2 class="mb-2 text-base">העדפות החיפוש ששמרת</h2>
-    <p>{{ savedPreferencesSummary() }}</p>
+    <h2 class="mb-2 text-base">
+      {{ browseAll() ? 'כל המשרות והמיקומים' : 'העדפות החיפוש ששמרת' }}
+    </h2>
+    <p>ההעדפות השמורות שלך: {{ savedPreferencesSummary() }}</p>
     <p class="text-sm">
-      הסינון בעמוד נוסף להעדפות האלה. אופן עבודה שלא נמסר אינו סתירה להעדפות ואינו התאמה מאומתת.
+      {{
+        browseAll()
+          ? 'במצב כל המשרות ההעדפות השמורות אינן מצמצמות את התחום, המיקום או אופן העבודה. אפשר לעבור לתצוגה האישית בכל רגע.'
+          : 'הסינון בעמוד נוסף להעדפות האלה. אופן עבודה שלא נמסר אינו סתירה להעדפות ואינו התאמה מאומתת.'
+      }}
     </p>
     <a routerLink="/app/preferences" class="text-brand underline">עדכון ההעדפות השמורות</a>
+  </section>
+}
+@if (store.catalogMode() === 'real') {
+  <section class="account-panel mb-4" aria-label="חיפוש באתרי משרות נוספים">
+    <h2 class="mb-2 text-base">עוד מקורות לחיפוש</h2>
+    <p class="text-sm">
+      LinkedIn ו־Indeed נפתחים באתר המקור. התוצאות שלהם אינן מיובאות אוטומטית ל־Niva; חיבור כזה דורש
+      הרשאת ספק מתאימה.
+    </p>
+    <div class="career-actions">
+      <a
+        class="account-button"
+        [href]="externalSearch('linkedin')"
+        target="_blank"
+        rel="noopener noreferrer"
+        >חיפוש משרות ב־LinkedIn (אתר חיצוני)</a
+      ><a
+        class="account-button"
+        [href]="externalSearch('indeed')"
+        target="_blank"
+        rel="noopener noreferrer"
+        >חיפוש משרות ב־Indeed (אתר חיצוני)</a
+      >
+    </div>
   </section>
 }
 <div
@@ -153,6 +190,33 @@
   >
   <niva-work-style-fields [value]="workStyles()" (valueChange)="setStyles($event)" />
 </div>
+@if (
+  !browseAll() && store.catalogMode() === 'real' && store.session.config().discovery && !savedOnly()
+) {
+  <div class="account-panel mb-4">
+    <button
+      type="button"
+      class="account-button"
+      (click)="setFilter({ area: params().get('area') === 'all' ? null : 'all' })"
+    >
+      {{
+        params().get('area') === 'all' ? 'חזרה למחוז השמור' : 'הרחבת המיקום לכל ישראל ולמשרות מרחוק'
+      }}
+    </button>
+    @if (params().get('area') === 'all') {
+      <p>המיקום הורחב במפורש; זכאות לעבודה מרחוק עדיין דורשת בירור.</p>
+    }
+    @if (qaPreferences()) {
+      <label class="checkbox-label"
+        ><input
+          type="checkbox"
+          [ngModel]="params().get('related') === 'true'"
+          (ngModelChange)="setFilter({ related: $event ? 'true' : null })"
+        />לכלול גם תפקידי QA ידניים קרובים</label
+      >
+    }
+  </div>
+}
 <label class="checkbox-label"
   ><input
     type="checkbox"
@@ -164,6 +228,12 @@
 <details class="account-panel mb-4">
   <summary class="cursor-pointer min-h-11">זכאות, מקור וסינון נוסף</summary>
   <div class="grid grid-cols-3 gap-4 max-[901px]:grid-cols-1">
+    <label class="filter-label"
+      >מיקום בעולם (כפי שנכתב במקור)<input
+        placeholder="למשל London, Germany או Tel Aviv"
+        [ngModel]="params().get('location') || ''"
+        (ngModelChange)="setFilter({ location: $event || null })"
+    /></label>
     <label class="filter-label"
       >זכאות להגשה<select
         [ngModel]="params().get('eligibility') || ''"
@@ -272,18 +342,38 @@
   </div>
 </details>
 <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-  הסינון כאן מצמצם את התוצאות בנוסף להעדפות ששמרת. המשרה צריכה להתאים גם לתחום וגם למחוז; באופן
-  העבודה מספיקה התאמה לאחת האפשרויות שבחרת.
+  {{
+    browseAll()
+      ? 'מוצגות משרות מכל התחומים והמיקומים במקורות המחוברים. המסננים שבחרת בעמוד עדיין חלים. הכיסוי אינו כל שוק העבודה העולמי.'
+      : 'הסינון כאן נוסף להעדפות ששמרת. אפשר להרחיב מיקום או תפקידי QA במפורש בלי לשנות את הפרופיל.'
+  }}
 </p>
-<div class="section-row flex items-center justify-between gap-[20px]">
-  <div class="segmented flex gap-[4px]" aria-label="תצוגת משרות">
+<div class="section-row flex flex-wrap items-center justify-between gap-[20px]">
+  <div class="segmented flex flex-wrap gap-[4px]" aria-label="תצוגת משרות">
     <button
-      [class.selected]="!savedOnly()"
-      [attr.aria-pressed]="!savedOnly()"
-      (click)="setFilter({ saved: null })"
+      [class.selected]="
+        !savedOnly() &&
+        (browseAll() || !store.session.config().discovery || store.catalogMode() !== 'real')
+      "
+      [attr.aria-pressed]="
+        !savedOnly() &&
+        (browseAll() || !store.session.config().discovery || store.catalogMode() !== 'real')
+      "
+      (click)="setFilter({ saved: null, scope: null })"
     >
-      כל המשרות</button
-    ><button
+      כל המשרות
+    </button>
+    @if (store.catalogMode() === 'real' && store.session.config().discovery) {
+      <button
+        type="button"
+        [class.selected]="!browseAll() && !savedOnly()"
+        [attr.aria-pressed]="!browseAll() && !savedOnly()"
+        (click)="setFilter({ scope: 'personal', saved: null })"
+      >
+        לפי ההעדפות שלי
+      </button>
+    }
+    <button
       [class.selected]="savedOnly()"
       [attr.aria-pressed]="savedOnly()"
       (click)="setFilter({ saved: 'true' })"

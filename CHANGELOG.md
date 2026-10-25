@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — All jobs and locations
+
+- Default to all roles and locations from connected employers, with 50 results per page and further pagination. Keep personal/saved views and optional wider-location/related-QA controls without rewriting account preferences. Show actual employer locations; preserve exclusions and explicit eligibility blockers.
+- Add verified Transmit Security, Veeva Kiryat Ono and WeDev feeds, bringing the registry to24 sources. Expand Jobicy to all roles/locations, bounded to1,000 postings per hourly pass with a visible partial-coverage label. Preserve history, rotate missing-status checks and withhold old unknown records. Add external LinkedIn/Indeed searches; automatic import from those services is not connected.
+- Enrich metadata-only job descriptions on detail verification, retain unchanged enrichment, and scan eligibility summaries before loading selected full descriptions. [Source observations and limits](docs/job-discovery/global-coverage.md).
+- Genuine paired evidence with public job samples and a synthetic account: desktop [light before](docs/screenshots/changes/qa-coverage-desktop-light/before.png) · [after](docs/screenshots/changes/qa-coverage-desktop-light/after.png), [dark before](docs/screenshots/changes/qa-coverage-desktop-dark/before.png) · [after](docs/screenshots/changes/qa-coverage-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/qa-coverage-mobile-light/before.png) · [after](docs/screenshots/changes/qa-coverage-mobile-light/after.png), [dark before](docs/screenshots/changes/qa-coverage-mobile-dark/before.png) · [after](docs/screenshots/changes/qa-coverage-mobile-dark/after.png). Before has two QA/Tel Aviv cards; after has ten representative fixture jobs. This is not a live market count. Verification passed:59 frontend tests,120 server tests,206 production-browser checks, Worker/provenance checks, three type checks, formatting and production build. Publication is pending.
+
 ## Version 32 — Recover jobs hidden by missing work arrangement
 
 Published 25 October 2026. [Publication/live regression receipt](docs/verification/publication-20261025-v32.json). The same public QA/Tel Aviv/all-style request returned0 before and2 after publication without an override; explicit strict filtering still returns0. All missing arrangements remain unknown. No actual account preferences or CV were modified.

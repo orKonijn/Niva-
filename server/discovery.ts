@@ -6,7 +6,7 @@ import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 import type { CareerDb } from './career-db';
 import { plainText, classify } from './job-feed';
-import { SOURCES } from './job-sources';
+import { SOURCES, type JobSource } from './job-sources';
 import { normalizeGreenhouse } from './greenhouse-source';
 export { SOURCES } from './job-sources';
 import type { Job } from '../src/app/core/models/job';
@@ -19,7 +19,12 @@ import {
 export const versionOf = (value: unknown) =>
   createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 24);
 const str = (v: unknown) => (typeof v === 'string' ? v : '');
-export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
+export function normalizeLever(
+  payload: unknown,
+  fetchedAt: string,
+  source: JobSource = SOURCES.find((s) => s.id === 'lever-walkme')!,
+  scope: 'israel' | 'global' = 'israel',
+): Job[] {
   if (!Array.isArray(payload) || payload.length >= 100) throw new Error('INCOMPLETE_SOURCE');
   return payload.flatMap((row: Record<string, unknown>) => {
     if (!row || typeof row !== 'object') return [];
@@ -27,6 +32,7 @@ export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
     const location = str(categories?.['location']);
     // Only explicit Israeli locations; remote does not imply worldwide eligibility.
     if (
+      scope === 'israel' &&
       !/tel aviv|israel|herzliya|haifa|jerusalem|raanana|ra'anana|petah tikva|beer sheva/i.test(
         location,
       )
@@ -44,7 +50,7 @@ export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
     if (
       url.protocol !== 'https:' ||
       url.hostname !== 'jobs.lever.co' ||
-      !url.pathname.startsWith('/walkme/') ||
+      !url.pathname.startsWith('/' + source.board + '/') ||
       url.username ||
       url.password
     )
@@ -57,7 +63,7 @@ export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
           ? 'south'
           : /raanana|ra'anana|petah tikva/i.test(location)
             ? 'central'
-            : /tel aviv|herzliya/i.test(location)
+            : /tel aviv|herzliya|kiryat[ -]?ono|holon/i.test(location)
               ? 'tel-aviv'
               : 'unknown';
     const style = row['workplaceType'];
@@ -67,10 +73,10 @@ export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
         : undefined;
     return [
       {
-        id: `lever-walkme-${id}`,
+        id: `${source.id}-${id}`,
         title,
-        company: 'WalkMe',
-        initials: 'WM',
+        company: source.company,
+        initials: source.company.slice(0, 2).toUpperCase(),
         color: '#e4f1fa',
         district,
         category: classify(title),
@@ -93,12 +99,12 @@ export function normalizeLever(payload: unknown, fetchedAt: string): Job[] {
         posted: published ? `פורסם: ${published.slice(0, 10)}` : 'מועד הפרסום לא נמסר',
         skills: [],
         offices: [],
-        reason: 'מקור: WalkMe / Lever. סיווג תחום לפי כותרת; סגנון עבודה לפי המקור.',
+        reason: `מקור: ${source.name}. סיווג תחום לפי כותרת; סגנון עבודה לפי המקור.`,
         source: {
           kind: 'real',
-          sourceId: 'lever-walkme',
-          name: 'WalkMe / Lever',
-          url: 'https://jobs.lever.co/walkme',
+          sourceId: source.id,
+          name: source.name,
+          url: source.careersUrl,
           applicationUrl: url.href,
           updatedAt: published ?? '',
           publishedAt: published,
@@ -168,7 +174,7 @@ export async function ingest(
     await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
     const lease = await db.all(
       'UPDATE niva_sources SET lease_until=? WHERE id=? AND next_at<=? AND lease_until<=? RETURNING id',
-      Math.max(now, Date.now()) + 60000,
+      Math.max(now, Date.now()) + (source.provider === 'jobicy' ? 120000 : 60000),
       source.id,
       now,
       now,
@@ -210,14 +216,18 @@ export async function ingest(
         throw new Error(response.status === 429 ? 'RATE_LIMITED' : 'SOURCE_UNAVAILABLE');
       }
       let payload = await boundedJson(response);
+      let partial = false;
       if (source.provider === 'jobicy') {
         let page = payload as { jobs?: unknown[]; hasMore?: boolean; nextCursor?: unknown };
         if (!Array.isArray(page.jobs)) throw Error('INVALID_FEED');
         const all = [...page.jobs];
         const seen = new Set<string>();
         for (let n = 1; page.hasMore; n++) {
+          if (n >= 5) {
+            partial = true;
+            break;
+          }
           if (
-            n >= 5 ||
             typeof page.nextCursor !== 'string' ||
             !page.nextCursor ||
             page.nextCursor.length > 500 ||
@@ -242,10 +252,10 @@ export async function ingest(
       const at = new Date(Math.max(now, Date.now())).toISOString();
       const jobs =
         source.provider === 'greenhouse'
-          ? normalizeGreenhouse(payload, source, at)
+          ? normalizeGreenhouse(payload, source, at, 'global')
           : source.provider === 'jobicy'
             ? normalizeJobicy(payload, at)
-            : normalizeLever(payload, at);
+            : normalizeLever(payload, at, source, 'global');
       const rows: { sql: string; args: (string | number | null)[] }[] = [
         ...(source.provider === 'jobicy'
           ? []
@@ -254,16 +264,41 @@ export async function ingest(
       const previous = new Map(
         (
           await db.all<{ id: string; data: string }>(
-            'SELECT id,data FROM niva_jobs WHERE source_id=?',
+            source.provider === 'jobicy'
+              ? "SELECT id,json_object('id',id,'title',title,'source',json_extract(data,'$.source')) AS data FROM niva_jobs WHERE source_id=? AND (active=1 OR id IN (SELECT value FROM json_each(?)) OR id IN (SELECT id FROM niva_jobs WHERE source_id=? AND json_extract(data,'$.source.availability')='unknown' ORDER BY coalesce(json_extract(data,'$.source.statusCheckedAt'),json_extract(data,'$.source.lastVerifiedAt'),'') LIMIT 100))"
+              : 'SELECT id,data FROM niva_jobs WHERE source_id=?',
             source.id,
+            ...(source.provider === 'jobicy'
+              ? [JSON.stringify(jobs.map((j) => j.id)), source.id]
+              : []),
           )
         ).map((row) => [row.id, JSON.parse(row.data) as Job]),
       );
       const unique = new Map(jobs.map((j) => [j.id, enrichJob(j)]));
       // A rolling seven-day feed cannot establish closure by absence. Status is explicit.
       if (source.provider === 'jobicy') {
-        const missing = [...previous.values()].filter((j) => !unique.has(j.id));
-        for (let offset = 0; offset < missing.length; offset += 100) {
+        rows.push({
+          sql: "INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES('system','source-window',?,?,?) ON CONFLICT(owner,kind,id) DO UPDATE SET data=excluded.data,expires_at=excluded.expires_at",
+          args: [
+            source.id,
+            JSON.stringify({ partial, limit: 1000, checkedAt: at }),
+            now + 172800000,
+          ],
+        });
+        const missing = [...previous.values()]
+          .filter((j) => !unique.has(j.id))
+          .sort((a, b) =>
+            (a.source!.statusCheckedAt ?? a.source!.lastVerifiedAt ?? '').localeCompare(
+              b.source!.statusCheckedAt ?? b.source!.lastVerifiedAt ?? '',
+            ),
+          );
+        for (const old of missing.slice(100))
+          if (now - Date.parse(old.source!.lastVerifiedAt ?? old.source!.fetchedAt) > 86400000)
+            rows.push({
+              sql: "UPDATE niva_jobs SET active=0,data=json_set(data,'$.source.availability','unknown','$.source.active',json('false')),version=? WHERE id=?",
+              args: [versionOf([old.id, 'unverified']), old.id],
+            });
+        for (let offset = 0; offset < Math.min(100, missing.length); offset += 100) {
           const batch = missing.slice(offset, offset + 100);
           const response = await fetch(
             'https://jobicy.com/api/jobs/status?ids=' +
@@ -285,19 +320,46 @@ export async function ingest(
             const status = statuses.jobs.find(
               (s) => String(s.id) === old.id.slice(source.id.length + 1),
             )?.status;
-            old.source!.availability =
+            const availability =
               status === 'active' ? 'published' : status === 'closed' ? 'closed' : 'unknown';
-            if (status === 'active' || status === 'closed') old.source!.lastVerifiedAt = at;
-            old.source!.active = status === 'active';
-            old.source!.version = versionOf([old.title, old.description, old.source!.availability]);
+            const verified =
+              status === 'active' || status === 'closed'
+                ? at
+                : (old.source!.lastVerifiedAt ?? null);
+            const version =
+              availability === old.source!.availability
+                ? (old.source!.version ?? versionOf([old.id, availability]))
+                : versionOf([old.id, old.source!.version, availability]);
             rows.push({
-              sql: 'UPDATE niva_jobs SET active=?,data=?,version=? WHERE id=?',
-              args: [status === 'active' ? 1 : 0, JSON.stringify(old), old.source!.version, old.id],
+              sql: "UPDATE niva_jobs SET active=?,data=json_set(data,'$.source.availability',?,'$.source.lastVerifiedAt',?,'$.source.statusCheckedAt',?,'$.source.active',json(?),'$.source.version',?),version=? WHERE id=?",
+              args: [
+                status === 'active' ? 1 : 0,
+                availability,
+                verified,
+                at,
+                status === 'active' ? 'true' : 'false',
+                version,
+                version,
+                old.id,
+              ],
             });
           }
         }
       }
       for (const job of unique.values()) {
+        const old = previous.get(job.id);
+        // Metadata-only snapshots retain a detail description while the provider's update
+        // version is unchanged; its original evidence timestamps remain intact.
+        if (
+          source.provider === 'greenhouse' &&
+          !new URL(source.url).searchParams.has('content') &&
+          old?.source?.descriptionFetchedAt &&
+          old.source.updatedAt === job.source!.updatedAt
+        ) {
+          job.description = old.description;
+          job.facts = old.facts;
+          job.source!.descriptionFetchedAt = old.source.descriptionFetchedAt;
+        }
         job.source!.sourceId = source.id;
         job.source!.firstSeenAt = previous.has(job.id)
           ? (previous.get(job.id)!.source?.firstSeenAt ?? null)
@@ -305,7 +367,8 @@ export async function ingest(
         job.source!.lastVerifiedAt = at;
         job.source!.availability = 'published';
         job.source!.applicationCheck =
-          previous.get(job.id)?.source?.applicationUrl === job.source!.applicationUrl
+          previous.get(job.id)?.source?.applicationUrl === job.source!.applicationUrl &&
+          previous.get(job.id)?.source?.updatedAt === job.source!.updatedAt
             ? previous.get(job.id)?.source?.applicationCheck
             : undefined;
         if (source.id === 'greenhouse-appsflyer')
@@ -386,6 +449,10 @@ export interface FeedQuery extends DiscoveryFilters {
   limit?: string;
   saved?: string;
   unknownStyle?: string;
+  scope?: string;
+  area?: string;
+  related?: string;
+  location?: string;
 }
 export async function discoveryPage(
   db: CareerDb,
@@ -400,7 +467,10 @@ export async function discoveryPage(
     checked_at: string | null;
     error: string | null;
     next_at: number;
-  }>('SELECT id,checked_at,error,next_at FROM niva_sources ORDER BY id');
+    partial: number;
+  }>(
+    "SELECT id,checked_at,error,next_at,coalesce((SELECT json_extract(data,'$.partial') FROM niva_documents WHERE owner='system' AND kind='source-window' AND niva_documents.id=niva_sources.id),0) AS partial FROM niva_sources ORDER BY id",
+  );
   const snapshot = versionOf(await db.all('SELECT id,version,active FROM niva_jobs ORDER BY id'));
   const filterKey = versionOf([
     [
@@ -423,6 +493,10 @@ export async function discoveryPage(
     query.styles,
     query.saved,
     query.unknownStyle,
+    query.scope,
+    query.area,
+    query.related,
+    query.location,
     preferences,
     query.saved ? saved : [],
   ]);
@@ -455,8 +529,17 @@ export async function discoveryPage(
     args.push(value);
     if (sql.includes('json_each')) args.push(value);
   };
-  if (query.saved !== 'true' && preferences.role !== 'all') add('category=?', preferences.role);
-  if (query.saved !== 'true' && preferences.district !== 'all')
+  if (query.saved !== 'true' && query.scope !== 'all' && preferences.role !== 'all') {
+    if (query.related === 'true' && ['qa-manual', 'qa-automation'].includes(preferences.role))
+      clauses.push("category IN ('qa-manual','qa-automation')");
+    else add('category=?', preferences.role);
+  }
+  if (
+    query.saved !== 'true' &&
+    query.scope !== 'all' &&
+    query.area !== 'all' &&
+    preferences.district !== 'all'
+  )
     add(
       "(district=? OR EXISTS (SELECT 1 FROM json_each(niva_jobs.data,'$.offices') WHERE json_extract(value,'$.district')=?))",
       preferences.district,
@@ -472,7 +555,10 @@ export async function discoveryPage(
       "(district=? OR EXISTS (SELECT 1 FROM json_each(niva_jobs.data,'$.offices') WHERE json_extract(value,'$.district')=?))",
       screen.district,
     );
-  for (const styles of [query.saved === 'true' ? [] : preferences.workStyles, screen.workStyles])
+  for (const styles of [
+    query.saved === 'true' || query.scope === 'all' ? [] : preferences.workStyles,
+    screen.workStyles,
+  ])
     if (styles.length) {
       clauses.push(
         `(style IN (${styles.map(() => '?').join(',')})${query.unknownStyle !== 'false' ? " OR style='unknown'" : ''})`,
@@ -485,6 +571,11 @@ export async function discoveryPage(
     .map((x) => x.trim().toLowerCase())
     .filter(Boolean))
     add('instr(company,?)=0', x);
+  if (query.location)
+    add(
+      "instr(lower(coalesce(json_extract(data,'$.source.location'),'')),?)>0",
+      query.location.toLowerCase().slice(0, 200),
+    );
   if (query.q) add('instr(search,?)>0', query.q.toLowerCase().slice(0, 200));
   if (query.saved === 'true') {
     clauses[0] = '1=1';
@@ -495,12 +586,13 @@ export async function discoveryPage(
   const where = clauses.join(' AND ');
   const ranked = `WITH eligible AS (SELECT * FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
   const candidates = await db.all<{ id: string; data: string; active: number }>(
-    `${ranked} SELECT id,data,active FROM ranked WHERE representative=1 ORDER BY id`,
+    `${ranked} SELECT id,CASE WHEN json_type(data,'$.facts')='object' THEN json_remove(data,'$.description') ELSE data END AS data,active FROM ranked WHERE representative=1 ORDER BY id`,
     ...args,
   );
   const assessed = candidates
     .map((row) => {
-      const job = enrichJob(JSON.parse(row.data) as Job);
+      const parsed = JSON.parse(row.data) as Job;
+      const job = parsed.facts ? parsed : enrichJob(parsed);
       job.source!.active = !!row.active;
       if (!row.active && job.source!.availability !== 'unknown')
         job.source!.availability = 'closed';
@@ -512,17 +604,32 @@ export async function discoveryPage(
   const rows = assessed.filter((job) => job.id > after);
   const more = rows.length > limit;
   const page = rows.slice(0, limit);
-  const jobs = page;
-  for (const job of jobs) {
-    const attributed = await db.all<{ data: string }>(
-      'SELECT data FROM niva_jobs WHERE canonical=?',
-      canonicalJobUrl(job.source!.applicationUrl),
-    );
-    job.source!.attribution = attributed.map((r) => {
-      const j = JSON.parse(r.data) as Job;
-      return { name: j.source!.name, url: j.source!.applicationUrl };
-    });
-  }
+  // Only selected cards need full descriptions. Keep global-catalog assessment bounded.
+  const jobs: Job[] = page.length
+    ? (
+        await db.all<{ data: string; active: number }>(
+          `SELECT data,active FROM niva_jobs WHERE id IN (${page.map(() => '?').join(',')}) ORDER BY id`,
+          ...page.map((j) => j.id),
+        )
+      ).map((row) => {
+        const job = enrichJob(JSON.parse(row.data) as Job);
+        job.source!.active = !!row.active;
+        if (!row.active && job.source!.availability !== 'unknown')
+          job.source!.availability = 'closed';
+        return job;
+      })
+    : [];
+  const canonicals = [...new Set(jobs.map((j) => canonicalJobUrl(j.source!.applicationUrl)))];
+  const references = canonicals.length
+    ? await db.all<{ canonical: string; name: string; url: string }>(
+        `SELECT canonical,json_extract(data,'$.source.name') AS name,json_extract(data,'$.source.applicationUrl') AS url FROM niva_jobs WHERE canonical IN (${canonicals.map(() => '?').join(',')})`,
+        ...canonicals,
+      )
+    : [];
+  for (const job of jobs)
+    job.source!.attribution = references
+      .filter((r) => r.canonical === canonicalJobUrl(job.source!.applicationUrl))
+      .map(({ name, url }) => ({ name, url }));
   const archived: Job[] = [];
   for (let offset = 0; offset < saved.length; offset += 50) {
     const ids = saved.slice(offset, offset + 50);
@@ -559,7 +666,11 @@ export async function discoveryPage(
       ? `${payload}.${createHmac('sha256', secret).update(payload).digest('hex')}`
       : null,
     snapshot,
-    health: health.map((h) => ({ ...h, name: SOURCES.find((s) => s.id === h.id)?.name ?? h.id })),
+    health: health.map((h) => ({
+      ...h,
+      partial: !!h.partial,
+      name: SOURCES.find((s) => s.id === h.id)?.name ?? h.id,
+    })),
     fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
     stale: health.some(
       (h) =>

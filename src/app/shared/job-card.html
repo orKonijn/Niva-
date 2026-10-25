@@ -33,13 +33,16 @@
     </button>
   </div>
   <div class="job-meta flex-wrap my-[20px_16px] text-muted">
-    <span><niva-icon name="pin" />{{ districtLabel(job().district) }}</span
+    <span
+      ><niva-icon name="pin" />{{ job().source?.location || districtLabel(job().district) }}</span
     ><span><niva-icon name="briefcase" />{{ workStyleLabel(job().workStyle) }}</span
     ><span><niva-icon name="clock" />{{ job().posted }}</span>
   </div>
   @if (!store.eligibleJobs().includes(job())) {
     <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-      מחוץ להעדפות הנוכחיות · האישור כפוף להעדפות
+      {{
+        job().source ? 'מחוץ להעדפות השמורות שלך' : 'מחוץ להעדפות הנוכחיות · האישור כפוף להעדפות'
+      }}
     </p>
   }
   <p
