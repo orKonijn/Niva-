@@ -51,14 +51,15 @@
       type="button"
       class="account-button"
       [disabled]="store.jobsLoading()"
-      (click)="store.loadJobs()"
+      (click)="store.refreshJobs()"
     >
       {{ store.jobsLoading() ? 'בודקים עדכונים…' : 'רענון משרות' }}
     </button>
     @if (store.session.config().discovery) {
       <p class="mt-3 text-xs">
-        הרענון מציג את המאגר המעודכן ומפעיל ברקע בדיקה של מקורות שמועד העדכון שלהם הגיע, בדרך כלל כל
-        10–15 דקות בזמן שימוש באתר. אין עדכון מתוזמן כשאין תנועה לאתר. כאן מוצג מועד הבדיקה בפועל.
+        בכל כניסה לאתר, טעינת הדף מחדש או לחיצה על רענון, נבדקות משרות עדכניות בלוחות המעסיקים
+        המחוברים לפני הצגת התוצאות. ייתכן שלא נוספו משרות מאז הבדיקה הקודמת. אם מקור אינו זמין או
+        מגביל בקשות, מוצג המידע האחרון שלו עם הודעה ומועד הבדיקה.
       </p>
       <details class="mt-3">
         <summary class="cursor-pointer text-sm">
@@ -222,29 +223,34 @@
 @if (mapView()) {
   <niva-job-map [jobs]="filtered()" />
 }
+@if (store.jobsLoading()) {
+  <p role="status" class="mb-4 text-sm text-muted">מחפשים משרות עדכניות בלוחות המעסיקים…</p>
+}
 <div
   class="jobs-grid grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-[20px] max-[1200px]:gap-[15px] max-[901px]:grid-cols-[1fr]"
 >
   @for (job of filtered(); track job.id) {
     <niva-job-card [job]="job" />
   } @empty {
-    <section
-      class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
-    >
-      <niva-icon name="search" />
-      <h2>עדיין לא מצאנו כאן התאמה</h2>
-      <p>{{ emptyExplanation() }}</p>
-      <button
-        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
-        (click)="clear()"
+    @if (!store.jobsLoading() && !store.jobsError()) {
+      <section
+        class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
       >
-        ניקוי הסינון במסך</button
-      ><a
-        routerLink="/app/preferences"
-        class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
-        >עדכון העדפות קבועות</a
-      >
-    </section>
+        <niva-icon name="search" />
+        <h2>עדיין לא מצאנו כאן התאמה</h2>
+        <p>{{ emptyExplanation() }}</p>
+        <button
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+          (click)="clear()"
+        >
+          ניקוי הסינון במסך</button
+        ><a
+          routerLink="/app/preferences"
+          class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+          >עדכון העדפות קבועות</a
+        >
+      </section>
+    }
   }
 </div>
 

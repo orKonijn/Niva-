@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Every site entry or full page reload now checks the connected employer boards before returning current jobs. Explicit job refresh does the same. Filter changes and pagination reuse that checked snapshot. The 17 official Greenhouse/Lever employer boards remain the coverage boundary; this does not claim a search of the entire web or guarantee that employers have posted new jobs between visits.
+- Fresh visit checks bypass healthy sources' normal 10–15 minute cadence. Four concurrent source workers fetch bounded responses, merge new/changed listings and close removed listings. Durable source leases let overlapping visits share in-progress checks across request/database adapters. Preserve provider Retry-After, failure backoff and last known listings; surface partial/stale data and actual source check times.
+- Show a checking status while waiting and suppress misleading empty results during loading or errors. Keep account preferences, saved historical listings and existing cursor-change recovery. Source refresh performs no private-record cleanup. Correct the async D1 test double to serialize batches as D1 does.
+- Verification: 59 frontend and 103 server tests; Worker and provenance regressions; all three type checks; formatting; production build. All 162 desktop/mobile browser cases passed, with one account/resume timing failure in the full run passing on isolated retry. The six visit/loading tests passed again after screenshot capture. Synthetic upstream tests prove added/removed listings, cadence bypass, concurrent visit sharing and Retry-After preservation.
+- Genuine before/after views use the same synthetic account, route, viewport and theme: desktop [light before](docs/screenshots/changes/visit-refresh-desktop-light/before.png) · [after](docs/screenshots/changes/visit-refresh-desktop-light/after.png), [dark before](docs/screenshots/changes/visit-refresh-desktop-dark/before.png) · [after](docs/screenshots/changes/visit-refresh-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/visit-refresh-mobile-light/before.png) · [after](docs/screenshots/changes/visit-refresh-mobile-light/after.png), [dark before](docs/screenshots/changes/visit-refresh-mobile-dark/before.png) · [after](docs/screenshots/changes/visit-refresh-mobile-dark/after.png).
+
 ## Version 24 — Account name and Google profile photo
 
 Published 25 October 2026. Verified in the existing live Chrome session: the account name appears in the greeting and the Google photo loads successfully. [Publication receipt](docs/verification/publication-20261025-v24.json).

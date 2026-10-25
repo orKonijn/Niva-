@@ -38,6 +38,7 @@ export function repairHarness(adapter: 'node' | 'd1', env: CareerEnvironment = {
       sqlite.exec(readFileSync('server/migrations/' + file, 'utf8'));
   let before: (sql: string) => Promise<void> = async () => {};
   let batchBefore: () => Promise<void> = async () => {};
+  let batchQueue: Promise<unknown> = Promise.resolve();
   const d1 = {
     prepare(sql: string) {
       let values: (string | number | null)[] = [];
@@ -68,16 +69,21 @@ export function repairHarness(adapter: 'node' | 'd1', env: CareerEnvironment = {
     },
     async batch(rows: { run: () => Promise<unknown> }[]) {
       await batchBefore();
-      sqlite.exec('BEGIN IMMEDIATE');
-      try {
-        const results = [];
-        for (const r of rows) results.push(await r.run());
-        sqlite.exec('COMMIT');
-        return results;
-      } catch (e) {
-        sqlite.exec('ROLLBACK');
-        throw e;
-      }
+      // D1 executes batches atomically and serially; async SQLite doubles must do the same.
+      const work = batchQueue.then(async () => {
+        sqlite.exec('BEGIN IMMEDIATE');
+        try {
+          const results = [];
+          for (const r of rows) results.push(await r.run());
+          sqlite.exec('COMMIT');
+          return results;
+        } catch (e) {
+          sqlite.exec('ROLLBACK');
+          throw e;
+        }
+      });
+      batchQueue = work.catch(() => {});
+      return work;
     },
   } as unknown as D1Database;
   const base = sqliteCareerDb(sqlite);

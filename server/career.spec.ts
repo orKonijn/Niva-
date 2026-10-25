@@ -74,6 +74,94 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
+  it('checks upstream on a visit even before cadence, returns new jobs, and closes removed listings', async () => {
+    const { req } = setup();
+    let revision = 1;
+    const fetcher = vi.fn(async (url: string) =>
+      Response.json(
+        url.includes('greenhouse')
+          ? {
+              jobs: [
+                {
+                  ...gh.jobs[0],
+                  id: 100 + revision,
+                  title: `QA Engineer revision ${revision}`,
+                  absolute_url: `https://careers.appsflyer.com/jobs/position/${100 + revision}`,
+                },
+              ],
+            }
+          : lever,
+      ),
+    );
+    vi.stubGlobal('fetch', fetcher);
+    const first = await (await req('feed?refresh=1')).json();
+    expect(first.jobs.some((j: { title: string }) => j.title === 'QA Engineer revision 1')).toBe(
+      true,
+    );
+    revision = 2;
+    const second = await (await req('feed?refresh=1')).json();
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length * 2);
+    expect(second.jobs.some((j: { title: string }) => j.title === 'QA Engineer revision 2')).toBe(
+      true,
+    );
+    expect(second.jobs.some((j: { title: string }) => j.title === 'QA Engineer revision 1')).toBe(
+      false,
+    );
+    expect(
+      sqlite.prepare('SELECT active FROM niva_jobs WHERE id=?').get('greenhouse-appsflyer-101')?.[
+        'active'
+      ],
+    ).toBe(0);
+    await req('feed?q=Engineer');
+    await req('feed?limit=1');
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length * 2);
+  });
+
+  it('joins overlapping visit checks with durable source leases across database adapters', async () => {
+    const db1 = sqliteCareerDb(sqlite),
+      db2 = sqliteCareerDb(sqlite);
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const fetcher = vi.fn(async (url: string) => {
+      await gate;
+      return Response.json(url.includes('greenhouse') ? gh : lever);
+    });
+    vi.stubGlobal('fetch', fetcher);
+    const observer = vi.spyOn(db2, 'all');
+    const first = ingest(db1, Date.now(), { refresh: true });
+    await vi.waitFor(() => expect(fetcher).toHaveBeenCalledTimes(4));
+    const second = ingest(db2, Date.now(), { refresh: true });
+    await vi.waitFor(() =>
+      expect(observer.mock.calls.some(([sql]) => sql.startsWith('SELECT lease_until'))).toBe(true),
+    );
+    release();
+    await Promise.all([first, second]);
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length);
+    expect((await discoveryPage(db1, 'secret', {})).stale).toBe(false);
+  });
+
+  it('preserves last results and Retry-After during forced visit checks', async () => {
+    const { db } = setup();
+    mockSources();
+    const now = Date.now();
+    await ingest(db, now);
+    const failed = vi.fn(
+      async () => new Response('', { status: 429, headers: { 'Retry-After': '3600' } }),
+    );
+    vi.stubGlobal('fetch', failed);
+    await ingest(db, now + 1000, { refresh: true });
+    expect(failed).toHaveBeenCalledTimes(SOURCES.length);
+    await ingest(db, now + 2000, { refresh: true });
+    expect(failed).toHaveBeenCalledTimes(SOURCES.length);
+    const result = await discoveryPage(db, 'secret', {});
+    expect(result.jobs).toHaveLength(2);
+    expect(result.stale).toBe(true);
+    expect(
+      result.health.every((s) => s.error === 'RATE_LIMITED' && s.next_at >= now + 3600000),
+    ).toBe(true);
+  });
   it('matches either explicit office district for a multi-district listing, together with category', async () => {
     const { db } = setup();
     const source = SOURCES.find((s) => s.board === 'gongio')!;

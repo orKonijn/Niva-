@@ -90,25 +90,39 @@
     >לכל המשרות <niva-icon name="arrow"
   /></a>
 </div>
+@if (store.jobsLoading()) {
+  <p role="status" class="mb-4 text-sm text-muted">מחפשים משרות עדכניות בלוחות המעסיקים…</p>
+}
+@if (store.jobsError()) {
+  <div role="alert" class="mb-4">
+    <p>{{ store.jobsError() }}</p>
+    <button class="account-button" [disabled]="store.jobsLoading()" (click)="store.refreshJobs()">
+      ניסיון נוסף
+    </button>
+  </div>
+}
 <div
   class="jobs-grid grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-[20px] max-[1200px]:gap-[15px] max-[901px]:grid-cols-[1fr]"
 >
   @for (job of recommended(); track job.id) {
     <niva-job-card [job]="job" />
   } @empty {
-    <div
-      class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
-    >
-      <niva-icon name="search" />
-      <h3>נרחיב קצת את האופק?</h3>
-      <p>
-        אין משרות שמתאימות לכל ההעדפות הנוכחיות. אפשר לשנות סינון או לבדוק את מצב המקור במסך המשרות.
-      </p>
-      <a
-        routerLink="/app/preferences"
-        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
-        >עדכון העדפות</a
+    @if (!store.jobsLoading() && !store.jobsError()) {
+      <div
+        class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
       >
-    </div>
+        <niva-icon name="search" />
+        <h3>נרחיב קצת את האופק?</h3>
+        <p>
+          אין משרות שמתאימות לכל ההעדפות הנוכחיות. אפשר לשנות סינון או לבדוק את מצב המקור במסך
+          המשרות.
+        </p>
+        <a
+          routerLink="/app/preferences"
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+          >עדכון העדפות</a
+        >
+      </div>
+    }
   }
 </div>

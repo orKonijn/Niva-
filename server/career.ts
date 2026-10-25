@@ -138,8 +138,9 @@ export function createCareer(deps: CareerDependencies) {
     const health = await db.all<{ id: string; checked_at: string | null; next_at: number }>(
       'SELECT id,checked_at,next_at FROM niva_sources',
     );
-    if (health.length < SOURCES.length || health.some((source) => !source.checked_at)) {
-      const work = ingest(db);
+    const refresh = c.req.query('refresh') === '1' && !c.req.query('cursor');
+    if (refresh || health.length < SOURCES.length || health.some((source) => !source.checked_at)) {
+      const work = ingest(db, Date.now(), { refresh });
       deps.keepAlive?.(work);
       await work;
     } else if (health.some((source) => source.next_at <= Date.now())) {

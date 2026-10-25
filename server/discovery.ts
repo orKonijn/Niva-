@@ -144,7 +144,11 @@ export async function importLegacyJobs(db: CareerDb): Promise<void> {
     FROM niva_pilot_jobs WHERE json_valid(data) AND json_extract(data,'$.source.applicationUrl') IS NOT NULL
     AND json_extract(data,'$.title') IS NOT NULL AND json_extract(data,'$.company') IS NOT NULL LIMIT 1000 ON CONFLICT(id) DO NOTHING`);
 }
-export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
+export async function ingest(
+  db: CareerDb,
+  now = Date.now(),
+  { refresh = false } = {},
+): Promise<void> {
   // Bounded historical data import is an ingestion operation, never a schema migration.
   await importLegacyJobs(db);
   // One-time repair of bootstrap failures from the unsupported Worker redirect:error policy.
@@ -156,16 +160,33 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
     await db.run(
       "UPDATE niva_sources SET next_at=0,lease_until=0 WHERE checked_at IS NULL AND error='SOURCE_UNAVAILABLE'",
     );
-  for (const source of SOURCES) {
+  const update = async (source: (typeof SOURCES)[number]) => {
     await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
     const lease = await db.all(
-      'UPDATE niva_sources SET lease_until=? WHERE id=? AND next_at<=? AND lease_until<=? RETURNING id',
-      now + 60000,
+      'UPDATE niva_sources SET lease_until=? WHERE id=? AND (next_at<=? OR (?=1 AND error IS NULL AND (checked_at IS NULL OR checked_at<?))) AND lease_until<=? RETURNING id',
+      Math.max(now, Date.now()) + 60000,
       source.id,
       now,
+      refresh ? 1 : 0,
+      new Date(now).toISOString(),
       now,
     );
-    if (!lease.length) continue;
+    if (!lease.length) {
+      // Other requests/isolates share durable leases. Wait for their result on visits.
+      if (refresh) {
+        const deadline = Date.now() + 65000;
+        for (;;) {
+          const [active] = await db.all<{ lease_until: number }>(
+            'SELECT lease_until FROM niva_sources WHERE id=?',
+            source.id,
+          );
+          if (!active || active.lease_until <= Date.now()) break;
+          if (Date.now() >= deadline) throw new Error('SOURCE_REFRESH_TIMEOUT');
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      }
+      return;
+    }
     try {
       const response = await fetch(source.url, {
         headers: { Accept: 'application/json' },
@@ -181,8 +202,8 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
           await db.run('UPDATE niva_sources SET next_at=? WHERE id=?', now + retry, source.id);
         throw new Error(response.status === 429 ? 'RATE_LIMITED' : 'SOURCE_UNAVAILABLE');
       }
-      const at = new Date(now).toISOString();
       const payload = await boundedJson(response);
+      const at = new Date(Math.max(now, Date.now())).toISOString();
       const jobs =
         source.provider === 'greenhouse'
           ? normalizeGreenhouse(payload, source, at)
@@ -243,7 +264,14 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
         source.id,
       );
     }
-  }
+  };
+  // Bound upstream concurrency while allowing independent slow boards to progress.
+  let index = 0;
+  await Promise.all(
+    Array.from({ length: 4 }, async () => {
+      while (index < SOURCES.length) await update(SOURCES[index++]);
+    }),
+  );
 }
 export async function catalogJobs(db: CareerDb): Promise<Job[]> {
   return (await db.all<{ data: string; active: number }>('SELECT data,active FROM niva_jobs')).map(

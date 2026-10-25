@@ -75,6 +75,20 @@ export class AppStore {
   private feedGeneration = 0;
   private feedAbort: AbortController | null = null;
   private feedSnapshot = '';
+  private sourceRefresh: Promise<void> | null = null;
+  async refreshJobs(): Promise<void> {
+    if (this.sourceRefresh) {
+      await this.sourceRefresh;
+      return this.loadJobs();
+    }
+    const work = this.loadJobs(false, true);
+    this.sourceRefresh = work;
+    try {
+      await work;
+    } finally {
+      this.sourceRefresh = null;
+    }
+  }
   setFeedQuery(query: Record<string, string>, preferenceKey = ''): void {
     if (
       JSON.stringify(query) === JSON.stringify(this.feedQuery) &&
@@ -123,7 +137,9 @@ export class AppStore {
     this.selectedCatalog.set(mode);
     if (mode === 'real') void this.loadJobs();
   }
-  async loadJobs(more = false): Promise<void> {
+  async loadJobs(more = false, refreshSources = false): Promise<void> {
+    // Filter/account changes wait for the visit's source check, then use current filters.
+    if (!refreshSources && this.sourceRefresh) await this.sourceRefresh;
     if (more && this.jobsLoading()) return;
     this.feedAbort?.abort();
     const controller = new AbortController();
@@ -138,11 +154,16 @@ export class AppStore {
         ...this.feedQuery,
         limit: String(more ? 12 : Math.min(50, Math.max(12, this.realJobs().length))),
         ...(more && this.nextCursor() ? { cursor: this.nextCursor()! } : {}),
+        ...(refreshSources ? { refresh: '1' } : {}),
       });
+      const queryKey = JSON.stringify(this.feedQuery);
       const response = await fetch(discovery ? '/api/feed?' + query : '/api/jobs', {
         credentials: 'same-origin',
         cache: 'no-store',
-        signal: AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]),
+        signal: AbortSignal.any([
+          controller.signal,
+          AbortSignal.timeout(refreshSources ? 75000 : 30000),
+        ]),
       });
       if (!response.ok)
         throw new Error(
@@ -185,6 +206,7 @@ export class AppStore {
       )
         throw new Error();
       if (generation !== this.feedGeneration || owner !== this.session.userId()) return;
+      if (queryKey !== JSON.stringify(this.feedQuery)) return;
       this.realJobs.set([
         ...new Map([...(more ? this.realJobs() : []), ...feed.jobs].map((j) => [j.id, j])).values(),
       ]);
@@ -373,7 +395,7 @@ export class AppStore {
         this.accountReady.set(false);
         this.accountNotice.set('');
         this.resumeName.set('');
-        if (this.session.config().realJobs) void this.loadJobs();
+        if (this.session.config().realJobs) void this.refreshJobs();
         if (userId) {
           this.theme.accountSelection = (value) => {
             void this.change({ type: 'theme', value });
