@@ -47,7 +47,15 @@ afterEach(() => {
 const mockSources = () =>
   vi.stubGlobal(
     'fetch',
-    vi.fn(async (url: string) => Response.json(url.includes('greenhouse') ? gh : lever)),
+    vi.fn(async (url: string) =>
+      Response.json(
+        url.includes('greenhouse')
+          ? gh
+          : url.includes('jobicy.com')
+            ? { jobs: [], hasMore: false, nextCursor: null }
+            : lever,
+      ),
+    ),
   );
 function setup(env: CareerEnvironment = {}) {
   const db = sqliteCareerDb(sqlite);
@@ -74,7 +82,7 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
-  it('checks upstream on a visit even before cadence, returns new jobs, and closes removed listings', async () => {
+  it('reuses cache before cadence, fetches due boards, and closes removed listings', async () => {
     const { req } = setup();
     let revision = 1;
     const fetcher = vi.fn(async (url: string) =>
@@ -90,7 +98,9 @@ describe('durable discovery', () => {
                 },
               ],
             }
-          : lever,
+          : url.includes('jobicy.com')
+            ? { jobs: [], hasMore: false, nextCursor: null }
+            : lever,
       ),
     );
     vi.stubGlobal('fetch', fetcher);
@@ -99,6 +109,12 @@ describe('durable discovery', () => {
       true,
     );
     revision = 2;
+    const cached = await (await req('feed?refresh=1')).json();
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length);
+    expect(cached.jobs.some((j: { title: string }) => j.title === 'QA Engineer revision 1')).toBe(
+      true,
+    );
+    sqlite.prepare('UPDATE niva_sources SET next_at=0').run();
     const second = await (await req('feed?refresh=1')).json();
     expect(fetcher).toHaveBeenCalledTimes(SOURCES.length * 2);
     expect(second.jobs.some((j: { title: string }) => j.title === 'QA Engineer revision 2')).toBe(
@@ -126,7 +142,13 @@ describe('durable discovery', () => {
     });
     const fetcher = vi.fn(async (url: string) => {
       await gate;
-      return Response.json(url.includes('greenhouse') ? gh : lever);
+      return Response.json(
+        url.includes('greenhouse')
+          ? gh
+          : url.includes('jobicy.com')
+            ? { jobs: [], hasMore: false, nextCursor: null }
+            : lever,
+      );
     });
     vi.stubGlobal('fetch', fetcher);
     const observer = vi.spyOn(db2, 'all');
@@ -151,9 +173,9 @@ describe('durable discovery', () => {
       async () => new Response('', { status: 429, headers: { 'Retry-After': '3600' } }),
     );
     vi.stubGlobal('fetch', failed);
-    await ingest(db, now + 1000, { refresh: true });
+    await ingest(db, now + 3600001, { refresh: true });
     expect(failed).toHaveBeenCalledTimes(SOURCES.length);
-    await ingest(db, now + 2000, { refresh: true });
+    await ingest(db, now + 3601001, { refresh: true });
     expect(failed).toHaveBeenCalledTimes(SOURCES.length);
     const result = await discoveryPage(db, 'secret', {});
     expect(result.jobs).toHaveLength(2);
@@ -213,7 +235,13 @@ describe('durable discovery', () => {
     );
     const fetcher = vi.fn(async (url: string, init: RequestInit) => {
       expect(init.redirect).toBe('manual');
-      return Response.json(url.includes('greenhouse') ? gh : lever);
+      return Response.json(
+        url.includes('greenhouse')
+          ? gh
+          : url.includes('jobicy.com')
+            ? { jobs: [], hasMore: false, nextCursor: null }
+            : lever,
+      );
     });
     vi.stubGlobal('fetch', fetcher);
     await ingest(db);

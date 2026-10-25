@@ -7,12 +7,13 @@
     tabindex="-1"
     class="mx-auto mt-12 max-w-[480px] rounded-card border border-line bg-surface p-6 shadow-card sm:p-10"
   >
-    <p class="mb-2 text-sm font-medium text-brand">הצעד הבא שלך, גם במכשיר הבא</p>
+    <p class="mb-2 text-sm font-medium text-brand">כל מה ששמרת, גם במכשיר אחר</p>
     <h1 class="mb-4 text-3xl">
       {{ session.config().platform === 'sites' ? 'החשבון שלך ב־Niva' : heading() }}
     </h1>
     <p class="text-sm">
-      הפרופיל, ההעדפות והמשרות השמורות נשמרים בחשבון שלך. קורות חיים מנוהלים בנפרד ובהסכמה.
+      הפרופיל, העדפות החיפוש והמשרות ששמרת זמינים בחשבון שלך. קורות החיים נשמרים רק לאחר בדיקה
+      ואישור שלך.
     </p>
     @if (session.config().platform === 'sites') {
       <section
@@ -40,10 +41,10 @@
             הנתונים בחשבון הנוכחי נשמרים. כניסה דרך ספק אחר יוצרת חשבון נפרד ואינה מעבירה נתונים.
           </p>
         } @else {
-          <h2 class="mb-2 text-lg">נכנסים וממשיכים מהיכן שעצרת</h2>
+          <h2 class="mb-2 text-lg">נכנסים וממשיכים מאיפה שהפסקת</h2>
           <p class="text-sm">
-            כניסה מאובטחת דרך ChatGPT שומרת את הפרופיל, ההעדפות והמשרות בחשבון. אין צורך בסיסמה
-            נוספת.
+            אפשר להיכנס דרך חשבון ChatGPT שלך ולחזור לפרופיל ולמשרות ששמרת. אין צורך ליצור סיסמה
+            חדשה ל־Niva.
           </p>
           <a class="account-button account-primary w-full" [href]="platformSignIn" target="_top"
             >המשך עם ChatGPT</a
@@ -85,7 +86,7 @@
       </div>
       @if (!session.config().google || !session.config().apple) {
         <p class="text-xs">
-          שיטה שאינה זמינה מסומנת ככזו. את סיסמת Google או Apple מזינים רק באתר הרשמי של הספק.
+          אפשרויות שאינן פעילות מסומנות כאן. את הסיסמה של Google או Apple מזינים רק באתר הרשמי שלהן.
         </p>
       }
       @if (session.config().email) {

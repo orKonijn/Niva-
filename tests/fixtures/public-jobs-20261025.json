@@ -1,0 +1,100 @@
+{
+  "verifiedAt": "2026-10-25T16:11:46.427Z",
+  "scope": "Two real public baseline jobs; descriptions shortened for evidence fixtures.",
+  "jobs": [
+    {
+      "id": "greenhouse-appsflyer-8394076002",
+      "title": "Application Security Engineer",
+      "company": "AppsFlyer",
+      "initials": "AF",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "workStyle": "unknown",
+      "category": "engineering",
+      "posted": "עודכן במקור: 2026-08-17",
+      "description": "AppsFlyer’s Security team is looking for a highly skilled an",
+      "skills": [],
+      "reason": "מקור: AppsFlyer / Greenhouse. הסיווג לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "herzliya-city",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "הרצליה",
+          "latitude": 32.16627,
+          "longitude": 34.82536,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/294778/herzliya.html",
+          "verifiedOn": "2026-10-24"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "name": "AppsFlyer / Greenhouse",
+        "url": "https://careers.appsflyer.com/",
+        "applicationUrl": "https://careers.appsflyer.com/jobs/position/8394076002?gh_jid=8394076002",
+        "updatedAt": "2026-08-17T11:55:27.000Z",
+        "fetchedAt": "2026-10-25T16:11:38.434Z",
+        "location": "Herzliya",
+        "classification": "סיווג אוטומטי לפי כותרת; סגנון העבודה לא נמסר במקור.",
+        "active": true,
+        "sourceId": "greenhouse-appsflyer",
+        "version": "3a0054ef5dadb08283f9bf84",
+        "attribution": [
+          {
+            "name": "AppsFlyer / Greenhouse",
+            "url": "https://careers.appsflyer.com/jobs/position/8394076002?gh_jid=8394076002"
+          }
+        ]
+      }
+    },
+    {
+      "id": "greenhouse-appsflyer-8509670002",
+      "title": "Product Partnerships Manager",
+      "company": "AppsFlyer",
+      "initials": "AF",
+      "color": "#e4f1fa",
+      "district": "tel-aviv",
+      "workStyle": "unknown",
+      "category": "other",
+      "posted": "עודכן במקור: 2026-10-20",
+      "description": "We are looking for a seasoned Product Partnerships Manager i",
+      "skills": [],
+      "reason": "מקור: AppsFlyer / Greenhouse. הסיווג לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.",
+      "offices": [
+        {
+          "id": "herzliya-city",
+          "country": "IL",
+          "district": "tel-aviv",
+          "city": "הרצליה",
+          "latitude": 32.16627,
+          "longitude": 34.82536,
+          "precision": "city",
+          "demonstration": false,
+          "coordinateSource": "https://www.geonames.org/294778/herzliya.html",
+          "verifiedOn": "2026-10-24"
+        }
+      ],
+      "source": {
+        "kind": "real",
+        "name": "AppsFlyer / Greenhouse",
+        "url": "https://careers.appsflyer.com/",
+        "applicationUrl": "https://careers.appsflyer.com/jobs/position/8509670002?gh_jid=8509670002",
+        "updatedAt": "2026-10-20T13:38:57.000Z",
+        "fetchedAt": "2026-10-25T16:11:38.434Z",
+        "location": "Herzliya",
+        "classification": "סיווג אוטומטי לפי כותרת; סגנון העבודה לא נמסר במקור.",
+        "active": true,
+        "sourceId": "greenhouse-appsflyer",
+        "version": "5bbab47d933d04b82a8b6dbd",
+        "attribution": [
+          {
+            "name": "AppsFlyer / Greenhouse",
+            "url": "https://careers.appsflyer.com/jobs/position/8509670002?gh_jid=8509670002"
+          }
+        ]
+      }
+    }
+  ]
+}

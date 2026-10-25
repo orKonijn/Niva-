@@ -1,0 +1,186 @@
+import type { Job } from './models/job';
+import type { CandidateCriteria } from './models/discovery';
+import type { Preferences } from './preferences';
+import { positiveEvidence } from './matching';
+export const FIT_VERSION = 'fit-v1';
+export const eligibilityLabel = (s: string) =>
+  ({ blocked: 'חסם מפורש', confirmation: 'נדרש בירור', clear: 'לא נמצא חסם ידוע' })[s] ??
+  'נדרש בירור';
+export function assessJob(
+  job: Job,
+  preferences: Preferences,
+  resume = '',
+  confirmed = false,
+  candidate?: CandidateCriteria,
+  now = Date.now(),
+) {
+  const p = candidate?.confirmed ? candidate : undefined;
+  const f = job.facts;
+  const blockers: string[] = [],
+    questions: string[] = [],
+    strengths: string[] = [],
+    gaps: string[] = [];
+  if (job.source?.active === false || job.source?.availability === 'closed')
+    blockers.push('המשרה אינה מפורסמת עוד במקור');
+  if (f?.deadline && Date.parse(f.deadline.value) < now) blockers.push('מועד ההגשה חלף');
+  if (
+    f?.applicantCountries &&
+    p?.currentCountry &&
+    !f.applicantCountries.value.includes(p.currentCountry)
+  )
+    blockers.push(
+      `המקור מגביל מועמדים למדינות ${f.applicantCountries.value.join(', ')}; הפרופיל מציין ${p.currentCountry}`,
+    );
+  if (!f?.applicantCountries || !p?.currentCountry)
+    questions.push('יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה');
+  if (f?.sponsorship?.value === 'unavailable' && p?.sponsorship === 'needed')
+    blockers.push('נדרשת חסות אשרה ובמקור נאמר שאין חסות');
+  if (!f?.sponsorship || !p || p.sponsorship === 'unknown') questions.push('חסות אשרה לא אומתה');
+  if (
+    f?.authorizationCountry &&
+    p?.authorizationCountry === f.authorizationCountry.value &&
+    p.workAuthorization === 'not-authorized'
+  )
+    blockers.push('דרישת אישור העבודה סותרת את הפרופיל המאושר');
+  if (!f?.authorizationCountry || !p || p.workAuthorization === 'unknown')
+    questions.push('יש לברר אישור עבודה במדינת ההעסקה');
+  for (const field of ['languages', 'qualifications', 'licenses'] as const) {
+    for (const requirement of f?.[field] ?? [])
+      if (!p?.[field].some((x) => x.toLowerCase() === requirement.value.toLowerCase()))
+        questions.push(`דרישה לבדיקה: ${requirement.value}`);
+  }
+  if (f?.clearance && p?.clearance === 'none')
+    blockers.push('המקור דורש סיווג ביטחוני; בפרופיל אושר שאין סיווג');
+  else if (f?.clearance && p?.clearance !== 'held') questions.push('יש לברר סיווג ביטחוני');
+  if (!job.source?.applicationCheck || job.source.applicationCheck.status !== 'reachable')
+    questions.push('מסלול ההגשה טרם אומת; יש לבדוק באתר המקור');
+  if (job.source?.availability === 'unknown') questions.push('מצב הפרסום אינו מאומת כרגע');
+  if (job.workStyle === 'remote')
+    questions.push(
+      f?.timezone
+        ? `יש לבדוק שעות עבודה ואזור זמן: ${f.timezone.value}`
+        : 'אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו',
+    );
+  if (f?.clearance && p?.clearance === 'held')
+    questions.push('יש לבדוק סוג סיווג ביטחוני ותוקף מול הדרישה המקורית');
+  if (
+    p?.employmentTypes.length &&
+    f?.employmentType &&
+    !p.employmentTypes.includes(f.employmentType.value)
+  )
+    gaps.push(`סוג העסקה מחוץ להעדפות: ${f.employmentType.value}`);
+  const required = [...new Set(f?.requiredSkills?.map((x) => x.value) ?? [])];
+  const evidence = confirmed ? positiveEvidence(resume) : [];
+  const skills = [...new Set([...evidence.map((x) => x.skill), ...(p?.skills ?? [])])];
+  const matched = required.filter((x) => skills.some((s) => s.toLowerCase() === x.toLowerCase()));
+  strengths.push(...matched.map((x) => `עדות למונח ${x}`));
+  gaps.push(
+    ...required
+      .filter((x) => !matched.includes(x))
+      .map((x) => `אין עדות בפרופיל: ${x} (לא הוכחת חוסר ניסיון)`),
+  );
+  const dimensions = [
+    {
+      key: 'skills',
+      label: 'מונחי כישורים',
+      weight: 35,
+      known: confirmed && required.length >= 2,
+      ratio: required.length ? matched.length / required.length : 0,
+      evidence: `${matched.join(', ') || 'אין עדות משותפת'} / ${required.join(', ') || 'דרישות לא חולצו בביטחון'}`,
+    },
+    {
+      key: 'experience',
+      label: 'ניסיון',
+      weight: 25,
+      known: p?.yearsExperience != null && f?.minimumYears != null,
+      ratio:
+        p?.yearsExperience != null && f?.minimumYears
+          ? Math.min(1, p.yearsExperience / Math.max(1, f.minimumYears.value))
+          : 0,
+      evidence: `${p?.yearsExperience ?? 'לא נמסר'} שנות ניסיון בפרופיל; מינימום במקור: ${f?.minimumYears?.value ?? 'לא נמסר'}`,
+    },
+    {
+      key: 'role',
+      label: 'תחום התפקיד',
+      weight: 15,
+      known: preferences.role !== 'all' && job.category !== 'other',
+      ratio: preferences.role === job.category ? 1 : 0,
+      evidence: `${preferences.role} / ${job.category} · סיווג כותרת משוער`,
+    },
+    {
+      key: 'work',
+      label: 'מיקום וסגנון עבודה',
+      weight: 15,
+      known:
+        preferences.district !== 'all' &&
+        !!preferences.workStyles.length &&
+        job.district !== 'unknown' &&
+        job.workStyle !== 'unknown',
+      ratio:
+        (preferences.district === job.district ||
+          job.offices.some((x) => x.district === preferences.district)) &&
+        preferences.workStyles.some((x) => x === job.workStyle)
+          ? 1
+          : 0,
+      evidence: `${job.source?.location ?? job.district} / ${job.workStyle}; העדפות: ${preferences.district} / ${preferences.workStyles.join(', ')}`,
+    },
+    {
+      key: 'salary',
+      label: 'שכר',
+      weight: 10,
+      known:
+        p?.salaryMin != null &&
+        !!f?.salary &&
+        f.salary.value.origin === 'employer' &&
+        p.currency === f.salary.value.currency &&
+        p.period === f.salary.value.period &&
+        (f.salary.value.max ?? f.salary.value.min) != null,
+      ratio:
+        p?.salaryMin != null &&
+        f?.salary &&
+        (f.salary.value.max ?? f.salary.value.min ?? 0) >= p.salaryMin
+          ? 1
+          : 0,
+      evidence: f?.salary
+        ? `${JSON.stringify(f.salary.value)}; מינימום מבוקש ${p?.salaryMin ?? 'לא נמסר'}`
+        : 'שכר לא נמסר; אין השלמת אומדן',
+    },
+  ].map((x) => ({ ...x, points: x.known ? Math.round(x.weight * x.ratio * 10) / 10 : 0 }));
+  const knownWeight = dimensions.filter((x) => x.known).reduce((s, x) => s + x.weight, 0);
+  const score =
+    confirmed && required.length >= 2 && knownWeight >= 60
+      ? Math.round(dimensions.reduce((s, x) => s + x.points, 0))
+      : null;
+  const fields = [
+    f?.requiredSkills,
+    f?.minimumYears,
+    f?.employmentType,
+    f?.applicantCountries,
+    f?.sponsorship,
+    f?.salary,
+    f?.deadline,
+    f?.languages,
+  ];
+  const completeness = Math.round((fields.filter((x) => x != null).length / fields.length) * 100);
+  const confidence =
+    !confirmed || knownWeight < 60
+      ? 'נמוכה'
+      : knownWeight >= 85 && f?.requiredSkills?.every((x) => x.provenance === 'supplied')
+        ? 'גבוהה'
+        : 'בינונית';
+  return {
+    method: FIT_VERSION,
+    jobVersion: job.source?.version ?? 'unknown',
+    score,
+    dimensions,
+    knownWeight,
+    completeness,
+    confidence,
+    eligibility: blockers.length ? 'blocked' : questions.length ? 'confirmation' : 'clear',
+    blockers,
+    questions,
+    strengths,
+    gaps,
+    evidence,
+  };
+}

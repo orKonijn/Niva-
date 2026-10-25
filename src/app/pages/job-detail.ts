@@ -23,6 +23,9 @@ import { directionsUrl, locationText } from '../core/job-locations';
 })
 export class JobDetail {
   readonly localDate = localDate;
+  sourceAttribution(job: import('../core/models/job').Job) {
+    return job.source?.attribution ?? [];
+  }
   readonly directionsUrl = directionsUrl;
   readonly locationText = locationText;
   readonly districtLabel = districtLabel;
@@ -46,7 +49,7 @@ export class JobDetail {
       const discovery = this.store.session.config().discovery;
       this.store.session.userId();
       untracked(() => {
-        if (/^(greenhouse|lever)-/.test(id)) {
+        if (/^(greenhouse|lever|jobicy)-/.test(id)) {
           this.store.useCatalog('real');
           if (discovery) void this.store.ensureJob(id);
         }

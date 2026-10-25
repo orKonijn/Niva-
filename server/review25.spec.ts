@@ -37,7 +37,9 @@ const sources = () =>
             }
           : String(url).includes('/scan')
             ? { scan: 'clean', pages: 1, text: 'Synthetic parsed Python SQL candidate' }
-            : [],
+            : String(url).includes('jobicy.com')
+              ? { jobs: [], hasMore: false, nextCursor: null }
+              : [],
       ),
     ),
   );
@@ -270,7 +272,9 @@ for (const adapter of ['node', 'd1'] as const)
             : Response.json(
                 String(url).includes('greenhouse')
                   ? { jobs: cycle === 0 ? [gh(101), gh(102)] : [gh(102)] }
-                  : [],
+                  : String(url).includes('jobicy.com')
+                    ? { jobs: [], hasMore: false, nextCursor: null }
+                    : [],
               ),
         ),
       );
@@ -280,7 +284,7 @@ for (const adapter of ['node', 'd1'] as const)
       await putRecord(h.db, h.owner, 'resume', 'expiry', resume('expiry'), true);
       h.sqlite.prepare("UPDATE niva_documents SET expires_at=? WHERE id='expiry'").run(now + 60000);
       cycle = 1;
-      await runMaintenance(h.db, { trigger: 'scheduled', now: now + 1000000 });
+      await runMaintenance(h.db, { trigger: 'scheduled', now: now + 3600001 });
       const second = await discoveryPage(h.db, 'synthetic', {});
       expect(second.total).toBe(1);
       expect(second.health.every((r, i) => r.checked_at !== first.health[i].checked_at)).toBe(true);
@@ -291,7 +295,7 @@ for (const adapter of ['node', 'd1'] as const)
       ).toBe(0);
       expect(h.sqlite.prepare("SELECT * FROM niva_documents WHERE id='expiry'").all()).toEqual([]);
       cycle = 2;
-      await runMaintenance(h.db, { trigger: 'scheduled', now: now + 2000000 });
+      await runMaintenance(h.db, { trigger: 'scheduled', now: now + 7200002 });
       const stale = await discoveryPage(h.db, 'synthetic', {});
       expect(stale.total).toBe(1);
       expect(stale.stale).toBe(true);

@@ -44,7 +44,9 @@ test('district and category combine with multiple work styles, and zero styles m
   await page.getByLabel('מחוז מועדף').selectOption('all');
   await page.getByRole('button', { name: 'שמירת ההעדפות' }).click();
   await expect(page.getByRole('status')).toContainText('11 משרות');
-  await expect(page.getByText('ללא בחירה', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('אם לא בוחרים, אין סינון לפי אופן העבודה.', { exact: false }),
+  ).toBeVisible();
 });
 
 test('onboarding shares the multi-select and describes district, category and styles in its summary', async ({
@@ -126,14 +128,16 @@ test('legacy model URL becomes canonical while district/category filters remain 
   await page.goto('/app/jobs?model=' + encodeURIComponent('היברידי'));
   await expect(page).toHaveURL(/styles=hybrid/);
   await expect(page).not.toHaveURL(/model=/);
-  await page.getByRole('combobox', { name: 'מחוז במסך', exact: true }).selectOption('haifa');
+  await page.getByRole('combobox', { name: 'סינון לפי מחוז', exact: true }).selectOption('haifa');
   await page
-    .getByRole('combobox', { name: 'תחום במסך', exact: true })
+    .getByRole('combobox', { name: 'סינון לפי תחום', exact: true })
     .selectOption('qa-automation');
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await page.reload();
   await expect(page.getByRole('checkbox', { name: 'היברידי', exact: true })).toBeChecked();
-  await expect(page.getByRole('combobox', { name: 'מחוז במסך', exact: true })).toHaveValue('haifa');
+  await expect(page.getByRole('combobox', { name: 'סינון לפי מחוז', exact: true })).toHaveValue(
+    'haifa',
+  );
   await page.goto('/app/preferences');
   await expect(page.getByLabel('מחוז מועדף')).toHaveValue('all');
   await expect(page.getByLabel('תחום שמעניין אותך')).toHaveValue('all');

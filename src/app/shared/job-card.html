@@ -48,7 +48,44 @@
     <niva-icon name="sparkles" />{{ job().reason }}
   </p>
   @if (job().source) {
+    <p class="text-xs">
+      <bdi>{{ job().source!.name }}</bdi> · {{ job().source!.location }} · נבדק:
+      <bdi>{{ job().source!.lastVerifiedAt || job().source!.fetchedAt }}</bdi>
+    </p>
+    <p class="text-xs">
+      שכר:
+      {{
+        job().facts?.salary
+          ? job().facts!.salary!.value.min +
+            '–' +
+            job().facts!.salary!.value.max +
+            ' ' +
+            job().facts!.salary!.value.currency +
+            ' / ' +
+            job().facts!.salary!.value.period
+          : 'לא נמסר במקור'
+      }}
+    </p>
+    @if (job().facts?.salary && job().facts!.salary!.value.origin !== 'employer') {
+      <p class="text-xs">מקור נתון השכר לא אומת כשכר שפרסם המעסיק; הוא אינו מוסיף נקודות התאמה.</p>
+    }
     <niva-match-indicator [job]="job()" />
+    @if (job().source!.active) {
+      <a
+        class="account-button account-primary"
+        [href]="'/api/apply/' + job().id"
+        target="_blank"
+        rel="noopener noreferrer"
+        >{{
+          job().id.startsWith('jobicy-')
+            ? 'בדיקת הגשה ב־Jobicy (ייתכן שנדרש חשבון)'
+            : 'פתיחת המשרה והגשה באתר המקור (חלון חדש)'
+        }}</a
+      >
+    }
+    <p class="text-xs">
+      פתיחת הקישור אינה הגשת מועמדות. הזמינות נבדקת שוב כשהבדיקה ישנה מ־15 דקות.
+    </p>
     <div class="job-card-actions">
       <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
         >שיחה על המשרה</a

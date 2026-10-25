@@ -18,7 +18,9 @@ describe('expanded official job sources', () => {
     expect(new Set(SOURCES.map((s) => s.id)).size).toBe(SOURCES.length);
     expect(new Set(SOURCES.map((s) => s.company)).size).toBe(SOURCES.length);
     for (const s of SOURCES)
-      expect(['boards-api.greenhouse.io', 'api.lever.co']).toContain(new URL(s.url).hostname);
+      expect(['boards-api.greenhouse.io', 'api.lever.co', 'jobicy.com']).toContain(
+        new URL(s.url).hostname,
+      );
   });
   it('keeps employer identity, safe source link and category separate from display labels', () => {
     const [job] = normalizeGreenhouse({ jobs: [row, row] }, source, '2026-10-25T00:01:00Z');

@@ -15,6 +15,7 @@ export interface JobLocation {
   verifiedOn?: string;
 }
 export interface Job {
+  facts?: import('./discovery').JobFacts;
   id: string;
   title: string;
   company: string;
@@ -39,6 +40,14 @@ export interface Job {
     applicationUrl: string;
     updatedAt: string;
     fetchedAt: string;
+    firstSeenAt?: string | null;
+    lastVerifiedAt?: string | null;
+    availability?: 'published' | 'closed' | 'unknown';
+    applicationCheck?: {
+      status: 'reachable' | 'unverified' | 'unavailable';
+      checkedAt: string;
+      note: string;
+    };
     location: string;
     classification: string;
     active: boolean;

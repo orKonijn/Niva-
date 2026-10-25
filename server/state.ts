@@ -1,4 +1,5 @@
 import { deleteCareerSync } from './lifecycle';
+import { normalizeCriteria } from '../src/app/core/candidate-validation';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { emptyAccountState, type AccountState } from '../src/app/core/models/account-state';
@@ -138,9 +139,18 @@ export function applyStateOperation(
     case 'profile': {
       const value = object(op['value']);
       state.profile = {
+        ...state.profile,
         name: string(value['name'], 50),
         headline: string(value['headline'], 140),
       };
+      break;
+    }
+    case 'criteria': {
+      try {
+        state.profile.criteria = normalizeCriteria(op['value']);
+      } catch {
+        throw new StateError(400, 'INVALID_CRITERIA');
+      }
       break;
     }
     case 'theme':

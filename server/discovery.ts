@@ -1,3 +1,7 @@
+import { passesDiscovery, type DiscoveryFilters } from '../src/app/core/discovery-filters';
+import type { CandidateCriteria } from '../src/app/core/models/discovery';
+import { normalizeJobicy } from './jobicy-source';
+import { enrichJob } from './job-facts';
 import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 import type { CareerDb } from './career-db';
@@ -163,12 +167,10 @@ export async function ingest(
   const update = async (source: (typeof SOURCES)[number]) => {
     await db.run('INSERT INTO niva_sources(id) VALUES(?) ON CONFLICT(id) DO NOTHING', source.id);
     const lease = await db.all(
-      'UPDATE niva_sources SET lease_until=? WHERE id=? AND (next_at<=? OR (?=1 AND error IS NULL AND (checked_at IS NULL OR checked_at<?))) AND lease_until<=? RETURNING id',
+      'UPDATE niva_sources SET lease_until=? WHERE id=? AND next_at<=? AND lease_until<=? RETURNING id',
       Math.max(now, Date.now()) + 60000,
       source.id,
       now,
-      refresh ? 1 : 0,
-      new Date(now).toISOString(),
       now,
     );
     if (!lease.length) {
@@ -196,24 +198,116 @@ export async function ingest(
       if (!response.ok) {
         const retry = Math.min(
           86400000,
-          Math.max(source.cadence, Number(response.headers.get('retry-after')) * 1000 || 0),
+          Math.max(
+            source.cadence,
+            Number(response.headers.get('retry-after')) * 1000 ||
+              Math.max(0, Date.parse(response.headers.get('retry-after') ?? '') - now) ||
+              0,
+          ),
         );
         if (response.status === 429)
           await db.run('UPDATE niva_sources SET next_at=? WHERE id=?', now + retry, source.id);
         throw new Error(response.status === 429 ? 'RATE_LIMITED' : 'SOURCE_UNAVAILABLE');
       }
-      const payload = await boundedJson(response);
+      let payload = await boundedJson(response);
+      if (source.provider === 'jobicy') {
+        let page = payload as { jobs?: unknown[]; hasMore?: boolean; nextCursor?: unknown };
+        if (!Array.isArray(page.jobs)) throw Error('INVALID_FEED');
+        const all = [...page.jobs];
+        const seen = new Set<string>();
+        for (let n = 1; page.hasMore; n++) {
+          if (
+            n >= 5 ||
+            typeof page.nextCursor !== 'string' ||
+            !page.nextCursor ||
+            page.nextCursor.length > 500 ||
+            seen.has(page.nextCursor)
+          )
+            throw Error('INCOMPLETE_SOURCE');
+          seen.add(page.nextCursor);
+          const next = new URL(source.url);
+          next.searchParams.set('cursor', page.nextCursor);
+          const response = await fetch(next.href, {
+            headers: { Accept: 'application/json' },
+            redirect: 'manual',
+            signal: AbortSignal.timeout(12000),
+          });
+          if (!response.ok) throw Error('SOURCE_UNAVAILABLE');
+          page = (await boundedJson(response)) as typeof page;
+          if (!Array.isArray(page.jobs)) throw Error('INCOMPLETE_SOURCE');
+          all.push(...page.jobs);
+        }
+        payload = { ...page, jobs: all, hasMore: false, nextCursor: null };
+      }
       const at = new Date(Math.max(now, Date.now())).toISOString();
       const jobs =
         source.provider === 'greenhouse'
           ? normalizeGreenhouse(payload, source, at)
-          : normalizeLever(payload, at);
+          : source.provider === 'jobicy'
+            ? normalizeJobicy(payload, at)
+            : normalizeLever(payload, at);
       const rows: { sql: string; args: (string | number | null)[] }[] = [
-        { sql: 'UPDATE niva_jobs SET active=0 WHERE source_id=?', args: [source.id] },
+        ...(source.provider === 'jobicy'
+          ? []
+          : [{ sql: 'UPDATE niva_jobs SET active=0 WHERE source_id=?', args: [source.id] }]),
       ];
-      const unique = new Map(jobs.map((j) => [j.id, j]));
+      const previous = new Map(
+        (
+          await db.all<{ id: string; data: string }>(
+            'SELECT id,data FROM niva_jobs WHERE source_id=?',
+            source.id,
+          )
+        ).map((row) => [row.id, JSON.parse(row.data) as Job]),
+      );
+      const unique = new Map(jobs.map((j) => [j.id, enrichJob(j)]));
+      // A rolling seven-day feed cannot establish closure by absence. Status is explicit.
+      if (source.provider === 'jobicy') {
+        const missing = [...previous.values()].filter((j) => !unique.has(j.id));
+        for (let offset = 0; offset < missing.length; offset += 100) {
+          const batch = missing.slice(offset, offset + 100);
+          const response = await fetch(
+            'https://jobicy.com/api/jobs/status?ids=' +
+              batch.map((j) => j.id.slice(source.id.length + 1)).join(','),
+            {
+              headers: { Accept: 'application/json' },
+              redirect: 'manual',
+              signal: AbortSignal.timeout(5000),
+            },
+          );
+          if (!response.ok) throw Error('SOURCE_UNAVAILABLE');
+          const statuses = (await boundedJson(response)) as {
+            success?: boolean;
+            jobs?: { id: number; status: string }[];
+          };
+          if (statuses.success !== true || !Array.isArray(statuses.jobs))
+            throw Error('INVALID_STATUS');
+          for (const old of batch) {
+            const status = statuses.jobs.find(
+              (s) => String(s.id) === old.id.slice(source.id.length + 1),
+            )?.status;
+            old.source!.availability =
+              status === 'active' ? 'published' : status === 'closed' ? 'closed' : 'unknown';
+            if (status === 'active' || status === 'closed') old.source!.lastVerifiedAt = at;
+            old.source!.active = status === 'active';
+            old.source!.version = versionOf([old.title, old.description, old.source!.availability]);
+            rows.push({
+              sql: 'UPDATE niva_jobs SET active=?,data=?,version=? WHERE id=?',
+              args: [status === 'active' ? 1 : 0, JSON.stringify(old), old.source!.version, old.id],
+            });
+          }
+        }
+      }
       for (const job of unique.values()) {
         job.source!.sourceId = source.id;
+        job.source!.firstSeenAt = previous.has(job.id)
+          ? (previous.get(job.id)!.source?.firstSeenAt ?? null)
+          : at;
+        job.source!.lastVerifiedAt = at;
+        job.source!.availability = 'published';
+        job.source!.applicationCheck =
+          previous.get(job.id)?.source?.applicationUrl === job.source!.applicationUrl
+            ? previous.get(job.id)?.source?.applicationCheck
+            : undefined;
         if (source.id === 'greenhouse-appsflyer')
           job.reason =
             'מקור: AppsFlyer / Greenhouse. הסיווג לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.';
@@ -278,11 +372,12 @@ export async function catalogJobs(db: CareerDb): Promise<Job[]> {
     (row) => {
       const j = JSON.parse(row.data) as Job;
       j.source!.active = !!row.active;
+      if (!row.active && j.source!.availability !== 'unknown') j.source!.availability = 'closed';
       return j;
     },
   );
 }
-export interface FeedQuery {
+export interface FeedQuery extends DiscoveryFilters {
   q?: string;
   category?: string;
   district?: string;
@@ -290,6 +385,7 @@ export interface FeedQuery {
   cursor?: string;
   limit?: string;
   saved?: string;
+  unknownStyle?: string;
 }
 export async function discoveryPage(
   db: CareerDb,
@@ -297,6 +393,7 @@ export async function discoveryPage(
   query: FeedQuery,
   preferences: Preferences = defaultPreferences(),
   saved: string[] = [],
+  criteria?: CandidateCriteria,
 ) {
   const health = await db.all<{
     id: string;
@@ -306,11 +403,26 @@ export async function discoveryPage(
   }>('SELECT id,checked_at,error,next_at FROM niva_sources ORDER BY id');
   const snapshot = versionOf(await db.all('SELECT id,version,active FROM niva_jobs ORDER BY id'));
   const filterKey = versionOf([
+    [
+      'eligibility',
+      'country',
+      'remoteScope',
+      'salaryMin',
+      'currency',
+      'period',
+      'seniority',
+      'employment',
+      'since',
+      'provider',
+      'missing',
+    ].map((key) => query[key as keyof FeedQuery]),
+    criteria,
     query.q,
     query.category,
     query.district,
     query.styles,
     query.saved,
+    query.unknownStyle,
     preferences,
     query.saved ? saved : [],
   ]);
@@ -362,7 +474,9 @@ export async function discoveryPage(
     );
   for (const styles of [query.saved === 'true' ? [] : preferences.workStyles, screen.workStyles])
     if (styles.length) {
-      clauses.push(`style IN (${styles.map(() => '?').join(',')})`);
+      clauses.push(
+        `(style IN (${styles.map(() => '?').join(',')})${query.unknownStyle === 'true' ? " OR style='unknown'" : ''})`,
+      );
       args.push(...styles);
     }
   for (const x of preferences.exclusions
@@ -379,27 +493,25 @@ export async function discoveryPage(
   // Choose a representative within the already-authorized/filtered identity set.
   const where = clauses.join(' AND ');
   const ranked = `WITH eligible AS (SELECT * FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
-  const count =
-    (
-      await db.all<{ total: number }>(
-        `${ranked} SELECT count(*) AS total FROM ranked WHERE representative=1`,
-        ...args,
-      )
-    )[0]?.total ?? 0;
-  const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
-  const rows = await db.all<{ id: string; data: string; active: number }>(
-    `${ranked} SELECT id,data,active FROM ranked WHERE representative=1 AND id>? ORDER BY id LIMIT ?`,
+  const candidates = await db.all<{ id: string; data: string; active: number }>(
+    `${ranked} SELECT id,data,active FROM ranked WHERE representative=1 ORDER BY id`,
     ...args,
-    after,
-    limit + 1,
   );
+  const assessed = candidates
+    .map((row) => {
+      const job = enrichJob(JSON.parse(row.data) as Job);
+      job.source!.active = !!row.active;
+      if (!row.active && job.source!.availability !== 'unknown')
+        job.source!.availability = 'closed';
+      return job;
+    })
+    .filter((job) => query.saved === 'true' || passesDiscovery(job, query, preferences, criteria));
+  const count = assessed.length;
+  const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
+  const rows = assessed.filter((job) => job.id > after);
   const more = rows.length > limit;
   const page = rows.slice(0, limit);
-  const jobs = page.map((row) => {
-    const j = JSON.parse(row.data) as Job;
-    j.source!.active = !!row.active;
-    return j;
-  });
+  const jobs = page;
   for (const job of jobs) {
     const attributed = await db.all<{ data: string }>(
       'SELECT data FROM niva_jobs WHERE canonical=?',
@@ -420,6 +532,8 @@ export async function discoveryPage(
     for (const row of rows) {
       const job = JSON.parse(row.data) as Job;
       job.source!.active = !!row.active;
+      if (!row.active && job.source!.availability !== 'unknown')
+        job.source!.availability = 'closed';
       if (!jobs.some((j) => j.id === job.id)) archived.push(job);
     }
   }
@@ -447,7 +561,11 @@ export async function discoveryPage(
     health: health.map((h) => ({ ...h, name: SOURCES.find((s) => s.id === h.id)?.name ?? h.id })),
     fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
     stale: health.some(
-      (h) => !!h.error || !h.checked_at || Date.now() - Date.parse(h.checked_at) > 1800000,
+      (h) =>
+        !!h.error ||
+        !h.checked_at ||
+        Date.now() - Date.parse(h.checked_at) >
+          Math.max(1800000, (SOURCES.find((s) => s.id === h.id)?.cadence ?? 900000) * 2),
     ),
   };
 }

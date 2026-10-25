@@ -93,8 +93,13 @@ test('real email registration/verification and independent sessions synchronize 
   await page.goto('/app/profile');
   await page.getByLabel('איך לקרוא לך?').fill('שם נשמר');
   await page.getByLabel('כותרת מקצועית').fill('QA Automation');
+  await page.getByLabel('שנות ניסיון רלוונטי', { exact: true }).fill('4');
+  await page.getByLabel('מדינה נוכחית (קוד, למשל IL)', { exact: true }).fill('IL');
+  await page.getByRole('checkbox', { name: 'בדקתי ומאשר/ת את הפרטים האלה' }).check();
+  await page.getByRole('button', { name: 'שמירת פרטים לבדיקת התאמה', exact: true }).click();
+  await expect(page.getByText('הפרטים נשמרו. ההתאמות חושבו מחדש.', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'שמירת שם בחשבון' }).click();
-  await expect(page.getByRole('status')).toContainText('נשמרו בחשבון');
+  await expect(page.getByText('הפרטים נשמרו בחשבון.', { exact: true })).toBeVisible();
   const other = await browser.newContext({ baseURL: 'http://127.0.0.1:4300' });
   const device = await other.newPage();
   await quietCookies(device);
@@ -105,6 +110,11 @@ test('real email registration/verification and independent sessions synchronize 
     await device.getByRole('button', { name: 'כניסה לחשבון', exact: true }).click();
     await expect(device).toHaveURL(/\/app$/);
     await expect(device.getByRole('heading', { level: 1 })).toContainText('שם נשמר');
+    await device.goto('/app/profile');
+    await expect(device.getByLabel('שנות ניסיון רלוונטי', { exact: true })).toHaveValue('4');
+    await expect(device.getByLabel('מדינה נוכחית (קוד, למשל IL)', { exact: true })).toHaveValue(
+      'IL',
+    );
     await device.goto('/app/jobs');
     await expect(device.locator('niva-job-card')).toHaveCount(1);
     await expect(device.getByRole('button', { name: 'הסרת המשרה מהשמורות' })).toBeVisible();
@@ -223,8 +233,8 @@ test('map groups multiple offices, separates remote/missing locations and follow
     .locator('niva-job-map')
     .evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.screenshot({ path: `test-results/map-${info.project.name}.png`, fullPage: false });
-  await page.getByLabel('תחום במסך').selectOption('qa-automation');
-  await page.getByLabel('מחוז במסך').selectOption('haifa');
+  await page.getByLabel('סינון לפי תחום').selectOption('qa-automation');
+  await page.getByLabel('סינון לפי מחוז').selectOption('haifa');
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await expect(page.locator('.niva-map-marker')).toHaveCount(1);
   await page.getByRole('button', { name: 'רשימה', exact: true }).click();

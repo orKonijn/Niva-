@@ -196,8 +196,7 @@
       transition:
         transform 180ms ease,
         box-shadow 180ms ease,
-        border-color 180ms ease,
-        background-color 180ms ease;
+        border-color 180ms ease;
     }
     .button:active:not(:disabled),
     .account-button:active:not(:disabled) {

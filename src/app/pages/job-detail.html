@@ -70,6 +70,27 @@
         <time [attr.title]="source.fetchedAt">{{ localDate(source.fetchedAt) }}</time>
       </p>
       <p class="text-sm">
+        פרסום במקור: {{ source.availability || 'לא נבדק בנפרד' }} · בדיקה מוצלחת אחרונה:
+        <bdi>{{ source.lastVerifiedAt || 'לא נמסר' }}</bdi>
+      </p>
+      <p class="text-sm">
+        מסלול הגשה: {{ source.applicationCheck?.note || 'טרם נבדק בנפרד; יש לבדוק באתר המקור' }}
+      </p>
+      @if (job.id.startsWith('jobicy-')) {
+        <p>Jobicy: עיכוב מקור של 3 שעות, ייתכן שנדרש חשבון אצל המקור.</p>
+      }
+      <p>
+        מועד אחרון: {{ job.facts?.deadline?.value || 'לא נמסר' }} · נראה לראשונה:
+        {{ source.firstSeenAt || 'לא ידוע (רשומה קודמת)' }}
+      </p>
+      <a
+        [href]="source.applicationUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-brand underline"
+        >הרשומה המקורית</a
+      >
+      <p class="text-sm">
         {{ source.classification }} הנקודה במפה היא מרכז העיר המשוער, לא כתובת המשרד. הסבר ההתאמה
         מופיע בנפרד.
       </p>
@@ -80,7 +101,7 @@
       }
       <a
         class="account-button account-primary"
-        [href]="source.applicationUrl"
+        [href]="'/api/apply/' + job.id"
         target="_blank"
         rel="noopener noreferrer"
         >פתיחת המשרה והגשה באתר המקור (חלון חדש)</a
@@ -88,6 +109,47 @@
       <p class="mt-3 mb-0 text-xs">
         פתיחת הקישור אינה הגשת מועמדות. Niva אינה שולחת פרופיל, קובץ או בקשה למעסיק.
       </p>
+    </section>
+  }
+  @if (job.facts; as facts) {
+    <section class="account-panel mb-6" aria-label="דרישות ועדויות מהמקור">
+      <h2>דרישות ועדויות מהמקור</h2>
+      <p>החילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.</p>
+      @for (fact of facts.requiredSkills || []; track $index) {
+        <p>
+          <bdi>{{ fact.value }}</bdi> · {{ fact.provenance }} · <q dir="auto">{{ fact.quote }}</q>
+        </p>
+      }
+      @for (fact of facts.preferredSkills || []; track $index) {
+        <p>
+          יתרון: <bdi>{{ fact.value }}</bdi> · <q dir="auto">{{ fact.quote }}</q>
+        </p>
+      }
+      <p>
+        ניסיון מינימלי: {{ facts.minimumYears?.value ?? 'לא נמסר בבירור' }} · בכירות:
+        {{ facts.seniority?.value || 'לא נמסר' }} (אם זוהתה בכותרת, זהו סיווג משוער)
+      </p>
+      @if (facts.applicantCountries; as countries) {
+        <p>
+          מדינות מועמדים: {{ countries.value.join(', ') }} · <q dir="auto">{{ countries.quote }}</q>
+        </p>
+      } @else {
+        <p>מדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.</p>
+      }
+      <p>
+        חסות אשרה: {{ facts.sponsorship?.value || 'לא ידוע' }} · אזור זמן נדרש:
+        {{ facts.timezone?.value || 'לא נמסר' }}
+      </p>
+      @if (sourceAttribution(job).length) {
+        <p>
+          ייחוס מקורות:
+          @for (reference of sourceAttribution(job); track reference.url) {
+            <a [href]="reference.url" target="_blank" rel="noopener noreferrer">{{
+              reference.name
+            }}</a>
+          }
+        </p>
+      }
     </section>
   }
   <section class="account-panel mb-6" aria-label="מיקומי המשרה">

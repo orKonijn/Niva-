@@ -1,7 +1,7 @@
 <niva-page-heading
-  kicker="מוצאים את החיבור"
-  heading="ההזדמנויות שלך"
-  description="כל משרה היא אפשרות להתחלה חדשה. בודקים מה מתאים לך."
+  kicker="החיפוש שלך"
+  heading="משרות שכדאי לבדוק"
+  description="מחפשים לפי תפקיד או חברה, מסננים ושומרים את המשרות שמעניינות אותך."
 >
   <a
     routerLink="/app/preferences"
@@ -30,16 +30,16 @@
       </button>
     </div>
   } @else {
-    <h2 class="mb-3 text-lg">משרות פתוחות מהמקור</h2>
+    <h2 class="mb-3 text-lg">משרות מהלוחות המחוברים</h2>
   }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      משרות בישראל מלוחות מעסיקים רשמיים ב־Greenhouse וב־Lever. הכיסוי מתרחב ואינו כולל את כל שוק
-      העבודה. הגשה מתבצעת באתר המעסיק בלבד.
+      המשרות מגיעות מאתרי גיוס של מעסיקים בישראל ב־Greenhouse וב־Lever, ומלוח המשרות מרחוק Jobicy.
+      הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן שנדרש חשבון.
     </p>
     <p class="mb-2 text-xs">
-      סיווג התחום לפי כותרת התפקיד. סגנון העבודה מוצג רק כשהמקור מסר אותו; בחירת סגנון מסוים תסתיר
-      משרות ללא מידע זה. משרות שמורות שהוסרו מהמקור נשארות בתצוגת השמורות בלבד.
+      תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו; סינון לפיו מסתיר גם
+      משרות שהמידע הזה חסר בהן. משרה ששמרת תישאר ברשימה שלך גם אם הוסרה מאתר המעסיק.
     </p>
     @if (store.feedCheckedAt()) {
       <p class="text-xs mb-2">
@@ -57,9 +57,9 @@
     </button>
     @if (store.session.config().discovery) {
       <p class="mt-3 text-xs">
-        בכל כניסה לאתר, טעינת הדף מחדש או לחיצה על רענון, נבדקות משרות עדכניות בלוחות המעסיקים
-        המחוברים לפני הצגת התוצאות. ייתכן שלא נוספו משרות מאז הבדיקה הקודמת. אם מקור אינו זמין או
-        מגביל בקשות, מוצג המידע האחרון שלו עם הודעה ומועד הבדיקה.
+        בכל כניסה או רענון נבדק המטמון המשותף ומעודכנים מקורות שהגיע מועד בדיקתם: לוחות מעסיקים
+        כשחלפו לפחות 15 דקות מהבדיקה הקודמת; Jobicy לא יותר מפעם בשעה (עיכוב מקור של 3 שעות). המידע
+        אינו חיפוש בכל שוק העבודה. תקלות ומגבלות מקור משאירות עותק קודם עם מועד הבדיקה האחרון.
       </p>
       <details class="mt-3">
         <summary class="cursor-pointer text-sm">
@@ -111,13 +111,13 @@
     ><span class="search-input flex items-center gap-[12px] text-muted">
       <niva-icon name="search" /><input
         aria-label="חיפוש תפקיד או חברה"
-        placeholder="איזה תפקיד או חברה מעניינים אותך?"
+        placeholder="שם תפקיד או חברה"
         [ngModel]="query()"
         (ngModelChange)="setFilter({ q: $event || null }, true)"
       /> </span
   ></label>
   <label class="filter-label"
-    ><span>מחוז במסך</span
+    ><span>סינון לפי מחוז</span
     ><select
       [ngModel]="district()"
       (ngModelChange)="setFilter({ district: $event === 'all' ? null : $event })"
@@ -129,7 +129,7 @@
     </select></label
   >
   <label class="filter-label"
-    ><span>תחום במסך</span
+    ><span>סינון לפי תחום</span
     ><select
       [ngModel]="category()"
       (ngModelChange)="setFilter({ category: $event === 'all' ? null : $event })"
@@ -142,9 +142,127 @@
   >
   <niva-work-style-fields [value]="workStyles()" (valueChange)="setStyles($event)" />
 </div>
+<label class="checkbox-label"
+  ><input
+    type="checkbox"
+    [ngModel]="params().get('unknownStyle') === 'true'"
+    (ngModelChange)="setFilter({ unknownStyle: $event ? 'true' : null })"
+  />
+  לכלול סגנון עבודה שלא נמסר</label
+>
+<details class="account-panel mb-4">
+  <summary class="cursor-pointer min-h-11">זכאות, מקור וסינון נוסף</summary>
+  <div class="grid grid-cols-3 gap-4 max-[901px]:grid-cols-1">
+    <label class="filter-label"
+      >זכאות להגשה<select
+        [ngModel]="params().get('eligibility') || ''"
+        (ngModelChange)="setFilter({ eligibility: $event || null })"
+      >
+        <option value="">ללא חסם מפורש (ברירת מחדל)</option>
+        <option value="confirmation">נדרש בירור</option>
+        <option value="clear">לא נמצא חסם ידוע</option>
+        <option value="blocked">בדיקת חסמים מפורשים</option>
+        <option value="all">הכול, כולל חסמים</option>
+      </select></label
+    >
+    <label class="filter-label"
+      >מקור<select
+        [ngModel]="params().get('provider') || ''"
+        (ngModelChange)="setFilter({ provider: $event || null })"
+      >
+        <option value="">כל המקורות</option>
+        @for (source of sources; track source.id) {
+          <option [value]="source.id">{{ source.name }}</option>
+        }
+      </select></label
+    >
+    <label class="filter-label"
+      >מדינת מועמדים (קוד)<input
+        placeholder="IL"
+        maxlength="2"
+        [ngModel]="params().get('country') || ''"
+        (ngModelChange)="setFilter({ country: $event.toUpperCase() || null })"
+    /></label>
+    <label class="filter-label"
+      >מגבלת מדינות<select
+        [ngModel]="params().get('remoteScope') || ''"
+        (ngModelChange)="setFilter({ remoteScope: $event || null })"
+      >
+        <option value="">כל המצבים</option>
+        <option value="known">הגבלה שפורשה במקור</option>
+        <option value="unknown">לא נמסרה הגבלה ברורה</option>
+      </select></label
+    >
+    <label class="filter-label"
+      >בכירות (לפי כותרת)<select
+        [ngModel]="params().get('seniority') || ''"
+        (ngModelChange)="setFilter({ seniority: $event || null })"
+      >
+        <option value="">כל הרמות</option>
+        @for (
+          level of ['intern', 'junior', 'senior', 'lead', 'principal', 'manager', 'director'];
+          track level
+        ) {
+          <option [value]="level">{{ level }}</option>
+        }
+      </select></label
+    >
+    <label class="filter-label"
+      >סוג העסקה<select
+        [ngModel]="params().get('employment') || ''"
+        (ngModelChange)="setFilter({ employment: $event || null })"
+      >
+        <option value="">כל הסוגים</option>
+        @for (type of ['full-time', 'part-time', 'contract', 'internship']; track type) {
+          <option [value]="type">{{ type }}</option>
+        }
+      </select></label
+    >
+    <label class="filter-label"
+      >פורסם מתאריך<input
+        type="date"
+        [ngModel]="params().get('since') || ''"
+        (ngModelChange)="setFilter({ since: $event || null })"
+    /></label>
+    <label class="filter-label"
+      >שכר מינימום<input
+        type="number"
+        min="0"
+        [ngModel]="params().get('salaryMin') || ''"
+        (ngModelChange)="setFilter({ salaryMin: $event ? '' + $event : null })"
+    /></label>
+    <label class="filter-label"
+      >מטבע להשוואה<input
+        maxlength="3"
+        placeholder="ILS"
+        [ngModel]="params().get('currency') || ''"
+        (ngModelChange)="setFilter({ currency: $event.toUpperCase() || null })"
+    /></label>
+    <label class="filter-label"
+      >תקופת שכר<select
+        [ngModel]="params().get('period') || ''"
+        (ngModelChange)="setFilter({ period: $event || null })"
+      >
+        <option value="">לא נבחרה</option>
+        <option value="hour">שעה</option>
+        <option value="month">חודש</option>
+        <option value="year">שנה</option>
+      </select></label
+    >
+    <label class="filter-label"
+      >מידע חסר במסננים<select
+        [ngModel]="params().get('missing') || ''"
+        (ngModelChange)="setFilter({ missing: $event || null })"
+      >
+        <option value="">כולל ערכים לא ידועים</option>
+        <option value="hide">הסתרת ערכים לא ידועים</option>
+      </select></label
+    >
+  </div>
+</details>
 <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-  הסינון במסך נוסף להעדפות הקבועות. תחום ומחוז חייבים להתאים יחד; סגנונות העבודה נבדקים לפי אחד
-  מהנבחרים.
+  הסינון כאן מצמצם את התוצאות בנוסף להעדפות ששמרת. המשרה צריכה להתאים גם לתחום וגם למחוז; באופן
+  העבודה מספיקה התאמה לאחת האפשרויות שבחרת.
 </p>
 <div class="section-row flex items-center justify-between gap-[20px]">
   <div class="segmented flex gap-[4px]" aria-label="תצוגת משרות">
@@ -174,14 +292,13 @@
 </div>
 @if (store.catalogMode() === 'real' && store.nextCursor()) {
   <p class="text-sm">
-    מוצגת מנה ראשונה של התוצאות. בהמשך העמוד אפשר לטעון משרות נוספות; המפה מציגה את המשרות שכבר
-    נטענו.
+    זו תחילת הרשימה. בהמשך העמוד אפשר לטעון עוד משרות. המפה מציגה רק את המשרות שכבר נטענו.
   </p>
 }
 @if (savedOnly()) {
   <p class="text-sm">
-    שמורות הן היסטוריית הבחירות שלך ועשויות להיות מחוץ להעדפות הקבועות. החרגות החברות והסינון במסך
-    עדיין חלים; מצב הזמינות מוצג לכל משרה.
+    כאן נמצאות המשרות ששמרת, גם אם הן כבר לא תואמות את ההעדפות שלך. הסינון בעמוד והחברות שבחרת
+    להסתיר עדיין משפיעים על הרשימה. ליד כל משרה אפשר לראות אם היא עדיין זמינה.
   </p>
 }
 @if (store.suppressedSavedCount()) {
@@ -212,7 +329,7 @@
     >
       <option value="source">סדר המאגר</option>
       <option value="relevance" [disabled]="!career.active()">
-        כיסוי מונחים בקורות החיים — תוצאות שנטענו בלבד
+        ציון התאמה מוסבר — תוצאות שנטענו בלבד
       </option>
     </select></label
   >
@@ -237,7 +354,7 @@
         class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
       >
         <niva-icon name="search" />
-        <h2>עדיין לא מצאנו כאן התאמה</h2>
+        <h2>לא נמצאו משרות בחיפוש הזה</h2>
         <p>{{ emptyExplanation() }}</p>
         <button
           class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"

@@ -1,3 +1,4 @@
+import { assessJob, eligibilityLabel } from '../core/job-assessment';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { Job } from '../core/models/job';
@@ -9,7 +10,42 @@ import { CareerStore } from '../core/career-store';
   imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <details class="match-panel">
-    <summary>{{ preference().label }} · {{ resume().label }}</summary>
+    <summary>
+      {{
+        assessment().score === null
+          ? 'אין מספיק מידע לציון התאמה'
+          : 'התאמה: ' + assessment().score + ' / 100'
+      }}
+      · {{ eligibilityLabel(assessment().eligibility) }}
+    </summary>
+    <p>
+      שלמות נתוני המשרה: {{ assessment().completeness }}% · ביטחון בעדות:
+      {{ assessment().confidence }} · מידע בר־השוואה: {{ assessment().knownWeight }}/100
+    </p>
+    <p>
+      השכר, הגאוגרפיה ואישור העבודה נבדקים בנפרד. מידע חסר אינו מוסיף נקודות; אין חיזוי סיכויי קבלה.
+    </p>
+    @for (factor of assessment().dimensions; track factor.key) {
+      <p>
+        {{ factor.label }}:
+        {{
+          factor.known ? factor.points + ' / ' + factor.weight : 'לא ידוע · משקל ' + factor.weight
+        }}
+        — <bdi>{{ factor.evidence }}</bdi>
+      </p>
+    }
+    @for (blocker of assessment().blockers; track blocker) {
+      <p class="form-error">{{ blocker }}</p>
+    }
+    @for (question of assessment().questions; track question) {
+      <p>{{ question }}</p>
+    }
+    <a routerLink="/app/profile">עדכון ואישור הפרטים לבדיקת התאמה</a>
+    <p>
+      גרסת החישוב: fit-v1 · מחושב מחדש לפי הפרופיל, ההעדפות וקורות החיים הפעילים. רעננות מוצגת
+      בנפרד.
+    </p>
+    <p>{{ preference().label }} · {{ resume().label }}</p>
     <p>דרישות הסינון הן תנאי להצגה, בנפרד ממונחים בקורות החיים. אין חיזוי סיכויי קבלה.</p>
     @for (factor of preference().factors; track factor.label) {
       <p>{{ factor.label }}: {{ status(factor.status) }}</p>
@@ -48,6 +84,16 @@ import { CareerStore } from '../core/career-store';
 })
 export class MatchIndicator {
   readonly job = input.required<Job>();
+  readonly eligibilityLabel = eligibilityLabel;
+  readonly assessment = computed(() =>
+    assessJob(
+      this.job(),
+      this.store.preferences(),
+      this.career.active()?.text ?? '',
+      !!this.career.active(),
+      this.store.account().profile.criteria,
+    ),
+  );
   readonly store = inject(AppStore);
   readonly career = inject(CareerStore);
   readonly preference = computed(() => preferenceMatch(this.job(), this.store.preferences()));

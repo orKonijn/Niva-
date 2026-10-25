@@ -8,6 +8,9 @@
   "
 >
 </niva-page-heading>
+@if (store.isAccount() && store.accountReady()) {
+  <niva-candidate-profile />
+}
 <div class="profile-grid grid grid-cols-[1fr_1fr] gap-[25px] max-[1200px]:grid-cols-[1fr]">
   <form
     class="niva-form panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"

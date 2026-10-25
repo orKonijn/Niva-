@@ -2,7 +2,7 @@
   class="work-style-fields min-w-[0] rounded-[12px]"
   [attr.aria-describedby]="descriptionId"
 >
-  <legend>סגנונות עבודה</legend>
+  <legend>אופן העבודה</legend>
   <div class="work-style-options flex-wrap">
     @for (style of options; track style.id) {
       <label class="checkbox-label font-normal leading-[1.9]"
@@ -15,7 +15,7 @@
     }
   </div>
   <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]" [id]="descriptionId">
-    אפשר לבחור כמה סגנונות. ללא בחירה — כל סגנונות העבודה מוצגים. מספיק שהמשרה תתאים לאחד הסגנונות
-    שנבחרו.
+    אפשר לבחור יותר מאפשרות אחת. אם לא בוחרים, אין סינון לפי אופן העבודה. מספיק שהמשרה תתאים לאחת
+    האפשרויות שבחרת.
   </p>
 </fieldset>

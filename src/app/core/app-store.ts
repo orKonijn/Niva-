@@ -1,3 +1,5 @@
+import { trustedJobUrl } from './source-registry';
+import type { CandidateCriteria } from './models/discovery';
 import { uniqueJobs } from './job-identity';
 import { CareerStore } from './career-store';
 import {
@@ -195,13 +197,7 @@ export class AppStore {
         !feed.jobs.every((j) => {
           if (j.source?.kind !== 'real' || !j.source.applicationUrl.startsWith('https://'))
             return false;
-          const url = new URL(j.source.applicationUrl);
-          return (
-            (/^greenhouse-appsflyer-\d+$/.test(j.id) && url.hostname === 'careers.appsflyer.com') ||
-            (/^lever-walkme-[a-z0-9-]+$/i.test(j.id) &&
-              url.hostname === 'jobs.lever.co' &&
-              url.pathname.startsWith('/walkme/'))
-          );
+          return trustedJobUrl(j.id, j.source.applicationUrl);
         })
       )
         throw new Error();
@@ -233,12 +229,7 @@ export class AppStore {
     }
   }
   async ensureJob(id: string, retry = false): Promise<void> {
-    if (
-      !this.session.config().discovery ||
-      (!retry && this.findJob(id)) ||
-      !/^(greenhouse|lever)-/.test(id)
-    )
-      return;
+    if (!this.session.config().discovery || !/^(greenhouse|lever|jobicy)-/.test(id)) return;
     const pending = this.listingRequests.get(id);
     if (pending) return pending;
     const owner = this.session.userId();
@@ -292,17 +283,7 @@ export class AppStore {
             job.source?.kind !== 'real'
           )
             throw Error();
-          const url = new URL(job.source.applicationUrl);
-          if (
-            url.protocol !== 'https:' ||
-            !(
-              (/^greenhouse-appsflyer-\d+$/.test(id) && url.hostname === 'careers.appsflyer.com') ||
-              (/^lever-walkme-[a-z0-9-]+$/i.test(id) &&
-                url.hostname === 'jobs.lever.co' &&
-                url.pathname.startsWith('/walkme/'))
-            )
-          )
-            throw Error();
+          if (!trustedJobUrl(id, job.source.applicationUrl)) throw Error();
         } catch (error) {
           if (timeoutSignal.aborted || (error instanceof Error && error.name === 'TimeoutError'))
             throw error;
@@ -539,6 +520,9 @@ export class AppStore {
   }
   approve(jobId: string): Promise<boolean> {
     return this.isAccount() ? this.change({ type: 'approve', jobId }) : this.demo.approve(jobId);
+  }
+  saveCriteria(value: CandidateCriteria): Promise<boolean> {
+    return this.change({ type: 'criteria', value });
   }
   async saveProfile(
     name: string,

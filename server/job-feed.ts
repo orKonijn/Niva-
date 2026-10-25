@@ -25,7 +25,12 @@ export function plainText(value: unknown): string {
     .slice(0, 18000);
 }
 export function classify(title: string): Category | 'other' {
-  if (/automation.*(?:qa|test)|(?:qa|test).*automation/i.test(title)) return 'qa-automation';
+  if (
+    /automation.*(?:qa|test)|(?:qa|test).*automation|\bsdet\b|software engineer.*(?:in test|testing)|testing.*software engineer/i.test(
+      title,
+    )
+  )
+    return 'qa-automation';
   if (/\bqa\b|quality assurance|manual test/i.test(title)) return 'qa-manual';
   if (/workflow|integration.*automation/i.test(title)) return 'workflow-automation';
   if (/devops|cloud|infrastructure|sre/i.test(title)) return 'devops-cloud';

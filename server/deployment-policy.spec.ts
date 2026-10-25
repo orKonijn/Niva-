@@ -62,7 +62,13 @@ it('source-only refresh requires its secret, reports provider health and preserv
     .prepare('INSERT INTO niva_documents(id,owner,kind,epoch,expires_at,data) VALUES(?,?,?,?,?,?)')
     .run('synthetic-expired', 'synthetic-owner', 'resume', '0', 2, '{}');
   vi.stubGlobal('fetch', async (url: string | URL | Request) =>
-    Response.json(String(url).includes('greenhouse') ? { jobs: [] } : []),
+    Response.json(
+      String(url).includes('greenhouse')
+        ? { jobs: [] }
+        : String(url).includes('jobicy.com')
+          ? { jobs: [], hasMore: false, nextCursor: null }
+          : [],
+    ),
   );
   const app = createCareer({
     db,

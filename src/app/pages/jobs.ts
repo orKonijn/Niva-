@@ -1,3 +1,6 @@
+import { passesDiscovery } from '../core/discovery-filters';
+import { assessJob } from '../core/job-assessment';
+import { SOURCES } from '../core/source-registry';
 import { localDate } from '../core/local-date';
 import { PageHeading } from '../shared/page-heading';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
@@ -34,6 +37,24 @@ export class Jobs {
     initialValue: this.route.snapshot.queryParamMap,
   });
   readonly query = computed(() => this.params().get('q') ?? '');
+  readonly sources = SOURCES;
+  readonly extraKeys = [
+    'eligibility',
+    'country',
+    'remoteScope',
+    'salaryMin',
+    'currency',
+    'period',
+    'seniority',
+    'employment',
+    'since',
+    'provider',
+    'missing',
+    'unknownStyle',
+  ] as const;
+  readonly extraQuery = computed(() =>
+    Object.fromEntries(this.extraKeys.map((key) => [key, this.params().get(key) ?? ''])),
+  );
   readonly categories = CATEGORIES;
   readonly districts = DISTRICTS;
   readonly workStyles = computed(() =>
@@ -60,6 +81,7 @@ export class Jobs {
       if (discovery && this.store.catalogMode() === 'real')
         this.store.setFeedQuery(
           {
+            ...this.extraQuery(),
             q: this.query(),
             category: this.category(),
             district: this.district(),
@@ -69,6 +91,7 @@ export class Jobs {
           JSON.stringify([
             this.store.session.userId(),
             this.store.preferences(),
+            this.store.account().profile.criteria,
             this.savedOnly() ? this.store.saved() : [],
           ]),
         );
@@ -103,7 +126,15 @@ export class Jobs {
     ).filter(
       (j) =>
         (!this.savedOnly() || this.store.saved().includes(j.id)) &&
+        (this.savedOnly() ||
+          passesDiscovery(
+            j,
+            this.extraQuery(),
+            this.store.preferences(),
+            this.store.account().profile.criteria,
+          )) &&
         (!this.workStyles().length ||
+          (j.workStyle === 'unknown' && this.params().get('unknownStyle') === 'true') ||
           (isWorkStyle(j.workStyle) && this.workStyles().includes(j.workStyle))) &&
         (this.district() === 'all' || this.district() === j.district) &&
         (this.category() === 'all' || this.category() === j.category) &&
@@ -118,9 +149,21 @@ export class Jobs {
     const resume = this.career.active();
     if (!resume) return jobs;
     return [...jobs].sort((a, b) => {
-      const x = resumeMatch(a, resume.text, true),
-        y = resumeMatch(b, resume.text, true);
-      return (y.coverage ?? -1) - (x.coverage ?? -1);
+      const x = assessJob(
+          a,
+          this.store.preferences(),
+          resume.text,
+          true,
+          this.store.account().profile.criteria,
+        ),
+        y = assessJob(
+          b,
+          this.store.preferences(),
+          resume.text,
+          true,
+          this.store.account().profile.criteria,
+        );
+      return (y.score ?? -1) - (x.score ?? -1) || a.id.localeCompare(b.id);
     });
   });
   setFilter(queryParams: Record<string, string | null>, replaceUrl = false): void {
@@ -133,23 +176,23 @@ export class Jobs {
   }
   readonly emptyExplanation = computed(() => {
     if (this.store.catalogMode() !== 'real')
-      return 'אלה נתוני הדגמה במכשיר. אפשר לשנות את הסינון במסך.';
+      return 'אלה משרות לדוגמה בלבד. אפשר לשנות את הסינון ולנסות חיפוש אחר.';
     if (this.store.jobsError() || this.store.sourceHealth().some((s) => s.error))
-      return 'חלק מהמקורות אינם זמינים. אפס תוצאות אינו מוכיח שאין משרות; אפשר לרענן ולבדוק את אתר המקור.';
+      return 'לא הצלחנו לבדוק חלק מאתרי המעסיקים. ייתכן שיש משרות שלא מוצגות כרגע. אפשר לרענן או לבדוק ישירות באתר המעסיק.';
     const coverage = this.store.coverage();
     const p = this.store.preferences();
     const category = this.category() === 'all' ? p.role : this.category();
     const district = this.district() === 'all' ? p.district : this.district();
     if (category !== 'all' && !coverage.some((c) => c.category === category))
-      return 'בכיסוי המצומצם הנוכחי, אחרי החרגות החברות, לא נמצאו משרות בתחום המבוקש. זה אינו חיפוש בכלל שוק העבודה.';
+      return 'לא מצאנו כרגע משרות בתחום הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת. ייתכן שיש משרות באתרים אחרים ש־Niva עדיין לא מציגה.';
     if (district !== 'all' && !coverage.some((c) => c.district === district))
-      return 'במקורות הנוכחיים, אחרי החרגות החברות, אין כרגע משרות במחוז המבוקש.';
+      return 'לא מצאנו כרגע משרות במחוז הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת.';
     if (
       (this.workStyles().length || p.workStyles.length) &&
       coverage.some((c) => c.style === 'unknown')
     )
-      return 'הסינון מסתיר גם משרות שסגנון העבודה שלהן לא נמסר במקור. אפשר לבדוק את ההעדפות במפורש.';
-    return 'המאגר כולל לוחות מעסיקים נבחרים ואינו מכסה את כל שוק העבודה. שילוב הסינון במסך, ההעדפות וההחרגות לא הניב תוצאות. ניתן לנקות רק את הסינון במסך; ההעדפות נשמרות.';
+      return 'הסינון מסתיר גם משרות שבהן המעסיק לא ציין אם העבודה מהבית או מהמשרד. אפשר להסיר את הסינון הזה ולראות עוד משרות.';
+    return 'לא מצאנו משרות שמתאימות לשילוב ההעדפות והסינון שבחרת. אפשר לנקות את הסינון בעמוד ולנסות שוב; ההעדפות ששמרת לא ישתנו. הרשימה כוללת רק את אתרי המעסיקים ש־Niva בודקת.';
   });
   clear(): void {
     this.setFilter({
@@ -158,6 +201,7 @@ export class Jobs {
       styles: null,
       district: null,
       category: null,
+      ...Object.fromEntries(this.extraKeys.map((key) => [key, null])),
       saved: null,
     });
   }

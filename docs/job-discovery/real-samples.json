@@ -1,0 +1,243 @@
+{
+  "verifiedAt": "2026-10-25T16:46:51.690Z",
+  "jobicyFeed": "Cached public response collected earlier in this research session; no repeated feed fetch",
+  "samples": [
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "title": "QA & Automation Engineer",
+      "company": "Canopy",
+      "category": "qa-automation",
+      "location": "Tel Aviv, Israel ",
+      "workStyle": "unknown",
+      "source": "Canopy / Greenhouse",
+      "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+      "providerStatus": 200,
+      "applicationPath": {
+        "http": 200,
+        "redirect": null,
+        "reachable": true,
+        "formJourneyVerified": false,
+        "checkedAt": "2026-10-25T16:46:52.436Z"
+      },
+      "requiredSkills": [
+        {
+          "term": "QA Automation",
+          "provenance": "extracted",
+          "quote": "Experience with automation tools such as Playwright, Cypress, Selenium, or similar"
+        }
+      ],
+      "minimumYears": null,
+      "applicantCountries": null,
+      "sponsorship": null,
+      "salary": null,
+      "match": {
+        "method": "fit-v1",
+        "profile": "No private profile used; anonymous audit",
+        "score": null,
+        "eligibility": "confirmation",
+        "questions": [
+          "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+          "חסות אשרה לא אומתה",
+          "יש לברר אישור עבודה במדינת ההעסקה",
+          "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+        ]
+      },
+      "sourceObservedAt": "2026-10-25T16:46:51.690Z"
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "title": "AI-First QA Automation Engineer ",
+      "company": "Unframe",
+      "category": "qa-automation",
+      "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+      "workStyle": "unknown",
+      "source": "Unframe / Greenhouse",
+      "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101",
+      "providerStatus": 200,
+      "applicationPath": {
+        "http": 200,
+        "redirect": null,
+        "reachable": true,
+        "formJourneyVerified": false,
+        "checkedAt": "2026-10-25T16:46:52.903Z"
+      },
+      "requiredSkills": null,
+      "minimumYears": null,
+      "applicantCountries": null,
+      "sponsorship": null,
+      "salary": null,
+      "match": {
+        "method": "fit-v1",
+        "profile": "No private profile used; anonymous audit",
+        "score": null,
+        "eligibility": "confirmation",
+        "questions": [
+          "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+          "חסות אשרה לא אומתה",
+          "יש לברר אישור עבודה במדינת ההעסקה",
+          "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+        ]
+      },
+      "sourceObservedAt": "2026-10-25T16:46:51.690Z"
+    },
+    {
+      "id": "jobicy-israel-qa-151003",
+      "title": "Testing a Financial App for Italian Business Owners",
+      "company": "Testlio",
+      "category": "other",
+      "location": "EMEA",
+      "workStyle": "remote",
+      "source": "Jobicy",
+      "url": "https://jobicy.com/jobs/151003-testing-a-financial-app-for-italian-business-owners",
+      "providerStatus": 200,
+      "applicationPath": {
+        "http": 200,
+        "redirect": null,
+        "reachable": true,
+        "formJourneyVerified": false,
+        "checkedAt": "2026-10-25T16:46:53.207Z"
+      },
+      "requiredSkills": null,
+      "minimumYears": null,
+      "applicantCountries": {
+        "value": ["IT"],
+        "quote": "Location: Must be physically located in Italy",
+        "provenance": "extracted",
+        "url": "https://jobicy.com/jobs/151003-testing-a-financial-app-for-italian-business-owners",
+        "observedAt": "2026-10-25T16:36:03.584Z"
+      },
+      "sponsorship": null,
+      "salary": {
+        "value": {
+          "min": 60000,
+          "max": null,
+          "currency": "USD",
+          "period": "year",
+          "origin": "unknown"
+        },
+        "provenance": "supplied",
+        "url": "https://jobicy.com/jobs/151003-testing-a-financial-app-for-italian-business-owners",
+        "observedAt": "2026-10-25T16:36:03.584Z",
+        "quote": "Jobicy API field"
+      },
+      "match": {
+        "method": "fit-v1",
+        "profile": "No private profile used; anonymous audit",
+        "score": null,
+        "eligibility": "confirmation",
+        "questions": [
+          "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+          "חסות אשרה לא אומתה",
+          "יש לברר אישור עבודה במדינת ההעסקה",
+          "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+          "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+        ]
+      },
+      "sourceObservedAt": "2026-10-25T16:36:03.584Z"
+    },
+    {
+      "id": "jobicy-israel-qa-151013",
+      "title": "Distributed Systems Testing Software Engineer, Python / Go",
+      "company": "Canonical",
+      "category": "qa-automation",
+      "location": "Anywhere",
+      "workStyle": "remote",
+      "source": "Jobicy",
+      "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+      "providerStatus": 200,
+      "applicationPath": {
+        "http": 200,
+        "redirect": null,
+        "reachable": true,
+        "formJourneyVerified": false,
+        "checkedAt": "2026-10-25T16:46:53.493Z"
+      },
+      "requiredSkills": null,
+      "minimumYears": null,
+      "applicantCountries": null,
+      "sponsorship": null,
+      "salary": null,
+      "match": {
+        "method": "fit-v1",
+        "profile": "No private profile used; anonymous audit",
+        "score": null,
+        "eligibility": "confirmation",
+        "questions": [
+          "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+          "חסות אשרה לא אומתה",
+          "יש לברר אישור עבודה במדינת ההעסקה",
+          "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+          "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+        ]
+      },
+      "sourceObservedAt": "2026-10-25T16:36:03.584Z"
+    },
+    {
+      "id": "jobicy-israel-qa-155928",
+      "title": "Senior Software Development Engineer in Test (SDET)",
+      "company": "Flex",
+      "category": "qa-automation",
+      "location": "Anywhere",
+      "workStyle": "remote",
+      "source": "Jobicy",
+      "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+      "providerStatus": 200,
+      "applicationPath": {
+        "http": 200,
+        "redirect": null,
+        "reachable": true,
+        "formJourneyVerified": false,
+        "checkedAt": "2026-10-25T16:46:53.815Z"
+      },
+      "requiredSkills": [
+        {
+          "term": "QA Automation",
+          "provenance": "extracted",
+          "quote": "perience 5+ years of experience in software development and test automation Advanced proficiency in multiple programming"
+        },
+        {
+          "term": "SQL",
+          "provenance": "extracted",
+          "quote": "alysis Solid understanding of database systems and advanced SQL Experience with observability and monitoring tools (e.g."
+        }
+      ],
+      "minimumYears": {
+        "value": 5,
+        "quote": "Computer Science or related field, or equivalent experience 5+ years of experience in software development and test automation Advanced proficiency in multiple programming languages and test automation frameworks Deep experience designing, building, and maintaining automation frameworks (e.g., Playw",
+        "provenance": "extracted",
+        "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+        "observedAt": "2026-10-25T16:36:03.584Z"
+      },
+      "applicantCountries": null,
+      "sponsorship": null,
+      "salary": {
+        "value": {
+          "min": 115600,
+          "max": 170000,
+          "currency": "USD",
+          "period": "year",
+          "origin": "unknown"
+        },
+        "provenance": "supplied",
+        "url": "https://jobicy.com/jobs/155928-senior-software-development-engineer-in-test-sdet-2",
+        "observedAt": "2026-10-25T16:36:03.584Z",
+        "quote": "Jobicy API field"
+      },
+      "match": {
+        "method": "fit-v1",
+        "profile": "No private profile used; anonymous audit",
+        "score": null,
+        "eligibility": "confirmation",
+        "questions": [
+          "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+          "חסות אשרה לא אומתה",
+          "יש לברר אישור עבודה במדינת ההעסקה",
+          "דרישה לבדיקה: Key qualifications Bachelor’s degree in Computer Science or related field, or equivalent experience 5+ years of experience in software development and test automation Advanced proficiency in multiple ",
+          "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+          "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+        ]
+      },
+      "sourceObservedAt": "2026-10-25T16:36:03.584Z"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ export interface AccountState {
   saved: string[];
   applications: (DemoApplication & { kind: 'local-demo' })[];
   paused: boolean;
-  profile: { name: string; headline: string };
+  profile: { name: string; headline: string; criteria?: import('./discovery').CandidateCriteria };
   theme: 'light' | 'dark' | 'system';
   importedAt: string | null;
   setupCompleted?: boolean;

@@ -147,7 +147,7 @@ test('real-feed UI boundary fixture remains separate from demo, preserves unknow
   await page.getByRole('link', { name: job.title, exact: true }).click();
   await expect(
     page.getByRole('link', { name: 'פתיחת המשרה והגשה באתר המקור (חלון חדש)' }),
-  ).toHaveAttribute('href', job.source.applicationUrl);
+  ).toHaveAttribute('href', '/api/apply/' + job.id);
   await expect(page.getByText('פתיחת הקישור אינה הגשת מועמדות.', { exact: false })).toBeVisible();
   await expect(page.getByRole('button', { name: 'אישור' })).toHaveCount(0);
   await page.goto('/app/jobs?source=demo');

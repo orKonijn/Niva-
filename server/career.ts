@@ -1,3 +1,5 @@
+import { verifyJob, reconcilePaths } from './job-verification';
+import { trustedJobUrl } from './job-sources';
 import { runMaintenance, maintenanceHealth } from './maintenance';
 import { lifecycle, deletionRows } from './lifecycle';
 import { Hono } from 'hono';
@@ -149,8 +151,18 @@ export function createCareer(deps: CareerDependencies) {
       if (deps.keepAlive) deps.keepAlive(work);
       else await work;
     }
+    if (c.req.query('reconcile') === '1') await reconcilePaths(db);
     const state = owner ? await deps.state(owner) : undefined;
-    return c.json(await discoveryPage(db, secret, c.req.query(), state?.preferences, state?.saved));
+    return c.json(
+      await discoveryPage(
+        db,
+        secret,
+        c.req.query(),
+        state?.preferences,
+        state?.saved,
+        state?.profile.criteria,
+      ),
+    );
   });
   app.get('/api/listings/:id', async (c) => {
     const jobs = await catalogJobs(db);
@@ -166,7 +178,36 @@ export function createCareer(deps: CareerDependencies) {
             ))))
     )
       return c.json({ error: 'NOT_FOUND' }, 404);
-    return c.json(job);
+    await quota(db, `listing:${owner ?? 'anonymous'}`, 120, 60000);
+    return c.json(await verifyJob(db, job));
+  });
+  app.get('/api/apply/:id', async (c) => {
+    await quota(db, 'apply:shared', 120, 60000);
+    const job = (await catalogJobs(db)).find((j) => j.id === c.req.param('id') && j.source?.active);
+    if (!job?.source || !trustedJobUrl(job.id, job.source.applicationUrl))
+      return c.json({ error: 'NOT_AVAILABLE' }, 404);
+    const checked = await verifyJob(db, job);
+    // Anonymous click-only event: no profile, account, email, IP or submitted-application claim.
+    await db.run(
+      "INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES('system','apply-click',?,?,?)",
+      randomUUID(),
+      JSON.stringify({
+        jobId: job.id,
+        at: new Date().toISOString(),
+        availability: checked.source?.availability,
+        path: checked.source?.applicationCheck?.status,
+      }),
+      Date.now() + 30 * 86400000,
+    );
+    if (
+      checked.source?.availability === 'closed' ||
+      (checked.facts?.deadline && Date.parse(checked.facts.deadline.value) < Date.now())
+    )
+      return c.redirect(
+        '/app/jobs/' + encodeURIComponent(job.id) + '?application=unavailable',
+        303,
+      );
+    return c.redirect(checked.source!.applicationUrl, 303);
   });
   app.use('/api/career/*', async (c, next) => {
     const owner = await deps.identity(c.req.raw);

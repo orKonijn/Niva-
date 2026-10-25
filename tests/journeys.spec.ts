@@ -8,10 +8,10 @@ test.beforeEach(async ({ page }) => {
 test('homepage is accessible, has no horizontal overflow and explains resume processing', async ({
   page,
 }, info) => {
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('פחות חיפוש');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('מחפשים עבודה?');
   await page.locator('summary').filter({ hasText: 'מה קורה לקורות החיים שלי?' }).click();
   await expect(
-    page.getByText('אפשר לבחור PDF/DOCX לקריאה בדפדפן או להדביק טקסט', { exact: false }),
+    page.getByText('אפשר לבחור קובץ PDF או DOCX, או להדביק את הטקסט.', { exact: false }),
   ).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,

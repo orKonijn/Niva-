@@ -1,5 +1,6 @@
+import { CandidateProfile } from '../shared/candidate-profile';
 import { PageHeading } from '../shared/page-heading';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppStore } from '../core/app-store';
@@ -10,7 +11,7 @@ import { validateResume } from '../core/resume-validation';
 import { protectUnsaved } from '../core/unsaved';
 import { FormStatus } from '../shared/form-status';
 @Component({
-  imports: [PageHeading, FormsModule, Icon, FormStatus, RouterLink],
+  imports: [CandidateProfile, PageHeading, FormsModule, Icon, FormStatus, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './profile.html',
 })
@@ -33,6 +34,11 @@ export class Profile {
     return JSON.stringify([this.name, this.headline]) !== this.baseline;
   }
   constructor() {
+    effect(() => {
+      const state = this.store.account();
+      if (JSON.stringify([state.profile.name, state.profile.headline]) === this.baseline)
+        this.profileRevision = state.revision;
+    });
     protectUnsaved(() => this.hasUnsavedChanges());
   }
   async save(): Promise<void> {

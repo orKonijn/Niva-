@@ -289,7 +289,7 @@ test('missing AI configuration is explicit while local file import remains avail
   await expect(page.getByRole('button', { name: 'שליחה', exact: true })).toBeDisabled();
   await page.goto('/app/resumes');
   await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
-  await expect(page.getByText(/הקובץ נקרא בדפדפן בלבד/)).toBeVisible();
+  await expect(page.getByText(/הקריאה נעשית במכשיר שלך/)).toBeVisible();
   await expect(page.getByLabel('קובץ לבדיקה', { exact: true })).toBeEnabled();
 });
 test('late filter responses cannot replace a newer search', async ({ page }) => {
