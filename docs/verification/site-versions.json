@@ -6,9 +6,21 @@
     "Sites saved version numbers, not semantic package versions.",
     "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
     "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
-    "Sites and GitHub have separate Git lineages; v16–v22 have verified reviewed-source mappings in build metadata."
+    "Sites and GitHub have separate Git lineages; v16–v23 have verified reviewed-source mappings in build metadata."
   ],
   "versions": [
+    {
+      "version": 23,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_f368679c1bec819189c64c6cd2fba9f2",
+      "sitesCommit": "3c3f2205301b052b7650346b94b4ce35a5cd9cde",
+      "reviewedGithubCommit": "1977ca2f920251b0999ca06b9ef8de61bde82baa",
+      "deploymentId": "appgdep_6ade18482d8881919954c406b9f99999",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T14:55:19.475346+00:00",
+      "artifactDigest": "sha256:5b23393a2e2af1b50a3b141063d095f058403a8fe88752a989ff8e65559dd490",
+      "mappedSourceVerified": true,
+      "followUp": "Reloaded the exact affected Chrome /login tab. Signed-in heading, explanation, continue-account link and explicit sign-out-and-choose button visible. Existing session retained; no real sign-out or account changes."
+    },
     {
       "version": 22,
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_7067068eab588191bf7725489785221b",

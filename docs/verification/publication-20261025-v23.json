@@ -1,0 +1,37 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 23,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_f368679c1bec819189c64c6cd2fba9f2",
+  "reviewedGithubCommit": "1977ca2f920251b0999ca06b9ef8de61bde82baa",
+  "sitesCommit": "3c3f2205301b052b7650346b94b4ce35a5cd9cde",
+  "deploymentId": "appgdep_6ade18482d8881919954c406b9f99999",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T14:55:19.475346+00:00",
+  "environmentRevision": 6,
+  "audience": "public",
+  "artifactDigest": "sha256:5b23393a2e2af1b50a3b141063d095f058403a8fe88752a989ff8e65559dd490",
+  "mappedSourceVerified": true,
+  "dirty": false,
+  "cause": "The affected Chrome user was already authenticated; existing UI intentionally hid social buttons but did not explain why.",
+  "liveReadback": "Reloaded the exact affected Chrome /login tab. Signed-in heading, explanation, continue-account link and explicit sign-out-and-choose button visible. Existing session retained; no real sign-out or account changes.",
+  "tests": {
+    "frontend": 59,
+    "browser": 84,
+    "browserScope": "Relevant pilot/account suites across desktop/mobile Chromium, Firefox and WebKit, light/dark, keyboard and axe",
+    "typechecks": ["server", "tests", "e2e"],
+    "format": "passed",
+    "productionBuild": "passed",
+    "serverTests": "Not repeated: no server source/config changes"
+  },
+  "screenshots": {
+    "before": "../screenshots/changes/chrome-login-refresh/before.png",
+    "after": "../screenshots/changes/chrome-login-refresh/after.png"
+  },
+  "limitations": [
+    "Google and ChatGPT remain separate Niva identities",
+    "Apple remains disabled at user request",
+    "Live sign-out not repeated on user's existing Chrome account; both logout branches and failure recovery verified with synthetic browser cases"
+  ],
+  "recordScope": "Git-only post-publication receipt and images; no additional hosted release"
+}

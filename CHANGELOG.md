@@ -1,10 +1,14 @@
 # Changelog
 
-## Unreleased — Explain signed-in login and account switching
+<a id="version-23"></a>
+
+## Version 23 — Explain signed-in login and account switching
+
+Published 25 October 2026. [Receipt](docs/verification/publication-20261025-v23.json). Live readback on the exact affected Chrome tab confirms the new signed-in message and explicit switch action. The original session remains signed in. Google is active; Apple remains disabled. This post-publication Git record creates no additional hosted version.
 
 - The Google button was hidden because the user was already signed in, not because the production deployment was missing. Show an explicit signed-in heading, explain how to reveal login methods, and add an intentional sign-out-and-choose action. Preserve existing account data and separate provider identities; do not sign out automatically. Remove the misleading ChatGPT-only description for already authenticated social users.
 - Reuse the existing sign-out flow, retain the session after a failed request, report the failure, guard duplicate actions and focus Google after successful social sign-out. Browser regressions cover both provider branches, failure recovery, keyboard activation and accessibility.
-- Verification passed: 59 frontend unit tests, all three type checks, formatting, production build and 84 relevant browser checks across desktop/mobile Chromium, Firefox and WebKit, including both themes and axe scans. Server/auth configuration is unchanged. Actual affected Chrome page [Before](docs/screenshots/changes/chrome-login-refresh/before.png) · [After](docs/screenshots/changes/chrome-login-refresh/after.png). Live publication readback is recorded after deployment; the real Chrome session is not signed out during verification.
+- Verification passed: 59 frontend unit tests, all three type checks, formatting, production build and 84 relevant browser checks across desktop/mobile Chromium, Firefox and WebKit, including both themes and axe scans. Server/auth configuration is unchanged. Actual affected Chrome page [Before](docs/screenshots/changes/chrome-login-refresh/before.png) · [After](docs/screenshots/changes/chrome-login-refresh/after.png). Live publication readback passed; the real Chrome session was not signed out during verification.
 
 <a id="version-22"></a>
 
@@ -112,11 +116,11 @@ The original local repair pass performed no commit, push or deployment. The subs
 
 - Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–22**, not semantic package versions (`package.json` remains `0.1.0`). Version 22 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–23**, not semantic package versions (`package.json` remains `0.1.0`). Version 23 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://getnivajobs.com/). Public audience was authorized for version20 and remains public.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–22 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–23 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
@@ -124,6 +128,7 @@ Sites and GitHub have separate Git histories. `Sites source` identifies the exac
 
 | Version | Source date | Changes                                                                  |
 | ------- | ----------- | ------------------------------------------------------------------------ |
+| 23      | 2026-10-25  | [Explain signed-in login and account switching](#version-23)             |
 | 22      | 2026-10-25  | [Worker request-context repair and verified Google sign-in](#version-22) |
 | 21      | 2026-10-25  | [Expanded employer coverage and hosted Google sign-in](#version-21)      |
 | 20      | 2026-10-25  | [Custom domain and public launch](#version-20)                           |
