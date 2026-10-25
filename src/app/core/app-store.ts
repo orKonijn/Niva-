@@ -325,6 +325,9 @@ export class AppStore {
   readonly name = linkedSignal(() =>
     this.isAccount() ? this.account().profile.name : this.demo.name(),
   );
+  readonly displayName = computed(
+    () => this.name().trim() || this.session.user()?.name.trim() || '',
+  );
   readonly resumeName = this.demo.resumeName;
   readonly notice = computed(
     () => this.accountNotice() || (this.isAccount() ? '' : this.demo.notice()),

@@ -130,6 +130,9 @@ describe('hosted OAuth using the actual Better Auth D1 adapter', () => {
       )
       .run('synthetic-google-user', 'Synthetic', 'synthetic@example.invalid', 1, now, now);
     sqlite
+      .prepare('UPDATE user SET image=? WHERE id=?')
+      .run('https://lh3.googleusercontent.com/synthetic-profile', 'synthetic-google-user');
+    sqlite
       .prepare(
         'INSERT INTO session(id,expiresAt,token,createdAt,updatedAt,userId) VALUES(?,?,?,?,?,?)',
       )
@@ -162,6 +165,8 @@ describe('hosted OAuth using the actual Better Auth D1 adapter', () => {
       id: 'oauth:synthetic-google-user',
       authMethod: 'social',
       emailVerified: true,
+      name: 'Synthetic',
+      image: 'https://lh3.googleusercontent.com/synthetic-profile',
     });
     const own = await app.request('https://niva.example/api/account/state', { headers });
     expect(own.status).toBe(200);

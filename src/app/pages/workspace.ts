@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ElementRef, HostListener, viewChild } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -13,6 +13,26 @@ import { AppStore } from '../core/app-store';
 })
 export class Workspace {
   readonly store = inject(AppStore);
+  readonly failedPhoto = signal('');
+  readonly photoKey = computed(() =>
+    JSON.stringify([this.store.session.userId(), this.store.session.user()?.image]),
+  );
+  readonly photo = computed(() => {
+    if (this.failedPhoto() === this.photoKey()) return '';
+    try {
+      const url = new URL(this.store.session.user()?.image ?? '');
+      return url.protocol === 'https:' &&
+        !url.username &&
+        !url.password &&
+        !url.port &&
+        (url.hostname === 'googleusercontent.com' ||
+          url.hostname.endsWith('.googleusercontent.com'))
+        ? url.href
+        : '';
+    } catch {
+      return '';
+    }
+  });
   readonly menu = signal(false);
   readonly drawer = viewChild.required<ElementRef<HTMLDialogElement>>('drawer');
   private trigger: HTMLElement | null = null;

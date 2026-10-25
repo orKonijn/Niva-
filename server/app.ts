@@ -91,6 +91,7 @@ export function createBackend(database: DatabaseSync, options: AuthOptions) {
             id: session.user.id,
             email: session.user.email,
             name: session.user.name,
+            image: session.user.image ?? null,
             emailVerified: session.user.emailVerified,
           }
         : null,

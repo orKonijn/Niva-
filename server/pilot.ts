@@ -120,6 +120,7 @@ export function createPilot(
           id: 'oauth:' + session.user.id,
           email: session.user.email,
           name: session.user.name,
+          image: session.user.image ?? null,
           emailVerified: true,
           authMethod: 'social' as const,
         }

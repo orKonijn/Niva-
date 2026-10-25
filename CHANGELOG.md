@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Personalize the dashboard greeting with the signed-in name when the editable profile name is blank. Preserve the chosen profile name when set. Show the Google sign-in profile photo in the header, with a name initial when the image is absent, untrusted or fails to load. Keep the editable profile independent from provider details.
+- Carry the existing authentication image through local and hosted session responses. Permit only HTTPS Google-hosted profile images in the avatar and allow those hosts in the image CSP; send no referrer. No Gmail mailbox permission or new OAuth scope is required. ChatGPT sessions without a photo keep the initial.
+- Verification: 59 frontend tests, 100 server tests, Worker concurrency and provenance checks, all three type checks, formatting, production build and 28 relevant desktop/mobile browser checks. Synthetic name/photo fixtures cover both themes, profile-name precedence, absent/untrusted photos and failed image loading. Live Google photo availability remains dependent on the provider account.
+- Genuine paired images, same route, viewport, theme and synthetic account: desktop [light before](docs/screenshots/changes/account-identity-desktop-light/before.png) · [after](docs/screenshots/changes/account-identity-desktop-light/after.png), [dark before](docs/screenshots/changes/account-identity-desktop-dark/before.png) · [after](docs/screenshots/changes/account-identity-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/account-identity-mobile-light/before.png) · [after](docs/screenshots/changes/account-identity-mobile-light/after.png), [dark before](docs/screenshots/changes/account-identity-mobile-dark/before.png) · [after](docs/screenshots/changes/account-identity-mobile-dark/after.png).
+
 <a id="version-23"></a>
 
 ## Version 23 — Explain signed-in login and account switching

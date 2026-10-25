@@ -99,9 +99,24 @@
                 : 'סביבת הדגמה'
           }}</span
         ><span
-          class="user-avatar grid place-items-center w-[35px] h-[35px] text-purple rounded-[50%] text-[14px] max-[768px]:w-[31px] max-[768px]:h-[31px] max-[768px]:text-[12px]"
-          >{{ store.name().charAt(0) || 'נ' }}</span
+          class="user-avatar grid place-items-center shrink-0 overflow-hidden w-[35px] h-[35px] text-purple rounded-[50%] text-[14px] max-[768px]:w-[31px] max-[768px]:h-[31px] max-[768px]:text-[12px]"
+          role="img"
+          [attr.aria-label]="store.displayName() || 'הפרופיל שלי'"
         >
+          @if (photo()) {
+            <img
+              [src]="photo()"
+              alt=""
+              width="35"
+              height="35"
+              class="w-full h-full object-cover"
+              referrerpolicy="no-referrer"
+              (error)="failedPhoto.set(photoKey())"
+            />
+          } @else {
+            {{ store.displayName().charAt(0) || 'נ' }}
+          }
+        </span>
       </div>
     </header>
     <div class="demo-notice" role="region" aria-label="שמירה ופרטיות">

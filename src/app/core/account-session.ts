@@ -4,6 +4,7 @@ export interface AccountUser {
   name: string;
   email: string;
   emailVerified: boolean;
+  image?: string | null;
   authMethod?: 'sites' | 'social';
 }
 export interface AuthConfiguration {
