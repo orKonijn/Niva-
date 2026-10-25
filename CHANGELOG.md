@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — Modern UI polish and restrained motion
+
+- Refine the landing-page navigation, hero framing, section labels, step cards, FAQ controls and closing invitation. Carry the same surface depth, selected navigation, button feedback and focus treatment into the app. Reuse transparent mascot artwork in the hero and dashboard for consistent light/dark presentation.
+- Add short one-time section entrances, a slight step stagger and fine-pointer card lifts. Keep text opaque and content visible from the start. Honor reduced motion, avoid new animation loops, and disconnect observers after use and on navigation away.
+- Verification: 59 frontend tests, both test type checks, 16 relevant desktop/mobile browser checks, WCAG axe scans, theme/image regressions, navigation, overflow and reduced motion. Production build validates the final source. [Design and complete paired evidence](docs/ui-polish.md).
+- Home desktop dark [before](docs/screenshots/changes/ui-polish-home-desktop-dark/before.png) · [after](docs/screenshots/changes/ui-polish-home-desktop-dark/after.png); mobile light [before](docs/screenshots/changes/ui-polish-home-mobile-light/before.png) · [after](docs/screenshots/changes/ui-polish-home-mobile-light/after.png). The evidence index includes all four routes in both themes and viewports.
+
 ## Unreleased — Theme-aware mascot artwork
 
 - Replace the baked pale-blue backgrounds in the three step illustrations and closing wave with transparent cutouts. Use the theme canvas color and a subtle shared blue glow for a continuous frame in light and dark modes. Remove the mismatched vertical side bands while preserving the full character and props.
