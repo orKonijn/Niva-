@@ -1,6 +1,16 @@
 # Changelog
 
-## Unreleased — Expanded employer coverage and hosted Google sign-in
+## Unreleased — Worker request-context repair
+
+- Live Google login completed, but account refresh exposed a Worker-only concurrency error: the server bundle selected Better Auth's browser AsyncLocalStorage fallback. Resolve package exports with the `workerd` condition so the native server request context is used. Preserve the provider, signing secret, cookies and account records.
+- Add `npm run test:worker` to CI. It bundles the actual hosted auth entry with the production options, checks the selected dependency implementation and verifies 40 overlapping session reads for two synthetic identities. The regression and production build pass. The client artifact digest is unchanged from version21, so the passing 292-case browser suite is retained rather than rerun for this server-build-only correction.
+- Non-UI evidence from the previous published and corrected build configurations: [Before](docs/screenshots/changes/worker-runtime-context/before.png) · [After](docs/screenshots/changes/worker-runtime-context/after.png). Final live session/save/sign-out readback is recorded after this repair is deployed.
+
+<a id="version-21"></a>
+
+## Version 21 — Expanded employer coverage and hosted Google sign-in
+
+Published 25 October 2026. GitHub source `0326a6b0157381e5e5542c4d1cd66d6fa0a16000`; Sites source `e1c39829129bdbb5103c526637a1b43ea3dc601a`. Deployment succeeded. Live readback found 188 jobs across 17 healthy sources and completed Google OAuth, then exposed the Worker concurrency defect described above. Publication is not a claim that the defect was absent.
 
 - Expand the source registry from two to 17 official employer ATS boards. A real provider check returned 188 Israeli listings; this is a point-in-time local ingestion result, not a claim about the deployed catalog before publication. Preserve employer attribution, original links, existing IDs/saves, bounded snapshots and failure/backoff behavior. Match multi-office listings against either explicit office district. Never infer worldwide remote eligibility.
 - Refresh due sources during site traffic with durable leases, without running private-record cleanup. No unattended cron is claimed. Show the actual source names/times in a compact disclosure, clarify pagination/map coverage and remove the obsolete two-employer descriptions.

@@ -17,6 +17,7 @@
     "db:migrate": "tsx server/migrate.ts",
     "api": "tsx server/index.ts",
     "test:server": "vitest run --config vitest.server.config.ts",
+    "test:worker": "node --test scripts/worker-runtime.test.mjs",
     "typecheck:server": "tsc --project tsconfig.server.json --noEmit",
     "typecheck:e2e": "tsc --project tsconfig.e2e.json --noEmit",
     "db:generate": "drizzle-kit generate",

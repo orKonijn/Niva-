@@ -1,6 +1,7 @@
 import { build } from 'esbuild';
 import { readdir, readFile, mkdir, writeFile, copyFile, cp } from 'node:fs/promises';
 import { extname } from 'node:path';
+import { workerRuntimeOptions } from './worker-build-options.mjs';
 const types = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -33,10 +34,8 @@ await build({
   outfile: 'dist/server/index.js',
   bundle: true,
   format: 'esm',
-  platform: 'browser',
-  target: 'es2022',
+  ...workerRuntimeOptions,
   minify: true,
-  external: ['node:*'],
   plugins: [
     {
       name: 'niva-assets',

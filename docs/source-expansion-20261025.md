@@ -30,6 +30,14 @@ Genuine image comparisons: catalog [before](screenshots/changes/source-expansion
 
 ## Maintenance
 
+### Worker runtime follow-up
+
+Version21 deployed successfully and its real Google OAuth round trip completed, but later account refreshes intermittently failed. Runtime logs mapped the failure to Better Auth's missing request-state context. The Worker build used the package's browser export, whose AsyncLocalStorage fallback does not preserve overlapping asynchronous contexts. The correction explicitly selects the `workerd` export and retains Workers' Node compatibility. It does not change application authorization rules or signing credentials.
+
+The new `npm run test:worker` checks the actual bundled dependency graph and 40 overlapping session reads for two synthetic identities, and runs in CI. The corrected production build passes; its client artifact digest remains `55301de06e715889d6266a8f89e04b532738df6bb83bd754515882b546540988`, identical to the client that passed all 292 browser cases. Those unchanged-client results are retained. Real Cloudflare session/save/sign-out checks follow deployment of the correction. [Build configuration before](screenshots/changes/worker-runtime-context/before.png) / [after](screenshots/changes/worker-runtime-context/after.png). These are actual source views, not simulated successful product screens.
+
+The attempted runtime disable removed the public client-ID entry from the environment revision, but a subsequent public configuration probe still reported Google enabled after redeployment. The same approved client ID is restored for the corrected release. Verify actual runtime readback when removing environment entries; metadata removal alone must not be treated as a confirmed provider shutdown. The existing client secret and session signing secret are preserved.
+
 Review source health and final pagination totals after releases. A provider failure retains its last successful catalog and reports stale/error state; it must not deactivate listings from an incomplete snapshot. Request-driven refreshing stops without traffic; provider-native scheduling remains separate work. The existing cleanup/restore/alerting limitations still apply.
 
 Keep Google redirect/origin restrictions exact. Rotate secrets through the hosting manager, preserving existing entries; rotating the session signing secret invalidates existing social sessions. Use separate OAuth clients for test environments. Do not merge identities by email. Roll back application releases through the previous saved Sites version; the additive tables can remain without deleting user data. Review Apple signing/token lifetime and provider requirements before later activation. No employer submission is enabled.
