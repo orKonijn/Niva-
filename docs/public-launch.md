@@ -1,5 +1,7 @@
 # Public launch — 25 October 2026
 
+Current follow-up: **version22** supersedes the original version20 feature status below. Google is live and verified with one account; Apple remains disabled at the user’s request. Coverage is now 17 healthy employers / 188 Israeli jobs at observation. Source refresh is request-driven, with no unattended cron claimed. [Current matrix](current-status.md), [release receipt](verification/publication-20261025-v22.json), [real Google verification](verification/google-live-20261025.json). The domain/cost evidence and original launch observations below remain historical.
+
 ## Domain and costs
 
 `getnivajobs.com` was approved for one year at Porkbun, capped at US$11.08 with no paid add-ons. The registrar account shows registration through **2027-10-25**. Automatic renewal was initially enabled; it was disabled and the account now explicitly shows **Auto renew is off**. The quoted renewal price was US$11.08/year, not a guaranteed future price. No domain renewal or new recurring service was approved. Manual renewal requires a later decision before expiration. The final payment receipt remains in the owner's registrar account; registration is verified, the charged amount is not independently audited.
@@ -18,7 +20,7 @@ Canonical configuration uses `https://getnivajobs.com`; only the explicitly conf
 - Add protected `POST /api/ingestion/refresh`, which refreshes public job sources without running retention cleanup. It reports source failures rather than claiming unconditional success. Keep cleanup and combined maintenance separate.
 - Store a new ingestion bearer secret in the hosting secret manager, preserving the existing import secret. No secret belongs in Git, screenshots, browser bundles or schedule prompts.
 
-## Live verification and feature status
+## Original version20 live verification and feature status
 
 Published as **Sites version20** on 25 October 2026. GitHub source: `4a089edbb994750966d3ef46a61d0bd236cf9b0d`; Sites source: `057bd6a2d5eba554edf234c26e464104073a4045`. [Deployment receipt](verification/publication-20261025-v20.json). The later release-record commits change documentation only. A follow-up redeployment of the same version20 through the public deployment operation was followed by a successful real ChatGPT sign-in; no new application version was created. [Live account verification](verification/live-account-20261025.json).
 

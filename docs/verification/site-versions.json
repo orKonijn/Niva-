@@ -6,9 +6,33 @@
     "Sites saved version numbers, not semantic package versions.",
     "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
     "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
-    "Sites and GitHub have separate Git lineages; v16–v20 have verified reviewed-source mappings in build metadata."
+    "Sites and GitHub have separate Git lineages; v16–v22 have verified reviewed-source mappings in build metadata."
   ],
   "versions": [
+    {
+      "version": 22,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_7067068eab588191bf7725489785221b",
+      "sitesCommit": "18402c958defc9d562d5b17910dd696ae7871916",
+      "reviewedGithubCommit": "62a02c8771891a0a6ec20dd8b2f9d25bb5d6ca29",
+      "deploymentId": "appgdep_6ade128c5d6081919c3cc200ea21fd0f",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T14:30:50.401998+00:00",
+      "artifactDigest": "sha256:2eac62825fe5a1b14d4cbb5dfcdc958ecbf417c7f13692bd25379ba13500b173",
+      "mappedSourceVerified": true,
+      "followUp": "188 real jobs, 17 healthy sources; real Google save/reload/two-tab/sign-out/sign-in verified; temporary save removed and System theme restored"
+    },
+    {
+      "version": 21,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_6cabacd33a948191bb1bdddbd9f25d96",
+      "sitesCommit": "e1c39829129bdbb5103c526637a1b43ea3dc601a",
+      "reviewedGithubCommit": "0326a6b0157381e5e5542c4d1cd66d6fa0a16000",
+      "deploymentId": "appgdep_6ade0ca3704c8191a91de85296364bd0",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T14:05:37.859933+00:00",
+      "artifactDigest": "sha256:d5909aed72dad62087fcce447c92b38168d5f9088dfb609a5e1d6314f3acd1d9",
+      "mappedSourceVerified": true,
+      "followUp": "188 real jobs, 17 healthy sources, real Google OAuth completed; intermittent Worker request-context failure discovered and corrected in version22"
+    },
     {
       "version": 20,
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",

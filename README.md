@@ -1,8 +1,8 @@
 # Niva
 
-See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 20** at [getnivajobs.com](https://getnivajobs.com), with public job browsing, managed HTTPS, canonical redirects and deployment hardening. See the [launch status and maintenance runbook](docs/public-launch.md) for live evidence and unavailable integrations. Git-only documentation updates do not create a new hosted version.
+See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 22** at [getnivajobs.com](https://getnivajobs.com), with 17 employer sources (188 live Israeli jobs at verification), Google sign-in, managed HTTPS and deployment hardening. See the [source expansion and sign-in report](docs/source-expansion-20261025.md). See the [launch status and maintenance runbook](docs/public-launch.md) for live evidence and unavailable integrations. Git-only documentation updates do not create a new hosted version.
 
-A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Google/Apple/email methods require their own configuration; hosted sign-in currently uses ChatGPT.
+A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Hosted sign-in supports Google and ChatGPT as separate accounts; use the original method to access existing records. Apple remains disabled at the user’s request, and hosted email delivery is inactive.
 
 The [current capability and operational matrix](docs/current-status.md) is authoritative. Historical milestone guides do not establish current deployment status. See the [pilot walkthrough, architecture, source accuracy and verification](docs/pilot.md). The earlier [account guide](docs/accounts-map.md) documents local SMTP/OAuth configuration and the original implementation milestone.
 
@@ -39,13 +39,14 @@ The API command serves an existing build and database. Unconfigured Google, Appl
 - Lazy-loaded standalone components, Angular signals, strict templates and self-hosted fonts.
 - Unit and browser journey tests, automated axe accessibility checks, desktop/mobile screenshots and GitHub Actions validation.
 
-**Data boundaries:** fictional sample jobs, approvals and device CV selection are explicitly demonstrations. Real discovery reads two public employer boards. Signed-in resume text/versions are private server records; PDF/DOCX processing and AI sending require separately configured services and consent and remain disabled without them. No employer submissions or payments are implemented. Device reset and account-data deletion are separate; deleting account data retains the sign-in identity.
+**Data boundaries:** fictional sample jobs, approvals and device CV selection are explicitly demonstrations. Real discovery reads 17 allowlisted public employer boards; it is limited coverage, with changing vacancy counts. Signed-in resume text/versions are private server records; PDF/DOCX processing and AI sending require separately configured services and consent and remain disabled without them. No employer submissions or payments are implemented. Device reset and account-data deletion are separate; deleting account data retains the sign-in identity.
 
 ## Checks
 
 ```sh
 npm test
 npm run test:server
+npm run test:worker
 npm run typecheck:tests
 npm run typecheck:server
 npm run typecheck:e2e

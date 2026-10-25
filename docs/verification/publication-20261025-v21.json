@@ -1,0 +1,41 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 21,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_6cabacd33a948191bb1bdddbd9f25d96",
+  "reviewedGithubCommit": "0326a6b0157381e5e5542c4d1cd66d6fa0a16000",
+  "sitesCommit": "e1c39829129bdbb5103c526637a1b43ea3dc601a",
+  "deploymentId": "appgdep_6ade0ca3704c8191a91de85296364bd0",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T14:05:37.859933+00:00",
+  "environmentRevision": 4,
+  "audience": "public",
+  "artifactDigest": "sha256:d5909aed72dad62087fcce447c92b38168d5f9088dfb609a5e1d6314f3acd1d9",
+  "mappedSourceVerified": true,
+  "dirty": false,
+  "liveEvidence": "expanded-live-v21-20261025.json",
+  "result": "188 real jobs, 17 healthy sources, real Google OAuth completed; intermittent Worker request-context failure discovered and corrected in version22",
+  "tests": {
+    "frontend": 59,
+    "server": 100,
+    "provenance": 1,
+    "browser": 292,
+    "worker": "added in version22",
+    "typechecks": ["server", "tests", "e2e"],
+    "format": "passed",
+    "productionBuild": "passed",
+    "browserScope": "desktop/mobile Chromium, Firefox, WebKit; unchanged client results retained for server-build-only version22"
+  },
+  "notActivated": [
+    "Apple (user deferred paid enrollment)",
+    "email/SMTP",
+    "AI provider",
+    "scanner/uploads",
+    "hosted unattended scheduling"
+  ],
+  "limitations": [
+    "one live Google identity in one browser; independent live users and physical cross-device persistence unverified",
+    "provider backup/restore, external alerts unverified"
+  ],
+  "recordScope": "Post-deployment Git-only receipts and images; no additional hosted release"
+}

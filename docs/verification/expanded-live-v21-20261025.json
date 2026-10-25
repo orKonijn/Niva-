@@ -1,0 +1,220 @@
+{
+  "observedAt": "2026-10-25T14:06:59.657Z",
+  "config": {
+    "accounts": true,
+    "discovery": true,
+    "platform": "sites",
+    "realJobs": true,
+    "email": false,
+    "google": true,
+    "apple": false
+  },
+  "health": {
+    "service": "niva",
+    "status": "ok",
+    "checks": {
+      "database": "ok",
+      "schema": "ok"
+    }
+  },
+  "metadata": {
+    "repository": "orKonijn/Niva-",
+    "sourceCommit": "e1c39829129bdbb5103c526637a1b43ea3dc601a",
+    "githubCommit": "0326a6b0157381e5e5542c4d1cd66d6fa0a16000",
+    "sitesCommit": "e1c39829129bdbb5103c526637a1b43ea3dc601a",
+    "sourceTree": "534e7de28ebc3f6df5868f305a29dae9ae0008f9",
+    "sourceContentDigest": "321982143d0a309d42230a1cd1558001ce7ce77de8f0842c7e03869afa1386f5",
+    "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+    "clientArtifactDigest": "55301de06e715889d6266a8f89e04b532738df6bb83bd754515882b546540988",
+    "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+    "builtAt": "2026-10-25T14:04:56.475Z",
+    "dirty": false,
+    "mappedSourceVerified": true,
+    "provenanceStatus": "mapped-reviewed-source"
+  },
+  "pages": 4,
+  "total": 188,
+  "sourceHealth": [
+    {
+      "id": "greenhouse-appsflyer",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792937749779,
+      "name": "AppsFlyer / Greenhouse"
+    },
+    {
+      "id": "greenhouse-datadog",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Datadog / Greenhouse"
+    },
+    {
+      "id": "greenhouse-elastic",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Elastic / Greenhouse"
+    },
+    {
+      "id": "greenhouse-forter",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Forter / Greenhouse"
+    },
+    {
+      "id": "greenhouse-gongio",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Gong / Greenhouse"
+    },
+    {
+      "id": "greenhouse-jfrog",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "JFrog / Greenhouse"
+    },
+    {
+      "id": "greenhouse-optimove",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Optimove / Greenhouse"
+    },
+    {
+      "id": "greenhouse-orcasecurity",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Orca Security / Greenhouse"
+    },
+    {
+      "id": "greenhouse-pendo",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Pendo / Greenhouse"
+    },
+    {
+      "id": "greenhouse-riskified",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Riskified / Greenhouse"
+    },
+    {
+      "id": "greenhouse-similarweb",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Similarweb / Greenhouse"
+    },
+    {
+      "id": "greenhouse-taboola",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Taboola / Greenhouse"
+    },
+    {
+      "id": "greenhouse-torq",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Torq / Greenhouse"
+    },
+    {
+      "id": "greenhouse-via",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Via / Greenhouse"
+    },
+    {
+      "id": "greenhouse-wizinc",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Wiz / Greenhouse"
+    },
+    {
+      "id": "greenhouse-yotpo",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "Yotpo / Greenhouse"
+    },
+    {
+      "id": "lever-walkme",
+      "checked_at": "2026-10-25T14:05:49.779Z",
+      "error": null,
+      "next_at": 1792938049779,
+      "name": "WalkMe / Lever"
+    }
+  ],
+  "sourceCounts": {
+    "AppsFlyer": 22,
+    "Datadog": 3,
+    "Elastic": 2,
+    "Forter": 5,
+    "Gong": 13,
+    "JFrog": 20,
+    "Optimove": 2,
+    "Orca Security": 2,
+    "Pendo": 4,
+    "Riskified": 12,
+    "Similarweb": 31,
+    "Taboola": 26,
+    "Torq": 3,
+    "Via": 9,
+    "Wiz": 23,
+    "Yotpo": 6,
+    "WalkMe": 5
+  },
+  "boundaries": {
+    "/api/account/state": 401,
+    "/api/career/snapshot": 401,
+    "spoofedIdentity": "anonymous",
+    "crossOriginSignIn": 403
+  },
+  "filterChecks": [
+    {
+      "filters": {
+        "category": "engineering"
+      },
+      "total": 57,
+      "loaded": 50,
+      "valid": true
+    },
+    {
+      "filters": {
+        "district": "central"
+      },
+      "total": 19,
+      "loaded": 19,
+      "valid": true
+    },
+    {
+      "filters": {
+        "styles": "onsite,hybrid"
+      },
+      "total": 5,
+      "loaded": 5,
+      "valid": true
+    },
+    {
+      "filters": {
+        "district": "tel-aviv",
+        "category": "engineering",
+        "styles": "onsite,hybrid"
+      },
+      "total": 2,
+      "loaded": 2,
+      "valid": true
+    }
+  ],
+  "liveOAuth": "Separate browser verification required; public configuration is not a completed sign-in."
+}

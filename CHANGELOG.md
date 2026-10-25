@@ -1,10 +1,16 @@
 # Changelog
 
-## Unreleased — Worker request-context repair
+<a id="version-22"></a>
+
+## Version 22 — Worker request-context repair
+
+Published 25 October 2026. GitHub source `62a02c8771891a0a6ec20dd8b2f9d25bb5d6ca29`; Sites source `18402c958defc9d562d5b17910dd696ae7871916`. [Publication receipt](docs/verification/publication-20261025-v22.json). Live catalog: **188 real jobs, 17 healthy sources**. Google login, save/reload/two-tab persistence, sign-out and a second sign-in passed. Temporary save removed and original System theme restored. [Live evidence](docs/verification/google-live-20261025.json). Apple remains disabled at the user’s request; no paid enrollment was purchased. Google and ChatGPT retain separate accounts.
+
+This Git-only release record creates no additional hosted version. Document [Before](docs/screenshots/changes/publication-source-expansion-record/before.png) · [After](docs/screenshots/changes/publication-source-expansion-record/after.png).
 
 - Live Google login completed, but account refresh exposed a Worker-only concurrency error: the server bundle selected Better Auth's browser AsyncLocalStorage fallback. Resolve package exports with the `workerd` condition so the native server request context is used. Preserve the provider, signing secret, cookies and account records.
 - Add `npm run test:worker` to CI. It bundles the actual hosted auth entry with the production options, checks the selected dependency implementation and verifies 40 overlapping session reads for two synthetic identities. The regression and production build pass. The client artifact digest is unchanged from version21, so the passing 292-case browser suite is retained rather than rerun for this server-build-only correction.
-- Non-UI evidence from the previous published and corrected build configurations: [Before](docs/screenshots/changes/worker-runtime-context/before.png) · [After](docs/screenshots/changes/worker-runtime-context/after.png). Final live session/save/sign-out readback is recorded after this repair is deployed.
+- Non-UI evidence from the previous published and corrected build configurations: [Before](docs/screenshots/changes/worker-runtime-context/before.png) · [After](docs/screenshots/changes/worker-runtime-context/after.png). Final live session/save/sign-out readback passed on version22; [authenticated dashboard](docs/screenshots/changes/google-signin/live-google-account.png) and [temporary saved job](docs/screenshots/changes/google-signin/live-saved-job.png) exclude account details. One live Google identity in one browser was checked; independent live identities and physical cross-device checks remain unverified.
 
 <a id="version-21"></a>
 
@@ -15,9 +21,9 @@ Published 25 October 2026. GitHub source `0326a6b0157381e5e5542c4d1cd66d6fa0a160
 - Expand the source registry from two to 17 official employer ATS boards. A real provider check returned 188 Israeli listings; this is a point-in-time local ingestion result, not a claim about the deployed catalog before publication. Preserve employer attribution, original links, existing IDs/saves, bounded snapshots and failure/backoff behavior. Match multi-office listings against either explicit office district. Never infer worldwide remote eligibility.
 - Refresh due sources during site traffic with durable leases, without running private-record cleanup. No unattended cron is claimed. Show the actual source names/times in a compact disclosure, clarify pagination/map coverage and remove the obsolete two-employer descriptions.
 - Prepare hosted Google/Apple provider support using the existing Better Auth implementation with D1. Keep ChatGPT sign-in and existing owner IDs; use separate OAuth owner IDs, no implicit merging/linking, exact-origin checks, PKCE/state and secure cookies. Clear optional social sessions on sign-out. Append the generated additive auth migration and typed schema.
-- With explicit user approval, create the Niva Production Google project/client, accept Google's user-data policy, add live public branding URLs and publish the OAuth audience. Store credentials only in the hosting secret manager. Google login is not claimed live until the new application is deployed and its real round trip succeeds. Apple remains unavailable pending an eligible developer account/app and Services ID; no Apple membership, paid plan or recurring cost was purchased.
-- [Implementation and verification report](docs/source-expansion-20261025.md). Genuine catalog [Before](docs/screenshots/changes/source-expansion/before.png) · [After](docs/screenshots/changes/source-expansion/after.png), login [Before](docs/screenshots/changes/google-signin/before.png) · [After](docs/screenshots/changes/google-signin/after.png). After images and final results are recorded after verification.
-- Final local verification passed: 59 frontend, 100 server, 1 provenance and all 292 browser tests across desktop/mobile Chromium, Firefox and WebKit. All three type checks, formatting and the Angular/Worker production build passed. Focused D1/PKCE/session tests use controlled synthetic data; real Google OAuth still requires production readback.
+- With explicit user approval, create the Niva Production Google project/client, accept Google's user-data policy, add live public branding URLs and publish the OAuth audience. Store credentials only in the hosting secret manager. The real Google round trip completed; the later Worker reliability correction and final checks are recorded in version22. Apple remains unavailable pending an eligible developer account/app and Services ID; no Apple membership, paid plan or recurring cost was purchased.
+- [Implementation and verification report](docs/source-expansion-20261025.md). Genuine catalog [Before](docs/screenshots/changes/source-expansion/before.png) · [After](docs/screenshots/changes/source-expansion/after.png), login [Before](docs/screenshots/changes/google-signin/before.png) · [After](docs/screenshots/changes/google-signin/after.png). Images show the actual published before/after views.
+- Final local verification passed: 59 frontend, 100 server, 1 provenance and all 292 browser tests across desktop/mobile Chromium, Firefox and WebKit. All three type checks, formatting and the Angular/Worker production build passed. Focused D1/PKCE/session tests use controlled synthetic data; real Google OAuth readback is recorded in version22.
 
 ## 25 October 2026 — Live account verification follow-up
 
@@ -100,38 +106,40 @@ The original local repair pass performed no commit, push or deployment. The subs
 
 - Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–20**, not semantic package versions (`package.json` remains `0.1.0`). Version 20 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–22**, not semantic package versions (`package.json` remains `0.1.0`). Version 22 is the latest published release. This Git documentation update does not create a new hosted version.
 
-Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
+Live site: [Niva](https://getnivajobs.com/). Public audience was authorized for version20 and remains public.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–20 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–22 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
 ## Release index
 
-| Version | Source date | Changes                                                             |
-| ------- | ----------- | ------------------------------------------------------------------- |
-| 20      | 2026-10-25  | [Custom domain and public launch](#version-20)                      |
-| 19      | 2026-10-25  | [UI/UX review repairs](#version-19)                                 |
-| 18      | 2026-10-25  | [Job-card action layout](#version-18)                               |
-| 17      | 2026-10-25  | [Independent-review repairs](#version-17)                           |
-| 16      | 2026-10-24  | [Reliability, privacy and evidence repairs](#version-16)            |
-| 15      | 2026-10-24  | [Worker-compatible source retrieval](#version-15)                   |
-| 14      | 2026-10-24  | [Reliable feed bootstrap lifetime](#version-14)                     |
-| 13      | 2026-10-24  | [Career workspace and two-source discovery](#version-13)            |
-| 12      | 2026-10-24  | [Homepage aligned with the real account workflow](#version-12)      |
-| 11      | 2026-10-24  | [Real jobs and accounts become the normal experience](#version-11)  |
-| 10      | 2026-10-24  | [RTL district/category filter layout repair](#version-10)           |
-| 9       | 2026-10-24  | [Hosted stylesheet/CSP compatibility](#version-9)                   |
-| 8       | 2026-10-24  | [Hosted accounts and first real employer feed](#version-8)          |
-| 7       | 2026-10-24  | [Google and Apple brand icons](#version-7)                          |
-| 6       | 2026-10-24  | [Account/map frontend and honest static-hosting limits](#version-6) |
-| 5       | 2026-10-23  | [Compact tablet filters and release checks](#version-5)             |
-| 4       | 2026-10-23  | [Tailwind and shared component refactor](#version-4)                |
-| 3       | 2026-10-23  | [Theme icon beside the logo](#version-3)                            |
-| 2       | 2026-10-23  | [District preferences, multiple work styles and themes](#version-2) |
-| 1       | 2026-10-23  | [Initial Hebrew RTL frontend demo](#version-1)                      |
+| Version | Source date | Changes                                                                  |
+| ------- | ----------- | ------------------------------------------------------------------------ |
+| 22      | 2026-10-25  | [Worker request-context repair and verified Google sign-in](#version-22) |
+| 21      | 2026-10-25  | [Expanded employer coverage and hosted Google sign-in](#version-21)      |
+| 20      | 2026-10-25  | [Custom domain and public launch](#version-20)                           |
+| 19      | 2026-10-25  | [UI/UX review repairs](#version-19)                                      |
+| 18      | 2026-10-25  | [Job-card action layout](#version-18)                                    |
+| 17      | 2026-10-25  | [Independent-review repairs](#version-17)                                |
+| 16      | 2026-10-24  | [Reliability, privacy and evidence repairs](#version-16)                 |
+| 15      | 2026-10-24  | [Worker-compatible source retrieval](#version-15)                        |
+| 14      | 2026-10-24  | [Reliable feed bootstrap lifetime](#version-14)                          |
+| 13      | 2026-10-24  | [Career workspace and two-source discovery](#version-13)                 |
+| 12      | 2026-10-24  | [Homepage aligned with the real account workflow](#version-12)           |
+| 11      | 2026-10-24  | [Real jobs and accounts become the normal experience](#version-11)       |
+| 10      | 2026-10-24  | [RTL district/category filter layout repair](#version-10)                |
+| 9       | 2026-10-24  | [Hosted stylesheet/CSP compatibility](#version-9)                        |
+| 8       | 2026-10-24  | [Hosted accounts and first real employer feed](#version-8)               |
+| 7       | 2026-10-24  | [Google and Apple brand icons](#version-7)                               |
+| 6       | 2026-10-24  | [Account/map frontend and honest static-hosting limits](#version-6)      |
+| 5       | 2026-10-23  | [Compact tablet filters and release checks](#version-5)                  |
+| 4       | 2026-10-23  | [Tailwind and shared component refactor](#version-4)                     |
+| 3       | 2026-10-23  | [Theme icon beside the logo](#version-3)                                 |
+| 2       | 2026-10-23  | [District preferences, multiple work styles and themes](#version-2)      |
+| 1       | 2026-10-23  | [Initial Hebrew RTL frontend demo](#version-1)                           |
 
 <a id="version-16"></a>
 

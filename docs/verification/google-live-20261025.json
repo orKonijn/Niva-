@@ -1,0 +1,38 @@
+{
+  "observedOn": "2026-10-25",
+  "version": 22,
+  "canonicalUrl": "https://getnivajobs.com",
+  "google": true,
+  "apple": false,
+  "liveIdentityScope": "One real Google account, same browser and two tabs",
+  "completed": [
+    "Google authorization and approved basic identity consent",
+    "Authenticated account identifies Google as actual provider",
+    "Saved one temporary job; persisted after reload, second tab and corrected deployment",
+    "Removed only temporary save; verified original zero saves",
+    "Settled Dark theme persisted after reload; restored original System preference",
+    "Real sign-out; /account redirected to login",
+    "Second real Google sign-in completed"
+  ],
+  "privacy": "No email, identity ID, cookies, codes or tokens recorded",
+  "preserved": "Existing accounts, profiles, approvals, pause state, exclusions and saved jobs; no implicit account linking",
+  "syntheticWorkerRegression": {
+    "concurrentRequests": 40,
+    "identities": 2,
+    "result": "passed"
+  },
+  "postDeploymentLogs": {
+    "scope": "Entries at or after version22 deployment in bounded observation window",
+    "errorLevelEntries": 0,
+    "canceledNavigationRequests": 6
+  },
+  "appleDecision": "Free developer agreement approved; user deferred paid enrollment and requested Apple remain disabled. No payment or paid membership.",
+  "limitations": [
+    "Independent live identities and physical cross-device checks unverified",
+    "No unattended schedule, SMTP, AI, scanner or backup restoration verified"
+  ],
+  "screenshots": [
+    "../screenshots/changes/google-signin/live-google-account.png",
+    "../screenshots/changes/google-signin/live-saved-job.png"
+  ]
+}
