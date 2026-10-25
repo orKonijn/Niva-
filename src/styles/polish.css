@@ -1,0 +1,251 @@
+@layer components {
+  .marketing {
+    background: radial-gradient(ellipse at 12% 4%, var(--pale), transparent 32%), var(--surface);
+  }
+  .site-header {
+    border-bottom-color: color-mix(in srgb, var(--line) 65%, transparent);
+  }
+  .site-header nav {
+    padding: 7px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+  }
+  .site-header nav a {
+    position: relative;
+    padding-block: 7px;
+  }
+  .site-header nav a::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 1px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  .site-header nav a:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .marketing .section-kicker {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--pale);
+  }
+  .marketing .section-kicker::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-inline-end: 6px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .section-heading .section-kicker,
+  .final-cta > .section-kicker {
+    margin-inline: auto;
+  }
+  .hero h1 {
+    line-height: 1.13;
+  }
+  .hero h1 span {
+    text-shadow: 0 8px 35px rgb(74 122 235 / 12%);
+  }
+  .hero-description {
+    text-wrap: pretty;
+  }
+  .mascot-frame {
+    border-radius: 32px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 50% 80%, rgb(74 122 235 / 20%), transparent 68%), var(--canvas);
+    box-shadow: 0 28px 64px -40px rgb(36 90 221 / 45%);
+  }
+  .mascot-frame img {
+    object-fit: contain;
+    transform: scale(1.08);
+  }
+  .orbit {
+    opacity: 0.55;
+  }
+  .floating-card {
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    box-shadow: 0 14px 36px -14px rgb(9 23 54 / 24%);
+  }
+  .promise-strip {
+    background: color-mix(in srgb, var(--canvas) 65%, var(--surface));
+  }
+  .step-card {
+    background: linear-gradient(
+      160deg,
+      var(--surface),
+      color-mix(in srgb, var(--pale) 32%, var(--surface))
+    );
+    box-shadow: 0 8px 30px -22px rgb(9 23 54 / 18%);
+  }
+  .step-index {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 11px;
+  }
+  .step-card h3 {
+    font-size: 22px;
+  }
+  .step-card p {
+    min-height: 72px;
+  }
+  .step-mascot {
+    border-color: color-mix(in srgb, var(--line) 60%, transparent);
+  }
+  .preview-window {
+    transform: rotate(-1deg);
+    box-shadow: 0 28px 70px -38px rgb(9 23 54 / 30%);
+  }
+  .faq-list details[open] {
+    border-color: var(--blue);
+    background: var(--canvas);
+  }
+  .faq-list summary {
+    min-height: 68px;
+  }
+  .faq-list summary span {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    background: var(--pale);
+    border-radius: 50%;
+  }
+  .final-cta {
+    background:
+      radial-gradient(ellipse at 10% 100%, rgb(74 122 235 / 14%), transparent 50%), var(--pale);
+    box-shadow: 0 20px 55px -42px rgb(36 90 221 / 30%);
+  }
+  .button,
+  .account-button {
+    box-shadow: 0 3px 8px -6px rgb(9 23 54 / 25%);
+  }
+  .button:not(.button-outline):not(:disabled),
+  .account-primary:not(:disabled) {
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 6%), transparent 70%);
+  }
+  .app-sidebar nav > a.active {
+    background: linear-gradient(
+      100deg,
+      var(--pale),
+      color-mix(in srgb, var(--pale) 55%, var(--surface))
+    );
+    box-shadow: inset -3px 0 var(--blue);
+  }
+  .stat-card,
+  .job-card,
+  .account-panel {
+    box-shadow: 0 6px 24px -20px rgb(9 23 54 / 24%);
+  }
+  .welcome-panel img {
+    object-fit: contain;
+    mix-blend-mode: normal;
+    border-radius: 0;
+  }
+  input:not([type='checkbox']):not([type='file']):focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 10%, transparent);
+  }
+  @media (max-width: 767px) {
+    .site-header nav.is-open {
+      border-radius: 18px;
+      background: var(--surface);
+    }
+    .mascot-frame {
+      border-radius: 26px;
+    }
+    .step-card p {
+      min-height: auto;
+    }
+    .preview-window {
+      transform: none;
+    }
+    .faq-list summary {
+      min-height: 64px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .button,
+    .account-button,
+    .icon-button,
+    .stat-card,
+    .job-card,
+    .step-card,
+    .app-sidebar nav > a,
+    .faq-list details,
+    .faq-list summary span {
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease;
+    }
+    .button:active:not(:disabled),
+    .account-button:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+    .site-header nav a::after {
+      transition: transform 180ms ease;
+    }
+    .niva-revealed {
+      animation: niva-rise 550ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    }
+    .steps-grid.niva-revealed {
+      animation: none;
+    }
+    .steps-grid.niva-revealed > .step-card {
+      animation: niva-rise 550ms cubic-bezier(0.2, 0.7, 0.3, 1);
+    }
+    .steps-grid.niva-revealed > .step-card:nth-child(2) {
+      animation-delay: 70ms;
+    }
+    .steps-grid.niva-revealed > .step-card:nth-child(3) {
+      animation-delay: 140ms;
+    }
+    .faq-list details[open] p {
+      animation: niva-rise 180ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .step-card:hover,
+      .stat-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--blue);
+        box-shadow: 0 16px 32px -26px rgb(36 90 221 / 45%);
+      }
+      .job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px -24px rgb(36 90 221 / 40%);
+      }
+      .site-header nav a:hover::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+@keyframes niva-rise {
+  from {
+    translate: 0 12px;
+  }
+  to {
+    translate: 0 0;
+  }
+}

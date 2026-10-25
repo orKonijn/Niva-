@@ -5,8 +5,9 @@ import { Icon } from '../shared/icon';
 import { CookiePreferences } from '../core/cookie-preferences';
 import { AccountSession } from '../core/account-session';
 import { AppStore } from '../core/app-store';
+import { Reveal } from '../shared/reveal';
 @Component({
-  imports: [RouterLink, Brand, Icon],
+  imports: [RouterLink, Brand, Icon, Reveal],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

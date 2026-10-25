@@ -11,6 +11,7 @@
 @import './styles/marketing.css';
 @import './styles/mascot.css';
 @import './styles/accounts.css';
+@import './styles/polish.css';
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme inline {
   --font-sans: Heebo, Arial, sans-serif;
