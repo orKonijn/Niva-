@@ -1,7 +1,10 @@
 import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 import type { CareerDb } from './career-db';
-import { normalizeFeed, plainText, classify } from './job-feed';
+import { plainText, classify } from './job-feed';
+import { SOURCES } from './job-sources';
+import { normalizeGreenhouse } from './greenhouse-source';
+export { SOURCES } from './job-sources';
 import type { Job } from '../src/app/core/models/job';
 import {
   defaultPreferences,
@@ -9,20 +12,6 @@ import {
   type Preferences,
 } from '../src/app/core/preferences';
 
-export const SOURCES = [
-  {
-    id: 'greenhouse-appsflyer',
-    name: 'AppsFlyer / Greenhouse',
-    url: 'https://boards-api.greenhouse.io/v1/boards/appsflyer/jobs?content=true',
-    cadence: 600_000,
-  },
-  {
-    id: 'lever-walkme',
-    name: 'WalkMe / Lever',
-    url: 'https://api.lever.co/v0/postings/walkme?mode=json&limit=100',
-    cadence: 900_000,
-  },
-] as const;
 export const versionOf = (value: unknown) =>
   createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 24);
 const str = (v: unknown) => (typeof v === 'string' ? v : '');
@@ -194,24 +183,9 @@ export async function ingest(db: CareerDb, now = Date.now()): Promise<void> {
       }
       const at = new Date(now).toISOString();
       const payload = await boundedJson(response);
-      if (source.id === 'greenhouse-appsflyer') {
-        const rows = (payload as { jobs?: unknown[] })?.jobs;
-        if (
-          !Array.isArray(rows) ||
-          rows.length > 1000 ||
-          rows.some(
-            (row) =>
-              !row ||
-              typeof row !== 'object' ||
-              !Number.isSafeInteger((row as { id: unknown }).id) ||
-              typeof (row as { title: unknown }).title !== 'string',
-          )
-        )
-          throw new Error('INCOMPLETE_SOURCE');
-      }
       const jobs =
-        source.id === 'greenhouse-appsflyer'
-          ? normalizeFeed(payload, at)
+        source.provider === 'greenhouse'
+          ? normalizeGreenhouse(payload, source, at)
           : normalizeLever(payload, at);
       const rows: { sql: string; args: (string | number | null)[] }[] = [
         { sql: 'UPDATE niva_jobs SET active=0 WHERE source_id=?', args: [source.id] },
@@ -339,17 +313,25 @@ export async function discoveryPage(
   const add = (sql: string, value: string) => {
     clauses.push(sql);
     args.push(value);
+    if (sql.includes('json_each')) args.push(value);
   };
   if (query.saved !== 'true' && preferences.role !== 'all') add('category=?', preferences.role);
   if (query.saved !== 'true' && preferences.district !== 'all')
-    add('district=?', preferences.district);
+    add(
+      "(district=? OR EXISTS (SELECT 1 FROM json_each(niva_jobs.data,'$.offices') WHERE json_extract(value,'$.district')=?))",
+      preferences.district,
+    );
   const screen = migratePreferences({
     role: query.category,
     district: query.district,
     workStyles: query.styles?.split(','),
   });
   if (screen.role !== 'all') add('category=?', screen.role);
-  if (screen.district !== 'all') add('district=?', screen.district);
+  if (screen.district !== 'all')
+    add(
+      "(district=? OR EXISTS (SELECT 1 FROM json_each(niva_jobs.data,'$.offices') WHERE json_extract(value,'$.district')=?))",
+      screen.district,
+    );
   for (const styles of [query.saved === 'true' ? [] : preferences.workStyles, screen.workStyles])
     if (styles.length) {
       clauses.push(`style IN (${styles.map(() => '?').join(',')})`);
@@ -434,7 +416,7 @@ export async function discoveryPage(
       ? `${payload}.${createHmac('sha256', secret).update(payload).digest('hex')}`
       : null,
     snapshot,
-    health,
+    health: health.map((h) => ({ ...h, name: SOURCES.find((s) => s.id === h.id)?.name ?? h.id })),
     fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
     stale: health.some(
       (h) => !!h.error || !h.checked_at || Date.now() - Date.parse(h.checked_at) > 1800000,

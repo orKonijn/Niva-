@@ -36,7 +36,7 @@ await build({
   platform: 'browser',
   target: 'es2022',
   minify: true,
-  external: ['node:crypto'],
+  external: ['node:*'],
   plugins: [
     {
       name: 'niva-assets',

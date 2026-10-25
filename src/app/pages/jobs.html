@@ -34,8 +34,8 @@
   }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      מקורות: AppsFlyer / Greenhouse ו־WalkMe / Lever. כיסוי של מעסיקים אלה בישראל בלבד. הגשה מתבצעת
-      באתר המקור בלבד.
+      משרות בישראל מלוחות מעסיקים רשמיים ב־Greenhouse וב־Lever. הכיסוי מתרחב ואינו כולל את כל שוק
+      העבודה. הגשה מתבצעת באתר המעסיק בלבד.
     </p>
     <p class="mb-2 text-xs">
       סיווג התחום לפי כותרת התפקיד. סגנון העבודה מוצג רק כשהמקור מסר אותו; בחירת סגנון מסוים תסתיר
@@ -57,23 +57,28 @@
     </button>
     @if (store.session.config().discovery) {
       <p class="mt-3 text-xs">
-        הרענון בודק את מסד הנתונים של Niva; אינו מפעיל כל מקור מחדש. מקור Greenhouse נבדק לכל היותר
-        כל 10 דקות ו־Lever כל 15 דקות, כשהתזמון בשרת מופעל. כאן מוצג מועד הבדיקה בפועל.
+        הרענון מציג את המאגר המעודכן ומפעיל ברקע בדיקה של מקורות שמועד העדכון שלהם הגיע, בדרך כלל כל
+        10–15 דקות בזמן שימוש באתר. אין עדכון מתוזמן כשאין תנועה לאתר. כאן מוצג מועד הבדיקה בפועל.
       </p>
-      @for (source of store.sourceHealth(); track source.id) {
-        <p class="text-xs">
-          <bdi>{{ source.id === 'lever-walkme' ? 'WalkMe / Lever' : 'AppsFlyer / Greenhouse' }}</bdi
-          >:
-          {{
-            source.error
-              ? 'העדכון נכשל; מוצג המידע האחרון'
-              : source.checked_at
-                ? 'נבדק'
-                : 'טרם נבדק'
-          }}
-          <bdi>{{ source.checked_at }}</bdi>
-        </p>
-      }
+      <details class="mt-3">
+        <summary class="cursor-pointer text-sm">
+          מקורות ומועדי בדיקה ({{ store.sourceHealth().length }})
+        </summary>
+        @for (source of store.sourceHealth(); track source.id) {
+          <p class="text-xs">
+            <bdi>{{ source.name || source.id }}</bdi
+            >:
+            {{
+              source.error
+                ? 'העדכון נכשל; מוצג המידע האחרון'
+                : source.checked_at
+                  ? 'נבדק'
+                  : 'טרם נבדק'
+            }}
+            <bdi>{{ source.checked_at }}</bdi>
+          </p>
+        }
+      </details>
       @if (store.feedChanged()) {
         <p role="status">
           יש שינוי במאגר שעשוי להשפיע על התוצאות.
@@ -166,6 +171,12 @@
     {{ store.catalogMode() === 'real' ? 'משרות מהמקור' : 'משרות לדוגמה' }}</span
   >
 </div>
+@if (store.catalogMode() === 'real' && store.nextCursor()) {
+  <p class="text-sm">
+    מוצגת מנה ראשונה של התוצאות. בהמשך העמוד אפשר לטעון משרות נוספות; המפה מציגה את המשרות שכבר
+    נטענו.
+  </p>
+}
 @if (savedOnly()) {
   <p class="text-sm">
     שמורות הן היסטוריית הבחירות שלך ועשויות להיות מחוץ להעדפות הקבועות. החרגות החברות והסינון במסך

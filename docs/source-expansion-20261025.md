@@ -1,0 +1,35 @@
+# Expanded job coverage and social sign-in — 25 October 2026
+
+## Requested behavior and current scope
+
+Replace the original two-employer restriction with an explicit registry of 17 verified public employer boards: AppsFlyer, WalkMe, Gong, Wiz, Taboola, Elastic, Datadog, Optimove, JFrog, Orca Security, Torq, Forter, Similarweb, Riskified, Yotpo, Pendo and Via. The [real local ingestion record](verification/expanded-sources-20261025.json) returned **188 Israeli jobs**, with all 17 sources healthy. This is limited employer coverage, not the whole Israeli market; counts and vacancies can change.
+
+Only explicit Israeli locations are included. Unknown work style/district remains unknown. Named city points are approximate areas, never employer addresses. Multiple explicit office districts remain distinct and either district can match a filter. Host and board allowlists protect original links. Full descriptions for Elastic and Datadog remain at the employer links because their global content snapshots exceed the existing four-megabyte response bound; their metadata snapshots retain real titles, locations and original URLs.
+
+The first page still loads 12 results; counts explain the total, load-more retrieves additional pages, and the map uses loaded results. Source names and health are available in a compact disclosure. Requests trigger lease/backoff-controlled source refresh when due; this performs no private retention cleanup. It is request-driven, not a verified unattended schedule. Existing saved/closed jobs and owner records are preserved.
+
+## Google and Apple
+
+The user approved using the signed-in Google email as support/developer contact, accepting Google's API Services User Data Policy, creating the exact restricted web client, and enabling public Google sign-in. The dedicated project is **Niva Production**. Its web client allows only `https://getnivajobs.com` and `https://getnivajobs.com/api/auth/callback/google`. Public homepage/privacy/terms links and authorized domain are configured. Google reports **In production**. No logo or sensitive/restricted API scopes were added; the application requests only OpenID/basic identity scopes. No billing upgrade was enabled.
+
+`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` and a strong `NIVA_AUTH_SECRET` are stored in the Sites secret manager, preserving existing keys. Secrets were transferred in memory using an encrypted handoff, not committed or saved as plaintext files. Configuration alone is not evidence of a completed live login; the publication receipt must record the actual round trip.
+
+Hosted provider support reuses Better Auth and the existing D1 database, alongside platform-managed ChatGPT identity. The generated `0004_ambitious_psylocke.sql` migration adds provider user/session/account/verification/rate-limit tables; existing tables/data are unchanged. Provider routes use `/api/auth/callback/google` and `/api/auth/callback/apple`; Sites-owned `/callback` and ChatGPT sign-in/out are retained. Exact-origin POST checks supplement the library's state/PKCE protection. Cookies are Secure/HttpOnly; provider tokens are encrypted server-side. No server key is returned in `/api/config` or client bundles.
+
+Google and ChatGPT currently use **separate Niva account identities**, even for the same email. Existing ChatGPT-owned data is preserved and remains accessible through ChatGPT. Automatic merging and provider linking are disabled to prevent email-based account takeover. Google account pages report their actual provider; sign-out clears the social session and, where present, the platform session. No account/private-data deletion is used in verification.
+
+**Apple is not activated.** The user has not provided an eligible enrolled Apple developer account/app, Services ID or signing credentials. Apple requires a Services ID associated with a Sign in with Apple-enabled primary app; its documentation also describes an existing App Store app for web authentication. [Apple's web configuration](https://developer.apple.com/help/account/capabilities/configure-sign-in-with-apple-for-the-web), [environment requirements](https://developer.apple.com/documentation/signinwithapple/configuring-your-environment-for-sign-in-with-apple). The listed Developer Program membership is US$99/year and no purchase was approved or made; membership alone does not complete the app/Services ID prerequisites. [Program details](https://developer.apple.com/programs/). The Apple control stays disabled and labeled unavailable until valid server credentials are configured and a real round trip is verified.
+
+## Verification and evidence
+
+Focused checks cover employer allowlists, malformed snapshots, explicit Israeli/remote eligibility, category IDs, multi-office district filtering, D1-backed Google authorization initiation, PKCE/state, secure cookies, cross-origin rejection, signed/tampered sessions and separation from ChatGPT data with the same email. An initial cross-origin test revealed that the framework alone accepted a cookie-free initiation; the application now explicitly rejects off-origin POSTs. Hosted UI checks cover provider failure recovery and both sign-out paths. Synthetic tests do not prove real OAuth provider operation.
+
+Final local verification passed: **59 frontend, 100 server, 1 provenance and all 292 browser tests**, covering desktop/mobile Chromium, Firefox and WebKit. Server/test/e2e type checks, formatting and the Angular/Worker production build also passed. The full suite ran once near completion. Production mapping, actual catalog readback and live Google sign-in are appended after those operations succeed. Apple is never reported connected based only on code/configuration.
+
+Genuine image comparisons: catalog [before](screenshots/changes/source-expansion/before.png) / [after](screenshots/changes/source-expansion/after.png); login [before](screenshots/changes/google-signin/before.png) / [after](screenshots/changes/google-signin/after.png). Before views were captured from version20 before deployment; no image is substituted for a missing baseline. Secrets and account details are excluded.
+
+## Maintenance
+
+Review source health and final pagination totals after releases. A provider failure retains its last successful catalog and reports stale/error state; it must not deactivate listings from an incomplete snapshot. Request-driven refreshing stops without traffic; provider-native scheduling remains separate work. The existing cleanup/restore/alerting limitations still apply.
+
+Keep Google redirect/origin restrictions exact. Rotate secrets through the hosting manager, preserving existing entries; rotating the session signing secret invalidates existing social sessions. Use separate OAuth clients for test environments. Do not merge identities by email. Roll back application releases through the previous saved Sites version; the additive tables can remain without deleting user data. Review Apple signing/token lifetime and provider requirements before later activation. No employer submission is enabled.

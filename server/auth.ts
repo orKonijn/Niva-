@@ -1,5 +1,6 @@
 import { betterAuth } from 'better-auth';
 import type { DatabaseSync } from 'node:sqlite';
+import type { D1Database } from '@cloudflare/workers-types';
 export interface Mail {
   to: string;
   subject: string;
@@ -15,8 +16,9 @@ export interface AuthOptions {
   sendMail: (mail: Mail) => Promise<void>;
   google?: { clientId: string; clientSecret: string };
   apple?: { clientId: string; clientSecret: string };
+  accountLinking?: boolean;
 }
-export function createAuth(database: DatabaseSync, options: AuthOptions) {
+export function createAuth(database: DatabaseSync | D1Database, options: AuthOptions) {
   if (
     options.browserTestMode &&
     (options.production || !['127.0.0.1', 'localhost'].includes(new URL(options.origin).hostname))
@@ -60,7 +62,7 @@ export function createAuth(database: DatabaseSync, options: AuthOptions) {
       encryptOAuthTokens: true,
       storeStateStrategy: 'database',
       accountLinking: {
-        enabled: true,
+        enabled: options.accountLinking !== false,
         disableImplicitLinking: true,
         allowDifferentEmails: true,
         allowUnlinkingAll: false,

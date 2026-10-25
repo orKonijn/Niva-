@@ -9,6 +9,7 @@ import { defaultPreferences } from '../src/app/core/preferences';
 import type { ResumeVersion } from '../src/app/core/models/career';
 import { readRecord } from './career-records';
 import { normalizeFeed } from './job-feed';
+import { normalizeGreenhouse } from './greenhouse-source';
 const gh = {
   jobs: [
     {
@@ -73,6 +74,49 @@ function setup(env: CareerEnvironment = {}) {
   return { db, app, req, state };
 }
 describe('durable discovery', () => {
+  it('matches either explicit office district for a multi-district listing, together with category', async () => {
+    const { db } = setup();
+    const source = SOURCES.find((s) => s.board === 'gongio')!;
+    const job = normalizeGreenhouse(
+      {
+        jobs: [
+          {
+            ...gh.jobs[0],
+            absolute_url: 'https://job-boards.greenhouse.io/gongio/jobs/101',
+            location: { name: 'Tel Aviv / Netanya, Israel' },
+          },
+        ],
+      },
+      source,
+      new Date().toISOString(),
+    )[0];
+    await db.run(
+      'INSERT INTO niva_jobs VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
+      job.id,
+      source.id,
+      job.source!.applicationUrl,
+      job.company.toLowerCase(),
+      job.title.toLowerCase(),
+      job.district,
+      job.category,
+      job.workStyle,
+      job.title.toLowerCase(),
+      1,
+      'v1',
+      JSON.stringify(job),
+    );
+    expect(
+      (await discoveryPage(db, 'secret', { district: 'central', category: 'qa-automation' })).total,
+    ).toBe(1);
+    expect(
+      (await discoveryPage(db, 'secret', { district: 'tel-aviv', category: 'qa-automation' }))
+        .total,
+    ).toBe(1);
+    expect((await discoveryPage(db, 'secret', { district: 'haifa' })).total).toBe(0);
+    expect(
+      (await discoveryPage(db, 'secret', { district: 'central', category: 'design' })).total,
+    ).toBe(0);
+  });
   it('repairs only the old never-fetched bootstrap state and uses Worker-supported manual redirects', async () => {
     const { db } = setup();
     await db.run(
@@ -85,9 +129,9 @@ describe('durable discovery', () => {
     });
     vi.stubGlobal('fetch', fetcher);
     await ingest(db);
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length);
     await ingest(db);
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(SOURCES.length);
   });
 
   it('recovers a partially initialized source table and retains ingestion for the Worker lifetime', async () => {
@@ -107,12 +151,12 @@ describe('durable discovery', () => {
     expect(response.status).toBe(200);
     const result = await response.json();
     expect(result.total).toBe(2);
-    expect(result.health).toHaveLength(2);
+    expect(result.health).toHaveLength(SOURCES.length);
     expect(result.health.every((s: { checked_at: string | null }) => !!s.checked_at)).toBe(true);
     expect(work).toHaveLength(1);
     await Promise.all(work);
     await app.request('https://niva.test/api/feed');
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(SOURCES.length);
   });
 
   it('migrates historical hosted job snapshots without losing closed saved-job data', async () => {
@@ -166,7 +210,7 @@ describe('durable discovery', () => {
       discoveryPage(db, 'secret', { cursor: first.nextCursor! + 'tampered' }),
     ).rejects.toThrow('CURSOR_EXPIRED');
     await ingest(db);
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(SOURCES.length);
     // Two source IDs for one canonical vacancy collapse, retaining attribution.
     const row = sqlite.prepare('SELECT * FROM niva_jobs WHERE id LIKE ?').get('lever-%')!;
     sqlite
@@ -261,7 +305,7 @@ describe('durable discovery', () => {
     await ingest(db);
     await req('feed');
     await req('feed?limit=1');
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(SOURCES.length);
     expect((await req('ingestion/run', {})).status).toBe(401);
   });
 });

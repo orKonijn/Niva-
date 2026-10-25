@@ -4,6 +4,7 @@ export interface AccountUser {
   name: string;
   email: string;
   emailVerified: boolean;
+  authMethod?: 'sites' | 'social';
 }
 export interface AuthConfiguration {
   platform?: 'sites';
@@ -97,7 +98,15 @@ export class AccountSession {
   }
   async signOut(): Promise<boolean> {
     this.generation++;
-    if (this.config().platform === 'sites') {
+    if (this.config().platform === 'sites' && this.user()?.authMethod !== 'social') {
+      if (this.config().google || this.config().apple) {
+        try {
+          await this.auth('sign-out', {});
+        } catch {
+          this.notice.set('הניתוק לא הושלם בשרת. יש לנסות שוב.');
+          return false;
+        }
+      }
       this.clear();
       location.assign('/signout-with-chatgpt?return_to=%2Flogin');
       return false;

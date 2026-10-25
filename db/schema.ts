@@ -1,4 +1,11 @@
-import { sqliteTable, text, integer, index, primaryKey } from 'drizzle-orm/sqlite-core';
+import {
+  sqliteTable,
+  text,
+  integer,
+  index,
+  primaryKey,
+  uniqueIndex,
+} from 'drizzle-orm/sqlite-core';
 export const pilotStates = sqliteTable('niva_pilot_states', {
   userId: text('user_id').primaryKey(),
   revision: integer('revision').notNull(),
@@ -97,4 +104,73 @@ export const maintenance = sqliteTable('niva_maintenance', {
   error: text('error'),
   removed: integer('removed').notNull().default(0),
   trigger: text('trigger').notNull(),
+});
+
+// Optional social-provider authentication; separate IDs from Sites identities.
+export const oauthUser = sqliteTable('user', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull().unique(),
+  emailVerified: integer('emailVerified').notNull(),
+  image: text('image'),
+  createdAt: integer('createdAt').notNull(),
+  updatedAt: integer('updatedAt').notNull(),
+});
+export const oauthSession = sqliteTable(
+  'session',
+  {
+    id: text('id').primaryKey(),
+    expiresAt: integer('expiresAt').notNull(),
+    token: text('token').notNull().unique(),
+    createdAt: integer('createdAt').notNull(),
+    updatedAt: integer('updatedAt').notNull(),
+    ipAddress: text('ipAddress'),
+    userAgent: text('userAgent'),
+    userId: text('userId')
+      .notNull()
+      .references(() => oauthUser.id, { onDelete: 'cascade' }),
+  },
+  (t) => [index('niva_session_owner').on(t.userId)],
+);
+export const oauthAccount = sqliteTable(
+  'account',
+  {
+    id: text('id').primaryKey(),
+    accountId: text('accountId').notNull(),
+    providerId: text('providerId').notNull(),
+    userId: text('userId')
+      .notNull()
+      .references(() => oauthUser.id, { onDelete: 'cascade' }),
+    accessToken: text('accessToken'),
+    refreshToken: text('refreshToken'),
+    idToken: text('idToken'),
+    accessTokenExpiresAt: integer('accessTokenExpiresAt'),
+    refreshTokenExpiresAt: integer('refreshTokenExpiresAt'),
+    scope: text('scope'),
+    password: text('password'),
+    createdAt: integer('createdAt').notNull(),
+    updatedAt: integer('updatedAt').notNull(),
+  },
+  (t) => [
+    uniqueIndex('niva_provider_account_unique').on(t.providerId, t.accountId),
+    index('niva_account_owner').on(t.userId),
+  ],
+);
+export const oauthVerification = sqliteTable(
+  'verification',
+  {
+    id: text('id').primaryKey(),
+    identifier: text('identifier').notNull(),
+    value: text('value').notNull(),
+    expiresAt: integer('expiresAt').notNull(),
+    createdAt: integer('createdAt').notNull(),
+    updatedAt: integer('updatedAt').notNull(),
+  },
+  (t) => [index('niva_verification_identifier').on(t.identifier)],
+);
+export const oauthRateLimit = sqliteTable('rateLimit', {
+  id: text('id').primaryKey(),
+  key: text('key').notNull().unique(),
+  count: integer('count').notNull(),
+  lastRequest: integer('lastRequest').notNull(),
 });

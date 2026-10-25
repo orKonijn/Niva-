@@ -35,7 +35,13 @@
         <p class="mt-3 mb-0 text-xs">ההתחברות מנוהלת דרך ChatGPT. אין צורך בסיסמה נפרדת ל־Niva.</p>
       </section>
     }
-    @if (session.config().platform !== 'sites' && (mode() === 'login' || mode() === 'register')) {
+    @if (
+      (session.config().platform !== 'sites' ||
+        session.config().google ||
+        session.config().apple) &&
+      (mode() === 'login' || mode() === 'register') &&
+      !session.user()
+    ) {
       <div class="my-6 grid gap-3">
         <button
           type="button"
@@ -52,14 +58,24 @@
           (click)="social('apple')"
         >
           <niva-provider-logo provider="apple" />המשך עם Apple
+          @if (!session.config().apple) {
+            <span class="text-xs">(לא זמין עדיין)</span>
+          }
         </button>
       </div>
       @if (!session.config().google || !session.config().apple) {
         <p class="text-xs">
-          ספקים מושבתים עד להגדרת המפתחות בשרת. אין לבקש או להזין כאן את סיסמת Google או Apple.
+          שיטה שאינה זמינה מסומנת ככזו. את סיסמת Google או Apple מזינים רק באתר הרשמי של הספק.
         </p>
       }
-      <p class="text-center text-xs">או באמצעות דוא״ל וסיסמה נפרדת ל־Niva, גם עם כתובת Gmail</p>
+      @if (session.config().email) {
+        <p class="text-center text-xs">או באמצעות דוא״ל וסיסמה נפרדת ל־Niva, גם עם כתובת Gmail</p>
+      }
+      @if (session.config().platform === 'sites') {
+        <p class="text-xs">
+          כניסה דרך ספק אחר יוצרת חשבון נפרד. כתובת דוא״ל זהה אינה ממזגת נתונים עם ChatGPT.
+        </p>
+      }
     }
     @if (session.config().platform !== 'sites') {
       @if (!session.loading() && !session.config().accounts) {

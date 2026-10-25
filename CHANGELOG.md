@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Expanded employer coverage and hosted Google sign-in
+
+- Expand the source registry from two to 17 official employer ATS boards. A real provider check returned 188 Israeli listings; this is a point-in-time local ingestion result, not a claim about the deployed catalog before publication. Preserve employer attribution, original links, existing IDs/saves, bounded snapshots and failure/backoff behavior. Match multi-office listings against either explicit office district. Never infer worldwide remote eligibility.
+- Refresh due sources during site traffic with durable leases, without running private-record cleanup. No unattended cron is claimed. Show the actual source names/times in a compact disclosure, clarify pagination/map coverage and remove the obsolete two-employer descriptions.
+- Prepare hosted Google/Apple provider support using the existing Better Auth implementation with D1. Keep ChatGPT sign-in and existing owner IDs; use separate OAuth owner IDs, no implicit merging/linking, exact-origin checks, PKCE/state and secure cookies. Clear optional social sessions on sign-out. Append the generated additive auth migration and typed schema.
+- With explicit user approval, create the Niva Production Google project/client, accept Google's user-data policy, add live public branding URLs and publish the OAuth audience. Store credentials only in the hosting secret manager. Google login is not claimed live until the new application is deployed and its real round trip succeeds. Apple remains unavailable pending an eligible developer account/app and Services ID; no Apple membership, paid plan or recurring cost was purchased.
+- [Implementation and verification report](docs/source-expansion-20261025.md). Genuine catalog [Before](docs/screenshots/changes/source-expansion/before.png) · [After](docs/screenshots/changes/source-expansion/after.png), login [Before](docs/screenshots/changes/google-signin/before.png) · [After](docs/screenshots/changes/google-signin/after.png). After images and final results are recorded after verification.
+- Final local verification passed: 59 frontend, 100 server, 1 provenance and all 292 browser tests across desktop/mobile Chromium, Firefox and WebKit. All three type checks, formatting and the Angular/Worker production build passed. Focused D1/PKCE/session tests use controlled synthetic data; real Google OAuth still requires production readback.
+
 ## 25 October 2026 — Live account verification follow-up
 
 - Observed a failed completed sign-in returning to the Angular not-found screen at `/callback`. Refreshed hosting by redeploying the existing version20 through the supported public operation, retaining source, audience and secrets. The retry completed successfully and returned to `/app`; the exact initial failure cause is not established. No new application version was created.

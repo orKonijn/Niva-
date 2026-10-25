@@ -11,8 +11,9 @@ import { applyStateOperation, importReceipt, normalizeImport, StateError } from 
 import { FEED_URL, normalizeFeed, type Feed } from './job-feed';
 import type { Job } from '../src/app/core/models/job';
 import type { DeploymentEnvironment } from './deployment-policy';
+import { hostedAuth, hostedProviders, type HostedAuthEnvironment } from './hosted-auth';
 
-export interface PilotEnv extends CareerEnvironment, DeploymentEnvironment {
+export interface PilotEnv extends CareerEnvironment, DeploymentEnvironment, HostedAuthEnvironment {
   DB: D1Database;
   NIVA_IMPORT_SECRET: string;
 }
@@ -109,6 +110,21 @@ export function createPilot(
 ) {
   if (!env.DB || !env.NIVA_IMPORT_SECRET || env.NIVA_IMPORT_SECRET.length < 32)
     throw new Error('PILOT_NOT_CONFIGURED');
+  const social = hostedAuth(env);
+  async function readUser(request: Request) {
+    const site = platformUser(request);
+    if (site) return { ...site, authMethod: 'sites' as const };
+    const session = await social?.api.getSession({ headers: request.headers });
+    return session?.user.emailVerified
+      ? {
+          id: 'oauth:' + session.user.id,
+          email: session.user.email,
+          name: session.user.name,
+          emailVerified: true,
+          authMethod: 'social' as const,
+        }
+      : null;
+  }
   const app = new Hono();
   app.use('/api/*', async (c, next) => {
     c.header('Cache-Control', 'no-store');
@@ -133,7 +149,7 @@ export function createPilot(
       secret: env.NIVA_IMPORT_SECRET,
       env,
       keepAlive: (work) => execution?.waitUntil(work),
-      identity: async (request) => platformUser(request)?.id ?? null,
+      identity: async (request) => (await readUser(request))?.id ?? null,
       state: (owner) => readState(env.DB, owner),
     }),
   );
@@ -144,23 +160,38 @@ export function createPilot(
       platform: 'sites',
       realJobs: true,
       email: false,
-      google: false,
-      apple: false,
+      ...(new URL(c.req.url).origin === env.NIVA_PUBLIC_ORIGIN
+        ? hostedProviders(env)
+        : { google: false, apple: false }),
     }),
   );
-  app.get('/api/session', (c) => c.json({ user: platformUser(c.req.raw) }));
+  app.get('/api/session', async (c) => c.json({ user: await readUser(c.req.raw) }));
   app.get('/api/jobs', async (c) => {
     const feed = await pilotFeed(env.DB);
-    const user = platformUser(c.req.raw);
+    const user = await readUser(c.req.raw);
     const saved = user ? (await readState(env.DB, user.id)).saved : [];
     const archived = saved.length
       ? (await catalog(env.DB)).filter((j) => !j.source!.active && saved.includes(j.id))
       : [];
     return c.json({ ...feed, archived });
   });
-  app.all('/api/auth/*', (c) => c.json({ error: 'PROVIDER_NOT_CONFIGURED' }, 503));
+  app.all('/api/auth/*', async (c) => {
+    if (!social) return c.json({ error: 'PROVIDER_NOT_CONFIGURED' }, 503);
+    const path = c.req.path.slice('/api/auth/'.length);
+    if (
+      c.req.method === 'POST' &&
+      !path.startsWith('callback/') &&
+      c.req.header('origin') !== env.NIVA_PUBLIC_ORIGIN
+    )
+      return c.json({ error: 'CSRF_REJECTED' }, 403);
+    if (!['sign-in/social', 'callback/google', 'callback/apple', 'sign-out'].includes(path))
+      return c.json({ error: 'NOT_FOUND' }, 404);
+    const headers = new Headers(c.req.raw.headers);
+    headers.delete('x-niva-client-ip'); // Never trust a caller-supplied rate-limit identity.
+    return social.handler(new Request(c.req.raw, { headers }));
+  });
   app.all('/api/account/*', async (c) => {
-    const user = platformUser(c.req.raw);
+    const user = await readUser(c.req.raw);
     if (!user) return c.json({ error: 'UNAUTHORIZED' }, 401);
     if (
       c.req.method !== 'GET' &&
@@ -183,7 +214,16 @@ export function createPilot(
     const state = await readState(env.DB, user.id);
     if (c.req.method === 'GET' && path === '/api/account/state') return c.json(state);
     if (c.req.method === 'GET' && path === '/api/account/methods')
-      return c.json({ methods: ['chatgpt'] });
+      return c.json({
+        methods:
+          user.authMethod === 'sites'
+            ? ['chatgpt']
+            : (
+                await env.DB.prepare('SELECT providerId FROM account WHERE userId=?')
+                  .bind(user.id.slice(6))
+                  .all<{ providerId: string }>()
+              ).results.map((row) => row.providerId),
+      });
     if (c.req.method === 'POST' && path === '/api/account/import-preview') {
       if (state.importedAt) throw new StateError(409, 'ALREADY_IMPORTED');
       const data = normalizeImport(await c.req.json());
@@ -245,5 +285,5 @@ export function createPilot(
       : c.json({ error: 'SERVICE_UNAVAILABLE' }, 503),
   );
   app.notFound((c) => c.json({ error: 'NOT_FOUND' }, 404));
-  return { app, readState: (owner: string) => readState(env.DB, owner) };
+  return { app, readUser, readState: (owner: string) => readState(env.DB, owner) };
 }

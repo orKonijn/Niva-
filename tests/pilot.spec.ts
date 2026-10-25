@@ -245,3 +245,97 @@ test('real-feed failure gives a retry and does not substitute demo results', asy
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await expect(page.getByText('מוצג עותק קודם', { exact: false })).toBeVisible();
 });
+test('hosted Google option keeps ChatGPT available, labels unavailable Apple and recovers provider failure', async ({
+  page,
+}) => {
+  await page.route('**/api/config', (r) =>
+    r.fulfill({
+      json: {
+        accounts: true,
+        platform: 'sites',
+        realJobs: true,
+        discovery: true,
+        email: false,
+        google: true,
+        apple: false,
+      },
+    }),
+  );
+  await page.route('**/api/session', (r) => r.fulfill({ json: { user: null } }));
+  await page.route('**/api/auth/sign-in/social', (r) =>
+    r.fulfill({ status: 503, json: { error: 'SYNTHETIC_PROVIDER_FAILURE' } }),
+  );
+  await page.goto('/login');
+  await expect(page.getByRole('link', { name: 'המשך עם ChatGPT' })).toHaveAttribute(
+    'target',
+    '_top',
+  );
+  const google = page.getByRole('button', { name: 'המשך עם Google' });
+  await expect(google).toBeEnabled();
+  await expect(page.getByRole('button', { name: /המשך עם Apple/ })).toBeDisabled();
+  await expect(page.getByLabel('סיסמה ל־Niva', { exact: true })).toHaveCount(0);
+  await google.focus();
+  await expect(google).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('alert')).toContainText('ההתחברות לספק אינה זמינה');
+  await expect(google).toBeEnabled();
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+});
+for (const authMethod of ['sites', 'social'] as const) {
+  test(
+    'hosted ' + authMethod + ' sign-out clears the optional social session',
+    async ({ page }) => {
+      let signouts = 0;
+      const user = {
+        id: authMethod + ':synthetic',
+        name: 'Synthetic',
+        email: 'synthetic@example.invalid',
+        emailVerified: true,
+        authMethod,
+      };
+      await page.route('**/api/config', (r) =>
+        r.fulfill({
+          json: {
+            accounts: true,
+            platform: 'sites',
+            realJobs: true,
+            discovery: true,
+            email: false,
+            google: true,
+            apple: false,
+          },
+        }),
+      );
+      await page.route('**/api/session', (r) =>
+        r.fulfill({ json: { user: signouts ? null : user } }),
+      );
+      await page.route('**/api/account/state', (r) => r.fulfill({ json: emptyAccountState() }));
+      await page.route('**/api/account/methods', (r) =>
+        r.fulfill({ json: { methods: [authMethod === 'sites' ? 'chatgpt' : 'google'] } }),
+      );
+      await page.route('**/api/feed**', (r) =>
+        r.fulfill({
+          json: { jobs: [], total: 0, stale: false, fetchedAt: '2026-10-25T00:00:00Z' },
+        }),
+      );
+      await page.route('**/api/auth/sign-out', (r) => {
+        signouts++;
+        return r.fulfill({ json: { success: true } });
+      });
+      await page.route('**/signout-with-chatgpt?**', (r) =>
+        r.fulfill({
+          contentType: 'text/html',
+          body: '<p>synthetic platform sign-out boundary</p>',
+        }),
+      );
+      await page.goto('/account');
+      await page.getByRole('button', { name: 'יציאה מהחשבון' }).click();
+      await expect.poll(() => signouts).toBe(1);
+      if (authMethod === 'social') await expect(page).toHaveURL(/\/login$/);
+      else await expect(page).toHaveURL(/\/signout-with-chatgpt\?/);
+    },
+  );
+}

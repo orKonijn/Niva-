@@ -136,14 +136,16 @@ export function hostedApp(assets: Record<string, { body: string; type: string }>
         let html = new TextDecoder().decode(
           Uint8Array.from(atob(assets['/index.html']!.body), (c) => c.charCodeAt(0)),
         );
-        const user = platformUser(request);
-        if (user) {
+        if (platformUser(request) || request.headers.get('cookie')?.includes('better-auth')) {
           try {
-            const state = await createPilot(env, execution).readState(user.id);
-            html = html.replace(
-              '<head>',
-              `<head><meta name="niva-account-theme" content="${['light', 'dark', 'system'].includes(state.theme) ? state.theme : 'system'}">`,
-            );
+            const pilot = createPilot(env, execution);
+            const user = await pilot.readUser(request);
+            const state = user ? await pilot.readState(user.id) : null;
+            if (state)
+              html = html.replace(
+                '<head>',
+                `<head><meta name="niva-account-theme" content="${['light', 'dark', 'system'].includes(state.theme) ? state.theme : 'system'}">`,
+              );
           } catch {
             /* Serve the shell with local/system theme; API failures retain their recovery UI. */
           }

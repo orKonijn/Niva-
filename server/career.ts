@@ -135,13 +135,18 @@ export function createCareer(deps: CareerDependencies) {
     const owner = await deps.identity(c.req.raw);
     await quota(db, `feed:${owner ?? 'anonymous'}`, 120, 60000);
     // Retry incomplete bootstrap, with durable leases/backoff still limiting upstream requests.
-    const health = await db.all<{ id: string; checked_at: string | null }>(
-      'SELECT id,checked_at FROM niva_sources',
+    const health = await db.all<{ id: string; checked_at: string | null; next_at: number }>(
+      'SELECT id,checked_at,next_at FROM niva_sources',
     );
     if (health.length < SOURCES.length || health.some((source) => !source.checked_at)) {
       const work = ingest(db);
       deps.keepAlive?.(work);
       await work;
+    } else if (health.some((source) => source.next_at <= Date.now())) {
+      // Request-driven refresh uses source leases/backoff; no private-record cleanup.
+      const work = ingest(db);
+      if (deps.keepAlive) deps.keepAlive(work);
+      else await work;
     }
     const state = owner ? await deps.state(owner) : undefined;
     return c.json(await discoveryPage(db, secret, c.req.query(), state?.preferences, state?.saved));

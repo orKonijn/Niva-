@@ -62,7 +62,13 @@ export class AppStore {
   readonly nextCursor = signal<string | null>(null);
   readonly feedChanged = signal(false);
   readonly sourceHealth = signal<
-    { id: string; checked_at: string | null; error: string | null; next_at: number }[]
+    {
+      id: string;
+      name?: string;
+      checked_at: string | null;
+      error: string | null;
+      next_at: number;
+    }[]
   >([]);
   private feedQuery: Record<string, string> = {};
   private feedPreferenceKey = '';
@@ -155,7 +161,13 @@ export class AppStore {
         coverage?: { category: string; district: string; style: string; n: number }[];
         nextCursor?: string | null;
         snapshot?: string;
-        health?: { id: string; checked_at: string | null; error: string | null; next_at: number }[];
+        health?: {
+          id: string;
+          name?: string;
+          checked_at: string | null;
+          error: string | null;
+          next_at: number;
+        }[];
       };
       if (
         !Array.isArray(feed.jobs) ||
