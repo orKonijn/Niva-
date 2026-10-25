@@ -1,6 +1,6 @@
 # Disposable staging verification and operational handoff
 
-Prepared 25 October 2026. **Not executed against hosted infrastructure.** This pass authorizes local implementation/verification only: no commit, push, deployment, access change, paid activation, real-resume transmission or existing-live-data deletion. The current live Site remains version16. A handler, mock, plan or configured URL is not operational evidence.
+Prepared 25 October 2026; current handoff clarified during the later UI/UX repair pass. **Not executed against hosted infrastructure.** The current live Site is version18; its published schema/build receipts do not prove runtime isolation, retention, restore or alert delivery. The UI/UX fixes remain local and uncommitted: no push, deployment, access change, paid activation, real-resume transmission or existing-live-data deletion. Plan-only staging/watchdog checks made zero network requests. A handler, mock, plan or configured URL is not operational evidence.
 
 ## Gate owner and evidence
 
@@ -15,7 +15,7 @@ A release operator must be assigned by the owner before activation; no individua
 
 ## Separate ingestion, cleanup and independent alerting
 
-The deployed v16 has no linked Sites automation as observed; the runbook does not activate one. After separate approval:
+The latest recorded version18 publication retained the existing inactive hosted schedule. This pass does not activate one. After separate approval:
 
 - Store `NIVA_INGEST_SECRET` as a server-only runtime secret with at least32 characters. Trusted external writer requests must satisfy both the hosting service gate and this bearer check. For Sites, the supported unattended credential is sent only to that Site as `OAI-Sites-Authorization: Bearer <service-token>`; dispatch consumes it. The endpoint separately requires `Authorization: Bearer <NIVA_INGEST_SECRET>`. These are different headers and permissions; no token is generated or activated here. A service credential alone is not a signed-in user. Never place secrets in URLs, source, screenshots, output or automation prompts.
 - Configure a trusted ingestion job every five minutes, calling `POST /api/ingestion/run` with bearer authentication and JSON body `{}`. Provider leases still limit actual source checks to their 10/15-minute cadence. Native Worker `scheduled` uses the same runner. HTTP jobs remain labelled manual in server evidence; use scheduler delivery records to establish their unattended nature.

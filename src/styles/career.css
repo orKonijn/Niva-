@@ -67,6 +67,31 @@
   padding-block: 16px;
   overflow-wrap: anywhere;
 }
+.resume-create > summary,
+.resume-privacy summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 12px;
+  font-weight: 600;
+}
+.resume-dialog {
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  margin: auto;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.resume-dialog::backdrop {
+  background: #071122b3;
+}
+.resume-dialog .career-actions {
+  margin-block-start: 20px;
+}
 .career-text {
   white-space: pre-wrap;
   overflow-wrap: anywhere;

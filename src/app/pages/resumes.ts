@@ -5,12 +5,15 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   signal,
   untracked,
+  ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CareerStore } from '../core/career-store';
 import type { ResumeVersion } from '../core/models/career';
 import { AppStore } from '../core/app-store';
@@ -28,8 +31,14 @@ export class Resumes {
   readonly selected = signal<ResumeVersion | null>(null);
   readonly notice = signal('');
   readonly busy = signal(false);
-  readonly jobId = this.route.snapshot.queryParamMap.get('job') ?? '';
-  readonly job = computed(() => this.store.findJob(this.jobId));
+  readonly query = toSignal(this.route.queryParamMap, {
+    initialValue: this.route.snapshot.queryParamMap,
+  });
+  readonly jobId = computed(() => this.query().get('job') ?? '');
+  readonly job = computed(() => this.store.findJob(this.jobId()));
+  private contextGeneration = 0;
+  @ViewChild('deleteDialog') private deleteDialog!: ElementRef<HTMLDialogElement>;
+  private deleteTrigger: HTMLElement | null = null;
   readonly before = computed(() =>
     this.career.resumes().find((r) => r.id === this.selected()?.parentId),
   );
@@ -78,16 +87,23 @@ export class Resumes {
       });
     });
     void this.career.refresh();
-    if (this.jobId) void this.store.ensureJob(this.jobId);
+    effect(() => {
+      const id = this.jobId();
+      const discovery = this.store.session.config().discovery;
+      untracked(() => {
+        this.contextGeneration++;
+        if (id && discovery) void this.store.ensureJob(id);
+      });
+    });
   }
-  async action(work: () => Promise<void>) {
+  async action(work: () => Promise<void>, current: () => boolean = () => true) {
     if (this.busy()) return;
     this.busy.set(true);
     this.notice.set('');
     try {
       await work();
     } catch (e) {
-      this.notice.set(e instanceof Error ? e.message : 'הפעולה נכשלה.');
+      if (current()) this.notice.set(e instanceof Error ? e.message : 'הפעולה נכשלה.');
     } finally {
       this.busy.set(false);
     }
@@ -169,27 +185,51 @@ export class Resumes {
   }
   async tailor() {
     const resume = this.selected();
-    if (!resume) return;
+    const jobId = this.jobId();
+    const generation = this.contextGeneration;
+    if (!resume || !jobId) return;
     if (this.editText !== resume.text) {
       this.notice.set('יש לשמור ולאשר את העריכה לפני התאמה.');
       return;
     }
-    await this.action(async () => {
-      const result = await this.career.request<ResumeVersion>('tailor', {
-        resumeId: resume.id,
-        jobId: this.jobId,
-      });
-      await this.career.load();
-      this.select(result);
-    });
+    await this.action(
+      async () => {
+        const result = await this.career.request<ResumeVersion>('tailor', {
+          resumeId: resume.id,
+          jobId,
+        });
+        await this.career.load();
+        if (generation === this.contextGeneration && this.selected()?.id === resume.id)
+          this.select(result);
+      },
+      () => generation === this.contextGeneration,
+    );
   }
   deleteCandidate = signal<string | null>(null);
+  askDelete(id: string, event: Event) {
+    if (this.busy() || this.deleteCandidate()) return;
+    this.deleteTrigger = event.currentTarget as HTMLElement;
+    this.deleteCandidate.set(id);
+    this.notice.set('');
+    this.deleteDialog.nativeElement.showModal();
+    this.deleteDialog.nativeElement.querySelector<HTMLButtonElement>('[data-cancel]')?.focus();
+  }
+  cancelDelete(event?: Event) {
+    event?.preventDefault();
+    if (this.busy()) return;
+    this.closeDelete();
+  }
+  private closeDelete() {
+    this.deleteDialog.nativeElement.close();
+    this.deleteCandidate.set(null);
+    if (this.deleteTrigger?.isConnected) this.deleteTrigger.focus();
+  }
   async remove() {
     const id = this.deleteCandidate();
     if (!id) return;
     await this.action(async () => {
       await this.career.request(`resumes/${id}/delete`, {});
-      this.deleteCandidate.set(null);
+      this.closeDelete();
       this.drafts.delete(id);
       if (this.selected()?.id === id) this.selected.set(null);
       await this.career.load();

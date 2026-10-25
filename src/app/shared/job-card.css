@@ -17,31 +17,37 @@
     letter-spacing: 0;
     margin-bottom: 4px;
   }
+  .job-title {
+    overflow-wrap: anywhere;
+  }
   .job-title h3 a:hover {
     color: var(--blue);
   }
   .job-title > span {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
   }
   .job-title .muted {
-    font-size: 12px;
+    font-size: 13px;
   }
   .job-meta {
     display: flex;
     gap: 16px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .job-meta span {
     display: flex;
     align-items: center;
     gap: 5px;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
   .job-meta niva-icon {
     font-size: 12px;
   }
   .job-reason {
-    font-size: 12px;
+    font-size: 13px;
+    overflow-wrap: anywhere;
     color: var(--muted);
     margin-bottom: 20px;
   }

@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CareerStore, careerError } from '../core/career-store';
 import type { Conversation, ChatMessage, JobReference } from '../core/models/career';
 @Component({
@@ -32,9 +33,12 @@ export class Assistant {
   >([]);
   readonly conversationId = signal<string | null>(null);
   readonly deleteId = signal<string | null>(null);
-  readonly jobId = this.route.snapshot.queryParamMap.get('job') ?? '';
+  readonly query = toSignal(this.route.queryParamMap, {
+    initialValue: this.route.snapshot.queryParamMap,
+  });
+  readonly jobId = computed(() => this.query().get('job') ?? '');
   readonly store = inject(AppStore);
-  readonly selectedJob = computed(() => this.store.findJob(this.jobId));
+  readonly selectedJob = computed(() => this.store.findJob(this.jobId()));
   message = '';
   consent = false;
   includeResume = false;
@@ -42,7 +46,17 @@ export class Assistant {
   private abort: AbortController | null = null;
   private generation = 0;
   constructor() {
-    if (this.jobId) void this.store.ensureJob(this.jobId);
+    effect(() => {
+      const id = this.jobId();
+      const discovery = this.store.session.config().discovery;
+      untracked(() => {
+        this.generation++;
+        this.abort?.abort();
+        this.busy.set(false);
+        this.fresh();
+        if (id && discovery) void this.store.ensureJob(id);
+      });
+    });
     effect(() => {
       this.career.session.userId();
       this.career.generation();
@@ -94,7 +108,8 @@ export class Assistant {
           this.fresh();
       }
     } catch (e) {
-      this.error.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
+      if (generation === this.generation && owner === this.career.session.userId())
+        this.error.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
     }
   }
   stop() {
@@ -156,7 +171,7 @@ export class Assistant {
         body: JSON.stringify({
           message,
           conversationId: this.conversationId() ?? undefined,
-          jobId: this.jobId || undefined,
+          jobId: this.jobId() || undefined,
           aiConsent: true,
           includeResume: this.includeResume,
         }),
@@ -167,6 +182,7 @@ export class Assistant {
         throw new Error(careerError(data.error));
       }
       if (!response.body) throw new Error('לא התקבל זרם תשובה.');
+      if (generation !== this.generation) return;
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
@@ -204,6 +220,7 @@ export class Assistant {
         await reader.cancel().catch(() => {});
       }
       if (!completed) throw new Error('התשובה לא הושלמה ולא נשמרה. אפשר לנסות שוב.');
+      if (generation !== this.generation) return;
       this.conversationId.set(newId);
       this.messages.update((messages) => [
         ...messages,

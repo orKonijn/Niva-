@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  Injector,
+  signal,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
@@ -10,6 +19,8 @@ import { AccountSession, safeReturn } from '../core/account-session';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthPage {
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
   readonly session = inject(AccountSession);
   readonly router = inject(Router);
   readonly route = inject(ActivatedRoute);
@@ -47,6 +58,13 @@ export class AuthPage {
     if (this.busy()) return;
     if (form?.invalid) {
       form.form.markAllAsTouched();
+      afterNextRender(
+        () =>
+          this.element.nativeElement
+            .querySelector<HTMLInputElement>('input[aria-invalid="true"]')
+            ?.focus(),
+        { injector: this.injector },
+      );
       return;
     }
     this.busy.set(true);

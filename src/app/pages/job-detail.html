@@ -14,7 +14,7 @@
         [style.color]="job.source ? '#142441' : null"
         >{{ job.initials }}</span
       >
-      <div>
+      <div class="job-text min-w-0">
         <span class="section-kicker block font-semibold text-brand tracking-[0.02em]">{{
           job.source ? 'משרה אמיתית · מקור מעסיק' : 'משרה לדוגמה'
         }}</span>
@@ -250,13 +250,23 @@
       </section>
     }
   </div>
-} @else if (store.jobsLoading()) {
+} @else if (
+  listingState().status === 'loading' || (listingState().status === 'idle' && store.jobsLoading())
+) {
   <p role="status">טוענים את פרטי המשרה מהמקור…</p>
-} @else if (store.jobsError()) {
+} @else if (listingError(); as failure) {
   <section class="account-panel">
     <h1>לא ניתן לטעון את המשרה כרגע</h1>
-    <p role="alert">{{ store.jobsError() }}</p>
-    <button class="account-button" (click)="store.loadJobs()">ניסיון נוסף</button>
+    <p role="alert">{{ failure.message }}</p>
+    @if (failure.code === 'auth') {
+      <a
+        class="account-button"
+        routerLink="/login"
+        [queryParams]="{ returnTo: '/app/jobs/' + params()?.get('id') }"
+        >כניסה מחדש לחשבון</a
+      >
+    }
+    <button class="account-button" (click)="retry()">ניסיון נוסף</button>
   </section>
 } @else {
   <section

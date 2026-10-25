@@ -132,6 +132,7 @@ test('deleting B in another tab preserves A and new-text drafts; deleting A clea
   const draft = 'UNSAVED synthetic A Python SQL';
   const newText = 'UNSAVED new synthetic candidate draft';
   await page.getByLabel('טקסט לבדיקה ולתיקון', { exact: true }).fill(draft);
+  await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
   await page.getByLabel('טקסט קורות החיים', { exact: true }).fill(newText);
   const other = await context.newPage();
   await other.goto('/app/resumes');
@@ -162,6 +163,7 @@ test('focus synchronizes active/expired resumes without erasing edits; account e
   await page.goto('/app/resumes');
   await page.getByRole('button', { name: 'Synthetic A', exact: true }).click();
   await page.getByLabel('טקסט לבדיקה ולתיקון', { exact: true }).fill('UNSAVED A draft Python SQL');
+  await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
   await page
     .getByLabel('טקסט קורות החיים', { exact: true })
     .fill('UNSAVED brand-new synthetic text');
@@ -204,6 +206,8 @@ test('maintenance diagnostics and enlarged Hebrew forms retain keyboard access a
 }) => {
   await fixture(context);
   await page.goto('/app/resumes');
+  await page.getByText('שמירה, פרטיות ותחזוקה', { exact: true }).focus();
+  await page.getByText('שמירה, פרטיות ותחזוקה', { exact: true }).press('Enter');
   await page.getByText('פרטים טכניים למפעיל', { exact: true }).focus();
   await page.getByText('פרטים טכניים למפעיל', { exact: true }).press('Enter');
   await expect(page.getByText(/לא הוגדר יעד התראה ומפעיל/)).toBeVisible();

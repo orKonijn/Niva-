@@ -1,0 +1,4616 @@
+{
+  "at": "2026-10-25T08:09:56.090Z",
+  "fixtureData": true,
+  "cases": [
+    {
+      "name": "home",
+      "path": "/",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-one w-[440px] h-[440px] max-[1200px]:w-[370px] max-[1200px]:h-[370px] max-[901px]:w-[290px] max-[901px]:h-[290px] max-[768px]:w-[320px] max-[768px]:h-[320px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-two w-[500px] h-[310px] max-[1200px]:w-[400px] max-[1200px]:h-[260px] max-[901px]:w-[320px] max-[901px]:h-[230px] max-[768px]:w-[350px] max-[768px]:h-[240px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 320,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-one w-[440px] h-[440px] max-[1200px]:w-[370px] max-[1200px]:h-[370px] max-[901px]:w-[290px] max-[901px]:h-[290px] max-[768px]:w-[320px] max-[768px]:h-[320px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-two w-[500px] h-[310px] max-[1200px]:w-[400px] max-[1200px]:h-[260px] max-[901px]:w-[320px] max-[901px]:h-[230px] max-[768px]:w-[350px] max-[768px]:h-[240px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ],
+      "screenshot": "screenshots/home-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/login-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/register-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/forgot-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/reset-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/onboarding-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/dashboard-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/jobs-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/saved-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/detail-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/unknown-job-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ],
+      "screenshot": "screenshots/map-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/preferences-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/profile-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/account-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/resumes-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/assistant-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/history-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/privacy-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/terms-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/accessibility-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 390,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/not-found-390-light.png",
+      "axe": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 768,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 1024,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ],
+      "screenshot": "screenshots/home-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/login-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/register-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/forgot-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/reset-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/onboarding-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/dashboard-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/jobs-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/saved-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/detail-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/unknown-job-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/map-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/preferences-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/profile-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/account-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/resumes-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/assistant-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/history-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/privacy-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/terms-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/accessibility-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 1440,
+      "theme": "light",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/not-found-1440-light.png",
+      "axe": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-one w-[440px] h-[440px] max-[1200px]:w-[370px] max-[1200px]:h-[370px] max-[901px]:w-[290px] max-[901px]:h-[290px] max-[768px]:w-[320px] max-[768px]:h-[320px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-two w-[500px] h-[310px] max-[1200px]:w-[400px] max-[1200px]:h-[260px] max-[901px]:w-[320px] max-[901px]:h-[230px] max-[768px]:w-[350px] max-[768px]:h-[240px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 320,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 320,
+      "innerWidth": 320,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-one w-[440px] h-[440px] max-[1200px]:w-[370px] max-[1200px]:h-[370px] max-[901px]:w-[290px] max-[901px]:h-[290px] max-[768px]:w-[320px] max-[768px]:h-[320px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "orbit absolute rounded-[50%] z-[-1] orbit-two w-[500px] h-[310px] max-[1200px]:w-[400px] max-[1200px]:h-[260px] max-[901px]:w-[320px] max-[901px]:h-[230px] max-[768px]:w-[350px] max-[768px]:h-[240px]",
+          "text": ""
+        },
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ],
+      "screenshot": "screenshots/home-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/login-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/register-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/forgot-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/reset-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/onboarding-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/dashboard-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/jobs-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/saved-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/detail-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/unknown-job-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ],
+      "screenshot": "screenshots/map-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/preferences-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/profile-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/account-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/resumes-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/assistant-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/history-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/privacy-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/terms-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/accessibility-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 390,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/not-found-390-dark.png",
+      "axe": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 768,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 768,
+      "innerWidth": 768,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        },
+        {
+          "tag": "IMG",
+          "cls": "leaflet-tile",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 1024,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "innerWidth": 1024,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": []
+    },
+    {
+      "name": "home",
+      "path": "/",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [
+        {
+          "tag": "DIV",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "STRONG",
+          "cls": "",
+          "text": "UnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitleUnbrokenTitl"
+        },
+        {
+          "tag": "SMALL",
+          "cls": "",
+          "text": "UnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEmployerUnbrokenEm"
+        },
+        {
+          "tag": "SPAN",
+          "cls": "status-badge items-center justify-center gap-[5px] bg-success-soft text-success rounded-[7px] p-[5px_9px] font-medium",
+          "text": "לבדיקה שלך"
+        }
+      ],
+      "screenshot": "screenshots/home-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "login",
+      "path": "/login",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/login-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "register",
+      "path": "/register",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/register-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "forgot",
+      "path": "/forgot-password",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/forgot-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "reset",
+      "path": "/reset-password?token=synthetic",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/reset-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "onboarding",
+      "path": "/signup",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/onboarding-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "dashboard",
+      "path": "/app",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/dashboard-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "jobs",
+      "path": "/app/jobs",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/jobs-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "saved",
+      "path": "/app/jobs?saved=true",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/saved-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "detail",
+      "path": "/app/jobs/greenhouse-appsflyer-101",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/detail-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "unknown-job",
+      "path": "/app/jobs/greenhouse-appsflyer-999999",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/unknown-job-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "map",
+      "path": "/app/jobs?view=map",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/map-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "preferences",
+      "path": "/app/preferences",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/preferences-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "profile",
+      "path": "/app/profile",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/profile-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "account",
+      "path": "/account",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/account-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "resumes",
+      "path": "/app/resumes",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/resumes-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "assistant",
+      "path": "/app/assistant",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "offenders": [],
+      "screenshot": "screenshots/assistant-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "history",
+      "path": "/app/applications",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/history-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "privacy",
+      "path": "/privacy",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/privacy-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "terms",
+      "path": "/terms",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/terms-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "accessibility",
+      "path": "/accessibility",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/accessibility-1440-dark.png",
+      "axe": []
+    },
+    {
+      "name": "not-found",
+      "path": "/not-a-route",
+      "width": 1440,
+      "theme": "dark",
+      "dir": "rtl",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "brokenImages": [],
+      "smallControls": [],
+      "offenders": [],
+      "screenshot": "screenshots/not-found-1440-dark.png",
+      "axe": []
+    }
+  ],
+  "console": [
+    {
+      "theme": "light",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "light",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "light",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "light",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "light",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "dark",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "dark",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "dark",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "dark",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "theme": "dark",
+      "type": "error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "failedRequests": [
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/feed?limit=12",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "badResponses": [
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "light",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    },
+    {
+      "theme": "dark",
+      "url": "http://127.0.0.1:4300/api/listings/greenhouse-appsflyer-999999",
+      "status": 404
+    }
+  ]
+}

@@ -30,7 +30,7 @@
   ></div>
   <div class="mt-5 grid gap-4 sm:grid-cols-2" aria-label="רשימת מיקומים נגישה">
     @for (group of groups(); track group.key) {
-      <section class="rounded-control border border-line p-4">
+      <section class="job-text min-w-0 rounded-control border border-line p-4">
         <button
           type="button"
           class="account-button mb-3"
@@ -63,7 +63,7 @@
     }
   </div>
   @if (remote().length) {
-    <section class="mt-5">
+    <section class="job-text min-w-0 mt-5">
       <h3 class="text-lg">עבודה מרחוק — ללא משרד על המפה</h3>
       @for (job of remote(); track job.id) {
         <a
@@ -75,7 +75,7 @@
     </section>
   }
   @if (missing().length) {
-    <section class="mt-5">
+    <section class="job-text min-w-0 mt-5">
       <h3 class="text-lg">כתובת או קואורדינטות לא זמינות</h3>
       @for (job of missing(); track job.id) {
         <a

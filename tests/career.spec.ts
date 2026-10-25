@@ -286,6 +286,7 @@ test('missing AI and scanning configuration is explicit without fake success', a
   await expect(page.getByRole('status')).toContainText('טרם הוגדר');
   await expect(page.getByRole('button', { name: 'שליחה', exact: true })).toBeDisabled();
   await page.goto('/app/resumes');
+  await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
   await expect(page.getByText(/העלאת קבצים אינה זמינה/)).toBeVisible();
   await expect(page.getByLabel('קובץ לבדיקה', { exact: true })).toBeDisabled();
 });

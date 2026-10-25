@@ -6,158 +6,57 @@
   </div>
   <a routerLink="/app/assistant" class="account-button">עזרה בניסוח ובתרגול ריאיון</a>
 </div>
-<section class="account-panel" aria-label="שמירה ועיבוד קורות חיים">
-  <h2>פרטיות ושליטה</h2>
-  <p>
-    טקסט וגרסאות נשמרים בחשבון ל־30 יום ממועד יצירתם, ואז אינם נגישים ונמחקים בניקוי הבא. ניתן לייצא
-    ולמחוק בכל עת. לא שולחים קורות חיים למעסיק.
+<p class="field-note mb-4" role="note">
+  הגרסאות נשמרות ל־30 יום, וניתן לייצא ולמחוק אותן בכל עת. אין שליחה למעסיק.
+</p>
+@if (career.operations(); as ops) {
+  @if ((ops.ingestionOverdue ?? ops.schedulerOverdue) || ops.cleanupOverdue) {
+    <p class="field-note mb-4" role="note">
+      עדכונים וניקוי מתעכבים. מידע שפג תוקפו חסום; פרטי התחזוקה בהמשך העמוד.
+    </p>
+  }
+}
+@if (job(); as context) {
+  <p class="job-text mb-4">
+    המשרה שבחרת: <bdi>{{ context.title }}</bdi
+    >. בוחרים גרסה לבדיקה ולהתאמה.
   </p>
-  <p>
-    התאמה בסיסית מדגישה עדויות רלוונטיות ושומרת על סדר הטקסט והעובדות, בתוך Niva. אין העברה לבינה
-    מלאכותית בפעולה זו. בצ׳אט נדרשת הסכמה נפרדת לשיתוף עם OpenAI.
-  </p>
-  <p>
-    ייצוא זמין כטקסט UTF-8 נגיש וניתן לבחירה. המקור נשמר. אין הבטחה לריאיון או לעמידה בכל מערכת ATS.
-  </p>
-</section>
+}
 @if (career.error()) {
   <p role="alert">{{ career.error() }}</p>
 }
 @if (notice()) {
   <p role="status" class="account-panel">{{ notice() }}</p>
 }
-@if (career.operations(); as ops) {
-  <section class="account-panel" aria-label="מצב תחזוקת נתונים">
-    <h2>מצב תחזוקה</h2>
-    <p>
-      {{
-        (ops.ingestionOverdue ?? ops.schedulerOverdue) || ops.cleanupOverdue
-          ? 'העדכונים וניקוי הנתונים מתעכבים. מידע שפג תוקפו חסום לקריאה; מומלץ להמתין או לפנות לתמיכה.'
-          : 'תחזוקת הנתונים פעלה לאחרונה.'
-      }}
-    </p>
-    <details>
-      <summary>פרטים טכניים למפעיל</summary>
-      <p>
-        {{
-          ops.scheduledObserved && !ops.schedulerOverdue
-            ? 'נצפה תזמון עדכני.'
-            : 'לא נצפה תזמון עדכני.'
-        }}
-        יעד ניקוי פיזי: {{ ops.cleanupBoundMinutes }} דקות, בכפוף לתזמון פעיל.
-      </p>
-      <p>
-        {{
-          ops.alerts?.configured
-            ? 'הוגדר יעד התראה. מסירה בפועל דורשת בדיקת מפעיל.'
-            : 'לא הוגדר יעד התראה ומפעיל במערכת. נדרשת הגדרה לפני הרחבת השימוש.'
-        }}
-      </p>
-      @for (row of ops.rows || []; track row.id) {
-        <p>
-          <bdi>{{ row.id }}</bdi> · הצלחה אחרונה:
-          <time [attr.title]="row.succeeded_at ? newDate(row.succeeded_at) : ''">{{
-            row.succeeded_at ? localDate(newDate(row.succeeded_at)) : 'לא נצפתה'
-          }}</time>
-          · <bdi>{{ row.error || 'ללא שגיאה רשומה' }}</bdi>
-        </p>
-      }
-    </details>
-  </section>
-}
-<div class="career-columns">
-  <section class="account-panel">
-    <h2>מתחילים מטקסט</h2>
-    <form (ngSubmit)="create()">
-      <label class="career-field"
-        >שם הגרסה<input
-          name="resumeName"
-          [disabled]="busy()"
-          [(ngModel)]="name"
-          maxlength="120"
-          required
-      /></label>
-      <label class="career-field"
-        >טקסט קורות החיים<textarea
-          name="resumeText"
-          [disabled]="busy()"
-          dir="auto"
-          [(ngModel)]="text"
-          minlength="20"
-          maxlength="30000"
-          rows="9"
-          required
-        ></textarea>
-      </label>
-      <button class="account-button account-primary" [disabled]="busy() || text.trim().length < 20">
-        שמירת טיוטה לבדיקה
-      </button>
-    </form>
-    <hr class="my-5" />
-    <h3>או קובץ PDF / DOCX</h3>
-    @if (career.config().uploads) {
-      <p>
-        הקובץ יועבר ל־<bdi>{{ career.config().processor }}</bdi> לסריקת נוזקות ופענוח מוגבל. עד
-        750KB, עד 20 עמודים. אין להשתמש במסמכים המכילים מידע שאינך רוצה להעביר לשירות זה.
-      </p>
-      <label class="career-check"
-        ><input type="checkbox" [(ngModel)]="processingConsent" />אני מאשר/ת העברה לשירות הסריקה
-        והפענוח המוצג</label
+<section class="account-panel">
+  <h2>הגרסאות שלי</h2>
+  <p>עד 20 גרסאות. אישור עובדות והפעלת גרסה הן פעולות נפרדות.</p>
+  @for (resume of career.resumes(); track resume.id) {
+    <div class="career-version">
+      <button
+        class="account-button"
+        [attr.aria-pressed]="selected()?.id === resume.id"
+        (click)="select(resume)"
+        [disabled]="busy()"
       >
-    } @else {
-      <p>העלאת קבצים אינה זמינה: שירות הסריקה והפענוח טרם הוגדר. ניתן להדביק טקסט בבטחה.</p>
-    }
-    <label class="career-field"
-      >קובץ לבדיקה<input
-        type="file"
-        accept=".pdf,.docx"
-        [disabled]="busy() || !career.config().uploads || !processingConsent"
-        (change)="upload($event)"
-    /></label>
-  </section>
-  <section class="account-panel">
-    <h2>הגרסאות שלי</h2>
-    <p>עד 20 גרסאות. אישור עובדות והפעלת גרסה הן פעולות נפרדות.</p>
-    @for (resume of career.resumes(); track resume.id) {
-      <div class="career-version">
-        <button
-          class="account-button"
-          [attr.aria-pressed]="selected()?.id === resume.id"
-          (click)="select(resume)"
-          [disabled]="busy()"
-        >
-          <bdi>{{ resume.name }}</bdi>
-        </button>
-        <p>
-          {{ resume.active ? 'פעילה · ' : ''
-          }}{{ resume.confirmed ? 'עובדות אושרו' : 'טיוטה לבדיקה' }} ·
-          {{ resume.kind === 'original' ? 'מקור' : resume.kind === 'tailored' ? 'התאמה' : 'עריכה' }}
-        </p>
-        <p>
-          תוקף: <time [attr.title]="resume.expiresAt">{{ localDate(resume.expiresAt) }}</time>
-        </p>
-        <button class="account-button" (click)="deleteCandidate.set(resume.id)" [disabled]="busy()">
-          מחיקת גרסה
-        </button>
-      </div>
-    } @empty {
-      <p>אין עדיין גרסאות. מתחילים בהדבקת הטקסט ובדיקה שלו.</p>
-    }
-  </section>
-</div>
-@if (deleteCandidate()) {
-  <section class="account-panel" role="region" aria-label="אישור מחיקת גרסה">
-    <h2>למחוק את הגרסה?</h2>
-    <p>
-      המחיקה אינה ניתנת לביטול. יימחקו גם ציונים ושיחות שעשויים להכיל את הטקסט. גרסאות נגזרות הן
-      עותקים נפרדים. גם העריכה המקומית שלא נשמרה לגרסה זו תימחק.
-    </p>
-    <button class="account-button" (click)="deleteCandidate.set(null)">ביטול</button
-    ><button class="account-button" [disabled]="busy()" (click)="remove()">
-      אישור מחיקה לצמיתות
-    </button>
-  </section>
-}
+        <bdi>{{ resume.name }}</bdi>
+      </button>
+      <p>
+        {{ resume.active ? 'פעילה · ' : ''
+        }}{{ resume.confirmed ? 'עובדות אושרו' : 'טיוטה לבדיקה' }} ·
+        {{ resume.kind === 'original' ? 'מקור' : resume.kind === 'tailored' ? 'התאמה' : 'עריכה' }}
+      </p>
+      <p>
+        תוקף: <time [attr.title]="resume.expiresAt">{{ localDate(resume.expiresAt) }}</time>
+      </p>
+      <button class="account-button" (click)="askDelete(resume.id, $event)" [disabled]="busy()">
+        מחיקת גרסה
+      </button>
+    </div>
+  } @empty {
+    <p>אין עדיין גרסאות. מתחילים בהדבקת הטקסט ובדיקה שלו.</p>
+  }
+</section>
 @if (selected(); as resume) {
   <section class="account-panel" aria-label="בדיקה והשוואת גרסאות">
     <h2>
@@ -230,3 +129,148 @@
     }
   </section>
 }
+
+<details class="resume-create account-panel" [open]="!career.resumes().length">
+  <summary>הוספת גרסה חדשה</summary>
+  <section class="pt-4">
+    <h2>מתחילים מטקסט</h2>
+    <form (ngSubmit)="create()">
+      <label class="career-field"
+        >שם הגרסה<input
+          name="resumeName"
+          [disabled]="busy()"
+          [(ngModel)]="name"
+          maxlength="120"
+          required
+      /></label>
+      <label class="career-field"
+        >טקסט קורות החיים<textarea
+          name="resumeText"
+          [disabled]="busy()"
+          dir="auto"
+          [(ngModel)]="text"
+          minlength="20"
+          maxlength="30000"
+          rows="9"
+          required
+        ></textarea>
+      </label>
+      <button class="account-button account-primary" [disabled]="busy() || text.trim().length < 20">
+        שמירת טיוטה לבדיקה
+      </button>
+    </form>
+    <hr class="my-5" />
+    <h3>או קובץ PDF / DOCX</h3>
+    @if (career.config().uploads) {
+      <p>
+        הקובץ יועבר ל־<bdi>{{ career.config().processor }}</bdi> לסריקת נוזקות ופענוח מוגבל. עד
+        750KB, עד 20 עמודים. אין להשתמש במסמכים המכילים מידע שאינך רוצה להעביר לשירות זה.
+      </p>
+      <label class="career-check"
+        ><input type="checkbox" [(ngModel)]="processingConsent" />אני מאשר/ת העברה לשירות הסריקה
+        והפענוח המוצג</label
+      >
+    } @else {
+      <p>העלאת קבצים אינה זמינה: שירות הסריקה והפענוח טרם הוגדר. ניתן להדביק טקסט בבטחה.</p>
+    }
+    <label class="career-field"
+      >קובץ לבדיקה<input
+        type="file"
+        accept=".pdf,.docx"
+        [disabled]="busy() || !career.config().uploads || !processingConsent"
+        (change)="upload($event)"
+    /></label>
+  </section>
+</details>
+<details class="account-panel resume-privacy">
+  <summary>שמירה, פרטיות ותחזוקה</summary>
+  <section class="account-panel" aria-label="שמירה ועיבוד קורות חיים">
+    <h2>פרטיות ושליטה</h2>
+    <p>
+      טקסט וגרסאות נשמרים בחשבון ל־30 יום ממועד יצירתם, ואז אינם נגישים ונמחקים בניקוי הבא. ניתן
+      לייצא ולמחוק בכל עת. לא שולחים קורות חיים למעסיק.
+    </p>
+    <details class="resume-privacy">
+      <summary>פרטים על התאמה, ייצוא ושיתוף</summary>
+      <p>
+        התאמה בסיסית מדגישה עדויות רלוונטיות ושומרת על סדר הטקסט והעובדות, בתוך Niva. אין העברה
+        לבינה מלאכותית בפעולה זו. בצ׳אט נדרשת הסכמה נפרדת לשיתוף עם OpenAI.
+      </p>
+      <p>
+        ייצוא זמין כטקסט UTF-8 נגיש וניתן לבחירה. המקור נשמר. אין הבטחה לריאיון או לעמידה בכל מערכת
+        ATS.
+      </p>
+    </details>
+  </section>
+  @if (career.operations(); as ops) {
+    <section class="account-panel" aria-label="מצב תחזוקת נתונים">
+      <h2>מצב תחזוקה</h2>
+      <p>
+        {{
+          (ops.ingestionOverdue ?? ops.schedulerOverdue) || ops.cleanupOverdue
+            ? 'העדכונים וניקוי הנתונים מתעכבים. מידע שפג תוקפו חסום לקריאה; מומלץ להמתין או לפנות לתמיכה.'
+            : 'תחזוקת הנתונים פעלה לאחרונה.'
+        }}
+      </p>
+      <details>
+        <summary>פרטים טכניים למפעיל</summary>
+        <p>
+          {{
+            ops.scheduledObserved && !ops.schedulerOverdue
+              ? 'נצפה תזמון עדכני.'
+              : 'לא נצפה תזמון עדכני.'
+          }}
+          יעד ניקוי פיזי: {{ ops.cleanupBoundMinutes }} דקות, בכפוף לתזמון פעיל.
+        </p>
+        <p>
+          {{
+            ops.alerts?.configured
+              ? 'הוגדר יעד התראה. מסירה בפועל דורשת בדיקת מפעיל.'
+              : 'לא הוגדר יעד התראה ומפעיל במערכת. נדרשת הגדרה לפני הרחבת השימוש.'
+          }}
+        </p>
+        @for (row of ops.rows || []; track row.id) {
+          <p>
+            <bdi>{{ row.id }}</bdi> · הצלחה אחרונה:
+            <time [attr.title]="row.succeeded_at ? newDate(row.succeeded_at) : ''">{{
+              row.succeeded_at ? localDate(newDate(row.succeeded_at)) : 'לא נצפתה'
+            }}</time>
+            · <bdi>{{ row.error || 'ללא שגיאה רשומה' }}</bdi>
+          </p>
+        }
+      </details>
+    </section>
+  }
+</details>
+<dialog
+  #deleteDialog
+  class="resume-dialog"
+  role="alertdialog"
+  aria-labelledby="delete-resume-title"
+  aria-describedby="delete-resume-description"
+  (cancel)="cancelDelete($event)"
+  [attr.aria-busy]="busy()"
+>
+  <h2 id="delete-resume-title">למחוק את הגרסה?</h2>
+  <p id="delete-resume-description">
+    המחיקה אינה ניתנת לביטול. יימחקו גם ציונים ושיחות שעשויים להכיל את הטקסט. גרסאות נגזרות הן
+    עותקים נפרדים. גם העריכה המקומית שלא נשמרה לגרסה זו תימחק.
+  </p>
+  <div class="career-actions">
+    <button
+      type="button"
+      data-cancel
+      class="account-button"
+      [disabled]="busy()"
+      (click)="cancelDelete()"
+    >
+      ביטול
+    </button>
+    <button type="button" class="account-button" [disabled]="busy()" (click)="remove()">
+      {{ busy() ? 'מוחקים את הגרסה…' : 'אישור מחיקה לצמיתות' }}
+    </button>
+  </div>
+  @if (notice()) {
+    <p role="alert">{{ notice() }}</p>
+  }
+</dialog>

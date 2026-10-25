@@ -145,7 +145,11 @@
                   minlength="12"
                   maxlength="128"
                   required
-                  aria-describedby="password-help"
+                  [attr.aria-describedby]="
+                    passwordField.invalid && (passwordField.touched || authForm.submitted)
+                      ? 'password-help password-validation'
+                      : 'password-help'
+                  "
                 /><button
                   type="button"
                   class="account-button shrink-0"
@@ -159,7 +163,7 @@
                 12–128 תווים. סיסמה ייעודית לחשבון Niva.
               </p>
               @if (passwordField.invalid && (passwordField.touched || authForm.submitted)) {
-                <p class="field-error">נדרשת סיסמה באורך 12–128 תווים.</p>
+                <p id="password-validation" class="field-error">נדרשת סיסמה באורך 12–128 תווים.</p>
               }
             </div>
           }

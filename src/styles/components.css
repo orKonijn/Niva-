@@ -506,10 +506,10 @@
   }
   .onboarding-aside > img {
     width: 100%;
-    height: 235px;
-    object-fit: cover;
-    border-radius: 35%;
-    mix-blend-mode: multiply;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: normal;
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 50%, transparent 100%);
     margin-block: 20px;
   }
   .aside-promise {
@@ -1082,4 +1082,8 @@
       display: none;
     }
   }
+}
+
+.job-text {
+  overflow-wrap: anywhere;
 }

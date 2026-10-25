@@ -16,10 +16,10 @@
       </h3>
       <span
         ><bdi>{{ job().company }}</bdi>
-        <span class="muted text-muted"
-          >· {{ job().source ? job().source!.name : 'חברת הדגמה' }}</span
-        ></span
-      >
+        @if (!job().source) {
+          <span class="muted text-muted"> · חברת הדגמה</span>
+        }
+      </span>
     </div>
     <button
       class="icon-button inline-flex justify-center items-center min-w-[44px] min-h-[44px] bg-transparent rounded-[11px] hover:bg-pale save-button self-[flex-start] text-[14px]"

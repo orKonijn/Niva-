@@ -23,6 +23,13 @@ export interface ImportPreview {
   receipt: string;
   counts: { saved: number; demoApprovals: number };
 }
+export type ListingState =
+  | { status: 'idle' | 'loading' | 'ready' | 'missing' }
+  | {
+      status: 'error';
+      code: 'auth' | 'rate' | 'server' | 'timeout' | 'invalid' | 'network';
+      message: string;
+    };
 @Injectable({ providedIn: 'root' })
 export class AppStore {
   readonly demo = inject(DemoStore);
@@ -43,6 +50,9 @@ export class AppStore {
   readonly archivedJobs = signal<Job[]>([]);
   readonly jobsLoading = signal(false);
   readonly jobsError = signal('');
+  readonly listingStates = signal<Record<string, ListingState>>({});
+  private readonly listingRequests = new Map<string, Promise<void>>();
+  private listingEpoch = 0;
   readonly feedCheckedAt = signal('');
   readonly feedStale = signal(false);
   readonly coverage = signal<{ category: string; district: string; style: string; n: number }[]>(
@@ -188,20 +198,108 @@ export class AppStore {
       if (generation === this.feedGeneration) this.jobsLoading.set(false);
     }
   }
-  async ensureJob(id: string): Promise<void> {
-    if (!this.session.config().discovery || this.findJob(id) || !/^(greenhouse|lever)-/.test(id))
+  async ensureJob(id: string, retry = false): Promise<void> {
+    if (
+      !this.session.config().discovery ||
+      (!retry && this.findJob(id)) ||
+      !/^(greenhouse|lever)-/.test(id)
+    )
       return;
+    const pending = this.listingRequests.get(id);
+    if (pending) return pending;
     const owner = this.session.userId();
-    try {
-      const response = await fetch('/api/listings/' + encodeURIComponent(id), {
-        signal: AbortSignal.timeout(10000),
-      });
-      if (response.ok) {
-        const job = (await response.json()) as Job;
-        if (owner === this.session.userId()) this.archivedJobs.update((jobs) => [...jobs, job]);
+    const update = (state: ListingState) => {
+      if (owner === this.session.userId() && epoch === this.listingEpoch)
+        this.listingStates.update((states) => ({ ...states, [id]: state }));
+    };
+    const epoch = this.listingEpoch;
+    update({ status: 'loading' });
+    const request = (async () => {
+      const timeoutSignal = AbortSignal.timeout(10000);
+      try {
+        const response = await fetch('/api/listings/' + encodeURIComponent(id), {
+          signal: timeoutSignal,
+          credentials: 'same-origin',
+          cache: 'no-store',
+        });
+        if (response.status === 404) {
+          update({ status: 'missing' });
+          return;
+        }
+        if (!response.ok) {
+          const code =
+            response.status === 401 || response.status === 403
+              ? 'auth'
+              : response.status === 429
+                ? 'rate'
+                : 'server';
+          update({
+            status: 'error',
+            code,
+            message:
+              code === 'auth'
+                ? 'החיבור לחשבון פג או שאין גישה למשרה. יש להתחבר מחדש ולנסות שוב.'
+                : code === 'rate'
+                  ? 'בוצעו בקשות רבות. יש להמתין מעט ולנסות שוב.'
+                  : 'שירות המשרות אינו זמין כרגע. אפשר לנסות שוב.',
+          });
+          return;
+        }
+        let job: Job;
+        try {
+          job = await response.json();
+          if (
+            !job ||
+            job.id !== id ||
+            typeof job.title !== 'string' ||
+            typeof job.company !== 'string' ||
+            !Array.isArray(job.offices) ||
+            !Array.isArray(job.skills) ||
+            job.source?.kind !== 'real'
+          )
+            throw Error();
+          const url = new URL(job.source.applicationUrl);
+          if (
+            url.protocol !== 'https:' ||
+            !(
+              (/^greenhouse-appsflyer-\d+$/.test(id) && url.hostname === 'careers.appsflyer.com') ||
+              (/^lever-walkme-[a-z0-9-]+$/i.test(id) &&
+                url.hostname === 'jobs.lever.co' &&
+                url.pathname.startsWith('/walkme/'))
+            )
+          )
+            throw Error();
+        } catch (error) {
+          if (timeoutSignal.aborted || (error instanceof Error && error.name === 'TimeoutError'))
+            throw error;
+          update({
+            status: 'error',
+            code: 'invalid',
+            message: 'התקבלה תשובה לא תקינה לשאילתת המשרה. אפשר לנסות שוב.',
+          });
+          return;
+        }
+        if (owner === this.session.userId() && epoch === this.listingEpoch) {
+          this.archivedJobs.update((jobs) => [...jobs.filter((j) => j.id !== id), job]);
+          update({ status: 'ready' });
+        }
+      } catch (error) {
+        const timeout =
+          timeoutSignal.aborted || (error instanceof Error && error.name === 'TimeoutError');
+        update({
+          status: 'error',
+          code: timeout ? 'timeout' : 'network',
+          message: timeout
+            ? 'טעינת המשרה ארכה יותר מדי זמן. אפשר לנסות שוב.'
+            : 'החיבור לשירות המשרות נכשל. יש לבדוק את החיבור ולנסות שוב.',
+        });
       }
-    } catch {
-      this.jobsError.set('לא ניתן לטעון את פרטי המשרה.');
+    })();
+    this.listingRequests.set(id, request);
+    try {
+      await request;
+    } finally {
+      if (this.listingRequests.get(id) === request) this.listingRequests.delete(id);
     }
   }
   readonly preferences = computed(() =>
@@ -247,6 +345,9 @@ export class AppStore {
         this.accountGeneration = crypto.randomUUID();
         this.account.set(emptyAccountState());
         this.archivedJobs.set([]);
+        this.listingStates.set({});
+        this.listingEpoch++;
+        this.listingRequests.clear();
         this.feedGeneration++;
         this.feedAbort?.abort();
         this.realJobs.set([]);

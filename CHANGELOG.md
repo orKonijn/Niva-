@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased
+
+### Publication requested — UI/UX review repairs
+
+The user subsequently authorized publication of the verified UI-01–08 repairs and their evidence. Source preparation now includes committing/pushing the reviewed source and building its mapped Sites archive. The successful saved release and exact source identifiers will be recorded after deployment. Existing owner-only access and provider/scheduler settings are preserved. The local verification report below remains historical evidence.
+
+### 25 October 2026 — UI/UX review repairs (local)
+
+- **UI-01:** wrap full job titles/employers without truncation in cards, dashboard, saved/feed/map lists, detail and career context. Keep RTL/bidi isolation and action sizing.
+- **UI-02:** react to URL query changes and removal in assistant/resumes; invalidate stale chat completion and tailoring selection while preserving unrelated drafts and matching request context.
+- **UI-03:** track individual listing loading, missing, authentication, rate-limit, server, timeout, invalid-response and network states; retry that listing without reloading the app or retrying the feed.
+- **UI-04:** associate the actual password validation error with its field and focus the first invalid input after validation renders. Preserve field values on server failure.
+- **UI-05:** replace the off-screen inline resume-delete confirmation with a labeled native modal dialog. Focus cancel, support Escape/focus restoration and guard duplicate deletion while busy.
+- **UI-06:** retain the existing onboarding artwork with normal blending, original proportions and a soft elliptical edge mask in both themes.
+- **UI-07:** show saved versions/current review before secondary creation/privacy sections. Keep concise retention/delayed-cleanup notices visible, processing consent explicit and full maintenance details discoverable.
+- **UI-08:** increase important metadata to 13px and remove duplicate source text from the employer subtitle. Preserve version18 action spacing and theme tokens.
+- Clarified stale capability/staging documentation without claiming hosted operations passed. All original review evidence remains intact. Final verification, scorecard and image links are recorded in the [implementation report](docs/ui-review-repairs-20261025.md) and [genuine before/after gallery](docs/screenshots/changes/ui-review-images.md).
+- Verification:59 frontend,79 server and1 provenance check passed; all three type checks, formatting and production build passed. The initial276-case browser run had262 passes,13 failures and1 flaky case. After correcting disclosure-test flows, context-fixture timing and WebKit timeout handling,76 affected cases passed without retries; a final obsolete-tailoring-error guard passed8 focused cases, including4 new cases. Consolidated browser coverage:280 passing cases. The220-case route audit has no overflow and88 axe scans have no reported violations. See the report for exact scopes and initial failures.
+- No commit, push, deployment, production access/data change, provider activation or scheduler activation in this pass. Version18 remains the last published release. Revised local UI judgments are8/10 in each overall category, with Medium overall confidence; actual browser zoom, spoken Hebrew screen-reader output, physical devices and hosted gates remain separate evidence requirements.
+
 <a id="version-18"></a>
 
 ## Version 18 — Job-card action layout

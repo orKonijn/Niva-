@@ -1,5 +1,13 @@
 import { localDate } from '../core/local-date';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatchIndicator } from '../shared/match-indicator';
 import { FormsModule } from '@angular/forms';
@@ -22,10 +30,28 @@ export class JobDetail {
   readonly store = inject(AppStore);
   readonly params = toSignal(inject(ActivatedRoute).paramMap);
   readonly job = computed(() => this.store.findJob(this.params()?.get('id') ?? ''));
+  readonly listingState = computed(
+    () => this.store.listingStates()[this.params()?.get('id') ?? ''] ?? { status: 'idle' as const },
+  );
+  readonly listingError = computed(() => {
+    const state = this.listingState();
+    return state.status === 'error' ? state : null;
+  });
+  retry() {
+    void this.store.ensureJob(this.params()?.get('id') ?? '', true);
+  }
   constructor() {
-    const id = inject(ActivatedRoute).snapshot.paramMap.get('id') ?? '';
-    void this.store.ensureJob(id);
-    if (/^(greenhouse|lever)-/.test(id)) this.store.useCatalog('real');
+    effect(() => {
+      const id = this.params()?.get('id') ?? '';
+      const discovery = this.store.session.config().discovery;
+      this.store.session.userId();
+      untracked(() => {
+        if (/^(greenhouse|lever)-/.test(id)) {
+          this.store.useCatalog('real');
+          if (discovery) void this.store.ensureJob(id);
+        }
+      });
+    });
   }
   readonly eligible = computed(() =>
     this.store.eligibleJobs().some((j) => j.id === this.job()?.id),

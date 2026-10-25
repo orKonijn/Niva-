@@ -1,0 +1,269 @@
+{
+  "phase": "before",
+  "baseline": "24d9d2e67168708bb9f82be2ea74ac4e1ad36815",
+  "overflow": [
+    {
+      "route": "/app",
+      "theme": "light",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "light",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "light",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "light",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app",
+      "theme": "light",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "light",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "light",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "light",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app",
+      "theme": "light",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "light",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "light",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "light",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app",
+      "theme": "light",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "light",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "light",
+      "width": 1024,
+      "scroll": 1726
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "light",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app",
+      "theme": "light",
+      "width": 1440,
+      "scroll": 2345
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "light",
+      "width": 1440,
+      "scroll": 2345
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "light",
+      "width": 1440,
+      "scroll": 1778
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "light",
+      "width": 1440,
+      "scroll": 2345
+    },
+    {
+      "route": "/app",
+      "theme": "dark",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "dark",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "dark",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "dark",
+      "width": 320,
+      "scroll": 1512
+    },
+    {
+      "route": "/app",
+      "theme": "dark",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "dark",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "dark",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "dark",
+      "width": 390,
+      "scroll": 1512
+    },
+    {
+      "route": "/app",
+      "theme": "dark",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "dark",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "dark",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "dark",
+      "width": 768,
+      "scroll": 1704
+    },
+    {
+      "route": "/app",
+      "theme": "dark",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "dark",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "dark",
+      "width": 1024,
+      "scroll": 1726
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "dark",
+      "width": 1024,
+      "scroll": 2115
+    },
+    {
+      "route": "/app",
+      "theme": "dark",
+      "width": 1440,
+      "scroll": 2345
+    },
+    {
+      "route": "/app/jobs",
+      "theme": "dark",
+      "width": 1440,
+      "scroll": 2345
+    },
+    {
+      "route": "/app/jobs?saved=true",
+      "theme": "dark",
+      "width": 1440,
+      "scroll": 1778
+    },
+    {
+      "route": "/app/jobs?view=map",
+      "theme": "dark",
+      "width": 1440,
+      "scroll": 2345
+    }
+  ],
+  "assistant": {
+    "url": "http://127.0.0.1:4300/app/assistant",
+    "stale": 1
+  },
+  "resumes": {
+    "url": "http://127.0.0.1:4300/app/resumes",
+    "stale": 1
+  },
+  "hierarchy": {
+    "form": 838.453125,
+    "versions": 781.953125
+  },
+  "deletion": {
+    "focus": "מחיקת גרסה"
+  },
+  "detail503": "המשרה לא נמצאה",
+  "auth": {
+    "focus": null,
+    "description": "password-help"
+  },
+  "art-light": "multiply",
+  "art-dark": "multiply",
+  "metadata": "12px"
+}
