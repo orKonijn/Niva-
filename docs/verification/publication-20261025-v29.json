@@ -1,0 +1,50 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 29,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_bd331e4eb9e481918a722fad992d0aa6",
+  "sitesCommit": "62b93ba0ecaf33a39c2ebb2b7dd8d126decda20b",
+  "githubCommit": "5a253453608e7bab2b83b3cd17e1a7c67a9e95b3",
+  "deploymentId": "appgdep_6ade23271d4c81918fc2261c5a964c16",
+  "status": "succeeded",
+  "publishedAt": "2026-10-25T15:41:45.265163+00:00",
+  "audience": "public",
+  "sourceVerified": true,
+  "dirty": false,
+  "liveReadback": {
+    "existingChromeSession": true,
+    "requestedRoute": "/app/jobs",
+    "destination": "/setup?returnTo=%2Fapp%2Fjobs",
+    "cvStepVisible": true,
+    "filePickerEnabled": true,
+    "continueRequiresTextAndConfirmation": true,
+    "productionSetupRequired": true,
+    "pdfWorkerJavaScriptMime": true,
+    "realCvWritten": false
+  },
+  "verification": {
+    "frontend": 59,
+    "server": 105,
+    "browser": {
+      "fullRun": 184,
+      "subsequentIntegratedChecks": 38,
+      "note": "Complete run after mascot merge; 38 affected CV/setup, homepage, mascot and UI-polish cases passed after the subsequent polish merge."
+    },
+    "worker": "passed",
+    "provenance": "passed",
+    "typechecks": "passed",
+    "format": "passed",
+    "build": "passed",
+    "dependencyAudit": "zero vulnerabilities at installation"
+  },
+  "preservedConcurrentSiteCommits": [
+    "9db5decebeef9acbefb1c3362ffeaee771b28d1d",
+    "b195043dcf5205e9508722f19c39da75bccf58ca"
+  ],
+  "limitations": [
+    "Scanned or encrypted PDFs may require pasted text; no OCR.",
+    "Browser-local import stores reviewed text, not the original file.",
+    "Real-user CV upload and preference writes were not performed; synthetic browser fixtures and SQLite/D1 contract tests cover writes."
+  ],
+  "recordScope": "Post-publication Git-only receipt; no additional hosted release"
+}

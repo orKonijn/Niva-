@@ -22,7 +22,11 @@
 - Genuine baseline/current-source images use matching viewport, theme, route and synthetic demo content. Baseline is served from the unchanged original checkout; current source from the isolated Sites checkout. Desktop [light before](docs/screenshots/changes/niva-mascot-desktop-light/before.png) · [after](docs/screenshots/changes/niva-mascot-desktop-light/after.png), [dark before](docs/screenshots/changes/niva-mascot-desktop-dark/before.png) · [after](docs/screenshots/changes/niva-mascot-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/niva-mascot-mobile-light/before.png) · [after](docs/screenshots/changes/niva-mascot-mobile-light/after.png), [dark before](docs/screenshots/changes/niva-mascot-mobile-dark/before.png) · [after](docs/screenshots/changes/niva-mascot-mobile-dark/after.png). Motion is disabled for comparable stills.
 - This update is authored directly in the Sites source repository. Remove the previous release's GitHub content mapping because it no longer matches the changed source; retain native Sites commit provenance without claiming this update was pushed to GitHub. Figma artwork was not linked in the project; the existing original mascot is the visual reference.
 
-## Unreleased
+<a id="version-29"></a>
+
+## Version 29 — CV import and required account setup
+
+Published 25 October 2026. [Publication receipt](docs/verification/publication-20261025-v29.json). Live source and setup configuration verified. Reloading the existing signed-in Chrome workspace route now opens the CV setup step with an enabled file picker. No real CV or preferences were written during validation; all write-path checks use disposable synthetic accounts.
 
 - Integrated the separately published mascot work from Sites commits `9db5decebeef9acbefb1c3362ffeaee771b28d1d` and `b195043dcf5205e9508722f19c39da75bccf58ca` without overwriting its assets or behavior; synchronize the combined reviewed source to GitHub and restore an accurate content mapping for this release.
 - Require signed-in production users to finish account setup before the personal workspace, including direct workspace links and OAuth returns. First enter a CV or choose a PDF/DOCX, review the extracted text and explicitly save/activate it; then confirm job preferences before entering the requested workspace route. Resume setup after a reload, retain choices after failed saves, and return to CV entry when the active CV expires or is removed. Existing valid CVs advance to preferences. The account/sign-out and public information pages remain reachable.
