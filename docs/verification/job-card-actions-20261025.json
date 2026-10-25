@@ -1,0 +1,205 @@
+{
+  "observedOn": "2026-10-25",
+  "scope": "Job-card action layout only; no API, stored-data, access or provider configuration changes",
+  "checks": {
+    "frontend": 59,
+    "server": 79,
+    "provenance": 1,
+    "browser": 208,
+    "browserProjects": ["desktop Chromium", "mobile Chromium", "Firefox", "WebKit"],
+    "typechecks": ["tests", "server", "e2e"],
+    "format": "passed",
+    "productionBuild": "passed",
+    "keyboardFocus": "visible on both action links in all four capture scenes"
+  },
+  "implementation": {
+    "digest": "6ee10d880824702489d4db5a88b7a55dc717d51966a84910c9aff6bf7720b12e",
+    "algorithm": "SHA256(sorted path + NUL + file bytes + NUL)",
+    "scope": "Same enumerated implementation paths as review25-checks.json"
+  },
+  "before": [
+    {
+      "device": "desktop",
+      "theme": "light",
+      "gapToFooter": 0,
+      "buttons": [
+        {
+          "x": 1002,
+          "y": 799.75,
+          "width": 130,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 847,
+          "y": 799.75,
+          "width": 143,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "theme": "dark",
+      "gapToFooter": 0,
+      "buttons": [
+        {
+          "x": 1002,
+          "y": 799.75,
+          "width": 130,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 847,
+          "y": 799.75,
+          "width": 143,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "theme": "light",
+      "gapToFooter": 0,
+      "buttons": [
+        {
+          "x": 218,
+          "y": 565.1875,
+          "width": 130,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 63,
+          "y": 565.1875,
+          "width": 143,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "theme": "dark",
+      "gapToFooter": 0,
+      "buttons": [
+        {
+          "x": 218,
+          "y": 565.1875,
+          "width": 130,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 63,
+          "y": 565.1875,
+          "width": 143,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    }
+  ],
+  "after": [
+    {
+      "device": "desktop",
+      "theme": "light",
+      "gapToFooter": 20,
+      "buttons": [
+        {
+          "x": 887.5,
+          "y": 779.75,
+          "width": 244.5,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 633,
+          "y": 779.75,
+          "width": 244.5,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "theme": "dark",
+      "gapToFooter": 20,
+      "buttons": [
+        {
+          "x": 887.5,
+          "y": 779.75,
+          "width": 244.5,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 633,
+          "y": 779.75,
+          "width": 244.5,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "theme": "light",
+      "gapToFooter": 20,
+      "buttons": [
+        {
+          "x": 42,
+          "y": 529.1875,
+          "width": 306,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 42,
+          "y": 583.1875,
+          "width": 306,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "theme": "dark",
+      "gapToFooter": 20,
+      "buttons": [
+        {
+          "x": 42,
+          "y": 529.1875,
+          "width": 306,
+          "height": 44,
+          "href": "/app/assistant?job=greenhouse-appsflyer-999999"
+        },
+        {
+          "x": 42,
+          "y": 583.1875,
+          "width": 306,
+          "height": 44,
+          "href": "/app/resumes?job=greenhouse-appsflyer-999999"
+        }
+      ],
+      "overflow": false
+    }
+  ],
+  "evidence": "Four genuine pairs under docs/screenshots/changes/job-card-actions-{desktop,mobile}-{light,dark}; synthetic employer/job data",
+  "limitations": [
+    "Physical devices and human Hebrew screen reader not checked",
+    "Existing hosted provider/scheduler/staging gates unchanged"
+  ]
+}

@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Job-card action spacing — 25 October 2026
+
+- Separated the conversation/resume action row from the footer divider by 20px, with 16px above it. Equal-width buttons form a balanced two-column row; cards with 360px or less of content width stack them at full width. Scoped styles preserve the shared buttons, Hebrew RTL, theme tokens, keyboard focus and existing destinations.
+- Genuine synthetic-data comparisons: desktop [Light before](docs/screenshots/changes/job-card-actions-desktop-light/before.png) · [Light after](docs/screenshots/changes/job-card-actions-desktop-light/after.png) · [Dark before](docs/screenshots/changes/job-card-actions-desktop-dark/before.png) · [Dark after](docs/screenshots/changes/job-card-actions-desktop-dark/after.png); mobile [Light before](docs/screenshots/changes/job-card-actions-mobile-light/before.png) · [Light after](docs/screenshots/changes/job-card-actions-mobile-light/after.png) · [Dark before](docs/screenshots/changes/job-card-actions-mobile-dark/before.png) · [Dark after](docs/screenshots/changes/job-card-actions-mobile-dark/after.png).
+- Verification: 59 frontend, 79 server, 1 provenance and 208 browser checks passed; all three type checks, formatting and production build passed. The four layout/focus probes show the footer gap improved from 0px to 20px, all buttons retain at least 44px height, no horizontal overflow, and links retain their selected-job query. [Verification record](docs/verification/job-card-actions-20261025.json). Publication follows these checks. Existing provider/scheduler limitations are unchanged.
+
 <a id="version-17"></a>
 
 ## Version 17 — Independent-review repairs

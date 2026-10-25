@@ -1,5 +1,6 @@
 @layer components {
   .job-card {
+    container: job-card / inline-size;
     border: 1px solid var(--line);
     transition:
       box-shadow 0.15s,
@@ -51,6 +52,23 @@
   }
   .job-card-bottom {
     border-top: 1px solid var(--line);
+  }
+  .job-card-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-block: 16px 20px;
+  }
+  .job-card-actions .account-button {
+    min-width: 0;
+    padding-inline: 12px;
+    white-space: normal;
+    text-align: center;
+  }
+  @container job-card (max-width: 360px) {
+    .job-card-actions {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
   .job-card-bottom .text-link {
     font-size: 12px;

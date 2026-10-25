@@ -49,7 +49,7 @@
   </p>
   @if (job().source) {
     <niva-match-indicator [job]="job()" />
-    <div class="career-actions">
+    <div class="job-card-actions">
       <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
         >שיחה על המשרה</a
       ><a class="account-button" routerLink="/app/resumes" [queryParams]="{ job: job().id }"
