@@ -133,23 +133,23 @@ export class Jobs {
   }
   readonly emptyExplanation = computed(() => {
     if (this.store.catalogMode() !== 'real')
-      return 'אלה נתוני הדגמה במכשיר. אפשר לשנות את הסינון במסך.';
+      return 'אלה משרות לדוגמה בלבד. אפשר לשנות את הסינון ולנסות חיפוש אחר.';
     if (this.store.jobsError() || this.store.sourceHealth().some((s) => s.error))
-      return 'חלק מהמקורות אינם זמינים. אפס תוצאות אינו מוכיח שאין משרות; אפשר לרענן ולבדוק את אתר המקור.';
+      return 'לא הצלחנו לבדוק חלק מאתרי המעסיקים. ייתכן שיש משרות שלא מוצגות כרגע. אפשר לרענן או לבדוק ישירות באתר המעסיק.';
     const coverage = this.store.coverage();
     const p = this.store.preferences();
     const category = this.category() === 'all' ? p.role : this.category();
     const district = this.district() === 'all' ? p.district : this.district();
     if (category !== 'all' && !coverage.some((c) => c.category === category))
-      return 'בכיסוי המצומצם הנוכחי, אחרי החרגות החברות, לא נמצאו משרות בתחום המבוקש. זה אינו חיפוש בכלל שוק העבודה.';
+      return 'לא מצאנו כרגע משרות בתחום הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת. ייתכן שיש משרות באתרים אחרים ש־Niva עדיין לא מציגה.';
     if (district !== 'all' && !coverage.some((c) => c.district === district))
-      return 'במקורות הנוכחיים, אחרי החרגות החברות, אין כרגע משרות במחוז המבוקש.';
+      return 'לא מצאנו כרגע משרות במחוז הזה באתרים שנבדקו, לאחר הסתרת החברות שבחרת.';
     if (
       (this.workStyles().length || p.workStyles.length) &&
       coverage.some((c) => c.style === 'unknown')
     )
-      return 'הסינון מסתיר גם משרות שסגנון העבודה שלהן לא נמסר במקור. אפשר לבדוק את ההעדפות במפורש.';
-    return 'המאגר כולל לוחות מעסיקים נבחרים ואינו מכסה את כל שוק העבודה. שילוב הסינון במסך, ההעדפות וההחרגות לא הניב תוצאות. ניתן לנקות רק את הסינון במסך; ההעדפות נשמרות.';
+      return 'הסינון מסתיר גם משרות שבהן המעסיק לא ציין אם העבודה מהבית או מהמשרד. אפשר להסיר את הסינון הזה ולראות עוד משרות.';
+    return 'לא מצאנו משרות שמתאימות לשילוב ההעדפות והסינון שבחרת. אפשר לנקות את הסינון בעמוד ולנסות שוב; ההעדפות ששמרת לא ישתנו. הרשימה כוללת רק את אתרי המעסיקים ש־Niva בודקת.';
   });
   clear(): void {
     this.setFilter({

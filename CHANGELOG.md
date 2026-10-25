@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — Natural Hebrew copy
+
+- Rewrite the homepage, FAQ, dashboard, jobs, preferences, sign-in, CV versions, account setup and assistant introduction in clear, idiomatic Hebrew. Replace translated marketing phrases with concrete instructions; clarify empty results, filter combinations, source coverage and review before saving. Update browser/search metadata to match.
+- Preserve manual employer applications, 30-day retention, local PDF/DOCX processing and separate OpenAI consent. Keep employer-supplied content unchanged. Add Hebrew CV-picker labels without replacing the native file-selection behavior; maintain keyboard focus and existing limits.
+- Verification: 59 frontend tests, both test type checks, production build and 56 production-browser checks, including actual PDF/DOCX fixtures, account setup, filters, both themes, mobile overflow, axe audits and reduced motion. [Copy examples and all paired evidence](docs/hebrew-copy.md).
+- Home desktop [before](docs/screenshots/changes/hebrew-copy-home-desktop-light/before.png) · [after](docs/screenshots/changes/hebrew-copy-home-desktop-light/after.png); setup mobile [before](docs/screenshots/changes/hebrew-copy-setup-mobile-dark/before.png) · [after](docs/screenshots/changes/hebrew-copy-setup-mobile-dark/after.png). Pairs cover eight screens in desktop/mobile and light/dark modes, using the same synthetic data. Preserve historical release screenshots.
+
 <a id="version-29"></a>
 
 ## Version 29 — CV import and required account setup

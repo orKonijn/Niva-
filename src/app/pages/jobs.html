@@ -1,7 +1,7 @@
 <niva-page-heading
-  kicker="מוצאים את החיבור"
-  heading="ההזדמנויות שלך"
-  description="כל משרה היא אפשרות להתחלה חדשה. בודקים מה מתאים לך."
+  kicker="החיפוש שלך"
+  heading="משרות שכדאי לבדוק"
+  description="מחפשים לפי תפקיד או חברה, מסננים ושומרים את המשרות שמעניינות אותך."
 >
   <a
     routerLink="/app/preferences"
@@ -30,16 +30,16 @@
       </button>
     </div>
   } @else {
-    <h2 class="mb-3 text-lg">משרות פתוחות מהמקור</h2>
+    <h2 class="mb-3 text-lg">משרות מאתרי המעסיקים</h2>
   }
   @if (store.catalogMode() === 'real') {
     <p class="mb-2 text-sm">
-      משרות בישראל מלוחות מעסיקים רשמיים ב־Greenhouse וב־Lever. הכיסוי מתרחב ואינו כולל את כל שוק
-      העבודה. הגשה מתבצעת באתר המעסיק בלבד.
+      המשרות מגיעות מאתרי גיוס של מעסיקים בישראל שמשתמשים ב־Greenhouse וב־Lever. הרשימה עדיין לא
+      כוללת את כל המשרות בשוק. מגישים מועמדות באתר המעסיק.
     </p>
     <p class="mb-2 text-xs">
-      סיווג התחום לפי כותרת התפקיד. סגנון העבודה מוצג רק כשהמקור מסר אותו; בחירת סגנון מסוים תסתיר
-      משרות ללא מידע זה. משרות שמורות שהוסרו מהמקור נשארות בתצוגת השמורות בלבד.
+      תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו; סינון לפיו מסתיר גם
+      משרות שהמידע הזה חסר בהן. משרה ששמרת תישאר ברשימה שלך גם אם הוסרה מאתר המעסיק.
     </p>
     @if (store.feedCheckedAt()) {
       <p class="text-xs mb-2">
@@ -111,13 +111,13 @@
     ><span class="search-input flex items-center gap-[12px] text-muted">
       <niva-icon name="search" /><input
         aria-label="חיפוש תפקיד או חברה"
-        placeholder="איזה תפקיד או חברה מעניינים אותך?"
+        placeholder="שם תפקיד או חברה"
         [ngModel]="query()"
         (ngModelChange)="setFilter({ q: $event || null }, true)"
       /> </span
   ></label>
   <label class="filter-label"
-    ><span>מחוז במסך</span
+    ><span>סינון לפי מחוז</span
     ><select
       [ngModel]="district()"
       (ngModelChange)="setFilter({ district: $event === 'all' ? null : $event })"
@@ -129,7 +129,7 @@
     </select></label
   >
   <label class="filter-label"
-    ><span>תחום במסך</span
+    ><span>סינון לפי תחום</span
     ><select
       [ngModel]="category()"
       (ngModelChange)="setFilter({ category: $event === 'all' ? null : $event })"
@@ -143,8 +143,8 @@
   <niva-work-style-fields [value]="workStyles()" (valueChange)="setStyles($event)" />
 </div>
 <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
-  הסינון במסך נוסף להעדפות הקבועות. תחום ומחוז חייבים להתאים יחד; סגנונות העבודה נבדקים לפי אחד
-  מהנבחרים.
+  הסינון כאן מצמצם את התוצאות בנוסף להעדפות ששמרת. המשרה צריכה להתאים גם לתחום וגם למחוז; באופן
+  העבודה מספיקה התאמה לאחת האפשרויות שבחרת.
 </p>
 <div class="section-row flex items-center justify-between gap-[20px]">
   <div class="segmented flex gap-[4px]" aria-label="תצוגת משרות">
@@ -174,14 +174,13 @@
 </div>
 @if (store.catalogMode() === 'real' && store.nextCursor()) {
   <p class="text-sm">
-    מוצגת מנה ראשונה של התוצאות. בהמשך העמוד אפשר לטעון משרות נוספות; המפה מציגה את המשרות שכבר
-    נטענו.
+    זו תחילת הרשימה. בהמשך העמוד אפשר לטעון עוד משרות. המפה מציגה רק את המשרות שכבר נטענו.
   </p>
 }
 @if (savedOnly()) {
   <p class="text-sm">
-    שמורות הן היסטוריית הבחירות שלך ועשויות להיות מחוץ להעדפות הקבועות. החרגות החברות והסינון במסך
-    עדיין חלים; מצב הזמינות מוצג לכל משרה.
+    כאן נמצאות המשרות ששמרת, גם אם הן כבר לא תואמות את ההעדפות שלך. הסינון בעמוד והחברות שבחרת
+    להסתיר עדיין משפיעים על הרשימה. ליד כל משרה אפשר לראות אם היא עדיין זמינה.
   </p>
 }
 @if (store.suppressedSavedCount()) {
@@ -237,7 +236,7 @@
         class="empty-state flex flex-col items-center text-center gap-[14px] p-[65px_25px] col-span-full"
       >
         <niva-icon name="search" />
-        <h2>עדיין לא מצאנו כאן התאמה</h2>
+        <h2>לא נמצאו משרות בחיפוש הזה</h2>
         <p>{{ emptyExplanation() }}</p>
         <button
           class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"

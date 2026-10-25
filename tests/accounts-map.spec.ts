@@ -223,8 +223,8 @@ test('map groups multiple offices, separates remote/missing locations and follow
     .locator('niva-job-map')
     .evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.screenshot({ path: `test-results/map-${info.project.name}.png`, fullPage: false });
-  await page.getByLabel('תחום במסך').selectOption('qa-automation');
-  await page.getByLabel('מחוז במסך').selectOption('haifa');
+  await page.getByLabel('סינון לפי תחום').selectOption('qa-automation');
+  await page.getByLabel('סינון לפי מחוז').selectOption('haifa');
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await expect(page.locator('.niva-map-marker')).toHaveCount(1);
   await page.getByRole('button', { name: 'רשימה', exact: true }).click();

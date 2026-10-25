@@ -1,13 +1,13 @@
 <div class="career-heading">
   <div>
-    <span class="section-kicker">הניסיון שלך, במילים שלך</span>
+    <span class="section-kicker">כל גרסאות קורות החיים שלך</span>
     <h1>קורות החיים שלך</h1>
-    <p>בודקים את העובדות, מדגישים את הרלוונטי ומאשרים כל גרסה.</p>
+    <p>מוסיפים קורות חיים, בודקים את הפרטים ושומרים גרסאות למשרות שונות.</p>
   </div>
   <a routerLink="/app/assistant" class="account-button">עזרה בניסוח ובתרגול ריאיון</a>
 </div>
 <p class="field-note mb-4" role="note">
-  הגרסאות נשמרות ל־30 יום, וניתן לייצא ולמחוק אותן בכל עת. אין שליחה למעסיק.
+  הגרסאות נשמרות בחשבון ל־30 יום. אפשר להוריד אותן או למחוק אותן בכל עת. הן לא נשלחות למעסיקים.
 </p>
 @if (career.operations(); as ops) {
   @if ((ops.ingestionOverdue ?? ops.schedulerOverdue) || ops.cleanupOverdue) {
@@ -30,7 +30,10 @@
 }
 <section class="account-panel">
   <h2>הגרסאות שלי</h2>
-  <p>עד 20 גרסאות. אישור עובדות והפעלת גרסה הן פעולות נפרדות.</p>
+  <p>
+    אפשר לשמור עד 20 גרסאות. אחרי שמאשרים שהפרטים נכונים, בוחרים בנפרד איזו גרסה תשמש לחיפוש
+    ולהתאמות.
+  </p>
   @for (resume of career.resumes(); track resume.id) {
     <div class="career-version">
       <button
@@ -54,7 +57,7 @@
       </button>
     </div>
   } @empty {
-    <p>אין עדיין גרסאות. מתחילים בהדבקת הטקסט ובדיקה שלו.</p>
+    <p>עוד לא שמרת קורות חיים. אפשר להתחיל מהדבקת הטקסט או מבחירת קובץ.</p>
   }
 </section>
 @if (selected(); as resume) {

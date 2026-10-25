@@ -3,14 +3,14 @@
     <niva-brand /><a routerLink="/account" class="text-link">החשבון שלי</a>
   </header>
   <main id="main" tabindex="-1" class="mx-auto max-w-[820px] px-5 pb-12">
-    <span class="section-kicker">מכינים את המרחב שלך</span>
-    <h1>קודם מכירים אותך, ואז מחפשים יחד.</h1>
+    <span class="section-kicker">לפני שמתחילים לחפש</span>
+    <h1>קצת על הניסיון שלך, וקצת על מה שמחפשים.</h1>
     <ol class="my-6 flex gap-5 text-sm" aria-label="שלבי ההגדרה">
       <li [attr.aria-current]="step() === 0 ? 'step' : null">1 · קורות חיים</li>
       <li [attr.aria-current]="step() === 1 ? 'step' : null">2 · העדפות חיפוש</li>
     </ol>
     <p class="mb-5 text-muted">
-      לפני הכניסה למרחב האישי, מוסיפים קורות חיים ומאשרים את ההעדפות. אפשר לעדכן אותם בהמשך.
+      כדי להתחיל, צריך לשמור קורות חיים ולאשר את העדפות החיפוש. את שניהם אפשר לעדכן בהמשך.
     </p>
     @if (loading()) {
       <p role="status">טוענים את הפרטים שלך…</p>
@@ -20,7 +20,8 @@
       <section class="account-panel">
         <h2>שלב 1 · קורות החיים שלך</h2>
         <p class="mb-4">
-          בוחרים PDF או DOCX, או ממלאים את הטקסט ישירות. בודקים ומתקנים לפני השמירה.
+          אפשר לבחור קובץ PDF או DOCX, או להדביק את הטקסט כאן. לפני השמירה כדאי לעבור עליו ולתקן אם
+          צריך.
         </p>
         <niva-resume-file-input
           [disabled]="busy()"
@@ -54,7 +55,8 @@
             הפעילים שלי.</label
           >
           <p class="field-note my-4">
-            הטקסט נשמר ל־30 יום וניתן למחיקה בכל עת. אין שליחה למעסיקים או לבינה מלאכותית בשלב זה.
+            הטקסט יישמר בחשבון ל־30 יום, ואפשר למחוק אותו בכל עת. בשלב הזה הוא לא נשלח למעסיקים או
+            לשירות בינה מלאכותית.
           </p>
           <button
             class="account-button account-primary"
@@ -68,8 +70,8 @@
       <section class="account-panel">
         <h2 id="setup-preferences" tabindex="-1">שלב 2 · מה מתאים לך?</h2>
         <p class="mb-4">
-          קורות החיים נשמרו ואושרו. עכשיו בוחרים תחום, מחוז וסגנונות עבודה. אפשר להשאיר כל אפשרות
-          פתוחה.
+          קורות החיים נשמרו. עכשיו אפשר לבחור תחום, מחוז ואופן עבודה. אין חובה לסנן — אפשר גם להשאיר
+          את כל האפשרויות פתוחות.
         </p>
         <niva-preference-fields
           [value]="draft"
