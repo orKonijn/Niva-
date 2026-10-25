@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — Natural Hebrew copy
+## Version 30 — Natural Hebrew copy
+
+Published 25 October 2026. Reviewed GitHub source `86033fd0c3c135cba7cedc8c377cc1cb4ec700eb`; exact mapped Sites source `a00f05f852af69e0df519ff8e2a4de434a84033b`. [Verified publication receipt](docs/verification/publication-20261025-v30.json). This post-publication release record is a Git-only documentation update, not another hosted version.
 
 - Rewrite the homepage, FAQ, dashboard, jobs, preferences, sign-in, CV versions, account setup and assistant introduction in clear, idiomatic Hebrew. Replace translated marketing phrases with concrete instructions; clarify empty results, filter combinations, source coverage and review before saving. Update browser/search metadata to match.
 - Preserve manual employer applications, 30-day retention, local PDF/DOCX processing and separate OpenAI consent. Keep employer-supplied content unchanged. Add Hebrew CV-picker labels without replacing the native file-selection behavior; maintain keyboard focus and existing limits.

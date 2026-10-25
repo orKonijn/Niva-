@@ -1,0 +1,30 @@
+{
+  "version": 30,
+  "githubCommit": "86033fd0c3c135cba7cedc8c377cc1cb4ec700eb",
+  "source": {
+    "commit_sha": "a00f05f852af69e0df519ff8e2a4de434a84033b"
+  },
+  "deployment": {
+    "id": "appgdep_6ade2ce7207481918fe82a1b8b91360a",
+    "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+    "title": "Niva — חיפוש עבודה",
+    "version_id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_794594f29d648191b521206a198b4862",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adb68abcc248191b701ebaf63187944",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-25T16:23:21.279040+00:00"
+  },
+  "verification": {
+    "frontendTests": 59,
+    "productionBrowserTests": 56,
+    "typechecks": ["frontend tests", "browser tests"],
+    "productionBuild": "passed",
+    "reviewedSourceMapping": "verified"
+  },
+  "scope": "Natural Hebrew copy across eight main screens and metadata; accessible Hebrew CV picker labels."
+}
