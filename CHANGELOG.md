@@ -1,32 +1,40 @@
 # Changelog
 
-## Unreleased — Modern UI polish and restrained motion
+## Version 28 — Modern UI polish and restrained motion
+
+Published 25 October 2026. Sites source `b195043dcf5205e9508722f19c39da75bccf58ca`; synchronized to GitHub `main` in `6026c4a1f95eb40d92b7e12fd52c13af702fdfb3`, preserving the newer CV setup work. [Verified publication records for versions 26–28](docs/verification/publication-20261025-v26-v28.json).
 
 - Refine the landing-page navigation, hero framing, section labels, step cards, FAQ controls and closing invitation. Carry the same surface depth, selected navigation, button feedback and focus treatment into the app. Reuse transparent mascot artwork in the hero and dashboard for consistent light/dark presentation.
 - Add short one-time section entrances, a slight step stagger and fine-pointer card lifts. Keep text opaque and content visible from the start. Honor reduced motion, avoid new animation loops, and disconnect observers after use and on navigation away.
 - Verification: 59 frontend tests, both test type checks, 16 relevant desktop/mobile browser checks, WCAG axe scans, theme/image regressions, navigation, overflow and reduced motion. Production build validates the final source. [Design and complete paired evidence](docs/ui-polish.md).
 - Home desktop dark [before](docs/screenshots/changes/ui-polish-home-desktop-dark/before.png) · [after](docs/screenshots/changes/ui-polish-home-desktop-dark/after.png); mobile light [before](docs/screenshots/changes/ui-polish-home-mobile-light/before.png) · [after](docs/screenshots/changes/ui-polish-home-mobile-light/after.png). The evidence index includes all four routes in both themes and viewports.
 
-## Unreleased — Theme-aware mascot artwork
+## Version 27 — Theme-aware mascot artwork
+
+Published 25 October 2026. Sites source `9db5decebeef9acbefb1c3362ffeaee771b28d1d`. [Verified publication record](docs/verification/publication-20261025-v26-v28.json).
 
 - Replace the baked pale-blue backgrounds in the three step illustrations and closing wave with transparent cutouts. Use the theme canvas color and a subtle shared blue glow for a continuous frame in light and dark modes. Remove the mismatched vertical side bands while preserving the full character and props.
 - Preserve the original artwork files. New optimized assets and the background-removal prompt are documented in [artwork notes](docs/mascot-artwork.md). Existing motion and reduced-motion behavior remain intact.
 - Verification: desktop/mobile image loading, overflow, theme-color regression, reduced-motion checks and WCAG axe scans; frontend unit tests and production build. Screenshots use matching route, viewport, theme and synthetic demo content, captured before editing and after verification.
 - Desktop [dark before](docs/screenshots/changes/niva-artwork-desktop-dark/before.png) · [after](docs/screenshots/changes/niva-artwork-desktop-dark/after.png), [light before](docs/screenshots/changes/niva-artwork-desktop-light/before.png) · [after](docs/screenshots/changes/niva-artwork-desktop-light/after.png); mobile [dark before](docs/screenshots/changes/niva-artwork-mobile-dark/before.png) · [after](docs/screenshots/changes/niva-artwork-mobile-dark/after.png), [light before](docs/screenshots/changes/niva-artwork-mobile-light/before.png) · [after](docs/screenshots/changes/niva-artwork-mobile-light/after.png).
 
-## Unreleased — Niva mascot pictures and motion
+## Version 26 — Niva mascot pictures and motion
+
+Published 25 October 2026. Sites source `9c02cffaf032a3a8fd87872d8a969a5e2b6a9c15`. [Verified publication record](docs/verification/publication-20261025-v26-v28.json).
 
 - Add two original Niva poses, waving and exploring an opportunity, in optimized WebP. Add mascot pictures to the three steps and closing invitation. Preserve the original hero illustration and Hebrew content. [Artwork briefs](docs/mascot-artwork.md).
 - Add a gentle four-second greeting, short entrance movement and a brief sparkle animation. Motion settles automatically and follows reduced-motion preferences. Hover effects are subtle; text remains fully opaque during entrance. Mobile artwork uses contain sizing so the whole character remains visible.
 - Verification: 59 frontend tests, test and browser type checks, eight desktop/mobile homepage and mascot browser checks including both themes, image loading, overflow, WCAG axe scans and reduced motion. Production build is checked during packaging. No account, authentication or backend behavior changes.
 - Genuine baseline/current-source images use matching viewport, theme, route and synthetic demo content. Baseline is served from the unchanged original checkout; current source from the isolated Sites checkout. Desktop [light before](docs/screenshots/changes/niva-mascot-desktop-light/before.png) · [after](docs/screenshots/changes/niva-mascot-desktop-light/after.png), [dark before](docs/screenshots/changes/niva-mascot-desktop-dark/before.png) · [after](docs/screenshots/changes/niva-mascot-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/niva-mascot-mobile-light/before.png) · [after](docs/screenshots/changes/niva-mascot-mobile-light/after.png), [dark before](docs/screenshots/changes/niva-mascot-mobile-dark/before.png) · [after](docs/screenshots/changes/niva-mascot-mobile-dark/after.png). Motion is disabled for comparable stills.
-- This update is authored directly in the Sites source repository. Remove the previous release's GitHub content mapping because it no longer matches the changed source; retain native Sites commit provenance without claiming this update was pushed to GitHub. Figma artwork was not linked in the project; the existing original mascot is the visual reference.
+- This update was initially authored in the Sites source repository, so its previous GitHub content mapping was removed when it stopped matching the source. The mascot changes were subsequently integrated into GitHub `main` in `d775242`, followed by the UI polish in `6026c4a`. Figma artwork was not linked in the project; the existing original mascot was the visual reference.
 
 <a id="version-29"></a>
 
 ## Version 29 — CV import and required account setup
 
 Published 25 October 2026. [Publication receipt](docs/verification/publication-20261025-v29.json). Live source and setup configuration verified. Reloading the existing signed-in Chrome workspace route now opens the CV setup step with an enabled file picker. No real CV or preferences were written during validation; all write-path checks use disposable synthetic accounts.
+
+- Documentation correction, 25 October 2026: replace the stale Unreleased labels on the already published versions 26–28 with their actual version numbers, publication date, exact source commits and verified deployment receipts. This documentation-only Git update creates no new hosted version; application UI is unchanged. Genuine documentation view [before](docs/screenshots/changes/changelog-release-records/before.png) · [after](docs/screenshots/changes/changelog-release-records/after.png). The CV/setup work below retains its pending release status until separately published.
 
 - Integrated the separately published mascot work from Sites commits `9db5decebeef9acbefb1c3362ffeaee771b28d1d` and `b195043dcf5205e9508722f19c39da75bccf58ca` without overwriting its assets or behavior; synchronize the combined reviewed source to GitHub and restore an accurate content mapping for this release.
 - Require signed-in production users to finish account setup before the personal workspace, including direct workspace links and OAuth returns. First enter a CV or choose a PDF/DOCX, review the extracted text and explicitly save/activate it; then confirm job preferences before entering the requested workspace route. Resume setup after a reload, retain choices after failed saves, and return to CV entry when the active CV expires or is removed. Existing valid CVs advance to preferences. The account/sign-out and public information pages remain reachable.

@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-10-25",
+  "purpose": "Correct the already-published mascot and UI release labels; documentation only, no new deployment.",
+  "releases": [
+    {
+      "version": 28,
+      "saved": {
+        "id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_79245d69e2ec8191b7a1099fa56505c2",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "version_number": 28,
+        "source": {
+          "commit_sha": "b195043dcf5205e9508722f19c39da75bccf58ca"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000b37c8243aa42f8ceab186ac8",
+          "content_hash": "sha256:87d4ff9e18a044a6413345c8591a130bca0f839b81321ee6d4bcb6e8ff2b153a",
+          "size_bytes": 4403200,
+          "file_count": 112
+        },
+        "screenshot_url": "https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-1770-81f7-bdc5-f443547a966d/raw?se=2026-10-25T16%3A41%3A03Z&sp=r&sv=2026-02-06&sr=b&scid=e94116a3-efbb-4cdd-a34d-bca13f7928f3&skoid=c30e7ce7-1f51-4051-a377-288cdba21c02&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-25T09%3A07%3A15Z&ske=2026-10-26T09%3A07%3A15Z&sks=b&skv=2026-02-06&sig=EcR2s2%2BkPIfVZey6mouy29m4Qw6ddPKH1M2FyQHjLek%3D",
+        "deployment_id": "appgdep_6ade2227558081918a34ffcacd0b63e3"
+      },
+      "deployment": {
+        "id": "appgdep_6ade2227558081918a34ffcacd0b63e3",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "title": "Niva — חיפוש עבודה",
+        "version_id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_79245d69e2ec8191b7a1099fa56505c2",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": "sediment://file_00000000177081f7bdc5f443547a966d",
+        "provider_deployment_id": "site---6adb68abcc248191b701ebaf63187944",
+        "failure_message": null,
+        "env_set_revision": 6,
+        "updated_at": "2026-10-25T15:38:30.251128+00:00"
+      }
+    },
+    {
+      "version": 27,
+      "saved": {
+        "id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_547e9444bce48191a5d9a7020d8bf2fd",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "version_number": 27,
+        "source": {
+          "commit_sha": "9db5decebeef9acbefb1c3362ffeaee771b28d1d"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000e1908246a88856e744a62d14",
+          "content_hash": "sha256:822a9f32488655ce81fa56ff2466af3403ba1803ca9e554f30e9da79e53daeee",
+          "size_bytes": 4392960,
+          "file_count": 112
+        },
+        "screenshot_url": "https://sdmntprcentralus.oaiusercontent.com/files/00000000-f37c-81f5-a5ee-8d5c2a6c17d4/raw?se=2026-10-25T16%3A41%3A03Z&sp=r&sv=2026-02-06&sr=b&scid=e94116a3-efbb-4cdd-a34d-bca13f7928f3&skoid=c30e7ce7-1f51-4051-a377-288cdba21c02&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-25T07%3A39%3A19Z&ske=2026-10-26T07%3A39%3A19Z&sks=b&skv=2026-02-06&sig=01tTgGxyCNcEYk0pCOTI84AlrWALGk1dp2QeoM61X%2BQ%3D",
+        "deployment_id": "appgdep_6ade203642d88191aa9ba9c0a0e93b68"
+      },
+      "deployment": {
+        "id": "appgdep_6ade203642d88191aa9ba9c0a0e93b68",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "title": "Niva — חיפוש עבודה",
+        "version_id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_547e9444bce48191a5d9a7020d8bf2fd",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": "sediment://file_00000000f37c81f5a5ee8d5c2a6c17d4",
+        "provider_deployment_id": "site---6adb68abcc248191b701ebaf63187944",
+        "failure_message": null,
+        "env_set_revision": 6,
+        "updated_at": "2026-10-25T15:30:24.827342+00:00"
+      }
+    },
+    {
+      "version": 26,
+      "saved": {
+        "id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_d0de06d2bba481919639d4f9ec936754",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "version_number": 26,
+        "source": {
+          "commit_sha": "9c02cffaf032a3a8fd87872d8a969a5e2b6a9c15"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000ef1881f4b3043739b0c40a42",
+          "content_hash": "sha256:36aa3387cc5f376effe4c749d8ca7ee9383187a72c68e5757d35362a1ff24ce7",
+          "size_bytes": 4126720,
+          "file_count": 109
+        },
+        "screenshot_url": "https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-c86c-81f7-beeb-fa2dc8aa5358/raw?se=2026-10-25T16%3A41%3A03Z&sp=r&sv=2026-02-06&sr=b&scid=e94116a3-efbb-4cdd-a34d-bca13f7928f3&skoid=c30e7ce7-1f51-4051-a377-288cdba21c02&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-25T06%3A57%3A21Z&ske=2026-10-26T06%3A57%3A21Z&sks=b&skv=2026-02-06&sig=IUnU48z/Jhz2v7wj9af7o4BYFNg%2BY6C7l8UT4nETpMo%3D",
+        "deployment_id": "appgdep_6ade1e68ba108191a156408757e0f1c2"
+      },
+      "deployment": {
+        "id": "appgdep_6ade1e68ba108191a156408757e0f1c2",
+        "project_id": "appgprj_6adb68abcc248191b701ebaf63187944",
+        "title": "Niva — חיפוש עבודה",
+        "version_id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_d0de06d2bba481919639d4f9ec936754",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": "sediment://file_00000000c86c81f7beebfa2dc8aa5358",
+        "provider_deployment_id": "site---6adb68abcc248191b701ebaf63187944",
+        "failure_message": null,
+        "env_set_revision": 6,
+        "updated_at": "2026-10-25T15:22:30.630057+00:00"
+      }
+    }
+  ]
+}
