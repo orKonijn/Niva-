@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /app
-Disallow: /signup
-Disallow: /login
+Disallow: /
+# Hosted robots/sitemap use the explicitly approved public-origin configuration.

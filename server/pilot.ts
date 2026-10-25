@@ -10,8 +10,9 @@ import { JOBS } from '../src/app/core/data/sample-jobs';
 import { applyStateOperation, importReceipt, normalizeImport, StateError } from './state';
 import { FEED_URL, normalizeFeed, type Feed } from './job-feed';
 import type { Job } from '../src/app/core/models/job';
+import type { DeploymentEnvironment } from './deployment-policy';
 
-export interface PilotEnv extends CareerEnvironment {
+export interface PilotEnv extends CareerEnvironment, DeploymentEnvironment {
   DB: D1Database;
   NIVA_IMPORT_SECRET: string;
 }

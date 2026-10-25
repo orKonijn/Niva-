@@ -96,6 +96,22 @@ export function createCareer(deps: CareerDependencies) {
     await runMaintenance(db, { trigger: 'manual' });
     return c.json({ ok: true });
   });
+  app.post('/api/ingestion/refresh', async (c) => {
+    if (
+      !env.NIVA_INGEST_SECRET ||
+      env.NIVA_INGEST_SECRET.length < 32 ||
+      c.req.header('authorization') !== `Bearer ${env.NIVA_INGEST_SECRET}`
+    )
+      return c.json({ error: 'UNAUTHORIZED' }, 401);
+    // Source refresh deliberately performs no private-record retention cleanup.
+    await ingest(db);
+    const sources = await db.all<{ id: string; checked_at: string | null; error: string | null }>(
+      'SELECT id,checked_at,error FROM niva_sources ORDER BY id',
+    );
+    const healthy =
+      sources.length === SOURCES.length && sources.every((s) => !!s.checked_at && !s.error);
+    return c.json({ scope: 'job-sources-only', healthy, sources }, healthy ? 200 : 503);
+  });
   app.post('/api/maintenance/run', async (c) => {
     if (
       !env.NIVA_INGEST_SECRET ||

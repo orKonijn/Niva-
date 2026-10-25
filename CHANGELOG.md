@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Custom domain and public launch
+
+- Connect the approved one-year `getnivajobs.com` registration to the existing Sites project with apex/www DNS and managed HTTPS. Disable registrar auto-renew as requested; preserve nameservers, email DNS and unrelated records. No new paid subscription or renewal is authorized.
+- Add read-only database/schema health checks, explicit canonical-host configuration, public sitemap/robots metadata, private-route indexing controls, HSTS and cache policies. Let assets and the recovery shell load when API configuration is unavailable.
+- Add a protected source-only ingestion refresh that does not run private retention cleanup. Preserve existing account data and secret entries; add the operator secret through the provider secret manager.
+- [Launch status and maintenance instructions](docs/public-launch.md) distinguish implemented/live features from disabled AI, scanner, OAuth/email, unattended scheduling and unverified provider backup/restore and independent live account gates.
+- Genuine non-UI source evidence: [Before](docs/screenshots/changes/public-launch-policy/before.png) · [After](docs/screenshots/changes/public-launch-policy/after.png). The application design is unchanged; source images are not proof of live services. Registrar before evidence was not captured before the user's purchase; verified [renewal](docs/screenshots/changes/public-launch-policy/registrar-autorenew-off.png) and [DNS](docs/screenshots/changes/public-launch-policy/registrar-dns.png) after evidence is recorded separately.
+- Verification: 59 frontend, 90 server, 1 provenance and all 280 browser checks passed (desktop/mobile Chromium, Firefox, WebKit); all three type checks, formatting and the Angular/Worker production build passed. The initial formatting check flagged this new changelog entry; it was formatted and the check passed. Production readback will be recorded after publication. This entry does not claim a published version before deployment succeeds.
+
 <a id="version-19"></a>
 
 ## Version 19 — UI/UX review repairs
