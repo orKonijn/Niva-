@@ -1,0 +1,1321 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "version": 33,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_124cda14a3308191b608d85d487dcc9e",
+  "deploymentId": "appgdep_6ade4258416c8191ae9d726c44da2cdf",
+  "publishedAt": "2026-10-25T17:54:49.424357+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com",
+  "sitesCommit": "76faf5b6cdb2858b16c56595400db49199b0a167",
+  "reviewedGithubCommit": "01a6ca311a529a86213790dc995fc43a776b41d9",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000d4d4820a956da7f07dcbdbb6",
+    "content_hash": "sha256:5602710ff6f15b1c8f96b35993fff245f4133f41380963c5ab8166edae20e920",
+    "size_bytes": 13363200,
+    "file_count": 303
+  },
+  "checks": {
+    "frontend": 59,
+    "server": 120,
+    "browser": 206,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "passed, clean mapped source"
+  },
+  "privacy": "Public job queries and read-only account UI verification. No actual CV or account preference was modified or committed.",
+  "liveBefore": {
+    "at": "2026-10-25T17:52:16.817Z",
+    "status": 200,
+    "total": 237,
+    "sourceCount": 21
+  },
+  "liveInitial": {
+    "at": "2026-10-25T17:54:59.167Z",
+    "status": 200,
+    "total": 261,
+    "jobs": [
+      {
+        "id": "greenhouse-aidocmedical-4864312101",
+        "title": "Staff Software Engineer",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4868634101",
+        "title": "Senior Product Analyst",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4871455101",
+        "title": "Principal Software Engineer",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4874306101",
+        "title": "AI Senior Software Engineer, ML Platform",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4876551101",
+        "title": "AI Algorithm Tech Lead",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4876560101",
+        "title": "AI Staff Software Engineer, ML Platform   ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4876590101",
+        "title": "AI Software Team Lead, ML Platform",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4882428101",
+        "title": "Principal Engineer - AI First Development Lead",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4889904101",
+        "title": "Senior Full Stack Engineer ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4897240101",
+        "title": "Analytics Engineer",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4902462101",
+        "title": "Senior DevOps Engineer ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4904239101",
+        "title": "Senior Data Engineer ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4920094101",
+        "title": "Senior Security Engineer",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4920296101",
+        "title": "SecOps Engineer",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4925761101",
+        "title": "Backend Tech Lead",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4941568101",
+        "title": "Director of GenAI Operations",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4951044101",
+        "title": " Director of Product Design",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4952195101",
+        "title": "Strategic Product Analyst",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4965141101",
+        "title": "AI Software Tech Lead, ML",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-4965332101",
+        "title": "Director of IT Security",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-5000297101",
+        "title": "Senior Quality Specialist",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-5009493101",
+        "title": "Engineering Team Lead ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-5011870101",
+        "title": "Director of Operations, Workplace Experience",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-5013115101",
+        "title": "AI Solution Engineer ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-aidocmedical-5013714101",
+        "title": "Information Delivery & Visualization Engineer   ",
+        "location": "Tel Aviv-Yafo, Tel Aviv District, Israel"
+      },
+      {
+        "id": "greenhouse-appsflyer-8394076002",
+        "title": "Application Security Engineer",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8509670002",
+        "title": "Product Partnerships Manager",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8535473002",
+        "title": "Senior Support Engineer",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8611961002",
+        "title": "Senior FP&A Business Partner",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8611963002",
+        "title": "Senior FP&A Analyst",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8693284002",
+        "title": "Senior Data Engineer",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8805502002",
+        "title": "Commission Analyst",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8809604002",
+        "title": "Salary Controller",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8813084002",
+        "title": "Bookkeeper - temporary position (Herzliya)- 2904",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8816205002",
+        "title": "Business Analyst",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8816216002",
+        "title": "Assistant Controller - Corporate Team- 2908",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8852064002",
+        "title": "Senior Software Engineer",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8855377002",
+        "title": "Senior PR&D Program Manager",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8868191002",
+        "title": "Software Team Leader- Domain Team",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8874236002",
+        "title": "IT Service Desk Team Leader",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8874566002",
+        "title": "Senior Product Manager",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8882905002",
+        "title": "Senior IT Infrastructure Operations",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8883285002",
+        "title": "Product Partnerships Lead- 2930",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8884649002",
+        "title": "Senior Data Scientist",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8897823002",
+        "title": "Backend Software Engineer- 2938",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8899626002",
+        "title": "Bookkeeper - 2942",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-appsflyer-8899639002",
+        "title": "Senior Backend Software Engineer - 2943",
+        "location": "Herzliya"
+      },
+      {
+        "id": "greenhouse-canopycare-4587575008",
+        "title": "Backend Tech Lead",
+        "location": "Tel Aviv (Hybrid)"
+      },
+      {
+        "id": "greenhouse-canopycare-4982571008",
+        "title": "DevOps Lead",
+        "location": "Tel Aviv, Israel"
+      },
+      {
+        "id": "greenhouse-canopycare-5285235008",
+        "title": "QA & Automation Engineer",
+        "location": "Tel Aviv, Israel "
+      }
+    ],
+    "health": [
+      {
+        "id": "greenhouse-aidocmedical",
+        "checked_at": "2026-10-25T17:45:46.074Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Aidoc / Greenhouse"
+      },
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-25T17:45:45.761Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "AppsFlyer / Greenhouse"
+      },
+      {
+        "id": "greenhouse-canopycare",
+        "checked_at": "2026-10-25T17:45:46.041Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Canopy / Greenhouse"
+      },
+      {
+        "id": "greenhouse-datadog",
+        "checked_at": "2026-10-25T17:51:46.220Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Datadog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-elastic",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Elastic / Greenhouse"
+      },
+      {
+        "id": "greenhouse-forter",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Forter / Greenhouse"
+      },
+      {
+        "id": "greenhouse-gongio",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Gong / Greenhouse"
+      },
+      {
+        "id": "greenhouse-jfrog",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "JFrog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-optimove",
+        "checked_at": "2026-10-25T17:51:46.585Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Optimove / Greenhouse"
+      },
+      {
+        "id": "greenhouse-orcasecurity",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Orca Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-pendo",
+        "checked_at": "2026-10-25T17:51:47.252Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Pendo / Greenhouse"
+      },
+      {
+        "id": "greenhouse-riskified",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Riskified / Greenhouse"
+      },
+      {
+        "id": "greenhouse-similarweb",
+        "checked_at": "2026-10-25T17:51:46.869Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Similarweb / Greenhouse"
+      },
+      {
+        "id": "greenhouse-taboola",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Taboola / Greenhouse"
+      },
+      {
+        "id": "greenhouse-torq",
+        "checked_at": "2026-10-25T17:51:46.634Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Torq / Greenhouse"
+      },
+      {
+        "id": "greenhouse-transmitsecurity",
+        "checked_at": "2026-10-25T17:54:56.227Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Transmit Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-unframe",
+        "checked_at": "2026-10-25T17:45:46.089Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Unframe / Greenhouse"
+      },
+      {
+        "id": "greenhouse-via",
+        "checked_at": "2026-10-25T17:51:47.302Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Via / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wedev",
+        "checked_at": "2026-10-25T17:54:56.229Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "WeDev / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wizinc",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Wiz / Greenhouse"
+      },
+      {
+        "id": "greenhouse-yotpo",
+        "checked_at": "2026-10-25T17:51:46.905Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Yotpo / Greenhouse"
+      },
+      {
+        "id": "jobicy-israel-qa",
+        "checked_at": "2026-10-25T16:59:02.023Z",
+        "error": null,
+        "next_at": 1792951140929,
+        "partial": false,
+        "name": "Jobicy · remote jobs"
+      },
+      {
+        "id": "lever-veeva-israel",
+        "checked_at": "2026-10-25T17:54:57.232Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Veeva / Lever"
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-25T17:47:14.812Z",
+        "error": null,
+        "next_at": 1792951332097,
+        "partial": false,
+        "name": "WalkMe / Lever"
+      }
+    ],
+    "coverage": [
+      {
+        "category": "data-analytics",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "data-analytics",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 35
+      },
+      {
+        "category": "data-analytics",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 1
+      },
+      {
+        "category": "design",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "design",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 7
+      },
+      {
+        "category": "devops-cloud",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 12
+      },
+      {
+        "category": "engineering",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 3
+      },
+      {
+        "category": "engineering",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 72
+      },
+      {
+        "category": "engineering",
+        "district": "unknown",
+        "style": "remote",
+        "n": 2
+      },
+      {
+        "category": "engineering",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 7
+      },
+      {
+        "category": "it-support",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 4
+      },
+      {
+        "category": "it-support",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 2
+      },
+      {
+        "category": "other",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "other",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 68
+      },
+      {
+        "category": "other",
+        "district": "unknown",
+        "style": "remote",
+        "n": 4
+      },
+      {
+        "category": "other",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 12
+      },
+      {
+        "category": "product",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 19
+      },
+      {
+        "category": "product",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 2
+      },
+      {
+        "category": "qa-automation",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 4
+      },
+      {
+        "category": "qa-automation",
+        "district": "unknown",
+        "style": "remote",
+        "n": 2
+      },
+      {
+        "category": "qa-manual",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 2
+      }
+    ],
+    "nextCursor": true,
+    "build": {
+      "repository": "orKonijn/Niva-",
+      "sourceCommit": "76faf5b6cdb2858b16c56595400db49199b0a167",
+      "githubCommit": "01a6ca311a529a86213790dc995fc43a776b41d9",
+      "sitesCommit": "76faf5b6cdb2858b16c56595400db49199b0a167",
+      "sourceTree": "5b36a13172c731a80d762db1022c0e7236275bee",
+      "sourceContentDigest": "00e1ac5ee1073190520785a2a227161bbf4e96ca224391d997ecbcdbd25c3472",
+      "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+      "clientArtifactDigest": "1675b3a32cac0a1d9a18d6c33509deb414f094a215f0ba05a7be50efe69039d9",
+      "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+      "builtAt": "2026-10-25T17:54:05.435Z",
+      "dirty": false,
+      "mappedSourceVerified": true,
+      "provenanceStatus": "mapped-reviewed-source"
+    }
+  },
+  "liveAccountUI": {
+    "allScopeTotal": 261,
+    "personalScopeTotal": 4,
+    "visibleSources": 24,
+    "defaultUnknownStyle": true,
+    "restoredTo": "all"
+  },
+  "newSourceDetails": [
+    {
+      "id": "greenhouse-transmitsecurity-8887486002",
+      "status": 200,
+      "availability": "published",
+      "applicationCheck": "unverified"
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "status": 200,
+      "availability": "published",
+      "applicationCheck": "reachable"
+    },
+    {
+      "id": "greenhouse-wedev-4652209101",
+      "status": 200,
+      "availability": "published",
+      "applicationCheck": "reachable"
+    }
+  ],
+  "note": "Published source is clean and mapped. Initial 261 catalogue expanded to1259 after the due Jobicy pass; existing ATS rows continue switching from their earlier Israel cache on their next15-minute checks.24 healthy sources; rolling Jobicy partial flag confirmed.150 unique rows paginated across3 consistent50-row pages. Screenshots committed to Git use synthetic account shells only. This receipt is a post-publication Git-only update. First due worldwide employer pass then returned1318 jobs and a verified Seoul location query (AppsFlyer Account Manager8793847002). Later employer timers remain subject to the documented15-minute cadence.",
+  "liveExpandedRemote": {
+    "at": "2026-10-25T17:59:22.678Z",
+    "status": 200,
+    "elapsedMs": 10338,
+    "total": 1259,
+    "health": [
+      {
+        "id": "greenhouse-aidocmedical",
+        "checked_at": "2026-10-25T17:45:46.074Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Aidoc / Greenhouse"
+      },
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-25T17:45:45.761Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "AppsFlyer / Greenhouse"
+      },
+      {
+        "id": "greenhouse-canopycare",
+        "checked_at": "2026-10-25T17:45:46.041Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Canopy / Greenhouse"
+      },
+      {
+        "id": "greenhouse-datadog",
+        "checked_at": "2026-10-25T17:51:46.220Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Datadog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-elastic",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Elastic / Greenhouse"
+      },
+      {
+        "id": "greenhouse-forter",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Forter / Greenhouse"
+      },
+      {
+        "id": "greenhouse-gongio",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Gong / Greenhouse"
+      },
+      {
+        "id": "greenhouse-jfrog",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "JFrog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-optimove",
+        "checked_at": "2026-10-25T17:51:46.585Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Optimove / Greenhouse"
+      },
+      {
+        "id": "greenhouse-orcasecurity",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Orca Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-pendo",
+        "checked_at": "2026-10-25T17:51:47.252Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Pendo / Greenhouse"
+      },
+      {
+        "id": "greenhouse-riskified",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Riskified / Greenhouse"
+      },
+      {
+        "id": "greenhouse-similarweb",
+        "checked_at": "2026-10-25T17:51:46.869Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Similarweb / Greenhouse"
+      },
+      {
+        "id": "greenhouse-taboola",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Taboola / Greenhouse"
+      },
+      {
+        "id": "greenhouse-torq",
+        "checked_at": "2026-10-25T17:51:46.634Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Torq / Greenhouse"
+      },
+      {
+        "id": "greenhouse-transmitsecurity",
+        "checked_at": "2026-10-25T17:54:56.227Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Transmit Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-unframe",
+        "checked_at": "2026-10-25T17:45:46.089Z",
+        "error": null,
+        "next_at": 1792951245518,
+        "partial": false,
+        "name": "Unframe / Greenhouse"
+      },
+      {
+        "id": "greenhouse-via",
+        "checked_at": "2026-10-25T17:51:47.302Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Via / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wedev",
+        "checked_at": "2026-10-25T17:54:56.229Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "WeDev / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wizinc",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Wiz / Greenhouse"
+      },
+      {
+        "id": "greenhouse-yotpo",
+        "checked_at": "2026-10-25T17:51:46.905Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Yotpo / Greenhouse"
+      },
+      {
+        "id": "jobicy-israel-qa",
+        "checked_at": "2026-10-25T17:59:15.969Z",
+        "error": null,
+        "next_at": 1792954751318,
+        "partial": true,
+        "name": "Jobicy · remote jobs"
+      },
+      {
+        "id": "lever-veeva-israel",
+        "checked_at": "2026-10-25T17:54:57.232Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Veeva / Lever"
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-25T17:47:14.812Z",
+        "error": null,
+        "next_at": 1792951332097,
+        "partial": false,
+        "name": "WalkMe / Lever"
+      }
+    ],
+    "hasNext": true,
+    "coverage": [
+      {
+        "category": "data-analytics",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "data-analytics",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 35
+      },
+      {
+        "category": "data-analytics",
+        "district": "unknown",
+        "style": "remote",
+        "n": 80
+      },
+      {
+        "category": "data-analytics",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 1
+      },
+      {
+        "category": "design",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "design",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 7
+      },
+      {
+        "category": "design",
+        "district": "unknown",
+        "style": "remote",
+        "n": 25
+      },
+      {
+        "category": "devops-cloud",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 12
+      },
+      {
+        "category": "devops-cloud",
+        "district": "unknown",
+        "style": "remote",
+        "n": 27
+      },
+      {
+        "category": "engineering",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 3
+      },
+      {
+        "category": "engineering",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 72
+      },
+      {
+        "category": "engineering",
+        "district": "unknown",
+        "style": "remote",
+        "n": 237
+      },
+      {
+        "category": "engineering",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 7
+      },
+      {
+        "category": "it-support",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 4
+      },
+      {
+        "category": "it-support",
+        "district": "unknown",
+        "style": "remote",
+        "n": 16
+      },
+      {
+        "category": "it-support",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 2
+      },
+      {
+        "category": "other",
+        "district": "tel-aviv",
+        "style": "hybrid",
+        "n": 1
+      },
+      {
+        "category": "other",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 68
+      },
+      {
+        "category": "other",
+        "district": "unknown",
+        "style": "remote",
+        "n": 586
+      },
+      {
+        "category": "other",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 12
+      },
+      {
+        "category": "product",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 19
+      },
+      {
+        "category": "product",
+        "district": "unknown",
+        "style": "remote",
+        "n": 30
+      },
+      {
+        "category": "product",
+        "district": "unknown",
+        "style": "unknown",
+        "n": 2
+      },
+      {
+        "category": "qa-automation",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 4
+      },
+      {
+        "category": "qa-automation",
+        "district": "unknown",
+        "style": "remote",
+        "n": 3
+      },
+      {
+        "category": "qa-manual",
+        "district": "tel-aviv",
+        "style": "unknown",
+        "n": 2
+      },
+      {
+        "category": "qa-manual",
+        "district": "unknown",
+        "style": "remote",
+        "n": 1
+      },
+      {
+        "category": "workflow-automation",
+        "district": "unknown",
+        "style": "remote",
+        "n": 1
+      }
+    ]
+  },
+  "livePagination": {
+    "at": "2026-10-25T17:59:54.405Z",
+    "pages": [
+      {
+        "status": 200,
+        "returned": 50,
+        "total": 1259,
+        "snapshot": "927aeab6b7fe7aaedce7d017"
+      },
+      {
+        "status": 200,
+        "returned": 50,
+        "total": 1259,
+        "snapshot": "927aeab6b7fe7aaedce7d017"
+      },
+      {
+        "status": 200,
+        "returned": 50,
+        "total": 1259,
+        "snapshot": "927aeab6b7fe7aaedce7d017"
+      }
+    ],
+    "uniqueLoaded": 150,
+    "hasNext": true,
+    "checks": [
+      {
+        "filters": {
+          "provider": "jobicy-israel-qa"
+        },
+        "status": 200,
+        "total": 1005,
+        "sample": [
+          {
+            "id": "jobicy-israel-qa-143813",
+            "location": "Japan"
+          }
+        ]
+      },
+      {
+        "filters": {
+          "location": "United States"
+        },
+        "status": 200,
+        "total": 1,
+        "sample": [
+          {
+            "id": "greenhouse-transmitsecurity-8509961002",
+            "location": "Boston, Massachusetts, United States"
+          }
+        ]
+      },
+      {
+        "filters": {
+          "category": "qa-automation",
+          "district": "tel-aviv"
+        },
+        "status": 200,
+        "total": 4,
+        "sample": [
+          {
+            "id": "greenhouse-canopycare-5285235008",
+            "location": "Tel Aviv, Israel "
+          }
+        ]
+      }
+    ]
+  },
+  "liveAccountExpanded": {
+    "total": 1259,
+    "loaded": 50,
+    "scope": "all",
+    "preferencesUnchanged": true,
+    "publicScreenshot": "C:/Users/zivna/Documents/workme/output/niva-global-live.png"
+  },
+  "offlinePublicPayloadVerification": {
+    "priorGreenhouseBoards": 19,
+    "raw": 1719,
+    "acceptedGlobally": 1719,
+    "jobicyRaw": 1000,
+    "jobicyAccepted": 1000
+  },
+  "liveFirstWorldwideEmployerPass": {
+    "at": "2026-10-25T18:01:03.402Z",
+    "status": 200,
+    "elapsedMs": 3248,
+    "total": 1318,
+    "health": [
+      {
+        "id": "greenhouse-aidocmedical",
+        "checked_at": "2026-10-25T18:01:00.520Z",
+        "error": null,
+        "next_at": 1792952159339,
+        "partial": false,
+        "name": "Aidoc / Greenhouse"
+      },
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-25T18:00:59.590Z",
+        "error": null,
+        "next_at": 1792952159339,
+        "partial": false,
+        "name": "AppsFlyer / Greenhouse"
+      },
+      {
+        "id": "greenhouse-canopycare",
+        "checked_at": "2026-10-25T18:01:00.520Z",
+        "error": null,
+        "next_at": 1792952159339,
+        "partial": false,
+        "name": "Canopy / Greenhouse"
+      },
+      {
+        "id": "greenhouse-datadog",
+        "checked_at": "2026-10-25T17:51:46.220Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Datadog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-elastic",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Elastic / Greenhouse"
+      },
+      {
+        "id": "greenhouse-forter",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Forter / Greenhouse"
+      },
+      {
+        "id": "greenhouse-gongio",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Gong / Greenhouse"
+      },
+      {
+        "id": "greenhouse-jfrog",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "JFrog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-optimove",
+        "checked_at": "2026-10-25T17:51:46.585Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Optimove / Greenhouse"
+      },
+      {
+        "id": "greenhouse-orcasecurity",
+        "checked_at": "2026-10-25T17:51:46.593Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Orca Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-pendo",
+        "checked_at": "2026-10-25T17:51:47.252Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Pendo / Greenhouse"
+      },
+      {
+        "id": "greenhouse-riskified",
+        "checked_at": "2026-10-25T17:51:46.884Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Riskified / Greenhouse"
+      },
+      {
+        "id": "greenhouse-similarweb",
+        "checked_at": "2026-10-25T17:51:46.869Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Similarweb / Greenhouse"
+      },
+      {
+        "id": "greenhouse-taboola",
+        "checked_at": "2026-10-25T17:51:45.855Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Taboola / Greenhouse"
+      },
+      {
+        "id": "greenhouse-torq",
+        "checked_at": "2026-10-25T17:51:46.634Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Torq / Greenhouse"
+      },
+      {
+        "id": "greenhouse-transmitsecurity",
+        "checked_at": "2026-10-25T17:54:56.227Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Transmit Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-unframe",
+        "checked_at": "2026-10-25T18:01:00.520Z",
+        "error": null,
+        "next_at": 1792952159339,
+        "partial": false,
+        "name": "Unframe / Greenhouse"
+      },
+      {
+        "id": "greenhouse-via",
+        "checked_at": "2026-10-25T17:51:47.302Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Via / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wedev",
+        "checked_at": "2026-10-25T17:54:56.229Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "WeDev / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wizinc",
+        "checked_at": "2026-10-25T17:51:45.881Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Wiz / Greenhouse"
+      },
+      {
+        "id": "greenhouse-yotpo",
+        "checked_at": "2026-10-25T17:51:46.905Z",
+        "error": null,
+        "next_at": 1792951605540,
+        "partial": false,
+        "name": "Yotpo / Greenhouse"
+      },
+      {
+        "id": "jobicy-israel-qa",
+        "checked_at": "2026-10-25T17:59:15.969Z",
+        "error": null,
+        "next_at": 1792954751318,
+        "partial": true,
+        "name": "Jobicy · remote jobs"
+      },
+      {
+        "id": "lever-veeva-israel",
+        "checked_at": "2026-10-25T17:54:57.232Z",
+        "error": null,
+        "next_at": 1792951795621,
+        "partial": false,
+        "name": "Veeva / Lever"
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-25T17:47:14.812Z",
+        "error": null,
+        "next_at": 1792951332097,
+        "partial": false,
+        "name": "WalkMe / Lever"
+      }
+    ],
+    "foreignLocationCheck": {
+      "status": 200,
+      "total": 2,
+      "jobs": [
+        {
+          "id": "greenhouse-appsflyer-8793847002",
+          "title": "Account Manager - Growth",
+          "location": "Seoul"
+        }
+      ]
+    }
+  }
+}
