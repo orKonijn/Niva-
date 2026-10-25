@@ -1,0 +1,254 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "version": 31,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_cba559d910208191bde5c026d357fffc",
+  "deploymentId": "appgdep_6ade351cc1348191a0777246f65e3bc8",
+  "status": "succeeded",
+  "publishedAt": "2026-10-25T16:58:20.855795+00:00",
+  "url": "https://getnivajobs.com",
+  "deploymentUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "af27bdeb62d5ecc6fa9c17fd167edd7efad53074",
+  "reviewedGithubCommit": "d2161a02433281c845d9afb5c9a56e80017d0ed6",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000038fc81f59478ecc55ccc8ed1",
+    "content_hash": "sha256:6b641637a13b05153eb1c72edfe5a4959a1ff633572aa88271bb6038372450ac",
+    "size_bytes": 13342720,
+    "file_count": 303
+  },
+  "publicationNotes": "Public audience preserved. No applications submitted and no real profile/CV modified. This receipt is a post-publication Git-only record.",
+  "schedule": {
+    "id": "Automation_d690f0bf5c248191be173f64aeae13ef",
+    "title": "Refresh Niva job discovery",
+    "timezone": "Asia/Jerusalem",
+    "schedule": "BEGIN:VEVENT\nDTSTART:20261025T190500\nRRULE:FREQ=HOURLY;INTERVAL=1\nEND:VEVENT",
+    "enabled": true,
+    "linkedToSiteVerified": true,
+    "firstScheduledRunObserved": false,
+    "readiness": "Public updater exercised without visitor identity and persisted source state read back; saved schedule is not execution evidence."
+  },
+  "verification": {
+    "frontend": {
+      "passed": 59
+    },
+    "server": {
+      "passed": 112
+    },
+    "worker": {
+      "passed": 1
+    },
+    "provenance": {
+      "passed": 1
+    },
+    "typeChecks": 3,
+    "formatting": "passed",
+    "browser": {
+      "preMergeFull": {
+        "passed": 194,
+        "total": 194
+      },
+      "mergedFull": {
+        "passed": 196,
+        "total": 198,
+        "failures": "Two pre-existing CV-copy assertions no longer matched published Hebrew wording."
+      },
+      "correctedAssertionsRerun": {
+        "passed": 2,
+        "total": 2
+      },
+      "finalEvidenceRerun": {
+        "passed": 4,
+        "total": 4
+      },
+      "scope": "Desktop/mobile, light/dark, axe, CV/setup, source/ownership regressions, candidate criteria persistence."
+    },
+    "build": "Production build passed; clean Sites HEAD; mapped reviewed GitHub source verified."
+  },
+  "liveVerification": {
+    "verifiedAt": "2026-10-25T17:01:43.571Z",
+    "build": {
+      "repository": "orKonijn/Niva-",
+      "sourceCommit": "af27bdeb62d5ecc6fa9c17fd167edd7efad53074",
+      "githubCommit": "d2161a02433281c845d9afb5c9a56e80017d0ed6",
+      "sitesCommit": "af27bdeb62d5ecc6fa9c17fd167edd7efad53074",
+      "sourceTree": "1159e3cd9fe1c5bc5e55cc7aefae0a004f2ab89b",
+      "sourceContentDigest": "e7d5e995ae6f23904adfdb1666cad5b91c5fceb3ce586fe80025da48bf950174",
+      "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+      "clientArtifactDigest": "ce81f74b0400db92dd23800d64c993bf9dd47ff4b86d8b861510375a90dc9c59",
+      "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+      "builtAt": "2026-10-25T16:57:24.227Z",
+      "dirty": false,
+      "mappedSourceVerified": true,
+      "provenanceStatus": "mapped-reviewed-source"
+    },
+    "publicWriterReadbackPersisted": true,
+    "initialWriterWorkflowMs": 5916,
+    "totalListings": 237,
+    "sourceCount": 21,
+    "sourceErrors": [],
+    "sourceHealth": [
+      {
+        "id": "greenhouse-aidocmedical",
+        "checked_at": "2026-10-25T16:59:01.920Z",
+        "error": null,
+        "next_at": 1792948440929,
+        "name": "Aidoc / Greenhouse"
+      },
+      {
+        "id": "greenhouse-appsflyer",
+        "checked_at": "2026-10-25T16:59:01.384Z",
+        "error": null,
+        "next_at": 1792948440929,
+        "name": "AppsFlyer / Greenhouse"
+      },
+      {
+        "id": "greenhouse-canopycare",
+        "checked_at": "2026-10-25T16:59:01.891Z",
+        "error": null,
+        "next_at": 1792948440929,
+        "name": "Canopy / Greenhouse"
+      },
+      {
+        "id": "greenhouse-datadog",
+        "checked_at": "2026-10-25T16:49:00.785Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Datadog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-elastic",
+        "checked_at": "2026-10-25T16:49:00.777Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Elastic / Greenhouse"
+      },
+      {
+        "id": "greenhouse-forter",
+        "checked_at": "2026-10-25T16:49:01.792Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Forter / Greenhouse"
+      },
+      {
+        "id": "greenhouse-gongio",
+        "checked_at": "2026-10-25T16:49:00.246Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Gong / Greenhouse"
+      },
+      {
+        "id": "greenhouse-jfrog",
+        "checked_at": "2026-10-25T16:49:01.294Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "JFrog / Greenhouse"
+      },
+      {
+        "id": "greenhouse-optimove",
+        "checked_at": "2026-10-25T16:49:01.068Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Optimove / Greenhouse"
+      },
+      {
+        "id": "greenhouse-orcasecurity",
+        "checked_at": "2026-10-25T16:49:01.356Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Orca Security / Greenhouse"
+      },
+      {
+        "id": "greenhouse-pendo",
+        "checked_at": "2026-10-25T16:49:02.330Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Pendo / Greenhouse"
+      },
+      {
+        "id": "greenhouse-riskified",
+        "checked_at": "2026-10-25T16:49:01.881Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Riskified / Greenhouse"
+      },
+      {
+        "id": "greenhouse-similarweb",
+        "checked_at": "2026-10-25T16:49:01.886Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Similarweb / Greenhouse"
+      },
+      {
+        "id": "greenhouse-taboola",
+        "checked_at": "2026-10-25T16:49:00.253Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Taboola / Greenhouse"
+      },
+      {
+        "id": "greenhouse-torq",
+        "checked_at": "2026-10-25T16:49:01.291Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Torq / Greenhouse"
+      },
+      {
+        "id": "greenhouse-unframe",
+        "checked_at": "2026-10-25T16:59:01.916Z",
+        "error": null,
+        "next_at": 1792948440929,
+        "name": "Unframe / Greenhouse"
+      },
+      {
+        "id": "greenhouse-via",
+        "checked_at": "2026-10-25T16:49:02.511Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Via / Greenhouse"
+      },
+      {
+        "id": "greenhouse-wizinc",
+        "checked_at": "2026-10-25T16:49:00.368Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Wiz / Greenhouse"
+      },
+      {
+        "id": "greenhouse-yotpo",
+        "checked_at": "2026-10-25T16:49:01.898Z",
+        "error": null,
+        "next_at": 1792947839201,
+        "name": "Yotpo / Greenhouse"
+      },
+      {
+        "id": "jobicy-israel-qa",
+        "checked_at": "2026-10-25T16:59:02.023Z",
+        "error": null,
+        "next_at": 1792951140929,
+        "name": "Jobicy · QA remote"
+      },
+      {
+        "id": "lever-walkme",
+        "checked_at": "2026-10-25T17:01:14.292Z",
+        "error": null,
+        "next_at": 1792948573400,
+        "name": "WalkMe / Lever"
+      }
+    ],
+    "qaAutomationCandidates": 4,
+    "qaCaveat": "Candidate count, not verified eligibility. Two direct employer jobs and two remote Jobicy candidates.",
+    "detail": {
+      "checkedAt": "2026-10-25T17:02:58.384Z",
+      "http": 200,
+      "id": "greenhouse-appsflyer-8394076002",
+      "availability": "published",
+      "sourceVerifiedAt": "2026-10-25T17:02:56.227Z",
+      "applicationCheck": {
+        "status": "unverified",
+        "checkedAt": "2026-10-25T17:02:56.227Z",
+        "note": "המקור הפנה לעמוד אחר; מסלול ההגשה דורש בדיקה"
+      }
+    },
+    "sourceOutage": "WalkMe legacy backoff initially visible; successful due-source retry recovered without shortening backoff."
+  }
+}

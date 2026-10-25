@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — Evidence-backed job discovery
+## Version 31 — Evidence-backed job discovery
+
+Published 25 October 2026. [Publication and live verification receipt](docs/verification/publication-20261025-v31.json). Live readback returned237 listings across21 healthy sources and four QA-automation candidates, with no claim of verified candidate eligibility. The public refresh writer persisted successfully. Hourly background updates are saved/enabled from19:05 Asia/Jerusalem; the first scheduled execution was not observed. Preserve source cadence and backoff. This release record is a post-publication Git-only update.
 
 - Repair browser validation for every connected employer; add scoped Canopy, Unframe and Aidoc boards plus the explicitly reusable Jobicy remote-QA source. Source-aware shared polling replaces forced upstream requests on every visit: ATS15min floor, Jobicy hourly/3h upstream delay, complete-vs-rolling closure rules, bounded pagination, leases and backoff.
 - Add confirmed profile criteria, deterministic fit-v1 breakdowns, separate eligibility/confidence/completeness/freshness, explicit unknown values, default blocker exclusion with inspection filters, source/remote/salary/seniority/type/date filters, original links and individual detail/Apply checks. Count anonymous Apply navigations separately from submissions. Keep CV review→preferences setup and identity/photo behavior.
