@@ -1,0 +1,48 @@
+{
+  "observedOn": "2026-10-25",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 20,
+  "applicationSourceUnchanged": true,
+  "deploymentRefresh": {
+    "id": "appgdep_6addff0a8b2881919faf42bdce3d1c62",
+    "status": "succeeded",
+    "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",
+    "updatedAt": "2026-10-25T13:07:35.879065+00:00",
+    "environmentRevision": 3,
+    "publicAudiencePreserved": true
+  },
+  "initialObservation": "User completed provider sign-in, but returned to Angular not-found page at /callback; subsequent jobs page remained anonymous.",
+  "resolution": "Redeployed the same saved version through the supported public deployment operation, then retried normal top-level ChatGPT sign-in. Actual round trip returned to /app with the signed-in server-storage notice. Precise root cause of the initial callback failure is not established.",
+  "checks": {
+    "completedCustomDomainCallback": "passed",
+    "sessionAfterReload": "passed",
+    "savedJobAfterReload": "passed",
+    "savedJobInSecondTab": "passed",
+    "savedJobId": "greenhouse-appsflyer-8394076002",
+    "savedJobTitle": "Application Security Engineer",
+    "savedCountBefore": 0,
+    "savedCountDuring": 1,
+    "restoration": "passed: both authenticated tabs show saved count 0 after reload",
+    "workerErrorLogs": {
+      "minutes": 20,
+      "count": 0
+    },
+    "scope": "One authenticated account, same browser; no independent user or physical cross-device proof.",
+    "savedCountAfter": 0
+  },
+  "images": {
+    "callbackBefore": "../screenshots/changes/custom-domain-signin/before.png",
+    "callbackAfter": "../screenshots/changes/custom-domain-signin/after.png",
+    "savedBefore": "../screenshots/changes/live-saved-job/before.png",
+    "savedAfter": "../screenshots/changes/live-saved-job/after.png"
+  },
+  "verificationPolicy": "Focused live authentication/save checks only. No application source change, so the previously passing full suite is retained rather than rerun.",
+  "untouched": [
+    "profile/preferences",
+    "existing user records",
+    "resumes",
+    "employer applications",
+    "runtime secrets",
+    "domain renewal settings"
+  ]
+}

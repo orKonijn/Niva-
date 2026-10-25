@@ -14,11 +14,13 @@
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",
       "sitesCommit": "057bd6a2d5eba554edf234c26e464104073a4045",
       "reviewedGithubCommit": "4a089edbb994750966d3ef46a61d0bd236cf9b0d",
-      "deploymentId": "appgdep_6addfa4e4dac8191a2f041e75c39d0b8",
+      "deploymentId": "appgdep_6addff0a8b2881919faf42bdce3d1c62",
       "deploymentStatus": "succeeded",
-      "deploymentRecordUpdatedAt": "2026-10-25T12:47:24.288571+00:00",
+      "deploymentRecordUpdatedAt": "2026-10-25T13:07:35.879065+00:00",
       "artifactDigest": "sha256:c87a4c9054edc0a429cc3bf4bd12baeb74ebf45acf16dd57274553818a111b1b",
-      "mappedSourceVerified": true
+      "mappedSourceVerified": true,
+      "previousDeploymentId": "appgdep_6addfa4e4dac8191a2f041e75c39d0b8",
+      "followUp": "Same saved version redeployed via public operation; completed authentication and reversible account save verified. See live-account-20261025.json."
     },
     {
       "version": 19,

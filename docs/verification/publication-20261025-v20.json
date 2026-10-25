@@ -47,5 +47,18 @@
   "recordScope": "Post-deployment Git-only receipt and documentation; no additional hosted release",
   "artifactDigest": "sha256:c87a4c9054edc0a429cc3bf4bd12baeb74ebf45acf16dd57274553818a111b1b",
   "mappedSourceVerified": true,
-  "dirty": false
+  "dirty": false,
+  "accountJourneyFollowUp": {
+    "evidence": "live-account-20261025.json",
+    "result": "Completed sign-in, saved job after reload/second authenticated tab and restoration verified",
+    "deploymentRefresh": {
+      "id": "appgdep_6addff0a8b2881919faf42bdce3d1c62",
+      "status": "succeeded",
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",
+      "updatedAt": "2026-10-25T13:07:35.879065+00:00",
+      "environmentRevision": 3,
+      "publicAudiencePreserved": true
+    },
+    "limitations": "One account, same browser; not independent identities or physical cross-device verification"
+  }
 }
