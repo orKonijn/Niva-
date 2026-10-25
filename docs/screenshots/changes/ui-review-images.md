@@ -1,6 +1,6 @@
 # UI/UX review repairs — genuine before/after evidence
 
-25 October 2026. Baseline `24d9d2e67168708bb9f82be2ea74ac4e1ad36815`; after images show the local uncommitted repair, not a new hosted release. Actual browser captures with synthetic data. Original review evidence under `output/niva-ui-review-20261025` is preserved. Focus outlines are intentional keyboard/route focus states. Screenshots are supporting evidence; the linked verification record distinguishes behavioral tests, viewport reflow, unavailable native zoom and unverified spoken screen-reader output.
+25 October 2026. Baseline `24d9d2e67168708bb9f82be2ea74ac4e1ad36815`; after images capture the verified local repair before publication. Those changes were subsequently published as version19; these remain synthetic local evidence rather than hosted screenshots. Actual browser captures with synthetic data. Original review evidence under `output/niva-ui-review-20261025` is preserved. Focus outlines are intentional keyboard/route focus states. Screenshots are supporting evidence; the linked verification record distinguishes behavioral tests, viewport reflow, unavailable native zoom and unverified spoken screen-reader output.
 
 Pairs retain route, viewport, theme and fixture data; natural content reflow changes page height. The delete pair preserves the short mobile viewport: before shows the trigger while its confirmation lies below the view, after shows the focused modal. The status pair renders actual repository documentation; it is not product UI.
 

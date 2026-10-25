@@ -1,0 +1,34 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "siteUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "version": 19,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a2fc781609d48191a702818b63d4b709",
+  "sitesCommit": "e94033e05a20b767b3537ed28503c3972be375ce",
+  "reviewedGithubCommit": "8aa5de3730724caaaa964fd32bf6aa133523c819",
+  "deploymentId": "appgdep_6addf01f8f408191a18798816095f2ad",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T14:03:57.010093+02:00",
+  "artifactDigest": "sha256:2d0aadbc6f6e356bbd3545f695f946950f10675bda66f088b4b0645be5c60aee",
+  "mappedSourceVerified": true,
+  "dirty": false,
+  "sourceContentDigest": "11dcdd75df336dd73c8a4467debaa59b356659f5a75ffd18ed868437b2c2e4f7",
+  "clientArtifactDigest": "a98ae656aa09d88569a64ff123ebb56cbac38622d507bcf74566bd812a1f21b3",
+  "verificationEvidence": "ui-review-fixes-20261025.json",
+  "verificationPolicy": "Verified implementation/test digest unchanged. Prior 59 frontend,79 server,1 provenance and280 consolidated browser cases plus220-case route audit retained. Clean mapped production archive rebuilt for publication; no repeated full test suite without changed inputs.",
+  "audience": "Existing owner-only access preserved; no sharing mutation",
+  "scope": "UI-01–08 repair source, report, changelog and genuine image evidence",
+  "inactive": ["AI provider", "scanner", "hosted schedules"],
+  "limitations": [
+    "Native 200%/400% zoom and spoken Hebrew screen reader/physical devices unverified",
+    "Hosted independent-identity, retention/alerts, actual D1 concurrency, restore and real-provider gates remain unverified"
+  ],
+  "sourceHostRecovery": "Initial Site checkout open received HTTP500; same operation retried successfully before any deployment",
+  "recordScope": "Post-deployment Git-only receipt, not another hosted release",
+  "liveVerification": [
+    "Live build-info.json exact GitHub/Sites source mapping, dirty=false, mappedSourceVerified=true",
+    "Authenticated jobs/map renders; provider subtitle no longer duplicated",
+    "General assistant navigation clears job query and displayed context",
+    "Resume versions precede creation/privacy disclosures; empty-account creation is open",
+    "Read-only checks only; no deletion, consent, provider send or new resume"
+  ]
+}

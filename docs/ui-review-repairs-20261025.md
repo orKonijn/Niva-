@@ -1,6 +1,6 @@
 # Niva — UI/UX review implementation and reassessment
 
-> Historical local implementation/verification report. The user subsequently authorized publication. The changelog and publication receipt record the resulting source/release state; the original evidence and unverified operational/provider gates below remain unchanged.
+> Historical local implementation/verification report. The user subsequently authorized publication, completed as version19. The [publication receipt](verification/publication-20261025-v19.json) and changelog record the exact source/release state; the original evidence and unverified operational/provider gates below remain unchanged.
 
 25 October 2026 (Asia/Jerusalem). **Local, uncommitted changes ready for review. No push or deployment.** Published version18 is unchanged. Synthetic data only; no employer applications, production data mutations, access changes, provider activation or scheduling changes.
 

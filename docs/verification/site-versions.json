@@ -6,9 +6,20 @@
     "Sites saved version numbers, not semantic package versions.",
     "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
     "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
-    "Sites and GitHub have separate Git lineages; v16–v18 have verified reviewed-source mappings in build metadata."
+    "Sites and GitHub have separate Git lineages; v16–v19 have verified reviewed-source mappings in build metadata."
   ],
   "versions": [
+    {
+      "version": 19,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a2fc781609d48191a702818b63d4b709",
+      "sitesCommit": "e94033e05a20b767b3537ed28503c3972be375ce",
+      "reviewedGithubCommit": "8aa5de3730724caaaa964fd32bf6aa133523c819",
+      "deploymentId": "appgdep_6addf01f8f408191a18798816095f2ad",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T12:03:57.010093+00:00",
+      "artifactDigest": "sha256:2d0aadbc6f6e356bbd3545f695f946950f10675bda66f088b4b0645be5c60aee",
+      "mappedSourceVerified": true
+    },
     {
       "version": 18,
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_086fc6047264819197731fca71994f43",

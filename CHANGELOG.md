@@ -1,12 +1,14 @@
 # Changelog
 
-## Unreleased
+<a id="version-19"></a>
 
-### Publication requested — UI/UX review repairs
+## Version 19 — UI/UX review repairs
 
-The user subsequently authorized publication of the verified UI-01–08 repairs and their evidence. Source preparation now includes committing/pushing the reviewed source and building its mapped Sites archive. The successful saved release and exact source identifiers will be recorded after deployment. Existing owner-only access and provider/scheduler settings are preserved. The local verification report below remains historical evidence.
+Published **25 October 2026** after authorization. Deployment succeeded. Reviewed GitHub source: `8aa5de3730724caaaa964fd32bf6aa133523c819`; Sites source: `e94033e05a20b767b3537ed28503c3972be375ce`. Live build metadata verifies the clean mapping. [Publication receipt](docs/verification/publication-20261025-v19.json). Existing owner-only access and inactive providers/scheduler are preserved. No new schema migration or live deletion operation.
 
-### 25 October 2026 — UI/UX review repairs (local)
+This subsequent Git-only release-record update does not change application code or create another hosted version. Genuine document record: [Before](docs/screenshots/changes/publication-ui-review-record/before.png) · [After](docs/screenshots/changes/publication-ui-review-record/after.png).
+
+### UI/UX repair scope and original verification
 
 - **UI-01:** wrap full job titles/employers without truncation in cards, dashboard, saved/feed/map lists, detail and career context. Keep RTL/bidi isolation and action sizing.
 - **UI-02:** react to URL query changes and removal in assistant/resumes; invalidate stale chat completion and tailoring selection while preserving unrelated drafts and matching request context.
@@ -18,7 +20,7 @@ The user subsequently authorized publication of the verified UI-01–08 repairs 
 - **UI-08:** increase important metadata to 13px and remove duplicate source text from the employer subtitle. Preserve version18 action spacing and theme tokens.
 - Clarified stale capability/staging documentation without claiming hosted operations passed. All original review evidence remains intact. Final verification, scorecard and image links are recorded in the [implementation report](docs/ui-review-repairs-20261025.md) and [genuine before/after gallery](docs/screenshots/changes/ui-review-images.md).
 - Verification:59 frontend,79 server and1 provenance check passed; all three type checks, formatting and production build passed. The initial276-case browser run had262 passes,13 failures and1 flaky case. After correcting disclosure-test flows, context-fixture timing and WebKit timeout handling,76 affected cases passed without retries; a final obsolete-tailoring-error guard passed8 focused cases, including4 new cases. Consolidated browser coverage:280 passing cases. The220-case route audit has no overflow and88 axe scans have no reported violations. See the report for exact scopes and initial failures.
-- No commit, push, deployment, production access/data change, provider activation or scheduler activation in this pass. Version18 remains the last published release. Revised local UI judgments are8/10 in each overall category, with Medium overall confidence; actual browser zoom, spoken Hebrew screen-reader output, physical devices and hosted gates remain separate evidence requirements.
+- The original local repair pass performed no commit, push or deployment. The subsequent authorized publication commits/syncs and deploys that verified source as version19. No production access/data change, provider activation or scheduler activation was performed. Revised local UI judgments are8/10 in each overall category, with Medium overall confidence; actual browser zoom, spoken Hebrew screen-reader output, physical devices and hosted gates remain separate evidence requirements.
 
 <a id="version-18"></a>
 
@@ -59,11 +61,11 @@ The original local repair pass performed no commit, push or deployment. The subs
 
 - Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–18**, not semantic package versions (`package.json` remains `0.1.0`). Version 18 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–19**, not semantic package versions (`package.json` remains `0.1.0`). Version 19 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–18 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–19 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
@@ -71,6 +73,7 @@ Sites and GitHub have separate Git histories. `Sites source` identifies the exac
 
 | Version | Source date | Changes                                                             |
 | ------- | ----------- | ------------------------------------------------------------------- |
+| 19      | 2026-10-25  | [UI/UX review repairs](#version-19)                                 |
 | 18      | 2026-10-25  | [Job-card action layout](#version-18)                               |
 | 17      | 2026-10-25  | [Independent-review repairs](#version-17)                           |
 | 16      | 2026-10-24  | [Reliability, privacy and evidence repairs](#version-16)            |
