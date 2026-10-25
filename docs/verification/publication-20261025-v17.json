@@ -1,0 +1,30 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "siteUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "version": 17,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_e8fa27c90478819180e212820436c776",
+  "sitesCommit": "d9db15d1a0d61104768bf1e419af64a8ad6eeec1",
+  "reviewedGithubCommit": "a9d4001cb9d71c2010903b994a8142af5a5ac54d",
+  "deploymentId": "appgdep_6add467b6a7081918f8a4ebed1d98177",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T00:00:13.722519+00:00",
+  "artifactDigest": "sha256:97de4310ef921338f78759456856b26729c3a1b15d1f31536c8fde500541f96a",
+  "mappedSourceVerified": true,
+  "dirty": false,
+  "liveVerification": [
+    "Build metadata exact GitHub/Sites hashes and clean mapping",
+    "Authenticated Hebrew RTL jobs page loaded, 12 of 28 jobs shown under existing preferences",
+    "Existing database tables retained; deployment completed appended schema migration"
+  ],
+  "verificationEvidence": "review25-checks.json",
+  "verificationPolicy": "Previously completed 59 frontend, 79 server, 208 browser and 1 provenance checks; implementation digest unchanged at publication. Production archive rebuilt. Documentation-only receipt receives formatting, links and diff checks; full suite not repeated.",
+  "preservedAudience": "Existing owner-only access; no access mutation",
+  "inactive": ["AI provider", "scanner", "hosted schedule"],
+  "remainingGates": [
+    "Hosted D1 concurrent capacity and deletion behavior",
+    "Second live identity and alternate-origin/header isolation",
+    "Real model/scanner quality and safety",
+    "Observed scheduled retention, independent operator delivery and backup restoration"
+  ],
+  "recordScope": "Git-only post-deployment receipt; does not itself create another hosted release"
+}

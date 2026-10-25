@@ -1,14 +1,25 @@
 {
   "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
   "siteUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
-  "observedOn": "2026-10-24",
+  "observedOn": "2026-10-25",
   "notes": [
     "Sites saved version numbers, not semantic package versions.",
     "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
     "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
-    "Source repositories have separate Git lineages; only v16 has a verified reviewed-source mapping in build metadata."
+    "Sites and GitHub have separate Git lineages; v16 and v17 have verified reviewed-source mappings in build metadata."
   ],
   "versions": [
+    {
+      "version": 17,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_e8fa27c90478819180e212820436c776",
+      "sitesCommit": "d9db15d1a0d61104768bf1e419af64a8ad6eeec1",
+      "reviewedGithubCommit": "a9d4001cb9d71c2010903b994a8142af5a5ac54d",
+      "deploymentId": "appgdep_6add467b6a7081918f8a4ebed1d98177",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T00:00:13.722519+00:00",
+      "artifactDigest": "sha256:97de4310ef921338f78759456856b26729c3a1b15d1f31536c8fde500541f96a",
+      "mappedSourceVerified": true
+    },
     {
       "version": 16,
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_ea5b869c30208191adaedacf9e9799e8",

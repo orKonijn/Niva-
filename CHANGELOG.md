@@ -1,18 +1,20 @@
 # Changelog
 
-## Unreleased
+<a id="version-17"></a>
 
-### Publication requested — 25 October 2026 review repairs
+## Version 17 — Independent-review repairs
 
-The user subsequently authorized publication of the verified N01–N07 repair source, standing workflow rules and genuine image evidence below. Release preparation may now commit/sync that source and apply its additive schema migration. The earlier local-only assessment remains historical evidence; the saved Sites version and publication receipt will be recorded after the deployment succeeds. Existing owner-only access and provider/scheduler settings are preserved.
+Published on **25 October 2026** after the user authorized publication. Sites reports deployment success. Reviewed GitHub source: `a9d4001cb9d71c2010903b994a8142af5a5ac54d`; Sites source: `d9db15d1a0d61104768bf1e419af64a8ad6eeec1`. Live build metadata verifies that mapping with a clean source state; the authenticated jobs page loads correctly. [Publication receipt](docs/verification/publication-20261025-v17.json). Existing owner-only access is preserved. AI/scanning/scheduling remain inactive and the hosted staging gates below remain unresolved.
+
+The release includes the repairs and genuine image pairs below. A subsequent Git-only record update confirms publication without changing application code or creating another hosted release. Actual publication-record document captures: [Before](docs/screenshots/changes/publication-v17-record/before.png) · [After](docs/screenshots/changes/publication-v17-record/after.png).
 
 ### 25 October 2026 — standing progress and verification rules
 
-- Updated [AGENTS.md](AGENTS.md) to require step-by-step progress updates in every task and one complete relevant verification run before final handoff, with focused intermediate checks only for specific issues. Documentation-only changes use appropriate checks. Application code/UI is unchanged. Genuine instruction-file captures: [Before](docs/screenshots/changes/workflow-progress-and-final-checks-20261025/before.png) · [After](docs/screenshots/changes/workflow-progress-and-final-checks-20261025/after.png). This rule update remains local and uncommitted under the current task restrictions.
+- Updated [AGENTS.md](AGENTS.md) to require step-by-step progress updates in every task and one complete relevant verification run before final handoff, with focused intermediate checks only for specific issues. Documentation-only changes use appropriate checks. Application code/UI is unchanged. Genuine instruction-file captures: [Before](docs/screenshots/changes/workflow-progress-and-final-checks-20261025/before.png) · [After](docs/screenshots/changes/workflow-progress-and-final-checks-20261025/after.png). The rule update is included in the reviewed source published as version 17.
 
-### 25 October 2026 — independent-review repairs (local, uncommitted)
+### 25 October 2026 — independent-review repair evidence
 
-No commit, push, deployment, live access change, provider activation, real-resume transmission or existing-live-data deletion was performed in this repair pass. Sites version16 remains the deployed release; this is not version17. See the [implementation/reassessment report](docs/review-repairs-20261025.md) and [complete genuine before/after gallery](docs/screenshots/changes/review25-images.md).
+The original local repair pass performed no commit, push or deployment. The subsequent authorized publication now deploys that verified source as version 17. No live access change, provider activation, real-resume transmission or existing-live-data deletion was performed. See the [implementation/reassessment report](docs/review-repairs-20261025.md) and [complete genuine before/after gallery](docs/screenshots/changes/review25-images.md).
 
 - **N01 — Maintenance/operations:** added bearer-protected operational health, an independent watchdog with named-operator delivery, cooldown/retry and a local loopback transport test, optional private-Sites service authorization, and concise candidate guidance with collapsed operator diagnostics. Hosted scheduler, actual operator delivery and retention target remain unverified; no service was activated. [Before](docs/screenshots/changes/review25-maintenance-desktop-light/before.png) · [After](docs/screenshots/changes/review25-maintenance-desktop-light/after.png). Mobile/dark pairs are in the gallery.
 - **N02 — Scoped deletion:** separated whole-account erasure from item invalidation, pruned deleted/dependent state and preserved unrelated A/new-text drafts across local and cross-tab B deletion. Added a constant-default erasure token through appended Node005/D1-0003 migrations; retained lifecycle/write guards and whole-account clearing. [Before](docs/screenshots/changes/review25-draft-desktop/before.png) · [After](docs/screenshots/changes/review25-draft-desktop/after.png). The mobile pair and test evidence cover the same loss path.
@@ -23,13 +25,13 @@ No commit, push, deployment, live access change, provider activation, real-resum
 - **N07 — Staging boundaries:** added a safe-default machine-readable gate plan, synthetic model corpus, a read-only disposable-staging identity/known-record/header checker that refuses production, and the recovery/D1/provider/retention/operator handoff. Script types are covered by server type checking. No real model, scanner, hosting isolation or restoration pass is claimed. Product UI unchanged. [Before](docs/screenshots/changes/review25-operations-handoff/before.png) · [After](docs/screenshots/changes/review25-operations-handoff/after.png).
 - **Verification:**59 frontend tests,79 server tests,1 provenance test,208 full browser cases plus focused rechecks; type checks, formatting and production build. Real local backend/outbox journeys are distinct from browser fixtures, SQLite-backed D1 doubles, provider mocks and unverified hosted gates. Exact execution scope, source digests and limitations are recorded in the report.
 
-- Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the published application remains version 16.
+- Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–16**, not semantic package versions (`package.json` remains `0.1.0`). Version 16 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–17**, not semantic package versions (`package.json` remains `0.1.0`). Version 17 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. All 16 listed latest deployment attempts returned `succeeded` when checked on 24 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; version 17 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
@@ -37,6 +39,7 @@ Sites and GitHub have separate Git histories. `Sites source` identifies the exac
 
 | Version | Source date | Changes                                                             |
 | ------- | ----------- | ------------------------------------------------------------------- |
+| 17      | 2026-10-25  | [Independent-review repairs](#version-17)                           |
 | 16      | 2026-10-24  | [Reliability, privacy and evidence repairs](#version-16)            |
 | 15      | 2026-10-24  | [Worker-compatible source retrieval](#version-15)                   |
 | 14      | 2026-10-24  | [Reliable feed bootstrap lifetime](#version-14)                     |
