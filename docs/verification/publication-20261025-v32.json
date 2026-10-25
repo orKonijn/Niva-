@@ -1,0 +1,90 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "version": 32,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_6004039d6c708191925868be33e8dfc0",
+  "deploymentId": "appgdep_6ade38eb0674819195dab652712c8241",
+  "publishedAt": "2026-10-25T17:14:36.043072+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com",
+  "sitesCommit": "f413dc2ec806e17b97bea4f156e2509c5e8860c7",
+  "reviewedGithubCommit": "fe32205e534001cad7925c4dfc54c0d2f41fc921",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000d8bc81f6a0ae9f46cad660b2",
+    "content_hash": "sha256:19e5b5df25120bafc03108b1277f9bfe93685586f98244953f1f2417faf389b5",
+    "size_bytes": 13342720,
+    "file_count": 303
+  },
+  "checks": {
+    "frontend": 59,
+    "server": 114,
+    "browser": 202,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "passed, clean mapped source"
+  },
+  "privacy": "Public listing queries only. Actual account preferences and CV were not modified.",
+  "note": "Post-publication Git-only verification record; no additional hosted version for this receipt.",
+  "liveBefore": {
+    "at": "2026-10-25T17:11:00.367Z",
+    "data": [
+      {
+        "url": "https://getnivajobs.com/api/feed?category=qa-automation&district=tel-aviv&styles=onsite,hybrid,remote&limit=50",
+        "status": 200,
+        "total": 0,
+        "ids": []
+      },
+      {
+        "url": "https://getnivajobs.com/api/feed?category=qa-automation&district=tel-aviv&styles=onsite,hybrid,remote&limit=50&unknownStyle=true",
+        "status": 200,
+        "total": 2,
+        "ids": ["greenhouse-canopycare-5285235008", "greenhouse-unframe-5003021101"]
+      }
+    ]
+  },
+  "liveAfter": {
+    "verifiedAt": "2026-10-25T17:14:48.290Z",
+    "url": "https://getnivajobs.com",
+    "defaultRequest": {
+      "url": "https://getnivajobs.com/api/feed?category=qa-automation&district=tel-aviv&styles=onsite,hybrid,remote&limit=50",
+      "status": 200,
+      "total": 2,
+      "jobs": [
+        {
+          "id": "greenhouse-canopycare-5285235008",
+          "title": "QA & Automation Engineer",
+          "company": "Canopy",
+          "workStyle": "unknown"
+        },
+        {
+          "id": "greenhouse-unframe-5003021101",
+          "title": "AI-First QA Automation Engineer ",
+          "company": "Unframe",
+          "workStyle": "unknown"
+        }
+      ]
+    },
+    "strictRequest": {
+      "url": "https://getnivajobs.com/api/feed?category=qa-automation&district=tel-aviv&styles=onsite,hybrid,remote&limit=50&unknownStyle=false",
+      "status": 200,
+      "total": 0
+    },
+    "build": {
+      "repository": "orKonijn/Niva-",
+      "sourceCommit": "f413dc2ec806e17b97bea4f156e2509c5e8860c7",
+      "githubCommit": "fe32205e534001cad7925c4dfc54c0d2f41fc921",
+      "sitesCommit": "f413dc2ec806e17b97bea4f156e2509c5e8860c7",
+      "sourceTree": "94e4e8665cf0c883749631e8d037363fe7571523",
+      "sourceContentDigest": "6c1e1eaa74c796b18b539338bc1907eef8c08de9f1e4428c63a18d73838f0b75",
+      "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+      "clientArtifactDigest": "3c414ea276beb4644f1a3ae0c8eb454cef08b16587c10ac651684bc38c55802e",
+      "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+      "builtAt": "2026-10-25T17:12:30.775Z",
+      "dirty": false,
+      "mappedSourceVerified": true,
+      "provenanceStatus": "mapped-reviewed-source"
+    }
+  }
+}

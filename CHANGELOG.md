@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — Recover jobs hidden by missing work arrangement
+## Version 32 — Recover jobs hidden by missing work arrangement
+
+Published 25 October 2026. [Publication/live regression receipt](docs/verification/publication-20261025-v32.json). The same public QA/Tel Aviv/all-style request returned0 before and2 after publication without an override; explicit strict filtering still returns0. All missing arrangements remain unknown. No actual account preferences or CV were modified.
 
 - Fix the zero-result case where saved QA/Tel Aviv/work-style preferences hid current employer listings that omitted office/hybrid/remote information. Include unspecified arrangements by default in both server pagination and browser lists/counters, without changing saved account preferences or inventing a work style. Known conflicts, district/role filters and employer exclusions still apply.
 - Keep an explicit strict checkbox choice in the URL across reload and Back/Forward; unchecking excludes unspecified arrangements even when no style is selected. Show the saved role/district/style preferences above the page filters, and describe unknown evidence as needing confirmation instead of claiming it conflicts.
