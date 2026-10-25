@@ -1,0 +1,55 @@
+{
+  "observedAt": "2026-10-25T12:54:11.566Z",
+  "total": 27,
+  "filterChecks": [
+    {
+      "filters": {
+        "district": "tel-aviv"
+      },
+      "count": 27,
+      "matching": "passed"
+    },
+    {
+      "filters": {
+        "category": "engineering"
+      },
+      "count": 7,
+      "matching": "passed"
+    },
+    {
+      "filters": {
+        "district": "tel-aviv",
+        "category": "engineering"
+      },
+      "count": 7,
+      "matching": "passed"
+    },
+    {
+      "filters": {
+        "styles": "onsite,hybrid"
+      },
+      "count": 5,
+      "matching": "passed"
+    },
+    {
+      "filters": {
+        "district": "tel-aviv",
+        "category": "engineering",
+        "styles": "onsite,hybrid"
+      },
+      "count": 2,
+      "matching": "passed"
+    }
+  ],
+  "pagination": {
+    "pages": 3,
+    "unique": 27,
+    "noDuplicates": true
+  },
+  "listing": {
+    "id": "greenhouse-appsflyer-8394076002",
+    "status": 200,
+    "originalSourceUrl": "https://careers.appsflyer.com/jobs/position/8394076002?gh_jid=8394076002"
+  },
+  "limitations": "Uses actual current public source data. Local synthetic tests additionally cover multiple selected styles with positive results, migration and independent account boundaries."
+}

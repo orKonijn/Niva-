@@ -6,9 +6,20 @@
     "Sites saved version numbers, not semantic package versions.",
     "Each listed latest deployment attempt was read once and returned succeeded; this does not certify feature correctness.",
     "deploymentRecordUpdatedAt is the server record update time, not a claimed first-publication timestamp.",
-    "Sites and GitHub have separate Git lineages; v16–v19 have verified reviewed-source mappings in build metadata."
+    "Sites and GitHub have separate Git lineages; v16–v20 have verified reviewed-source mappings in build metadata."
   ],
   "versions": [
+    {
+      "version": 20,
+      "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",
+      "sitesCommit": "057bd6a2d5eba554edf234c26e464104073a4045",
+      "reviewedGithubCommit": "4a089edbb994750966d3ef46a61d0bd236cf9b0d",
+      "deploymentId": "appgdep_6addfa4e4dac8191a2f041e75c39d0b8",
+      "deploymentStatus": "succeeded",
+      "deploymentRecordUpdatedAt": "2026-10-25T12:47:24.288571+00:00",
+      "artifactDigest": "sha256:c87a4c9054edc0a429cc3bf4bd12baeb74ebf45acf16dd57274553818a111b1b",
+      "mappedSourceVerified": true
+    },
     {
       "version": 19,
       "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a2fc781609d48191a702818b63d4b709",
@@ -188,5 +199,6 @@
       "deploymentRecordUpdatedAt": "2026-10-23T14:21:59.128837+00:00",
       "artifactDigest": "sha256:3a773669f59ace25d1bd0fbd94d3b164d881663720e091915a40202b7747d1b4"
     }
-  ]
+  ],
+  "canonicalUrl": "https://getnivajobs.com"
 }

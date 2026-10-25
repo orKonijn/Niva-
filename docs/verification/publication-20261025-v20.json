@@ -1,0 +1,51 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "canonicalUrl": "https://getnivajobs.com",
+  "version": 20,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5c42697ea4808191a8e99b1e4ff7a78c",
+  "reviewedGithubCommit": "4a089edbb994750966d3ef46a61d0bd236cf9b0d",
+  "sitesCommit": "057bd6a2d5eba554edf234c26e464104073a4045",
+  "deploymentId": "appgdep_6addfa4e4dac8191a2f041e75c39d0b8",
+  "deploymentStatus": "succeeded",
+  "deploymentRecordUpdatedAt": "2026-10-25T12:47:24.288571+00:00",
+  "environmentRevision": 3,
+  "audience": "public",
+  "accessRevision": 2,
+  "registrar": "Porkbun",
+  "domainExpires": "2027-10-25",
+  "domainAutoRenew": false,
+  "approvedOneYearCapUSD": 11.08,
+  "quotedRenewalEstimateUSD": 11.08,
+  "newRecurringCostsApproved": false,
+  "tests": {
+    "frontend": 59,
+    "server": 90,
+    "provenance": 1,
+    "browser": 280,
+    "projects": ["desktop Chromium", "mobile Chromium", "Firefox", "WebKit"],
+    "typechecks": ["server", "tests", "e2e"],
+    "format": "passed after formatting new changelog entry",
+    "productionBuild": "passed"
+  },
+  "liveEvidence": "public-launch-live-20261025.json",
+  "sourceRefreshEvidence": "public-launch-source-refresh-20261025.json",
+  "liveAnonymousPrivateBoundary": "account/state and career/snapshot 401; spoofed identity remained null",
+  "initialAccessPropagation": "Initial post-access-update probes returned platform sign-in 401; subsequent requests and final probe returned public application responses.",
+  "accountJourneys": "Custom-domain sign-in reaches OpenAI account chooser with correct HTTPS callback. Completed session and independent synthetic accounts remain pending user action.",
+  "notActivated": [
+    "AI provider",
+    "scanner/uploads",
+    "Google/Apple/email providers",
+    "hosted unattended schedule",
+    "external alert delivery"
+  ],
+  "unverified": [
+    "provider backup/isolated restore",
+    "independent live account isolation/persistence",
+    "physical mobile devices/spoken Hebrew screen reader"
+  ],
+  "recordScope": "Post-deployment Git-only receipt and documentation; no additional hosted release",
+  "artifactDigest": "sha256:c87a4c9054edc0a429cc3bf4bd12baeb74ebf45acf16dd57274553818a111b1b",
+  "mappedSourceVerified": true,
+  "dirty": false
+}

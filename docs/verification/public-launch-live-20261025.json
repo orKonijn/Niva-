@@ -1,0 +1,309 @@
+{
+  "observedAt": "2026-10-25T12:49:39.504Z",
+  "dns": {
+    "getnivajobs.com": ["172.66.3.26", "162.159.143.30"],
+    "www.getnivajobs.com": ["104.18.22.186", "104.18.23.186"]
+  },
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "canonical": "https://getnivajobs.com/",
+      "assets": ["/theme-init.js", "styles-447MBVJY.css", "chunk-xIMl_fbW.js", "main-WMQLMUSH.js"]
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/accessibility",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/app/jobs?view=map&source=real",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "location": null,
+      "type": "text/html; charset=utf-8",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "data": {
+        "service": "niva",
+        "status": "ok",
+        "checks": {
+          "database": "ok",
+          "schema": "ok"
+        }
+      }
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "location": null,
+      "type": "text/plain; charset=utf-8",
+      "cache": "no-cache",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "body": "User-agent: *\nDisallow: /app\nDisallow: /account\nDisallow: /api\nDisallow: /login\nDisallow: /register\nDisallow: /signup\nDisallow: /forgot-password\nDisallow: /reset-password\nDisallow: /signin-with-chatgpt\nDisallow: /signout-with-chatgpt\nDisallow: /callback\nSitemap: https://getnivajobs.com/sitemap.xml\n"
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "location": null,
+      "type": "application/xml; charset=utf-8",
+      "cache": "no-cache",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://getnivajobs.com/</loc></url><url><loc>https://getnivajobs.com/privacy</loc></url><url><loc>https://getnivajobs.com/terms</loc></url><url><loc>https://getnivajobs.com/accessibility</loc></url></urlset>"
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "no-store",
+      "robots": null,
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "data": {
+        "repository": "orKonijn/Niva-",
+        "sourceCommit": "057bd6a2d5eba554edf234c26e464104073a4045",
+        "githubCommit": "4a089edbb994750966d3ef46a61d0bd236cf9b0d",
+        "sitesCommit": "057bd6a2d5eba554edf234c26e464104073a4045",
+        "sourceTree": "ccfb00bf45480be228141f9a79dfce4acae5345f",
+        "sourceContentDigest": "2003aa6c63d409d2f427819059fb54e495384035414ae46a5a2e5a031b49604b",
+        "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+        "clientArtifactDigest": "df0b0d4a110ea6590a017ca0e200ced768f58f14f90a5e97026fc25c7c048748",
+        "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+        "builtAt": "2026-10-25T12:46:43.645Z",
+        "dirty": false,
+        "mappedSourceVerified": true,
+        "provenanceStatus": "mapped-reviewed-source"
+      }
+    },
+    {
+      "path": "/api/config",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "data": {
+        "accounts": true,
+        "discovery": true,
+        "platform": "sites",
+        "realJobs": true,
+        "email": false,
+        "google": false,
+        "apple": false
+      }
+    },
+    {
+      "path": "/api/session",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": null,
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "data": {
+        "user": null
+      }
+    },
+    {
+      "path": "/api/account/state",
+      "status": 401,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": null,
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/api/career/snapshot",
+      "status": 401,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": null,
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "path": "/api/feed",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "keys": [
+        "jobs",
+        "archived",
+        "total",
+        "coverage",
+        "nextCursor",
+        "snapshot",
+        "health",
+        "fetchedAt",
+        "stale"
+      ],
+      "count": 12,
+      "fetchedAt": "2026-10-25T12:49:38.004Z",
+      "stale": false
+    },
+    {
+      "path": "/api/jobs",
+      "status": 200,
+      "location": null,
+      "type": "application/json",
+      "cache": "private, no-store",
+      "robots": "noindex, nofollow",
+      "encoding": "gzip",
+      "hsts": "max-age=31536000",
+      "csp": true,
+      "keys": ["jobs", "fetchedAt", "stale", "archived"],
+      "count": 22,
+      "fetchedAt": "2026-10-25T12:48:50.539Z",
+      "stale": false
+    },
+    {
+      "path": "/missing-asset.js",
+      "status": 404,
+      "location": null,
+      "type": "text/plain;charset=UTF-8",
+      "cache": null,
+      "robots": null,
+      "encoding": null,
+      "hsts": "max-age=31536000",
+      "csp": true
+    },
+    {
+      "url": "https://www.getnivajobs.com/app/jobs?view=map",
+      "status": 308,
+      "location": "https://getnivajobs.com/app/jobs?view=map"
+    },
+    {
+      "url": "http://getnivajobs.com/",
+      "status": 302,
+      "location": "https://getnivajobs.com/"
+    },
+    {
+      "url": "http://www.getnivajobs.com/",
+      "status": 302,
+      "location": "https://www.getnivajobs.com/"
+    },
+    {
+      "asset": "/theme-init.js",
+      "status": 200,
+      "cache": "no-cache",
+      "encoding": "gzip"
+    },
+    {
+      "asset": "styles-447MBVJY.css",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "encoding": "gzip"
+    },
+    {
+      "asset": "chunk-xIMl_fbW.js",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "encoding": "gzip"
+    },
+    {
+      "asset": "main-WMQLMUSH.js",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "encoding": "gzip"
+    }
+  ],
+  "assets": ["/theme-init.js", "styles-447MBVJY.css", "chunk-xIMl_fbW.js", "main-WMQLMUSH.js"],
+  "spoof": {
+    "status": 200,
+    "authenticated": false,
+    "applicationJson": true
+  },
+  "tls": {
+    "authorized": true,
+    "issuer": {
+      "C": "US",
+      "O": "Google Trust Services",
+      "CN": "WE1"
+    },
+    "validFrom": "Oct 25 11:37:29 2026 GMT",
+    "validTo": "Jan 23 12:37:26 2027 GMT",
+    "subjectAltName": "DNS:getnivajobs.com"
+  }
+}

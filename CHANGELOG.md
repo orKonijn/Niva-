@@ -1,13 +1,17 @@
 # Changelog
 
-## Unreleased — Custom domain and public launch
+<a id="version-20"></a>
+
+## Version 20 — Custom domain and public launch
+
+Published **25 October 2026** at [getnivajobs.com](https://getnivajobs.com). Public audience is enabled as requested. Reviewed GitHub source: `4a089edbb994750966d3ef46a61d0bd236cf9b0d`; Sites source: `057bd6a2d5eba554edf234c26e464104073a4045`. Deployment succeeded; live build metadata confirms the clean reviewed-source mapping. [Publication receipt](docs/verification/publication-20261025-v20.json), [live HTTP/TLS evidence](docs/verification/public-launch-live-20261025.json) and [source-only refresh](docs/verification/public-launch-source-refresh-20261025.json). This subsequent Git-only record update creates no additional hosted version. Actual document record: [Before](docs/screenshots/changes/publication-public-launch-record/before.png) · [After](docs/screenshots/changes/publication-public-launch-record/after.png).
 
 - Connect the approved one-year `getnivajobs.com` registration to the existing Sites project with apex/www DNS and managed HTTPS. Disable registrar auto-renew as requested; preserve nameservers, email DNS and unrelated records. No new paid subscription or renewal is authorized.
 - Add read-only database/schema health checks, explicit canonical-host configuration, public sitemap/robots metadata, private-route indexing controls, HSTS and cache policies. Let assets and the recovery shell load when API configuration is unavailable.
 - Add a protected source-only ingestion refresh that does not run private retention cleanup. Preserve existing account data and secret entries; add the operator secret through the provider secret manager.
 - [Launch status and maintenance instructions](docs/public-launch.md) distinguish implemented/live features from disabled AI, scanner, OAuth/email, unattended scheduling and unverified provider backup/restore and independent live account gates.
 - Genuine non-UI source evidence: [Before](docs/screenshots/changes/public-launch-policy/before.png) · [After](docs/screenshots/changes/public-launch-policy/after.png). The application design is unchanged; source images are not proof of live services. Registrar before evidence was not captured before the user's purchase; verified [renewal](docs/screenshots/changes/public-launch-policy/registrar-autorenew-off.png) and [DNS](docs/screenshots/changes/public-launch-policy/registrar-dns.png) after evidence is recorded separately.
-- Verification: 59 frontend, 90 server, 1 provenance and all 280 browser checks passed (desktop/mobile Chromium, Firefox, WebKit); all three type checks, formatting and the Angular/Worker production build passed. The initial formatting check flagged this new changelog entry; it was formatted and the check passed. Production readback will be recorded after publication. This entry does not claim a published version before deployment succeeds.
+- Verification: 59 frontend, 90 server, 1 provenance and all 280 browser checks passed (desktop/mobile Chromium, Firefox, WebKit); all three type checks, formatting and the Angular/Worker production build passed. The initial formatting check flagged this new changelog entry; it was formatted and the check passed. Live verification passed public pages, nested routes, assets/compression/cache, database/schema health, robots/sitemap, HTTPS and canonical redirect. Anonymous private reads return 401; spoofed identity remains anonymous. Both sources refreshed successfully without private cleanup; the combined catalog contains 27 jobs. Completed custom-domain account journeys remain pending interactive sign-in; independent identities, scheduling, backup restoration and inactive providers are not claimed verified.
 
 <a id="version-19"></a>
 
@@ -70,11 +74,11 @@ The original local repair pass performed no commit, push or deployment. The subs
 
 - Recorded the user's standing workflow requirement in [AGENTS.md](AGENTS.md): every future change must update this changelog and include genuine before-and-after images linked from its entry and checked into Git. This records a development instruction; the instruction is included in version 17.
 
-This log uses **Sites release numbers 1–19**, not semantic package versions (`package.json` remains `0.1.0`). Version 19 is the latest published release. This Git documentation update does not create a new hosted version.
+This log uses **Sites release numbers 1–20**, not semantic package versions (`package.json` remains `0.1.0`). Version 20 is the latest published release. This Git documentation update does not create a new hosted version.
 
 Live site: [Niva](https://niva-demo-ziv-20261023.ork77.chatgpt.site/). The existing owner-only audience is unchanged.
 
-Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–19 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
+Entries were reconstructed from Sites saved-version/deployment records and source diffs. The version 1–16 deployment attempts returned `succeeded` when checked on 24 October 2026; versions 17–20 returned `succeeded` on 25 October 2026; that status means deployment completed, not that every feature worked correctly. Dates below are **source commit dates in Asia/Jerusalem**, not inferred exact first-publication timestamps. The [version evidence manifest](docs/verification/site-versions.json) records full source/deployment identifiers and archive hashes; record-update timestamps are labelled separately.
 
 Sites and GitHub have separate Git histories. `Sites source` identifies the exact published checkout. Version 16 explicitly maps to reviewed GitHub commit [`8bb4dc1`](https://github.com/orKonijn/Niva-/commit/8bb4dc1371d352d79eb1eb05a2da480c396b6241), with `mappedSourceVerified: true` and `dirty: false` in the [live build metadata](https://niva-demo-ziv-20261023.ork77.chatgpt.site/build-info.json). Earlier entries do not invent an exact GitHub-to-Sites SHA mapping.
 
@@ -82,6 +86,7 @@ Sites and GitHub have separate Git histories. `Sites source` identifies the exac
 
 | Version | Source date | Changes                                                             |
 | ------- | ----------- | ------------------------------------------------------------------- |
+| 20      | 2026-10-25  | [Custom domain and public launch](#version-20)                      |
 | 19      | 2026-10-25  | [UI/UX review repairs](#version-19)                                 |
 | 18      | 2026-10-25  | [Job-card action layout](#version-18)                               |
 | 17      | 2026-10-25  | [Independent-review repairs](#version-17)                           |

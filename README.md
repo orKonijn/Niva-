@@ -1,6 +1,6 @@
 # Niva
 
-See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 19**, including the verified UI/UX reflow, context, recovery, accessibility and resume-workflow repairs. Git-only documentation updates do not create a new hosted version.
+See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 20** at [getnivajobs.com](https://getnivajobs.com), with public job browsing, managed HTTPS, canonical redirects and deployment hardening. See the [launch status and maintenance runbook](docs/public-launch.md) for live evidence and unavailable integrations. Git-only documentation updates do not create a new hosted version.
 
 A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Google/Apple/email methods require their own configuration; hosted sign-in currently uses ChatGPT.
 
