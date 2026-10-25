@@ -1,0 +1,973 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "version": 35,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_2e308918f5d48191b2b48437c51193ae",
+  "deploymentId": "appgdep_6ade4b632df8819191e5158c5d879118",
+  "publishedAt": "2026-10-25T18:33:22.110526+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com/app/jobs?provider=jsearch",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "0a89e4855cb10020d876c85d76555717597d7e6d",
+  "reviewedGithubCommit": "074385c553de1c15515b66f86308733e11dc0501",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000e41482109c98f89a0ab0b305",
+    "content_hash": "sha256:3201a7b0ca51c948ab1b2a16f08df8539553b61eff5f5cbb51c155a4b2171af1",
+    "size_bytes": 13383680,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "credentials": "JSEARCH_API_KEY is a private Sites secret; no secret value or private CV/account content is included.",
+  "checks": {
+    "frontend": 59,
+    "fullServerRun": 123,
+    "distinctServerTestsIncludingNewRegression": 124,
+    "browser": 210,
+    "finalCopyFocusedBrowserChecks": 4,
+    "focusedLifetimeAndCareerTests": 22,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "clean mapped source, client digest unchanged by lifetime fix"
+  },
+  "plan": {
+    "provider": "OpenWeb Ninja JSearch Basic",
+    "monthlyPriceUSD": 0,
+    "advertisedRequests": 200,
+    "nivaBudget": 180,
+    "nivaBudgetWindowDays": 31,
+    "normalDailyRequests": 6,
+    "markets": ["Tel Aviv, Israel", "New York, United States", "London, United Kingdom"],
+    "coverage": "One page per market per publisher; partial. Interrupted attempts consume budget; no paid plan selected."
+  },
+  "initialPublication": {
+    "version": 34,
+    "id": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_2e11800c10548191af37031f025a49fa",
+    "deploymentId": "appgdep_6ade49e3e7088191b929ca5f658c172d",
+    "publishedAt": "2026-10-25T18:27:02.349822+00:00",
+    "sourceCommit": "33eaed19f67874f18dda31699daa5cdd28167cef"
+  },
+  "repair": {
+    "observation": "Initial live browser poll was canceled after about9.5 seconds; LinkedIn imported while Indeed initially retained a pending lease. After natural lease expiry, a held-open check completed Indeed. Register publisherWork with Worker keepAlive before awaiting it.",
+    "verification": "22 focused server checks plus Worker/type checks passed. A contract test verifies promise registration and request-signal independence. A forced production disconnect with due upstream work was not repeated after the fix."
+  },
+  "live": {
+    "at": "2026-10-25T18:33:42.399Z",
+    "checks": [
+      {
+        "provider": "jsearch",
+        "status": 200,
+        "total": 44,
+        "jobs": [
+          {
+            "id": "jsearch-indeed-0d4d69e603b76131feda63d6",
+            "title": "Affiliate Lead at AIOS — Remote, $100k-$200/yr inc equity",
+            "company": "AIOS",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=d99543a7439f0ae9",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-579751259c53c59500c832e2",
+            "title": "Security and Compliance Officer",
+            "company": "Think Cyber",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=1e6ffc9519f71f3a",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-5adc20cad72d6c9769521998",
+            "title": "Vice President of Transformation and Shared Services",
+            "company": "SPS North America",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=25a94a8285493643",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-645976fb6ff4908264693744",
+            "title": "Agentic AI Architect-Anthropic-UK",
+            "company": "NewRocket",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=3473c1f62cfb049f",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-69d196e23569687f6b7d7a52",
+            "title": "Bus Assistant",
+            "company": "Democracy Prep Public Schools",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=6e0e405ae5ce07fc",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-indeed-7c219b6b07019f50bb959578",
+            "title": "Sales & Operations Executive",
+            "company": "Hairtechnic Ltd",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=0f66932e3eef2dab",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-850bd68bfa8e9b4d782d9e3e",
+            "title": "Executive Director, Brand Partnerships (UK)",
+            "company": "Influencer",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=ebc4e021754cfed6",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-89417627fb6fb483c4c91c4a",
+            "title": "Account Executive – Field Sales | kyco",
+            "company": "kyco (kyco.uk)",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=af26cde991121526",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-8fbcc761380c0b27ea0650de",
+            "title": "AI Engineering Lead at AIOS — Remote, $200-$400k/yr + equity",
+            "company": "AIOS",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=b950653aeb4506ee",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-b6fe542d2b5206bf5557ba4f",
+            "title": "AI Design Technologist, Marketing Productivity, Amazon Ads Marketing",
+            "company": "Amazon Online UK Limited - D17",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=3db3238ed9000c1f",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-ce9b355bafeeb38838f91d3f",
+            "title": "VP of Product, Bucketlisters",
+            "company": "TodayTix Group",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=2d5e71cd640a6370",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-indeed-dada6bfd032212ecc6ab6e66",
+            "title": "CSR Full Time 11am - 8pm",
+            "company": "PAY-O-MATIC CK CASHI",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=7fcecc03be2a343e",
+            "location": "Bronx, NY"
+          },
+          {
+            "id": "jsearch-indeed-f545946d0ae70a1959c8533f",
+            "title": "Production Planning Analyst, Supply Chain,Local Trans & Supply Chain",
+            "company": "Amazon UK Services Ltd. - A10",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=18312b52aabb3dd7",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-f6eb75f4eab094591ce959cd",
+            "title": "Quooker Walking Engineer (Public Transport Engineer)",
+            "company": "Quooker UK",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=5ea384259f880098",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-0766ecba49f46120e0c7beff",
+            "title": "AI Relationship Account Manager-US",
+            "company": "FintransicAI",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/ai-relationship-account-manager-us-at-fintransicai-4476058867",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-09a8f11039f893ffbe19485d",
+            "title": "Business Management Consultant (Remote | $245–$280/hr)",
+            "company": "Synthires",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/business-management-consultant-remote-%24245%E2%80%93%24280-hr-at-synthires-4479404237",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-0d39e57b022f9727450b7a02",
+            "title": "Business Consultant - Retail",
+            "company": "Snatch UP Jobs",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/business-consultant-retail-at-snatch-up-jobs-4478849955",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-0ff5b75007a8b6d500d01bbe",
+            "title": "Sales Development Representative - Tel Aviv",
+            "company": "Agora RE",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/sales-development-representative-tel-aviv-at-agora-4455781096?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-13e4771520865b39b5495ea7",
+            "title": "VP of Communications",
+            "company": "Trustpilot",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/vp-of-communications-at-trustpilot-4477658551?refId=j9%2B5ThrYX%2FBQ051oz8TMsQ%3D%3D&trackingId=Ix%2B9w4XhptF3W%2ByUqm3X6g%3D%3D",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-14901403220caa412f6f1da7",
+            "title": "Partnership Manager USA",
+            "company": "OFFphish",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/partnership-manager-usa-at-offphish-4440499454",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-1829c60a3f58c317d92fcf21",
+            "title": "Chief Product Officer",
+            "company": "DRC Search",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/chief-product-officer-at-drc-search-4469730123",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-1f86d71eda10604e98bfaab7",
+            "title": "Strategy Leader",
+            "company": "Siemens Energy",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/strategy-leader-at-siemens-energy-4479343942",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-2a87eaf930a88de22f70f744",
+            "title": "Talent Acquisition Manager – US Retail",
+            "company": "Christian Dior Couture",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/talent-acquisition-manager-%E2%80%93-us-retail-at-christian-dior-couture-4447587420",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-4ef4f8a00d7f6eeb90cba0ef",
+            "title": "KOL Lead, Spain & Iberia",
+            "company": "Kraken",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/kol-lead-spain-iberia-at-kraken-4465571200",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-521c89f49ce5034947e1d518",
+            "title": "Mgr-Digital Product Mgmt",
+            "company": "American Express",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/mgr-digital-product-mgmt-at-american-express-4481990463",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-56ba5a6ff3c7885920467db8",
+            "title": "Solutions Engineer - Tel Aviv",
+            "company": "Harmony",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/solutions-engineer-tel-aviv-at-harmony-4482165292?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-5eaeafe9aa0c152d2b68f8d1",
+            "title": "Personalized Internet Assessor - Hebrew Speakers In Israel",
+            "company": "TELUS Digital AI Data Solutions",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/personalized-internet-assessor-hebrew-speakers-in-israel-at-telus-digital-ai-data-solutions-4482061182?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          },
+          {
+            "id": "jsearch-linkedin-66ae9fc776f316fa3b2f36b7",
+            "title": "Country Sales Manager- Israel",
+            "company": "Thales",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/country-sales-manager-israel-at-thales-4473295502?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-6c9a6e9f9667678a51b9c44f",
+            "title": "SVP, Product Enablement - Open, UK",
+            "company": "WPP Media",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/svp-product-enablement-open-uk-at-wpp-media-4466262783",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-7b15f1a1590c4f022930d357",
+            "title": "Senior React Native Engineer",
+            "company": "US Mobile",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/senior-react-native-engineer-at-us-mobile-4423665399",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-7c5c3560b37b2a57db964e6e",
+            "title": "Delegate Acquisition Manager",
+            "company": "Information Security Media Group (ISMG)",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/delegate-acquisition-manager-at-information-security-media-group-ismg-4480529094",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-7cf1bf980adb6b7bef66fd26",
+            "title": "IT Support Technician, Tel Aviv",
+            "company": "Tesla",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/it%C2%A0support-technician-tel-aviv-at-tesla-4474747993?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-80d07069ab1d54bb0b1ba9b3",
+            "title": "IT Manager",
+            "company": "Parfitt Cresswell",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/it-manager-at-parfitt-cresswell-4479413734",
+            "location": "Sutton"
+          },
+          {
+            "id": "jsearch-linkedin-86df99eb202aacda875db115",
+            "title": "Head of Creator Community - TikTok",
+            "company": "TikTok",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/head-of-creator-community-tiktok-at-tiktok-4481395337",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-996df258949f53bcb991f4e9",
+            "title": "Sr. Marketing Manager",
+            "company": "Oviva",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/sr-marketing-manager-at-oviva-4469165693",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-99b6e628e3b365ca513958e9",
+            "title": "Director, EMEA Field Marketing",
+            "company": "CoreWeave",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/director-emea-field-marketing-at-coreweave-4469914032",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-a98aeb4352eaec737664081e",
+            "title": "Engineer - Degreed I",
+            "company": "Abbott",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/engineer-degreed-i-at-abbott-4479461523",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-b1764ed5c0cdecec0a862e65",
+            "title": "Founding Enterprise Account Executive, Israel",
+            "company": "Omnea",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/founding-enterprise-account-executive-israel-at-omnea-4481560380?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-bde4b02b022bb70573537fe2",
+            "title": "Sr. Staff Experience Designer",
+            "company": "Airbnb",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/sr-staff-experience-designer-at-airbnb-4482819124",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-be820b3be0d4a12d3a0d7602",
+            "title": "Solution Engineer – New York",
+            "company": "Coralogix",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/solution-engineer-%E2%80%93-new-york-at-coralogix-4479510347",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-cde5187059afa4f5aca257cc",
+            "title": "Manager Facilities Operations EMEA – Tel Aviv",
+            "company": "Akamai Technologies",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/manager-facilities-operations-emea-%E2%80%93-tel-aviv-at-akamai-technologies-4482056892?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-cf6978db8ea65c4565979f73",
+            "title": "Presales Engineer - Tel Aviv",
+            "company": "JustBacked",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/presales-engineer-tel-aviv-at-justbacked-4478990712?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-dcb83c4c937fa3680213018a",
+            "title": "רכז/ת גיוס",
+            "company": "Israel Hayom ישראל היום",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/%D7%A8%D7%9B%D7%96-%D7%AA-%D7%92%D7%99%D7%95%D7%A1-at-israel-hayom-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%94%D7%99%D7%95%D7%9D-4481543964?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          },
+          {
+            "id": "jsearch-linkedin-f4d1ba94f20f46fc64490230",
+            "title": "Product Manager (Maternity Leave Replacement)",
+            "company": "Israel Hayom ישראל היום",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/product-manager-maternity-leave-replacement-at-israel-hayom-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%94%D7%99%D7%95%D7%9D-4481543954?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          }
+        ],
+        "health": [
+          {
+            "id": "jsearch-indeed",
+            "checked_at": "2026-10-25T18:29:20.741Z",
+            "error": null,
+            "next_at": 1793039360741,
+            "partial": true,
+            "name": "Indeed · JSearch"
+          },
+          {
+            "id": "jsearch-linkedin",
+            "checked_at": "2026-10-25T18:27:09.515Z",
+            "error": null,
+            "next_at": 1793039229515,
+            "partial": true,
+            "name": "LinkedIn · JSearch"
+          }
+        ]
+      },
+      {
+        "provider": "jsearch-linkedin",
+        "status": 200,
+        "total": 30,
+        "jobs": [
+          {
+            "id": "jsearch-linkedin-0766ecba49f46120e0c7beff",
+            "title": "AI Relationship Account Manager-US",
+            "company": "FintransicAI",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/ai-relationship-account-manager-us-at-fintransicai-4476058867",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-09a8f11039f893ffbe19485d",
+            "title": "Business Management Consultant (Remote | $245–$280/hr)",
+            "company": "Synthires",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/business-management-consultant-remote-%24245%E2%80%93%24280-hr-at-synthires-4479404237",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-0d39e57b022f9727450b7a02",
+            "title": "Business Consultant - Retail",
+            "company": "Snatch UP Jobs",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/business-consultant-retail-at-snatch-up-jobs-4478849955",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-0ff5b75007a8b6d500d01bbe",
+            "title": "Sales Development Representative - Tel Aviv",
+            "company": "Agora RE",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/sales-development-representative-tel-aviv-at-agora-4455781096?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-13e4771520865b39b5495ea7",
+            "title": "VP of Communications",
+            "company": "Trustpilot",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/vp-of-communications-at-trustpilot-4477658551?refId=j9%2B5ThrYX%2FBQ051oz8TMsQ%3D%3D&trackingId=Ix%2B9w4XhptF3W%2ByUqm3X6g%3D%3D",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-14901403220caa412f6f1da7",
+            "title": "Partnership Manager USA",
+            "company": "OFFphish",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/partnership-manager-usa-at-offphish-4440499454",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-1829c60a3f58c317d92fcf21",
+            "title": "Chief Product Officer",
+            "company": "DRC Search",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/chief-product-officer-at-drc-search-4469730123",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-1f86d71eda10604e98bfaab7",
+            "title": "Strategy Leader",
+            "company": "Siemens Energy",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/strategy-leader-at-siemens-energy-4479343942",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-2a87eaf930a88de22f70f744",
+            "title": "Talent Acquisition Manager – US Retail",
+            "company": "Christian Dior Couture",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/talent-acquisition-manager-%E2%80%93-us-retail-at-christian-dior-couture-4447587420",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-4ef4f8a00d7f6eeb90cba0ef",
+            "title": "KOL Lead, Spain & Iberia",
+            "company": "Kraken",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/kol-lead-spain-iberia-at-kraken-4465571200",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-521c89f49ce5034947e1d518",
+            "title": "Mgr-Digital Product Mgmt",
+            "company": "American Express",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/mgr-digital-product-mgmt-at-american-express-4481990463",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-56ba5a6ff3c7885920467db8",
+            "title": "Solutions Engineer - Tel Aviv",
+            "company": "Harmony",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/solutions-engineer-tel-aviv-at-harmony-4482165292?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-5eaeafe9aa0c152d2b68f8d1",
+            "title": "Personalized Internet Assessor - Hebrew Speakers In Israel",
+            "company": "TELUS Digital AI Data Solutions",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/personalized-internet-assessor-hebrew-speakers-in-israel-at-telus-digital-ai-data-solutions-4482061182?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          },
+          {
+            "id": "jsearch-linkedin-66ae9fc776f316fa3b2f36b7",
+            "title": "Country Sales Manager- Israel",
+            "company": "Thales",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/country-sales-manager-israel-at-thales-4473295502?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-6c9a6e9f9667678a51b9c44f",
+            "title": "SVP, Product Enablement - Open, UK",
+            "company": "WPP Media",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/svp-product-enablement-open-uk-at-wpp-media-4466262783",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-7b15f1a1590c4f022930d357",
+            "title": "Senior React Native Engineer",
+            "company": "US Mobile",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/senior-react-native-engineer-at-us-mobile-4423665399",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-7c5c3560b37b2a57db964e6e",
+            "title": "Delegate Acquisition Manager",
+            "company": "Information Security Media Group (ISMG)",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/delegate-acquisition-manager-at-information-security-media-group-ismg-4480529094",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-7cf1bf980adb6b7bef66fd26",
+            "title": "IT Support Technician, Tel Aviv",
+            "company": "Tesla",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/it%C2%A0support-technician-tel-aviv-at-tesla-4474747993?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-80d07069ab1d54bb0b1ba9b3",
+            "title": "IT Manager",
+            "company": "Parfitt Cresswell",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/it-manager-at-parfitt-cresswell-4479413734",
+            "location": "Sutton"
+          },
+          {
+            "id": "jsearch-linkedin-86df99eb202aacda875db115",
+            "title": "Head of Creator Community - TikTok",
+            "company": "TikTok",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/head-of-creator-community-tiktok-at-tiktok-4481395337",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-linkedin-996df258949f53bcb991f4e9",
+            "title": "Sr. Marketing Manager",
+            "company": "Oviva",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/sr-marketing-manager-at-oviva-4469165693",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-99b6e628e3b365ca513958e9",
+            "title": "Director, EMEA Field Marketing",
+            "company": "CoreWeave",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/director-emea-field-marketing-at-coreweave-4469914032",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-linkedin-a98aeb4352eaec737664081e",
+            "title": "Engineer - Degreed I",
+            "company": "Abbott",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/engineer-degreed-i-at-abbott-4479461523",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-b1764ed5c0cdecec0a862e65",
+            "title": "Founding Enterprise Account Executive, Israel",
+            "company": "Omnea",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/founding-enterprise-account-executive-israel-at-omnea-4481560380?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-bde4b02b022bb70573537fe2",
+            "title": "Sr. Staff Experience Designer",
+            "company": "Airbnb",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://uk.linkedin.com/jobs/view/sr-staff-experience-designer-at-airbnb-4482819124",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-be820b3be0d4a12d3a0d7602",
+            "title": "Solution Engineer – New York",
+            "company": "Coralogix",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://www.linkedin.com/jobs/view/solution-engineer-%E2%80%93-new-york-at-coralogix-4479510347",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-linkedin-cde5187059afa4f5aca257cc",
+            "title": "Manager Facilities Operations EMEA – Tel Aviv",
+            "company": "Akamai Technologies",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/manager-facilities-operations-emea-%E2%80%93-tel-aviv-at-akamai-technologies-4482056892?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-cf6978db8ea65c4565979f73",
+            "title": "Presales Engineer - Tel Aviv",
+            "company": "JustBacked",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/presales-engineer-tel-aviv-at-justbacked-4478990712?trk=bingjobs",
+            "location": "Tel Aviv, Tel-Aviv Bölgesi"
+          },
+          {
+            "id": "jsearch-linkedin-dcb83c4c937fa3680213018a",
+            "title": "רכז/ת גיוס",
+            "company": "Israel Hayom ישראל היום",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/%D7%A8%D7%9B%D7%96-%D7%AA-%D7%92%D7%99%D7%95%D7%A1-at-israel-hayom-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%94%D7%99%D7%95%D7%9D-4481543964?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          },
+          {
+            "id": "jsearch-linkedin-f4d1ba94f20f46fc64490230",
+            "title": "Product Manager (Maternity Leave Replacement)",
+            "company": "Israel Hayom ישראל היום",
+            "sourceId": "jsearch-linkedin",
+            "source": "LinkedIn · JSearch",
+            "url": "https://il.linkedin.com/jobs/view/product-manager-maternity-leave-replacement-at-israel-hayom-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%94%D7%99%D7%95%D7%9D-4481543954?trk=bingjobs",
+            "location": "Tel-Aviv District"
+          }
+        ],
+        "health": [
+          {
+            "id": "jsearch-indeed",
+            "checked_at": "2026-10-25T18:29:20.741Z",
+            "error": null,
+            "next_at": 1793039360741,
+            "partial": true,
+            "name": "Indeed · JSearch"
+          },
+          {
+            "id": "jsearch-linkedin",
+            "checked_at": "2026-10-25T18:27:09.515Z",
+            "error": null,
+            "next_at": 1793039229515,
+            "partial": true,
+            "name": "LinkedIn · JSearch"
+          }
+        ]
+      },
+      {
+        "provider": "jsearch-indeed",
+        "status": 200,
+        "total": 14,
+        "jobs": [
+          {
+            "id": "jsearch-indeed-0d4d69e603b76131feda63d6",
+            "title": "Affiliate Lead at AIOS — Remote, $100k-$200/yr inc equity",
+            "company": "AIOS",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=d99543a7439f0ae9",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-579751259c53c59500c832e2",
+            "title": "Security and Compliance Officer",
+            "company": "Think Cyber",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=1e6ffc9519f71f3a",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-5adc20cad72d6c9769521998",
+            "title": "Vice President of Transformation and Shared Services",
+            "company": "SPS North America",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=25a94a8285493643",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-645976fb6ff4908264693744",
+            "title": "Agentic AI Architect-Anthropic-UK",
+            "company": "NewRocket",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=3473c1f62cfb049f",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-69d196e23569687f6b7d7a52",
+            "title": "Bus Assistant",
+            "company": "Democracy Prep Public Schools",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=6e0e405ae5ce07fc",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-indeed-7c219b6b07019f50bb959578",
+            "title": "Sales & Operations Executive",
+            "company": "Hairtechnic Ltd",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=0f66932e3eef2dab",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-850bd68bfa8e9b4d782d9e3e",
+            "title": "Executive Director, Brand Partnerships (UK)",
+            "company": "Influencer",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=ebc4e021754cfed6",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-89417627fb6fb483c4c91c4a",
+            "title": "Account Executive – Field Sales | kyco",
+            "company": "kyco (kyco.uk)",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=af26cde991121526",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-8fbcc761380c0b27ea0650de",
+            "title": "AI Engineering Lead at AIOS — Remote, $200-$400k/yr + equity",
+            "company": "AIOS",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=b950653aeb4506ee",
+            "location": "Anywhere"
+          },
+          {
+            "id": "jsearch-indeed-b6fe542d2b5206bf5557ba4f",
+            "title": "AI Design Technologist, Marketing Productivity, Amazon Ads Marketing",
+            "company": "Amazon Online UK Limited - D17",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=3db3238ed9000c1f",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-ce9b355bafeeb38838f91d3f",
+            "title": "VP of Product, Bucketlisters",
+            "company": "TodayTix Group",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=2d5e71cd640a6370",
+            "location": "New York, NY"
+          },
+          {
+            "id": "jsearch-indeed-dada6bfd032212ecc6ab6e66",
+            "title": "CSR Full Time 11am - 8pm",
+            "company": "PAY-O-MATIC CK CASHI",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://www.indeed.com/viewjob?jk=7fcecc03be2a343e",
+            "location": "Bronx, NY"
+          },
+          {
+            "id": "jsearch-indeed-f545946d0ae70a1959c8533f",
+            "title": "Production Planning Analyst, Supply Chain,Local Trans & Supply Chain",
+            "company": "Amazon UK Services Ltd. - A10",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=18312b52aabb3dd7",
+            "location": "London"
+          },
+          {
+            "id": "jsearch-indeed-f6eb75f4eab094591ce959cd",
+            "title": "Quooker Walking Engineer (Public Transport Engineer)",
+            "company": "Quooker UK",
+            "sourceId": "jsearch-indeed",
+            "source": "Indeed · JSearch",
+            "url": "https://uk.indeed.com/viewjob?jk=5ea384259f880098",
+            "location": "London"
+          }
+        ],
+        "health": [
+          {
+            "id": "jsearch-indeed",
+            "checked_at": "2026-10-25T18:29:20.741Z",
+            "error": null,
+            "next_at": 1793039360741,
+            "partial": true,
+            "name": "Indeed · JSearch"
+          },
+          {
+            "id": "jsearch-linkedin",
+            "checked_at": "2026-10-25T18:27:09.515Z",
+            "error": null,
+            "next_at": 1793039229515,
+            "partial": true,
+            "name": "LinkedIn · JSearch"
+          }
+        ]
+      }
+    ],
+    "details": [
+      {
+        "id": "jsearch-linkedin-0766ecba49f46120e0c7beff",
+        "status": 200,
+        "source": "LinkedIn · JSearch",
+        "title": "AI Relationship Account Manager-US",
+        "descriptionLength": 3831,
+        "applicationStatus": "unverified"
+      },
+      {
+        "id": "jsearch-indeed-0d4d69e603b76131feda63d6",
+        "status": 200,
+        "source": "Indeed · JSearch",
+        "title": "Affiliate Lead at AIOS — Remote, $100k-$200/yr inc equity",
+        "descriptionLength": 10827,
+        "applicationStatus": "unverified"
+      }
+    ],
+    "build": {
+      "repository": "orKonijn/Niva-",
+      "sourceCommit": "0a89e4855cb10020d876c85d76555717597d7e6d",
+      "githubCommit": "074385c553de1c15515b66f86308733e11dc0501",
+      "sitesCommit": "0a89e4855cb10020d876c85d76555717597d7e6d",
+      "sourceTree": "89aa2509d8619a615ea9c5a7b21a0fe3f8df4d94",
+      "sourceContentDigest": "602e6f42fff38ba91cb8ab8a9c1642601a0273f1a086058a002df1552909c475",
+      "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+      "clientArtifactDigest": "2953f1773fa2659c7d290fcbc24c685db9b2a8c22ce0686349bfb065e3a687f0",
+      "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+      "builtAt": "2026-10-25T18:32:19.313Z",
+      "dirty": false,
+      "mappedSourceVerified": true,
+      "provenanceStatus": "mapped-reviewed-source"
+    }
+  },
+  "liveAccountUI": {
+    "combinedTotal": 44,
+    "linkedin": 30,
+    "indeed": 14,
+    "sourcePanel": "Both connected; update complete",
+    "privateWrites": 0
+  },
+  "limitations": [
+    "This is JSearch search data, not a direct LinkedIn/Indeed partnership or exhaustive global feed.",
+    "Original application routes and eligibility remain unverified; opening a link does not submit an application.",
+    "Free-plan cache refreshes daily, not a new upstream search per user refresh."
+  ],
+  "note": "Post-publication Git-only receipt; no additional hosted version for this record."
+}
