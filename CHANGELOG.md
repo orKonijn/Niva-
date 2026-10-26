@@ -4,12 +4,21 @@
 
 No unreleased changes.
 
-## 0.1.2 — 2026-10-26 (release candidate)
+## 0.1.3 — 2026-10-26 (release candidate)
+
+### Fixed
+
+- Preserve individually resolved details when an unrelated late feed replaces its archived-results list. This prevents a valid detail from disappearing after it loads. Owner/epoch resets still clear resolved records; fresh feed records take precedence. No migration or candidate action required.
+- Reproduced the failure locally by delaying a feed that explicitly excludes the target; verify both publisher details, reloads and independent career context with delayed session and feed responses. Genuine desktop [before](docs/screenshots/changes/feed-race-desktop-light/before.png) / [after](docs/screenshots/changes/feed-race-desktop-light/after.png). Publication/live checks pending; the existing maintenance-readiness limits remain.
+
+## 0.1.2 — 2026-10-26
+
+Published as Sites38. Initial-reconciliation sequencing was corrected; subsequent live verification isolated a second late-feed cache race, fixed in0.1.3.
 
 ### Fixed
 
 - Wait for the AppStore initial account reconciliation before fetching a deep-linked listing. Real hosted session timing could otherwise clear the just-loaded listing; fresh details and independent career contexts now share an explicit initialization barrier. Retain ownership/epoch validation. No migration or candidate action required.
-- Add delayed-session desktop/mobile, light/dark checks to the existing fresh publisher and career-context regression. The original local verification and genuine image pairs remain linked below. Publication/live verification pending; maintenance and alert readiness remain unverified.
+- Add delayed-session desktop/mobile, light/dark checks to the existing fresh publisher and career-context regression. The original local verification and genuine image pairs remain linked below. Maintenance and alert readiness remain unverified.
 
 ## 0.1.1 — 2026-10-26
 

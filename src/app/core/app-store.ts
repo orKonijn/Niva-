@@ -214,7 +214,15 @@ export class AppStore {
       this.realJobs.set([
         ...new Map([...(more ? this.realJobs() : []), ...feed.jobs].map((j) => [j.id, j])).values(),
       ]);
-      this.archivedJobs.set(feed.archived ?? []);
+      // A detail can finish before this unrelated feed (which may omit it).
+      // Keep explicitly resolved records within the same owner/epoch; the
+      // account lifecycle above still clears both this cache and ready states.
+      const resolved = this.archivedJobs().filter(
+        (job) => this.listingStates()[job.id]?.status === 'ready',
+      );
+      this.archivedJobs.set([
+        ...new Map([...resolved, ...(feed.archived ?? [])].map((job) => [job.id, job])).values(),
+      ]);
       this.feedCheckedAt.set(feed.fetchedAt);
       this.feedStale.set(feed.stale);
       this.feedTotal.set(feed.total ?? feed.jobs.length);

@@ -85,6 +85,7 @@ for (const theme of ['light', 'dark'] as const)
       );
     await context.route('**/api/feed**', async (r) => {
       feedRequests++;
+      await new Promise((resolve) => setTimeout(resolve, 400));
       const p = Object.fromEntries(new URL(r.request().url()).searchParams);
       const result = await discoveryPage(
         sqliteCareerDb(sql),
@@ -110,6 +111,18 @@ for (const theme of ['light', 'dark'] as const)
         else {
           await expect(page.getByRole('heading', { name: job.title, exact: true })).toBeVisible();
           expect(requested).toContain(job.id);
+          await expect(page.getByText('טוענים את פרטי המשרה מהמקור…', { exact: true })).toHaveCount(
+            0,
+          );
+          // A later unrelated feed must not evict this individually resolved detail.
+          await page.waitForResponse((response) => response.url().includes('/api/feed?'));
+          await expect(page.getByRole('heading', { name: job.title, exact: true })).toBeVisible();
+          if (n === 0 && info.project.name === 'desktop' && theme === 'light') {
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.screenshot({
+              path: 'docs/screenshots/changes/feed-race-desktop-light/after.png',
+            });
+          }
         }
         await page.locator('main').screenshot({
           path: `${directory}-${n ? 'indeed' : 'linkedin'}/${before ? 'before' : 'after'}.png`,
@@ -184,6 +197,7 @@ for (const theme of ['light', 'dark'] as const)
         .locator('main')
         .screenshot({ path: `${directory}-copy/${before ? 'before' : 'after'}.png` });
     } finally {
+      await context.unrouteAll({ behavior: 'wait' });
       sql.close();
     }
   });
