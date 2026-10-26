@@ -1,6 +1,8 @@
 # Niva job finding audit repairs
 
-26 October 2026. **Local and unpublished.** Baseline application **0.1.3 / Sites39**, initial clean HEAD `f13964a70753c81a6f7667a68b776036366ea394`. Proposed compatible capability release **0.2.0**, subject to release review; version files remain0.1.3. No commit, push, production deployment, employer message or application submission was performed.
+**Publication addendum:** the owner subsequently authorized checks and publication. The audit fixes are now live in **0.2.1 / Sites41**, with [source, live and check evidence](verification/publication-20261026-v41.json). The following original audit-review record and its PDF/DOCX retain their earlier local scope.
+
+Original review,26 October 2026. **Local and unpublished at that time.** Baseline application **0.1.3 / Sites39**, initial clean HEAD `f13964a70753c81a6f7667a68b776036366ea394`. Proposed compatible capability release **0.2.0**, subject to release review; version files remain0.1.3. No commit, push, production deployment, employer message or application submission was performed.
 
 All28 pages of the supplied audit were extracted, rendered and reviewed, including screenshots, scores, scenarios and bug register. B01-B04, S01-S03, S1-S6/S4b and R01-R20 preserve original audit IDs. **F01-F26 are local IDs** for the audit's unnumbered feature rows. PDF implementation-prompt pages were treated as source material; the current user request determines scope.
 
@@ -193,3 +195,7 @@ Existing canonical-dedup, distinct-requisition, closed-job reconciliation and so
 After this report was completed, the owner explicitly authorized checks and publication. Application0.2.0 is now the release candidate; the original report and PDFs retain their local-review observation scope. A fresh release-suite run, cold-cache5000-row D1-contract upgrade check and production source/behavior receipt will establish the new publication state. Operator/alert, restore, real AI and human device checks are not upgraded to pass without evidence.
 
 Fresh release acceptance passed59 frontend,153 server and218 desktop/mobile Chromium cases, plus Worker/provenance checks, all three typechecks, formatting and build. A new5000-row cold-cache upgrade regression passed. [Release check receipt](verification/release-20261026-v020-checks.json) preserves the exact local scope and external limits; deployment evidence is recorded separately.
+
+The live publication retested all20 audit details, recovered the two strict-hybrid jobs, confirmed four salary ranges and citizenship/local-rights facts, compared padded/trimmed search, verified both publisher feeds and the Canopy original application redirect. The results jump was also checked in the actual signed-in browser after its patch. No owner profile/CV writes or employer submissions were performed. [Live API receipt](verification/live-20261026-v41.json). Original reports remain historical; this addendum establishes publication.
+
+GitHub Actions completed successfully for the deployed0.2.1 source commit55b21e2: [green release run](https://github.com/orKonijn/Niva-/actions/runs/40362520740). It passed installation, formatting, all typechecks,59 frontend/153 server tests, Worker/provenance, build and218 Chromium cases. This includes the corrected managed diagnostic output path on a fresh checkout. The final publication/changelog reconciliation is documentation only; it is formatted/link-checked locally and does not trigger another application deployment.

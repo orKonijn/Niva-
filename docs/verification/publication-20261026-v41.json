@@ -1,0 +1,84 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.2.1",
+  "version": 41,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_8b1ffc07bce4819195e697f8c2e3ecd8",
+  "deploymentId": "appgdep_6adf849b2bb081919f558701866d7a6b",
+  "publishedAt": "2026-10-26T16:49:50.433240+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "ddc96b3a18b9e5861a0b48208b1dff6ea66c12e0",
+  "reviewedGithubCommit": "55b21e270dab0ec25cd8d908ebdf600425d45cbb",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000ef0c8211a4991b1ec85e92e4",
+    "content_hash": "sha256:5128e0f9a6afd72723a1126e92f31bf27715c209b87cbc4751f0fd9fc26d82d2",
+    "size_bytes": 13516800,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "latestVersion": 41,
+    "accessMode": "public",
+    "accessRevision": 2,
+    "currentLiveUrl": "https://getnivajobs.com",
+    "automationsUnchanged": true
+  },
+  "checks": {
+    "baselineRelease": {
+      "frontend": 59,
+      "server": 153,
+      "browser": 218,
+      "worker": 1,
+      "provenance": 1,
+      "typeChecks": 3
+    },
+    "patch": {
+      "browser": 4,
+      "build": "passed",
+      "browserTypes": "passed",
+      "formatting": "passed"
+    },
+    "liveReceipt": "live-20261026-v41.json",
+    "githubCI": {
+      "runId": 40362520740,
+      "url": "https://github.com/orKonijn/Niva-/actions/runs/40362520740",
+      "status": "completed",
+      "conclusion": "success",
+      "checkedCommit": "55b21e270dab0ec25cd8d908ebdf600425d45cbb",
+      "suiteCounts": {
+        "frontend": 59,
+        "server": 153,
+        "browser": 218
+      },
+      "allRequiredSteps": "passed"
+    }
+  },
+  "browser": {
+    "url": "https://getnivajobs.com/app/jobs?scope=all&q=QA&category=qa-automation&styles=hybrid&unknownStyle=false#job-results",
+    "viewport": "1280x720",
+    "resultsJumpPreservesRouteAndFilters": true,
+    "hybridResultTitles": ["QA & Automation Engineer", "QA & Automation Lead"],
+    "privateWrites": 0,
+    "submissionCount": 0
+  },
+  "previousCI": {
+    "runId": 40360942213,
+    "result": "failure",
+    "browserPassed": 214,
+    "browserFailed": 4,
+    "reason": "Audit diagnostics wrote to an absent ignored directory on a clean checkout. Corrected to Playwright-managed test output paths; no assertions removed."
+  },
+  "workerLogReview": {
+    "windowMinutes": 15,
+    "returnedEvents": 5,
+    "observedOutcomes": "Five canceled info-level feed requests; no exception outcome in returned events. This is a bounded log observation, not an uptime certification."
+  },
+  "limitations": [
+    "Two actual recurring private cleanup cycles, accountable operator, approved alert delivery, independent hosted identity isolation and backup restoration remain unverified.",
+    "Real AI and remote scanning stay configuration-gated; physical phone/spoken Hebrew assistive-technology checks not completed.",
+    "First v40 public-cache upgrade request took28170ms; warm global reads measured7552ms on v40 and5829ms on v41. These are single API observations, not field Core Web Vitals or percentile claims."
+  ],
+  "note": "Publication receipt and changelog reconciliation are Git-only documentation after deployment; original audit PDF/DOCX retain their earlier local verification scope."
+}

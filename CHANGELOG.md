@@ -6,7 +6,7 @@ No unreleased changes.
 
 ## 0.2.1 — 2026-10-26
 
-Release candidate. Compatible navigation correction; no data migration or candidate action required.
+Published as **Sites41**. [Publication and live verification receipt](docs/verification/publication-20261026-v41.json). Compatible navigation correction; no data migration or candidate action required.
 
 ### Fixed
 
