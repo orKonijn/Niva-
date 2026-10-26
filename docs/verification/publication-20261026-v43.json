@@ -1,0 +1,54 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.3.1",
+  "version": 43,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_185428c2332c819182d99d4f2f357eb3",
+  "deploymentId": "appgdep_6adfa1bb5a148191921a965292f5c5eb",
+  "status": "succeeded",
+  "publishedAt": "2026-10-26T18:54:02.057160+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "c548494845659bc5a70c072085db19ab53c74b83",
+  "sitesCommit": "5e12ef3138d86b6589cd9438005494be20869806",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000eb1c82438c5c05db2e135838",
+    "content_hash": "sha256:1dbac6149ed4a1c63486ab1679c5a142e3c4e96d54a6f63ce48737d682aac749",
+    "size_bytes": 13660160,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2,
+    "automationsUnchanged": true
+  },
+  "checks": {
+    "githubCI": {
+      "runId": 40380686211,
+      "url": "https://github.com/orKonijn/Niva-/actions/runs/40380686211",
+      "conclusion": "success",
+      "frontend": 59,
+      "server": 159,
+      "browser": 222,
+      "worker": 1,
+      "provenance": 1,
+      "typeChecks": 3
+    },
+    "localAccountJourney": "Passed with two synthetic local accounts; not hosted staging",
+    "liveReceipt": "live-20261026-v43.json"
+  },
+  "newFinding": {
+    "id": "N03",
+    "status": "Fixed in0.3.1",
+    "issue": "QA alias mismatch between server and browser for Testing Software Engineer titles",
+    "regression": "Positive alternate titles and unrelated manufacturing negative; consistent count and literal fallback"
+  },
+  "limitations": [
+    "No separate hosted staging origin/D1/test identities configured.",
+    "Operator and approved alert receiver unassigned; external alert delivery disabled.",
+    "Hosted private cleanup cycles, real alert receipt and hosted erasure-safe restoration remain unverified.",
+    "No production account writes, application submission, new professional-fit calibration or market-wide relevance claim."
+  ],
+  "note": "Follow-up publication receipt and status reconciliation are Git-only; historical local PDF/DOCX reports retain their earlier scope."
+}

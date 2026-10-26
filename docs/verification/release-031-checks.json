@@ -16,5 +16,11 @@
   },
   "negativeControl": "Overbroad manufacturing QA category excluded only in explicit alias mode; literal Engineer retrieval preserved",
   "inheritedBaseline": "Full0.3.0 GitHub CI passed; main222 browser cases passed on clean Linux",
-  "productionAccountWrites": 0
+  "productionAccountWrites": 0,
+  "publicationFollowup": {
+    "version": "0.3.1 / Sites43",
+    "receipt": "publication-20261026-v43.json",
+    "live": "live-20261026-v43.json",
+    "githubCI": "success;59 frontend159 server222 browser"
+  }
 }

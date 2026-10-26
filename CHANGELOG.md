@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.3.1 � 2026-10-26
 
-Release candidate; deployment pending validation.
+Published as **Sites43**. [Deployment and live verification receipt](docs/verification/publication-20261026-v43.json). Reviewed source commit `c548494`; the earlier0.3.0 release is recorded separately. No account-data migration or environment/access change.
 
 ### Fixed
 
@@ -14,7 +14,7 @@ Release candidate; deployment pending validation.
 
 ## 0.3.0 — 2026-10-26
 
-Published as **Sites42** from reviewed GitHub commit5ca74b3. The next patch below corrects a live alias consistency finding. Compatible discovery capabilities and repairs; no account-data migration. Existing flattened description caches acquire source headings after the next successful provider refresh.
+Published as **Sites42** from reviewed GitHub commit `5ca74b3`. The follow-up0.3.1 patch corrects a live alias consistency finding. Compatible discovery capabilities and repairs; no account-data migration. Existing flattened description caches acquire source headings after the next successful provider refresh.
 
 ### Added
 

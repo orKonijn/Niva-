@@ -1,6 +1,6 @@
 # Disposable staging and operations preparation
 
-Prepared26 October2026. Local Node/SQLite only. No separate hosted staging origin, D1 database, verified hosted test identities, accountable operator or approved alert receiver is available. The existing Sites project has production0.2.1 / Sites41 and no preview URL. All Sites deployment tools target production; none was called. A local test cannot close the hosted gates.
+Prepared26 October2026. Local Node/SQLite only. No separate hosted staging origin, D1 database, verified hosted test identities, accountable operator or approved alert receiver is available. At preparation, the existing Sites project had production0.2.1 / Sites41 and no preview URL. Later publication of0.3.1 / Sites43 does not provide a separate staging origin. All Sites deployment tools target production. None was called during local staging preparation; later application publication was separately authorized. A local test cannot close the hosted gates.
 
 ## Prepare and access the local environment
 

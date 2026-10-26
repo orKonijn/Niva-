@@ -1,0 +1,174 @@
+{
+  "at": "2026-10-26T18:54:04.494Z",
+  "productionAccountWrites": 0,
+  "employerSubmissions": 0,
+  "requests": [
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "ms": 423
+    },
+    {
+      "path": "/api/feed?scope=all&q=QA&sort=relevance&limit=20",
+      "status": 200,
+      "ms": 2999
+    },
+    {
+      "path": "/api/feed?scope=all&q=QA&category=qa-automation&styles=hybrid&unknownStyle=false&sort=relevance&limit=20",
+      "status": 200,
+      "ms": 2110
+    },
+    {
+      "path": "/api/feed?scope=all&q=Engineer&related=true&sort=relevance&limit=20",
+      "status": 200,
+      "ms": 2738
+    },
+    {
+      "path": "/api/feed?scope=all&q=ZZZ_NIVA_RELEASE_ZERO_030&sort=relevance",
+      "status": 200,
+      "ms": 2819
+    },
+    {
+      "path": "/api/feed?scope=all&provider=jsearch&limit=50&sort=source",
+      "status": 200,
+      "ms": 6791
+    },
+    {
+      "path": "/api/listings/greenhouse-canopycare-5285235008",
+      "status": 200,
+      "ms": 427
+    }
+  ],
+  "build": {
+    "repository": "orKonijn/Niva-",
+    "sourceCommit": "5e12ef3138d86b6589cd9438005494be20869806",
+    "githubCommit": "c548494845659bc5a70c072085db19ab53c74b83",
+    "sitesCommit": "5e12ef3138d86b6589cd9438005494be20869806",
+    "sourceTree": "a4fe950e525cb0f448c234ce0c5e0f546e0eeb9a",
+    "sourceContentDigest": "fee1d4d1cac8ad6a4cc15457bd19adc89ecf649adfeee394a343f8d6dff10fe9",
+    "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+    "clientArtifactDigest": "fc855809066f04f2ce461c26efbc7391afc2f4efac850a70769e6d22c240111d",
+    "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+    "builtAt": "2026-10-26T18:47:34.985Z",
+    "dirty": false,
+    "mappedSourceVerified": true,
+    "provenanceStatus": "mapped-reviewed-source"
+  },
+  "qa": {
+    "total": 8,
+    "loaded": 8,
+    "titles": [
+      "QA & Automation Engineer",
+      "QA Engineer",
+      "AI-First QA Automation Engineer ",
+      "Junior QA Tester",
+      "Manual QA Engineer (Game Client)",
+      "QA Automation Engineer - CDH",
+      "QA & Automation Lead",
+      "LQA Game Tester (European Spanish) - Freelance Remote"
+    ],
+    "freshness": {
+      "oldestSuccessfulAt": "2026-10-26T18:23:36.344Z",
+      "newestSuccessfulAt": "2026-10-26T18:36:16.424Z",
+      "newestAttemptedAt": null,
+      "neverSucceededCount": 0
+    },
+    "stale": false
+  },
+  "sourceCount": 26,
+  "hybrid": {
+    "total": 2,
+    "titles": ["QA & Automation Engineer", "QA & Automation Lead"]
+  },
+  "alias": {
+    "total": 10,
+    "titles": [
+      "QA & Automation Engineer",
+      "QA & Automation Lead",
+      "QA Engineer",
+      "AI-First QA Automation Engineer ",
+      "Junior QA Tester",
+      "Distributed Systems Testing Software Engineer, Python / Go",
+      "Senior Software Development Engineer in Test (SDET)",
+      "Manager Software Test Automation",
+      "Manual QA Engineer (Game Client)",
+      "QA Automation Engineer - CDH"
+    ]
+  },
+  "emptyRecovery": true,
+  "publishers": {
+    "total": 59,
+    "loaded": 50,
+    "stale": false,
+    "sources": ["jsearch-indeed", "jsearch-linkedin"]
+  },
+  "description": {
+    "blocks": 22,
+    "headings": [
+      "Join Us in Revolutionizing Oncology Care",
+      "Your Mission",
+      "What You\u2019ll Do",
+      "What You\u2019ll Bring",
+      "Bonus Points",
+      "Benefits"
+    ],
+    "sourceCheckedAt": "2026-10-26T18:54:14.654Z"
+  },
+  "application": {
+    "path": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+    "liveRedirectNotInvoked": true,
+    "originalPage": {
+      "status": 200,
+      "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+      "titleMatches": true,
+      "submission": false
+    }
+  },
+  "pagination": {
+    "pages": 2,
+    "pageSize": 10,
+    "unique": 20,
+    "total": 876
+  },
+  "browser": {
+    "desktop": {
+      "cards": 10,
+      "catalogLabel": true,
+      "legacyNumericHeadline": false,
+      "newestLabel": true,
+      "oldestLabel": true,
+      "status": [
+        "10 \u05de\u05ea\u05d5\u05da 10 \u05de\u05e9\u05e8\u05d5\u05ea \u05de\u05d4\u05de\u05e7\u05d5\u05e8",
+        "\u05db\u05dc \u05d4\u05ea\u05d5\u05e6\u05d0\u05d5\u05ea \u05d4\u05d6\u05de\u05d9\u05e0\u05d5\u05ea \u05dc\u05e1\u05d9\u05e0\u05d5\u05df \u05d6\u05d4 \u05e0\u05d8\u05e2\u05e0\u05d5.",
+        "\u05de\u05e9\u05e8\u05d5\u05ea \u05de\u05beLinkedIn \u05d5\u05de\u05beIndeed \u05de\u05d5\u05e4\u05d9\u05e2\u05d5\u05ea \u05d1\u05e8\u05e9\u05d9\u05de\u05d4 \u05db\u05d0\u05df \u05d3\u05e8\u05da JSearch, \u05e2\u05dd \u05e9\u05dd \u05d4\u05de\u05e7\u05d5\u05e8 \u05d5\u05e7\u05d9\u05e9\u05d5\u05e8 \u05dc\u05de\u05e9\u05e8\u05d4 \u05e2\u05e6\u05de\u05d4."
+      ],
+      "titles": [
+        "QA & Automation Engineer",
+        "AI-First QA Automation Engineer",
+        "QA Automation Engineer - CDH",
+        "Distributed Systems Testing Software Engineer, Python / Go",
+        "Senior Software Development Engineer in Test (SDET)",
+        "QA Engineer",
+        "Junior QA Tester",
+        "QA & Automation Lead",
+        "Manual QA Engineer (Game Client)",
+        "Manager Software Test Automation"
+      ]
+    },
+    "mobile": {
+      "cards": 8,
+      "main": {
+        "height": 678.828125,
+        "width": 375,
+        "x": 0,
+        "y": 165.171875
+      },
+      "scrollWidth": 375,
+      "width": 390
+    },
+    "sourceHeadings": 6,
+    "sourceListItems": 27,
+    "productionAccountWrites": 0,
+    "note": "Two early browser waits expired during page initialization; subsequent completed views and DOM checks succeeded. Not counted as passed waits."
+  }
+}

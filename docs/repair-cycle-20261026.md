@@ -1,5 +1,7 @@
 # Focused Niva repair and validation
 
+Publication follow-up: the reviewed repairs and N03 follow-up were published as0.3.1 / Sites43 after explicit user authorization. [Publication receipt](verification/publication-20261026-v43.json) and [live checks](verification/live-20261026-v43.json). The original local findings, scores and report wording below retain their earlier observation scope; hosted operational gates remain unresolved.
+
 26 October 2026. Primary input: the preceding 16-page independent verification report, with the original audit and repair report retained as historical evidence. Changes are local and Unreleased; live remains application0.2.1 / Sites41. Proposed next compatible feature version0.3.0 is not allocated or deployed. The working tree is based on8550b51a7247039caa44424c3f1c5c4b90284458, with uncommitted repairs.
 
 ## Results and remaining gates
