@@ -1,5 +1,9 @@
 # Niva local review repairs — 26 October 2026
 
+## Published follow-up
+
+Application **0.1.3 / Sites39** is published after the owner's explicit authorization. [Publication, exact commit mapping and live verification](verification/publication-20261026-v39.json). The original local-only review below is historical evidence; the later startup and late-feed repairs are included. Final delayed-session/feed browser checks4/4, context/retry checks24/24, frontend59/59, focused typechecks, formatting and clean mapped build passed. Live custom-domain metadata, LinkedIn/Indeed details and padded search were verified. This receipt/status reconciliation is Git-only; it does not create another hosted release or upgrade operational readiness.
+
 ## Publication preparation
 
 The owner subsequently authorized commit, push and deployment of these fixes. Application version **0.1.1** is a compatible patch from0.1.0; no schema migration or candidate action is required. The intervening Sites36 documentation policy was preserved. The review observations below retain their original local-only scope; a separate publication receipt will establish actual deployment and live checks. Sites37 deployed0.1.1; live browser verification exposed an additional account-initialization race. The0.1.2 follow-up adds an explicit initial-reconciliation barrier and delayed-session browser coverage; it does not change provider or maintenance configuration.

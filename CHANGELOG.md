@@ -4,12 +4,14 @@
 
 No unreleased changes.
 
-## 0.1.3 — 2026-10-26 (release candidate)
+## 0.1.3 — 2026-10-26
+
+Published as **Sites39**. [Publication/source/live verification receipt](docs/verification/publication-20261026-v39.json). Compatible patch; no migration or candidate action required.
 
 ### Fixed
 
 - Preserve individually resolved details when an unrelated late feed replaces its archived-results list. This prevents a valid detail from disappearing after it loads. Owner/epoch resets still clear resolved records; fresh feed records take precedence. No migration or candidate action required.
-- Reproduced the failure locally by delaying a feed that explicitly excludes the target; verify both publisher details, reloads and independent career context with delayed session and feed responses. Genuine desktop [before](docs/screenshots/changes/feed-race-desktop-light/before.png) / [after](docs/screenshots/changes/feed-race-desktop-light/after.png). Publication/live checks pending; the existing maintenance-readiness limits remain.
+- Reproduced the failure locally by delaying a feed that explicitly excludes the target; verify both publisher details, reloads and independent career context with delayed session and feed responses. Genuine desktop [before](docs/screenshots/changes/feed-race-desktop-light/before.png) / [after](docs/screenshots/changes/feed-race-desktop-light/after.png). Live custom-domain source mapping, fresh LinkedIn/Indeed details and equivalent padded/trimmed search passed. Four delayed-session/feed browser cases,24 context/retry cases,59 frontend tests, focused typechecks, formatting and mapped production build passed. The existing maintenance-readiness limits remain.
 
 ## 0.1.2 — 2026-10-26
 

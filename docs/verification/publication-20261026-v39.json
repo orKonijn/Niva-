@@ -1,0 +1,122 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.1.3",
+  "version": 39,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_42785f313674819199933a5c48f7cebf",
+  "deploymentId": "appgdep_6adef43aa100819195ca5fefe64b6d85",
+  "publishedAt": "2026-10-26T06:33:46.024410+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "80b4e85cecbab9c0fc47224cd65ff124d25625d8",
+  "reviewedGithubCommit": "4d86c51126ed1e8ab60328988db7435f9b5f2b7e",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000011d082439797e0299ad00837",
+    "content_hash": "sha256:cc9318430d6d1474190dca8a1473fce69380b443b2e022412c0149e1bad32264",
+    "size_bytes": 13383680,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "checks": {
+    "frontend": 59,
+    "server": 139,
+    "browserDistinct": 214,
+    "initialFullBrowserPassed": 210,
+    "correctedFixtureReruns": 4,
+    "delayedSessionPublisherBrowser": 4,
+    "startupContextRecoveryBrowser": 24,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "clean mapped source"
+  },
+  "limitations": [
+    "Production quota exhaustion not attempted; isolation/retention regressions use local disposable adapters.",
+    "Two recurring private cleanup cycles, accountable operator, approved alert delivery and backup restoration remain unverified.",
+    "No provider/secrets/access/schedule changes; environment revision remains7.",
+    "Actual-account read-only browser checks; no private record writes or application submissions."
+  ],
+  "note": "Post-publication Git-only receipt; no further deployment for documentation reconciliation.",
+  "initialPublications": [
+    {
+      "version": 37,
+      "applicationVersion": "0.1.1",
+      "deploymentId": "appgdep_6adef05b91108191b192f6adc63518cf",
+      "observation": "Live detail startup failed despite API200; followed up."
+    },
+    {
+      "version": 38,
+      "applicationVersion": "0.1.2",
+      "deploymentId": "appgdep_6adef1d7be2c8191b49db1c06989888c",
+      "observation": "Initial reconciliation sequenced; subsequent check isolated late feed overwriting separately resolved details."
+    }
+  ],
+  "startupRegression": {
+    "before": "Actual local delayed-feed fixture reproduced disappearing detail; failed heading assertion after feed response.",
+    "after": "Four delayed-session/feed desktop/mobile light/dark cases passed. Twenty-four context/retry cases and59 frontend tests passed. Teardown/canceled-request harness issues were repaired; only final successful runs are acceptance evidence."
+  },
+  "live": {
+    "at": "2026-10-26T06:34:05.840Z",
+    "origin": "https://getnivajobs.com",
+    "build": {
+      "repository": "orKonijn/Niva-",
+      "sourceCommit": "80b4e85cecbab9c0fc47224cd65ff124d25625d8",
+      "githubCommit": "4d86c51126ed1e8ab60328988db7435f9b5f2b7e",
+      "sitesCommit": "80b4e85cecbab9c0fc47224cd65ff124d25625d8",
+      "sourceTree": "60d473eaafda64d75cbc9cb1467a407cc4f48e36",
+      "sourceContentDigest": "7f220ddd13854042fbc7da15bb7319d6162fdc58104f1139d29763ab4802e8c3",
+      "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+      "clientArtifactDigest": "91bd2ea16cd83d7dc130452ca3edcdcfe38c86a6cabad884dda8b54ff050f71b",
+      "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+      "builtAt": "2026-10-26T06:32:56.683Z",
+      "dirty": false,
+      "mappedSourceVerified": true,
+      "provenanceStatus": "mapped-reviewed-source"
+    },
+    "publishers": [
+      {
+        "provider": "jsearch-linkedin",
+        "status": 200,
+        "total": 30,
+        "job": {
+          "id": "jsearch-linkedin-0766ecba49f46120e0c7beff",
+          "title": "AI Relationship Account Manager-US"
+        },
+        "detail": {
+          "status": 200,
+          "id": "jsearch-linkedin-0766ecba49f46120e0c7beff",
+          "title": "AI Relationship Account Manager-US",
+          "source": "jsearch-linkedin"
+        }
+      },
+      {
+        "provider": "jsearch-indeed",
+        "status": 200,
+        "total": 14,
+        "job": {
+          "id": "jsearch-indeed-0d4d69e603b76131feda63d6",
+          "title": "Affiliate Lead at AIOS ג€” Remote, $100k-$200/yr inc equity"
+        },
+        "detail": {
+          "status": 200,
+          "id": "jsearch-indeed-0d4d69e603b76131feda63d6",
+          "title": "Affiliate Lead at AIOS ג€” Remote, $100k-$200/yr inc equity",
+          "source": "jsearch-indeed"
+        }
+      }
+    ],
+    "browser": {
+      "linkedin": "Fresh full-document navigation rendered expected title after feed completion",
+      "indeed": "Full reload rendered expected title after feed completion",
+      "privateWrites": 0
+    },
+    "search": {
+      "trimmedTotal": 1,
+      "paddedTotal": 1,
+      "sameJobId": "jsearch-linkedin-f4d1ba94f20f46fc64490230",
+      "status": 200
+    }
+  }
+}

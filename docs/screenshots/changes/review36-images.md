@@ -26,3 +26,7 @@ Genuine before captures were taken at baseline before product edits; after captu
 | mobile / dark / copy       | [Before](review36-mobile-dark-copy/before.png)       | [After](review36-mobile-dark-copy/after.png)       |
 
 Application-quota isolation, indexed retrieval, retention tests and documentation-only changes have no distinct product layout change. Benchmark before/after results are preserved as [measured verification data](../../verification/review36-benchmark.json). Separate genuine before screenshots of those nonvisual verification/document views were not captured; that image evidence is missing, not reconstructed. Public copy evidence covers terms; separate FAQ/privacy image pairs are also unavailable. Historical image files remain unchanged.
+
+## Late-feed follow-up
+
+The400ms delayed feed reproduced a disappearing detail even after the earlier publication. Genuine synthetic desktop/light captures use the same route,1440×1000 viewport, theme and top-of-page position: [before](feed-race-desktop-light/before.png) / [after](feed-race-desktop-light/after.png). The before image is the actual failed browser regression; the after image shows the retained detail once the unrelated feed finishes. Both devices/themes are covered by browser regressions. No real account or CV appears.
