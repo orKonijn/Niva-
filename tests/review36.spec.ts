@@ -85,7 +85,7 @@ for (const theme of ['light', 'dark'] as const)
       );
     await context.route('**/api/feed**', async (r) => {
       feedRequests++;
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      const responseMode = mode;
       const p = Object.fromEntries(new URL(r.request().url()).searchParams);
       const result = await discoveryPage(
         sqliteCareerDb(sql),
@@ -93,9 +93,18 @@ for (const theme of ['light', 'dark'] as const)
         p,
         state.preferences,
       );
-      return r.fulfill({
-        json: mode === 'context' ? { ...result, jobs: [], total: 0, nextCursor: null } : result,
-      });
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      return r
+        .fulfill({
+          json:
+            responseMode === 'context'
+              ? { ...result, jobs: [], total: 0, nextCursor: null }
+              : result,
+        })
+        .catch((error) => {
+          // Full-document navigation intentionally aborts obsolete feed requests.
+          if (!/already handled|Target.*closed|Request.*disposed/i.test(String(error))) throw error;
+        });
     });
     await context.route('**/api/listings/**', (r) => {
       const id = new URL(r.request().url()).pathname.split('/').at(-1)!;
@@ -106,6 +115,9 @@ for (const theme of ['light', 'dark'] as const)
     const directory = `docs/screenshots/changes/review36-${info.project.name}-${theme}`;
     try {
       for (const [n, job] of jobs.entries()) {
+        const initialFeed = before
+          ? null
+          : page.waitForResponse((response) => response.url().includes('/api/feed?'));
         await page.goto('/app/jobs/' + job.id);
         if (before) await expect(page.getByText('המשרה לא נמצאה', { exact: true })).toBeVisible();
         else {
@@ -115,7 +127,7 @@ for (const theme of ['light', 'dark'] as const)
             0,
           );
           // A later unrelated feed must not evict this individually resolved detail.
-          await page.waitForResponse((response) => response.url().includes('/api/feed?'));
+          await initialFeed;
           await expect(page.getByRole('heading', { name: job.title, exact: true })).toBeVisible();
           if (n === 0 && info.project.name === 'desktop' && theme === 'light') {
             await page.evaluate(() => window.scrollTo(0, 0));
@@ -197,7 +209,7 @@ for (const theme of ['light', 'dark'] as const)
         .locator('main')
         .screenshot({ path: `${directory}-copy/${before ? 'before' : 'after'}.png` });
     } finally {
-      await context.unrouteAll({ behavior: 'wait' });
+      await page.close();
       sql.close();
     }
   });
