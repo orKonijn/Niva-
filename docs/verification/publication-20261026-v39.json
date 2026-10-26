@@ -110,7 +110,9 @@
     "browser": {
       "linkedin": "Fresh full-document navigation rendered expected title after feed completion",
       "indeed": "Full reload rendered expected title after feed completion",
-      "privateWrites": 0
+      "privateWrites": 0,
+      "assistantContext": "Fresh navigation rendered expected LinkedIn job context; no AI message sent",
+      "resumeContext": "Fresh navigation rendered expected LinkedIn job context; no CV edits or upload"
     },
     "search": {
       "trimmedTotal": 1,
