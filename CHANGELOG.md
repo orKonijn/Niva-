@@ -4,9 +4,17 @@
 
 No changes recorded.
 
+## 0.3.1 � 2026-10-26
+
+Release candidate; deployment pending validation.
+
+### Fixed
+
+- Preserve the alternate QA title �Testing Software Engineer� in the browser and apply the same explicit QA-title rule on the server before counting and pagination. Live verification of0.3.0 found one valid role hidden by the browser despite being returned by the server (N03). Regression coverage includes the newly observed title and an unrelated manufacturing role with an overbroad category.
+
 ## 0.3.0 — 2026-10-26
 
-Release candidate; production deployment pending verification. Compatible discovery capabilities and repairs; no account-data migration. Existing flattened description caches acquire source headings after the next successful provider refresh.
+Published as **Sites42** from reviewed GitHub commit5ca74b3. The next patch below corrects a live alias consistency finding. Compatible discovery capabilities and repairs; no account-data migration. Existing flattened description caches acquire source headings after the next successful provider refresh.
 
 ### Added
 

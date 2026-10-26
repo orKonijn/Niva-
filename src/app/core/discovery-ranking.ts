@@ -4,7 +4,7 @@ import type { Preferences } from './preferences';
 import { normalizeSearch } from './preferences';
 export const RANKING_VERSION = 'discovery-evidence-v1';
 export const qaTitle = (title: string) =>
-  /\bqa\b|\bsdet\b|quality assurance|test automation|automation.*test|software engineer.*in test|software test(?:ing)? engineer/i.test(
+  /\bqa\b|\bsdet\b|quality assurance|test automation|automation.*test|software (?:development )?engineer.*in test|software test(?:ing)? engineer|testing software engineer/i.test(
     title,
   );
 export function relatedQaQuery(query: string) {

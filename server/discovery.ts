@@ -13,7 +13,7 @@ import { SOURCES, type JobSource } from './job-sources';
 import { normalizeGreenhouse } from './greenhouse-source';
 import { recordSourceAttempt, sourceFreshness } from './source-health';
 import { descriptionBlocks } from './description-blocks';
-import { discoveryRank, relatedQaQuery } from '../src/app/core/discovery-ranking';
+import { discoveryRank, relatedQaQuery, qaTitle } from '../src/app/core/discovery-ranking';
 export { SOURCES } from './job-sources';
 import type { Job } from '../src/app/core/models/job';
 import {
@@ -653,6 +653,10 @@ export async function discoveryPage(
       job.source!.active = !!row.active;
       if (!row.active && job.source!.availability !== 'unknown')
         job.source!.availability = 'closed';
+      // Category preselection can be broader than the explicit title alias policy.
+      // Apply the same predicate as the browser before counting and pagination.
+      if (query.related === 'true' && relatedQaQuery(query.q ?? '') && !qaTitle(job.title))
+        continue;
       if (query.saved === 'true' || passesDiscovery(job, query, preferences, criteria)) {
         count++;
         const rank = relevance ? discoveryRank(job, query.q ?? '', preferences, criteria).rank : 0;

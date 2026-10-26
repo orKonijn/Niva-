@@ -28,11 +28,13 @@ for (const theme of ['light', 'dark'] as const)
       sql.exec(readFileSync('server/migrations/' + m + '.sql', 'utf8'));
     const publicJobs = auditJobs();
     const jobs: Job[] = [];
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 82; i++) {
       const j = structuredClone(publicJobs[0]);
       j.id = 'greenhouse-canopycare-' + (7000000 + i);
       j.title = i < 60 ? 'Synthetic Sales Engineer' : 'Synthetic QA Automation Engineer';
       j.category = i < 60 ? 'engineering' : 'qa-automation';
+      if (i === 80) j.title = 'Distributed Systems Testing Software Engineer';
+      if (i === 81) j.title = 'Synthetic Manufacturing Quality Engineer';
       j.source!.applicationUrl =
         'https://job-boards.greenhouse.io/canopycare/jobs/' + (7000000 + i);
       jobs.push(j);
@@ -99,6 +101,16 @@ for (const theme of ['light', 'dark'] as const)
         );
       await page.getByRole('link', { name: 'לתוצאות החיפוש', exact: true }).click();
       await page.screenshot({ path: root + '-ranking.png' });
+      await page.goto('/app/jobs?scope=all&q=Engineer&related=true&sort=relevance');
+      await expect(page.locator('niva-job-card')).toHaveCount(21);
+      await expect(
+        page.getByRole('heading', {
+          name: 'Distributed Systems Testing Software Engineer',
+          exact: true,
+        }),
+      ).toHaveCount(1);
+      await expect(page.getByRole('status').filter({ hasText: /מתוך/ })).toHaveText(/21 מתוך 21/);
+      await page.goto('/app/jobs?scope=all&q=Engineer&sort=relevance');
       await page.getByRole('combobox', { name: 'מיון המשרות' }).selectOption('source');
       await expect(page.locator('niva-job-card').first().getByRole('heading')).toContainText(
         'Sales Engineer',

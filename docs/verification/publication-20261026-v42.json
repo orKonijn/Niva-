@@ -1,0 +1,32 @@
+{
+  "applicationVersion": "0.3.0",
+  "version": 42,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a16ed33ea02c81919d7e34b56dd91e63",
+  "deploymentId": "appgdep_6adf9f149c988191b57951b6d8834f99",
+  "status": "succeeded",
+  "publishedAt": "2026-10-26T18:42:49.589167+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "5ca74b3e048dc759ec0e5481ee42272e67869f7a",
+  "sitesCommit": "d7e30bbe1ee02c199050d179e6e09c99cd9aae13",
+  "environmentRevision": 7,
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000f9988211a63a2aeec5878cd3",
+    "content_hash": "sha256:eb7e8ec864b5159511cf9cf1e3c1fd66bc84bb342e6648b48b9f9237c6f3343e",
+    "size_bytes": 13660160,
+    "file_count": 303
+  },
+  "ci": {
+    "runId": 40378784401,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "liveFinding": {
+    "id": "N03",
+    "status": "Fix prepared in0.3.1",
+    "issue": "Server returns Testing Software Engineer but browser QA alias predicate omits it",
+    "reproduction": "scope=all&q=Engineer&related=true&sort=relevance",
+    "productionAccountWrites": 0
+  }
+}

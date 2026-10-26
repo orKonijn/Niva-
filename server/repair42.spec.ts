@@ -8,6 +8,49 @@ import { emptyCriteria } from '../src/app/core/models/discovery';
 import { defaultPreferences } from '../src/app/core/preferences';
 import { assessJob } from '../src/app/core/job-assessment';
 import { enrichJob } from './job-facts';
+import { matchesDiscoverySearch } from '../src/app/core/discovery-ranking';
+
+it('N03 explicit QA aliases retain testing-software-engineer titles and share server/browser totals', async () => {
+  const h = repairHarness('node');
+  try {
+    for (const [i, title] of [
+      'Distributed Systems Testing Software Engineer, Python / Go',
+      'Software Development Engineer in Test',
+      'Manufacturing Quality Engineer',
+    ].entries()) {
+      const job = structuredClone(auditJobs()[0]);
+      job.id = String(i);
+      job.title = title;
+      job.category = 'qa-automation';
+      await h.db.run(
+        'INSERT INTO niva_jobs(id,source_id,canonical,company,title,district,category,style,search,active,version,data) VALUES(?,?,?,?,?,?,?,?,?,1,?,?)',
+        job.id,
+        'greenhouse-canopycare',
+        'https://example.test/job/' + i,
+        'synthetic',
+        title.toLowerCase(),
+        job.district,
+        job.category,
+        job.workStyle,
+        title.toLowerCase(),
+        'n03',
+        JSON.stringify(job),
+      );
+    }
+    const feed = await discoveryPage(h.db, 'test', {
+      scope: 'all',
+      q: 'Engineer',
+      related: 'true',
+      sort: 'relevance',
+    });
+    expect(feed.total).toBe(2);
+    expect(feed.jobs.map((j) => j.id)).toEqual(['0', '1']);
+    expect(feed.jobs.every((j) => matchesDiscoverySearch(j, 'Engineer', true))).toBe(true);
+    expect((await discoveryPage(h.db, 'test', { scope: 'all', q: 'Engineer' })).total).toBe(3);
+  } finally {
+    h.sqlite.close();
+  }
+});
 
 it('F11 term coverage withholds unknown evidence and separates explicit eligibility blockers', () => {
   const job = structuredClone(auditJobs()[0]);
