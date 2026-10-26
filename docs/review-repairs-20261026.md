@@ -2,7 +2,7 @@
 
 ## Publication preparation
 
-The owner subsequently authorized commit, push and deployment of these fixes. Application version **0.1.1** is a compatible patch from0.1.0; no schema migration or candidate action is required. The intervening Sites36 documentation policy was preserved. The review observations below retain their original local-only scope; a separate publication receipt will establish actual deployment and live checks.
+The owner subsequently authorized commit, push and deployment of these fixes. Application version **0.1.1** is a compatible patch from0.1.0; no schema migration or candidate action is required. The intervening Sites36 documentation policy was preserved. The review observations below retain their original local-only scope; a separate publication receipt will establish actual deployment and live checks. Sites37 deployed0.1.1; live browser verification exposed an additional account-initialization race. The0.1.2 follow-up adds an explicit initial-reconciliation barrier and delayed-session browser coverage; it does not change provider or maintenance configuration.
 
 ## Scope and baseline
 

@@ -16,6 +16,11 @@ for (const theme of ['light', 'dark'] as const)
   }, info) => {
     test.setTimeout(60000);
     await reviewFixture(context);
+    // Production can load discovery configuration before the account session.
+    await context.route('**/api/session', async (r) => {
+      await new Promise((resolve) => setTimeout(resolve, 250));
+      await r.fallback();
+    });
     const state = emptyAccountState();
     state.theme = theme;
     await context.route('**/api/account/state', (r) => r.fulfill({ json: state }));

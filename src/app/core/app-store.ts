@@ -56,6 +56,10 @@ export class AppStore {
   readonly listingStates = signal<Record<string, ListingState>>({});
   private readonly listingRequests = new Map<string, Promise<void>>();
   private listingEpoch = 0;
+  private markListingsInitialized!: () => void;
+  private readonly listingsInitialized = new Promise<void>((resolve) => {
+    this.markListingsInitialized = resolve;
+  });
   readonly feedCheckedAt = signal('');
   readonly feedStale = signal(false);
   readonly coverage = signal<{ category: string; district: string; style: string; n: number }[]>(
@@ -233,6 +237,9 @@ export class AppStore {
     }
   }
   async ensureJob(id: string, retry = false): Promise<void> {
+    // Initial account reconciliation clears listing state/epochs. Start only
+    // after it can run, including when callers already see discovery config.
+    await this.listingsInitialized;
     if (!this.session.config().discovery || !isSupportedListingId(id)) return;
     const pending = this.listingRequests.get(id);
     if (pending) return pending;
@@ -390,6 +397,7 @@ export class AppStore {
           this.theme.accountSelection = null;
           this.theme.restoreGuest();
         }
+        this.markListingsInitialized();
       });
     });
     this.refreshTimer = setInterval(() => {

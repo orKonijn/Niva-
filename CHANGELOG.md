@@ -4,9 +4,16 @@
 
 No unreleased changes.
 
-## 0.1.1 — 2026-10-26 (release candidate)
+## 0.1.2 — 2026-10-26 (release candidate)
 
-Compatible fixes to existing workflows; no schema migration or candidate action required. Sites publication pending.
+### Fixed
+
+- Wait for the AppStore initial account reconciliation before fetching a deep-linked listing. Real hosted session timing could otherwise clear the just-loaded listing; fresh details and independent career contexts now share an explicit initialization barrier. Retain ownership/epoch validation. No migration or candidate action required.
+- Add delayed-session desktop/mobile, light/dark checks to the existing fresh publisher and career-context regression. The original local verification and genuine image pairs remain linked below. Publication/live verification pending; maintenance and alert readiness remain unverified.
+
+## 0.1.1 — 2026-10-26
+
+Compatible fixes to existing workflows; no schema migration or candidate action required. Published as Sites37. A live check then identified an additional startup race; the0.1.2 follow-up below addresses it.
 
 ### Fixed
 
