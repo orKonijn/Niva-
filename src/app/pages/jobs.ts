@@ -1,3 +1,4 @@
+import { matchesDistrict, normalizeSearch } from '../core/preferences';
 import { passesDiscovery } from '../core/discovery-filters';
 import { assessJob } from '../core/job-assessment';
 import { SOURCES, JSEARCH_SOURCES } from '../core/source-registry';
@@ -115,7 +116,7 @@ export class Jobs {
         this.store.setFeedQuery(
           {
             ...this.extraQuery(),
-            q: this.query(),
+            q: normalizeSearch(this.query()),
             category: this.category(),
             district: this.district(),
             styles: this.workStyles().join(','),
@@ -170,11 +171,11 @@ export class Jobs {
         (!this.workStyles().length ||
           (j.workStyle === 'unknown' && this.includeUnknownStyles()) ||
           (isWorkStyle(j.workStyle) && this.workStyles().includes(j.workStyle))) &&
-        (this.district() === 'all' || this.district() === j.district) &&
+        matchesDistrict(j, this.district()) &&
         (this.category() === 'all' || this.category() === j.category) &&
         `${j.title} ${j.company} ${j.skills.join(' ')}`
           .toLowerCase()
-          .includes(this.query().trim().toLowerCase()),
+          .includes(normalizeSearch(this.query())),
     ),
   );
   readonly filtered = computed(() => {

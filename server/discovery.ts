@@ -1,3 +1,4 @@
+import { normalizeSearch } from '../src/app/core/preferences';
 import { passesDiscovery, type DiscoveryFilters } from '../src/app/core/discovery-filters';
 import type { CandidateCriteria } from '../src/app/core/models/discovery';
 import { normalizeJobicy } from './jobicy-source';
@@ -441,6 +442,18 @@ export async function catalogJobs(db: CareerDb): Promise<Job[]> {
     },
   );
 }
+/** Indexed single-record retrieval. Authorization remains at the owning route. */
+export async function catalogJob(db: CareerDb, id: string): Promise<Job | undefined> {
+  const [row] = await db.all<{ data: string; active: number }>(
+    'SELECT data,active FROM niva_jobs WHERE id=? LIMIT 1',
+    id,
+  );
+  if (!row) return undefined;
+  const job = JSON.parse(row.data) as Job;
+  job.source!.active = !!row.active;
+  if (!row.active && job.source!.availability !== 'unknown') job.source!.availability = 'closed';
+  return job;
+}
 export interface FeedQuery extends DiscoveryFilters {
   q?: string;
   category?: string;
@@ -488,7 +501,7 @@ export async function discoveryPage(
       'missing',
     ].map((key) => query[key as keyof FeedQuery]),
     criteria,
-    query.q,
+    normalizeSearch(query.q),
     query.category,
     query.district,
     query.styles,
@@ -577,7 +590,7 @@ export async function discoveryPage(
       "instr(lower(coalesce(json_extract(data,'$.source.location'),'')),?)>0",
       query.location.toLowerCase().slice(0, 200),
     );
-  if (query.q) add('instr(search,?)>0', query.q.toLowerCase().slice(0, 200));
+  if (normalizeSearch(query.q)) add('instr(search,?)>0', normalizeSearch(query.q));
   if (query.saved === 'true') {
     clauses[0] = '1=1';
     clauses.push(`id IN (${saved.length ? saved.map(() => '?').join(',') : 'NULL'})`);

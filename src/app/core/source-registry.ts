@@ -156,6 +156,18 @@ export const JSEARCH_SOURCES: readonly JobSource[] = ['linkedin', 'indeed'].map(
   allowedHosts: [],
   cadence: 86400000,
 }));
+export function listingSource(id: string): JobSource | undefined {
+  return [...SOURCES, ...JSEARCH_SOURCES].find((source) => {
+    if (!id.startsWith(source.id + '-')) return false;
+    const suffix = id.slice(source.id.length + 1);
+    return source.provider === 'jsearch'
+      ? /^[a-f0-9]{24}$/.test(suffix)
+      : source.provider === 'lever'
+        ? /^[a-z0-9-]{10,80}$/i.test(suffix)
+        : /^\d+$/.test(suffix);
+  });
+}
+export const isSupportedListingId = (id: string): boolean => !!listingSource(id);
 export function trustedPublisherUrl(publisher: string, value: string): boolean {
   try {
     const u = new URL(value);
@@ -180,29 +192,16 @@ export function trustedJobUrl(id: string, value: string): boolean {
   try {
     const url = new URL(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port) return false;
-    if (
-      JSEARCH_SOURCES.some(
-        (s) =>
-          id.startsWith(s.id + '-') &&
-          /^[a-f0-9]{24}$/.test(id.slice(s.id.length + 1)) &&
-          trustedPublisherUrl(s.board, value),
-      )
-    )
-      return true;
-    return SOURCES.some((source) => {
-      if (!id.startsWith(source.id + '-') || !source.allowedHosts.includes(url.hostname))
-        return false;
-      const suffix = id.slice(source.id.length + 1);
-      if (source.provider === 'jobicy')
-        return /^\d+$/.test(suffix) && url.pathname.startsWith(`/jobs/${suffix}-`);
-      if (source.provider === 'lever')
-        return /^[a-z0-9-]{10,80}$/i.test(suffix) && url.pathname === `/${source.board}/${suffix}`;
-      return (
-        /^\d+$/.test(suffix) &&
-        (!url.hostname.endsWith('greenhouse.io') ||
-          url.pathname === `/${source.board}/jobs/${suffix}`)
-      );
-    });
+    const source = listingSource(id);
+    if (!source) return false;
+    if (source.provider === 'jsearch') return trustedPublisherUrl(source.board, value);
+    if (!source.allowedHosts.includes(url.hostname)) return false;
+    const suffix = id.slice(source.id.length + 1);
+    if (source.provider === 'jobicy') return url.pathname.startsWith(`/jobs/${suffix}-`);
+    if (source.provider === 'lever') return url.pathname === `/${source.board}/${suffix}`;
+    return (
+      !url.hostname.endsWith('greenhouse.io') || url.pathname === `/${source.board}/jobs/${suffix}`
+    );
   } catch {
     return false;
   }

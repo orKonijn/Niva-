@@ -1,3 +1,4 @@
+import { applicationVisitor, limitedApplication } from './application-quota';
 import { verifyJob, reconcilePaths } from './job-verification';
 import { ingestJsearch } from './jsearch-source';
 import { trustedJobUrl } from './job-sources';
@@ -7,7 +8,15 @@ import { Hono } from 'hono';
 import { streamSSE } from 'hono/streaming';
 import { randomUUID } from 'node:crypto';
 import type { CareerDb } from './career-db';
-import { boundedJson, catalogJobs, discoveryPage, ingest, SOURCES, versionOf } from './discovery';
+import {
+  boundedJson,
+  catalogJobs,
+  catalogJob,
+  discoveryPage,
+  ingest,
+  SOURCES,
+  versionOf,
+} from './discovery';
 import {
   CareerError,
   listRecords,
@@ -172,8 +181,7 @@ export function createCareer(deps: CareerDependencies) {
     );
   });
   app.get('/api/listings/:id', async (c) => {
-    const jobs = await catalogJobs(db);
-    const job = jobs.find((j) => j.id === c.req.param('id'));
+    const job = await catalogJob(db, c.req.param('id'));
     const owner = await deps.identity(c.req.raw);
     if (
       !job ||
@@ -189,10 +197,27 @@ export function createCareer(deps: CareerDependencies) {
     return c.json(await verifyJob(db, job));
   });
   app.get('/api/apply/:id', async (c) => {
-    await quota(db, 'apply:shared', 120, 60000);
-    const job = (await catalogJobs(db)).find((j) => j.id === c.req.param('id') && j.source?.active);
-    if (!job?.source || !trustedJobUrl(job.id, job.source.applicationUrl))
+    const visitor = await applicationVisitor(c, secret, await deps.identity(c.req.raw));
+    try {
+      await quota(db, 'apply:visitor:' + visitor.key, 120, 60000);
+    } catch (error) {
+      if (error instanceof CareerError && error.status === 429) return limitedApplication(c);
+      throw error;
+    }
+    const job = await catalogJob(db, c.req.param('id'));
+    if (!job?.source?.active || !trustedJobUrl(job.id, job.source.applicationUrl)) {
+      // Limit cookie-less missing-ID probes separately; they cannot consume any
+      // valid visitor's handoff or upstream-verification allowance.
+      if (visitor.freshAnonymous) {
+        try {
+          await quota(db, 'apply:missing:bootstrap', 120, 60000);
+        } catch (error) {
+          if (error instanceof CareerError && error.status === 429) return limitedApplication(c);
+          throw error;
+        }
+      }
       return c.json({ error: 'NOT_AVAILABLE' }, 404);
+    }
     const checked = await verifyJob(db, job);
     // Anonymous click-only event: no profile, account, email, IP or submitted-application claim.
     await db.run(
@@ -487,8 +512,8 @@ export function createCareer(deps: CareerDependencies) {
     if (!resume.confirmed) throw new CareerError(409, 'REVIEW_REQUIRED');
     if ((await listRecords(db, owner, 'resume')).length >= 20)
       throw new CareerError(409, 'VERSION_LIMIT');
-    const job = (await catalogJobs(db)).find((j) => j.id === body.jobId && j.source?.active);
-    if (!job) throw new CareerError(404, 'JOB_UNAVAILABLE');
+    const job = await catalogJob(db, String(body.jobId));
+    if (!job?.source?.active) throw new CareerError(404, 'JOB_UNAVAILABLE');
     const result = tailorExtractive(resume.text, job);
     const tailored: ResumeVersion = {
       id: randomUUID(),
@@ -511,7 +536,7 @@ export function createCareer(deps: CareerDependencies) {
   });
   app.get('/api/career/match/:id', async (c) => {
     const owner = c.get('owner');
-    const job = (await catalogJobs(db)).find((j) => j.id === c.req.param('id'));
+    const job = await catalogJob(db, c.req.param('id'));
     if (!job) throw new CareerError(404, 'NOT_FOUND');
     const state = await deps.state(owner);
     const resume = (await listRecords<ResumeVersion>(db, owner, 'resume')).find(
@@ -625,7 +650,8 @@ export function createCareer(deps: CareerDependencies) {
     const state = await deps.state(owner);
     const page = await discoveryPage(db, secret, { limit: '8' }, state.preferences);
     const jobId = typeof body['jobId'] === 'string' ? body['jobId'] : conversation.jobId;
-    const selected = (await catalogJobs(db)).find((j) => j.id === jobId && j.source?.active);
+    const candidateJob = jobId ? await catalogJob(db, jobId) : undefined;
+    const selected = candidateJob?.source?.active ? candidateJob : undefined;
     if (jobId && (!selected || preferenceMatch(selected, state.preferences).excluded))
       throw new CareerError(404, 'JOB_UNAVAILABLE');
     conversation.jobId = selected?.id;

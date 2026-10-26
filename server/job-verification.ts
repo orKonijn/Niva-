@@ -1,3 +1,4 @@
+import { takeQuota } from './career-records';
 import type { CareerDb } from './career-db';
 import type { Job } from '../src/app/core/models/job';
 import { SOURCES, trustedJobUrl } from './job-sources';
@@ -16,6 +17,21 @@ export async function verifyJob(db: CareerDb, job: Job, now = Date.now()): Promi
     now - Date.parse(job.source!.applicationCheck.checkedAt) < TTL
   )
     return enrichJob(job);
+  // Cached handoffs never spend this shared upstream budget. Exhaustion only
+  // defers re-verification; it does not deny a trusted original application link.
+  if (!(await takeQuota(db, 'verification:shared', 120, 60000))) {
+    return enrichJob({
+      ...job,
+      source: {
+        ...job.source,
+        applicationCheck: {
+          status: 'unverified',
+          checkedAt: new Date(now).toISOString(),
+          note: 'הזמינות לא נבדקה מחדש בגלל עומס. יש לבדוק את המשרה באתר המקור.',
+        },
+      },
+    });
+  }
   const lease = await db.all(
     "INSERT INTO niva_documents(owner,kind,id,data,expires_at) VALUES('system','job-check',?,'{}',?) ON CONFLICT(owner,kind,id) DO UPDATE SET expires_at=excluded.expires_at WHERE expires_at<=? RETURNING id",
     job.id,

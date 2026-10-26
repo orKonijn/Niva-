@@ -1,0 +1,115 @@
+{
+  "scope": "Disposable local SQLite; UTF-8 serialized result bytes (includes JSON wrapper). Single-pass elapsed/heap observations, not peak memory or production measurements.",
+  "before": [
+    {
+      "size": 100,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 100,
+      "bytesRead": 1516791,
+      "heapDeltaBytes": 4399656,
+      "latencyMs": 6.474800000000002
+    },
+    {
+      "size": 100,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 100,
+      "bytesRead": 1516791,
+      "heapDeltaBytes": 7847272,
+      "latencyMs": 4.877399999999994
+    },
+    {
+      "size": 1000,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 1000,
+      "bytesRead": 15168891,
+      "heapDeltaBytes": 68621136,
+      "latencyMs": 54.11489999999998
+    },
+    {
+      "size": 1000,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 1000,
+      "bytesRead": 15168891,
+      "heapDeltaBytes": 46704080,
+      "latencyMs": 63.329800000000006
+    },
+    {
+      "size": 5000,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 5000,
+      "bytesRead": 75848891,
+      "heapDeltaBytes": 199208032,
+      "latencyMs": 278.4243
+    },
+    {
+      "size": 5000,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 5000,
+      "bytesRead": 75848891,
+      "heapDeltaBytes": 226353008,
+      "latencyMs": 315.74800000000005
+    }
+  ],
+  "after": [
+    {
+      "size": 100,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 1,
+      "bytesRead": 15169,
+      "heapDeltaBytes": 227576,
+      "latencyMs": 0.15790000000001214
+    },
+    {
+      "size": 100,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 0,
+      "bytesRead": 2,
+      "heapDeltaBytes": 2336,
+      "latencyMs": 0.020600000000001728
+    },
+    {
+      "size": 1000,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 1,
+      "bytesRead": 15170,
+      "heapDeltaBytes": 77592,
+      "latencyMs": 0.11959999999999127
+    },
+    {
+      "size": 1000,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 0,
+      "bytesRead": 2,
+      "heapDeltaBytes": 2144,
+      "latencyMs": 0.01279999999999859
+    },
+    {
+      "size": 5000,
+      "lookup": "existing",
+      "found": true,
+      "rowsRead": 1,
+      "bytesRead": 15171,
+      "heapDeltaBytes": 78096,
+      "latencyMs": 0.1593000000000302
+    },
+    {
+      "size": 5000,
+      "lookup": "missing",
+      "found": false,
+      "rowsRead": 0,
+      "bytesRead": 2,
+      "heapDeltaBytes": 2352,
+      "latencyMs": 0.016099999999994452
+    }
+  ]
+}

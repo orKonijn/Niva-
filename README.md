@@ -1,6 +1,6 @@
 # Niva
 
-See the [version-by-version changelog](CHANGELOG.md). The latest recorded published Sites release is **version 36**, published **2026-10-26** at [getnivajobs.com](https://getnivajobs.com), synchronizing the release-note policy and documentation with no application/UI change. See the [publication receipt](docs/verification/publication-20261026-v36.json). Version 35 introduced in-site LinkedIn/Indeed cards through a partial daily JSearch feed; see its [release evidence](docs/verification/publication-20261025-v35.json) and [connection, coverage and limits](docs/job-discovery/jsearch.md). The semantic package version remains **0.1.0**; Sites saved-version numbers are separate hosting identifiers. Follow the [release-note policy](docs/release-notes-policy.md). A Git-only documentation commit does not itself create a hosted release; version 36 was separately published.
+See the [version-by-version changelog](CHANGELOG.md). The latest observed published Sites release is **version 36** at [getnivajobs.com](https://getnivajobs.com), rechecked read-only on 26 October 2026. Discovery combines 24 selected Greenhouse/Lever/Jobicy sources with two configuration-gated JSearch publisher feeds (LinkedIn/Indeed). Coverage is global and partial; vacancy counts change. Publisher imports are shared daily samples, not exhaustive searches on each visit. See [current status](docs/current-status.md) and the [unpublished local review](docs/review-repairs-20261026.md). These compatible fixes are being prepared as application **0.1.1**; Sites publication is pending. See the [release-note policy](docs/release-notes-policy.md).
 
 A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Hosted sign-in supports Google and ChatGPT as separate accounts; use the original method to access existing records. Apple remains disabled at the user’s request, and hosted email delivery is inactive.
 
@@ -29,17 +29,14 @@ The API command serves an existing build and database. Unconfigured Google, Appl
 
 ## Included
 
-- Responsive Hebrew RTL landing page, original mascot, FAQ and local cookie preference controls.
-- Three-step setup with optional local CV selection, preference selection and demo acknowledgement.
-- Candidate dashboard, sample jobs, search, work-model filters and saved jobs.
-- Job details and explicit demo approval, with duplicate, exclusion and pause checks.
-- Local approval history, editable preferences, temporary profile details, JSON export and reset.
-- Separate verified accounts with cookie sessions, durable account-owned preferences/profile/theme, explicit demo-data import and account-data deletion.
-- Lazy Leaflet map with approximate demonstration cities, grouped markers, multiple offices, remote/missing-location sections and a usable list fallback.
-- Lazy-loaded standalone components, Angular signals, strict templates and self-hosted fonts.
-- Unit and browser journey tests, automated axe accessibility checks, desktop/mobile screenshots and GitHub Actions validation.
+- Responsive Hebrew RTL pages, Light/Dark/System themes and account-owned preferences/saved jobs.
+- Global discovery from selected official employer boards, Jobicy and configuration-gated LinkedIn/Indeed samples through JSearch; original application links, source health, cursor pagination and approximate multi-office maps.
+- CV-first account setup followed by preferences. PDF/DOCX text extraction runs locally in the browser, with review before saving confirmed text/versions to the account.
+- Extractive tailoring and terminology matching; server-side AI requires separate configuration and consent. No automatic employer applications.
+- Separate Google and ChatGPT identities; Apple and hosted email delivery remain inactive. Legacy demonstration approvals/catalogue remain explicitly separate.
+- Unit, disposable SQLite/D1-contract and desktop/mobile browser tests, automated axe checks and build provenance.
 
-**Data boundaries:** fictional sample jobs, approvals and device CV selection are explicitly demonstrations. Real discovery reads 17 allowlisted public employer boards; it is limited coverage, with changing vacancy counts. Signed-in resume text/versions are private server records; PDF/DOCX processing and AI sending require separately configured services and consent and remain disabled without them. No employer submissions or payments are implemented. Device reset and account-data deletion are separate; deleting account data retains the sign-in identity.
+**Data boundaries:** the normal PDF/DOCX path keeps original files on the device and sends only reviewed text when saved. Private resume versions and conversations expire after 30 days; reads deny expiry immediately. Physical deletion targets 60 minutes after expiry but recurring private cleanup, accountable operation, alert delivery and backup restoration remain unverified. Server upload scanning/parsing, real AI and email require separate configuration; local parsing works without those services. No private account/CV data is sent to job providers. Request-driven source refresh uses cache/leases/backoff: core employer feeds are checked when due (15 minutes), Jobicy at most hourly with its publication delay, and JSearch daily across three sampled cities with a 180-request/31-day Niva cap. A visit does not guarantee new vacancies or complete market coverage.
 
 ## Checks
 
@@ -81,7 +78,7 @@ docs/             Specification, design assets and implementation roadmap
 - [Design tokens](docs/design/design-tokens.json)
 - [Tailwind architecture and verification](docs/tailwind-refactor.md)
 
-The production build is in `dist`. The hosted Sites deployment uses a Worker/D1 adapter; Node/SQLite is the local alternative. [The changelog](CHANGELOG.md) and publication receipts record release-specific source mappings and verification limits. Build metadata records checkout and reviewed-source identifiers, dirty state, build time and content digests. See [current operational truth and release gates](docs/current-status.md). Historical guides retain the scope of their original release; they do not establish today's live state.
+The production build is in `dist`. Public hosting uses a Worker/D1 adapter; Node/SQLite is the local alternative. Build metadata records checkout/reviewed-source identifiers, dirty state, build time and content digests. Historical release receipts remain preserved; see [current operational truth and release gates](docs/current-status.md).
 
 ## Dependency note
 
@@ -91,12 +88,8 @@ The Vite override selects a patched 8.3.x release for the Angular development to
 
 See [implementation evidence](docs/repair-verification.md) for F01–F13 status, cross-tab consistency guarantees, reset failure semantics, screenshots and browser coverage. Persisted edits require Web Locks and available localStorage; unsupported environments fail closed for edits and approvals. To run Firefox and WebKit alongside Chromium, set CROSS_BROWSER=1 before the browser command.
 
-## District preferences and appearance
+## Historical milestones and career workflows
 
-Niva now includes 11 fictional jobs across nine professional fields and all six Israeli districts, shared multi-style checkboxes, and a persistent Light/Dark/System theme control. Older city and single-style preferences migrate without clearing demo records. See [behavior, migration and verification](docs/preferences-and-themes.md).
+The original fictional catalogue, local approvals and device migrations are historical demonstration features. They do not establish current source coverage or employer application status. See [preferences and themes](docs/preferences-and-themes.md).
 
-## Career extension
-
-The implementation includes two-source durable discovery with cursor pagination, explicit refresh and source health; versioned, candidate-confirmed resume text and extractive tailoring; explainable terminology matching; and an optional server-side streaming career assistant. PDF/DOCX uploads fail closed until a real scanning/parsing service is configured. AI sending remains unavailable without a server API key and explicit model. No new paid services or hosted schedule have been activated.
-
-See [career-assistant.md](docs/career-assistant.md) for trying each workflow, configuration placeholders, source coverage/cadence, retention/deletion, scoring methodology, provider limitations and screenshots. The earlier career milestone was published before this repair pass. The latest review repair pass was subsequently published as version 17. Runtime AI/scanning credentials and hosted scheduling remain separate setup requirements.
+Current career workflows include candidate-confirmed text versions, local PDF/DOCX extraction, extractive tailoring, terminology matching and configuration-gated AI. See [career workflows](docs/career-assistant.md), [publisher limits](docs/job-discovery/jsearch.md), [global coverage](docs/job-discovery/global-coverage.md) and [staging verification](docs/staging-verification.md). The enabled hourly public-source schedule does not prove recurring private retention cleanup.

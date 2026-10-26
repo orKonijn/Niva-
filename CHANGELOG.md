@@ -4,6 +4,20 @@
 
 No unreleased changes.
 
+## 0.1.1 — 2026-10-26 (release candidate)
+
+Compatible fixes to existing workflows; no schema migration or candidate action required. Sites publication pending.
+
+### Fixed
+
+- Centralize listing-ID recognition so fresh LinkedIn/Indeed details, reloads and career context resolve without first appearing in the feed; retain trusted URL checks and archived ownership boundaries.
+- Replace the shared application handoff quota with authenticated/signed-visitor buckets, a separate missing-ID bootstrap limit and bounded upstream verification. Cached valid links bypass unrelated verification exhaustion; rate limits provide retry guidance.
+- Normalize search/cursor keys consistently and include secondary offices in rendered district filtering. Use indexed single-job retrieval after an isolated rows/bytes/memory/latency benchmark justified replacing full-catalog lookups.
+- Add local Node/SQLite and D1-contract regressions for source-failure cleanup, immediate expired-read denial and source-only separation. Keep the actual operational gate unverified; no schedule, secrets, providers, notifications or production data changed.
+- Correct current FAQ/terms/README/status for global partial coverage, daily JSearch samples and local file parsing. Preserve historical evidence. [Review, benchmark, validation and staging procedure](docs/review-repairs-20261026.md). [Genuine before/after gallery](docs/screenshots/changes/review36-images.md). Validation:59 frontend and139 server tests passed, Worker/provenance checks, three typechecks, formatting and production build passed. The full214-case browser run passed210; four older case-sensitive fixture failures were corrected and passed targeted reruns. New publisher/search/office cases passed desktop/mobile light/dark. Representative genuine desktop detail [before](docs/screenshots/changes/review36-desktop-light-linkedin/before.png) / [after](docs/screenshots/changes/review36-desktop-light-linkedin/after.png); all themes/devices and evidence limitations are in the gallery. The review was local-only; publication is now authorized separately.
+
+
+
 ## Version 36 — Release-note policy and documentation
 
 Published **2026-10-26**. Documentation-only hosting release; the semantic application version remains **0.1.0**. [Publication and live source verification receipt](docs/verification/publication-20261026-v36.json).

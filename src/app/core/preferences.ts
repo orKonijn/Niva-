@@ -99,6 +99,7 @@ export function matchesPreferences(
     district: District | 'unknown';
     workStyle: WorkStyle | 'unknown';
     company: string;
+    offices?: readonly { district: District | 'unknown' }[];
   },
   value: Preferences,
   includeUnknownWorkStyle = true,
@@ -109,7 +110,7 @@ export function matchesPreferences(
     .filter(Boolean);
   return (
     (value.role === 'all' || job.category === value.role) &&
-    (value.district === 'all' || job.district === value.district) &&
+    matchesDistrict(job, value.district) &&
     (job.workStyle === 'unknown'
       ? includeUnknownWorkStyle
       : !value.workStyles.length || value.workStyles.includes(job.workStyle)) &&
@@ -126,3 +127,16 @@ export const workStyleLabel = (value: WorkStyle | 'unknown'): string =>
   WORK_STYLES.find((x) => x.id === value)?.label ?? 'סגנון עבודה לא נמסר';
 export const workStylesLabel = (values: WorkStyle[]): string =>
   values.length ? values.map(workStyleLabel).join(' / ') : 'כל סגנונות העבודה';
+
+export function matchesDistrict(
+  job: { district: District | 'unknown'; offices?: readonly { district: District | 'unknown' }[] },
+  district: District | 'all',
+): boolean {
+  return (
+    district === 'all' ||
+    job.district === district ||
+    !!job.offices?.some((office) => office.district === district)
+  );
+}
+export const normalizeSearch = (value: string | undefined | null): string =>
+  (value ?? '').trim().toLowerCase().slice(0, 200);

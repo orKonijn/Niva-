@@ -23,6 +23,10 @@ export async function cleanup(db: CareerDb, now = Date.now(), trigger = 'manual'
       },
       { sql: 'DELETE FROM niva_career_leases WHERE expires_at<=?', args: [now] },
       {
+        sql: "DELETE FROM niva_career_limits WHERE key LIKE 'apply:visitor:%' AND window<?",
+        args: [Math.floor(now / 60000) - 2],
+      },
+      {
         sql: "UPDATE niva_maintenance SET succeeded_at=?,error=NULL,removed=?,trigger=? WHERE id='retention'",
         args: [now, count, trigger],
       },

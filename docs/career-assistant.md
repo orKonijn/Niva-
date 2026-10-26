@@ -1,5 +1,13 @@
 # Career assistant extension — local implementation and handoff
 
+## Current scope — 26 October 2026
+
+Latest observed publication: **version 35**, not the earlier milestones described below. Selected global discovery includes 24 core employer/Jobicy sources plus two configuration-gated JSearch publisher feeds. JSearch provides partial daily LinkedIn/Indeed samples, not exhaustive live searches. PDF/DOCX text extraction works in the browser; original files stay on device on this path. Reviewed text is saved privately for 30 days. Server upload scanning, AI and email remain configuration-gated/inactive; they are distinct from local parsing. The enabled hourly public-source refresh is not evidence of private retention cleanup. Two recurring private cleanup cycles, an accountable operator, approved alert delivery, independent hosted identity isolation and backup restoration remain unverified. See [current status](current-status.md) and the [unpublished local repair report and staging procedure](review-repairs-20261026.md).
+
+## Historical implementation and prepared procedures
+
+The milestone-specific counts, publication numbers and observations below retain their original dates and scope. Current status above supersedes conflicting capability/deployment summaries; prepared procedures do not establish successful hosted execution.
+
 > Current scope and deployment truth: [current-status.md](current-status.md). This guide includes historical milestone evidence. The 24 October review repairs are local only and have not been pushed or deployed.
 
 The implementation was verified locally and publication was subsequently authorized. Existing Sites identity, Site ID, audience, account preferences, saved jobs, approval history, employer exclusions, themes and maps are retained. No paid plan, provider key, scanner or scheduler was activated by publication.

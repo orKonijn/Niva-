@@ -101,12 +101,16 @@ export async function putRecord(
     if (kind !== 'score') throw new CareerError(409, 'RECORD_CHANGED');
   }
 }
-export async function quota(db: CareerDb, key: string, maximum: number, windowMs = 86400000) {
+export async function takeQuota(db: CareerDb, key: string, maximum: number, windowMs = 86400000) {
   const window = Math.floor(Date.now() / windowMs);
   const result = await db.all<{ count: number }>(
     'INSERT INTO niva_career_limits(key,count,window) VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=CASE WHEN window=excluded.window THEN count+1 ELSE 1 END,window=excluded.window RETURNING count',
     key,
     window,
   );
-  if ((result[0]?.count ?? maximum + 1) > maximum) throw new CareerError(429, 'RATE_LIMITED');
+  return (result[0]?.count ?? maximum + 1) <= maximum;
+}
+
+export async function quota(db: CareerDb, key: string, maximum: number, windowMs = 86400000) {
+  if (!(await takeQuota(db, key, maximum, windowMs))) throw new CareerError(429, 'RATE_LIMITED');
 }

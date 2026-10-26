@@ -1,3 +1,4 @@
+import { isSupportedListingId } from '../core/source-registry';
 import { localDate } from '../core/local-date';
 import {
   ChangeDetectionStrategy,
@@ -49,7 +50,7 @@ export class JobDetail {
       const discovery = this.store.session.config().discovery;
       this.store.session.userId();
       untracked(() => {
-        if (/^(greenhouse|lever|jobicy)-/.test(id)) {
+        if (isSupportedListingId(id)) {
           this.store.useCatalog('real');
           if (discovery) void this.store.ensureJob(id);
         }

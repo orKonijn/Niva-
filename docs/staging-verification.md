@@ -1,5 +1,13 @@
 # Disposable staging verification and operational handoff
 
+## Current scope — 26 October 2026
+
+Latest observed publication: **version 35**, not the earlier milestones described below. Selected global discovery includes 24 core employer/Jobicy sources plus two configuration-gated JSearch publisher feeds. JSearch provides partial daily LinkedIn/Indeed samples, not exhaustive live searches. PDF/DOCX text extraction works in the browser; original files stay on device on this path. Reviewed text is saved privately for 30 days. Server upload scanning, AI and email remain configuration-gated/inactive; they are distinct from local parsing. The enabled hourly public-source refresh is not evidence of private retention cleanup. Two recurring private cleanup cycles, an accountable operator, approved alert delivery, independent hosted identity isolation and backup restoration remain unverified. See [current status](current-status.md) and the [unpublished local repair report and staging procedure](review-repairs-20261026.md).
+
+## Historical implementation and prepared procedures
+
+The milestone-specific counts, publication numbers and observations below retain their original dates and scope. Current status above supersedes conflicting capability/deployment summaries; prepared procedures do not establish successful hosted execution.
+
 Prepared 25 October 2026; current handoff clarified during the later UI/UX repair pass. **Not executed against hosted infrastructure.** The current live Site is version19; its published schema/build receipts do not prove runtime isolation, retention, restore or alert delivery. The UI/UX fixes were subsequently authorized and published as version19. That publication made no access change, paid activation, real-resume transmission or existing-live-data deletion. Plan-only staging/watchdog checks made zero network requests. A handler, mock, plan or configured URL is not operational evidence.
 
 ## Gate owner and evidence

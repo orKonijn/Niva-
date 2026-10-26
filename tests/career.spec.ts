@@ -143,7 +143,9 @@ async function fixture(page: Page, { ai = false } = {}) {
   await page.route('**/api/feed?**', (r) => {
     const url = new URL(r.request().url());
     const filtered = url.searchParams.get('q')
-      ? jobs.filter((j) => j.title.includes(url.searchParams.get('q')!))
+      ? jobs.filter((j) =>
+          j.title.toLowerCase().includes(url.searchParams.get('q')!.trim().toLowerCase()),
+        )
       : jobs;
     const more = url.searchParams.has('cursor');
     return r.fulfill({

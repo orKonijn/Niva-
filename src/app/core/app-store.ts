@@ -1,3 +1,4 @@
+import { isSupportedListingId } from './source-registry';
 import { trustedJobUrl } from './source-registry';
 import type { CandidateCriteria } from './models/discovery';
 import { uniqueJobs } from './job-identity';
@@ -232,7 +233,7 @@ export class AppStore {
     }
   }
   async ensureJob(id: string, retry = false): Promise<void> {
-    if (!this.session.config().discovery || !/^(greenhouse|lever|jobicy)-/.test(id)) return;
+    if (!this.session.config().discovery || !isSupportedListingId(id)) return;
     const pending = this.listingRequests.get(id);
     if (pending) return pending;
     const owner = this.session.userId();

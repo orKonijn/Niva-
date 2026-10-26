@@ -56,18 +56,25 @@ describe('district and work-style preference migration', () => {
       workStyles: ['onsite', 'hybrid'] as ('onsite' | 'hybrid')[],
     };
     expect(JOBS.filter((job) => matchesPreferences(job, preferences)).map((job) => job.id)).toEqual(
-      ['product-designer', 'frontend-engineer', 'product-manager', 'devops-cloud'],
+      // Full Stack also has a Tel Aviv office; secondary offices match the same district filter.
+      [
+        'product-designer',
+        'frontend-engineer',
+        'product-manager',
+        'fullstack-developer',
+        'devops-cloud',
+      ],
     );
     expect(
       JOBS.filter((job) => matchesPreferences(job, { ...preferences, role: 'engineering' })).map(
         (job) => job.id,
       ),
-    ).toEqual(['frontend-engineer']);
+    ).toEqual(['frontend-engineer', 'fullstack-developer']);
     expect(
       JOBS.filter((job) =>
         matchesPreferences(job, { ...preferences, role: 'engineering', exclusions: 'orbit' }),
-      ),
-    ).toEqual([]);
+      ).map((job) => job.id),
+    ).toEqual(['fullstack-developer']);
     expect(
       JOBS.filter((job) =>
         matchesPreferences(job, {
