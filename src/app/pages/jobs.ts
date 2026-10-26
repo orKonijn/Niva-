@@ -1,6 +1,7 @@
 import { matchesDistrict, normalizeSearch } from '../core/preferences';
 import { passesDiscovery } from '../core/discovery-filters';
 import { assessJob } from '../core/job-assessment';
+import { matchesDiscoverySearch } from '../core/discovery-ranking';
 import { SOURCES, JSEARCH_SOURCES } from '../core/source-registry';
 import { localDate } from '../core/local-date';
 import { PageHeading } from '../shared/page-heading';
@@ -41,6 +42,11 @@ export class Jobs {
     initialValue: this.route.snapshot.queryParamMap,
   });
   readonly query = computed(() => this.params().get('q') ?? '');
+  readonly sort = computed(
+    () =>
+      this.params().get('sort') ??
+      (this.store.preferences().role !== 'all' ? 'relevance' : 'source'),
+  );
   readonly sources = [...SOURCES, ...JSEARCH_SOURCES];
   readonly publisherFeeds = computed(() =>
     this.store.sourceHealth().filter((s) => s.id.startsWith('jsearch-')),
@@ -67,6 +73,7 @@ export class Jobs {
     ...Object.fromEntries(this.extraKeys.map((key) => [key, this.params().get(key) ?? ''])),
     unknownStyle: String(this.includeUnknownStyles()),
     scope: this.browseAll() ? 'all' : 'personal',
+    sort: this.sort(),
   }));
   readonly browseAll = computed(
     () =>
@@ -173,14 +180,13 @@ export class Jobs {
           (isWorkStyle(j.workStyle) && this.workStyles().includes(j.workStyle))) &&
         matchesDistrict(j, this.district()) &&
         (this.category() === 'all' || this.category() === j.category) &&
-        `${j.title} ${j.company} ${j.skills.join(' ')}`
-          .toLowerCase()
-          .includes(normalizeSearch(this.query())),
+        matchesDiscoverySearch(j, this.query(), this.params().get('related') === 'true'),
     ),
   );
   readonly filtered = computed(() => {
     const jobs = this.matching();
-    if (this.params().get('sort') !== 'relevance') return jobs;
+    if (this.store.catalogMode() === 'real' && this.store.session.config().discovery) return jobs;
+    if (this.sort() !== 'relevance') return jobs;
     const resume = this.career.active();
     if (!resume) return jobs;
     return [...jobs].sort((a, b) => {

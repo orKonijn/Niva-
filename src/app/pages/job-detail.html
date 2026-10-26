@@ -215,7 +215,7 @@
       class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
     >
       <h2>קצת על התפקיד</h2>
-      <niva-job-description [text]="job.description" />
+      <niva-job-description [text]="job.description" [sourceBlocks]="job.descriptionBlocks" />
       @if (!job.source) {
         <h3>מה מביאים לתפקיד?</h3>
         <div class="skills flex gap-[8px] flex-wrap">

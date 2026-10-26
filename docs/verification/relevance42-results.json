@@ -1,0 +1,733 @@
+{
+  "generatedAt": "2026-10-26T17:58:27.625Z",
+  "labelDigest": "66da6d0d114e01ffcd3988a0b43e48e6a52962dacc36d599df1333b3bb9f7bb6",
+  "method": "Single-analyst labelled synthetic diagnostic corpus. Precision counts grade1/2 roles without explicit eligibility blockers; unknown is not confirmed eligible. Heldout not used for tuning. Source-ID order is the actual previous ordering. Full-catalog order measured separately from explicit alias retrieval. Not market prevalence or hiring calibration.",
+  "results": [
+    {
+      "split": "development",
+      "n": 24,
+      "positive": 12,
+      "modes": [
+        {
+          "mode": "baseline-literal-source",
+          "candidateCount": 18,
+          "p10": {
+            "n": 10,
+            "relevant": 4,
+            "value": 0.4
+          },
+          "p20": {
+            "n": 18,
+            "relevant": 10,
+            "value": 0.5555555555555556
+          },
+          "recall": 0.8333333333333334,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 18,
+          "ids": [
+            "eval-03cd85040cf1",
+            "eval-0d1722016a26",
+            "eval-14d7d2fbbd81",
+            "eval-296c425104bb",
+            "eval-30c99662596f",
+            "eval-33e294549e34",
+            "eval-44d306a6db57",
+            "eval-4daeae834d34",
+            "eval-6a8af879d738",
+            "eval-76cae4925fc2",
+            "eval-79d7a5fa94f8",
+            "eval-7cedb05e2a6d",
+            "eval-a71568c4ec0e",
+            "eval-d1e37e4e5e52",
+            "eval-d913bda82379",
+            "eval-dd8c34ec90b4",
+            "eval-f4e2db45c3a0",
+            "eval-f6f33783d1f9"
+          ]
+        },
+        {
+          "mode": "same-pool-global-order",
+          "candidateCount": 18,
+          "p10": {
+            "n": 10,
+            "relevant": 10,
+            "value": 1
+          },
+          "p20": {
+            "n": 18,
+            "relevant": 10,
+            "value": 0.5555555555555556
+          },
+          "recall": 0.8333333333333334,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 18,
+          "ids": [
+            "eval-03cd85040cf1",
+            "eval-14d7d2fbbd81",
+            "eval-6a8af879d738",
+            "eval-79d7a5fa94f8",
+            "eval-a71568c4ec0e",
+            "eval-dd8c34ec90b4",
+            "eval-7cedb05e2a6d",
+            "eval-d1e37e4e5e52",
+            "eval-f4e2db45c3a0",
+            "eval-4daeae834d34",
+            "eval-296c425104bb",
+            "eval-33e294549e34",
+            "eval-44d306a6db57",
+            "eval-f6f33783d1f9",
+            "eval-0d1722016a26",
+            "eval-76cae4925fc2",
+            "eval-d913bda82379",
+            "eval-30c99662596f"
+          ]
+        },
+        {
+          "mode": "explicit-QA-alias-global-order",
+          "candidateCount": 12,
+          "p10": {
+            "n": 10,
+            "relevant": 10,
+            "value": 1
+          },
+          "p20": {
+            "n": 12,
+            "relevant": 12,
+            "value": 1
+          },
+          "recall": 1,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 12,
+          "ids": [
+            "eval-03cd85040cf1",
+            "eval-14d7d2fbbd81",
+            "eval-27d8690359f4",
+            "eval-6a8af879d738",
+            "eval-79d7a5fa94f8",
+            "eval-a71568c4ec0e",
+            "eval-dd8c34ec90b4",
+            "eval-f65d578f466c",
+            "eval-7cedb05e2a6d",
+            "eval-d1e37e4e5e52",
+            "eval-f4e2db45c3a0",
+            "eval-4daeae834d34"
+          ]
+        }
+      ],
+      "termCoverage": {
+        "n": 14,
+        "meanAbsolutePercentagePointError": 0,
+        "withheld": 10,
+        "legacyCompositeNotSameConstruct": true,
+        "rows": [
+          {
+            "id": "eval-dd8c34ec90b4",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-a71568c4ec0e",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-6a8af879d738",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-03cd85040cf1",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-14d7d2fbbd81",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-f65d578f466c",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-27d8690359f4",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-f4e2db45c3a0",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-d1e37e4e5e52",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-7cedb05e2a6d",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-4daeae834d34",
+            "label": 50,
+            "oldComposite": 43,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-79d7a5fa94f8",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-76cae4925fc2",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-0d1722016a26",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-44d306a6db57",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-30c99662596f",
+            "label": 100,
+            "oldComposite": 60,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-d913bda82379",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-296c425104bb",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-f6f33783d1f9",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-33e294549e34",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-2a9c7cc6cb18",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-02689a0a681c",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-c6b5aded7a26",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-e6ad8b28fcb9",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          }
+        ]
+      }
+    },
+    {
+      "split": "heldout",
+      "n": 48,
+      "positive": 24,
+      "modes": [
+        {
+          "mode": "baseline-literal-source",
+          "candidateCount": 37,
+          "p10": {
+            "n": 10,
+            "relevant": 8,
+            "value": 0.8
+          },
+          "p20": {
+            "n": 20,
+            "relevant": 14,
+            "value": 0.7
+          },
+          "recall": 0.9166666666666666,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 37,
+          "ids": [
+            "eval-049bfc753c8b",
+            "eval-065e164fbaa1",
+            "eval-0a358ba27520",
+            "eval-0cdad59496f4",
+            "eval-12a8c8dcbad0",
+            "eval-1a2f0cecf8f9",
+            "eval-1d12c5b2f28f",
+            "eval-211930cb8974",
+            "eval-21cdcd19c917",
+            "eval-3532e4d47b59",
+            "eval-3c831fbbe568",
+            "eval-3e069f236370",
+            "eval-4b1872514a0e",
+            "eval-5a9a8d4729df",
+            "eval-5fb20024977b",
+            "eval-65639a4598c8",
+            "eval-6f298509eba2",
+            "eval-76d6baaa1913",
+            "eval-83dbb222521a",
+            "eval-889e29ed03d7",
+            "eval-96a5265982f7",
+            "eval-9e5d26b1d2f5",
+            "eval-a16157f9e1fe",
+            "eval-a3bbb6853998",
+            "eval-b1d3bbec34cc",
+            "eval-b1ff4847d824",
+            "eval-b46e291a5c40",
+            "eval-b85afec1ddcf",
+            "eval-bca0bbf7a721",
+            "eval-c04544c5ed54",
+            "eval-c4015873bdb3",
+            "eval-cab5f24fb058",
+            "eval-ea9a3fdc04d7",
+            "eval-ec82d1f3b00f",
+            "eval-f2f3bfb8a58c",
+            "eval-f881d235a1cd",
+            "eval-fb6b62c2fc89"
+          ]
+        },
+        {
+          "mode": "same-pool-global-order",
+          "candidateCount": 37,
+          "p10": {
+            "n": 10,
+            "relevant": 10,
+            "value": 1
+          },
+          "p20": {
+            "n": 20,
+            "relevant": 20,
+            "value": 1
+          },
+          "recall": 0.9166666666666666,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 37,
+          "ids": [
+            "eval-049bfc753c8b",
+            "eval-3532e4d47b59",
+            "eval-6f298509eba2",
+            "eval-76d6baaa1913",
+            "eval-96a5265982f7",
+            "eval-9e5d26b1d2f5",
+            "eval-a16157f9e1fe",
+            "eval-b1d3bbec34cc",
+            "eval-ec82d1f3b00f",
+            "eval-f2f3bfb8a58c",
+            "eval-fb6b62c2fc89",
+            "eval-211930cb8974",
+            "eval-065e164fbaa1",
+            "eval-0a358ba27520",
+            "eval-1a2f0cecf8f9",
+            "eval-21cdcd19c917",
+            "eval-4b1872514a0e",
+            "eval-5a9a8d4729df",
+            "eval-cab5f24fb058",
+            "eval-1d12c5b2f28f",
+            "eval-5fb20024977b",
+            "eval-65639a4598c8",
+            "eval-b85afec1ddcf",
+            "eval-0cdad59496f4",
+            "eval-f881d235a1cd",
+            "eval-12a8c8dcbad0",
+            "eval-83dbb222521a",
+            "eval-889e29ed03d7",
+            "eval-b1ff4847d824",
+            "eval-3c831fbbe568",
+            "eval-c4015873bdb3",
+            "eval-3e069f236370",
+            "eval-a3bbb6853998",
+            "eval-bca0bbf7a721",
+            "eval-c04544c5ed54",
+            "eval-ea9a3fdc04d7",
+            "eval-b46e291a5c40"
+          ]
+        },
+        {
+          "mode": "explicit-QA-alias-global-order",
+          "candidateCount": 28,
+          "p10": {
+            "n": 10,
+            "relevant": 10,
+            "value": 1
+          },
+          "p20": {
+            "n": 20,
+            "relevant": 20,
+            "value": 1
+          },
+          "recall": 1,
+          "explicitBlockedReturned": 0,
+          "unknownEligibilityReturned": 28,
+          "ids": [
+            "eval-049bfc753c8b",
+            "eval-3532e4d47b59",
+            "eval-4d4a83de5bcf",
+            "eval-6f298509eba2",
+            "eval-76d6baaa1913",
+            "eval-96a5265982f7",
+            "eval-9e5d26b1d2f5",
+            "eval-a16157f9e1fe",
+            "eval-b1d3bbec34cc",
+            "eval-ec82d1f3b00f",
+            "eval-f2f3bfb8a58c",
+            "eval-fb6b62c2fc89",
+            "eval-211930cb8974",
+            "eval-352c990f3c5e",
+            "eval-065e164fbaa1",
+            "eval-0a358ba27520",
+            "eval-1a2f0cecf8f9",
+            "eval-21cdcd19c917",
+            "eval-4b1872514a0e",
+            "eval-5a9a8d4729df",
+            "eval-cab5f24fb058",
+            "eval-1d12c5b2f28f",
+            "eval-5fb20024977b",
+            "eval-65639a4598c8",
+            "eval-7fe9daec381a",
+            "eval-b85afec1ddcf",
+            "eval-0cdad59496f4",
+            "eval-f881d235a1cd"
+          ]
+        }
+      ],
+      "termCoverage": {
+        "n": 29,
+        "meanAbsolutePercentagePointError": 0,
+        "withheld": 19,
+        "legacyCompositeNotSameConstruct": true,
+        "rows": [
+          {
+            "id": "eval-211930cb8974",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-f2f3bfb8a58c",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-9e5d26b1d2f5",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-049bfc753c8b",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-fb6b62c2fc89",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-352c990f3c5e",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-4d4a83de5bcf",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-0a358ba27520",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-cab5f24fb058",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-4b1872514a0e",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-1d12c5b2f28f",
+            "label": 50,
+            "oldComposite": 43,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-a16157f9e1fe",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-b1d3bbec34cc",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-ec82d1f3b00f",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-3532e4d47b59",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-65639a4598c8",
+            "label": 100,
+            "oldComposite": 60,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-065e164fbaa1",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-1a2f0cecf8f9",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-5a9a8d4729df",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-76d6baaa1913",
+            "label": 50,
+            "oldComposite": 73,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-5fb20024977b",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-96a5265982f7",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-6f298509eba2",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-21cdcd19c917",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-bca0bbf7a721",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-b46e291a5c40",
+            "label": 50,
+            "oldComposite": 43,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-83dbb222521a",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-a3bbb6853998",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-ea9a3fdc04d7",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-889e29ed03d7",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-c4015873bdb3",
+            "label": 100,
+            "oldComposite": 60,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-b1ff4847d824",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-3e069f236370",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-c04544c5ed54",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-12a8c8dcbad0",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-3c831fbbe568",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-0cdad59496f4",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-b85afec1ddcf",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-f881d235a1cd",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-7fe9daec381a",
+            "label": 100,
+            "oldComposite": 90,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-1cc474ee2ab2",
+            "label": 50,
+            "oldComposite": 58,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-9ab59195c46f",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-b3cb28fadefb",
+            "label": 100,
+            "oldComposite": 75,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-21866cdeb618",
+            "label": 50,
+            "oldComposite": 43,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-d912754b88af",
+            "label": null,
+            "oldComposite": null,
+            "newTermCoverage": null
+          },
+          {
+            "id": "eval-3b6f5a2f26fa",
+            "label": 100,
+            "oldComposite": 60,
+            "newTermCoverage": 100
+          },
+          {
+            "id": "eval-3ae72dcf2f3a",
+            "label": 50,
+            "oldComposite": 43,
+            "newTermCoverage": 50
+          },
+          {
+            "id": "eval-59f27624b9ce",
+            "label": 0,
+            "oldComposite": null,
+            "newTermCoverage": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,634 @@
+{
+  "observedAt": "2026-10-26T17:56:11.050Z",
+  "n": 57,
+  "sourceQueries": [
+    {
+      "url": "https://getnivajobs.com/api/feed?scope=all&limit=50&q=Engineer",
+      "at": "2026-10-26T17:56:10.286Z",
+      "total": 873,
+      "n": 50
+    },
+    {
+      "url": "https://getnivajobs.com/api/feed?scope=all&limit=50&q=QA",
+      "at": "2026-10-26T17:56:11.050Z",
+      "total": 8,
+      "n": 8
+    }
+  ],
+  "method": "Purposive bounded sample: first50 public Engineer plus all available QA results. Not a full catalog evaluation or a random inventory estimate. QA lead/gaming/AI/Java qualifications remain unresolved. Grade>=1 is role relevance only; explicit blockers excluded separately.",
+  "labels": [
+    {
+      "id": "greenhouse-aidocmedical-4864312101",
+      "title": "Staff Software Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4871455101",
+      "title": "Principal Software Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4874306101",
+      "title": "AI Senior Software Engineer, ML Platform",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4876560101",
+      "title": "AI Staff Software Engineer, ML Platform   ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4882428101",
+      "title": "Principal Engineer - AI First Development Lead",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4889904101",
+      "title": "Senior Full Stack Engineer ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4897240101",
+      "title": "Analytics Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4902462101",
+      "title": "Senior DevOps Engineer ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4904239101",
+      "title": "Senior Data Engineer ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4905355101",
+      "title": "Technical Support Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "blocked"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4920094101",
+      "title": "Senior Security Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4920296101",
+      "title": "SecOps Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-4972430101",
+      "title": "Sales Engineer",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "blocked"
+    },
+    {
+      "id": "greenhouse-aidocmedical-5009493101",
+      "title": "Engineering Team Lead ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-5013115101",
+      "title": "AI Solution Engineer ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-aidocmedical-5013714101",
+      "title": "Information Delivery & Visualization Engineer   ",
+      "company": "Aidoc",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8394076002",
+      "title": "Application Security Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8469417002",
+      "title": "Software Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8474364002",
+      "title": "Senior Support Engineer ",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8535473002",
+      "title": "Senior Support Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8537441002",
+      "title": "Backend Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8557844002",
+      "title": "Backend Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8625988002",
+      "title": "Support Engineer ",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8687455002",
+      "title": "Support Engineer ",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8693284002",
+      "title": "Senior Data Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8695881002",
+      "title": "Security SDK Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8732659002",
+      "title": "Senior SW Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8781233002",
+      "title": "Senior Software Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8852064002",
+      "title": "Senior Software Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8869908002",
+      "title": "Senior Backend Engineer ",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8897823002",
+      "title": "Backend Software Engineer- 2938",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8899415002",
+      "title": "Senior Support Engineer",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8899639002",
+      "title": "Senior Backend Software Engineer - 2943",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8908247002",
+      "title": "Support Engineer (Korean Speaker)",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-appsflyer-8908249002",
+      "title": "Support Engineer (Bangkok Based)",
+      "company": "AppsFlyer",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "title": "QA & Automation Engineer",
+      "company": "Canopy",
+      "grade": 2,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-3851927",
+      "title": "Senior Software Engineer - Distributed Systems",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-3851935",
+      "title": "Senior Software Engineer ",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-4599111",
+      "title": "Senior Software Engineer - Distributed Systems",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-4599148",
+      "title": "Senior Software Engineer - Backend ",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-6430289",
+      "title": "Enterprise Sales Engineer",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-6703351",
+      "title": "Enterprise Sales Engineer",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-6759702",
+      "title": "Technical Support Engineer II",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-6761448",
+      "title": "Technical Support Engineer II",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-7107437",
+      "title": "Staff AI Engineer - Agent Observability",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-7194969",
+      "title": "AI Research Engineer - Datadog AI Research (DAIR)",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-7452669",
+      "title": "Commercial Sales Engineer - Boston",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-datadog-7487353",
+      "title": "Enterprise Sales Engineer - UK/Ireland",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "blocked"
+    },
+    {
+      "id": "greenhouse-datadog-7516279",
+      "title": "Senior Sales Engineer - Key Accounts",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "blocked"
+    },
+    {
+      "id": "greenhouse-datadog-7529852",
+      "title": "Manager I, Engineering - AI Platform - Training & Serving",
+      "company": "Datadog",
+      "grade": 0,
+      "reason": "Not a QA target role in this sample; independently inspected title and available requirements",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-transmitsecurity-8887486002",
+      "title": "QA & Automation Lead",
+      "company": "Transmit Security",
+      "grade": 1,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-unframe-4904270101",
+      "title": "QA Engineer",
+      "company": "Unframe",
+      "grade": 1,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "title": "AI-First QA Automation Engineer ",
+      "company": "Unframe",
+      "grade": 1,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "greenhouse-wedev-4652209101",
+      "title": "Junior QA Tester",
+      "company": "WeDev",
+      "grade": 0,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "jobicy-israel-qa-144408",
+      "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+      "company": "Side",
+      "grade": 0,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "jobicy-israel-qa-156544",
+      "title": "Manual QA Engineer (Game Client)",
+      "company": "Playson",
+      "grade": 1,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "title": "QA Automation Engineer - CDH",
+      "company": "Veeva",
+      "grade": 1,
+      "reason": "QA role/seniority judgment rechecked in original audit cohort; LQA language/gaming and junior role limitations retained",
+      "eligibility": "confirmation"
+    }
+  ],
+  "measures": [
+    {
+      "name": "baseline-literal-source",
+      "p10": {
+        "n": 10,
+        "relevant": 0,
+        "value": 0
+      },
+      "p20": {
+        "n": 20,
+        "relevant": 0,
+        "value": 0
+      },
+      "n": 50,
+      "ids": [
+        "greenhouse-aidocmedical-4864312101",
+        "greenhouse-aidocmedical-4871455101",
+        "greenhouse-aidocmedical-4874306101",
+        "greenhouse-aidocmedical-4876560101",
+        "greenhouse-aidocmedical-4882428101",
+        "greenhouse-aidocmedical-4889904101",
+        "greenhouse-aidocmedical-4897240101",
+        "greenhouse-aidocmedical-4902462101",
+        "greenhouse-aidocmedical-4904239101",
+        "greenhouse-aidocmedical-4920094101",
+        "greenhouse-aidocmedical-4920296101",
+        "greenhouse-aidocmedical-5009493101",
+        "greenhouse-aidocmedical-5013115101",
+        "greenhouse-aidocmedical-5013714101",
+        "greenhouse-appsflyer-8394076002",
+        "greenhouse-appsflyer-8469417002",
+        "greenhouse-appsflyer-8474364002",
+        "greenhouse-appsflyer-8535473002",
+        "greenhouse-appsflyer-8537441002",
+        "greenhouse-appsflyer-8557844002",
+        "greenhouse-appsflyer-8625988002",
+        "greenhouse-appsflyer-8687455002",
+        "greenhouse-appsflyer-8693284002",
+        "greenhouse-appsflyer-8695881002",
+        "greenhouse-appsflyer-8732659002",
+        "greenhouse-appsflyer-8781233002",
+        "greenhouse-appsflyer-8852064002",
+        "greenhouse-appsflyer-8869908002",
+        "greenhouse-appsflyer-8897823002",
+        "greenhouse-appsflyer-8899415002",
+        "greenhouse-appsflyer-8899639002",
+        "greenhouse-appsflyer-8908247002",
+        "greenhouse-appsflyer-8908249002",
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-datadog-3851927",
+        "greenhouse-datadog-3851935",
+        "greenhouse-datadog-4599111",
+        "greenhouse-datadog-4599148",
+        "greenhouse-datadog-6430289",
+        "greenhouse-datadog-6703351",
+        "greenhouse-datadog-6759702",
+        "greenhouse-datadog-6761448",
+        "greenhouse-datadog-7107437",
+        "greenhouse-datadog-7194969",
+        "greenhouse-datadog-7452669",
+        "greenhouse-datadog-7529852",
+        "greenhouse-unframe-4904270101",
+        "greenhouse-unframe-5003021101",
+        "jobicy-israel-qa-156544",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+      ]
+    },
+    {
+      "name": "same-pool-global-order",
+      "p10": {
+        "n": 10,
+        "relevant": 5,
+        "value": 0.5
+      },
+      "p20": {
+        "n": 20,
+        "relevant": 5,
+        "value": 0.25
+      },
+      "n": 50,
+      "ids": [
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-unframe-5003021101",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+        "greenhouse-unframe-4904270101",
+        "jobicy-israel-qa-156544",
+        "greenhouse-aidocmedical-4897240101",
+        "greenhouse-aidocmedical-4904239101",
+        "greenhouse-aidocmedical-4920094101",
+        "greenhouse-aidocmedical-4920296101",
+        "greenhouse-aidocmedical-5013714101",
+        "greenhouse-appsflyer-8394076002",
+        "greenhouse-appsflyer-8535473002",
+        "greenhouse-appsflyer-8693284002",
+        "greenhouse-appsflyer-8852064002",
+        "greenhouse-appsflyer-8897823002",
+        "greenhouse-appsflyer-8899639002",
+        "greenhouse-appsflyer-8469417002",
+        "greenhouse-appsflyer-8474364002",
+        "greenhouse-appsflyer-8537441002",
+        "greenhouse-appsflyer-8557844002",
+        "greenhouse-appsflyer-8625988002",
+        "greenhouse-appsflyer-8687455002",
+        "greenhouse-appsflyer-8695881002",
+        "greenhouse-appsflyer-8732659002",
+        "greenhouse-appsflyer-8781233002",
+        "greenhouse-appsflyer-8869908002",
+        "greenhouse-appsflyer-8899415002",
+        "greenhouse-appsflyer-8908247002",
+        "greenhouse-appsflyer-8908249002",
+        "greenhouse-datadog-3851927",
+        "greenhouse-datadog-3851935",
+        "greenhouse-datadog-4599111",
+        "greenhouse-datadog-4599148",
+        "greenhouse-datadog-6759702",
+        "greenhouse-datadog-6761448",
+        "greenhouse-datadog-7194969",
+        "greenhouse-aidocmedical-4874306101",
+        "greenhouse-aidocmedical-4902462101",
+        "greenhouse-aidocmedical-5009493101",
+        "greenhouse-aidocmedical-4889904101",
+        "greenhouse-datadog-7107437",
+        "greenhouse-datadog-7529852",
+        "greenhouse-aidocmedical-4864312101",
+        "greenhouse-aidocmedical-4871455101",
+        "greenhouse-aidocmedical-4876560101",
+        "greenhouse-aidocmedical-4882428101",
+        "greenhouse-aidocmedical-5013115101",
+        "greenhouse-datadog-6430289",
+        "greenhouse-datadog-6703351",
+        "greenhouse-datadog-7452669"
+      ]
+    },
+    {
+      "name": "explicit-QA-alias-global-order",
+      "p10": {
+        "n": 7,
+        "relevant": 6,
+        "value": 0.8571428571428571
+      },
+      "p20": {
+        "n": 7,
+        "relevant": 6,
+        "value": 0.8571428571428571
+      },
+      "n": 7,
+      "ids": [
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-unframe-5003021101",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+        "greenhouse-unframe-4904270101",
+        "greenhouse-transmitsecurity-8887486002",
+        "jobicy-israel-qa-156544",
+        "greenhouse-wedev-4652209101"
+      ]
+    }
+  ]
+}

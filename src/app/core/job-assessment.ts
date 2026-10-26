@@ -205,6 +205,11 @@ export function assessJob(
     method: FIT_VERSION,
     jobVersion: job.source?.version ?? 'unknown',
     score,
+    skillsScore:
+      confirmed && required.length >= 2
+        ? Math.round((matched.length / required.length) * 100)
+        : null,
+    skillsCoverage: { matched: matched.length, required: required.length },
     dimensions,
     knownWeight,
     completeness,

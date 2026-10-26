@@ -1,5 +1,7 @@
 # Niva
 
+The [focused repair and validation cycle](docs/repair-cycle-20261026.md) is **Unreleased, local only**. It addresses remaining description/freshness defects, evaluates QA retrieval and global ordering, and validates two disposable local accounts. No production deployment was performed. Hosted staging, operator and alert approval remain prerequisites; [secure local access and setup](docs/disposable-staging.md).
+
 The latest published release is **application0.2.1 / Sites41**, published26 October2026 at [getnivajobs.com](https://getnivajobs.com). See the [changelog](CHANGELOG.md) and [publication/live verification receipt](docs/verification/publication-20261026-v41.json). The audit repairs recover explicit work arrangements, separate mandatory skills from responsibilities, preserve salary evidence and readable descriptions, explain confirmed eligibility and put search first on mobile. The follow-up patch keeps the results shortcut on the current search.
 
 The [complete audit tracker](docs/job-finding-audit-20261026.md) retains every finding and its limits. The PDF/DOCX reports preserve the earlier local-review scope; publication is established by the separate receipts. Discovery combines24 selected Greenhouse/Lever/Jobicy sources with configuration-gated LinkedIn/Indeed feeds through JSearch. Coverage remains partial, with shared daily publisher samples. Cleanup/alert, identity/restore and human device verification gaps remain documented in [current status](docs/current-status.md).

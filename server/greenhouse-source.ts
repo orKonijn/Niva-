@@ -4,6 +4,7 @@ import { classify, normalizeFeed, plainText } from './job-feed';
 import type { JobSource } from './job-sources';
 import { enrichJob } from './job-facts';
 import { sourceEvidence } from './source-evidence';
+import { descriptionBlocks } from './description-blocks';
 const text = (v: unknown) => (typeof v === 'string' ? v : '');
 const cities: { pattern: RegExp; city: string; district: District; lat: number; lng: number }[] = [
   {
@@ -107,6 +108,7 @@ export function normalizeGreenhouse(
       workStyle: /\bremote\b/i.test(location) ? 'remote' : 'unknown',
       posted: `עודכן במקור: ${updated.slice(0, 10)}`,
       description: content || 'תיאור המשרה המלא זמין בקישור המקורי באתר המעסיק.',
+      descriptionBlocks: descriptionBlocks(row['content']),
       skills: [],
       reason: `מקור: ${source.name}. סיווג תחום לפי כותרת התפקיד; הסבר התאמה מוצג בנפרד.`,
       offices: found.map((c) => ({

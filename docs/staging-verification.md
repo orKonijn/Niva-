@@ -2,6 +2,8 @@
 
 ## Current scope — 26 October 2026
 
+Focused follow-up: [isolated local staging is prepared](disposable-staging.md), with two real local verified-email accounts, actual PDF/DOCX onboarding and save/isolation checks, two accelerated timer cleanup cycles and separate SQLite restoration. See [repair results](repair-cycle-20261026.md). This is not hosted staging evidence. No approved separate staging URL/D1 binding or accountable operator exists; external alert delivery is disabled pending receiver approval.
+
 Latest publication: **application0.2.1 / Sites41**. [Publication/live receipt](verification/publication-20261026-v41.json). The audit and navigation repairs are published; the external operational gates below remain unverified. The earlier milestones below remain historical. Selected global discovery includes 24 core employer/Jobicy sources plus two configuration-gated JSearch publisher feeds. JSearch provides partial daily LinkedIn/Indeed samples, not exhaustive live searches. PDF/DOCX text extraction works in the browser; original files stay on device on this path. Reviewed text is saved privately for 30 days. Server upload scanning, AI and email remain configuration-gated/inactive; they are distinct from local parsing. The enabled hourly public-source refresh is not evidence of private retention cleanup. Two recurring private cleanup cycles, an accountable operator, approved alert delivery, independent hosted identity isolation and backup restoration remain unverified. See [current status](current-status.md) and the [local repair report and staging procedure](review-repairs-20261026.md).
 
 ## Historical implementation and prepared procedures

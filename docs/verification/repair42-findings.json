@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-26",
+  "scope": "Focused repair; original audit IDs preserved; local evidence is not hosted evidence",
+  "findings": [
+    {
+      "id": "B03",
+      "reported": "Arbitrary source h2 headings became paragraphs",
+      "implemented": "Inert bounded HTML parsing retains heading/list structure",
+      "independentlyVerified": "Public Canopy source sections are actual h3; nested ordered/unordered and hostile bilingual fixtures pass",
+      "status": "Fixed locally",
+      "remaining": "Old cached plain text needs successful upstream refresh; no deployment"
+    },
+    {
+      "id": "F12",
+      "reported": "Description semantics incomplete",
+      "implemented": "Safe recursive source blocks with semantic headings",
+      "independentlyVerified": "Desktop/mobile, light/dark structure tests and actual local IAB inspection",
+      "status": "Fixed locally",
+      "remaining": "Not deployed"
+    },
+    {
+      "id": "N01",
+      "reported": "Oldest successful check labelled last check",
+      "implemented": "Separate oldest/newest success from latest attempt",
+      "independentlyVerified": "Two successes on 25 and 26 Oct plus later failed attempt; expected dates all distinct",
+      "status": "Fixed locally",
+      "remaining": "Not deployed"
+    },
+    {
+      "id": "F14",
+      "reported": "Freshness summary misleading",
+      "implemented": "Never-successful sources and truthful legacy fallback",
+      "independentlyVerified": "Source-health regression and four browser cases show distinct labelled dates",
+      "status": "Fixed locally",
+      "remaining": "Not deployed"
+    },
+    {
+      "id": "F08",
+      "reported": "Ordering only loaded cards hides later matches",
+      "implemented": "Server orders filtered catalog before pagination",
+      "independentlyVerified": "20 QA roles after 60 Sales roles appear first; two cursor pages unique; cursor invalidates on sort change",
+      "status": "Fixed locally",
+      "remaining": "Field latency and entire live catalog relevance untested; no deployment"
+    },
+    {
+      "id": "F01",
+      "reported": "Only 6/20 useful roles in prior cohort",
+      "implemented": "Evidence ranking and explicit QA alias retrieval",
+      "independentlyVerified": "Held-out 48 and fresh 57 paired comparisons improve role relevance",
+      "status": "Partially fixed",
+      "remaining": "Fresh broad first 10 still only 5 useful; role family and inventory coverage remain limited"
+    },
+    {
+      "id": "F11",
+      "reported": "No empirical numeric-fit calibration",
+      "implemented": "Replace composite headline with extracted-term coverage",
+      "independentlyVerified": "29/48 held-out cases scored with 0 pp error on simple term labels; 19 withheld",
+      "status": "Partially fixed",
+      "remaining": "No hiring/professional-fit probability calibration; dictionary completeness unproven"
+    },
+    {
+      "id": "F15",
+      "reported": "Live logged redirect untested",
+      "implemented": "Unknown click availability explicitly logged",
+      "independentlyVerified": "Actual local 303 to Canopy vacancy; one metadata-only event; no employer request",
+      "status": "Partially fixed",
+      "remaining": "Hosted redirect/session logging untested; local fixture does not establish vacancy open"
+    },
+    {
+      "id": "F16",
+      "reported": "Hosted persistence and independent owner isolation untested",
+      "implemented": "Prepared two actual local accounts",
+      "independentlyVerified": "Save/unsave/reload and separate Alice session; Bob export of Alice r\u00e9sum\u00e9 404",
+      "status": "Partially fixed",
+      "remaining": "Separate hosted staging identity and D1 unavailable"
+    },
+    {
+      "id": "F18",
+      "reported": "Hosted first-time onboarding untested",
+      "implemented": "Actual local sign-up/verification and setup gates",
+      "independentlyVerified": "Two sign-ups 200 and verification 302; CV then preferences then workspace",
+      "status": "Partially fixed",
+      "remaining": "Hosted OAuth/identity and separate-origin checks remain untested"
+    },
+    {
+      "id": "F19",
+      "reported": "Hosted r\u00e9sum\u00e9 upload path untested",
+      "implemented": "Actual local PDF/DOCX parsing and review flow",
+      "independentlyVerified": "Both valid formats parse; zero stored r\u00e9sum\u00e9s before explicit confirmation",
+      "status": "Partially fixed",
+      "remaining": "Hosted flow untested; remote scanner unavailable; bytes stay on device"
+    },
+    {
+      "id": "S02",
+      "reported": "Operator cleanup alerts and restore unverified",
+      "implemented": "Safe staging preparation; alert delivery off",
+      "independentlyVerified": "Two actual local accelerated timer cycles; deletion/pointers; separate restore; injected failure detected",
+      "status": "Partially fixed",
+      "remaining": "No hosted scheduled delivery, D1 restore, approved receiver or accountable operator"
+    },
+    {
+      "id": "F17",
+      "reported": "Optional job hiding and tracking absent",
+      "implemented": "Deferred per current user instruction",
+      "independentlyVerified": "No new implementation or acceptance claim",
+      "status": "Deferred",
+      "remaining": "Resume only after core journey and operational gates"
+    },
+    {
+      "id": "N02",
+      "reported": "Newly observed omitted unknown availability in apply log",
+      "implemented": "Log unknown/unverified explicitly",
+      "independentlyVerified": "Real local journey initially failed, repair applied, complete rerun passed",
+      "status": "Fixed locally",
+      "remaining": "Hosted log path untested; introduced-by version not established"
+    }
+  ],
+  "counts": {
+    "Fixed locally": 6,
+    "Partially fixed": 7,
+    "Deferred": 1
+  },
+  "carryForwardNotReaudited": [
+    {
+      "id": "B01",
+      "issue": "Explicit hybrid and onsite arrangements omitted",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "B02",
+      "issue": "Collaboration becomes Product Management skill gap",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "B04",
+      "issue": "Salary absent despite four monetary ranges",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "S01",
+      "issue": "Citizenship and local rights omitted suspected",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "S03",
+      "issue": "Optional skills years JavaScript and source facts suspected",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F02",
+      "issue": "Eligibility",
+      "priorVerdict": "Partially passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F03",
+      "issue": "Search",
+      "priorVerdict": "Partially passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F04",
+      "issue": "District filter",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F05",
+      "issue": "Work style filter",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F06",
+      "issue": "Country and missing data",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F07",
+      "issue": "Salary and seniority filters",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F09",
+      "issue": "Pagination",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F10",
+      "issue": "Match explanations",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F13",
+      "issue": "Data completeness",
+      "priorVerdict": "Partially passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F20",
+      "issue": "Mobile layout",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F21",
+      "issue": "Usability",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F22",
+      "issue": "Accessibility spot checks",
+      "priorVerdict": "Partially passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F23",
+      "issue": "Performance benchmark",
+      "priorVerdict": "Blocked / not tested",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F24",
+      "issue": "Empty and recovery states",
+      "priorVerdict": "Passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F25",
+      "issue": "Errors and outages",
+      "priorVerdict": "Partially passed",
+      "currentStatus": "Not reaudited in focused cycle"
+    },
+    {
+      "id": "F26",
+      "issue": "AI assistant",
+      "priorVerdict": "Blocked / not tested",
+      "currentStatus": "Not reaudited in focused cycle"
+    }
+  ]
+}

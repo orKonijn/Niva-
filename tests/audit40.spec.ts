@@ -150,7 +150,9 @@ for (const theme of ['light', 'dark'] as const)
       if (!before)
         await expect(page.locator('niva-job-card')).toContainText('149000–198000 USD / שנה');
       await page.goto('/app/jobs/greenhouse-jfrog-8185306');
-      await expect(page.getByRole('heading', { name: /Senior Solution Engineer/ })).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name: /Senior Solution Engineer/, level: 1 }),
+      ).toBeVisible();
       await page.locator('niva-match-indicator summary').click();
       await shot('eligibility', 'niva-match-indicator');
       if (!before) await expect(page.locator('niva-match-indicator')).toContainText('אזרחות US');

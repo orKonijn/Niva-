@@ -11,6 +11,9 @@ import type { CareerDb } from './career-db';
 import { plainText, classify } from './job-feed';
 import { SOURCES, type JobSource } from './job-sources';
 import { normalizeGreenhouse } from './greenhouse-source';
+import { recordSourceAttempt, sourceFreshness } from './source-health';
+import { descriptionBlocks } from './description-blocks';
+import { discoveryRank, relatedQaQuery } from '../src/app/core/discovery-ranking';
 export { SOURCES } from './job-sources';
 import type { Job } from '../src/app/core/models/job';
 import {
@@ -100,6 +103,15 @@ ${plainText(l['content'])}`,
               : []),
           ].join('\n'),
         ),
+        descriptionBlocks: [
+          ...descriptionBlocks(row['description'] ?? row['descriptionPlain']),
+          ...(Array.isArray(row['lists'])
+            ? row['lists'].flatMap((l: Record<string, unknown>) => [
+                { kind: 'heading' as const, level: 2, text: plainText(l['text']) },
+                ...descriptionBlocks(l['content']),
+              ])
+            : []),
+        ],
         posted: published ? `פורסם: ${published.slice(0, 10)}` : 'מועד הפרסום לא נמסר',
         skills: [],
         offices: [],
@@ -199,6 +211,7 @@ export async function ingest(
       }
       return;
     }
+    await recordSourceAttempt(db, source.id, now);
     try {
       const response = await fetch(source.url, {
         headers: { Accept: 'application/json' },
@@ -458,6 +471,7 @@ export async function catalogJob(db: CareerDb, id: string): Promise<Job | undefi
   return job;
 }
 export interface FeedQuery extends DiscoveryFilters {
+  sort?: string;
   q?: string;
   category?: string;
   district?: string;
@@ -483,11 +497,12 @@ export async function discoveryPage(
   const health = await db.all<{
     id: string;
     checked_at: string | null;
+    attempted_at: string | null;
     error: string | null;
     next_at: number;
     partial: number;
   }>(
-    "SELECT id,checked_at,error,next_at,coalesce((SELECT json_extract(data,'$.partial') FROM niva_documents WHERE owner='system' AND kind='source-window' AND niva_documents.id=niva_sources.id),0) AS partial FROM niva_sources ORDER BY id",
+    "SELECT id,checked_at,(SELECT json_extract(data,'$.attemptedAt') FROM niva_documents WHERE owner='system' AND kind='source-attempt' AND niva_documents.id=niva_sources.id) AS attempted_at,error,next_at,coalesce((SELECT json_extract(data,'$.partial') FROM niva_documents WHERE owner='system' AND kind='source-window' AND niva_documents.id=niva_sources.id),0) AS partial FROM niva_sources ORDER BY id",
   );
   const snapshot = versionOf(await db.all('SELECT id,version,active FROM niva_jobs ORDER BY id'));
   const filterKey = versionOf([
@@ -515,6 +530,7 @@ export async function discoveryPage(
     query.area,
     query.related,
     query.location,
+    query.sort,
     preferences,
     query.saved ? saved : [],
   ]);
@@ -594,7 +610,13 @@ export async function discoveryPage(
       "instr(lower(coalesce(json_extract(data,'$.source.location'),'')),?)>0",
       query.location.toLowerCase().slice(0, 200),
     );
-  if (normalizeSearch(query.q)) add('instr(search,?)>0', normalizeSearch(query.q));
+  if (normalizeSearch(query.q)) {
+    if (query.related === 'true' && relatedQaQuery(query.q!)) {
+      clauses.push(
+        "(category IN ('qa-manual','qa-automation') OR instr(title,'sdet')>0 OR instr(title,'in test')>0)",
+      );
+    } else add('instr(search,?)>0', normalizeSearch(query.q));
+  }
   if (query.saved === 'true') {
     clauses[0] = '1=1';
     clauses.push(`id IN (${saved.length ? saved.map(() => '?').join(',') : 'NULL'})`);
@@ -604,7 +626,16 @@ export async function discoveryPage(
   const where = clauses.join(' AND ');
   const ranked = `WITH eligible AS (SELECT id,canonical,active FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
   const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
-  const page: { id: string }[] = [];
+  const page: { id: string; rank: number }[] = [];
+  const relevance = query.sort === 'relevance';
+  const compare = (a: { id: string; rank: number }, b: { id: string; rank: number }) =>
+    b.rank - a.rank || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  let afterRank = 0;
+  if (after && relevance) {
+    const previous = await catalogJob(db, after);
+    if (!previous) throw Error('CURSOR_EXPIRED');
+    afterRank = discoveryRank(previous, query.q ?? '', preferences, criteria).rank;
+  }
   let count = 0,
     matchingAfter = 0,
     scan = '';
@@ -612,7 +643,7 @@ export async function discoveryPage(
     // Evidence prose is needed by selected cards, not eligibility filtering.
     // Keep canonical ranking identical and bound intermediate row residency.
     const candidates = await db.all<{ id: string; data: string; active: number }>(
-      `${ranked} SELECT j.id,json_remove(j.data,'$.description','$.facts.requiredSkills','$.facts.preferredSkills','$.facts.responsibilities','$.facts.workArrangements','$.facts.salaryText') AS data,j.active FROM ranked r JOIN niva_jobs j ON j.id=r.id WHERE r.representative=1 AND r.id>? ORDER BY r.id LIMIT 128`,
+      `${ranked} SELECT j.id,json_remove(j.data,'$.description','$.descriptionBlocks','$.facts.requiredSkills','$.facts.preferredSkills','$.facts.responsibilities','$.facts.workArrangements','$.facts.salaryText') AS data,j.active FROM ranked r JOIN niva_jobs j ON j.id=r.id WHERE r.representative=1 AND r.id>? ORDER BY r.id LIMIT 128`,
       ...args,
       scan,
     );
@@ -624,9 +655,19 @@ export async function discoveryPage(
         job.source!.availability = 'closed';
       if (query.saved === 'true' || passesDiscovery(job, query, preferences, criteria)) {
         count++;
-        if (job.id > after) {
+        const rank = relevance ? discoveryRank(job, query.q ?? '', preferences, criteria).rank : 0;
+        if (
+          !after ||
+          (relevance
+            ? compare({ id: job.id, rank }, { id: after, rank: afterRank }) > 0
+            : job.id > after)
+        ) {
           matchingAfter++;
-          if (page.length < limit) page.push({ id: job.id });
+          if (relevance) {
+            page.push({ id: job.id, rank });
+            page.sort(compare);
+            if (page.length > limit) page.pop();
+          } else if (page.length < limit) page.push({ id: job.id, rank });
         }
       }
     }
@@ -649,6 +690,7 @@ export async function discoveryPage(
         return job;
       })
     : [];
+  jobs.sort((a, b) => page.findIndex((r) => r.id === a.id) - page.findIndex((r) => r.id === b.id));
   const canonicals = [...new Set(jobs.map((j) => canonicalJobUrl(j.source!.applicationUrl)))];
   const references = canonicals.length
     ? await db.all<{ canonical: string; name: string; url: string }>(
@@ -696,12 +738,17 @@ export async function discoveryPage(
       ? `${payload}.${createHmac('sha256', secret).update(payload).digest('hex')}`
       : null,
     snapshot,
+    ranking: {
+      mode: relevance ? 'catalog' : 'source',
+      version: relevance ? 'discovery-evidence-v1' : null,
+    },
     health: health.map((h) => ({
       ...h,
       partial: !!h.partial,
       name: [...SOURCES, ...JSEARCH_SOURCES].find((s) => s.id === h.id)?.name ?? h.id,
     })),
-    fetchedAt: health.map((x) => x.checked_at ?? '').sort()[0] ?? '',
+    freshness: sourceFreshness(health),
+    fetchedAt: sourceFreshness(health).newestSuccessfulAt ?? '',
     stale: health.some(
       (h) =>
         !!h.error ||

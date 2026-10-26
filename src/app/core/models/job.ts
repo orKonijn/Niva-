@@ -1,4 +1,8 @@
 import { Category, District, WorkStyle } from '../preferences';
+export type DescriptionBlock =
+  | { kind: 'heading'; level: number; text: string }
+  | { kind: 'paragraph'; text: string }
+  | { kind: 'list'; ordered: boolean; items: DescriptionBlock[][] };
 export interface JobLocation {
   id: string;
   country: 'IL';
@@ -26,6 +30,7 @@ export interface Job {
   category: Category | 'other';
   posted: string;
   description: string;
+  descriptionBlocks?: DescriptionBlock[];
   skills: string[];
   reason: string;
   offices: JobLocation[];

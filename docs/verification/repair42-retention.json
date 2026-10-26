@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-26T18:09:18.270Z",
+  "environment": "Disposable local Node SQLite; two real timer deliveries at accelerated 1.1-second cadence",
+  "cycles": [
+    {
+      "cycle": 1,
+      "started": "2026-10-26T18:09:17.101Z",
+      "completed": "2026-10-26T18:09:17.110Z",
+      "expiredReadDenied": true,
+      "physicallyRemoved": 1,
+      "activePointerCleared": true
+    },
+    {
+      "cycle": 2,
+      "started": "2026-10-26T18:09:18.227Z",
+      "completed": "2026-10-26T18:09:18.235Z",
+      "expiredReadDenied": true,
+      "physicallyRemoved": 1,
+      "activePointerCleared": true
+    }
+  ],
+  "restore": {
+    "separateTarget": true,
+    "sourceRetained": true,
+    "accountOwners": 2,
+    "crossOwnerLeakCount": 0,
+    "brokenActivePointers": 0,
+    "expiredProbeRecordsRestored": 0
+  },
+  "failure": {
+    "recorded": true,
+    "detectedByWatchdog": true,
+    "externalDeliveryEnabled": false,
+    "actualAlertSent": false,
+    "transport": "Injected disabled receiver; no external network request"
+  },
+  "hostedSchedulerVerified": false,
+  "cloudflareD1Verified": false,
+  "operator": "unassigned",
+  "approvedReceiver": null,
+  "productionEvidence": false
+}

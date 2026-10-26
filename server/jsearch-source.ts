@@ -1,4 +1,6 @@
 import { createHash } from 'node:crypto';
+import { descriptionBlocks } from './description-blocks';
+import { recordSourceAttempt } from './source-health';
 import type { Job } from '../src/app/core/models/job';
 import { JSEARCH_SOURCES, trustedPublisherUrl } from '../src/app/core/source-registry';
 import { plainText, classify } from './job-feed';
@@ -75,6 +77,7 @@ export function normalizeJsearch(payload: unknown, publisher: string, at: string
               ? 'remote'
               : 'unknown',
       description: plainText(row['job_description']),
+      descriptionBlocks: descriptionBlocks(row['job_description']),
       skills: [],
       offices: [],
       posted: published ? `פורסם: ${published.slice(0, 10)}` : 'מועד הפרסום לא נמסר',
@@ -146,6 +149,7 @@ export async function ingestJsearch(
         now,
       );
       if (!lease.length) return;
+      await recordSourceAttempt(db, source.id, now);
       try {
         const pages = await Promise.all(
           markets.map(async (market) => {

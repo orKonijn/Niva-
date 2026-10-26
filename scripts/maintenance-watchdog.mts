@@ -16,6 +16,7 @@ if (process.argv.includes('--plan')) {
         intervalMinutes: 5,
         independentOfAppScheduler: true,
         hostedDelivery: 'unverified',
+        deliveryEnabled: process.env['NIVA_ALERT_DELIVERY_ENABLED'] === '1',
         sideEffects: false,
       },
       null,
@@ -28,6 +29,8 @@ if (process.argv[2] !== '--run')
   throw new Error(
     'Use --plan, or configure an approved operator endpoint and explicitly use --run',
   );
+if (process.env['NIVA_ALERT_DELIVERY_ENABLED'] !== '1')
+  throw new Error('ALERT_DELIVERY_DISABLED_REQUIRES_APPROVED_RECEIVER');
 if (names.some((n) => !process.env[n])) throw new Error('MISSING_WATCHDOG_CONFIGURATION');
 const file = resolve(process.env['NIVA_WATCHDOG_STATE'] ?? '.data/operator-watchdog.json');
 let previous: WatchdogState = {};

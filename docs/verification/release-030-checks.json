@@ -1,0 +1,31 @@
+{
+  "applicationVersion": "0.3.0",
+  "checkedAt": "2026-10-26T18:33:07.473829+00:00",
+  "frontend": 59,
+  "server": 158,
+  "browser": {
+    "uniqueCases": 222,
+    "initialPassed": 221,
+    "initialFailed": 1,
+    "failure": "Chromium net::ERR_NO_BUFFER_SPACE while fetching lazy module; no application assertion evaluated after bootstrap failure",
+    "focusedRecoveryPassed": 2,
+    "recoveryFailed": 0,
+    "skipped": 0
+  },
+  "actualLocalStagingJourney": "passed; two synthetic accounts; real local authentication/state/CV backend",
+  "worker": 1,
+  "provenance": 1,
+  "typeChecks": 3,
+  "build": "passed",
+  "format": "passed",
+  "hostedStaging": "unavailable; no separate origin/D1/identity registrations",
+  "operator": "unassigned",
+  "approvedAlertReceiver": null,
+  "externalAlertsEnabled": false,
+  "productionWritesInValidation": false,
+  "releaseAuthorization": "User explicitly requested commit, push and production deployment on26 October2026",
+  "limitations": [
+    "Hosted identity, private cleanup scheduling, real alert receipt and D1 restore remain unverified.",
+    "No professional-fit probability calibration, physical phone or real employer submission."
+  ]
+}

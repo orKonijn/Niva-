@@ -2,7 +2,32 @@
 
 ## Unreleased
 
-No unreleased changes.
+No changes recorded.
+
+## 0.3.0 — 2026-10-26
+
+Release candidate; production deployment pending verification. Compatible discovery capabilities and repairs; no account-data migration. Existing flattened description caches acquire source headings after the next successful provider refresh.
+
+### Added
+
+- Rank all filtered vacancies before pagination, using the selected role, location and confirmed experience. QA title expansion is explicit; literal searching and source ordering remain available. Ranking is separate from eligibility and the displayed skills-evidence measure. [Evaluation definitions and results](docs/repair-cycle-20261026.md).
+- Prepare isolated loopback staging with two synthetic verified accounts, local-only verification mail, PDF/DOCX fixtures and an independent-session journey. No hosted staging deployment or production writes are performed. Alert delivery remains disabled pending an approved receiver and accountable operator.
+
+### Fixed
+
+- Preserve provider heading boundaries, relative heading roles, ordered/nested lists and safe text instead of recognizing only a fixed list of heading names. Existing flattened caches retain text/list fallback; source headings require the next successful provider refresh.
+- Label the oldest and newest **successful** source checks separately, and retain attempted checks without presenting failure as success. Oldest successful dates no longer appear under a latest-check label.
+- Record unknown vacancy availability and unverified application paths explicitly in local application-click events. Opening a vacancy still does not submit an application.
+
+### Changed
+
+- Show coverage of explicitly extracted skill terms rather than an uncalibrated overall match total. Unknown requirements, eligibility and freshness remain separate. The legacy composite API field is retained for compatibility and is not used for catalog ordering or presented as a hiring probability.
+
+### Known issues
+
+- Hosted two-account staging, recurring private cleanup, D1 restoration and external alert receipt remain unverified. No separate staging origin, accountable operator or approved receiver is configured; alert delivery stays disabled.
+- Relevance gains are bounded: the fresh same-pool first10 improved from0/10 to5/10 useful roles; QA-alias retrieval returned6 useful among7 candidates. Unknown eligibility is not confirmed eligibility. Global-ordering field latency and professional-fit calibration remain unverified.
+- F17 optional job hiding/tracking remains deferred. AI and remote scanning remain configuration-gated.
 
 ## 0.2.1 — 2026-10-26
 

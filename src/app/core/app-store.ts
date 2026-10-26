@@ -61,6 +61,12 @@ export class AppStore {
     this.markListingsInitialized = resolve;
   });
   readonly feedCheckedAt = signal('');
+  readonly feedFreshness = signal<{
+    oldestSuccessfulAt: string | null;
+    newestSuccessfulAt: string | null;
+    newestAttemptedAt: string | null;
+    neverSucceededCount: number;
+  } | null>(null);
   readonly feedStale = signal(false);
   readonly coverage = signal<{ category: string; district: string; style: string; n: number }[]>(
     [],
@@ -73,6 +79,7 @@ export class AppStore {
       id: string;
       name?: string;
       checked_at: string | null;
+      attempted_at?: string | null;
       error: string | null;
       next_at: number;
       partial?: boolean;
@@ -186,6 +193,12 @@ export class AppStore {
         jobs: Job[];
         archived?: Job[];
         fetchedAt: string;
+        freshness?: {
+          oldestSuccessfulAt: string | null;
+          newestSuccessfulAt: string | null;
+          newestAttemptedAt: string | null;
+          neverSucceededCount: number;
+        };
         stale: boolean;
         total?: number;
         coverage?: { category: string; district: string; style: string; n: number }[];
@@ -195,6 +208,7 @@ export class AppStore {
           id: string;
           name?: string;
           checked_at: string | null;
+          attempted_at?: string | null;
           error: string | null;
           next_at: number;
           partial?: boolean;
@@ -224,6 +238,7 @@ export class AppStore {
         ...new Map([...resolved, ...(feed.archived ?? [])].map((job) => [job.id, job])).values(),
       ]);
       this.feedCheckedAt.set(feed.fetchedAt);
+      this.feedFreshness.set(feed.freshness ?? null);
       this.feedStale.set(feed.stale);
       this.feedTotal.set(feed.total ?? feed.jobs.length);
       this.coverage.set(feed.coverage ?? []);
@@ -390,6 +405,9 @@ export class AppStore {
         this.realJobs.set([]);
         this.nextCursor.set(null);
         this.feedTotal.set(0);
+        this.feedCheckedAt.set('');
+        this.feedFreshness.set(null);
+        this.sourceHealth.set([]);
         this.feedPreferenceKey = '';
         this.jobsLoading.set(false);
         this.accountReady.set(false);

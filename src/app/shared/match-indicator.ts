@@ -12,12 +12,17 @@ import { CareerStore } from '../core/career-store';
   template: ` <details class="match-panel">
     <summary>
       {{
-        assessment().score === null
-          ? 'אין מספיק מידע לציון התאמה'
-          : 'התאמה: ' + assessment().score + ' / 100'
+        assessment().skillsScore === null
+          ? 'אין מספיק מידע למדד כישורים'
+          : 'כיסוי מונחי כישורים: ' + assessment().skillsScore + '%'
       }}
       · {{ eligibilityLabel(assessment().eligibility) }}
     </summary>
+    <p>
+      כיסוי עדות למונחים שחולצו: {{ assessment().skillsCoverage.matched }} מתוך
+      {{ assessment().skillsCoverage.required }}. זה אינו ציון כולל להתאמה או הסתברות לקבלה; דרישות
+      שלא חולצו נשארות לבדיקה.
+    </p>
     <p>
       שלמות נתוני המשרה: {{ assessment().completeness }}% · ביטחון בעדות:
       {{ assessment().confidence }} · מידע בר־השוואה: {{ assessment().knownWeight }}/100

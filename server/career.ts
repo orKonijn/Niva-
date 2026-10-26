@@ -226,8 +226,8 @@ export function createCareer(deps: CareerDependencies) {
       JSON.stringify({
         jobId: job.id,
         at: new Date().toISOString(),
-        availability: checked.source?.availability,
-        path: checked.source?.applicationCheck?.status,
+        availability: checked.source?.availability ?? 'unknown',
+        path: checked.source?.applicationCheck?.status ?? 'unverified',
       }),
       Date.now() + 30 * 86400000,
     );

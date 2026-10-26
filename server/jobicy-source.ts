@@ -1,4 +1,5 @@
 import { enrichJob } from './job-facts';
+import { descriptionBlocks } from './description-blocks';
 import type { Job } from '../src/app/core/models/job';
 import { trustedJobUrl } from './job-sources';
 import { classify, plainText } from './job-feed';
@@ -39,6 +40,7 @@ export function normalizeJobicy(payload: unknown, at: string): Job[] {
       district: 'unknown',
       workStyle: 'remote',
       description: plainText(row['jobDescription']),
+      descriptionBlocks: descriptionBlocks(row['jobDescription']),
       skills: [],
       offices: [],
       posted: published ? `פורסם: ${published.slice(0, 10)}` : 'מועד הפרסום לא נמסר',

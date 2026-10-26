@@ -118,6 +118,13 @@
         {{ title }}
       </button>
     }
+    <button
+      class="account-button"
+      [attr.aria-pressed]="params().get('related') === 'true'"
+      (click)="setFilter({ related: params().get('related') === 'true' ? null : 'true' })"
+    >
+      כולל כותרות QA דומות
+    </button>
   </div>
 }
 <details class="account-panel mb-4">
@@ -320,16 +327,15 @@
 </div>
 @if (store.catalogMode() === 'real') {
   <label class="career-field"
-    >מיון התוצאות שנטענו<select
-      [ngModel]="params().get('sort') || 'source'"
-      (ngModelChange)="setFilter({ sort: $event === 'source' ? null : $event })"
-    >
+    >מיון המשרות<select [ngModel]="sort()" (ngModelChange)="setFilter({ sort: $event })">
       <option value="source">סדר המאגר</option>
-      <option value="relevance" [disabled]="!career.active()">
-        ציון התאמה מוסבר — תוצאות שנטענו בלבד
-      </option>
+      <option value="relevance">רלוונטיות לפי תפקיד והעדפות — בכל התוצאות המסוננות</option>
     </select></label
   >
+  <p class="text-xs mb-4">
+    מיון הרלוונטיות חל לפני חלוקת התוצאות לעמודים. הוא משקלל תפקיד, מיקום וניסיון שנמסרו; אינו ציון
+    כישורים או אישור זכאות.
+  </p>
   <p class="text-xs mb-4">
     הרשימה והמפה משתמשות באותן תוצאות שנטענו. משרות ללא קואורדינטות מוצגות בסיכום המפה.
   </p>
@@ -424,9 +430,27 @@
         גם משרות שהמידע הזה חסר בהן, עם סימון ברור שהפרט לא נמסר. משרה ששמרת תישאר ברשימה שלך גם אם
         הוסרה מאתר המעסיק.
       </p>
-      @if (store.feedCheckedAt()) {
+      @if (store.feedFreshness(); as freshness) {
         <p class="text-xs mb-2">
-          בדיקת מקור אחרונה: <bdi>{{ store.feedCheckedAt() }}</bdi>
+          בדיקת המקור המוצלחת החדשה ביותר:
+          <bdi>{{ freshness.newestSuccessfulAt || 'טרם נרשמה' }}</bdi>
+        </p>
+        <p class="text-xs mb-2">
+          בדיקת המקור המוצלחת הישנה ביותר:
+          <bdi>{{ freshness.oldestSuccessfulAt || 'טרם נרשמה' }}</bdi>
+        </p>
+        @if (freshness.newestAttemptedAt) {
+          <p class="text-xs mb-2">
+            ניסיון בדיקת המקור האחרון (אינו אישור הצלחה):
+            <bdi>{{ freshness.newestAttemptedAt }}</bdi>
+          </p>
+        }
+        @if (freshness.neverSucceededCount) {
+          <p class="text-xs mb-2">מקורות ללא בדיקה מוצלחת: {{ freshness.neverSucceededCount }}</p>
+        }
+      } @else if (store.feedCheckedAt()) {
+        <p class="text-xs mb-2">
+          מועד בדיקה שנמסר מהמקור: <bdi>{{ store.feedCheckedAt() }}</bdi>
         </p>
       }
       <button
@@ -456,10 +480,15 @@
                 source.error
                   ? 'העדכון נכשל; מוצג המידע האחרון'
                   : source.checked_at
-                    ? 'נבדק'
-                    : 'טרם נבדק'
+                    ? 'בדיקה מוצלחת אחרונה'
+                    : 'טרם נרשמה בדיקה מוצלחת'
               }}
               <bdi>{{ source.checked_at }}</bdi>
+              @if (source.attempted_at) {
+                <span>
+                  · ניסיון אחרון: <bdi>{{ source.attempted_at }}</bdi></span
+                >
+              }
               @if (source.partial) {
                 <span>
                   {{

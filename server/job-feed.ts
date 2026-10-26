@@ -1,6 +1,7 @@
 import type { Job } from '../src/app/core/models/job';
 import type { Category } from '../src/app/core/preferences';
 import { descriptionText } from '../src/app/core/description-text';
+import { descriptionBlocks } from './description-blocks';
 
 export const FEED_URL = 'https://boards-api.greenhouse.io/v1/boards/appsflyer/jobs?content=true';
 export const EMPLOYER_URL = 'https://careers.appsflyer.com/';
@@ -17,7 +18,7 @@ export function plainText(value: unknown): string {
 }
 export function classify(title: string): Category | 'other' {
   if (
-    /automation.*(?:qa|test)|(?:qa|test).*automation|\bsdet\b|software engineer.*(?:in test|testing)|testing.*software engineer/i.test(
+    /automation.*(?:qa|test)|(?:qa|test).*automation|\bsdet\b|software engineer.*(?:in test|testing)|software test(?:ing)? engineer|testing.*software engineer/i.test(
       title,
     )
   )
@@ -76,6 +77,7 @@ export function normalizeFeed(payload: unknown, fetchedAt = new Date().toISOStri
       category: classify(title),
       posted: `עודכן במקור: ${updated.slice(0, 10)}`,
       description: plainText(row['content']) || 'תיאור מלא זמין באתר המעסיק.',
+      descriptionBlocks: descriptionBlocks(row['content']),
       skills: [],
       reason:
         'מקור: AppsFlyer / Greenhouse. הסיווג לפי כותרת התפקיד, ללא ציון התאמה או ניתוח קורות חיים.',

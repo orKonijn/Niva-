@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-26",
+  "baseCommit": "8550b51a7247039caa44424c3f1c5c4b90284458",
+  "uncommitted": true,
+  "deployed": false,
+  "currentLive": "0.2.1 / Sites41",
+  "proposedUnreleased": "0.3.0",
+  "frontend": {
+    "passed": 59,
+    "failed": 0
+  },
+  "server": {
+    "passed": 158,
+    "failed": 0
+  },
+  "browser": {
+    "initial": {
+      "startTime": "2026-10-26T18:10:22.912Z",
+      "duration": 212433.946,
+      "expected": 220,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "artifactConflict": "Concurrent staging run removed shared test-results trace files. Separate outputDir now configured.",
+    "focusedRecovery": {
+      "startTime": "2026-10-26T18:14:42.222Z",
+      "duration": 8232.448999999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "uniqueCasesPassedAfterRecovery": 222,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "actualLocalJourney": {
+    "passed": 1,
+    "hosted": false,
+    "at": "2026-10-26T18:15:24.108Z"
+  },
+  "build": "passed",
+  "typeChecks": {
+    "server": "passed after correcting required-field delete in new test",
+    "e2e": "passed after annotating new fixture array",
+    "frontendTests": "passed"
+  },
+  "worker": {
+    "passed": 1
+  },
+  "provenance": {
+    "passed": 1
+  },
+  "format": "passed",
+  "productionWrites": false,
+  "externalAlertsSent": false
+}
