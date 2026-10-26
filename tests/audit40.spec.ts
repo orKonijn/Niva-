@@ -90,7 +90,7 @@ for (const theme of ['light', 'dark'] as const)
         const search = await page.getByLabel('חיפוש תפקיד או חברה', { exact: true }).boundingBox();
         expect(search!.y + search!.height).toBeLessThan(page.viewportSize()!.height);
         writeFileSync(
-          `.test-data/audit40/${info.project.name}-${theme}-layout.json`,
+          info.outputPath('audit40-layout.json'),
           JSON.stringify({
             viewport: page.viewportSize(),
             search,
@@ -103,6 +103,10 @@ for (const theme of ['light', 'dark'] as const)
             .violations,
         ).toEqual([]);
         await context.route('https://tile.openstreetmap.org/**', (r) => r.abort());
+        await page.getByRole('link', { name: 'לתוצאות החיפוש', exact: true }).click();
+        await expect(page).toHaveURL(/\/app\/jobs\?.+#job-results$/);
+        expect(new URL(page.url()).searchParams.get('styles')).toBe('hybrid');
+        await expect(page.locator('niva-job-card')).toHaveCount(2);
         await page.getByRole('button', { name: 'מפה', exact: true }).click();
         await expect(
           page

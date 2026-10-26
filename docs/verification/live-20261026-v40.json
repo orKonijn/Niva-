@@ -1,0 +1,376 @@
+{
+  "at": "2026-10-26T16:41:56.603Z",
+  "origin": "https://getnivajobs.com",
+  "checks": [
+    "B01 strict hybrid retains Canopy/Transmit with no mismatched styles",
+    "B02 no Product Management gap term",
+    "B03 zero literal entities in20 details",
+    "B04 four pay ranges represented",
+    "S01 explicit citizenship and local rights present",
+    "jsearch-linkedin feed HTTP200",
+    "jsearch-indeed feed HTTP200"
+  ],
+  "privateWrites": 0,
+  "applicationSubmissions": 0,
+  "build": {
+    "repository": "orKonijn/Niva-",
+    "sourceCommit": "e2fafa1081f2d864bbd766a51006520603af0920",
+    "githubCommit": "e3e4a0cb71727e6a6e2e2695741fe1dbd24e2f0d",
+    "sitesCommit": "e2fafa1081f2d864bbd766a51006520603af0920",
+    "sourceTree": "08ed83f6bc8e24caaf8b0aa54735a943618abd6a",
+    "sourceContentDigest": "f974985aa6a2afb5a28b5f61375a7bdadb141d2fd76c134a26ec9b4d8f4b0ed8",
+    "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+    "clientArtifactDigest": "4e3c62973b50f7dba185db371477cb1e31ad91380b2406fe08bbbc2fbd0ebe5a",
+    "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+    "builtAt": "2026-10-26T16:39:23.356Z",
+    "dirty": false,
+    "mappedSourceVerified": true,
+    "provenanceStatus": "mapped-reviewed-source"
+  },
+  "initialFeed": {
+    "status": 200,
+    "total": 2997,
+    "elapsedMs": 28170,
+    "error": null
+  },
+  "records": [
+    {
+      "auditId": "R01",
+      "id": "greenhouse-canopycare-5285235008",
+      "workStyle": "hybrid",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Manual QA", "APIs"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+      "observedAt": "2026-10-26T16:42:26.290Z"
+    },
+    {
+      "auditId": "R02",
+      "id": "greenhouse-transmitsecurity-8887486002",
+      "workStyle": "hybrid",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["QA Automation"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002",
+      "observedAt": "2026-10-26T16:42:26.518Z"
+    },
+    {
+      "auditId": "R03",
+      "id": "greenhouse-unframe-4904270101",
+      "workStyle": "unknown",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Manual QA", "APIs", "APIs"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101",
+      "observedAt": "2026-10-26T16:42:26.597Z"
+    },
+    {
+      "auditId": "R04",
+      "id": "greenhouse-unframe-5003021101",
+      "workStyle": "unknown",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Playwright", "QA Automation"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101",
+      "observedAt": "2026-10-26T16:42:27.508Z"
+    },
+    {
+      "auditId": "R05",
+      "id": "greenhouse-wedev-4652209101",
+      "workStyle": "onsite",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["JavaScript"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+      "observedAt": "2026-10-26T16:42:27.500Z"
+    },
+    {
+      "auditId": "R06",
+      "id": "jobicy-israel-qa-156544",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Manual QA"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/156544-manual-qa-engineer-game-client",
+      "observedAt": "2026-10-26T16:22:35.593Z"
+    },
+    {
+      "auditId": "R07",
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "workStyle": "onsite",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Java"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "observedAt": "2026-10-26T16:42:29.050Z"
+    },
+    {
+      "auditId": "R08",
+      "id": "greenhouse-datadog-7487353",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["AWS", "Azure", "Kubernetes"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://careers.datadoghq.com/detail/7487353/?gh_jid=7487353",
+      "observedAt": "2026-10-26T16:42:29.056Z"
+    },
+    {
+      "auditId": "R09",
+      "id": "greenhouse-datadog-7516279",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["AWS", "Azure", "Kubernetes"],
+      "salary": {
+        "min": 149000,
+        "max": 198000,
+        "currency": "USD",
+        "period": "year",
+        "origin": "estimated"
+      },
+      "salaryText": "$149,000—$198,000 USD",
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://careers.datadoghq.com/detail/7516279/?gh_jid=7516279",
+      "observedAt": "2026-10-26T16:42:29.093Z"
+    },
+    {
+      "auditId": "R10",
+      "id": "greenhouse-datadog-7993198",
+      "workStyle": "unknown",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": {
+        "min": 192000,
+        "max": 240000,
+        "currency": "USD",
+        "period": "year",
+        "origin": "estimated"
+      },
+      "salaryText": "$192,000—$240,000 USD",
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://careers.datadoghq.com/detail/7993198/?gh_jid=7993198",
+      "observedAt": "2026-10-26T16:42:29.846Z"
+    },
+    {
+      "auditId": "R11",
+      "id": "greenhouse-jfrog-8185306",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Kubernetes", "AWS", "Azure"],
+      "salary": null,
+      "salaryText": "$160,000 to $190,000",
+      "citizenship": "US",
+      "authorization": null,
+      "applicationUrl": "https://join.jfrog.com/job/?job=8185306&gh_jid=8185306",
+      "observedAt": "2026-10-26T16:42:29.908Z"
+    },
+    {
+      "auditId": "R12",
+      "id": "greenhouse-jfrog-8255562",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": "$250,000 to $275,000",
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://join.jfrog.com/job/?job=8255562&gh_jid=8255562",
+      "observedAt": "2026-10-26T16:42:29.900Z"
+    },
+    {
+      "auditId": "R13",
+      "id": "greenhouse-wizinc-4665302006",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": "JP",
+      "applicationUrl": "https://www.wiz.io/careers/job/4665302006/:title?gh_jid=4665302006",
+      "observedAt": "2026-10-26T16:42:31.000Z"
+    },
+    {
+      "auditId": "R14",
+      "id": "greenhouse-wizinc-4704730006",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": "GB",
+      "applicationUrl": "https://www.wiz.io/careers/job/4704730006/:title?gh_jid=4704730006",
+      "observedAt": "2026-10-26T16:42:31.020Z"
+    },
+    {
+      "auditId": "R15",
+      "id": "greenhouse-wizinc-4712609006",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": "AU",
+      "applicationUrl": "https://www.wiz.io/careers/job/4712609006/:title?gh_jid=4712609006",
+      "observedAt": "2026-10-26T16:42:31.008Z"
+    },
+    {
+      "auditId": "R16",
+      "id": "jobicy-israel-qa-144040",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": {
+        "min": 210000,
+        "max": 265000,
+        "currency": "USD",
+        "period": "year",
+        "origin": "unknown"
+      },
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/144040-staff-software-engineer-app-platform",
+      "observedAt": "2026-10-26T15:13:28.304Z"
+    },
+    {
+      "auditId": "R17",
+      "id": "jobicy-israel-qa-144139",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Workflow Automation", "Python", "React", "AWS", "APIs", "Docker", "AWS"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/144139-senior-ai-engineer-3",
+      "observedAt": "2026-10-26T16:22:35.593Z"
+    },
+    {
+      "auditId": "R18",
+      "id": "jobicy-israel-qa-149520",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu",
+      "observedAt": "2026-10-26T16:22:35.593Z"
+    },
+    {
+      "auditId": "R19",
+      "id": "jobicy-israel-qa-149522",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": [],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer",
+      "observedAt": "2026-10-26T16:22:35.593Z"
+    },
+    {
+      "auditId": "R20",
+      "id": "jobicy-israel-qa-149523",
+      "workStyle": "remote",
+      "entityTokens": false,
+      "factVersion": "source-sections-v4",
+      "required": ["Python", "Kubernetes"],
+      "salary": null,
+      "salaryText": null,
+      "citizenship": null,
+      "authorization": null,
+      "applicationUrl": "https://jobicy.com/jobs/149523-cloud-field-engineer",
+      "observedAt": "2026-10-26T16:22:35.593Z"
+    }
+  ],
+  "hybrid": {
+    "status": 200,
+    "total": 2,
+    "jobs": [
+      {
+        "id": "greenhouse-canopycare-5285235008",
+        "title": "QA & Automation Engineer",
+        "workStyle": "hybrid"
+      },
+      {
+        "id": "greenhouse-transmitsecurity-8887486002",
+        "title": "QA & Automation Lead",
+        "workStyle": "hybrid"
+      }
+    ]
+  },
+  "applicationHandoff": {
+    "status": 303,
+    "location": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+    "scope": "Anonymous GET checks original redirect only; no form entered or submitted"
+  },
+  "publishers": [
+    {
+      "provider": "jsearch-linkedin",
+      "status": 200,
+      "total": 30,
+      "id": "jsearch-linkedin-0766ecba49f46120e0c7beff"
+    },
+    {
+      "provider": "jsearch-indeed",
+      "status": 200,
+      "total": 14,
+      "id": "jsearch-indeed-0d4d69e603b76131feda63d6"
+    }
+  ],
+  "search": {
+    "trimmedTotal": 8,
+    "paddedTotal": 8,
+    "sameIds": true
+  }
+}

@@ -4,9 +4,17 @@
 
 No unreleased changes.
 
+## 0.2.1 — 2026-10-26
+
+Release candidate. Compatible navigation correction; no data migration or candidate action required.
+
+### Fixed
+
+- Keep the results shortcut on the current jobs route with all search filters preserved. The live0.2.0 check reproduced navigation to the homepage because the fragment-only link resolved against the application base. Desktop/mobile regression checks now click the shortcut and verify the route, filter and result count.
+
 ## 0.2.0 — 2026-10-26
 
-Release candidate for publication. Compatible additions and audit fixes; no Sites version allocated yet. Current live baseline remains0.1.3 / Sites39 until deployment succeeds. [Complete finding tracker and verification](docs/job-finding-audit-20261026.md).
+Published as **Sites40**. [Publication and live verification receipt](docs/verification/publication-20261026-v40.json). Compatible additions and audit fixes. The subsequent live results-shortcut correction is recorded in0.2.1. [Complete finding tracker and verification](docs/job-finding-audit-20261026.md).
 
 ### Fixed
 

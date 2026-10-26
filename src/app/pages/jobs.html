@@ -8,7 +8,9 @@
     class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
     ><niva-icon name="settings" /> העדפות חיפוש</a
   >
-  <a class="account-button" href="#job-results">לתוצאות החיפוש</a>
+  <a class="account-button" [routerLink]="[]" fragment="job-results" queryParamsHandling="preserve"
+    >לתוצאות החיפוש</a
+  >
 </niva-page-heading>
 @if (store.jobsError()) {
   <p class="form-error" role="alert">

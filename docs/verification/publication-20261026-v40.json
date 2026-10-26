@@ -1,0 +1,38 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.2.0",
+  "version": 40,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_8d34f48f17b081919581b1046e3e3f48",
+  "deploymentId": "appgdep_6adf828848808191a65e26ed3d572e95",
+  "publishedAt": "2026-10-26T16:40:58.958607+00:00",
+  "status": "succeeded",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "e2fafa1081f2d864bbd766a51006520603af0920",
+  "reviewedGithubCommit": "e3e4a0cb71727e6a6e2e2695741fe1dbd24e2f0d",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000e280824390643a4d98afdf32",
+    "content_hash": "sha256:ddf93a18952a47288adfd7b9adf8ad62c9ced810ac2c696fd95a99dcee4871d3",
+    "size_bytes": 13516800,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "checks": {
+    "frontend": 59,
+    "server": 153,
+    "browser": 218,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "clean mapped source",
+    "liveReceipt": "live-20261026-v40.json"
+  },
+  "liveFollowup": "Live audit/source checks passed. A results jump link navigated to the root due to the base URL; identified in actual browser after deployment and corrected in the following patch.",
+  "limitations": [
+    "Operational cleanup/alerts/identity/restore gates remain unverified.",
+    "First public-cache upgrade feed response took28170ms; warm performance is recorded separately.",
+    "No employer submissions or owner profile/CV mutations."
+  ]
+}
