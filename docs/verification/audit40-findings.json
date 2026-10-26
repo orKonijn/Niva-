@@ -1,0 +1,532 @@
+{
+  "date": "2026-10-26",
+  "baseline": "0.1.3 / Sites39",
+  "proposed": "0.2.0 (unpublished compatible additions; package remains 0.1.3)",
+  "findings": [
+    {
+      "id": "B01",
+      "finding": "Explicit hybrid and onsite evidence omitted",
+      "priority": "P1",
+      "plannedFix": "Preserve source location, provider metadata and explicit description evidence; keep conflicts unknown. Reindex old public JSON before filtering.",
+      "status": "Fixed",
+      "verification": "13 audit regressions plus four browser cases: strict hybrid 0 to 2; onsite WeDev and Veeva recovered after normal provider ingestion; list/map agree. Legacy provider-only metadata needs next due ingestion.",
+      "kind": "Confirmed bug"
+    },
+    {
+      "id": "B02",
+      "finding": "Collaborating with product managers becomes a skill gap",
+      "priority": "P1",
+      "plannedFix": "Separate mandatory, optional and responsibility sections. Use required evidence for matching.",
+      "status": "Fixed",
+      "verification": "Unframe no Product Management requirement or gap. Explicit Product Management still required in positive control; optional and negated controls pass.",
+      "kind": "Confirmed bug"
+    },
+    {
+      "id": "B03",
+      "finding": "Encoded entities and flattened descriptions",
+      "priority": "P2",
+      "plannedFix": "Decode bounded untrusted text; discard unsafe markup; render semantic headings and lists as text.",
+      "status": "Fixed",
+      "verification": "13/20 entity descriptions to 0/20. Hebrew/English, repeated encoding, unsafe markup, order and mobile reflow pass. Original section boundaries require fresh provider content for already flattened caches.",
+      "kind": "Confirmed bug"
+    },
+    {
+      "id": "B04",
+      "finding": "Salary marked absent despite four visible ranges",
+      "priority": "P1",
+      "plannedFix": "Use validated provider pay, exact currency/period/origin; retain unstructured ranges when period is absent.",
+      "status": "Fixed",
+      "verification": "R09 USD149000-198000/year and R10 USD192000-240000/year labelled employer estimates. R11/R12 present-unstructured; no inferred period. Same-unit and cross-unit tests pass.",
+      "kind": "Confirmed bug"
+    },
+    {
+      "id": "S01",
+      "finding": "Citizenship and local work-rights evidence omitted",
+      "priority": "P1",
+      "plannedFix": "Surface exact conditions, inferred country association and explicit candidate confirmation; separate unknown from conflict.",
+      "status": "Fixed",
+      "verification": "R11 US citizenship and R13/R14/R15 JP/GB/AU rights/no-sponsorship extracted. Unknown candidate not rejected; confirmed contradictions blocked. No actual owner citizenship inferred.",
+      "kind": "Suspected policy issue; omission confirmed"
+    },
+    {
+      "id": "S02",
+      "finding": "Overdue maintenance and unverified operational readiness",
+      "priority": "P1",
+      "plannedFix": "Retest expiry denial, cleanup and failure handling on disposable databases; retain operational gate.",
+      "status": "Blocked",
+      "verification": "Local Node/D1 cleanup and failure regressions passed. Still requires an accountable operator, approved verified alert receiver, two actual private cleanup cycles, live identity isolation and restore evidence. No proof of retention breach.",
+      "kind": "Operational dependency"
+    },
+    {
+      "id": "S03",
+      "finding": "Other section, experience and date extraction risks",
+      "priority": "P1",
+      "plannedFix": "Keep bonus optional, JavaScript distinct from Java; extract explicit experience and supplied dates without inventing missing fields.",
+      "status": "Partially fixed",
+      "verification": "Canopy bonus automation optional; Canopy 2 years and Transmit 5 years recovered; WeDev JavaScript not Java. Published dates preserved from provider. Broad multilingual extraction/deadline completeness not certified.",
+      "kind": "Suspected extraction issues; targeted cases confirmed"
+    },
+    {
+      "id": "F01",
+      "finding": "Result relevance",
+      "priority": "P1",
+      "plannedFix": "Offer explicit QA alternate-title searches and retain exact filters.",
+      "status": "Partially fixed",
+      "verification": "SDET, Software Engineer in Test and Test Automation actions added. Same purposive cohort remains 1 strong, 5 partial, 14 low; no independent relevance uplift established.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F02",
+      "finding": "Eligibility",
+      "priority": "P1",
+      "plannedFix": "Compare source conditions only with confirmed profile criteria.",
+      "status": "Fixed",
+      "verification": "S01 unknown/conflict controls and Node/D1 criteria reload pass; source geography and authorization stay separate from skills.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F03",
+      "finding": "Search",
+      "priority": "P2",
+      "plannedFix": "Keep real result filtering consistent and offer explicit alternate titles.",
+      "status": "Partially fixed",
+      "verification": "S1-S6/S4b replayed on repaired cohort; padded/trimmed search and URL history pass. Negative-term query syntax and semantic intent search deferred.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F04",
+      "finding": "District filter",
+      "priority": "P2",
+      "plannedFix": "Retain office evidence and shared list/map filtering.",
+      "status": "Not reproducible",
+      "verification": "No district defect in audit. S3 returns six of seven cohort QA roles; multi-office map tests pass. Approximate city points remain labelled.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F05",
+      "finding": "Work style filter",
+      "priority": "P1",
+      "plannedFix": "Recover explicit arrangements and retain unknown/conflict states.",
+      "status": "Fixed",
+      "verification": "B01; strict hybrid returns Canopy and Transmit. WeDev/Veeva onsite controls pass. R10 conflicting evidence remains unknown.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F06",
+      "finding": "Country and missing data",
+      "priority": "P1",
+      "plannedFix": "Expose known-country and unknown counts and their limited meaning.",
+      "status": "Fixed",
+      "verification": "Loaded-result counts distinguish country evidence from authorization. S4 inclusive one vs strict S4b zero in fixed cohort; real catalog was two vs zero.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F07",
+      "finding": "Salary and seniority filters",
+      "priority": "P1",
+      "plannedFix": "Use comparable units and explain excluded or unknown pay.",
+      "status": "Fixed",
+      "verification": "B04 controls; salary estimate labels retained; strict incomparable/unstructured values excluded. S5 honest empty recovery.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F08",
+      "finding": "Sort controls",
+      "priority": "P2",
+      "plannedFix": "Keep source order and loaded-result ranking scope explicit.",
+      "status": "Partially fixed",
+      "verification": "Source order and loaded-list sort retained; no fabricated numeric order. Full-catalog calibrated ranking remains unavailable.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F09",
+      "finding": "Pagination",
+      "priority": "P2",
+      "plannedFix": "Preserve snapshots, totals and nearby recovery.",
+      "status": "Not reproducible",
+      "verification": "No existing loss reproduced. 260-record regression traverses six pages without repeated IDs; browser load-more and stale-cursor recovery pass.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F10",
+      "finding": "Match explanations",
+      "priority": "P1",
+      "plannedFix": "Show required/preferred source quotes and meaningful gaps.",
+      "status": "Fixed",
+      "verification": "B02 and S03 positive/negative/optional controls; eligibility, skills, freshness and data completeness remain separate.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F11",
+      "finding": "Numeric match accuracy",
+      "priority": "P1",
+      "plannedFix": "Test known positive, negative and unconfirmed inputs.",
+      "status": "Partially fixed",
+      "verification": "Terminology coverage 1/0/null controls pass. Numeric fit remains withheld for insufficient evidence. No empirical hiring-fit calibration; rubric score stays N/T.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F12",
+      "finding": "Job descriptions",
+      "priority": "P2",
+      "plannedFix": "Use safe readable sections on narrow screens.",
+      "status": "Fixed",
+      "verification": "B03; semantic headings/lists and no horizontal overflow in Chromium. No provider HTML executed.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F13",
+      "finding": "Data completeness",
+      "priority": "P1",
+      "plannedFix": "Preserve available source facts and label absent or conflicting ones.",
+      "status": "Partially fixed",
+      "verification": "Known arrangements 14 to 17/20 plus one conflict; structured salaries 1 to 3/20 plus two unstructured. Unavailable source facts remain unknown.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F14",
+      "finding": "Freshness disclosure",
+      "priority": "P2",
+      "plannedFix": "Distinguish source dates, retrieval and application checks.",
+      "status": "Not reproducible",
+      "verification": "Existing separation retained; official first_published now preserved. Twenty public HTTP200 observations do not certify open employer hiring or form availability.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F15",
+      "finding": "Application handoff",
+      "priority": "P1",
+      "plannedFix": "Retain trusted vacancy-specific paths and honest external gate labels.",
+      "status": "Not reproducible",
+      "verification": "20/20 trusted distinct original URLs and HTTP200 responses; 14 provider IDs verified. Two original forms visibly rechecked. No submissions; Jobicy employer path and other forms not newly certified.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F16",
+      "finding": "Save and unsave",
+      "priority": "P2",
+      "plannedFix": "Preserve account persistence and reversible saved state.",
+      "status": "Not reproducible",
+      "verification": "Browser save/reload/unsave and independent synthetic session tests pass. No actual owner writes; physical multi-device behavior untested.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F17",
+      "finding": "Hide and track jobs",
+      "priority": "P3",
+      "plannedFix": "Assess per-job hide and explicitly self-reported stages.",
+      "status": "Partially fixed",
+      "verification": "Existing company exclusions remain. Per-job hiding and application-stage storage deliberately deferred: optional larger workflow needs recovery/data-model design. Opened is never labelled applied.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F18",
+      "finding": "Setup and profile editing",
+      "priority": "P2",
+      "plannedFix": "Complete isolated first-time setup and confirmed-profile checks.",
+      "status": "Partially fixed",
+      "verification": "Synthetic first-time CV/preferences gate passes in both themes/devices. New rights/citizenship criteria persist through Node/D1 reload. Live first-time OAuth identity isolation remains unverified.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F19",
+      "finding": "Resume upload and parsing",
+      "priority": "P2",
+      "plannedFix": "Retest chooser-independent PDF/DOCX parsing and review boundary.",
+      "status": "Not reproducible",
+      "verification": "Native local PDF/DOCX fixture selection, CSP parsing, invalid/oversized input and review-before-write pass. Audit timeout was tooling, not established product defect. Remote scanning remains unavailable.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F20",
+      "finding": "Mobile layout",
+      "priority": "P2",
+      "plannedFix": "Put search before verbose source panels and retain reflow.",
+      "status": "Fixed",
+      "verification": "Search fully visible in 390x664 paired captures and explicit 390x844 after-only checks. No horizontal overflow. Real phones remain untested.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F21",
+      "finding": "Usability",
+      "priority": "P2",
+      "plannedFix": "Show active filter chips, direct removal, remedies and results jump.",
+      "status": "Fixed",
+      "verification": "Individual style-chip removal and Back restore exact counts; mobile search first; error/retry and source explanations remain reachable.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F22",
+      "finding": "Accessibility spot checks",
+      "priority": "P2",
+      "plannedFix": "Retain labels, keyboard access and semantic source content.",
+      "status": "Partially fixed",
+      "verification": "Four audit-case automated axe scans have zero violations; existing keyboard/reflow/theme regressions pass. Spoken Hebrew screen reader, native zoom and full conformance require separate testing.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F23",
+      "finding": "Performance benchmark",
+      "priority": "P2",
+      "plannedFix": "Bound catalog metadata residency and measure locally.",
+      "status": "Partially fixed",
+      "verification": "Synthetic 5000-row sampled heap falls 145.7MB to 36.1MB; returned metadata 34.6MB to 13.7MB. This is local SQLite/Node evidence, not Worker peak, D1 latency or field Core Web Vitals.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F24",
+      "finding": "Empty and recovery states",
+      "priority": "P2",
+      "plannedFix": "Explain every active restriction and keep retry visible.",
+      "status": "Fixed",
+      "verification": "S5, filter-chip removal, stale-cursor and failed-feed retry pass; stale warning deduplicated after full-suite failure exposed repeated copy.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F25",
+      "finding": "Forced errors and outages",
+      "priority": "P2",
+      "plannedFix": "Inject provider, network, storage and stale-response failures locally.",
+      "status": "Fixed",
+      "verification": "Existing server/browser fault suites executed with synthetic failures; unavailable sources do not substitute fake listings. No production outage/load injection.",
+      "kind": "Recommendation or coverage gap"
+    },
+    {
+      "id": "F26",
+      "finding": "AI assistant",
+      "priority": "P2",
+      "plannedFix": "Keep unavailable real AI unavailable; verify local failure boundary.",
+      "status": "Blocked",
+      "verification": "Missing-provider, consent, request abort and mocked recovery tests pass. Real model quality/grounding remains N/T; needs configured provider, consented fixtures and cost authorization.",
+      "kind": "Recommendation or coverage gap"
+    }
+  ],
+  "scores": [
+    {
+      "id": "F01",
+      "feature": "Result relevance",
+      "before": 6,
+      "after": 6,
+      "evidence": "SDET, Software Engineer in Test and Test Automation actions added. Same purposive cohort remains 1 strong, 5 partial, 14 low; no independent relevance uplift established."
+    },
+    {
+      "id": "F02",
+      "feature": "Eligibility",
+      "before": 5,
+      "after": 7,
+      "evidence": "S01 unknown/conflict controls and Node/D1 criteria reload pass; source geography and authorization stay separate from skills."
+    },
+    {
+      "id": "F03",
+      "feature": "Search",
+      "before": 8,
+      "after": 8,
+      "evidence": "S1-S6/S4b replayed on repaired cohort; padded/trimmed search and URL history pass. Negative-term query syntax and semantic intent search deferred."
+    },
+    {
+      "id": "F04",
+      "feature": "District filter",
+      "before": 8,
+      "after": 8,
+      "evidence": "No district defect in audit. S3 returns six of seven cohort QA roles; multi-office map tests pass. Approximate city points remain labelled."
+    },
+    {
+      "id": "F05",
+      "feature": "Work style filter",
+      "before": 5,
+      "after": 8,
+      "evidence": "B01; strict hybrid returns Canopy and Transmit. WeDev/Veeva onsite controls pass. R10 conflicting evidence remains unknown."
+    },
+    {
+      "id": "F06",
+      "feature": "Country and missing data",
+      "before": 7,
+      "after": 8,
+      "evidence": "Loaded-result counts distinguish country evidence from authorization. S4 inclusive one vs strict S4b zero in fixed cohort; real catalog was two vs zero."
+    },
+    {
+      "id": "F07",
+      "feature": "Salary and seniority filters",
+      "before": 6,
+      "after": 7,
+      "evidence": "B04 controls; salary estimate labels retained; strict incomparable/unstructured values excluded. S5 honest empty recovery."
+    },
+    {
+      "id": "F08",
+      "feature": "Sort controls",
+      "before": 6,
+      "after": 6,
+      "evidence": "Source order and loaded-list sort retained; no fabricated numeric order. Full-catalog calibrated ranking remains unavailable."
+    },
+    {
+      "id": "F09",
+      "feature": "Pagination",
+      "before": 8,
+      "after": 8,
+      "evidence": "No existing loss reproduced. 260-record regression traverses six pages without repeated IDs; browser load-more and stale-cursor recovery pass."
+    },
+    {
+      "id": "F10",
+      "feature": "Match explanations",
+      "before": 4,
+      "after": 8,
+      "evidence": "B02 and S03 positive/negative/optional controls; eligibility, skills, freshness and data completeness remain separate."
+    },
+    {
+      "id": "F11",
+      "feature": "Numeric match accuracy",
+      "before": null,
+      "after": null,
+      "evidence": "Terminology coverage 1/0/null controls pass. Numeric fit remains withheld for insufficient evidence. No empirical hiring-fit calibration; rubric score stays N/T."
+    },
+    {
+      "id": "F12",
+      "feature": "Job descriptions",
+      "before": 5,
+      "after": 8,
+      "evidence": "B03; semantic headings/lists and no horizontal overflow in Chromium. No provider HTML executed."
+    },
+    {
+      "id": "F13",
+      "feature": "Data completeness",
+      "before": 4,
+      "after": 8,
+      "evidence": "Known arrangements 14 to 17/20 plus one conflict; structured salaries 1 to 3/20 plus two unstructured. Unavailable source facts remain unknown."
+    },
+    {
+      "id": "F14",
+      "feature": "Freshness disclosure",
+      "before": 7,
+      "after": 7,
+      "evidence": "Existing separation retained; official first_published now preserved. Twenty public HTTP200 observations do not certify open employer hiring or form availability."
+    },
+    {
+      "id": "F15",
+      "feature": "Application handoff",
+      "before": 8,
+      "after": 8,
+      "evidence": "20/20 trusted distinct original URLs and HTTP200 responses; 14 provider IDs verified. Two original forms visibly rechecked. No submissions; Jobicy employer path and other forms not newly certified."
+    },
+    {
+      "id": "F16",
+      "feature": "Save and unsave",
+      "before": 8,
+      "after": 8,
+      "evidence": "Browser save/reload/unsave and independent synthetic session tests pass. No actual owner writes; physical multi-device behavior untested."
+    },
+    {
+      "id": "F17",
+      "feature": "Hide and track jobs",
+      "before": null,
+      "after": null,
+      "evidence": "Existing company exclusions remain. Per-job hiding and application-stage storage deliberately deferred: optional larger workflow needs recovery/data-model design. Opened is never labelled applied."
+    },
+    {
+      "id": "F18",
+      "feature": "Setup and profile editing",
+      "before": null,
+      "after": 8,
+      "evidence": "Synthetic first-time CV/preferences gate passes in both themes/devices. New rights/citizenship criteria persist through Node/D1 reload. Live first-time OAuth identity isolation remains unverified."
+    },
+    {
+      "id": "F19",
+      "feature": "Resume upload and parsing",
+      "before": null,
+      "after": 8,
+      "evidence": "Native local PDF/DOCX fixture selection, CSP parsing, invalid/oversized input and review-before-write pass. Audit timeout was tooling, not established product defect. Remote scanning remains unavailable."
+    },
+    {
+      "id": "F20",
+      "feature": "Mobile layout",
+      "before": 8,
+      "after": 8,
+      "evidence": "Search fully visible in 390x664 paired captures and explicit 390x844 after-only checks. No horizontal overflow. Real phones remain untested."
+    },
+    {
+      "id": "F21",
+      "feature": "Usability",
+      "before": 6,
+      "after": 8,
+      "evidence": "Individual style-chip removal and Back restore exact counts; mobile search first; error/retry and source explanations remain reachable."
+    },
+    {
+      "id": "F22",
+      "feature": "Accessibility spot checks",
+      "before": 7,
+      "after": 7,
+      "evidence": "Four audit-case automated axe scans have zero violations; existing keyboard/reflow/theme regressions pass. Spoken Hebrew screen reader, native zoom and full conformance require separate testing."
+    },
+    {
+      "id": "F23",
+      "feature": "Performance benchmark",
+      "before": null,
+      "after": null,
+      "evidence": "Synthetic 5000-row sampled heap falls 145.7MB to 36.1MB; returned metadata 34.6MB to 13.7MB. This is local SQLite/Node evidence, not Worker peak, D1 latency or field Core Web Vitals."
+    },
+    {
+      "id": "F24",
+      "feature": "Empty and recovery states",
+      "before": 8,
+      "after": 8,
+      "evidence": "S5, filter-chip removal, stale-cursor and failed-feed retry pass; stale warning deduplicated after full-suite failure exposed repeated copy."
+    },
+    {
+      "id": "F25",
+      "feature": "Forced errors and outages",
+      "before": null,
+      "after": 8,
+      "evidence": "Existing server/browser fault suites executed with synthetic failures; unavailable sources do not substitute fake listings. No production outage/load injection."
+    },
+    {
+      "id": "F26",
+      "feature": "AI assistant",
+      "before": null,
+      "after": null,
+      "evidence": "Missing-provider, consent, request abort and mocked recovery tests pass. Real model quality/grounding remains N/T; needs configured provider, consented fixtures and cost authorization."
+    }
+  ],
+  "rubric": [
+    {
+      "category": "Relevance",
+      "weight": 25,
+      "before": 6,
+      "after": 6
+    },
+    {
+      "category": "Eligibility",
+      "weight": 15,
+      "before": 5,
+      "after": 7
+    },
+    {
+      "category": "Data quality",
+      "weight": 20,
+      "before": 4,
+      "after": 8
+    },
+    {
+      "category": "Handoff",
+      "weight": 15,
+      "before": 8,
+      "after": 8
+    },
+    {
+      "category": "Search",
+      "weight": 10,
+      "before": 8,
+      "after": 8
+    },
+    {
+      "category": "Usability",
+      "weight": 10,
+      "before": 6,
+      "after": 8
+    },
+    {
+      "category": "Responsive accessibility",
+      "weight": 5,
+      "before": 7,
+      "after": 7
+    }
+  ]
+}

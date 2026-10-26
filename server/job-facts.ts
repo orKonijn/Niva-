@@ -1,6 +1,15 @@
 import type { Job } from '../src/app/core/models/job';
 import type { Evidence, JobFacts } from '../src/app/core/models/discovery';
 import { positiveEvidence, SKILLS } from '../src/app/core/matching';
+import { requirementClauses } from '../src/app/core/requirements';
+import { descriptionText } from '../src/app/core/description-text';
+import {
+  FACT_VERSION,
+  arrangementEvidence,
+  countryIn,
+  descriptionSalary,
+  sourceEvidence,
+} from './source-evidence';
 /** Deliberately narrow extraction. Unrecognised, contradictory and optional requirements stay unknown. */
 export function enrichJob(job: Job): Job {
   if (!job.source) return job;
@@ -24,25 +33,26 @@ export function enrichJob(job: Job): Job {
       observedAt: job.source!.fetchedAt,
     };
   };
+  job.description = descriptionText(job.description);
   const text = job.description;
+  const sections = requirementClauses(text);
   const clauses = text
     .split(/\n|[.!?;](?:\s|$)/)
     .map((x) => x.trim())
     .filter(Boolean);
-  const optional = /preferred|bonus|advantage|nice.to.have|a plus|יתרון/i;
-  // A technology mentioned in responsibilities is not automatically a mandatory requirement.
-  const required = clauses.filter(
-    (x) =>
-      !optional.test(x) &&
-      /require|must |proficien|experience (?:with|in)|knowledge of|נדרש|חובה/i.test(x),
-  );
-  const skillRows = (rows: string[]) =>
-    rows.flatMap((x) => positiveEvidence(x).map((s) => evidence(s.skill, x)));
+  const required = sections.required;
+  const skillRows = (rows: string[], mandatory = true) =>
+    rows.flatMap((x) => {
+      // Examples/alternatives do not each become a mandatory named tool.
+      const scope = mandatory ? x.split(/e\.g\.|such as|for example|at least one|one of/i)[0] : x;
+      if (mandatory && /\bor\b/i.test(scope) && positiveEvidence(scope).length > 1) return [];
+      return positiveEvidence(scope).map((s) => evidence(s.skill, x));
+    });
   const years = required
     .map((x) => ({
       x,
       m: x.match(
-        /(?:at least\s+|minimum\s+(?:of\s+)?)?(\d{1,2})\+?\s*(?:-|to)\s*\d{1,2}\s+years?\s+(?:of\s+)?(?:relevant |professional )?experience|(?:at least\s+|minimum\s+(?:of\s+)?)?(\d{1,2})\+?\s+years?\s+(?:of\s+)?(?:relevant |professional )?experience/i,
+        /(?:at least\s+|minimum\s+(?:of\s+)?)?(\d{1,2})\+?\s*(?:-|to)\s*\d{1,2}\s+years?\s+(?:of\s+)?(?:(?:relevant|professional|hands-on|QA|automation|software|engineering|testing|development)\s+){0,3}experience|(?:at least\s+|minimum\s+(?:of\s+)?)?(\d{1,2})\+?\s+years?\s+(?:of\s+)?(?:(?:relevant|professional|hands-on|QA|automation|software|engineering|testing|development)\s+){0,3}experience/i,
       ),
     }))
     .find((x) => x.m);
@@ -91,14 +101,18 @@ export function enrichJob(job: Job): Job {
     ].map((m) => evidence(m[1], x)),
   );
   const facts: JobFacts = {
+    extractionVersion: FACT_VERSION,
+    ...arrangementEvidence(job),
     postingId: job.id,
     employerId: job.source.sourceId ?? null,
     requisitionId: null,
     department: null,
-    responsibilities: null,
+    responsibilities: sections.responsibilities.length
+      ? sections.responsibilities.map((x) => evidence(x, x))
+      : null,
     requiredSkills: skillRows(required).length ? skillRows(required) : null,
-    preferredSkills: skillRows(clauses.filter((x) => optional.test(x))).length
-      ? skillRows(clauses.filter((x) => optional.test(x)))
+    preferredSkills: skillRows(sections.preferred, false).length
+      ? skillRows(sections.preferred, false)
       : null,
     minimumYears: years?.m ? evidence(Number(years.m[1] ?? years.m[2]), years.x) : null,
     seniority: senior ? evidence(senior[1].toLowerCase(), job.title, 'inferred') : null,
@@ -132,13 +146,47 @@ export function enrichJob(job: Job): Job {
     authorizationCountry: authorization?.m
       ? evidence(codes[authorization.m[1].toLowerCase()], authorization.x)
       : null,
-    salary: null,
+    ...descriptionSalary(job),
     deadline: null,
   };
-  job.facts = { ...facts, ...job.facts };
-  if (job.workStyle === 'unknown') {
-    if (/\bhybrid\b/i.test(job.source.location)) job.workStyle = 'hybrid';
-    else if (/\bon.?site\b/i.test(job.source.location)) job.workStyle = 'onsite';
+
+  const locationCountry = countryIn(job.source.location);
+  const citizen = text.match(
+    /(?:U\.S\.|US|United States)\s+citizenship\s+(?:is\s+)?required|must\s+be\s+(?:a\s+)?(?:U\.S\.|US|United States)\s+citizen/i,
+  );
+  facts.citizenshipCountry = citizen ? evidence('US', citizen[0]) : null;
+  const localRights = clauses.find((x) =>
+    /(?:must have|must be|requires?|are required to have).{0,60}(?:legal right|legally authori[sz]ed|work authori[sz]ation)/i.test(
+      x,
+    ),
+  );
+  facts.authorizationCondition = localRights ? evidence(localRights, localRights) : null;
+  if (localRights && !facts.authorizationCountry && locationCountry)
+    facts.authorizationCountry = sourceEvidence(
+      job,
+      locationCountry,
+      localRights + ' Source location: ' + job.source.location,
+      'inferred',
+    );
+  if (
+    !facts.applicantCountries &&
+    locationCountry &&
+    (job.workStyle === 'remote' || facts.workArrangements?.some((r) => r.value === 'remote')) &&
+    !job.source.sourceId?.startsWith('jobicy-')
+  )
+    facts.applicantCountries = sourceEvidence(job, [locationCountry], job.source.location);
+  const previous = job.facts;
+  // Only actual provider-supplied fields override recomputed extraction. Nulls
+  // and obsolete extracted facts must not conceal newly available evidence.
+  for (const [key, value] of Object.entries(previous ?? {})) {
+    const supplied = Array.isArray(value)
+      ? value.length > 0 && value.every((v) => v?.provenance === 'supplied')
+      : value &&
+        typeof value === 'object' &&
+        'provenance' in value &&
+        value.provenance === 'supplied';
+    if (supplied && key !== 'workArrangements') Object.assign(facts, { [key]: value });
   }
+  job.facts = facts;
   return job;
 }

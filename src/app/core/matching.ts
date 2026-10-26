@@ -1,9 +1,15 @@
 import type { Job } from './models/job';
 import { matchesPreferences, type Preferences } from './preferences';
-export const MATCH_VERSION = 'evidence-v3';
+import { requirementClauses } from './requirements';
+export const MATCH_VERSION = 'evidence-v4';
 export const SKILLS: Record<string, RegExp> = {
   JavaScript: /\bjavascript\b|ג׳אווהסקריפט/i,
   TypeScript: /\btypescript\b|טייפסקריפט/i,
+  Java: /\bjava\b|ג׳אווה(?!סקריפט)/i,
+  Playwright: /\bplaywright\b/i,
+  Selenium: /\bselenium\b/i,
+  APIs: /\b(?:apis?|rest api)\b/i,
+  'GitHub Actions': /\bgithub actions\b/i,
   Angular: /\bangular\b|אנגולר/i,
   React: /\breact\b|ריאקט/i,
   Python: /\bpython\b|פייתון/i,
@@ -12,7 +18,7 @@ export const SKILLS: Record<string, RegExp> = {
   Kubernetes: /\bkubernetes\b|\bk8s\b|קוברנטיס/i,
   AWS: /\baws\b|amazon web services/i,
   Azure: /\bazure\b/i,
-  'Manual QA': /manual (?:qa|testing)|בדיקות ידניות|\bqa\b(?! automation)/i,
+  'Manual QA': /manual (?:qa|testing)|בדיקות ידניות/i,
   'QA Automation': /test automation|qa automation|selenium|playwright|cypress|אוטומציית בדיקות/i,
   'Workflow Automation': /workflow automation|\bn8n\b|zapier|אוטומציית תהליכים/i,
   Figma: /\bfigma\b|פיגמה/i,
@@ -113,7 +119,15 @@ export function preferenceMatch(job: Job, p: Preferences) {
   };
 }
 export function resumeMatch(job: Job, text: string, confirmed: boolean) {
-  const requirements = skillEvidence(`${job.title}\n${job.description}\n${job.skills.join(' ')}`);
+  const requirements = [
+    ...new Set(
+      job.facts
+        ? (job.facts.requiredSkills?.map((e) => e.value) ?? [])
+        : job.source
+          ? skillEvidence(requirementClauses(job.description).required.join('\n'))
+          : skillEvidence(`${job.title}\n${job.description}\n${job.skills.join(' ')}`),
+    ),
+  ];
   const evidence = confirmed ? skillEvidence(text) : [];
   const strengths = requirements.filter((s) => evidence.includes(s));
   const missing = requirements.filter((s) => !evidence.includes(s));

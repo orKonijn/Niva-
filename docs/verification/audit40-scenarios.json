@@ -1,0 +1,142 @@
+{
+  "scope": "Local repaired 20-record cohort is a subset of current catalog. Original/current totals are context, not direct local recall denominators.",
+  "scenarios": [
+    {
+      "id": "S1",
+      "query": {
+        "q": "QA",
+        "category": "qa-automation",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 4,
+      "currentPublicTotal": 4,
+      "localFixedCohortTotal": 4,
+      "ids": [
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-transmitsecurity-8887486002",
+        "greenhouse-unframe-5003021101",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+      ]
+    },
+    {
+      "id": "S2",
+      "query": {
+        "q": "QA",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 7,
+      "currentPublicTotal": 8,
+      "localFixedCohortTotal": 7,
+      "ids": [
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-transmitsecurity-8887486002",
+        "greenhouse-unframe-4904270101",
+        "greenhouse-unframe-5003021101",
+        "greenhouse-wedev-4652209101",
+        "jobicy-israel-qa-156544",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+      ]
+    },
+    {
+      "id": "S3",
+      "query": {
+        "q": "QA",
+        "district": "tel-aviv",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 6,
+      "currentPublicTotal": 6,
+      "localFixedCohortTotal": 6,
+      "ids": [
+        "greenhouse-canopycare-5285235008",
+        "greenhouse-transmitsecurity-8887486002",
+        "greenhouse-unframe-4904270101",
+        "greenhouse-unframe-5003021101",
+        "greenhouse-wedev-4652209101",
+        "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+      ]
+    },
+    {
+      "id": "S4",
+      "query": {
+        "q": "QA",
+        "styles": "remote",
+        "unknownStyle": "false",
+        "country": "IL",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 1,
+      "currentPublicTotal": 2,
+      "localFixedCohortTotal": 1,
+      "ids": ["jobicy-israel-qa-156544"]
+    },
+    {
+      "id": "S4b",
+      "query": {
+        "q": "QA",
+        "styles": "remote",
+        "unknownStyle": "false",
+        "country": "IL",
+        "missing": "hide",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 0,
+      "currentPublicTotal": 0,
+      "localFixedCohortTotal": 0,
+      "ids": []
+    },
+    {
+      "id": "S5",
+      "query": {
+        "q": "QA",
+        "styles": "remote",
+        "unknownStyle": "false",
+        "country": "IL",
+        "missing": "hide",
+        "salaryMin": "30000",
+        "currency": "ILS",
+        "period": "month",
+        "seniority": "senior",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 0,
+      "currentPublicTotal": 0,
+      "localFixedCohortTotal": 0,
+      "ids": []
+    },
+    {
+      "id": "S6",
+      "query": {
+        "q": "Engineer",
+        "styles": "remote",
+        "unknownStyle": "false",
+        "scope": "all",
+        "limit": "50"
+      },
+      "originalAuditTotal": 338,
+      "currentPublicTotal": 373,
+      "localFixedCohortTotal": 13,
+      "ids": [
+        "greenhouse-datadog-7487353",
+        "greenhouse-datadog-7516279",
+        "greenhouse-jfrog-8185306",
+        "greenhouse-jfrog-8255562",
+        "greenhouse-wizinc-4665302006",
+        "greenhouse-wizinc-4704730006",
+        "greenhouse-wizinc-4712609006",
+        "jobicy-israel-qa-144040",
+        "jobicy-israel-qa-144139",
+        "jobicy-israel-qa-149520",
+        "jobicy-israel-qa-149522",
+        "jobicy-israel-qa-149523",
+        "jobicy-israel-qa-156544"
+      ]
+    }
+  ]
+}

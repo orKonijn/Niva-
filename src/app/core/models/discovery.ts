@@ -12,6 +12,9 @@ export interface CandidateCriteria {
   currentCountry: string | null;
   authorizationCountry: string | null;
   workAuthorization: 'unknown' | 'authorized' | 'not-authorized';
+  authorizationExclusive?: boolean;
+  citizenshipCountry?: string | null;
+  citizenshipStatus?: 'unknown' | 'citizen' | 'not-citizen';
   sponsorship: 'unknown' | 'needed' | 'not-needed';
   languages: string[];
   qualifications: string[];
@@ -30,6 +33,9 @@ export const emptyCriteria = (): CandidateCriteria => ({
   currentCountry: null,
   authorizationCountry: null,
   workAuthorization: 'unknown',
+  authorizationExclusive: false,
+  citizenshipCountry: null,
+  citizenshipStatus: 'unknown',
   sponsorship: 'unknown',
   languages: [],
   qualifications: [],
@@ -42,6 +48,12 @@ export const emptyCriteria = (): CandidateCriteria => ({
   timezone: null,
 });
 export interface JobFacts {
+  extractionVersion?: string;
+  workArrangements?: Evidence<'onsite' | 'hybrid' | 'remote'>[];
+  workArrangementConflict?: boolean;
+  citizenshipCountry?: Evidence<string> | null;
+  authorizationCondition?: Evidence<string> | null;
+  salaryText?: Evidence<string> | null;
   postingId: string;
   employerId: string | null;
   requisitionId: string | null;

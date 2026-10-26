@@ -55,21 +55,11 @@
       <bdi>{{ job().source!.name }}</bdi> · {{ job().source!.location }} · נבדק:
       <bdi>{{ job().source!.lastVerifiedAt || job().source!.fetchedAt }}</bdi>
     </p>
-    <p class="text-xs">
-      שכר:
-      {{
-        job().facts?.salary
-          ? job().facts!.salary!.value.min +
-            '–' +
-            job().facts!.salary!.value.max +
-            ' ' +
-            job().facts!.salary!.value.currency +
-            ' / ' +
-            job().facts!.salary!.value.period
-          : 'לא נמסר במקור'
-      }}
-    </p>
-    @if (job().facts?.salary && job().facts!.salary!.value.origin !== 'employer') {
+    <p class="text-xs">שכר: {{ payLabel(job()) }}</p>
+    @if (job().facts?.workArrangementConflict) {
+      <p class="text-xs">אופן העבודה סותר בין פרטי המקור; נשאר לא ידוע עד לבירור.</p>
+    }
+    @if (job().facts?.salary && job().facts!.salary!.value.origin === 'unknown') {
       <p class="text-xs">מקור נתון השכר לא אומת כשכר שפרסם המעסיק; הוא אינו מוסיף נקודות התאמה.</p>
     }
     <niva-match-indicator [job]="job()" />

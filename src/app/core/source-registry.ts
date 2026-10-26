@@ -23,7 +23,7 @@ const greenhouse = (board: string, company: string, host: string, content = true
   board,
   company,
   name: `${company} / Greenhouse`,
-  url: `https://boards-api.greenhouse.io/v1/boards/${board}/jobs${content ? '?content=true' : ''}`,
+  url: `https://boards-api.greenhouse.io/v1/boards/${board}/jobs${content ? '?content=true&pay_transparency=true' : '?pay_transparency=true'}`,
   careersUrl: `https://${host}${host.includes('greenhouse.io') ? '/' + board : ''}`,
   allowedHosts: [host],
   cadence: 900_000,

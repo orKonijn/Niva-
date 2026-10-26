@@ -40,6 +40,20 @@ import { emptyCriteria } from '../core/models/discovery';
           <option value="not-needed">לא נדרשת חסות</option>
         </select></label
       >
+      <label class="checkbox-label"
+        ><input type="checkbox" [(ngModel)]="value.authorizationExclusive" /> אישור העבודה שלי מוגבל
+        למדינה שציינתי ואין לי אישור במדינות אחרות</label
+      >
+      <label class="career-field"
+        >מדינה לבדיקת אזרחות (קוד)<input [(ngModel)]="value.citizenshipCountry" maxlength="2"
+      /></label>
+      <label class="career-field"
+        >אזרחות במדינה שצוינה<select [(ngModel)]="value.citizenshipStatus">
+          <option value="unknown">לא ידוע / לא נמסר</option>
+          <option value="citizen">יש אזרחות</option>
+          <option value="not-citizen">אין אזרחות</option>
+        </select></label
+      >
       <label class="career-field"
         >שפות (מופרדות בפסיק)<input [(ngModel)]="languages" maxlength="1000"
       /></label>
@@ -98,7 +112,7 @@ import { emptyCriteria } from '../core/models/discovery';
 })
 export class CandidateProfile {
   readonly store = inject(AppStore);
-  value = structuredClone(this.store.account().profile.criteria ?? emptyCriteria());
+  value = { ...emptyCriteria(), ...structuredClone(this.store.account().profile.criteria ?? {}) };
   skills = this.value.skills.join(', ');
   languages = this.value.languages.join(', ');
   qualifications = this.value.qualifications.join(', ');
@@ -122,6 +136,7 @@ export class CandidateProfile {
       employmentTypes: list(this.employmentTypes),
       currentCountry: this.value.currentCountry?.trim().toUpperCase() || null,
       authorizationCountry: this.value.authorizationCountry?.trim().toUpperCase() || null,
+      citizenshipCountry: this.value.citizenshipCountry?.trim().toUpperCase() || null,
       currency: this.value.currency?.trim().toUpperCase() || null,
       timezone: this.value.timezone?.trim() || null,
     };

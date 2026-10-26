@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-26",
+  "docx": "output/docx/Niva_job_finding_fix_report_20261026.docx",
+  "pdf": "output/pdf/Niva_job_finding_fix_report_20261026.pdf",
+  "pages": 15,
+  "docxZipCRC": "passed",
+  "all33FindingIdsInPDF": true,
+  "visualInspection": "Every final page1-15 opened and visually inspected; no blank spill pages, clipped tables or title rule. Original audit screenshot labelled separately. Same DOCX rendered by canonical render_docx.py; delivered PDF is byte-identical to inspected PDF.",
+  "renderer": "Canonical render_docx.py with task-isolated signed LibreOffice26.8.1 and bundled Poppler; no desktop office installation used.",
+  "screenshots": {
+    "before": 20,
+    "after": 26,
+    "pairedMobileViewport": "390x664 scale3; screen390x844",
+    "additionalAfterOnly": "390x844"
+  },
+  "hashes": {
+    "docx": "dc34cc1697454631341971557b6839486f0adf1526a2eae5d31187f5973e27c6",
+    "pdf": "0ffb3697c56dba08ad13917970e3b4f6c671a166a188b79c77f720942127fec8"
+  },
+  "sha256MatchesInspectedPDF": true
+}

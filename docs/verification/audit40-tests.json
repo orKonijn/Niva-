@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-26",
+  "scope": "Local Node24 SQLite, SQLite-backed D1 contract double and Chromium desktop/mobile; no deployment or actual application submission",
+  "executions": [
+    {
+      "suite": "Frontend Vitest full",
+      "passed": 58,
+      "failed": 1,
+      "resolution": "Matching assertion updated for separately recognized Playwright; focused matching16/16 passed."
+    },
+    {
+      "suite": "Server Vitest full",
+      "passed": 146,
+      "failed": 1,
+      "resolution": "Cache test source fixture now explicitly marks Requirements; corrected career18/18 and audit13/13 pass. Five new audit tests added after full run."
+    },
+    {
+      "suite": "Chromium full browser suite",
+      "passed": 212,
+      "failed": 6,
+      "resolution": "Deduplicated stale copy (2 cases); made onsite synthetic fixture metadata consistent (4 cases). All six plus four audit cases passed in focused10/10 rerun."
+    },
+    {
+      "suite": "Final audit browser recheck",
+      "passed": 4,
+      "failed": 0,
+      "resolution": "Latest extraction and explicit390x844 after-only checks passed in both themes."
+    },
+    {
+      "suite": "Final career and audit server regressions",
+      "passed": 31,
+      "failed": 0
+    },
+    {
+      "suite": "Worker native request-context runtime",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "suite": "Source provenance mapping",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "suite": "Chip-label focused rerun",
+      "passed": 4,
+      "failed": 0,
+      "resolution": "Preceding4 cases failed due to ambiguous test selector after human-readable chip copy changed; exact accessible-name selector now passes. Product filtering/count assertions retained."
+    },
+    {
+      "suite": "Final explicit salary-period controls",
+      "passed": 13,
+      "failed": 0,
+      "resolution": "Annual team retreat cannot infer pay period; explicit annual base salary can. Production build and server types passed after latest changes."
+    }
+  ],
+  "checks": {
+    "productionBuild": "passed",
+    "frontendTypes": "passed",
+    "serverTypes": "passed",
+    "browserTypes": "passed",
+    "format": "passed"
+  },
+  "limits": [
+    "D1 is a contract double, not actual hosted runtime/load verification",
+    "No real AI, remote scan provider or paid call activation",
+    "No actual owner profile/CV or application writes",
+    "No field Core Web Vitals, physical phone, screen reader or full conformance check",
+    "Production maintenance/alerts/isolation/restore remain unverified"
+  ]
+}

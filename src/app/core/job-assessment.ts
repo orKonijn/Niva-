@@ -2,7 +2,7 @@ import type { Job } from './models/job';
 import type { CandidateCriteria } from './models/discovery';
 import type { Preferences } from './preferences';
 import { positiveEvidence } from './matching';
-export const FIT_VERSION = 'fit-v1';
+export const FIT_VERSION = 'fit-v2';
 export const eligibilityLabel = (s: string) =>
   ({ blocked: 'חסם מפורש', confirmation: 'נדרש בירור', clear: 'לא נמצא חסם ידוע' })[s] ??
   'נדרש בירור';
@@ -47,6 +47,36 @@ export function assessJob(
     blockers.push('דרישת אישור העבודה סותרת את הפרופיל המאושר');
   if (!f?.authorizationCountry || !p || p.workAuthorization === 'unknown')
     questions.push('יש לברר אישור עבודה במדינת ההעסקה');
+  if (
+    f?.authorizationCountry &&
+    p?.authorizationExclusive &&
+    p.authorizationCountry &&
+    p.authorizationCountry !== f.authorizationCountry.value
+  )
+    blockers.push(
+      `נדרש אישור עבודה ב־${f.authorizationCountry.value}; אושר בפרופיל שאישור העבודה מוגבל ל־${p.authorizationCountry}`,
+    );
+  else if (f?.authorizationCountry && p?.authorizationCountry !== f.authorizationCountry.value)
+    questions.push(
+      `המקור דורש אישור עבודה ב־${f.authorizationCountry.value}; אישור במדינה אחרת אינו מוכיח או שולל אותו`,
+    );
+  if (f?.authorizationCondition) questions.push(`תנאי המקור: ${f.authorizationCondition.quote}`);
+  if (f?.citizenshipCountry) {
+    if (
+      p?.citizenshipCountry === f.citizenshipCountry.value &&
+      p.citizenshipStatus === 'not-citizen'
+    )
+      blockers.push(`המקור דורש אזרחות ${f.citizenshipCountry.value}; בפרופיל אושר שאין אזרחות זו`);
+    else if (
+      p?.citizenshipCountry !== f.citizenshipCountry.value ||
+      p.citizenshipStatus !== 'citizen'
+    )
+      questions.push(
+        `המקור דורש אזרחות ${f.citizenshipCountry.value}: ${f.citizenshipCountry.quote}. מצב המועמד אינו מאומת`,
+      );
+  }
+  if (f?.workArrangementConflict)
+    questions.push('מקורות אופן העבודה סותרים; הסגנון נשאר לא ידוע עד לבירור');
   for (const field of ['languages', 'qualifications', 'licenses'] as const) {
     for (const requirement of f?.[field] ?? [])
       if (!p?.[field].some((x) => x.toLowerCase() === requirement.value.toLowerCase()))

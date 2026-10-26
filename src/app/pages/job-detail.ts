@@ -1,3 +1,5 @@
+import { payLabel } from '../core/pay-label';
+import { JobDescription } from '../shared/job-description';
 import { isSupportedListingId } from '../core/source-registry';
 import { localDate } from '../core/local-date';
 import {
@@ -18,7 +20,7 @@ import { districtLabel, workStyleLabel } from '../core/preferences';
 import { Icon } from '../shared/icon';
 import { directionsUrl, locationText } from '../core/job-locations';
 @Component({
-  imports: [FormsModule, RouterLink, Icon, MatchIndicator],
+  imports: [FormsModule, RouterLink, Icon, MatchIndicator, JobDescription],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './job-detail.html',
 })
@@ -31,6 +33,7 @@ export class JobDetail {
   readonly locationText = locationText;
   readonly districtLabel = districtLabel;
   readonly workStyleLabel = workStyleLabel;
+  readonly payLabel = payLabel;
   readonly store = inject(AppStore);
   readonly params = toSignal(inject(ActivatedRoute).paramMap);
   readonly job = computed(() => this.store.findJob(this.params()?.get('id') ?? ''));

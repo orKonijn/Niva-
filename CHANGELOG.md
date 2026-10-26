@@ -4,6 +4,26 @@
 
 No unreleased changes.
 
+## 0.2.0 — 2026-10-26
+
+Release candidate for publication. Compatible additions and audit fixes; no Sites version allocated yet. Current live baseline remains0.1.3 / Sites39 until deployment succeeds. [Complete finding tracker and verification](docs/job-finding-audit-20261026.md).
+
+### Fixed
+
+- Recover explicit hybrid/onsite arrangements from employer content and metadata, preserving quotes and conflicts. Strict hybrid QA automation now retains Canopy and Transmit in the public audit cohort. Upgrade existing public JSON before filtering; old provider-only metadata and flattened descriptions need the next ordinary due ATS ingestion. No DDL migration or account reset is required.
+- Separate mandatory qualifications, optional skills and collaboration responsibilities. Unframe collaboration no longer creates a Product Management gap; Canopy bonus automation stays optional, JavaScript stays distinct from Java, and explicit experience is retained. Unknown candidate rights stay unknown; confirmed citizenship/local-rights conflicts are explained independently from skills.
+- Decode untrusted descriptions safely and retain headings, lists and order. Represent the four audit salary ranges with exact origin/units, including employer estimates and explicit present-but-unstructured ranges. No currency conversion, salary guarantee or missing pay period is invented.
+- Keep stale-feed warnings and retry visible without duplicated copy. Empty-state remedies identify active filters; source timestamps remain distinct from application/form verification.
+
+### Added
+
+- Explicitly confirmed citizenship and exclusive work-rights fields, validated and persisted through existing account JSON. Existing accounts default to unknown; candidates can confirm new fields in their profile.
+- Removable active-filter chips, QA alternate-title searches and loaded-result country/unknown counts. Search appears before verbose source explanations, with a direct results jump. [Genuine desktop/mobile before-and-after gallery](docs/screenshots/changes/audit40-images.md).
+
+### Changed
+
+- Bound catalog metadata residency while preserving canonical identities, totals and cursors. Local synthetic5000-row measurements improved sampled memory; hosted latency, cleanup/alerts, identity isolation, restore, field performance and assistive-technology gates remain unverified. Real AI/scanning stay configuration-gated; optional hiding/stage tracking remains deferred. See the tracker for executed tests and limits.
+
 ## 0.1.3 — 2026-10-26
 
 Published as **Sites39**. [Publication/source/live verification receipt](docs/verification/publication-20261026-v39.json). Compatible patch; no migration or candidate action required.

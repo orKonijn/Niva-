@@ -1,0 +1,37 @@
+{
+  "applicationVersion": "0.2.0",
+  "date": "2026-10-26",
+  "authorized": "Owner explicitly requested checks and publication after reviewing the local audit report.",
+  "status": "release candidate; all local release checks passed",
+  "checks": {
+    "frontend": 59,
+    "server": 153,
+    "chromiumBrowser": 218,
+    "worker": 1,
+    "provenance": 1,
+    "typeChecks": 3,
+    "formatting": "passed",
+    "build": "passed",
+    "coldCache": "5000 stale public rows upgraded by SQLite-backed D1 contract double; correct strict hybrid total and50 returned cards; less than1000 database calls. This is the paid D1 budget, not evidence for the free50-call budget or actual hosted latency."
+  },
+  "baselinePublicCatalog": {
+    "total": 2995,
+    "status": 200,
+    "at": "2026-10-26",
+    "scope": "Unfiltered public read before release; point-in-time count, not hiring availability."
+  },
+  "environment": {
+    "revision": 7,
+    "mutations": 0,
+    "access": "public unchanged",
+    "providers": "Existing registered job-source secrets retained; no new activation or paid plan change"
+  },
+  "remaining": [
+    "Operator and approved alert receiver are absent; no real alert sent.",
+    "Two actual private cleanup cycles, hosted independent identity isolation and backup restoration remain unverified.",
+    "Real AI/scanning unavailable; physical phone, spoken Hebrew screen reader and field performance unverified.",
+    "Publication will be separately verified through native deployment status and live source/behavior readback."
+  ],
+  "platformReference": "https://developers.cloudflare.com/d1/platform/limits/",
+  "note": "The previous audit test receipt is historical. This fresh release run passed all suites without corrective reruns."
+}

@@ -27,7 +27,8 @@ describe('evidence matching', () => {
     const score = resumeMatch(job, 'פייתון ו־SQL', true);
     expect(score.strengths).toEqual(['Python', 'SQL']);
     expect(score.missing).toContain('QA Automation');
-    expect(score.coverage).toBeCloseTo(2 / 3);
+    expect(score.missing).toContain('Playwright');
+    expect(score.coverage).toBeCloseTo(2 / 4);
   });
   it('honors hard employer exclusions and conflicting district/work-style requirements', () => {
     const p = { ...defaultPreferences(), exclusions: job.company };

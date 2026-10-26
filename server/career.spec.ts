@@ -18,7 +18,7 @@ const gh = {
       location: { name: 'Herzliya' },
       absolute_url: 'https://careers.appsflyer.com/jobs/position/101',
       updated_at: '2026-10-20T00:00:00Z',
-      content: 'Python Playwright SQL',
+      content: '<h2>Requirements</h2><p>Python Playwright SQL</p>',
     },
   ],
 };

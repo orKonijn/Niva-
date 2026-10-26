@@ -4,6 +4,7 @@ import type { CandidateCriteria } from '../src/app/core/models/discovery';
 import { normalizeJobicy } from './jobicy-source';
 import { JSEARCH_SOURCES } from './jsearch-source';
 import { enrichJob } from './job-facts';
+import { reindexFacts } from './reindex-facts';
 import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 import type { CareerDb } from './career-db';
@@ -85,7 +86,7 @@ export function normalizeLever(
         workStyle:
           style === 'remote' || style === 'hybrid'
             ? style
-            : style === 'on-site'
+            : style === 'on-site' || style === 'onsite'
               ? 'onsite'
               : 'unknown',
         description: plainText(
@@ -93,7 +94,8 @@ export function normalizeLever(
             row['descriptionPlain'],
             ...(Array.isArray(row['lists'])
               ? row['lists'].map(
-                  (l: Record<string, unknown>) => `${str(l['text'])} ${plainText(l['content'])}`,
+                  (l: Record<string, unknown>) => `${str(l['text'])}
+${plainText(l['content'])}`,
                 )
               : []),
           ].join('\n'),
@@ -382,6 +384,7 @@ export async function ingest(
           job.district,
           job.workStyle,
           job.source!.updatedAt,
+          JSON.stringify(job.facts, (key, value) => (key === 'observedAt' ? undefined : value)),
         ]);
         const canonical = canonicalJobUrl(job.source!.applicationUrl);
         rows.push({
@@ -476,6 +479,7 @@ export async function discoveryPage(
   saved: string[] = [],
   criteria?: CandidateCriteria,
 ) {
+  await reindexFacts(db);
   const health = await db.all<{
     id: string;
     checked_at: string | null;
@@ -598,26 +602,38 @@ export async function discoveryPage(
   }
   // Choose a representative within the already-authorized/filtered identity set.
   const where = clauses.join(' AND ');
-  const ranked = `WITH eligible AS (SELECT * FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
-  const candidates = await db.all<{ id: string; data: string; active: number }>(
-    `${ranked} SELECT id,CASE WHEN json_type(data,'$.facts')='object' THEN json_remove(data,'$.description') ELSE data END AS data,active FROM ranked WHERE representative=1 ORDER BY id`,
-    ...args,
-  );
-  const assessed = candidates
-    .map((row) => {
+  const ranked = `WITH eligible AS (SELECT id,canonical,active FROM niva_jobs WHERE ${where}), ranked AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY canonical ORDER BY active DESC,id) AS representative FROM eligible)`;
+  const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
+  const page: { id: string }[] = [];
+  let count = 0,
+    matchingAfter = 0,
+    scan = '';
+  for (;;) {
+    // Evidence prose is needed by selected cards, not eligibility filtering.
+    // Keep canonical ranking identical and bound intermediate row residency.
+    const candidates = await db.all<{ id: string; data: string; active: number }>(
+      `${ranked} SELECT j.id,json_remove(j.data,'$.description','$.facts.requiredSkills','$.facts.preferredSkills','$.facts.responsibilities','$.facts.workArrangements','$.facts.salaryText') AS data,j.active FROM ranked r JOIN niva_jobs j ON j.id=r.id WHERE r.representative=1 AND r.id>? ORDER BY r.id LIMIT 128`,
+      ...args,
+      scan,
+    );
+    for (const row of candidates) {
       const parsed = JSON.parse(row.data) as Job;
       const job = parsed.facts ? parsed : enrichJob(parsed);
       job.source!.active = !!row.active;
       if (!row.active && job.source!.availability !== 'unknown')
         job.source!.availability = 'closed';
-      return job;
-    })
-    .filter((job) => query.saved === 'true' || passesDiscovery(job, query, preferences, criteria));
-  const count = assessed.length;
-  const limit = Math.min(50, Math.max(1, Number(query.limit) || 12));
-  const rows = assessed.filter((job) => job.id > after);
-  const more = rows.length > limit;
-  const page = rows.slice(0, limit);
+      if (query.saved === 'true' || passesDiscovery(job, query, preferences, criteria)) {
+        count++;
+        if (job.id > after) {
+          matchingAfter++;
+          if (page.length < limit) page.push({ id: job.id });
+        }
+      }
+    }
+    if (candidates.length < 128) break;
+    scan = candidates.at(-1)!.id;
+  }
+  const more = matchingAfter > limit;
   // Only selected cards need full descriptions. Keep global-catalog assessment bounded.
   const jobs: Job[] = page.length
     ? (

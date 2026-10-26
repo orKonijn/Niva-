@@ -2,6 +2,8 @@ import type { Job } from '../src/app/core/models/job';
 import type { District } from '../src/app/core/preferences';
 import { classify, normalizeFeed, plainText } from './job-feed';
 import type { JobSource } from './job-sources';
+import { enrichJob } from './job-facts';
+import { sourceEvidence } from './source-evidence';
 const text = (v: unknown) => (typeof v === 'string' ? v : '');
 const cities: { pattern: RegExp; city: string; district: District; lat: number; lng: number }[] = [
   {
@@ -89,7 +91,7 @@ export function normalizeGreenhouse(
     const districts = [...new Set(found.map((c) => c.district))];
     const id = `${source.id}-${row['id']}`,
       content = plainText(row['content']);
-    jobs.set(id, {
+    const job: Job = {
       id,
       title,
       company: source.company,
@@ -127,12 +129,80 @@ export function normalizeGreenhouse(
         applicationUrl: url.href,
         updatedAt: new Date(updated).toISOString(),
         fetchedAt: at,
+        publishedAt: Number.isFinite(Date.parse(text(row['first_published'])))
+          ? new Date(text(row['first_published'])).toISOString()
+          : undefined,
         location,
         active: true,
         classification:
-          'תחום לפי כותרת; נקודות עירוניות משוערות בלבד. סגנון עבודה רק כשנמסר במיקום המקור.',
+          'תחום לפי כותרת; נקודות עירוניות משוערות בלבד. אופן עבודה לפי מידע מפורש במקור; סתירות נשארות לבירור.',
       },
-    });
+    };
+    enrichJob(job);
+    const ranges = Array.isArray(row['pay_input_ranges'])
+      ? (row['pay_input_ranges'] as Record<string, unknown>[])
+      : [];
+    if (ranges.length === 1) {
+      const r = ranges[0],
+        title = text(r['title']);
+      const period = /annual|yearly|per year/i.test(title)
+        ? 'year'
+        : /monthly|per month/i.test(title)
+          ? 'month'
+          : /hourly|per hour/i.test(title)
+            ? 'hour'
+            : null;
+      if (
+        typeof r['min_cents'] === 'number' &&
+        typeof r['max_cents'] === 'number' &&
+        r['min_cents'] >= 0 &&
+        r['max_cents'] >= r['min_cents'] &&
+        r['max_cents'] <= 10_000_000_000 &&
+        /^[A-Z]{3}$/.test(text(r['currency_type'])) &&
+        period
+      )
+        job.facts!.salary = sourceEvidence(
+          job,
+          {
+            min: r['min_cents'] / 100,
+            max: r['max_cents'] / 100,
+            currency: text(r['currency_type']),
+            period,
+            origin: /estimat/i.test(title) ? 'estimated' : 'employer',
+          },
+          `${title} ${r['min_cents'] / 100}-${r['max_cents'] / 100} ${r['currency_type']}`,
+          'supplied',
+        );
+    }
+    if (Number.isFinite(Date.parse(text(row['application_deadline']))))
+      job.facts!.deadline = sourceEvidence(
+        job,
+        new Date(text(row['application_deadline'])).toISOString(),
+        text(row['application_deadline']),
+        'supplied',
+      );
+    if (text(row['requisition_id'])) job.facts!.requisitionId = text(row['requisition_id']);
+    const metadata = Array.isArray(row['metadata'])
+      ? (row['metadata'] as Record<string, unknown>[])
+      : [];
+    for (const m of metadata) {
+      const name = text(m['name']),
+        value = text(m['value']).toLowerCase();
+      if (
+        /workplace|work style|work model|working model/i.test(name) &&
+        /^(?:hybrid|remote|onsite|on-site)$/.test(value)
+      ) {
+        job.facts!.workArrangements!.push(
+          sourceEvidence(
+            job,
+            value === 'on-site' ? 'onsite' : (value as 'hybrid' | 'remote' | 'onsite'),
+            `${name}: ${value}`,
+            'supplied',
+          ),
+        );
+      }
+    }
+    jobs.set(id, enrichJob(job));
   }
   return [...jobs.values()];
 }

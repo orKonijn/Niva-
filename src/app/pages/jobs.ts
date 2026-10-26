@@ -209,11 +209,95 @@ export class Jobs {
       replaceUrl,
     });
   }
+  readonly qaSearch = computed(() =>
+    /\bqa\b|sdet|test automation|quality assurance/i.test(this.query()),
+  );
+  readonly countryCounts = computed(() => ({
+    known: this.filtered().filter((j) => !!j.facts?.applicantCountries).length,
+    unknown: this.filtered().filter((j) => !j.facts?.applicantCountries).length,
+  }));
+  readonly activeFilters = computed(() => {
+    const labels: Record<string, string> = {
+      q: 'חיפוש',
+      category: 'תחום',
+      district: 'מחוז',
+      styles: 'אופן עבודה',
+      country: 'מדינת מועמד',
+      remoteScope: 'מדינה מרחוק',
+      salaryMin: 'שכר מינימום',
+      currency: 'מטבע',
+      period: 'תקופת שכר',
+      seniority: 'ותק',
+      employment: 'סוג העסקה',
+      provider: 'מקור',
+      missing: 'הסתרת מידע חסר',
+      unknownStyle: 'אופן עבודה שלא נמסר',
+      eligibility: 'זכאות',
+      location: 'מיקום בעולם',
+      since: 'פורסם מאז',
+      saved: 'משרות שמורות',
+      scope: 'העדפות אישיות',
+      related: 'QA קרוב',
+      area: 'הרחבת מיקום',
+    };
+    return Object.entries(labels).flatMap(([key, label]) => {
+      const value = this.params().get(key);
+      if (
+        !value ||
+        ['all', ''].includes(value) ||
+        (value === 'false' && key !== 'unknownStyle') ||
+        (key === 'scope' && value !== 'personal') ||
+        (key === 'unknownStyle' && value !== 'false')
+      )
+        return [];
+      const display =
+        key === 'category'
+          ? categoryLabel(value as never)
+          : key === 'district'
+            ? districtLabel(value as never)
+            : key === 'styles'
+              ? workStylesLabel(normalizeWorkStyles(value))
+              : key === 'unknownStyle' || (key === 'missing' && value === 'hide')
+                ? 'מוסתר'
+                : key === 'provider'
+                  ? (this.sources.find((s) => s.id === value)?.name ?? value)
+                  : ((
+                      {
+                        true: 'פעיל',
+                        personal: 'פעילות',
+                        year: 'שנה',
+                        month: 'חודש',
+                        hour: 'שעה',
+                        blocked: 'חסם מפורש',
+                        confirmation: 'נדרש בירור',
+                        clear: 'ללא חסם ידוע',
+                        known: 'ידועה',
+                        unknown: 'לא ידועה',
+                        junior: 'ג׳וניור',
+                        senior: 'בכיר',
+                        lead: 'מוביל',
+                        principal: 'ראשי',
+                        director: 'מנהל תחום',
+                        manager: 'מנהל',
+                        intern: 'התמחות',
+                      } as Record<string, string>
+                    )[value] ?? value);
+      return [{ key, label: `${label}: ${display}` }];
+    });
+  });
+  removeFilter(key: string) {
+    this.setFilter({
+      [key]: key === 'scope' ? 'all' : null,
+      ...(key === 'salaryMin' ? { currency: null, period: null } : {}),
+    });
+  }
   readonly emptyExplanation = computed(() => {
     if (this.store.catalogMode() !== 'real')
       return 'אלה משרות לדוגמה בלבד. אפשר לשנות את הסינון ולנסות חיפוש אחר.';
     if (this.store.jobsError() || this.store.sourceHealth().some((s) => s.error))
       return 'לא הצלחנו לבדוק חלק מאתרי המעסיקים. ייתכן שיש משרות שלא מוצגות כרגע. אפשר לרענן או לבדוק ישירות באתר המעסיק.';
+    if (this.activeFilters().length)
+      return 'הצירוף של הסינונים הפעילים לא החזיר משרות. כל הסינונים מוצגים מעל התוצאות וניתן להסיר כל אחד בנפרד. הסתרת מידע חסר מסירה גם שכר או זכאות שאינם מאומתים; אין המרת מטבע או תקופה אוטומטית.';
     const coverage = this.store.coverage();
     const p = this.store.preferences();
     const category = this.category() === 'all' ? p.role : this.category();

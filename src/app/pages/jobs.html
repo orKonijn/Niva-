@@ -8,182 +8,18 @@
     class="button inline-flex items-center gap-[13px] rounded-[12px] font-semibold leading-[1.5] button-outline bg-surface text-ink border-line enabled:hover:bg-pale button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
     ><niva-icon name="settings" /> העדפות חיפוש</a
   >
+  <a class="account-button" href="#job-results">לתוצאות החיפוש</a>
 </niva-page-heading>
-<section class="mb-5 rounded-card border border-line bg-surface p-5" aria-label="מקור המשרות">
-  @if (!store.session.config().realJobs || store.catalogMode() === 'demo') {
-    <div class="mb-3 flex flex-wrap gap-3">
-      <button
-        type="button"
-        class="account-button"
-        [attr.aria-pressed]="store.catalogMode() === 'real'"
-        (click)="store.useCatalog('real'); setFilter({ source: 'real' })"
-      >
-        משרות אמיתיות
-      </button>
-      <button
-        type="button"
-        class="account-button"
-        [attr.aria-pressed]="store.catalogMode() === 'demo'"
-        (click)="store.useCatalog('demo'); setFilter({ source: 'demo' })"
-      >
-        נתוני הדגמה
-      </button>
-    </div>
-  } @else {
-    <h2 class="mb-3 text-lg">משרות מהלוחות המחוברים</h2>
-  }
-  @if (store.catalogMode() === 'real') {
-    <p class="mb-2 text-sm">
-      המשרות מגיעות מלוחות מעסיקים ב־Greenhouse וב־Lever בישראל ובמדינות נוספות, ומלוח המשרות מרחוק
-      Jobicy. הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן שנדרש
-      חשבון.
-    </p>
-    <p class="mb-2 text-xs">
-      תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו. כברירת מחדל מוצגות גם
-      משרות שהמידע הזה חסר בהן, עם סימון ברור שהפרט לא נמסר. משרה ששמרת תישאר ברשימה שלך גם אם הוסרה
-      מאתר המעסיק.
-    </p>
-    @if (store.feedCheckedAt()) {
-      <p class="text-xs mb-2">
-        בדיקה אחרונה: <bdi>{{ store.feedCheckedAt() }}</bdi
-        >{{ store.feedStale() ? ' · מוצג עותק קודם; יש לבדוק זמינות באתר המקור.' : '' }}
-      </p>
-    }
-    <button
-      type="button"
-      class="account-button"
-      [disabled]="store.jobsLoading()"
-      (click)="store.refreshJobs()"
-    >
-      {{ store.jobsLoading() ? 'בודקים עדכונים…' : 'רענון משרות' }}
-    </button>
-    @if (store.session.config().discovery) {
-      <p class="mt-3 text-xs">
-        בכל כניסה או רענון נבדק המטמון המשותף ומעודכנים מקורות שהגיע מועד בדיקתם: לוחות מעסיקים
-        כשחלפו לפחות 15 דקות מהבדיקה הקודמת; Jobicy לא יותר מפעם בשעה (עיכוב מקור של 3 שעות). המידע
-        אינו חיפוש בכל שוק העבודה. תקלות ומגבלות מקור משאירות עותק קודם עם מועד הבדיקה האחרון.
-      </p>
-      <details class="mt-3">
-        <summary class="cursor-pointer text-sm">
-          מקורות ומועדי בדיקה ({{ store.sourceHealth().length }})
-        </summary>
-        @for (source of store.sourceHealth(); track source.id) {
-          <p class="text-xs">
-            <bdi>{{ source.name || source.id }}</bdi
-            >:
-            {{
-              source.error
-                ? 'העדכון נכשל; מוצג המידע האחרון'
-                : source.checked_at
-                  ? 'נבדק'
-                  : 'טרם נבדק'
-            }}
-            <bdi>{{ source.checked_at }}</bdi>
-            @if (source.partial) {
-              <span>
-                {{
-                  source.id.startsWith('jsearch-')
-                    ? ' · כיסוי חלקי דרך JSearch: עמוד אחד לכל שוק, בתל אביב, ניו יורק ולונדון; עדכון יומי במסגרת התוכנית החינמית.'
-                    : ' · כיסוי חלקי ומתגלגל: עד 1,000 המשרות האחרונות בסבב; ייתכנו משרות נוספות באתר המקור.'
-                }}</span
-              >
-            }
-          </p>
-        }
-      </details>
-      @if (store.feedChanged()) {
-        <p role="status">
-          יש שינוי במאגר שעשוי להשפיע על התוצאות.
-          <button
-            class="account-button"
-            [disabled]="store.jobsLoading()"
-            (click)="store.loadJobs()"
-          >
-            הצגת התוצאות המעודכנות
-          </button>
-        </p>
-      }
-    }
-    @if (store.jobsError()) {
-      <p role="alert" class="form-error mt-3">{{ store.jobsError() }}</p>
-    }
-    @if (!store.isAccount()) {
-      <a class="text-brand underline ms-4" routerLink="/login">כניסה לשמירה בחשבון</a>
-    }
-  } @else {
-    <p class="mb-0 text-sm">משרות וחברות לדוגמה בלבד. נתוני ההדגמה אינם נכללים במשרות האמיתיות.</p>
-  }
-</section>
-@if (store.isAccount() && store.accountReady()) {
-  <section class="account-panel mb-4" aria-label="העדפות החיפוש ששמרת">
-    <h2 class="mb-2 text-base">
-      {{ browseAll() ? 'כל המשרות והמיקומים' : 'העדפות החיפוש ששמרת' }}
-    </h2>
-    <p>ההעדפות השמורות שלך: {{ savedPreferencesSummary() }}</p>
-    <p class="text-sm">
-      {{
-        browseAll()
-          ? 'במצב כל המשרות ההעדפות השמורות אינן מצמצמות את התחום, המיקום או אופן העבודה. אפשר לעבור לתצוגה האישית בכל רגע.'
-          : 'הסינון בעמוד נוסף להעדפות האלה. אופן עבודה שלא נמסר אינו סתירה להעדפות ואינו התאמה מאומתת.'
-      }}
-    </p>
-    <a routerLink="/app/preferences" class="text-brand underline">עדכון ההעדפות השמורות</a>
-  </section>
+@if (store.jobsError()) {
+  <p class="form-error" role="alert">
+    {{ store.jobsError() }}
+    <button class="account-button" (click)="store.refreshJobs()">ניסיון חוזר לחיפוש</button>
+  </p>
 }
-@if (store.catalogMode() === 'real') {
-  <section class="account-panel mb-4" aria-label="חיפוש באתרי משרות נוספים">
-    <h2 class="mb-2 text-base">עוד מקורות לחיפוש</h2>
-    @if (publisherFeeds().length) {
-      <button
-        class="account-button account-primary"
-        (click)="setFilter({ provider: 'jsearch' })"
-        [attr.aria-pressed]="params().get('provider') === 'jsearch'"
-      >
-        משרות LinkedIn ו־Indeed כאן באתר
-      </button>
-      <p class="text-sm" role="status">
-        משרות מ־LinkedIn ומ־Indeed מופיעות ברשימה כאן דרך JSearch, עם שם המקור וקישור למשרה עצמה.
-      </p>
-      <p class="text-xs">
-        הכיסוי חלקי: תוצאות נבחרות מתל אביב, ניו יורק ולונדון, בעדכון יומי בהתאם למכסת הספק. רענון
-        העמוד מציג את התוצאות השמורות עד העדכון הבא. זמינות ההגשה נבדקת באתר המקור.
-      </p>
-      @for (feed of publisherFeeds(); track feed.id) {
-        <p class="text-xs">
-          <bdi>{{ feed.name }}</bdi
-          >:
-          {{
-            feed.error
-              ? 'העדכון לא הצליח; מוצגות תוצאות קודמות אם קיימות'
-              : feed.checked_at
-                ? 'מחובר · העדכון הושלם'
-                : 'החיפוש הראשון עדיין בבדיקה'
-          }}
-        </p>
-      }
-    } @else {
-      <p class="text-sm">
-        LinkedIn ו־Indeed נפתחים באתר המקור. התוצאות שלהם אינן מיובאות אוטומטית ל־Niva; חיבור כזה
-        דורש הרשאת ספק מתאימה.
-      </p>
-    }
-    <div class="career-actions">
-      <a
-        class="account-button"
-        [href]="externalSearch('linkedin')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >חיפוש משרות ב־LinkedIn (אתר חיצוני)</a
-      ><a
-        class="account-button"
-        [href]="externalSearch('indeed')"
-        target="_blank"
-        rel="noopener noreferrer"
-        >חיפוש משרות ב־Indeed (אתר חיצוני)</a
-      >
-    </div>
-  </section>
+@if (store.feedStale()) {
+  <p role="status">מוצג עותק קודם; עדכון מקור נכשל או טרם הושלם. יש לבדוק זמינות באתר המקור.</p>
 }
+
 <div
   class="filter-panel grid grid-cols-[minmax(0,1.35fr)_repeat(2,minmax(0,1fr))] items-start gap-5 bg-surface p-5 rounded-[16px] max-[901px]:grid-cols-1 max-[768px]:p-[15px]"
 >
@@ -191,6 +27,7 @@
     ><span>חיפוש תפקיד או חברה</span
     ><span class="search-input flex items-center gap-[12px] text-muted">
       <niva-icon name="search" /><input
+        id="job-search"
         aria-label="חיפוש תפקיד או חברה"
         placeholder="שם תפקיד או חברה"
         [ngModel]="query()"
@@ -258,6 +95,29 @@
   />
   לכלול סגנון עבודה שלא נמסר</label
 >
+@if (activeFilters().length) {
+  <div class="mb-4 flex flex-wrap gap-2" aria-label="הסינון הפעיל">
+    @for (filter of activeFilters(); track filter.key) {
+      <button
+        class="account-button max-w-full break-words"
+        [attr.aria-label]="'הסרת סינון: ' + filter.label"
+        (click)="removeFilter(filter.key)"
+      >
+        {{ filter.label }} ×
+      </button>
+    }
+  </div>
+}
+@if (qaSearch()) {
+  <div class="mb-4 flex flex-wrap gap-2" aria-label="כותרות QA נוספות">
+    <span>כותרות נוספות לבדיקה:</span>
+    @for (title of ['SDET', 'Software Engineer in Test', 'Test Automation']; track title) {
+      <button class="account-button" (click)="setFilter({ q: title, category: 'qa-automation' })">
+        {{ title }}
+      </button>
+    }
+  </div>
+}
 <details class="account-panel mb-4">
   <summary class="cursor-pointer min-h-11">זכאות, מקור וסינון נוסף</summary>
   <div class="grid grid-cols-3 gap-4 max-[901px]:grid-cols-1">
@@ -382,7 +242,7 @@
       : 'הסינון כאן נוסף להעדפות ששמרת. אפשר להרחיב מיקום או תפקידי QA במפורש בלי לשנות את הפרופיל.'
   }}
 </p>
-<div class="section-row flex flex-wrap items-center justify-between gap-[20px]">
+<div id="job-results" class="section-row flex flex-wrap items-center justify-between gap-[20px]">
   <div class="segmented flex flex-wrap gap-[4px]" aria-label="תצוגת משרות">
     <button
       [class.selected]="
@@ -472,6 +332,10 @@
     הרשימה והמפה משתמשות באותן תוצאות שנטענו. משרות ללא קואורדינטות מוצגות בסיכום המפה.
   </p>
 }
+<p class="mb-3 text-sm">
+  בתוצאות שנטענו: {{ countryCounts().known }} עם מדינות שצוינו במקור;
+  {{ countryCounts().unknown }} ללא מדינה מאומתת. אלה אינם אישור עבודה או התחייבות להעסקה.
+</p>
 @if (mapView()) {
   <niva-job-map [jobs]="filtered()" />
 }
@@ -521,3 +385,182 @@
     }
   </div>
 }
+
+<details class="account-panel mt-6" open>
+  <summary class="cursor-pointer min-h-11">מקורות, כיסוי והעדפות שמורות</summary>
+  <section class="mb-5 rounded-card border border-line bg-surface p-5" aria-label="מקור המשרות">
+    @if (!store.session.config().realJobs || store.catalogMode() === 'demo') {
+      <div class="mb-3 flex flex-wrap gap-3">
+        <button
+          type="button"
+          class="account-button"
+          [attr.aria-pressed]="store.catalogMode() === 'real'"
+          (click)="store.useCatalog('real'); setFilter({ source: 'real' })"
+        >
+          משרות אמיתיות
+        </button>
+        <button
+          type="button"
+          class="account-button"
+          [attr.aria-pressed]="store.catalogMode() === 'demo'"
+          (click)="store.useCatalog('demo'); setFilter({ source: 'demo' })"
+        >
+          נתוני הדגמה
+        </button>
+      </div>
+    } @else {
+      <h2 class="mb-3 text-lg">משרות מהלוחות המחוברים</h2>
+    }
+    @if (store.catalogMode() === 'real') {
+      <p class="mb-2 text-sm">
+        המשרות מגיעות מלוחות מעסיקים ב־Greenhouse וב־Lever בישראל ובמדינות נוספות, ומלוח המשרות
+        מרחוק Jobicy. הרשימה אינה כוללת את כל המשרות בשוק. מגישים מועמדות באתר המקור; ב־Jobicy ייתכן
+        שנדרש חשבון.
+      </p>
+      <p class="mb-2 text-xs">
+        תחום המשרה נקבע לפי שם התפקיד. אופן העבודה מוצג רק אם המעסיק ציין אותו. כברירת מחדל מוצגות
+        גם משרות שהמידע הזה חסר בהן, עם סימון ברור שהפרט לא נמסר. משרה ששמרת תישאר ברשימה שלך גם אם
+        הוסרה מאתר המעסיק.
+      </p>
+      @if (store.feedCheckedAt()) {
+        <p class="text-xs mb-2">
+          בדיקת מקור אחרונה: <bdi>{{ store.feedCheckedAt() }}</bdi>
+        </p>
+      }
+      <button
+        type="button"
+        class="account-button"
+        [disabled]="store.jobsLoading()"
+        (click)="store.refreshJobs()"
+      >
+        {{ store.jobsLoading() ? 'בודקים עדכונים…' : 'רענון משרות' }}
+      </button>
+      @if (store.session.config().discovery) {
+        <p class="mt-3 text-xs">
+          בכל כניסה או רענון נבדק המטמון המשותף ומעודכנים מקורות שהגיע מועד בדיקתם: לוחות מעסיקים
+          כשחלפו לפחות 15 דקות מהבדיקה הקודמת; Jobicy לא יותר מפעם בשעה (עיכוב מקור של 3 שעות).
+          המידע אינו חיפוש בכל שוק העבודה. תקלות ומגבלות מקור משאירות עותק קודם עם מועד הבדיקה
+          האחרון.
+        </p>
+        <details class="mt-3">
+          <summary class="cursor-pointer text-sm">
+            מקורות ומועדי בדיקה ({{ store.sourceHealth().length }})
+          </summary>
+          @for (source of store.sourceHealth(); track source.id) {
+            <p class="text-xs">
+              <bdi>{{ source.name || source.id }}</bdi
+              >:
+              {{
+                source.error
+                  ? 'העדכון נכשל; מוצג המידע האחרון'
+                  : source.checked_at
+                    ? 'נבדק'
+                    : 'טרם נבדק'
+              }}
+              <bdi>{{ source.checked_at }}</bdi>
+              @if (source.partial) {
+                <span>
+                  {{
+                    source.id.startsWith('jsearch-')
+                      ? ' · כיסוי חלקי דרך JSearch: עמוד אחד לכל שוק, בתל אביב, ניו יורק ולונדון; עדכון יומי במסגרת התוכנית החינמית.'
+                      : ' · כיסוי חלקי ומתגלגל: עד 1,000 המשרות האחרונות בסבב; ייתכנו משרות נוספות באתר המקור.'
+                  }}</span
+                >
+              }
+            </p>
+          }
+        </details>
+        @if (store.feedChanged()) {
+          <p role="status">
+            יש שינוי במאגר שעשוי להשפיע על התוצאות.
+            <button
+              class="account-button"
+              [disabled]="store.jobsLoading()"
+              (click)="store.loadJobs()"
+            >
+              הצגת התוצאות המעודכנות
+            </button>
+          </p>
+        }
+      }
+
+      @if (!store.isAccount()) {
+        <a class="text-brand underline ms-4" routerLink="/login">כניסה לשמירה בחשבון</a>
+      }
+    } @else {
+      <p class="mb-0 text-sm">
+        משרות וחברות לדוגמה בלבד. נתוני ההדגמה אינם נכללים במשרות האמיתיות.
+      </p>
+    }
+  </section>
+  @if (store.isAccount() && store.accountReady()) {
+    <section class="account-panel mb-4" aria-label="העדפות החיפוש ששמרת">
+      <h2 class="mb-2 text-base">
+        {{ browseAll() ? 'כל המשרות והמיקומים' : 'העדפות החיפוש ששמרת' }}
+      </h2>
+      <p>ההעדפות השמורות שלך: {{ savedPreferencesSummary() }}</p>
+      <p class="text-sm">
+        {{
+          browseAll()
+            ? 'במצב כל המשרות ההעדפות השמורות אינן מצמצמות את התחום, המיקום או אופן העבודה. אפשר לעבור לתצוגה האישית בכל רגע.'
+            : 'הסינון בעמוד נוסף להעדפות האלה. אופן עבודה שלא נמסר אינו סתירה להעדפות ואינו התאמה מאומתת.'
+        }}
+      </p>
+      <a routerLink="/app/preferences" class="text-brand underline">עדכון ההעדפות השמורות</a>
+    </section>
+  }
+  @if (store.catalogMode() === 'real') {
+    <section class="account-panel mb-4" aria-label="חיפוש באתרי משרות נוספים">
+      <h2 class="mb-2 text-base">עוד מקורות לחיפוש</h2>
+      @if (publisherFeeds().length) {
+        <button
+          class="account-button account-primary"
+          (click)="setFilter({ provider: 'jsearch' })"
+          [attr.aria-pressed]="params().get('provider') === 'jsearch'"
+        >
+          משרות LinkedIn ו־Indeed כאן באתר
+        </button>
+        <p class="text-sm" role="status">
+          משרות מ־LinkedIn ומ־Indeed מופיעות ברשימה כאן דרך JSearch, עם שם המקור וקישור למשרה עצמה.
+        </p>
+        <p class="text-xs">
+          הכיסוי חלקי: תוצאות נבחרות מתל אביב, ניו יורק ולונדון, בעדכון יומי בהתאם למכסת הספק. רענון
+          העמוד מציג את התוצאות השמורות עד העדכון הבא. זמינות ההגשה נבדקת באתר המקור.
+        </p>
+        @for (feed of publisherFeeds(); track feed.id) {
+          <p class="text-xs">
+            <bdi>{{ feed.name }}</bdi
+            >:
+            {{
+              feed.error
+                ? 'העדכון לא הצליח; מוצגות תוצאות קודמות אם קיימות'
+                : feed.checked_at
+                  ? 'מחובר · העדכון הושלם'
+                  : 'החיפוש הראשון עדיין בבדיקה'
+            }}
+          </p>
+        }
+      } @else {
+        <p class="text-sm">
+          LinkedIn ו־Indeed נפתחים באתר המקור. התוצאות שלהם אינן מיובאות אוטומטית ל־Niva; חיבור כזה
+          דורש הרשאת ספק מתאימה.
+        </p>
+      }
+      <div class="career-actions">
+        <a
+          class="account-button"
+          [href]="externalSearch('linkedin')"
+          target="_blank"
+          rel="noopener noreferrer"
+          >חיפוש משרות ב־LinkedIn (אתר חיצוני)</a
+        ><a
+          class="account-button"
+          [href]="externalSearch('indeed')"
+          target="_blank"
+          rel="noopener noreferrer"
+          >חיפוש משרות ב־Indeed (אתר חיצוני)</a
+        >
+      </div>
+    </section>
+  }
+</details>

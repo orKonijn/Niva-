@@ -1,3 +1,4 @@
+import { payLabel } from '../core/pay-label';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { MatchIndicator } from './match-indicator';
 import { RouterLink } from '@angular/router';
@@ -15,5 +16,6 @@ export class JobCard {
   readonly job = input.required<Job>();
   readonly districtLabel = districtLabel;
   readonly workStyleLabel = workStyleLabel;
+  readonly payLabel = payLabel;
   readonly store = inject(AppStore);
 }

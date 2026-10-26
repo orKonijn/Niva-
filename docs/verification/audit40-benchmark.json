@@ -1,0 +1,32 @@
+[
+  {
+    "size": 100,
+    "total": 100,
+    "latencyMs": 54.436200000000014,
+    "rowsRead": 310,
+    "serializedBytes": 840965,
+    "baselineHeap": 10920920,
+    "sampledMaxHeap": 19338432,
+    "heapDelta": 8417512
+  },
+  {
+    "size": 1000,
+    "total": 1000,
+    "latencyMs": 91.75320000000005,
+    "rowsRead": 2110,
+    "serializedBytes": 3206992,
+    "baselineHeap": 11844936,
+    "sampledMaxHeap": 22686936,
+    "heapDelta": 10842000
+  },
+  {
+    "size": 5000,
+    "total": 5000,
+    "latencyMs": 428.2229,
+    "rowsRead": 10110,
+    "serializedBytes": 13722633,
+    "baselineHeap": 11880408,
+    "sampledMaxHeap": 36089832,
+    "heapDelta": 24209424
+  }
+]

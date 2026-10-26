@@ -83,6 +83,16 @@
       @if (job.id.startsWith('jobicy-')) {
         <p>Jobicy: עיכוב מקור של 3 שעות, ייתכן שנדרש חשבון אצל המקור.</p>
       }
+      <p>שכר: {{ payLabel(job) }}</p>
+      @if (job.facts?.salaryText; as pay) {
+        <p class="text-sm" dir="auto">עדות מקור לשכר: {{ pay.quote }}</p>
+      }
+      @if (job.facts?.workArrangementConflict) {
+        <p>אופן העבודה סותר בפרטי המקור; נשאר לא ידוע עד לבירור.</p>
+      }
+      @for (arrangement of job.facts?.workArrangements ?? []; track $index) {
+        <p class="text-sm" dir="auto">אופן עבודה במקור: {{ arrangement.quote }}</p>
+      }
       <p>
         מועד אחרון: {{ job.facts?.deadline?.value || 'לא נמסר' }} · נראה לראשונה:
         {{ source.firstSeenAt || 'לא ידוע (רשומה קודמת)' }}
@@ -205,7 +215,7 @@
       class="panel bg-surface rounded-[20px] p-[32px] max-[768px]:p-[24px_20px] max-[768px]:rounded-[16px]"
     >
       <h2>קצת על התפקיד</h2>
-      <p class="whitespace-pre-line" dir="auto">{{ job.description }}</p>
+      <niva-job-description [text]="job.description" />
       @if (!job.source) {
         <h3>מה מביאים לתפקיד?</h3>
         <div class="skills flex gap-[8px] flex-wrap">

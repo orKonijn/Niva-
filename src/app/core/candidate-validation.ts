@@ -22,7 +22,12 @@ export function normalizeCriteria(input: unknown): CandidateCriteria {
       throw Error('INVALID_CRITERIA');
     value[key] = [...new Set((rows as string[]).map((x) => x.trim()).filter(Boolean))];
   }
-  for (const key of ['currentCountry', 'authorizationCountry', 'currency'] as const) {
+  for (const key of [
+    'currentCountry',
+    'authorizationCountry',
+    'citizenshipCountry',
+    'currency',
+  ] as const) {
     const v = raw[key];
     if (
       v != null &&
@@ -30,7 +35,7 @@ export function normalizeCriteria(input: unknown): CandidateCriteria {
         !new RegExp(key === 'currency' ? '^[A-Z]{3}$' : '^[A-Z]{2}$').test(v))
     )
       throw Error('INVALID_CRITERIA');
-    value[key] = v as string | null;
+    value[key] = (v ?? null) as string | null;
   }
   for (const key of ['yearsExperience', 'salaryMin'] as const) {
     const v = raw[key];
@@ -59,5 +64,19 @@ export function normalizeCriteria(input: unknown): CandidateCriteria {
   )
     throw Error('INVALID_CRITERIA');
   value.timezone = raw['timezone'] as string | null;
+  if (raw['authorizationExclusive'] != null && typeof raw['authorizationExclusive'] !== 'boolean')
+    throw Error('INVALID_CRITERIA');
+  value.authorizationExclusive = raw['authorizationExclusive'] === true;
+  const status = raw['citizenshipStatus'] ?? 'unknown';
+  if (!['unknown', 'citizen', 'not-citizen'].includes(String(status)))
+    throw Error('INVALID_CRITERIA');
+  value.citizenshipStatus = status as CandidateCriteria['citizenshipStatus'];
+  if (
+    value.authorizationExclusive &&
+    (!value.authorizationCountry || value.workAuthorization !== 'authorized')
+  )
+    throw Error('INVALID_CRITERIA');
+  if (value.citizenshipStatus !== 'unknown' && !value.citizenshipCountry)
+    throw Error('INVALID_CRITERIA');
   return value;
 }

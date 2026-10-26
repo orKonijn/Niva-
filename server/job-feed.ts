@@ -1,5 +1,6 @@
 import type { Job } from '../src/app/core/models/job';
 import type { Category } from '../src/app/core/preferences';
+import { descriptionText } from '../src/app/core/description-text';
 
 export const FEED_URL = 'https://boards-api.greenhouse.io/v1/boards/appsflyer/jobs?content=true';
 export const EMPLOYER_URL = 'https://careers.appsflyer.com/';
@@ -12,17 +13,7 @@ export interface Feed {
 const text = (value: unknown) => (typeof value === 'string' ? value : '');
 // Display provider content as text, never injected HTML. Decode only common text entities.
 export function plainText(value: unknown): string {
-  return text(value)
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#(?:39|x27);/g, "'")
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 18000);
+  return descriptionText(value);
 }
 export function classify(title: string): Category | 'other' {
   if (

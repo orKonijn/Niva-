@@ -64,7 +64,7 @@ export function passesDiscovery(
     const s = f?.salary?.value;
     const comparable =
       s &&
-      s.origin === 'employer' &&
+      (s.origin === 'employer' || s.origin === 'estimated') &&
       s.currency === query.currency &&
       s.period === query.period &&
       (s.max ?? s.min) != null;

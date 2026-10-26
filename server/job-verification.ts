@@ -44,7 +44,7 @@ export async function verifyJob(db: CareerDb, job: Job, now = Date.now()): Promi
   try {
     const url =
       source.provider === 'greenhouse'
-        ? `https://boards-api.greenhouse.io/v1/boards/${source.board}/jobs/${id}`
+        ? `https://boards-api.greenhouse.io/v1/boards/${source.board}/jobs/${id}?pay_transparency=true`
         : source.provider === 'lever'
           ? `https://api.lever.co/v0/postings/${source.board}/${id}?mode=json`
           : `https://jobicy.com/api/jobs/status?ids=${id}`;

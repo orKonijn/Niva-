@@ -167,7 +167,9 @@ for (const theme of ['light', 'dark'] as const)
         await expect(page.locator('niva-job-card')).toHaveCount(1);
         // Additional on-site map scenario; captured pairs above retain the original remote fixture.
         sql
-          .prepare("UPDATE niva_jobs SET style='onsite',data=json_set(data,'$.workStyle','onsite')")
+          .prepare(
+            "UPDATE niva_jobs SET style='onsite',data=json_remove(json_set(data,'$.workStyle','onsite'),'$.facts.workArrangements','$.facts.workArrangementConflict')",
+          )
           .run();
         await page.reload();
         await expect(page.locator('niva-job-card')).toHaveCount(1);

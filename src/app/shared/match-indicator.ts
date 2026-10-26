@@ -40,10 +40,19 @@ import { CareerStore } from '../core/career-store';
     @for (question of assessment().questions; track question) {
       <p>{{ question }}</p>
     }
+    @if (job().facts?.citizenshipCountry; as citizen) {
+      <p dir="auto">דרישת אזרחות במקור: {{ citizen.quote }}</p>
+    }
+    @for (skill of job().facts?.requiredSkills ?? []; track $index) {
+      <p dir="auto">דרישה: {{ skill.value }} — {{ skill.quote }}</p>
+    }
+    @for (skill of job().facts?.preferredSkills ?? []; track $index) {
+      <p dir="auto">יתרון בלבד: {{ skill.value }} — {{ skill.quote }}</p>
+    }
     <a routerLink="/app/profile">עדכון ואישור הפרטים לבדיקת התאמה</a>
     <p>
-      גרסת החישוב: fit-v1 · מחושב מחדש לפי הפרופיל, ההעדפות וקורות החיים הפעילים. רעננות מוצגת
-      בנפרד.
+      גרסת החישוב: {{ assessment().method }} · מחושב מחדש לפי הפרופיל, ההעדפות וקורות החיים הפעילים.
+      רעננות מוצגת בנפרד.
     </p>
     <p>{{ preference().label }} · {{ resume().label }}</p>
     <p>דרישות הסינון הן תנאי להצגה, בנפרד ממונחים בקורות החיים. אין חיזוי סיכויי קבלה.</p>
@@ -53,7 +62,10 @@ import { CareerStore } from '../core/career-store';
     @if (preference().excluded) {
       <p>המעסיק ברשימת ההחרגות.</p>
     }
-    <p>ותק, השכלה ואישורי עבודה אינם נבדקים אוטומטית. יש לבדוק דרישות באתר המקור.</p>
+    <p>
+      ההשוואה משתמשת בפרטים שאישרת ובעדויות שחולצו מהמקור. יש לאמת את הדרישות ואת תנאי ההעסקה באתר
+      המקור.
+    </p>
     @if (career.active(); as active) {
       <p>
         גרסת קורות חיים: <bdi>{{ active.name }} · {{ active.id }}</bdi>
@@ -75,8 +87,8 @@ import { CareerStore } from '../core/career-store';
       <a routerLink="/app/resumes">בדיקה ואישור קורות חיים לקבלת הסבר</a>
     }
     <p>
-      שיטה: evidence-v3. מילון מונחים מוגבל בעברית ובאנגלית; סעיפים עם שלילה או אי־ודאות אינם נחשבים
-      עדות חיובית; אזכור אינו הוכחת מומחיות. גרסת משרה:
+      שיטה: {{ resume().method }}. מילון מונחים מוגבל בעברית ובאנגלית; סעיפים עם שלילה או אי־ודאות
+      אינם נחשבים עדות חיובית; אזכור אינו הוכחת מומחיות. גרסת משרה:
       <bdi>{{ job().source?.version || 'מקור נוכחי' }}</bdi
       >.
     </p>
