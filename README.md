@@ -1,6 +1,6 @@
 # Niva
 
-See the [version-by-version changelog](CHANGELOG.md). The latest published Sites release is **version 23** at [getnivajobs.com](https://getnivajobs.com), with 17 employer sources (188 live Israeli jobs at verification), Google sign-in, managed HTTPS and deployment hardening. See the [source expansion and sign-in report](docs/source-expansion-20261025.md). See the [launch status and maintenance runbook](docs/public-launch.md) for live evidence and unavailable integrations. Git-only documentation updates do not create a new hosted version.
+See the [version-by-version changelog](CHANGELOG.md). The latest recorded published Sites release is **version 35**, published **2026-10-25** at [getnivajobs.com](https://getnivajobs.com), adding in-site LinkedIn/Indeed cards through a partial daily JSearch feed. See the [publication receipt](docs/verification/publication-20261025-v35.json) and [connection, coverage and limits](docs/job-discovery/jsearch.md). The semantic package version remains **0.1.0**; Sites saved-version numbers are separate hosting identifiers. Follow the [release-note policy](docs/release-notes-policy.md). Git-only documentation updates do not create a hosted release.
 
 A Hebrew-first job search application built with **Angular 22, TypeScript 6 and Tailwind CSS 4**. The hosted Worker uses verified Sites/ChatGPT identity and D1 for durable account data, with real employer listings, original application links and an approximate city map. The main flow opens source jobs and account features; the legacy demo catalog is retained separately. Hosted sign-in supports Google and ChatGPT as separate accounts; use the original method to access existing records. Apple remains disabled at the user’s request, and hosted email delivery is inactive.
 
@@ -81,7 +81,7 @@ docs/             Specification, design assets and implementation roadmap
 - [Design tokens](docs/design/design-tokens.json)
 - [Tailwind architecture and verification](docs/tailwind-refactor.md)
 
-The production build is in `dist`. The existing private Sites deployment uses a Worker/D1 adapter; Node/SQLite is the local alternative. The reviewed repairs were subsequently published as **Sites version 17**; [the changelog](CHANGELOG.md) records the source mapping and remaining operational limits. Build metadata records checkout and reviewed-source identifiers, dirty state, build time and content digests. See [current operational truth and release gates](docs/current-status.md).
+The production build is in `dist`. The hosted Sites deployment uses a Worker/D1 adapter; Node/SQLite is the local alternative. [The changelog](CHANGELOG.md) and publication receipts record release-specific source mappings and verification limits. Build metadata records checkout and reviewed-source identifiers, dirty state, build time and content digests. See [current operational truth and release gates](docs/current-status.md). Historical guides retain the scope of their original release; they do not establish today's live state.
 
 ## Dependency note
 

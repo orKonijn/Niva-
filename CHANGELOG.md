@@ -1,10 +1,50 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Document how Niva selects semantic application versions, records completed changes and verifies release notes. Keep Sites publication numbers separate from package versions; this documentation update leaves application version `0.1.0` and published Sites version 35 unchanged. See the [release-note policy](docs/release-notes-policy.md).
+- Clarify version 35's existing release notes and align the README/capability summary with its publication receipt. Historical release dates, implementation evidence and assets are preserved. Application behavior and UI are unchanged; no new screenshots or deployment were produced.
+
 ## Version 35 — LinkedIn and Indeed cards through JSearch
 
-- Activate the owner's free JSearch plan and keep its key exclusively in server secrets. Import publisher-verified LinkedIn/Indeed results into normal Niva cards, with original links, source filters, details and existing save/matching behavior. A dedicated in-site button shows both publishers together. External searches remain optional.
-- Share a daily six-page sample across Tel Aviv, New York and London; cap Niva at180 requests/31days. Preserve unknown work style, partial coverage, rolling history and explicit unverified application status. No private CV/account data is sent to the provider. [Connection and limits](docs/job-discovery/jsearch.md). Verification passed:59 frontend tests,124 distinct server tests (123 in the full run plus a new lifetime regression),210 production-browser checks, Worker/provenance checks, three type checks, formatting and production build. Four focused publisher/browser checks also verify the final simplified coverage copy. Published 25 October 2026. [Publication/live verification receipt](docs/verification/publication-20261025-v35.json). Live verified:44 publisher jobs (30 LinkedIn,14 Indeed), both feeds healthy and both detail routes returning200. Register imports with the Worker lifetime so browser cancellation does not cancel public-source work;22 focused server checks plus Worker/type checks passed. The client artifact is unchanged by that focused lifecycle repair. This release record is a post-publication Git-only update.
-- Genuine paired evidence: desktop [light before](docs/screenshots/changes/jsearch-desktop-light/before.png) · [after](docs/screenshots/changes/jsearch-desktop-light/after.png), [dark before](docs/screenshots/changes/jsearch-desktop-dark/before.png) · [after](docs/screenshots/changes/jsearch-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/jsearch-mobile-light/before.png) · [after](docs/screenshots/changes/jsearch-mobile-light/after.png), [dark before](docs/screenshots/changes/jsearch-mobile-dark/before.png) · [after](docs/screenshots/changes/jsearch-mobile-dark/after.png). Synthetic account with short real public listings; no actual private profile or key appears in Git.
+Published **2026-10-25**. LinkedIn and Indeed results can be browsed inside Niva through JSearch, alongside existing job cards. [Publication and live verification receipt](docs/verification/publication-20261025-v35.json).
+
+Highlights:
+
+- Browse both publishers together or filter each separately, then open job details and original application links.
+- Reuse the existing save and matching tools without sending private CV/account content to JSearch.
+- Public-source imports continue through the Worker lifetime when a browser request is canceled.
+
+### Added
+
+- Import results whose publisher attribution and original job-page URL pass the LinkedIn/Indeed checks. A dedicated in-site button opens both publishers together; external searches remain optional. No direct publisher partnership is implied.
+
+### Changed
+
+- Use the owner's configured free JSearch Basic plan with a shared daily sample: one page per publisher in Tel Aviv, New York and London, capped at 180 requests per 31-day budget window. The key remains in server secrets. No candidate action is required to view imported results; [connection and limits](docs/job-discovery/jsearch.md) explain operator configuration and coverage.
+
+### Fixed
+
+- Register public-source imports with the Worker lifetime so canceling a browser request does not cancel the import. The focused repair preserves the client artifact. Contract tests cover lifetime registration and request-signal independence; a production disconnect experiment was not performed.
+
+### Known issues
+
+- The feed is a partial daily sample, not an exhaustive or real-time search of LinkedIn/Indeed. Refresh reuses cached results until the next provider update; the request budget can limit further imports.
+- Missing work arrangements remain unknown, and rolling absence does not establish that a job closed. Original application paths and eligibility remain unverified. Opening a link does not submit an application.
+
+### Verification and visual evidence
+
+Recorded checks passed: 59 frontend tests, 124 distinct server tests (123 in the full run plus one new lifetime regression), 210 browser checks against the production build, Worker/provenance checks, three type checks, formatting and build. Four focused browser checks cover the final coverage copy; 22 focused server checks plus Worker/type checks cover the lifetime repair. These are the recorded release results, not tests rerun for this documentation update.
+
+The publication readback found 44 publisher jobs (30 LinkedIn, 14 Indeed), both feeds healthy and representative detail routes returning HTTP 200. These are **2026-10-25 observations**, not current job-count guarantees. The receipt also records initial publication as Sites version 34 before the version 35 lifetime repair. Clarified on 2026-10-26 without changing the published behavior or creating another hosted release.
+
+![Mobile Niva source panel with the combined LinkedIn and Indeed feed button and partial daily coverage explanation](docs/screenshots/changes/jsearch-mobile-light/after.png)
+
+Existing release capture: the mobile panel distinguishes in-site JSearch results from optional external searches and explains the partial daily sample. No new image was captured for this documentation update.
+
+Preserved genuine comparisons: desktop [light before](docs/screenshots/changes/jsearch-desktop-light/before.png) · [after](docs/screenshots/changes/jsearch-desktop-light/after.png), [dark before](docs/screenshots/changes/jsearch-desktop-dark/before.png) · [after](docs/screenshots/changes/jsearch-desktop-dark/after.png); mobile [light before](docs/screenshots/changes/jsearch-mobile-light/before.png) · [after](docs/screenshots/changes/jsearch-mobile-light/after.png), [dark before](docs/screenshots/changes/jsearch-mobile-dark/before.png) · [after](docs/screenshots/changes/jsearch-mobile-dark/after.png). These use a synthetic account with short real public listings; no private profile or key is shown.
 
 ## Version 33 — All jobs and locations
 
