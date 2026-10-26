@@ -1,0 +1,40 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "version": 36,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_75c8c7c5eac88191b7b3cb930e705000",
+  "deploymentId": "appgdep_6adeebfd18308191b0231e175789b23f",
+  "status": "succeeded",
+  "publishedAt": "2026-10-26T05:58:35.797794+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "sitesCommit": "29064b132489c25dcc2524774bcd5966389d3ebd",
+  "reviewedGithubCommit": "ebcbaa307c97a823750f80296f78ceed4fbf81d8",
+  "applicationVersion": "0.1.0",
+  "audience": "public",
+  "environmentRevision": 7,
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000de5081f4829b0cc8aca3893e",
+    "content_hash": "sha256:73273984008f0d75fa30423313c336f2a66e33693f02b5149527f95a60275d3b",
+    "size_bytes": 13383680,
+    "file_count": 303
+  },
+  "scope": "Documentation-only source publication; changelog/release-policy updates and prior receipt synchronized. Application, configuration and version file bytes preserved.",
+  "verification": {
+    "formattedDocumentationFiles": 5,
+    "repositoryReferences": 219,
+    "runtimeFilesCompared": 203,
+    "mappedSourceVerified": true,
+    "dirty": false,
+    "productionBuild": "passed",
+    "staticClientDigest": "2953f1773fa2659c7d290fcbc24c685db9b2a8c22ce0686349bfb065e3a687f0",
+    "clientDigestUnchangedFromVersion35": true,
+    "canonicalLiveReadback": "HTTP 200 homepage and exact reviewed-source/build metadata matched after publication"
+  },
+  "limitations": [
+    "No new application features or UI changes.",
+    "No new browser journey or real provider/account/CV mutation test was required or performed for this documentation-only publication.",
+    "Changelog and policy are repository/source documentation; no in-app What's New screen was introduced."
+  ],
+  "recordScope": "Post-publication Git-only receipt and release-note reconciliation; no additional hosted version for this record."
+}

@@ -5,10 +5,10 @@ Adopted 2026-10-26. Applies to meaningful development changes and release prepar
 ## Project baseline and versioning
 
 - The application package and lockfile currently identify **0.1.0**. The package is private; no automated semantic-version release workflow is defined.
-- The latest recorded published hosting release is **Sites version 35**, published **2026-10-25**. Its [publication receipt](verification/publication-20261025-v35.json) identifies the deployment, reviewed source, verification scope and limitations. This is recorded release evidence, not a fresh live-service check.
+- The latest recorded published hosting release is **Sites version 36**, published **2026-10-26**, synchronizing this policy and related documentation. Its [publication receipt](verification/publication-20261026-v36.json) identifies the deployment, reviewed source, verification scope and limitations. Application behavior and version `0.1.0` are unchanged. Version 35 remains the preceding feature release; its [receipt](verification/publication-20261025-v35.json) retains the original feature observations.
 - Sites saved-version numbers are hosting identifiers, not semantic application versions or product-major milestones. Preserve the existing `Version N` history and publication receipts. Do not rename version 35 to `35.0.0`, infer `0.35.0`, or reserve version 36 for an unpublished documentation update.
 - For a future actual application release, record the semantic version separately from its Sites identifier, for example `1.2.0 — YYYY-MM-DD` with a verified hosting-release reference. Do not invent a retroactive semantic mapping for historical Sites releases.
-- This policy update is **Unreleased**. The package stays **0.1.0**; no next semantic version or hosting version is assigned because application behavior and supported interfaces are unchanged.
+- This policy was initially committed under `Unreleased`, then published as **Sites version 36** after the user's separate publication instruction. The package stays **0.1.0**; no next semantic application version is assigned because application behavior and supported interfaces are unchanged. The receipt and status reconciliation after publication is a Git-only record, not another deployment.
 
 Choose the next semantic version from the highest-impact change in the entire release, once per release:
 

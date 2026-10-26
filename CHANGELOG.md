@@ -2,10 +2,18 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## Version 36 — Release-note policy and documentation
+
+Published **2026-10-26**. Documentation-only hosting release; the semantic application version remains **0.1.0**. [Publication and live source verification receipt](docs/verification/publication-20261026-v36.json).
+
 ### Changed
 
-- Document how Niva selects semantic application versions, records completed changes and verifies release notes. Keep Sites publication numbers separate from package versions; this documentation update leaves application version `0.1.0` and published Sites version 35 unchanged. See the [release-note policy](docs/release-notes-policy.md).
-- Clarify version 35's existing release notes and align the README/capability summary with its publication receipt. Historical release dates, implementation evidence and assets are preserved. Application behavior and UI are unchanged; no new screenshots or deployment were produced.
+- Document how Niva selects semantic application versions, records completed changes and verifies release notes. Keep Sites publication numbers separate from package versions. See the [release-note policy](docs/release-notes-policy.md).
+- Clarify version 35's existing release notes and align the README/capability summary with its publication receipt. Historical release dates, implementation evidence and assets are preserved. Application behavior and UI are unchanged; no new product screenshots were needed.
+
+The deployed source maps to GitHub commit `ebcbaa307c97a823750f80296f78ceed4fbf81d8`. The production build passed; the client artifact digest matches version 35 exactly, and 203 runtime/configuration/version files were preserved byte-for-byte. Live readback verified the homepage and exact source mapping. Public access, runtime environment revision 7 and package version `0.1.0` are unchanged. This post-publication receipt/release-note reconciliation is a Git-only record, not another hosted release.
 
 ## Version 35 — LinkedIn and Indeed cards through JSearch
 
