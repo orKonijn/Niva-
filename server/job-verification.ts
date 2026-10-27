@@ -6,6 +6,7 @@ import { boundedJson, versionOf, normalizeLever } from './discovery';
 import { normalizeGreenhouse } from './greenhouse-source';
 import { canonicalJobUrl } from '../src/app/core/job-identity';
 import { enrichJob } from './job-facts';
+import { boundedHtml, jobicyDescription } from './jobicy-description';
 const TTL = 900000;
 /** Provider presence and path reachability are distinct. A generic HTML 200 never establishes publication. */
 export async function verifyJob(db: CareerDb, job: Job, now = Date.now()): Promise<Job> {
@@ -83,7 +84,9 @@ export async function verifyJob(db: CareerDb, job: Job, now = Date.now()): Promi
       }
     }
     if (presence) {
-      job.source!.lastVerifiedAt = new Date(now).toISOString();
+      // Jobicy presence comes from the earlier hourly status batch, not this
+      // detail request. Transport/description refresh must not renew that date.
+      if (source.provider !== 'jobicy') job.source!.lastVerifiedAt = new Date(now).toISOString();
       job.source!.availability = 'published';
     } else job.source!.availability = 'unknown';
   } catch {
@@ -100,9 +103,20 @@ export async function verifyJob(db: CareerDb, job: Job, now = Date.now()): Promi
       // Only transport reachability, never form completeness or eligibility.
       status = 'reachable';
       note = 'עמוד המקור נגיש; טופס ההגשה והזכאות לא אושרו';
+      if (source.provider === 'jobicy') {
+        const html = await boundedHtml(response);
+        const recovered = html ? jobicyDescription(html, job) : null;
+        if (recovered) {
+          job = enrichJob({
+            ...job,
+            ...recovered,
+            source: { ...job.source!, descriptionFetchedAt: new Date(now).toISOString() },
+          });
+        }
+      }
     } else if (response.status >= 300 && response.status < 400)
       note = 'המקור הפנה לעמוד אחר; מסלול ההגשה דורש בדיקה';
-    await response.body?.cancel();
+    if (!response.body?.locked) await response.body?.cancel();
   } catch {
     /* Unknown on timeout or blocked requests. */
   }

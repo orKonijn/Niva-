@@ -1,7 +1,7 @@
 import type { Job } from './models/job';
 import { matchesPreferences, type Preferences } from './preferences';
 import { requirementClauses } from './requirements';
-export const MATCH_VERSION = 'evidence-v4';
+export const MATCH_VERSION = 'evidence-v5';
 export const SKILLS: Record<string, RegExp> = {
   JavaScript: /\bjavascript\b|ג׳אווהסקריפט/i,
   TypeScript: /\btypescript\b|טייפסקריפט/i,
@@ -13,6 +13,7 @@ export const SKILLS: Record<string, RegExp> = {
   Angular: /\bangular\b|אנגולר/i,
   React: /\breact\b|ריאקט/i,
   Python: /\bpython\b|פייתון/i,
+  Go: /\bgolang\b|\bGo(?=\s*(?:development|programming|language|engineer|developer|SQL|$|[,/.]))|\b(?:Python\s*(?:or|\/)\s*Go)\b/,
   SQL: /\bsql\b|שאילתות/i,
   Docker: /\bdocker\b|דוקר/i,
   Kubernetes: /\bkubernetes\b|\bk8s\b|קוברנטיס/i,
@@ -118,8 +119,8 @@ export function preferenceMatch(job: Job, p: Preferences) {
             : 'תואם לדרישות הסינון שהוגדרו',
   };
 }
-export function resumeMatch(job: Job, text: string, confirmed: boolean) {
-  const requirements = [
+export function requiredSkillGroups(job: Job): string[][] {
+  const singles = [
     ...new Set(
       job.facts
         ? (job.facts.requiredSkills?.map((e) => e.value) ?? [])
@@ -128,15 +129,26 @@ export function resumeMatch(job: Job, text: string, confirmed: boolean) {
           : skillEvidence(`${job.title}\n${job.description}\n${job.skills.join(' ')}`),
     ),
   ];
+  return [
+    ...singles.map((s) => [s]),
+    ...(job.facts?.requiredSkillAlternatives?.map((e) => e.value) ?? []),
+  ];
+}
+export function resumeMatch(job: Job, text: string, confirmed: boolean) {
+  const groups = requiredSkillGroups(job);
+  const requirements = groups.map((g) => g.join(' / '));
   const evidence = confirmed ? skillEvidence(text) : [];
-  const strengths = requirements.filter((s) => evidence.includes(s));
-  const missing = requirements.filter((s) => !evidence.includes(s));
+  const matched = groups.filter((g) => g.some((s) => evidence.includes(s)));
+  const strengths = matched.map((g) => g.join(' / '));
+  const missing = groups.filter((g) => !matched.includes(g)).map((g) => g.join(' / '));
   // This is a terminology coverage count, never a probability or an inferred qualification.
   return {
     method: MATCH_VERSION,
     comparable: confirmed && requirements.length >= 2,
     strengths,
-    evidence: positiveEvidence(text).filter((e) => confirmed && strengths.includes(e.skill)),
+    evidence: positiveEvidence(text).filter(
+      (e) => confirmed && matched.some((g) => g.includes(e.skill)),
+    ),
     missing,
     label:
       !confirmed || requirements.length < 2

@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-27T14:33:41.522Z",
+  "environment": "Local Node SQLite actual HTTP backend; no mocked identity or account/CV/state routes",
+  "firstTimeOnboarding": true,
+  "pdf": true,
+  "docx": true,
+  "reviewBeforeWrite": true,
+  "preferenceReload": true,
+  "independentAliceSession": true,
+  "saveUnsaveReload": true,
+  "bobCannotExportAlice": true,
+  "redirectStatus": 303,
+  "destination": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+  "loggedClick": true,
+  "externalApplicationRequest": false,
+  "hosted": false
+}

@@ -1,5 +1,6 @@
 import { matchesDistrict, normalizeSearch } from '../core/preferences';
 import { passesDiscovery } from '../core/discovery-filters';
+import { hasApplicantLocationRestriction } from '../core/applicant-location';
 import { assessJob } from '../core/job-assessment';
 import { matchesDiscoverySearch } from '../core/discovery-ranking';
 import { SOURCES, JSEARCH_SOURCES } from '../core/source-registry';
@@ -219,8 +220,8 @@ export class Jobs {
     /\bqa\b|sdet|test automation|quality assurance/i.test(this.query()),
   );
   readonly countryCounts = computed(() => ({
-    known: this.filtered().filter((j) => !!j.facts?.applicantCountries).length,
-    unknown: this.filtered().filter((j) => !j.facts?.applicantCountries).length,
+    known: this.filtered().filter((j) => hasApplicantLocationRestriction(j.facts)).length,
+    unknown: this.filtered().filter((j) => !hasApplicantLocationRestriction(j.facts)).length,
   }));
   readonly activeFilters = computed(() => {
     const labels: Record<string, string> = {

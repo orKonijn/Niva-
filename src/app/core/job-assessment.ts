@@ -1,8 +1,9 @@
 import type { Job } from './models/job';
 import type { CandidateCriteria } from './models/discovery';
 import type { Preferences } from './preferences';
-import { positiveEvidence } from './matching';
-export const FIT_VERSION = 'fit-v2';
+import { positiveEvidence, requiredSkillGroups } from './matching';
+import { applicantLocationMatch, hasApplicantLocationRestriction } from './applicant-location';
+export const FIT_VERSION = 'fit-v3';
 export const eligibilityLabel = (s: string) =>
   ({ blocked: 'חסם מפורש', confirmation: 'נדרש בירור', clear: 'לא נמצא חסם ידוע' })[s] ??
   'נדרש בירור';
@@ -26,16 +27,24 @@ export function assessJob(
   )
     blockers.push('המשרה אינה מפורסמת עוד במקור');
   if (f?.deadline && Date.parse(f.deadline.value) < now) blockers.push('מועד ההגשה חלף');
-  if (
-    f?.applicantCountries &&
-    p?.currentCountry &&
-    !f.applicantCountries.value.includes(p.currentCountry)
-  )
+  if (applicantLocationMatch(f, p?.currentCountry) === false)
     blockers.push(
-      `המקור מגביל מועמדים למדינות ${f.applicantCountries.value.join(', ')}; הפרופיל מציין ${p.currentCountry}`,
+      `המקור מגביל מגורים ל־${f?.applicantCountries?.value.join(', ') ?? ''}${f?.applicantRegions?.value.includes('SCHENGEN') ? 'אזור שנגן' : ''}; הפרופיל מציין ${p?.currentCountry}`,
     );
-  if (!f?.applicantCountries || !p?.currentCountry)
+  if (!hasApplicantLocationRestriction(f) || !p?.currentCountry)
     questions.push('יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה');
+  if (f?.applicantRegions)
+    questions.push(
+      `יש לאמת מגורים בפועל באזור הנדרש; אין בכך אישור עבודה או אזרחות: ${f.applicantRegions.quote}`,
+    );
+  if (f?.locationConditions?.length && !f.applicantCountries)
+    questions.push(
+      ...f.locationConditions.map((e) => `מגבלת מגורים שלא פורשה בביטחון: ${e.quote}`),
+    );
+  if (f?.requirementsUnresolved)
+    questions.push(
+      'גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי',
+    );
   if (f?.sponsorship?.value === 'unavailable' && p?.sponsorship === 'needed')
     blockers.push('נדרשת חסות אשרה ובמקור נאמר שאין חסות');
   if (!f?.sponsorship || !p || p.sponsorship === 'unknown') questions.push('חסות אשרה לא אומתה');
@@ -102,10 +111,13 @@ export function assessJob(
     !p.employmentTypes.includes(f.employmentType.value)
   )
     gaps.push(`סוג העסקה מחוץ להעדפות: ${f.employmentType.value}`);
-  const required = [...new Set(f?.requiredSkills?.map((x) => x.value) ?? [])];
+  const groups = f ? requiredSkillGroups(job) : [];
+  const required = groups.map((g) => g.join(' / '));
   const evidence = confirmed ? positiveEvidence(resume) : [];
   const skills = [...new Set([...evidence.map((x) => x.skill), ...(p?.skills ?? [])])];
-  const matched = required.filter((x) => skills.some((s) => s.toLowerCase() === x.toLowerCase()));
+  const matched = groups
+    .filter((g) => g.some((x) => skills.some((s) => s.toLowerCase() === x.toLowerCase())))
+    .map((g) => g.join(' / '));
   strengths.push(...matched.map((x) => `עדות למונח ${x}`));
   gaps.push(
     ...required
@@ -185,10 +197,10 @@ export function assessJob(
       ? Math.round(dimensions.reduce((s, x) => s + x.points, 0))
       : null;
   const fields = [
-    f?.requiredSkills,
+    f?.requiredSkills ?? f?.requiredSkillAlternatives,
     f?.minimumYears,
     f?.employmentType,
-    f?.applicantCountries,
+    f?.applicantCountries ?? f?.applicantRegions,
     f?.sponsorship,
     f?.salary,
     f?.deadline,

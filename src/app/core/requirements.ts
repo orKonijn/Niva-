@@ -5,16 +5,17 @@ export function requirementClauses(text: string) {
     required: [] as string[],
     preferred: [] as string[],
     responsibilities: [] as string[],
+    unresolved: [] as string[],
   };
   let scope: Scope = 'other';
   const requiredHeader =
-    /^(?:requirements|qualifications|what (?:we(?:'|’)re looking for|we are looking for|you(?:'|’)ll (?:bring|need)|you bring)|who you are|your (?:experience|qualifications)|דרישות(?: התפקיד)?|מה נדרש)(?:\s*[:：])?$/i;
+    /^(?:requirements|qualifications|what (?:we(?:'|’)re looking for(?: in you)?|we are looking for(?: in you)?|you(?:'|’)ll (?:bring|need)|you bring)|who you are|your (?:experience|qualifications)|דרישות(?: התפקיד)?|מה נדרש)(?:\s*[:：])?$/i;
   const preferredHeader =
-    /^(?:bonus(?: points)?|nice.to.haves?|preferred(?: qualifications)?|advantages?|יתרונות|יתרון)(?:\s*[:：])?$/i;
+    /^(?:bonus(?: points)?|nice.to.haves?(?: skills)?|preferred(?: qualifications)?|advantages?|יתרונות|יתרון)(?:\s*[:：])?$/i;
   const responsibilitiesHeader =
-    /^(?:responsibilities|what you(?:'|’)ll do|what you will do|your (?:role|impact)|the role|role description|תיאור התפקיד|תחומי אחריות)(?:\s*[:：])?$/i;
+    /^(?:responsibilities|what you(?:'|’)ll do|what you will do|your (?:role|impact)|the role(?: entails)?|role description|תיאור התפקיד|תחומי אחריות)(?:\s*[:：])?$/i;
   const otherHeader =
-    /^(?:benefits|about .+|what (?:we offer|you get)|compensation|equal opportunity.*|why .+)(?:\s*[:：])?$/i;
+    /^(?:benefits|about .+|what (?:we offer|you get)(?: .+)?|compensation|equal opportunity.*|why .+)(?:\s*[:：])?$/i;
   const prepared = text.replace(
     /\b(Requirements|Qualifications|Bonus Points|What we are looking for|What you'll do|Benefits)\s*:/gi,
     '\n$1:\n',
@@ -35,6 +36,12 @@ export function requirementClauses(text: string) {
       continue;
     }
     if (line.length < 120 && otherHeader.test(line)) {
+      scope = 'other';
+      continue;
+    }
+    // Inline section headings in legacy flattened text cannot establish scope.
+    if (/\b(?:what we are looking for(?: in you)?|nice.to.have skills)\b/i.test(line)) {
+      result.unresolved.push(line);
       scope = 'other';
       continue;
     }

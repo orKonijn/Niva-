@@ -1,4 +1,8 @@
-# Current capability and operational status — updated 26 October 2026
+# Current capability and operational status — updated 27 October 2026
+
+Release candidate **0.3.2** is prepared for authorized deployment: [comparison audit repairs](comparison-repairs-20261027.md) address residence regions, required alternatives, cached Jobicy structure and clipped evidence. The earlier reports preserve their local verification scope. Deployment and fresh live checks are pending; the published status below is unchanged.
+
+The subsequent [relevance and eligibility pass](relevance-improvements-20261027.md) preserves those repairs and improves confirmed-skill ordering, complete residence lists, related software-QA expansion and explicit talent-pool disclosure. Its synthetic benchmark is separate from the20-record public-source check; no real-market precision gain or application success is claimed. This work is also local and unpublished.
 
 Latest published release: **application0.3.1 / Sites43**. [Publication receipt](verification/publication-20261026-v43.json), [live checks](verification/live-20261026-v43.json). Reviewed GitHub source `c548494845659bc5a70c072085db19ab53c74b83` maps to Sites source `5e12ef3138d86b6589cd9438005494be20869806`. GitHub CI passed. Source heading roles, source-check date labels and filtered-catalog ranking were independently checked live; N03 alias/server-total consistency is repaired in0.3.1.
 

@@ -4,6 +4,13 @@
   >בחזרה לכל המשרות <niva-icon name="arrow"
 /></a>
 @if (job(); as job) {
+  @if (jobOpportunity(job); as opportunity) {
+    <section class="account-panel mb-6" aria-label="סוג ההזדמנות">
+      <h2>מאגר מועמדים · לא משרה פתוחה מאומתת</h2>
+      <p>המקור מתאר פנייה למאגר או הזדמנות עתידית. אין בכך אישור למשרה פתוחה כעת.</p>
+      <q dir="auto">{{ opportunity.quote }}</q>
+    </section>
+  }
   <div
     class="page-heading flex items-center justify-between gap-[24px] max-[901px]:flex-wrap max-[768px]:gap-[20px]"
   >
@@ -17,9 +24,11 @@
       <div class="job-text min-w-0">
         <span class="section-kicker block font-semibold text-brand tracking-[0.02em]">{{
           job.source
-            ? job.id.startsWith('jsearch-')
-              ? 'משרה אמיתית · דרך JSearch'
-              : 'משרה אמיתית · מקור מעסיק'
+            ? jobOpportunity(job)
+              ? 'מאגר מועמדים · נדרשת בדיקת הזדמנות פעילה'
+              : job.id.startsWith('jsearch-')
+                ? 'משרה אמיתית · דרך JSearch'
+                : 'משרה אמיתית · מקור מעסיק'
             : 'משרה לדוגמה'
         }}</span>
         <h1>
@@ -134,6 +143,9 @@
     <section class="account-panel mb-6" aria-label="דרישות ועדויות מהמקור">
       <h2>דרישות ועדויות מהמקור</h2>
       <p>החילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.</p>
+      @if (facts.requirementsUnresolved) {
+        <p>גבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.</p>
+      }
       @for (fact of facts.requiredSkills || []; track $index) {
         <p>
           <bdi>{{ fact.value }}</bdi> · {{ fact.provenance }} · <q dir="auto">{{ fact.quote }}</q>
@@ -144,6 +156,12 @@
           יתרון: <bdi>{{ fact.value }}</bdi> · <q dir="auto">{{ fact.quote }}</q>
         </p>
       }
+      @for (fact of facts.requiredSkillAlternatives || []; track $index) {
+        <p>
+          נדרשת אחת מהחלופות: <bdi>{{ fact.value.join(' / ') }}</bdi> · {{ fact.provenance }} ·
+          <q dir="auto">{{ fact.quote }}</q>
+        </p>
+      }
       <p>
         ניסיון מינימלי: {{ facts.minimumYears?.value ?? 'לא נמסר בבירור' }} · בכירות:
         {{ facts.seniority?.value || 'לא נמסר' }} (אם זוהתה בכותרת, זהו סיווג משוער)
@@ -152,8 +170,25 @@
         <p>
           מדינות מועמדים: {{ countries.value.join(', ') }} · <q dir="auto">{{ countries.quote }}</q>
         </p>
-      } @else {
+      } @else if (!facts.applicantRegions) {
         <p>מדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.</p>
+      }
+      @if (facts.applicantRegions; as regions) {
+        <p>
+          מגבלת מגורים:
+          {{ regions.value.includes('SCHENGEN') ? 'אזור שנגן' : regions.value.join(', ') }} ·
+          <q dir="auto">{{ regions.quote }}</q>
+        </p>
+        <p>
+          יש לאמת מגורים בפועל באזור. חברות המדינה באזור אינה הוכחת אישור עבודה, אזרחות או זכאות.
+        </p>
+      }
+      @if (!facts.applicantCountries) {
+        @for (condition of facts.locationConditions || []; track $index) {
+          <p>
+            מגבלת מגורים שלא פורשה בביטחון: <q dir="auto">{{ condition.quote }}</q>
+          </p>
+        }
       }
       <p>
         חסות אשרה: {{ facts.sponsorship?.value || 'לא ידוע' }} · אזור זמן נדרש:

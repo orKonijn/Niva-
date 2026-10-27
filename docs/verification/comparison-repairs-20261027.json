@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-27",
+  "status": "local-unpublished",
+  "baseCommit": "80705c368658a26c7c41f6828bbe070009859109",
+  "workingTreeChangesIncluded": true,
+  "packageVersion": "0.3.1",
+  "proposedNextVersion": "0.3.2",
+  "compatibility": "compatible patch; additive optional public facts; no SQL or account migration",
+  "fullSuite": {
+    "format": "passed",
+    "typecheckTests": "passed",
+    "typecheckServer": "passed",
+    "typecheckE2e": "passed",
+    "frontend": { "passed": 59, "failed": 0 },
+    "server": { "passed": 170, "failed": 0 },
+    "workerRuntime": { "passed": 1, "failed": 0 },
+    "provenance": { "passed": 1, "failed": 0 },
+    "productionBuild": "passed",
+    "browser": { "passed": 224, "failed": 0, "skipped": 0, "flaky": 0 }
+  },
+  "finalAdjustment": {
+    "description": "Count alternative requirement groups and residence regions in completeness when the corresponding single-skill/country fact is absent",
+    "affectedServerRegressions": { "passed": 38, "failed": 0 },
+    "productionBuild": "passed",
+    "desktopMobileUi": { "passed": 2, "failed": 0 },
+    "accessibilityScan": "No violations reported for WCAG 2 A/AA and WCAG 2.1 AA tags in the two synthetic job-detail cases; not a complete accessibility audit",
+    "horizontalOverflow": "none in both synthetic cases",
+    "formatAndDiffWhitespace": "passed"
+  },
+  "publicSourceCheck": "comparison-source-check-20261027.json",
+  "visuals": "../screenshots/changes/comparison-repairs/",
+  "visualInspection": "desktop-after.png and mobile-after.png inspected; synthetic data; historical screenshots preserved",
+  "limitations": [
+    "D1 tests use the local SQLite-backed D1 contract double, not hosted Cloudflare D1",
+    "No production profile, application, employer contact or subscription changes",
+    "No commit, push or deployment",
+    "Hosted maintenance schedule, private retention cadence, alert receipt and erasure-safe restore remain unverified",
+    "Source reachability/description recovery does not establish an open vacancy or a complete application form"
+  ]
+}

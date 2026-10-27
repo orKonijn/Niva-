@@ -1,6 +1,6 @@
 import type { Job } from '../src/app/core/models/job';
 import type { Evidence, JobFacts } from '../src/app/core/models/discovery';
-export const FACT_VERSION = 'source-sections-v4';
+export const FACT_VERSION = 'source-sections-v6';
 const countries: [RegExp, string][] = [
   [/\b(?:Israel|IL)\b/i, 'IL'],
   [/\b(?:United States|USA|U\.S\.|US)\b/i, 'US'],

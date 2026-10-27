@@ -4,6 +4,22 @@
 
 No changes recorded.
 
+## 0.3.2 — 2026-10-27
+
+Release candidate prepared for the authorized deployment. Publication and live verification are pending; no hosted version number has been assigned here.
+
+### Fixed
+
+- Rank similar jobs using confirmed skill evidence and residence compatibility before pagination, explain the evidence on cards, and stop demoting software QA roles simply because their title includes “customer.” Explicit non-software QA titles are excluded from related software-QA expansion; literal search remains available.
+- Preserve every supported country in a residence list. Unsupported, mixed-region and contradictory lists remain unresolved instead of becoming a partial exclusion. Existing work-authorization, citizenship and Schengen checks remain separate.
+- Identify explicitly described talent pools in cards and details and give them lower discovery priority, without calling them closed or claiming an open vacancy. See [relevance benchmark and verification](docs/relevance-improvements-20261027.md) for measured scope and limits.
+- Keep explicit Schengen residence restrictions separate from citizenship and work authorization, apply them to candidate-country filtering, and show the original condition in job details and fit explanations (comparison audit S01). Country membership alone still requires confirmation of actual residence and work rights.
+- Preserve source section boundaries and treat simple required alternatives such as “Python or Go” as one requirement. Optional skills and collaborator mentions remain separate; ambiguous legacy flattened sections are flagged for checking against the original (S03).
+- Recover source headings and lists for cached Jobicy descriptions during an ordinary due original-page check, only when posting identity and the source description container agree. Requests retain the existing quota, lease, timeout and version guards; unsuccessful recovery keeps cached content (B03).
+- Show bounded evidence excerpts at word boundaries with ellipses instead of cutting words (B05). Jobicy description/path refreshes also preserve the actual earlier provider-publication verification date.
+
+No account-data/schema migration or configuration change is required. Existing public facts upgrade through the normal bounded reindex; older flattened Jobicy content needs a successful, due source-page check before its structure can recover. See [repair notes and UI evidence](docs/comparison-repairs-20261027.md). Hosted maintenance/retention, alert receipt and restore verification remain external operational gates. The earlier local reports retain their point-in-time unpublished status until a separate deployment receipt confirms publication.
+
 ## 0.3.1 � 2026-10-26
 
 Published as **Sites43**. [Deployment and live verification receipt](docs/verification/publication-20261026-v43.json). Reviewed source commit `c548494`; the earlier0.3.0 release is recorded separately. No account-data migration or environment/access change.

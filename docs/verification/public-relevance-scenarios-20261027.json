@@ -1,0 +1,179 @@
+{
+  "scope": "Programmatic scenario evaluation of the same 20-record current public-source snapshot, using stored original eligibility results and ranks. Not live catalog search, new browser journeys, qualification or application success.",
+  "observations": [
+    {
+      "id": "close-role",
+      "q": "QA",
+      "related": false,
+      "strictCountry": false,
+      "remote": false,
+      "country": null,
+      "total": 7,
+      "before": [
+        {
+          "id": "greenhouse-canopycare-5285235008",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-5003021101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-4904270101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "jobicy-israel-qa-156544",
+          "qaFamily": true,
+          "publication": "unknown"
+        }
+      ],
+      "after": [
+        {
+          "id": "greenhouse-unframe-5003021101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-canopycare-5285235008",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-4904270101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "jobicy-israel-qa-156544",
+          "qaFamily": true,
+          "publication": "unknown"
+        }
+      ],
+      "sourcePublished": 6,
+      "publicationUnknown": 1,
+      "applicationAccessibility": "not verified"
+    },
+    {
+      "id": "alternate-title",
+      "q": "SDET",
+      "related": true,
+      "strictCountry": false,
+      "remote": false,
+      "country": null,
+      "total": 7,
+      "before": [
+        {
+          "id": "greenhouse-canopycare-5285235008",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-5003021101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-4904270101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "jobicy-israel-qa-156544",
+          "qaFamily": true,
+          "publication": "unknown"
+        }
+      ],
+      "after": [
+        {
+          "id": "greenhouse-unframe-5003021101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-canopycare-5285235008",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "greenhouse-unframe-4904270101",
+          "qaFamily": true,
+          "publication": "published-at-provider"
+        },
+        {
+          "id": "jobicy-israel-qa-156544",
+          "qaFamily": true,
+          "publication": "unknown"
+        }
+      ],
+      "sourcePublished": 6,
+      "publicationUnknown": 1,
+      "applicationAccessibility": "not verified"
+    },
+    {
+      "id": "location-constrained",
+      "q": "",
+      "related": false,
+      "strictCountry": true,
+      "remote": false,
+      "country": "IL",
+      "total": 0,
+      "before": [],
+      "after": [],
+      "sourcePublished": 0,
+      "publicationUnknown": 0,
+      "applicationAccessibility": "not verified"
+    },
+    {
+      "id": "remote-country",
+      "q": "",
+      "related": false,
+      "strictCountry": true,
+      "remote": true,
+      "country": "IL",
+      "total": 0,
+      "before": [],
+      "after": [],
+      "sourcePublished": 0,
+      "publicationUnknown": 0,
+      "applicationAccessibility": "not verified"
+    },
+    {
+      "id": "restrictive-empty",
+      "q": "Unobtainium Researcher",
+      "related": false,
+      "strictCountry": true,
+      "remote": false,
+      "country": "IL",
+      "total": 0,
+      "before": [],
+      "after": [],
+      "sourcePublished": 0,
+      "publicationUnknown": 0,
+      "applicationAccessibility": "not verified"
+    }
+  ]
+}

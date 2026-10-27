@@ -1,4 +1,5 @@
 import { payLabel } from '../core/pay-label';
+import { jobOpportunity } from '../core/job-opportunity';
 import { JobDescription } from '../shared/job-description';
 import { isSupportedListingId } from '../core/source-registry';
 import { localDate } from '../core/local-date';
@@ -25,6 +26,7 @@ import { directionsUrl, locationText } from '../core/job-locations';
   templateUrl: './job-detail.html',
 })
 export class JobDetail {
+  readonly jobOpportunity = jobOpportunity;
   readonly localDate = localDate;
   sourceAttribution(job: import('../core/models/job').Job) {
     return job.source?.attribution ?? [];

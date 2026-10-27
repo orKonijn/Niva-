@@ -1,0 +1,58 @@
+[
+  {
+    "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go",
+    "checkedAt": "2026-10-27T09:19:23.595Z",
+    "httpStatus": 200,
+    "identityMatched": true,
+    "headings": [
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "The role entails"
+      },
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "What we are looking for in you"
+      },
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "Nice-to-have skills"
+      },
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "What we offer colleagues"
+      },
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "About Canonical"
+      },
+      {
+        "kind": "heading",
+        "level": 2,
+        "text": "Canonical is an equal opportunity employer"
+      }
+    ],
+    "alternatives": [["Python", "Go"]],
+    "applicantRegions": null,
+    "scope": "Read-only public source HTML; no vacancy/application/hosted-deployment assertion"
+  },
+  {
+    "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote",
+    "checkedAt": "2026-10-27T09:19:24.049Z",
+    "httpStatus": 200,
+    "identityMatched": true,
+    "headings": [],
+    "applicantRegions": {
+      "value": ["SCHENGEN"],
+      "quote": "Candidate must be located within Schengen Area",
+      "provenance": "extracted",
+      "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote",
+      "observedAt": "2026-10-27T09:19:24.049Z"
+    },
+    "scope": "Read-only public source HTML; no vacancy/application/hosted-deployment assertion"
+  }
+]

@@ -1,0 +1,782 @@
+{
+  "phase": "after",
+  "ranking": "discovery-evidence-v2",
+  "observedAt": "2026-10-27T14:14:40.363Z",
+  "corpus": "32 frozen synthetic cases, development and held-out; five scenarios per split. Not market precision, live vacancies or proven actionability.",
+  "targetsFrozenBeforeChanges": {
+    "skillAlignedQaAt5": "at least 0.8 for nonempty QA scenarios in each split",
+    "explicitCountryConflicts": 0,
+    "emptySearch": "zero fabricated results",
+    "preserveAllDistinctResults": true
+  },
+  "observations": [
+    {
+      "split": "development",
+      "scenario": "close-role",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910007",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910009",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910006",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910008",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "alternate-title",
+      "total": 11,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910007",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910009",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910006",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910008",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "location-constrained",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910007",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910009",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910006",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910008",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "remote-country",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910007",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910009",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910006",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910008",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "restrictive-empty",
+      "total": 0,
+      "topFive": [],
+      "skillAlignedQaAt5": null,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "close-role",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920007",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920009",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920006",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920008",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "alternate-title",
+      "total": 11,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920007",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920009",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920006",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920008",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "location-constrained",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920007",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920009",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920006",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920008",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "remote-country",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920005",
+          "title": "Software QA Automation Engineer — Customer Platform",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920007",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920009",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 107,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 2 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920006",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920008",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": true,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 99,
+            "reasons": [
+              "כותרת ממשפחת בדיקות תוכנה",
+              "תחום לפי ההעדפה השמורה",
+              "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו",
+              "המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד"
+            ],
+            "version": "discovery-evidence-v2"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 1,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "restrictive-empty",
+      "total": 0,
+      "topFive": [],
+      "skillAlignedQaAt5": null,
+      "explicitCountryConflicts": 0
+    }
+  ]
+}

@@ -13,7 +13,12 @@ import { SOURCES, type JobSource } from './job-sources';
 import { normalizeGreenhouse } from './greenhouse-source';
 import { recordSourceAttempt, sourceFreshness } from './source-health';
 import { descriptionBlocks } from './description-blocks';
-import { discoveryRank, relatedQaQuery, qaTitle } from '../src/app/core/discovery-ranking';
+import {
+  discoveryRank,
+  relatedQaQuery,
+  qaTitle,
+  RANKING_VERSION,
+} from '../src/app/core/discovery-ranking';
 export { SOURCES } from './job-sources';
 import type { Job } from '../src/app/core/models/job';
 import {
@@ -506,6 +511,7 @@ export async function discoveryPage(
   );
   const snapshot = versionOf(await db.all('SELECT id,version,active FROM niva_jobs ORDER BY id'));
   const filterKey = versionOf([
+    RANKING_VERSION,
     [
       'eligibility',
       'country',
@@ -640,10 +646,10 @@ export async function discoveryPage(
     matchingAfter = 0,
     scan = '';
   for (;;) {
-    // Evidence prose is needed by selected cards, not eligibility filtering.
-    // Keep canonical ranking identical and bound intermediate row residency.
+    // Required skill evidence now participates in global ordering. Descriptions
+    // and unrelated prose still stay out of the bounded 128-row scan.
     const candidates = await db.all<{ id: string; data: string; active: number }>(
-      `${ranked} SELECT j.id,json_remove(j.data,'$.description','$.descriptionBlocks','$.facts.requiredSkills','$.facts.preferredSkills','$.facts.responsibilities','$.facts.workArrangements','$.facts.salaryText') AS data,j.active FROM ranked r JOIN niva_jobs j ON j.id=r.id WHERE r.representative=1 AND r.id>? ORDER BY r.id LIMIT 128`,
+      `${ranked} SELECT j.id,json_remove(j.data,'$.description','$.descriptionBlocks','$.facts.preferredSkills','$.facts.responsibilities','$.facts.workArrangements','$.facts.salaryText') AS data,j.active FROM ranked r JOIN niva_jobs j ON j.id=r.id WHERE r.representative=1 AND r.id>? ORDER BY r.id LIMIT 128`,
       ...args,
       scan,
     );
@@ -744,7 +750,7 @@ export async function discoveryPage(
     snapshot,
     ranking: {
       mode: relevance ? 'catalog' : 'source',
-      version: relevance ? 'discovery-evidence-v1' : null,
+      version: relevance ? RANKING_VERSION : null,
     },
     health: health.map((h) => ({
       ...h,

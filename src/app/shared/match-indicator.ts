@@ -54,6 +54,9 @@ import { CareerStore } from '../core/career-store';
     @for (skill of job().facts?.preferredSkills ?? []; track $index) {
       <p dir="auto">יתרון בלבד: {{ skill.value }} — {{ skill.quote }}</p>
     }
+    @for (group of job().facts?.requiredSkillAlternatives ?? []; track $index) {
+      <p dir="auto">נדרשת אחת מהחלופות: {{ group.value.join(' / ') }} — {{ group.quote }}</p>
+    }
     <a routerLink="/app/profile">עדכון ואישור הפרטים לבדיקת התאמה</a>
     <p>
       גרסת החישוב: {{ assessment().method }} · מחושב מחדש לפי הפרופיל, ההעדפות וקורות החיים הפעילים.

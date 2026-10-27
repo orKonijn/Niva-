@@ -1,5 +1,7 @@
 import { payLabel } from '../core/pay-label';
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { jobOpportunity } from '../core/job-opportunity';
+import { discoveryRank } from '../core/discovery-ranking';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { MatchIndicator } from './match-indicator';
 import { RouterLink } from '@angular/router';
 import { AppStore, Job } from '../core/app-store';
@@ -13,6 +15,12 @@ import { Icon } from './icon';
   styleUrl: './job-card.css',
 })
 export class JobCard {
+  readonly jobOpportunity = jobOpportunity;
+  readonly rankingReasons = computed(
+    () =>
+      discoveryRank(this.job(), '', this.store.preferences(), this.store.account().profile.criteria)
+        .reasons,
+  );
   readonly job = input.required<Job>();
   readonly districtLabel = districtLabel;
   readonly workStyleLabel = workStyleLabel;

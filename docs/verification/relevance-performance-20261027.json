@@ -1,0 +1,75 @@
+{
+  "scope": "Local Node 24 Windows SQLite in-memory, 3000 synthetic rows, 5 alternating-order samples per version with explicit GC; compares previous discovery/ranking against new discovery/ranking on same current facts. Not hosted D1, browser latency, INP or field Web Vitals.",
+  "samples": [
+    {
+      "iteration": 0,
+      "phase": "before",
+      "ms": 129.73770000000002,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 0,
+      "phase": "after",
+      "ms": 140.89329999999995,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 1,
+      "phase": "after",
+      "ms": 136.90949999999998,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 1,
+      "phase": "before",
+      "ms": 130.7583000000002,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 2,
+      "phase": "before",
+      "ms": 126.84789999999998,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 2,
+      "phase": "after",
+      "ms": 136.50510000000008,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 3,
+      "phase": "after",
+      "ms": 137.81820000000016,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 3,
+      "phase": "before",
+      "ms": 128.35640000000012,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 4,
+      "phase": "before",
+      "ms": 124.5145,
+      "total": 3000,
+      "returned": 12
+    },
+    {
+      "iteration": 4,
+      "phase": "after",
+      "ms": 143.0254,
+      "total": 3000,
+      "returned": 12
+    }
+  ]
+}

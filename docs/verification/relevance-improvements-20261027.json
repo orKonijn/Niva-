@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-27",
+  "status": "local-unpublished",
+  "baseCommit": "80705c368658a26c7c41f6828bbe070009859109",
+  "preservedWork": "Existing uncommitted comparison repairs preserved and extended; no commit, push, deployment or production-account mutation",
+  "packageVersion": "0.3.1",
+  "proposedNextVersion": "0.3.2 compatible discovery correction",
+  "schemaMigration": "none; additive optional public facts; bounded public reindex source-sections-v6",
+  "ranking": "discovery-evidence-v2; ranking version and confirmed criteria bind relevance cursors",
+  "validation": {
+    "format": "passed",
+    "typecheckTests": "passed",
+    "typecheckServer": "passed",
+    "typecheckE2e": "passed",
+    "frontend": { "passed": 59, "failed": 0 },
+    "server": { "passed": 177, "failed": 0 },
+    "workerRuntime": { "passed": 1, "failed": 0 },
+    "provenance": { "passed": 1, "failed": 0 },
+    "productionBuild": "passed",
+    "browser": { "passed": 226, "failed": 0, "skipped": 0, "flaky": 0 },
+    "afterDetailScreenshots": { "browserPassed": 2, "browserFailed": 0 },
+    "accessibility": "No axe violations for tested WCAG A/AA tags in new synthetic desktop/mobile cases; not full conformance",
+    "overflow": "None in new desktop/mobile cases",
+    "historicalScreenshots": "Restored from pre-suite byte copies, including prior untracked comparison evidence"
+  },
+  "evidence": [
+    "relevance-benchmark-before-20261027.json",
+    "relevance-benchmark-after-20261027.json",
+    "public-relevance-check-20261027.json",
+    "public-relevance-scenarios-20261027.json",
+    "relevance-talent-pool-source-20261027.json",
+    "relevance-performance-20261027.json",
+    "relevance-local-journey-20261027.json",
+    "relevance-local-retention-20261027.json"
+  ],
+  "results": {
+    "synthetic": "32 frozen adversarial cases;5 scenarios in2 wording/stack variants. Skill-aligned QA at5 from0/5 to5/5 in8 nonempty combinations; empty searches stayed empty. Not market precision or independent blind evaluation",
+    "publicCohort": "20 prior records rechecked read-only;14 exact ATS postings published,6 Jobicy publication states unknown. Top-five role-family relevance5/5 before and after; no measured precision gain",
+    "strictCountry": "Zero results with explicit known Israel applicant restrictions in this cohort; missing evidence, not proof employers cannot hire the seeker",
+    "applicationAccessibility": "Not verified in this programmatic source check",
+    "performance": "3000 synthetic rows, Windows Node24 SQLite,5 alternating samples per version; median128.4ms before versus137.8ms after. Not hosted D1 or field Web Vitals"
+  },
+  "remainingGates": [
+    "Authorized reviewed deployment and fresh same-persona live benchmark",
+    "More complete original eligibility evidence and verified application accessibility",
+    "Hosted D1 identities, maintenance cadence, approved alerts and erasure-safe restore",
+    "Manual screen-reader/physical-device checks and field performance",
+    "No10/10 claim; optional hide/undo and tracking deferred"
+  ]
+}

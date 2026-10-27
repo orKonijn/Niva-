@@ -1,0 +1,582 @@
+{
+  "phase": "before",
+  "ranking": "discovery-evidence-v1",
+  "observedAt": "2026-10-27T14:12:34.889Z",
+  "corpus": "32 frozen synthetic cases, development and held-out; five scenarios per split. Not market precision, live vacancies or proven actionability.",
+  "targetsFrozenBeforeChanges": {
+    "skillAlignedQaAt5": "at least 0.8 for nonempty QA scenarios in each split",
+    "explicitCountryConflicts": 0,
+    "emptySearch": "zero fabricated results",
+    "preserveAllDistinctResults": true
+  },
+  "observations": [
+    {
+      "split": "development",
+      "scenario": "close-role",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910001",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910002",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910003",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910004",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "alternate-title",
+      "total": 13,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910001",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910002",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910003",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910004",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "location-constrained",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910001",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910002",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910003",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910004",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "remote-country",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-910000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910001",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910002",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910003",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-910004",
+          "title": "QA Automation Engineer",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "development",
+      "scenario": "restrictive-empty",
+      "total": 0,
+      "topFive": [],
+      "skillAlignedQaAt5": null,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "close-role",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920001",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920002",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920003",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920004",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "alternate-title",
+      "total": 13,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920001",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920002",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920003",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920004",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "location-constrained",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920001",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920002",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920003",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920004",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "remote-country",
+      "total": 16,
+      "topFive": [
+        {
+          "id": "jobicy-israel-qa-920000",
+          "title": "QA Automation Engineer — Talent Pool",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "talent-pool",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920001",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920002",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920003",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        },
+        {
+          "id": "jobicy-israel-qa-920004",
+          "title": "Software Development Engineer in Test",
+          "expectedSkillAligned": false,
+          "expectedQaFamily": true,
+          "opportunity": "vacancy",
+          "rank": {
+            "rank": 75,
+            "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+            "version": "discovery-evidence-v1"
+          }
+        }
+      ],
+      "skillAlignedQaAt5": 0,
+      "explicitCountryConflicts": 0
+    },
+    {
+      "split": "held-out",
+      "scenario": "restrictive-empty",
+      "total": 0,
+      "topFive": [],
+      "skillAlignedQaAt5": null,
+      "explicitCountryConflicts": 0
+    }
+  ]
+}

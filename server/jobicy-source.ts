@@ -1,5 +1,6 @@
 import { enrichJob } from './job-facts';
 import { descriptionBlocks } from './description-blocks';
+import { descriptionBlockText } from '../src/app/core/description-block-text';
 import type { Job } from '../src/app/core/models/job';
 import { trustedJobUrl } from './job-sources';
 import { classify, plainText } from './job-feed';
@@ -39,7 +40,7 @@ export function normalizeJobicy(payload: unknown, at: string): Job[] {
       category: classify(row['jobTitle']),
       district: 'unknown',
       workStyle: 'remote',
-      description: plainText(row['jobDescription']),
+      description: descriptionBlockText(descriptionBlocks(row['jobDescription'])),
       descriptionBlocks: descriptionBlocks(row['jobDescription']),
       skills: [],
       offices: [],

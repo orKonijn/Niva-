@@ -51,6 +51,24 @@
     <niva-icon name="sparkles" />{{ job().reason }}
   </p>
   @if (job().source) {
+    @if (jobOpportunity(job()); as opportunity) {
+      <p class="form-hint">
+        <strong>מאגר מועמדים · לא משרה פתוחה מאומתת</strong><br /><q dir="auto">{{
+          opportunity.quote
+        }}</q>
+      </p>
+    }
+    @if (rankingReasons().length) {
+      <details class="mb-3 text-sm">
+        <summary>למה כדאי לבדוק את התוצאה?</summary>
+        <ul>
+          @for (reason of rankingReasons(); track reason) {
+            <li>{{ reason }}</li>
+          }
+        </ul>
+        <p>הסבר לסדר העדיפות בלבד. דרישות שלא חולצו, זכאות וזמינות דורשות בדיקה נפרדת.</p>
+      </details>
+    }
     <p class="text-xs">
       <bdi>{{ job().source!.name }}</bdi> · {{ job().source!.location }} · נבדק:
       <bdi>{{ job().source!.lastVerifiedAt || job().source!.fetchedAt }}</bdi>
@@ -97,11 +115,13 @@
       [class.blue-badge]="!store.approved(job().id)"
       >{{
         job().source
-          ? job().source!.active
-            ? 'משרה אמיתית'
-            : job().source!.availability === 'unknown'
-              ? 'יש לבדוק זמינות'
-              : 'הוסרה מהמקור'
+          ? jobOpportunity(job())
+            ? 'מאגר מועמדים'
+            : job().source!.active
+              ? 'משרה אמיתית'
+              : job().source!.availability === 'unknown'
+                ? 'יש לבדוק זמינות'
+                : 'הוסרה מהמקור'
           : store.approved(job().id)
             ? 'אושר בהדגמה'
             : 'משרה לדוגמה'

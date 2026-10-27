@@ -3,6 +3,10 @@ import type { Evidence, JobFacts } from '../src/app/core/models/discovery';
 import { positiveEvidence, SKILLS } from '../src/app/core/matching';
 import { requirementClauses } from '../src/app/core/requirements';
 import { descriptionText } from '../src/app/core/description-text';
+import { descriptionBlockText } from '../src/app/core/description-block-text';
+import { evidenceExcerpt } from '../src/app/core/evidence-excerpt';
+import { residenceCountries } from './residence-requirements';
+import { jobOpportunity } from '../src/app/core/job-opportunity';
 import {
   FACT_VERSION,
   arrangementEvidence,
@@ -24,16 +28,19 @@ export function enrichJob(job: Job): Job {
         : typeof value === 'number'
           ? new RegExp(`\\b${value}\\+?\\s+years?`, 'i').exec(quote)
           : null;
-    const start = match ? Math.max(0, match.index - 60) : 0;
     return {
       value,
-      quote: quote.slice(start, start + 300),
+      quote: evidenceExcerpt(quote, match?.index ?? 0),
       provenance,
       url: job.source!.applicationUrl,
-      observedAt: job.source!.fetchedAt,
+      observedAt: job.source!.descriptionFetchedAt ?? job.source!.fetchedAt,
     };
   };
   job.description = descriptionText(job.description);
+  const blockText = descriptionBlockText(job.descriptionBlocks ?? []);
+  const comparable = (s: string) => s.replace(/[\s•]+/gu, '');
+  if (blockText && comparable(blockText) === comparable(job.description))
+    job.description = blockText;
   const text = job.description;
   const sections = requirementClauses(text);
   const clauses = text
@@ -41,11 +48,23 @@ export function enrichJob(job: Job): Job {
     .map((x) => x.trim())
     .filter(Boolean);
   const required = sections.required;
+  // Only a simple explicit skill disjunction is supported. Complex mixed
+  // conjunctions stay unknown rather than silently requiring every option.
+  const supportedAlternatives = new Set<string>();
+  const alternatives = required.flatMap((x) => {
+    const scope = x.split(/e\.g\.|such as|for example|at least one|one of/i)[0];
+    const options = scope.split(/\bor\b/i).map((s) => positiveEvidence(s).map((e) => e.skill));
+    if (options.length > 1 && !/\band\b/i.test(scope) && options.every((s) => s.length === 1)) {
+      supportedAlternatives.add(x);
+      return [evidence([...new Set(options.flat())], x)];
+    }
+    return [];
+  });
   const skillRows = (rows: string[], mandatory = true) =>
     rows.flatMap((x) => {
       // Examples/alternatives do not each become a mandatory named tool.
       const scope = mandatory ? x.split(/e\.g\.|such as|for example|at least one|one of/i)[0] : x;
-      if (mandatory && /\bor\b/i.test(scope) && positiveEvidence(scope).length > 1) return [];
+      if (mandatory && /\bor\b/i.test(scope)) return [];
       return positiveEvidence(scope).map((s) => evidence(s.skill, x));
     });
   const years = required
@@ -57,14 +76,7 @@ export function enrichJob(job: Job): Job {
     }))
     .find((x) => x.m);
   const senior = job.title.match(/\b(junior|senior|lead|principal|director|manager|intern)\b/i);
-  const country = clauses
-    .map((x) => ({
-      x,
-      m: x.match(
-        /(?:must (?:be |reside |live )?(?:physically )?(?:based|located|living|residing)?\s*(?:in )?|only applicants (?:based |located )?in )(Italy|Israel|United States|United Kingdom|Canada|Germany)\b/i,
-      ),
-    }))
-    .find((x) => x.m);
+  const residence = residenceCountries(clauses);
   const codes: Record<string, string> = {
     italy: 'IT',
     israel: 'IL',
@@ -102,6 +114,10 @@ export function enrichJob(job: Job): Job {
   );
   const facts: JobFacts = {
     extractionVersion: FACT_VERSION,
+    opportunity: (() => {
+      const opportunity = jobOpportunity({ ...job, facts: undefined });
+      return opportunity ? evidence('talent-pool', opportunity.quote) : null;
+    })(),
     ...arrangementEvidence(job),
     postingId: job.id,
     employerId: job.source.sourceId ?? null,
@@ -111,6 +127,10 @@ export function enrichJob(job: Job): Job {
       ? sections.responsibilities.map((x) => evidence(x, x))
       : null,
     requiredSkills: skillRows(required).length ? skillRows(required) : null,
+    requiredSkillAlternatives: alternatives.length ? alternatives : null,
+    requirementsUnresolved:
+      sections.unresolved.length > 0 ||
+      required.some((x) => /\bor\b/i.test(x) && !supportedAlternatives.has(x)),
     preferredSkills: skillRows(sections.preferred, false).length
       ? skillRows(sections.preferred, false)
       : null,
@@ -134,9 +154,21 @@ export function enrichJob(job: Job): Job {
     employmentType: employment
       ? evidence(employment[1].toLowerCase().replace(' ', '-'), employment[0])
       : null,
-    applicantCountries: country?.m
-      ? evidence([codes[country.m[1].toLowerCase()]], country.x)
+    applicantCountries: residence.countries
+      ? evidence(residence.countries, residence.conditions.join('; '))
       : null,
+    locationConditions: residence.conditions.length
+      ? residence.conditions.map((x) => evidence(x, x))
+      : null,
+    applicantRegions: (() => {
+      const clause = clauses.find(
+        (x) =>
+          /\bmust\s+(?:be\s+)?(?:located|based|resid(?:e|ing)|liv(?:e|ing))\s+(?:in|within)\s+(?:the\s+)?Schengen\s+(?:Area|Zone)\s*[.!]?$/i.test(
+            x,
+          ) && !/\b(?:not|no|optional|preferred|bonus|not required)\b/i.test(x),
+      );
+      return clause ? evidence(['SCHENGEN'], clause) : null;
+    })(),
     timezone: timezone ? evidence(timezone.slice(0, 200), timezone) : null,
     sponsorship: noSponsor
       ? evidence('unavailable', noSponsor)
@@ -170,6 +202,7 @@ export function enrichJob(job: Job): Job {
     );
   if (
     !facts.applicantCountries &&
+    !facts.locationConditions?.length &&
     locationCountry &&
     (job.workStyle === 'remote' || facts.workArrangements?.some((r) => r.value === 'remote')) &&
     !job.source.sourceId?.startsWith('jobicy-')

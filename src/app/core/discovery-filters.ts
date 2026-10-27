@@ -2,6 +2,7 @@ import type { Job } from './models/job';
 import type { CandidateCriteria } from './models/discovery';
 import type { Preferences } from './preferences';
 import { assessJob } from './job-assessment';
+import { applicantLocationMatch, hasApplicantLocationRestriction } from './applicant-location';
 export interface DiscoveryFilters {
   eligibility?: string;
   country?: string;
@@ -39,15 +40,10 @@ export function passesDiscovery(
       : job.source?.sourceId !== query.provider)
   )
     return false;
-  if (
-    query.country &&
-    (f?.applicantCountries
-      ? !f.applicantCountries.value.includes(query.country.toUpperCase())
-      : !unknown)
-  )
-    return false;
-  if (query.remoteScope === 'known' && !f?.applicantCountries) return false;
-  if (query.remoteScope === 'unknown' && f?.applicantCountries) return false;
+  const location = applicantLocationMatch(f, query.country);
+  if (query.country && (location === false || (location === null && !unknown))) return false;
+  if (query.remoteScope === 'known' && !hasApplicantLocationRestriction(f)) return false;
+  if (query.remoteScope === 'unknown' && hasApplicantLocationRestriction(f)) return false;
   if (query.seniority && (f?.seniority ? f.seniority.value !== query.seniority : !unknown))
     return false;
   if (

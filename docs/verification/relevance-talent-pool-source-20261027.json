@@ -1,0 +1,23 @@
+{
+  "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote",
+  "checkedAt": "2026-10-27T14:27:06.218Z",
+  "httpStatus": 200,
+  "identityMatched": true,
+  "opportunity": {
+    "value": "talent-pool",
+    "quote": "We are currently building a talent pool",
+    "provenance": "extracted",
+    "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote",
+    "observedAt": "2026-10-27T14:27:06.218Z"
+  },
+  "residenceRegion": {
+    "value": ["SCHENGEN"],
+    "quote": "Candidate must be located within Schengen Area",
+    "provenance": "extracted",
+    "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote",
+    "observedAt": "2026-10-27T14:27:06.218Z"
+  },
+  "publication": "unknown",
+  "applicationAccessibility": "not verified",
+  "scope": "Read-only public source; no production account mutation or application submission"
+}

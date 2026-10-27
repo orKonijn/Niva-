@@ -2,8 +2,14 @@ import type { Job } from './models/job';
 import type { CandidateCriteria } from './models/discovery';
 import type { Preferences } from './preferences';
 import { normalizeSearch } from './preferences';
-export const RANKING_VERSION = 'discovery-evidence-v1';
+import { requiredSkillGroups } from './matching';
+import { applicantLocationMatch } from './applicant-location';
+import { jobOpportunity } from './job-opportunity';
+export const RANKING_VERSION = 'discovery-evidence-v2';
+const nonSoftwareQa =
+  /\b(?:manufacturing|food safety|food production|pharmaceutical|laboratory|construction|mechanical|electrical)\b/i;
 export const qaTitle = (title: string) =>
+  (!nonSoftwareQa.test(title) || /\bsoftware\b|\bsdet\b/i.test(title)) &&
   /\bqa\b|\bsdet\b|quality assurance|test automation|automation.*test|software (?:development )?engineer.*in test|software test(?:ing)? engineer|testing software engineer/i.test(
     title,
   );
@@ -43,11 +49,14 @@ export function discoveryRank(
       rank += 15;
       reasons.push('תחום לפי ההעדפה השמורה');
     }
-    if (
-      /sales|presales|solutions? engineer|solution engineer|customer|manufactur|hardware|mechanical|electrical/i.test(
+    const otherOccupation =
+      /\b(?:sales|presales|solutions?|customer success|customer support)\s+engineer\b/i.test(
         job.title,
-      )
-    ) {
+      );
+    const physicalDomain =
+      /\b(?:manufactur\w*|hardware|mechanical|electrical|food safety)\b/i.test(job.title) &&
+      !/\bsoftware\b|\bsdet\b/i.test(job.title);
+    if (otherOccupation || physicalDomain) {
       rank -= 70;
       reasons.push('תחום אחר בכותרת');
     }
@@ -64,6 +73,24 @@ export function discoveryRank(
       reasons.push('בכירות נמוכה מהניסיון שאושר');
     }
   } else if (preferences.role !== 'all' && job.category === preferences.role) rank += 60;
+  if (jobOpportunity(job)) {
+    rank -= 45;
+    reasons.push('מאגר מועמדים או פנייה עתידית; לא משרה פתוחה מאומתת');
+  }
+  if (candidate?.confirmed) {
+    const groups = requiredSkillGroups(job);
+    const skills = new Set(candidate.skills.map((s) => s.toLowerCase()));
+    const matched = groups.filter((g) => g.some((s) => skills.has(s.toLowerCase()))).length;
+    if (groups.length && skills.size) {
+      // Positive evidence orders leads; absence is not proof of ineligibility.
+      rank += Math.round((24 * matched) / groups.length);
+      reasons.push(`עדות בפרופיל המאושר ל־${matched} מתוך ${groups.length} דרישות כישורים שחולצו`);
+    }
+    if (applicantLocationMatch(job.facts, candidate.currentCountry) === true) {
+      rank += 8;
+      reasons.push('המדינה המאושרת תואמת למגבלת המגורים; אישור עבודה נבדק בנפרד');
+    }
+  }
   if (
     preferences.district !== 'all' &&
     (job.district === preferences.district ||

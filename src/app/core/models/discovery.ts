@@ -60,6 +60,9 @@ export interface JobFacts {
   department: Evidence<string> | null;
   responsibilities: Evidence<string>[] | null;
   requiredSkills: Evidence<string>[] | null;
+  /** Each group is one requirement satisfied by any listed skill. */
+  requiredSkillAlternatives?: Evidence<string[]>[] | null;
+  requirementsUnresolved?: boolean;
   preferredSkills: Evidence<string>[] | null;
   minimumYears: Evidence<number> | null;
   seniority: Evidence<string> | null;
@@ -69,6 +72,10 @@ export interface JobFacts {
   languages: Evidence<string>[] | null;
   employmentType: Evidence<string> | null;
   applicantCountries: Evidence<string[]> | null;
+  /** Residence constraints, separate from citizenship and work authorization. */
+  applicantRegions?: Evidence<string[]> | null;
+  locationConditions?: Evidence<string>[] | null;
+  opportunity?: Evidence<'talent-pool'> | null;
   timezone: Evidence<string> | null;
   sponsorship: Evidence<'available' | 'unavailable'> | null;
   authorizationCountry: Evidence<string> | null;
