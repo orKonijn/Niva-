@@ -57,5 +57,6 @@
     "14 of20 independent employer ATS records were published;6 Jobicy current publication states remain uncertain.",
     "Live review found clipped work-arrangement quotes and an inaccurate requirements-warning explanation.",
     "Follow-up documentation is Git-only; it is not another deployment."
-  ]
+  ],
+  "workerBundleSha256": "076fe2d803bdda2d392b01fbff2ecc6917493e171d09cc7614f7415bdbfef328"
 }
