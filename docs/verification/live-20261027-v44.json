@@ -1,0 +1,1101 @@
+{
+  "verifiedAt": "2026-10-27T15:25:42.405Z",
+  "applicationVersion": "0.3.2",
+  "sitesVersion": 44,
+  "build": {
+    "repository": "orKonijn/Niva-",
+    "sourceCommit": "f83f5f064eaeef1be0299e435164390f6df35df9",
+    "githubCommit": "f1fd7292904df73bd46f1ffb5b9d0a07e8b2e0e9",
+    "sitesCommit": "f83f5f064eaeef1be0299e435164390f6df35df9",
+    "sourceTree": "732ba9073d255f0fa7e223ffef5e84925f8be5d7",
+    "sourceContentDigest": "8ad9fbf5c606301d02bfbc15fc9446fa18b07ee83e357286dac478d3d4ffad58",
+    "digestScope": "sorted tracked and non-ignored source paths + NUL + bytes + NUL; excludes source mapping",
+    "clientArtifactDigest": "bd7d802ef2e3d97a7aa46e01000f3779c3a99ae00320f7352f4e727b8ac2f95a",
+    "artifactScope": "dist static assets excluding server, .openai and build-info.json",
+    "builtAt": "2026-10-27T14:48:03.646Z",
+    "dirty": false,
+    "mappedSourceVerified": true,
+    "provenanceStatus": "mapped-reviewed-source"
+  },
+  "scope": "Existing authorized account; no profile/resume edits or applications. UI browser checks plus independent read-only original/provider checks. Not full accessibility, performance or operational certification.",
+  "scenarios": [
+    {
+      "name": "QA literal search",
+      "at": "2026-10-27T14:55:33.930Z",
+      "url": "https://getnivajobs.com/app/jobs?q=QA",
+      "status": "8 מתוך 8 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA Automation Engineer - CDH",
+          "url": "https://getnivajobs.com/app/jobs/lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        },
+        {
+          "title": "QA Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+        },
+        {
+          "title": "Junior QA Tester",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-wedev-4652209101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        },
+        {
+          "title": "Manual QA Engineer (Game Client)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156544"
+        },
+        {
+          "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144408"
+        }
+      ]
+    },
+    {
+      "name": "SDET quick-title literal search",
+      "at": "2026-10-27T14:55:42.907Z",
+      "url": "https://getnivajobs.com/app/jobs?q=SDET&category=qa-automation",
+      "status": "1 מתוך 1 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "Senior Software Development Engineer in Test (SDET)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-155928"
+        }
+      ]
+    },
+    {
+      "name": "SDET related titles across categories",
+      "at": "2026-10-27T14:56:31.114Z",
+      "url": "https://getnivajobs.com/app/jobs?q=SDET&related=true",
+      "status": "10 מתוך 10 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA Automation Engineer - CDH",
+          "url": "https://getnivajobs.com/app/jobs/lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        },
+        {
+          "title": "Distributed Systems Testing Software Engineer, Python / Go",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-151013"
+        },
+        {
+          "title": "Senior Software Development Engineer in Test (SDET)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-155928"
+        },
+        {
+          "title": "QA Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+        },
+        {
+          "title": "Junior QA Tester",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-wedev-4652209101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        },
+        {
+          "title": "Manual QA Engineer (Game Client)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156544"
+        },
+        {
+          "title": "Manager Software Test Automation",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156466"
+        }
+      ]
+    },
+    {
+      "name": "Related testing roles with source location Tel Aviv",
+      "at": "2026-10-27T14:56:43.760Z",
+      "url": "https://getnivajobs.com/app/jobs?q=SDET&related=true&location=Tel%20Aviv",
+      "status": "4 מתוך 4 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        }
+      ]
+    },
+    {
+      "name": "Remote LQA with applicant country IL",
+      "at": "2026-10-27T14:57:10.962Z",
+      "url": "https://getnivajobs.com/app/jobs?q=LQA&country=IL&styles=remote",
+      "status": "0 מתוך 0 משרות מהמקור",
+      "loading": false,
+      "cards": []
+    },
+    {
+      "name": "Remote LQA with applicant country PT",
+      "at": "2026-10-27T14:57:16.841Z",
+      "url": "https://getnivajobs.com/app/jobs?q=LQA&country=PT&styles=remote",
+      "status": "1 מתוך 1 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144408"
+        }
+      ]
+    },
+    {
+      "name": "Remote LQA PT with unknown values hidden",
+      "at": "2026-10-27T14:57:29.842Z",
+      "url": "https://getnivajobs.com/app/jobs?q=LQA&country=PT&styles=remote&missing=hide",
+      "status": "1 מתוך 1 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144408"
+        }
+      ]
+    },
+    {
+      "name": "Restrictive empty search",
+      "at": "2026-10-27T14:57:36.978Z",
+      "url": "https://getnivajobs.com/app/jobs?q=Unobtainium%20Researcher%20zzNivaAudit&country=PT&styles=remote&missing=hide",
+      "status": "0 מתוך 0 משרות מהמקור",
+      "loading": false,
+      "cards": []
+    },
+    {
+      "name": "Clear-filter recovery",
+      "at": "2026-10-27T14:58:12.999Z",
+      "url": "https://getnivajobs.com/app/jobs",
+      "status": "50 מתוך 3037 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA Automation Engineer - CDH",
+          "url": "https://getnivajobs.com/app/jobs/lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        },
+        {
+          "title": "Distributed Systems Testing Software Engineer, Python / Go",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-151013"
+        },
+        {
+          "title": "Senior Software Development Engineer in Test (SDET)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-155928"
+        },
+        {
+          "title": "QA Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+        },
+        {
+          "title": "Junior QA Tester",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-wedev-4652209101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        },
+        {
+          "title": "Manual QA Engineer (Game Client)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156544"
+        },
+        {
+          "title": "Manager Software Test Automation",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156466"
+        },
+        {
+          "title": "Senior Product Analyst",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4868634101"
+        },
+        {
+          "title": "AI Senior Software Engineer, ML Platform",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4874306101"
+        },
+        {
+          "title": "Senior Full Stack Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4889904101"
+        },
+        {
+          "title": "Analytics Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4897240101"
+        },
+        {
+          "title": "Senior DevOps Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4902462101"
+        },
+        {
+          "title": "Senior Data Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4904239101"
+        },
+        {
+          "title": "Senior Security Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4920094101"
+        },
+        {
+          "title": "SecOps Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4920296101"
+        },
+        {
+          "title": "Strategic Product Analyst",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-4952195101"
+        },
+        {
+          "title": "Senior Quality Specialist",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-5000297101"
+        },
+        {
+          "title": "Information Delivery & Visualization Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-aidocmedical-5013714101"
+        },
+        {
+          "title": "Application Security Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8394076002"
+        },
+        {
+          "title": "Senior Support Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8535473002"
+        },
+        {
+          "title": "Senior FP&A Business Partner",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8611961002"
+        },
+        {
+          "title": "Senior FP&A Analyst",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8611963002"
+        },
+        {
+          "title": "Senior Data Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8693284002"
+        },
+        {
+          "title": "Commission Analyst",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8805502002"
+        },
+        {
+          "title": "Salary Controller",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8809604002"
+        },
+        {
+          "title": "Bookkeeper - temporary position (Herzliya)- 2904",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8813084002"
+        },
+        {
+          "title": "Business Analyst",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8816205002"
+        },
+        {
+          "title": "Assistant Controller - Corporate Team- 2908",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8816216002"
+        },
+        {
+          "title": "Senior Software Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8852064002"
+        },
+        {
+          "title": "Software Team Leader- Domain Team",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8868191002"
+        },
+        {
+          "title": "IT Service Desk Team Leader",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8874236002"
+        },
+        {
+          "title": "Senior IT Infrastructure Operations",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8882905002"
+        },
+        {
+          "title": "Senior Data Scientist",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8884649002"
+        },
+        {
+          "title": "Backend Software Engineer- 2938",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8897823002"
+        },
+        {
+          "title": "Bookkeeper - 2942",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8899626002"
+        },
+        {
+          "title": "Senior Backend Software Engineer - 2943",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-appsflyer-8899639002"
+        },
+        {
+          "title": "Commercial Account Executive - Israel",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-datadog-8245889"
+        },
+        {
+          "title": "General Application (Israel)",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-forter-6349983002"
+        },
+        {
+          "title": "Senior Full Stack Engineer II - CX Offering",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-forter-8534195002"
+        },
+        {
+          "title": "People Partner (Maternity Leave Replacement - 1 Year)",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-forter-8867716002"
+        },
+        {
+          "title": "Accounts Payable Specialist",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-forter-8905280002"
+        },
+        {
+          "title": "Senior Backend Engineer - AI Framework (Python)",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4668007006"
+        },
+        {
+          "title": "Senior Backend Engineer (Python) - AI Application",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4668065006"
+        },
+        {
+          "title": "Head of AI Security",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4672107006"
+        },
+        {
+          "title": "Senior Cyber Defense Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4677810006"
+        },
+        {
+          "title": "Senior Data Scientist - AI Research & Reliability ",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4699279006"
+        },
+        {
+          "title": "Software Architect, AI Applications",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-gongio-4712289006"
+        }
+      ]
+    },
+    {
+      "name": "Hybrid QA including unknown arrangements",
+      "at": "2026-10-27T14:59:00.019Z",
+      "url": "https://getnivajobs.com/app/jobs?q=QA&category=qa-automation&styles=hybrid",
+      "status": "3 מתוך 3 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        }
+      ]
+    },
+    {
+      "name": "Hybrid QA strict arrangements",
+      "at": "2026-10-27T14:59:06.224Z",
+      "url": "https://getnivajobs.com/app/jobs?q=QA&category=qa-automation&styles=hybrid&unknownStyle=false",
+      "status": "2 מתוך 2 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        }
+      ]
+    },
+    {
+      "name": "Strict hybrid QA with source-order option",
+      "at": "2026-10-27T14:59:55.796Z",
+      "url": "https://getnivajobs.com/app/jobs?q=QA&category=qa-automation&styles=hybrid&unknownStyle=false&sort=source",
+      "status": "2 מתוך 2 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        }
+      ]
+    },
+    {
+      "name": "Final QA search settled",
+      "at": "2026-10-27T15:18:05.228Z",
+      "url": "https://getnivajobs.com/app/jobs?sort=relevance&q=QA",
+      "status": "8 מתוך 8 משרות מהמקור",
+      "loading": false,
+      "cards": [
+        {
+          "title": "QA & Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+        },
+        {
+          "title": "AI-First QA Automation Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+        },
+        {
+          "title": "QA Automation Engineer - CDH",
+          "url": "https://getnivajobs.com/app/jobs/lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        },
+        {
+          "title": "QA Engineer",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+        },
+        {
+          "title": "Junior QA Tester",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-wedev-4652209101"
+        },
+        {
+          "title": "QA & Automation Lead",
+          "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+        },
+        {
+          "title": "Manual QA Engineer (Game Client)",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156544"
+        },
+        {
+          "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+          "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144408"
+        }
+      ]
+    }
+  ],
+  "journey": [
+    {
+      "check": "mobile strict hybrid results",
+      "at": "2026-10-27T15:01:38.363Z",
+      "viewport": "390x844",
+      "result": "2 results, preserved URL filters, no horizontal overflow; native screenshot visually inspected"
+    },
+    {
+      "check": "Canopy detail",
+      "at": "2026-10-27T15:02:58.884Z",
+      "result": "Published source status, application-path disclaimer, structured source headings, optional tools separated; country/authorization remain unconfirmed",
+      "remainingPresentation": "Work-arrangement evidence has duplicated clipped fragments; a requirements warning describes missing boundaries despite visible source structure"
+    },
+    {
+      "check": "save persistence",
+      "at": "2026-10-27T15:03:14.410Z",
+      "result": "Canopy changed to saved and remained saved after full reload"
+    },
+    {
+      "check": "restore saved state",
+      "at": "2026-10-27T15:03:36.658Z",
+      "result": "Removed only the temporary Canopy save; unsaved state persisted after reload"
+    },
+    {
+      "check": "employer handoff",
+      "at": "2026-10-27T15:05:18.024Z",
+      "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+      "result": "Matching employer title/location and a visible Apply for this job form with name, email, phone and CV fields plus Submit application; no fields entered, uploads, autofill or submission"
+    },
+    {
+      "check": "employer form follow-up",
+      "at": "2026-10-27T15:14:34.868Z",
+      "result": "After the source Apply control, MyGreenhouse displayed an autofill notice. The agent did not click Autofill my application, enter field values, upload a file, or submit. Existing provider/session autofill must not be represented as a blank-form guarantee."
+    },
+    {
+      "check": "live pagination",
+      "at": "2026-10-27T15:15:32.670Z",
+      "first": 50,
+      "second": 100,
+      "unique": 100,
+      "retainedFirst": true,
+      "status": "100 מתוך 3037 משרות מהמקור"
+    },
+    {
+      "check": "source sorting",
+      "at": "2026-10-27T15:15:41.489Z",
+      "first": [
+        "Staff Software Engineer",
+        "Senior Product Analyst",
+        "Customer Success Manager - East",
+        "Customer Success Manager - West",
+        "Principal Software Engineer"
+      ],
+      "status": "50 מתוך 3037 משרות מהמקור",
+      "url": "https://getnivajobs.com/app/jobs?sort=source"
+    },
+    {
+      "check": "final state",
+      "at": "2026-10-27T15:16:45.965Z",
+      "result": "Saved count restored to0; saved QA automation / Tel Aviv / all three work arrangements unchanged; final search QA on relevance sorting"
+    }
+  ],
+  "details": [
+    {
+      "name": "Canonical required alternatives and structured description",
+      "at": "2026-10-27T15:06:15.140Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nיתרון: Kubernetes · Experience with cloud technologies such as OpenStack, Kubernetes, Terraform and AWS\n\nיתרון: AWS · Experience with cloud technologies such as OpenStack, Kubernetes, Terraform and AWS\n\nנדרשת אחת מהחלופות: Python / Go · extracted · Experience with Python or Go development\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "The role entails",
+        "What we are looking for in you",
+        "Nice-to-have skills",
+        "What we offer colleagues",
+        "About Canonical",
+        "Canonical is an equal opportunity employer"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/151013-distributed-systems-testing-software-engineer-python-go"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T08:19:47.706Z",
+      "title": "Distributed Systems Testing Software Engineer, Python / Go",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-151013"
+    },
+    {
+      "name": "Side pool and Schengen restriction",
+      "at": "2026-10-27T15:06:23.215Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמגבלת מגורים: אזור שנגן · Candidate must be located within Schengen Area\n\nיש לאמת מגורים בפועל באזור. חברות המדינה באזור אינה הוכחת אישור עבודה, אזרחות או זכאות.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/144408-lqa-game-tester-european-spanish-freelance-remote"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T08:12:20.543Z",
+      "title": "LQA Game Tester (European Spanish) - Freelance Remote",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144408"
+    },
+    {
+      "name": "greenhouse-canopycare-5285235008",
+      "at": "2026-10-27T15:08:32.009Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nManual QA · extracted · Strong manual QA foundations, including test planning, test case creation, exploratory testing, regression testing, and clear bug reporting.\n\nAPIs · extracted · Experience testing web applications, APIs, backend workflows, integrations, and cross-system product behavior.\n\nיתרון: Playwright · Experience with automation tools such as Playwright, Cypress, Selenium, or similar.\n\nיתרון: QA Automation · Experience with automation tools such as Playwright, Cypress, Selenium, or similar.\n\nיתרון: Selenium · Experience with automation tools such as Playwright, Cypress, Selenium, or similar.\n\nניסיון מינימלי: 2 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר\n\nייחוס מקורות: Canopy / Greenhouse",
+      "headings": [
+        "Join Us in Revolutionizing Oncology Care",
+        "Your Mission",
+        "What You’ll Do",
+        "What You’ll Bring",
+        "Bonus Points",
+        "Benefits"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Canopy / Greenhouse",
+          "url": "https://job-boards.greenhouse.io/canopycare"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008"
+        },
+        {
+          "text": "Canopy / Greenhouse",
+          "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:04:23.097Z",
+      "title": "QA & Automation Engineer",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-canopycare-5285235008"
+    },
+    {
+      "name": "greenhouse-transmitsecurity-8887486002",
+      "at": "2026-10-27T15:09:27.814Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nQA Automation · extracted · 5+ years of QA automation experience.\n\nניסיון מינימלי: 5 · בכירות: lead (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר\n\nייחוס מקורות: Transmit Security / Greenhouse",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Transmit Security / Greenhouse",
+          "url": "https://transmitsecurity.com/about/careers"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002"
+        },
+        {
+          "text": "Transmit Security / Greenhouse",
+          "url": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:08:35.621Z",
+      "title": "QA & Automation Lead",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-transmitsecurity-8887486002"
+    },
+    {
+      "name": "greenhouse-unframe-4904270101",
+      "at": "2026-10-27T15:09:33.023Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nManual QA · extracted · 4+ years of experience as a QA Engineer (with a strong focus on manual testing).\n\nAPIs · extracted · Strong technical background with the ability to understand systems, APIs, and debug complex flows.\n\nAPIs · extracted · Experience testing web applications, APIs, and complex distributed systems.\n\nניסיון מינימלי: 4 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Unframe / Greenhouse",
+          "url": "https://job-boards.eu.greenhouse.io/unframe"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:09:31.887Z",
+      "title": "QA Engineer",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-4904270101"
+    },
+    {
+      "name": "greenhouse-unframe-5003021101",
+      "at": "2026-10-27T15:09:39.215Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nPlaywright · extracted · 2+ years of hands-on experience building and maintaining automated test suites using Playwright.\n\nQA Automation · extracted · 2+ years of hands-on experience building and maintaining automated test suites using Playwright.\n\nיתרון: GitHub Actions · Experience integrating automation into CI/CD pipelines (GitHub Actions is a plus).\n\nנדרשת אחת מהחלופות: TypeScript / Python · extracted · Strong programming skills in TypeScript or Python.\n\nניסיון מינימלי: 4 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר\n\nייחוס מקורות: Unframe / Greenhouse",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Unframe / Greenhouse",
+          "url": "https://job-boards.eu.greenhouse.io/unframe"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101"
+        },
+        {
+          "text": "Unframe / Greenhouse",
+          "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:04:25.585Z",
+      "title": "AI-First QA Automation Engineer",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-unframe-5003021101"
+    },
+    {
+      "name": "greenhouse-wedev-4652209101",
+      "at": "2026-10-27T15:09:45.783Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nJavaScript · extracted · Basic understanding of web technologies (HTML, CSS, JavaScript)\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: junior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "WeDev / Greenhouse",
+          "url": "https://job-boards.eu.greenhouse.io/wedev"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:09:44.691Z",
+      "title": "Junior QA Tester",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-wedev-4652209101"
+    },
+    {
+      "name": "jobicy-israel-qa-156544",
+      "at": "2026-10-27T15:09:51.305Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nManual QA · extracted · 4+ years of experience in manual testing\n\nניסיון מינימלי: 4 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/156544-manual-qa-engineer-game-client"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/156544-manual-qa-engineer-game-client"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:20:16.952Z",
+      "title": "Manual QA Engineer (Game Client)",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-156544"
+    },
+    {
+      "name": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "at": "2026-10-27T15:10:12.894Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nJava · extracted · Familiarity with coding in Java and a solid understanding of object-oriented programming principles\n\nיתרון: Java · Familiarity with Java programming\n\nיתרון: APIs · Familiarity with Rest API services\n\nיתרון: AWS · Familiarity with AWS services\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר\n\nייחוס מקורות: Veeva / Lever",
+      "headings": [
+        "The Role",
+        "What You'll Do",
+        "Requirements",
+        "Nice to Have",
+        "Interviewing with Veeva"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Veeva / Lever",
+          "url": "https://jobs.lever.co/veeva"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        },
+        {
+          "text": "Veeva / Lever",
+          "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:04:28.920Z",
+      "title": "QA Automation Engineer - CDH",
+      "url": "https://getnivajobs.com/app/jobs/lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab"
+    },
+    {
+      "name": "greenhouse-datadog-7487353",
+      "at": "2026-10-27T15:10:18.180Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nAWS · extracted · Proficient background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nAzure · extracted · Proficient background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nKubernetes · extracted · Proficient background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nניסיון מינימלי: 5 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: GB · Dublin, Ireland; United Kingdom, Remote\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Datadog / Greenhouse",
+          "url": "https://careers.datadoghq.com/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://careers.datadoghq.com/detail/7487353/?gh_jid=7487353"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:10:17.002Z",
+      "title": "Enterprise Sales Engineer - UK/Ireland",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-datadog-7487353"
+    },
+    {
+      "name": "greenhouse-datadog-7516279",
+      "at": "2026-10-27T15:10:23.812Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nAWS · extracted · Advanced background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nAzure · extracted · Advanced background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nKubernetes · extracted · Advanced background in public cloud (AWS, Azure, GCP), Kubernetes, APM/tracing, security, developer experience, observability\n\nניסיון מינימלי: 7 · בכירות: senior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: US · Arizona, USA, Remote; California, USA, Remote; Nevada, USA, Remote; Oregon, USA, Remote; Washington, USA, Remote\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Datadog / Greenhouse",
+          "url": "https://careers.datadoghq.com/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://careers.datadoghq.com/detail/7516279/?gh_jid=7516279"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:10:22.415Z",
+      "title": "Senior Sales Engineer - Key Accounts",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-datadog-7516279"
+    },
+    {
+      "name": "greenhouse-datadog-7993198",
+      "at": "2026-10-27T15:10:29.199Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nניסיון מינימלי: 5 · בכירות: senior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: US · Atlanta, Georgia, USA; Connecticut, USA, Remote; Florida, USA, Remote; Massachusetts, USA, Remote; New York, New York, USA; New York, USA, Remote; Pennsylvania, USA, Remote\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Datadog / Greenhouse",
+          "url": "https://careers.datadoghq.com/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://careers.datadoghq.com/detail/7993198/?gh_jid=7993198"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:10:28.149Z",
+      "title": "Senior Product Security Engineer - AI Agents",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-datadog-7993198"
+    },
+    {
+      "name": "greenhouse-jfrog-8185306",
+      "at": "2026-10-27T15:11:22.942Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nKubernetes · extracted · 3+ years hands-on experience with vulnerability scanning (SCA, SAST, DAST), network security, container/Kubernetes security, software supply chain security (SBOMs, artifact signing, SLSA), and embedding security into CI/CD pipelines.\n\nAWS · extracted · Proficiency in cloud platforms (AWS, Azure, GCP) and Linux environments, with ability to design hybrid architectures and scalable deployment solutions.\n\nAzure · extracted · Proficiency in cloud platforms (AWS, Azure, GCP) and Linux environments, with ability to design hybrid architectures and scalable deployment solutions.\n\nניסיון מינימלי: 3 · בכירות: senior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: US · Remote, US\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "JFrog / Greenhouse",
+          "url": "https://join.jfrog.com/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://join.jfrog.com/job/?job=8185306&gh_jid=8185306"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:11:21.600Z",
+      "title": "Senior Solution Engineer, Presales - Public Sector (US Remote)",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-jfrog-8185306"
+    },
+    {
+      "name": "greenhouse-jfrog-8255562",
+      "at": "2026-10-27T15:11:28.526Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nניסיון מינימלי: 10 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: US · US, Remote\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "JFrog / Greenhouse",
+          "url": "https://join.jfrog.com/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://join.jfrog.com/job/?job=8255562&gh_jid=8255562"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:11:27.568Z",
+      "title": "Regional Vice President, Strategic Solution Engineering (Central)",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-jfrog-8255562"
+    },
+    {
+      "name": "greenhouse-wizinc-4665302006",
+      "at": "2026-10-27T15:11:34.470Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: JP · Remote - Japan\n\nחסות אשרה: unavailable · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Wiz / Greenhouse",
+          "url": "https://www.wiz.io/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://www.wiz.io/careers/job/4665302006/:title?gh_jid=4665302006"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:11:32.817Z",
+      "title": "Solutions Engineer",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-wizinc-4665302006"
+    },
+    {
+      "name": "greenhouse-wizinc-4704730006",
+      "at": "2026-10-27T15:11:40.165Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: GB · London, UK; Remote - United Kingdom\n\nחסות אשרה: unavailable · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "Role Description",
+        "Responsibilities",
+        "Minimum qualifications",
+        "Preferred qualifications"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Wiz / Greenhouse",
+          "url": "https://www.wiz.io/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://www.wiz.io/careers/job/4704730006/:title?gh_jid=4704730006"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:11:38.797Z",
+      "title": "Security Engineer - Product",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-wizinc-4704730006"
+    },
+    {
+      "name": "greenhouse-wizinc-4712609006",
+      "at": "2026-10-27T15:11:57.426Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nיתרון: Kubernetes · SME level knowledge of Kubernetes and containers with the ability to architect and troubleshoot complex environments.\n\nיתרון: Kubernetes · Hands-on experience deploying and troubleshooting various k8s distributions.\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: principal (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מועמדים: AU · Remote - Australia\n\nחסות אשרה: unavailable · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "Role Description",
+        "Responsibilities",
+        "Minimum qualifications",
+        "Preferred qualifications"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Wiz / Greenhouse",
+          "url": "https://www.wiz.io/"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://www.wiz.io/careers/job/4712609006/:title?gh_jid=4712609006"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-27T15:11:56.301Z",
+      "title": "Principal Solutions Engineer",
+      "url": "https://getnivajobs.com/app/jobs/greenhouse-wizinc-4712609006"
+    },
+    {
+      "name": "jobicy-israel-qa-144040",
+      "at": "2026-10-27T15:12:02.868Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nAPIs · extracted · Deep experience designing APIs, services, and shared systems that other engineers build on top of\n\nיתרון: AWS · Strong fluency with modern cloud platforms (AWS preferred), Kubernetes, and distributed systems\n\nיתרון: Kubernetes · Strong fluency with modern cloud platforms (AWS preferred), Kubernetes, and distributed systems\n\nניסיון מינימלי: 10 · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "About Us",
+        "About the Role",
+        "What You’ll Own",
+        "Who You Are",
+        "Bonus Points",
+        "Benefits",
+        "Our Values"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/144040-staff-software-engineer-app-platform"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/144040-staff-software-engineer-app-platform"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:21:23.718Z",
+      "title": "Staff Software Engineer, App Platform",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144040"
+    },
+    {
+      "name": "jobicy-israel-qa-144139",
+      "at": "2026-10-27T15:12:08.081Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nWorkflow Automation · extracted · Practical experience with AI agents, agentic workflows, LLM-based applications, tool-calling architectures, workflow automation, and AI orchestration patterns.\n\nAWS · extracted · Strong knowledge of AWS, including practical experience with cloud-native architectures, Amazon Bedrock, Amazon Bedrock AgentCore, Amazon SageMaker, and related AWS AI/ML services (the more, the better)\n\nAPIs · extracted · Hands-on experience using LLMs via APIs, such as OpenAI, Anthropic, Gemini, or similar providers.\n\nAPIs · extracted · Knowledge of API design, microservices, event-driven systems, and cloud-based architectures.\n\nProduct Management · extracted · Experience working in cross-functional teams with engineers, product managers, data scientists, DevOps, security, and business stakeholders.\n\nDocker · extracted · Experience with containerization and orchestration, including Docker and EKS/ECS.\n\nAPIs · extracted · Experience integrating AI systems with enterprise platforms, internal APIs, CRM/ERP systems, ticketing systems, knowledge bases, and workflow engines.\n\nניסיון מינימלי: 7 · בכירות: senior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/144139-senior-ai-engineer-3"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/144139-senior-ai-engineer-3"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:21:34.720Z",
+      "title": "Senior AI Engineer",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-144139"
+    },
+    {
+      "name": "jobicy-israel-qa-149520",
+      "at": "2026-10-27T15:12:13.391Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nיתרון: Python · Python and Bash scripting ability\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: junior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "The role entails",
+        "What we are looking for in you",
+        "Nice-to-have skills",
+        "What we offer colleagues",
+        "About Canonical",
+        "Canonical is an equal opportunity employer"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:21:37.056Z",
+      "title": "Junior Linux Kernel Engineer - Ubuntu",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-149520"
+    },
+    {
+      "name": "jobicy-israel-qa-149522",
+      "at": "2026-10-27T15:12:25.625Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nיתרון: Docker · Container technologies such as LXD, Docker and Kubernetes\n\nיתרון: Kubernetes · Container technologies such as LXD, Docker and Kubernetes\n\nיתרון: APIs · REST and gRPC API experience\n\nיתרון: SQL · SQL and NoSQL data store expertise\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: senior (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [
+        "The role entails",
+        "What we are looking for in you",
+        "Nice-to-have skills",
+        "What we offer you",
+        "About Canonical",
+        "Canonical is an equal opportunity employer"
+      ],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:21:39.899Z",
+      "title": "Senior/Staff/Principal Engineer",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-149522"
+    },
+    {
+      "name": "jobicy-israel-qa-149523",
+      "at": "2026-10-27T15:12:31.348Z",
+      "facts": "דרישות ועדויות מהמקור\n\nהחילוץ מוגבל ושמרני. פרטים שלא חולצו נשארים לא ידועים; התיאור המקורי הוא הבסיס לבדיקה.\n\nגבולות סעיפי הדרישות לא נשמרו. יש לברר דרישות חובה ויתרון בעמוד המקור.\n\nPython · extracted · You have Intermediate to Advanced level of Python programming skills\n\nKubernetes · extracted · OpenStack and Kubernetes infrastructure\n\nניסיון מינימלי: לא נמסר בבירור · בכירות: לא נמסר (אם זוהתה בכותרת, זהו סיווג משוער)\n\nמדינות מותרות למועמדים: לא נמסרו בבירור. מיקום המשרד אינו תנאי אזרחות או אישור עבודה.\n\nחסות אשרה: לא ידוע · אזור זמן נדרש: לא נמסר",
+      "headings": [],
+      "sourceLinks": [
+        {
+          "text": "Jobicy",
+          "url": "https://jobicy.com/jobs/149523-cloud-field-engineer"
+        },
+        {
+          "text": "הרשומה המקורית",
+          "url": "https://jobicy.com/jobs/149523-cloud-field-engineer"
+        }
+      ],
+      "sourceStatus": "פרסום במקור: published · בדיקה מוצלחת אחרונה: 2026-10-26T20:21:42.666Z",
+      "title": "Cloud Field Engineer",
+      "url": "https://getnivajobs.com/app/jobs/jobicy-israel-qa-149523"
+    }
+  ],
+  "independentSources": {
+    "sample": 20,
+    "published": 14,
+    "notPresent": 0,
+    "unknown": 6,
+    "applicationFormsActuallyInspected": 1,
+    "formsSubmitted": 0
+  },
+  "score": {
+    "components": [
+      {
+        "area": "Result relevance",
+        "weight": 25,
+        "score": 6
+      },
+      {
+        "area": "Eligibility handling",
+        "weight": 15,
+        "score": 8
+      },
+      {
+        "area": "Data quality and presentation",
+        "weight": 20,
+        "score": 7
+      },
+      {
+        "area": "Application handoff",
+        "weight": 15,
+        "score": 8
+      },
+      {
+        "area": "Search and filtering",
+        "weight": 10,
+        "score": 8
+      },
+      {
+        "area": "Usability",
+        "weight": 10,
+        "score": 8
+      },
+      {
+        "area": "Responsive/accessibility spot checks",
+        "weight": 5,
+        "score": 7
+      }
+    ],
+    "weighted": 7.25,
+    "rounded": 7.3,
+    "previousLive": 6.8,
+    "previousLocalProvisional": 7.5,
+    "reason": "Verified improvements, with remaining work-arrangement quote clipping, misleading requirements-warning wording, incomplete eligibility/freshness evidence and unverified broader gates."
+  },
+  "privacy": "Private account identifiers, CV text, personalized term-coverage scores and employer autofill values are excluded. Live screenshot with account avatar is not published."
+}

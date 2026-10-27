@@ -1,0 +1,61 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.3.2",
+  "version": 44,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_5996ac65c7d881918d5ae98b5b03db2e",
+  "deploymentId": "appgdep_6ae0bae8fe5481918e5fb17924919053",
+  "status": "succeeded",
+  "publishedAt": "2026-10-27T14:53:44.764669+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "f1fd7292904df73bd46f1ffb5b9d0a07e8b2e0e9",
+  "sitesCommit": "f83f5f064eaeef1be0299e435164390f6df35df9",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000028d081f49e6a223e5756e861",
+    "content_hash": "sha256:0ec21c3c3d0cbca3ef319aef632647e1bc95e18e1be5f6bfe41647d672b20c41",
+    "size_bytes": 13690880,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2,
+    "automationsUnchanged": true
+  },
+  "checks": {
+    "githubCI": {
+      "runId": 40524161837,
+      "url": "https://github.com/orKonijn/Niva-/actions/runs/40524161837",
+      "conclusion": "success",
+      "frontend": 59,
+      "server": 177,
+      "browser": 226,
+      "worker": 1,
+      "provenance": 1,
+      "typeChecks": 3
+    },
+    "liveReceipt": "live-20261027-v44.json",
+    "report": "../live-reassessment-20261027-v44.md",
+    "liveBuildMappingVerified": true,
+    "liveMainClientBytesVerified": true,
+    "liveMainClientSha256": "820bc33e9e2ae9c5d6b2ffbc67213fa128e2627793581faf58fb13f7b26306bc"
+  },
+  "productionWrites": {
+    "temporaryJobSave": 1,
+    "temporaryJobUnsave": 1,
+    "netSavedChange": 0,
+    "profileEdits": 0,
+    "employerApplicationsSubmitted": 0,
+    "agentEnteredEmployerFormValues": 0,
+    "agentUploadedFiles": 0
+  },
+  "sourceApplicationNote": "Existing MyGreenhouse session populated four visible fields after the employer Apply control; no actual values were recorded. The agent did not click Autofill my application or Submit application; test tab closed.",
+  "limitations": [
+    "Scope is the observed job-finding journey, not full product/security/accessibility certification.",
+    "Hosted private retention, approved alert receipt and erasure-safe restoration remain unverified.",
+    "14 of20 independent employer ATS records were published;6 Jobicy current publication states remain uncertain.",
+    "Live review found clipped work-arrangement quotes and an inaccurate requirements-warning explanation.",
+    "Follow-up documentation is Git-only; it is not another deployment."
+  ]
+}

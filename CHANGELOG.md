@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.3.2 — 2026-10-27
 
-Release candidate prepared for the authorized deployment. Publication and live verification are pending; no hosted version number has been assigned here.
+Published as **Sites44** at [getnivajobs.com](https://getnivajobs.com). [Publication receipt](docs/verification/publication-20261027-v44.json), [live reassessment](docs/live-reassessment-20261027-v44.md). Reviewed GitHub source `f1fd729` maps to Sites source `f83f5f0`; GitHub CI passed. Live search, regional filtering, source facts, pagination, saving and employer handoff were checked without submitting applications.
 
 ### Fixed
 
@@ -16,9 +16,14 @@ Release candidate prepared for the authorized deployment. Publication and live v
 - Keep explicit Schengen residence restrictions separate from citizenship and work authorization, apply them to candidate-country filtering, and show the original condition in job details and fit explanations (comparison audit S01). Country membership alone still requires confirmation of actual residence and work rights.
 - Preserve source section boundaries and treat simple required alternatives such as “Python or Go” as one requirement. Optional skills and collaborator mentions remain separate; ambiguous legacy flattened sections are flagged for checking against the original (S03).
 - Recover source headings and lists for cached Jobicy descriptions during an ordinary due original-page check, only when posting identity and the source description container agree. Requests retain the existing quota, lease, timeout and version guards; unsuccessful recovery keeps cached content (B03).
-- Show bounded evidence excerpts at word boundaries with ellipses instead of cutting words (B05). Jobicy description/path refreshes also preserve the actual earlier provider-publication verification date.
+- Show required-skill/experience evidence excerpts at word boundaries with ellipses instead of cutting words (B05, partially repaired; remaining arrangement excerpts noted below). Jobicy description/path refreshes preserve the actual earlier provider-publication verification date.
 
 No account-data/schema migration or configuration change is required. Existing public facts upgrade through the normal bounded reindex; older flattened Jobicy content needs a successful, due source-page check before its structure can recover. See [repair notes and UI evidence](docs/comparison-repairs-20261027.md). Hosted maintenance/retention, alert receipt and restore verification remain external operational gates. The earlier local reports retain their point-in-time unpublished status until a separate deployment receipt confirms publication.
+
+### Known issues
+
+- Live verification found work-arrangement quotes still beginning mid-word, and a warning that incorrectly attributes all unresolved requirements to missing section boundaries (L44-01/L44-02). These affect presentation, not the verified filtering or handoff.
+- Original-source eligibility/freshness evidence remains incomplete. Fourteen of twenty paired employer ATS records were confirmed published; six Jobicy current publication states remained uncertain. Existing provider-session autofill appeared at the employer form; no agent-entered values or application submission occurred. See the live report for scope and remaining hosted gates.
 
 ## 0.3.1 � 2026-10-26
 

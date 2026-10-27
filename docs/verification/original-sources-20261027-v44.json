@@ -1,0 +1,966 @@
+{
+  "method": "20 prior audited public records; read-only programmatic original/provider check, same synthetic confirmed persona. Role-family labels carried from original audit, not skill-qualification labels. Before/after ranking uses the same newly fetched facts. No applications or authenticated production actions. Jobicy HTML identity does not prove vacancy publication.",
+  "persona": {
+    "confirmed": true,
+    "skills": ["Python", "SQL", "Playwright", "TypeScript", "React"],
+    "yearsExperience": 5,
+    "currentCountry": "IL",
+    "authorizationCountry": "IL",
+    "workAuthorization": "authorized",
+    "authorizationExclusive": false,
+    "citizenshipCountry": null,
+    "citizenshipStatus": "unknown",
+    "sponsorship": "unknown",
+    "languages": [],
+    "qualifications": [],
+    "licenses": [],
+    "clearance": "unknown",
+    "salaryMin": null,
+    "currency": null,
+    "period": null,
+    "employmentTypes": [],
+    "timezone": null
+  },
+  "sampleSize": 20,
+  "providerPublicationConfirmed": 14,
+  "providerNotPresent": 0,
+  "publicationUnknown": 6,
+  "applicationAccessibility": "N/T",
+  "beforeTopFive": [
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "qaFamily": true
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "qaFamily": true
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "qaFamily": true
+    },
+    {
+      "id": "greenhouse-unframe-4904270101",
+      "qaFamily": true
+    },
+    {
+      "id": "jobicy-israel-qa-156544",
+      "qaFamily": true
+    }
+  ],
+  "afterTopFive": [
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "qaFamily": true
+    },
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "qaFamily": true
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "qaFamily": true
+    },
+    {
+      "id": "greenhouse-unframe-4904270101",
+      "qaFamily": true
+    },
+    {
+      "id": "jobicy-israel-qa-156544",
+      "qaFamily": true
+    }
+  ],
+  "records": [
+    {
+      "id": "greenhouse-canopycare-5285235008",
+      "title": "QA & Automation Engineer",
+      "company": "Canopy",
+      "url": "https://job-boards.greenhouse.io/canopycare/jobs/5285235008",
+      "source": "Canopy / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/canopycare/jobs/5285235008?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:14.123Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["Manual QA", "APIs"],
+      "minimumYears": 2,
+      "location": "Tel Aviv, Israel ",
+      "workStyle": "hybrid",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 75,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 75,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "תחום לפי ההעדפה השמורה",
+          "עדות בפרופיל המאושר ל־0 מתוך 2 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-transmitsecurity-8887486002",
+      "title": "QA & Automation Lead",
+      "company": "Transmit Security",
+      "url": "https://www.transmitsecurity.com/about/careers/job?gh_jid=8887486002",
+      "source": "Transmit Security / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/transmitsecurity/jobs/8887486002?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:14.377Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["QA Automation"],
+      "minimumYears": 5,
+      "location": "Tel Aviv-Yafo, Gush Dan, Israel",
+      "workStyle": "hybrid",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 57,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "תחום לפי ההעדפה השמורה",
+          "נדרשת בדיקת בכירות או ניהול"
+        ],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 57,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "תחום לפי ההעדפה השמורה",
+          "נדרשת בדיקת בכירות או ניהול",
+          "עדות בפרופיל המאושר ל־0 מתוך 1 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-unframe-4904270101",
+      "title": "QA Engineer",
+      "company": "Unframe",
+      "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/4904270101",
+      "source": "Unframe / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/unframe/jobs/4904270101?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:14.563Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["Manual QA", "APIs", "APIs"],
+      "minimumYears": 4,
+      "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+      "workStyle": "unknown",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 60,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 60,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "עדות בפרופיל המאושר ל־0 מתוך 2 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-unframe-5003021101",
+      "title": "AI-First QA Automation Engineer ",
+      "company": "Unframe",
+      "url": "https://job-boards.eu.greenhouse.io/unframe/jobs/5003021101",
+      "source": "Unframe / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/unframe/jobs/5003021101?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:14.749Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["Playwright", "QA Automation"],
+      "alternatives": [["TypeScript", "Python"]],
+      "minimumYears": 4,
+      "location": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+      "workStyle": "unknown",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 75,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 91,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "תחום לפי ההעדפה השמורה",
+          "עדות בפרופיל המאושר ל־2 מתוך 3 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-wedev-4652209101",
+      "title": "Junior QA Tester",
+      "company": "WeDev",
+      "url": "https://job-boards.eu.greenhouse.io/wedev/jobs/4652209101",
+      "source": "WeDev / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/wedev/jobs/4652209101?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:14.936Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["JavaScript"],
+      "location": "Holon, Israel",
+      "workStyle": "onsite",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 30,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה", "בכירות נמוכה מהניסיון שאושר"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 30,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "בכירות נמוכה מהניסיון שאושר",
+          "עדות בפרופיל המאושר ל־0 מתוך 1 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-156544",
+      "title": "Manual QA Engineer (Game Client)",
+      "company": "Playson",
+      "url": "https://jobicy.com/jobs/156544-manual-qa-engineer-game-client",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/156544-manual-qa-engineer-game-client",
+      "checkedAt": "2026-10-27T15:07:15.118Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "requiredSkills": ["Manual QA"],
+      "minimumYears": 4,
+      "location": "Europe",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 60,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 60,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "עדות בפרופיל המאושר ל־0 מתוך 1 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "lever-veeva-israel-fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "title": "QA Automation Engineer - CDH",
+      "company": "Veeva",
+      "url": "https://jobs.lever.co/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab",
+      "source": "Veeva / Lever",
+      "sourceCheckUrl": "https://api.lever.co/v0/postings/veeva/fdca1089-4737-4b89-8fa7-03c36262d3ab?mode=json",
+      "checkedAt": "2026-10-27T15:07:15.512Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": true,
+      "roleFit": "QA family; seniority/skills/arrangement need separate review",
+      "location": "Israel - Kiryat Ono",
+      "workStyle": "onsite",
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 75,
+        "reasons": ["כותרת ממשפחת בדיקות תוכנה", "תחום לפי ההעדפה השמורה"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 75,
+        "reasons": [
+          "כותרת ממשפחת בדיקות תוכנה",
+          "תחום לפי ההעדפה השמורה",
+          "עדות בפרופיל המאושר ל־0 מתוך 1 דרישות כישורים שחולצו"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-datadog-7487353",
+      "title": "Enterprise Sales Engineer - UK/Ireland",
+      "company": "Datadog",
+      "url": "https://careers.datadoghq.com/detail/7487353/?gh_jid=7487353",
+      "source": "Datadog / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/datadog/jobs/7487353?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:16.607Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": ["AWS", "Azure", "Kubernetes"],
+      "minimumYears": 5,
+      "location": "Dublin, Ireland; United Kingdom, Remote",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["GB"],
+        "quote": "Dublin, Ireland; United Kingdom, Remote",
+        "provenance": "extracted",
+        "url": "https://careers.datadoghq.com/detail/7487353/?gh_jid=7487353",
+        "observedAt": "2026-10-27T15:07:16.607Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־GB; הפרופיל מציין IL"],
+      "questions": [
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "דרישה לבדיקה: We understand not everyone will meet all the above qualifications on day one",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת", "עדות בפרופיל המאושר ל־0 מתוך 3 דרישות כישורים שחולצו"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-datadog-7516279",
+      "title": "Senior Sales Engineer - Key Accounts",
+      "company": "Datadog",
+      "url": "https://careers.datadoghq.com/detail/7516279/?gh_jid=7516279",
+      "source": "Datadog / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/datadog/jobs/7516279?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:16.824Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": ["AWS", "Azure", "Kubernetes"],
+      "minimumYears": 7,
+      "location": "Arizona, USA, Remote; California, USA, Remote; Nevada, USA, Remote; Oregon, USA, Remote; Washington, USA, Remote",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["US"],
+        "quote": "Arizona, USA, Remote; California, USA, Remote; Nevada, USA, Remote; Oregon, USA, Remote; Washington, USA, Remote",
+        "provenance": "extracted",
+        "url": "https://careers.datadoghq.com/detail/7516279/?gh_jid=7516279",
+        "observedAt": "2026-10-27T15:07:16.824Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־US; הפרופיל מציין IL"],
+      "questions": [
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "דרישה לבדיקה: We understand not everyone will meet all the above qualifications on day one",
+        "דרישה לבדיקה: Actual compensation is based on factors such as the candidate's skills, qualifications, and experience",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -84,
+        "reasons": ["תחום אחר בכותרת", "מינימום שנות ניסיון מעל הפרופיל"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -84,
+        "reasons": [
+          "תחום אחר בכותרת",
+          "עדות בפרופיל המאושר ל־0 מתוך 3 דרישות כישורים שחולצו",
+          "מינימום שנות ניסיון מעל הפרופיל"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-datadog-7993198",
+      "title": "Senior Product Security Engineer - AI Agents",
+      "company": "Datadog",
+      "url": "https://careers.datadoghq.com/detail/7993198/?gh_jid=7993198",
+      "source": "Datadog / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/datadog/jobs/7993198?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.013Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "minimumYears": 5,
+      "location": "Atlanta, Georgia, USA; Connecticut, USA, Remote; Florida, USA, Remote; Massachusetts, USA, Remote; New York, New York, USA; New York, USA, Remote; Pennsylvania, USA, Remote",
+      "workStyle": "unknown",
+      "applicantCountries": {
+        "value": ["US"],
+        "quote": "Atlanta, Georgia, USA; Connecticut, USA, Remote; Florida, USA, Remote; Massachusetts, USA, Remote; New York, New York, USA; New York, USA, Remote; Pennsylvania, USA, Remote",
+        "provenance": "extracted",
+        "url": "https://careers.datadoghq.com/detail/7993198/?gh_jid=7993198",
+        "observedAt": "2026-10-27T15:07:17.013Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־US; הפרופיל מציין IL"],
+      "questions": [
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מקורות אופן העבודה סותרים; הסגנון נשאר לא ידוע עד לבירור",
+        "דרישה לבדיקה: We understand not everyone will meet all the above qualifications on day one",
+        "דרישה לבדיקה: Actual compensation is based on factors such as the candidate's skills, qualifications, and experience",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 0,
+        "reasons": [],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 0,
+        "reasons": [],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-jfrog-8185306",
+      "title": "Senior Solution Engineer, Presales - Public Sector (US Remote)",
+      "company": "JFrog",
+      "url": "https://join.jfrog.com/job/?job=8185306&gh_jid=8185306",
+      "source": "JFrog / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/jfrog/jobs/8185306?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.205Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": ["Kubernetes", "AWS", "Azure"],
+      "minimumYears": 3,
+      "location": "Remote, US",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["US"],
+        "quote": "Remote, US",
+        "provenance": "extracted",
+        "url": "https://join.jfrog.com/job/?job=8185306&gh_jid=8185306",
+        "observedAt": "2026-10-27T15:07:17.205Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־US; הפרופיל מציין IL"],
+      "questions": [
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "המקור דורש אזרחות US: U.S. Citizenship is required. מצב המועמד אינו מאומת",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת", "עדות בפרופיל המאושר ל־0 מתוך 3 דרישות כישורים שחולצו"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-jfrog-8255562",
+      "title": "Regional Vice President, Strategic Solution Engineering (Central)",
+      "company": "JFrog",
+      "url": "https://join.jfrog.com/job/?job=8255562&gh_jid=8255562",
+      "source": "JFrog / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/jfrog/jobs/8255562?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.398Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "minimumYears": 10,
+      "location": "US, Remote",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["US"],
+        "quote": "US, Remote",
+        "provenance": "extracted",
+        "url": "https://join.jfrog.com/job/?job=8255562&gh_jid=8255562",
+        "observedAt": "2026-10-27T15:07:17.398Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־US; הפרופיל מציין IL"],
+      "questions": [
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -123,
+        "reasons": [
+          "תחום אחר בכותרת",
+          "נדרשת בדיקת בכירות או ניהול",
+          "מינימום שנות ניסיון מעל הפרופיל"
+        ],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -53,
+        "reasons": ["נדרשת בדיקת בכירות או ניהול", "מינימום שנות ניסיון מעל הפרופיל"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-wizinc-4665302006",
+      "title": "Solutions Engineer",
+      "company": "Wiz",
+      "url": "https://www.wiz.io/careers/job/4665302006/:title?gh_jid=4665302006",
+      "source": "Wiz / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/wizinc/jobs/4665302006?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.570Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "location": "Remote - Japan",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["JP"],
+        "quote": "Remote - Japan",
+        "provenance": "extracted",
+        "url": "https://www.wiz.io/careers/job/4665302006/:title?gh_jid=4665302006",
+        "observedAt": "2026-10-27T15:07:17.570Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־JP; הפרופיל מציין IL"],
+      "questions": [
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "המקור דורש אישור עבודה ב־JP; אישור במדינה אחרת אינו מוכיח או שולל אותו",
+        "תנאי המקור: Applicants must have the legal right to work in the country where the position is based, without the need for visa sponsorship",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -70,
+        "reasons": ["תחום אחר בכותרת"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-wizinc-4704730006",
+      "title": "Security Engineer - Product",
+      "company": "Wiz",
+      "url": "https://www.wiz.io/careers/job/4704730006/:title?gh_jid=4704730006",
+      "source": "Wiz / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/wizinc/jobs/4704730006?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.756Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "location": "London, UK; Remote - United Kingdom",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["GB"],
+        "quote": "London, UK; Remote - United Kingdom",
+        "provenance": "extracted",
+        "url": "https://www.wiz.io/careers/job/4704730006/:title?gh_jid=4704730006",
+        "observedAt": "2026-10-27T15:07:17.756Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־GB; הפרופיל מציין IL"],
+      "questions": [
+        "חסות אשרה לא אומתה",
+        "המקור דורש אישור עבודה ב־GB; אישור במדינה אחרת אינו מוכיח או שולל אותו",
+        "תנאי המקור: Applicants must have the legal right to work in the country where the position is based, without the need for visa sponsorship",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 0,
+        "reasons": [],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 0,
+        "reasons": [],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "greenhouse-wizinc-4712609006",
+      "title": "Principal Solutions Engineer",
+      "company": "Wiz",
+      "url": "https://www.wiz.io/careers/job/4712609006/:title?gh_jid=4712609006",
+      "source": "Wiz / Greenhouse",
+      "sourceCheckUrl": "https://boards-api.greenhouse.io/v1/boards/wizinc/jobs/4712609006?pay_transparency=true",
+      "checkedAt": "2026-10-27T15:07:17.932Z",
+      "httpStatus": 200,
+      "publication": "published-at-provider",
+      "descriptionRecovered": false,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "location": "Remote - Australia",
+      "workStyle": "remote",
+      "applicantCountries": {
+        "value": ["AU"],
+        "quote": "Remote - Australia",
+        "provenance": "extracted",
+        "url": "https://www.wiz.io/careers/job/4712609006/:title?gh_jid=4712609006",
+        "observedAt": "2026-10-27T15:07:17.932Z"
+      },
+      "applicantRegions": null,
+      "blockers": ["המקור מגביל מגורים ל־AU; הפרופיל מציין IL"],
+      "questions": [
+        "חסות אשרה לא אומתה",
+        "המקור דורש אישור עבודה ב־AU; אישור במדינה אחרת אינו מוכיח או שולל אותו",
+        "תנאי המקור: Applicants must have the legal right to work in the country where the position is based, without the need for visa sponsorship",
+        "מסלול ההגשה טרם אומת; יש לבדוק באתר המקור",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": false,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -88,
+        "reasons": ["תחום אחר בכותרת", "נדרשת בדיקת בכירות או ניהול"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -88,
+        "reasons": ["תחום אחר בכותרת", "נדרשת בדיקת בכירות או ניהול"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-144040",
+      "title": "Staff Software Engineer, App Platform",
+      "company": "Fieldguide",
+      "url": "https://jobicy.com/jobs/144040-staff-software-engineer-app-platform",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/144040-staff-software-engineer-app-platform",
+      "checkedAt": "2026-10-27T15:07:18.113Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": ["APIs"],
+      "minimumYears": 10,
+      "location": "USA",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -53,
+        "reasons": ["נדרשת בדיקת בכירות או ניהול", "מינימום שנות ניסיון מעל הפרופיל"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -53,
+        "reasons": [
+          "נדרשת בדיקת בכירות או ניהול",
+          "עדות בפרופיל המאושר ל־0 מתוך 1 דרישות כישורים שחולצו",
+          "מינימום שנות ניסיון מעל הפרופיל"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-144139",
+      "title": "Senior AI Engineer",
+      "company": "eMerchantPay",
+      "url": "https://jobicy.com/jobs/144139-senior-ai-engineer-3",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/144139-senior-ai-engineer-3",
+      "checkedAt": "2026-10-27T15:07:18.295Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": [
+        "Workflow Automation",
+        "AWS",
+        "APIs",
+        "APIs",
+        "Product Management",
+        "Docker",
+        "APIs"
+      ],
+      "minimumYears": 7,
+      "location": "Bulgaria",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -14,
+        "reasons": ["מינימום שנות ניסיון מעל הפרופיל"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -14,
+        "reasons": [
+          "עדות בפרופיל המאושר ל־0 מתוך 5 דרישות כישורים שחולצו",
+          "מינימום שנות ניסיון מעל הפרופיל"
+        ],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-149520",
+      "title": "Junior Linux Kernel Engineer - Ubuntu",
+      "company": "Canonical",
+      "url": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/149520-junior-linux-kernel-engineer-ubuntu",
+      "checkedAt": "2026-10-27T15:07:18.482Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "location": "Anywhere",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -30,
+        "reasons": ["בכירות נמוכה מהניסיון שאושר"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -30,
+        "reasons": ["בכירות נמוכה מהניסיון שאושר"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-149522",
+      "title": "Senior/Staff/Principal Engineer",
+      "company": "Canonical",
+      "url": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/149522-senior-staff-principal-engineer",
+      "checkedAt": "2026-10-27T15:07:18.679Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "location": "Anywhere",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "דרישה לבדיקה: Undergraduate degree in Computer Science or STEM, or a compelling narrative about your alternative path",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": -18,
+        "reasons": ["נדרשת בדיקת בכירות או ניהול"],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": -18,
+        "reasons": ["נדרשת בדיקת בכירות או ניהול"],
+        "version": "discovery-evidence-v2"
+      }
+    },
+    {
+      "id": "jobicy-israel-qa-149523",
+      "title": "Cloud Field Engineer",
+      "company": "Canonical",
+      "url": "https://jobicy.com/jobs/149523-cloud-field-engineer",
+      "source": "Jobicy · remote jobs",
+      "sourceCheckUrl": "https://jobicy.com/jobs/149523-cloud-field-engineer",
+      "checkedAt": "2026-10-27T15:07:18.876Z",
+      "httpStatus": 200,
+      "publication": "unknown",
+      "descriptionRecovered": true,
+      "qaFamilyLabel": false,
+      "roleFit": "Different role family for the QA persona",
+      "requiredSkills": ["Python", "Kubernetes"],
+      "location": "Anywhere",
+      "workStyle": "remote",
+      "applicantCountries": null,
+      "applicantRegions": null,
+      "blockers": [],
+      "questions": [
+        "יש לברר מדינות מותרות למועמדים; עבודה מרחוק אינה אישור לעבודה מכל מדינה",
+        "גבולות סעיפי הדרישות לא נשמרו במקור השמור; יש לבדוק דרישות חובה ויתרון בעמוד המקורי",
+        "חסות אשרה לא אומתה",
+        "יש לברר אישור עבודה במדינת ההעסקה",
+        "דרישה לבדיקה: University degree in Computer Science or related software engineering expertise",
+        "אזורי זמן ושעות חפיפה לעבודה מרחוק לא אומתו"
+      ],
+      "defaultVisible": true,
+      "applicationAccessibility": "not verified in this programmatic check",
+      "beforeRank": {
+        "rank": 0,
+        "reasons": [],
+        "version": "discovery-evidence-v1"
+      },
+      "afterRank": {
+        "rank": 12,
+        "reasons": ["עדות בפרופיל המאושר ל־1 מתוך 2 דרישות כישורים שחולצו"],
+        "version": "discovery-evidence-v2"
+      }
+    }
+  ]
+}
