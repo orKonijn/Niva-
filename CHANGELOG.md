@@ -2,11 +2,17 @@
 
 ## Unreleased
 
+No changes recorded.
+
+## 0.4.4 — 2026-10-28
+
+Published as **Sites 52** at [getnivajobs.com](https://getnivajobs.com). [Publication/live receipt](docs/verification/publication-20261028-v52.json). Reviewed GitHub source `ba6d9d5` maps to Sites source `dee3cd7`. No schema migration or configuration change.
+
 ### Fixed
 
-- Explain résumé draft validation instead of leaving Save silently disabled. Save now focuses invalid fields and describes the20-character minimum, trimmed-edge whitespace, blank names and size limits. A visible counter updates while typing; valid drafts retain the existing server checks. Saving shows progress, failures preserve the input with an inline retry explanation, and the form stays open to show successful saving and its review link. No résumé is automatically approved, activated or sent externally.
+- Explain résumé draft validation instead of leaving Save silently disabled. Save now focuses invalid fields and describes the 20-character minimum, trimmed-edge whitespace, blank names and size limits. A visible counter updates while typing; valid drafts retain the existing server checks. Saving shows progress, failures preserve the input with an inline retry explanation, and the form stays open to show successful saving and its review link. No résumé is automatically approved, activated or sent externally.
 
-Development fix targeting0.4.4; publication pending. [Verification and actual before/after UI](docs/resume-save-20261028.md).
+Compatible validation repair; existing review/activation and résumé content limits are preserved. [Verification and actual before/after UI](docs/resume-save-20261028.md).
 
 ## 0.4.3 — 2026-10-28
 
@@ -391,7 +397,7 @@ Published **25 October 2026** at [getnivajobs.com](https://getnivajobs.com). Pub
 
 ## Version 19 — UI/UX review repairs
 
-Published **25 October 2026** after authorization. Deployment succeeded. Reviewed GitHub source: `8aa5de3730724caaaa964fd32bf6aa133523c819`; Sites source: `e94033e05a20b767b3537ed28503c3972be375ce`. Live build metadata verifies the clean mapping. [Publication receipt](docs/verification/publication-20261025-v19.json). Existing owner-only access and inactive providers/scheduler are preserved. No new schema migration or live deletion operation.
+Published **25 October 2026** after authorization. Deployment succeeded. Reviewed GitHub source: `8aa5de3730724caaaa964fd32bf6aa133523c819`; Sites source: `e94033e05a 20b767b3537ed28503c3972be375ce`. Live build metadata verifies the clean mapping. [Publication receipt](docs/verification/publication-20261025-v19.json). Existing owner-only access and inactive providers/scheduler are preserved. No new schema migration or live deletion operation.
 
 This subsequent Git-only release-record update does not change application code or create another hosted version. Genuine document record: [Before](docs/screenshots/changes/publication-ui-review-record/before.png) · [After](docs/screenshots/changes/publication-ui-review-record/after.png).
 
@@ -536,7 +542,7 @@ Source date: **2026-10-24**. Sites source: `2dcec00a4797d979d144c33f1531e4da96c7
 
 ## Version 12 — Homepage aligned with the real account workflow
 
-Source date: **2026-10-24**. Sites source: `73e1db943277890a20d4e0d14fe6257a54ccc4d7`.
+Source date: **2026-10-24**. Sites source: `73e1db943277890a 20d4e0d14fe6257a54ccc4d7`.
 
 - Updated homepage descriptions to match source-job search, saved jobs, persistent account preferences, original employer links and approximate maps.
 - Clarified that resume parsing and AI sending required separately configured services, and that viewing an employer listing was not an application submission.

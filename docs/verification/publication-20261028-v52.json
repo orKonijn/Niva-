@@ -1,0 +1,60 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.4",
+  "version": 52,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a4af26da8aa08191ad51965419bae70b",
+  "deploymentId": "appgdep_6ae1db0c2d7c81919bb7a61985d2c944",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T11:23:07.679296+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "ba6d9d56150fedb323897c51e4dcdce767106a20",
+  "sitesCommit": "dee3cd711f17ddbb0dcd72dd4b8903b63eb57f43",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000bdc0824399c93c2920c0b5aa",
+    "content_hash": "sha256:67503ae8b55b14dd460e2b32cdf4457895af5aded221a9576a2887e10d91b7fa",
+    "size_bytes": 13803520,
+    "file_count": 303
+  },
+  "workerBundleSha256": "75f9c95b8fca3a81c37745a66ef466e7751d7b547ae07f7faa3b561a884a2788",
+  "environmentRevision": 7,
+  "checks": {
+    "frontend": 59,
+    "careerAPI": 22,
+    "typeChecks": 3,
+    "worker": 1,
+    "provenance": 1,
+    "relevantBrowserCases": 92,
+    "finalDisclosureCases": 20,
+    "mergedHomepageAndSaveCases": 28,
+    "allRecordedCasesPassed": true,
+    "formatting": true,
+    "productionBuild": true,
+    "liveBuildMappingVerified": true,
+    "liveInvalidSave": {
+      "characters": 4,
+      "buttonEnabled": true,
+      "inlineExplanation": true,
+      "ariaInvalid": true
+    },
+    "liveValidText": {
+      "buttonEnabled": true,
+      "ariaInvalidCleared": true
+    },
+    "report": "../resume-save-20261028.md"
+  },
+  "productionAccountChanges": {
+    "resumeCreates": 0,
+    "resumeEdits": 0,
+    "resumeActivations": 0,
+    "profileEdits": 0,
+    "applicationsSubmitted": 0
+  },
+  "limitations": [
+    "Successful persistence, retry, review and activation were tested against the real local backend with synthetic accounts, not the user's production resumes.",
+    "Live checks verified the deployed form and validation without submitting a draft; temporary input was cleared.",
+    "Existing assistant stylesheet soft-budget warning remains.",
+    "No full product/security or hosted operational certification is implied."
+  ]
+}
