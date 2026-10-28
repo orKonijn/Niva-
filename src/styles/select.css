@@ -1,0 +1,19 @@
+/* Keep the arrow inset and its text space consistent across scoped form styles. */
+:root body select:not([multiple]):is(:not([size]), [size='1']) {
+  appearance: none;
+  padding-inline-end: 44px;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 12px;
+}
+:root body select:not([multiple]):is(:not([size]), [size='1']):dir(rtl) {
+  background-position: left 16px center;
+}
+@media (forced-colors: active) {
+  :root body select:not([multiple]):is(:not([size]), [size='1']) {
+    appearance: auto;
+    padding-inline-end: 14px;
+    background-image: none;
+  }
+}
