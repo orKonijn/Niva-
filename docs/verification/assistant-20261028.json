@@ -1,7 +1,7 @@
 {
   "date": "2026-10-28",
   "applicationVersion": "0.4.0",
-  "status": "local verification passed; publication pending",
+  "status": "published as application0.4.0 / Sites48; preserved by subsequent0.4.1 / Sites49",
   "frontend": 59,
   "server": 184,
   "typeChecks": 3,
@@ -41,5 +41,20 @@
     "worker": 1,
     "productionBuild": "passed with 5.58kB assistant CSS soft warning",
     "serverSourceUnchangedByUpstreamMerge": true
+  },
+  "publicationReceipt": "publication-20261028-v48.json",
+  "hostedCI": {
+    "runId": 40674315126,
+    "conclusion": "failure",
+    "nonBrowserSteps": "all passed",
+    "browserPassed": 243,
+    "browserFailed": 3,
+    "testOnlyFixes": "Isolated synthetic guide catalog and current country label/base URL",
+    "isolatedLocalCIMode": {
+      "cases": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "replacementRemoteResult": "not yet observed"
   }
 }

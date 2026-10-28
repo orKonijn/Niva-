@@ -14,6 +14,8 @@ The [current capability and operational matrix](docs/current-status.md) is autho
 
 ![Niva desktop homepage](docs/screenshots/home-preview.png)
 
+The [assistant repair and live checks](docs/assistant-repair-20261028.md) document the built-in guide, redesigned chat UI and the remaining free-form AI configuration requirement. [Assistant deployment receipt](docs/verification/publication-20261028-v48.json).
+
 ## Run locally
 
 Use Node.js 24.15+ (24.x) and npm.

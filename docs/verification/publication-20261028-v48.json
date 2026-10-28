@@ -1,0 +1,95 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.0",
+  "version": 48,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_517fdb2c8bc0819186f93f67b5afe2e2",
+  "deploymentId": "appgdep_6ae1d243c95c8191bc72398e3eaba04e",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T10:45:39.167534+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "105de51a830151cac089dcd51016a79c89029d5b",
+  "sitesCommit": "9237968fc424ad5b0b4b01e95176d27210d1596b",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000130081f4acbc95cd38ec5f01",
+    "content_hash": "sha256:79f048d1d7b6923decbf8f72329b905ce226562f416b1e27625f6f1024adcc05",
+    "size_bytes": 13783040,
+    "file_count": 303
+  },
+  "workerBundleSha256": "6cd12cc7ae08cfc351fdb820fbd071410b869a26094cc34894d84a938c88954b",
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2,
+    "automationsUnchanged": true
+  },
+  "checks": {
+    "verification": "assistant-20261028.json",
+    "report": "../assistant-repair-20261028.md",
+    "liveBuildMappingVerified": true,
+    "live": {
+      "qaResults": 4,
+      "linkedJobDetails": true,
+      "savedConversationReload": true,
+      "selectedJobRequirements": true,
+      "interviewPreparation": true,
+      "mobileEmptyState": true,
+      "mobileRecovery": true,
+      "desktop": {
+        "width": 1550,
+        "height": 1251,
+        "scrollWidth": 1535
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 375
+      },
+      "resumeSharing": false
+    },
+    "githubCI": {
+      "runId": 40674315126,
+      "url": "https://github.com/orKonijn/Niva-/actions/runs/40674315126",
+      "conclusion": "failure",
+      "nonBrowserSteps": "all passed",
+      "browser": {
+        "passed": 243,
+        "failed": 3
+      },
+      "diagnosis": [
+        "New guide test assumed a pre-populated local catalog on a fresh CI database.",
+        "Legacy account test still targeted the pre-redesign country field label."
+      ],
+      "testOnlyRepair": {
+        "freshIsolatedCases": 4,
+        "passed": 4,
+        "failed": 0,
+        "newCI": "pending after test-only commit"
+      }
+    }
+  },
+  "productionWrites": {
+    "guideConversationsCreated": 2,
+    "guideExchanges": 5,
+    "profileEdits": 0,
+    "resumeEdits": 0,
+    "applicationsSubmitted": 0,
+    "employerContacts": 0
+  },
+  "limitations": [
+    "Built-in guide uses database facts and fixed guidance, not AI.",
+    "Free-form AI remains disabled; provider credentials and real-provider verification are absent.",
+    "Positive resume opt-in, deletion, cancellation and provider failures were tested locally with synthetic data; no personal resume was shared live.",
+    "Hosted retention/identity/restore operational gates remain unverified.",
+    "Broad run459/464 initially passed; all failed cases were covered by44 passing retests, then76 combined-release UI cases passed.",
+    "The original deployed-source CI failed three browser cases. Test-only repairs passed four isolated local CI-mode cases; no replacement CI pass is claimed."
+  ],
+  "subsequentPublicationObserved": {
+    "applicationVersion": "0.4.1",
+    "latestSavedVersion": 49,
+    "githubCommit": "aaf24a5c5ca348cb626694f1b40b54a3933f50c8",
+    "sitesCommit": "9439f38cfaf645584c859a14d9df3cd008d1e59e",
+    "note": "Separate preferences publication includes the assistant repair. This receipt records this task's own 0.4.0 / Sites48 deployment and observed live journey."
+  }
+}

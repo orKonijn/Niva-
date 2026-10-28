@@ -2,6 +2,8 @@ import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { DatabaseSync } from 'node:sqlite';
+import type { Job } from '../src/app/core/models/job';
 const password = 'Browser-test-password-2026';
 async function quietCookies(page: Page) {
   await page.addInitScript(() => localStorage.setItem('niva.cookie-choice', 'necessary'));
@@ -47,31 +49,104 @@ test.beforeEach(async ({ page }) => quietCookies(page));
 
 test('real local guide searches catalog, persists and reopens a conversation, reviews a job and deletes only its test chat', async ({
   page,
+  baseURL,
 }) => {
-  await registerAndLogin(page, `guide-${crypto.randomUUID()}@example.test`);
-  await page.goto('/app/assistant');
-  await page.getByRole('button', { name: /למצוא משרות/ }).click();
-  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
-  await expect(page.getByRole('log')).toContainText('נמצאו');
-  await expect(page.getByRole('log')).toContainText('ללא בינה מלאכותית');
-  await expect(page.locator('.assistant-main > ul a').first()).toBeVisible();
-  await page.reload();
-  await page.getByRole('button', { name: 'QA', exact: true }).click();
-  await expect(page.getByRole('log')).toContainText('נמצאו');
-  await page.locator('.assistant-main > ul a').first().click();
-  await page.getByRole('link', { name: 'שיחה והכנה לריאיון', exact: true }).click();
-  await page.getByRole('button', { name: /להבין את המשרה/ }).click();
-  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
-  await expect(page.getByRole('log')).toContainText('דרישות שחולצו מהמקור', { timeout: 15000 });
-  const remove = page.getByRole('button', { name: 'מחיקת שיחה', exact: true }).first();
-  await remove.click();
-  await expect(page.getByRole('dialog')).toBeVisible();
-  await page.getByRole('button', { name: 'ביטול', exact: true }).click();
-  await expect(page.getByRole('dialog')).not.toBeVisible();
-  await remove.click();
-  await page.getByRole('button', { name: 'אישור מחיקה לצמיתות', exact: true }).click();
-  await expect(page.getByRole('dialog')).not.toBeVisible();
-  await expect(page.getByRole('button', { name: 'מחיקת שיחה', exact: true })).toHaveCount(1);
+  // Seed only this test's clearly synthetic listing. Fresh CI databases have no
+  // ingested catalog; tests must not depend on another test or public providers.
+  if (!baseURL || !['127.0.0.1', 'localhost'].includes(new URL(baseURL).hostname))
+    throw new Error('Guide catalog fixture is restricted to local testing');
+  const root = resolve(process.env['NIVA_DATA_DIR'] ?? '.test-data/browser');
+  if (
+    !root.startsWith(resolve('.test-data') + '\\') &&
+    !root.startsWith(resolve('.test-data') + '/')
+  )
+    throw new Error('Guide catalog fixture requires an isolated .test-data directory');
+  const token = crypto.randomUUID();
+  const postingId = BigInt('0x' + token.replaceAll('-', '')).toString();
+  const query = `QA Guide ${token}`;
+  const job: Job = {
+    // Use the regular supported route and cached-check path, with explicitly
+    // synthetic content. No source/application URL is opened by this test.
+    id: `greenhouse-appsflyer-${postingId}`,
+    title: query,
+    company: 'Synthetic browser fixture — not a vacancy',
+    initials: 'TEST',
+    color: '#e4f1fa',
+    district: 'tel-aviv',
+    workStyle: 'hybrid',
+    category: 'qa-automation',
+    posted: 'נתוני בדיקה סינתטיים בלבד',
+    description: 'Synthetic local browser fixture, not a vacancy. Requirements: Python and SQL.',
+    skills: [],
+    reason: 'Synthetic local test only',
+    offices: [],
+    source: {
+      kind: 'real',
+      name: 'Synthetic local test only',
+      url: 'https://careers.appsflyer.com/',
+      applicationUrl: `https://careers.appsflyer.com/jobs/position/${postingId}`,
+      applicationCheck: {
+        status: 'unverified',
+        checkedAt: new Date().toISOString(),
+        note: 'Synthetic cached fixture; no employer vacancy verification claimed.',
+      },
+      updatedAt: new Date().toISOString(),
+      fetchedAt: new Date().toISOString(),
+      version: token,
+      location: 'Tel Aviv, Israel',
+      classification: 'Synthetic fixture, not a vacancy',
+      active: true,
+    },
+  };
+  const sql = new DatabaseSync(resolve(root, 'niva.sqlite'));
+  sql.exec('PRAGMA busy_timeout=5000');
+  sql
+    .prepare(
+      'INSERT INTO niva_jobs(id,source_id,canonical,company,title,district,category,style,search,active,version,data) VALUES(?,?,?,?,?,?,?,?,?,1,?,?)',
+    )
+    .run(
+      job.id,
+      'synthetic-guide',
+      job.source!.applicationUrl,
+      job.company.toLowerCase(),
+      job.title.toLowerCase(),
+      job.district,
+      job.category,
+      job.workStyle,
+      `${job.title} ${job.company}`.toLowerCase(),
+      token,
+      JSON.stringify(job),
+    );
+  try {
+    await registerAndLogin(page, `guide-${crypto.randomUUID()}@example.test`);
+    await page.goto('/app/assistant');
+    await page.getByRole('button', { name: /למצוא משרות/ }).click();
+    await page.getByLabel('ההודעה שלך', { exact: true }).fill(query);
+    await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+    await expect(page.getByRole('log')).toContainText('נמצאו');
+    await expect(page.getByRole('log')).toContainText('ללא בינה מלאכותית');
+    await expect(page.locator('.assistant-main > ul a').first()).toBeVisible();
+    await page.reload();
+    await page.getByRole('button', { name: query, exact: true }).click();
+    await expect(page.getByRole('log')).toContainText('נמצאו');
+    await page.locator('.assistant-main > ul a').first().click();
+    await page.getByRole('link', { name: 'שיחה והכנה לריאיון', exact: true }).click();
+    await page.getByRole('button', { name: /להבין את המשרה/ }).click();
+    await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+    await expect(page.getByRole('log')).toContainText('דרישות שחולצו מהמקור', { timeout: 15000 });
+    const remove = page.getByRole('button', { name: 'מחיקת שיחה', exact: true }).first();
+    await remove.click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.getByRole('button', { name: 'ביטול', exact: true }).click();
+    await expect(page.getByRole('dialog')).not.toBeVisible();
+    await remove.click();
+    await page.getByRole('button', { name: 'אישור מחיקה לצמיתות', exact: true }).click();
+    await expect(page.getByRole('dialog')).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'מחיקת שיחה', exact: true })).toHaveCount(1);
+  } finally {
+    sql.prepare('DELETE FROM niva_jobs WHERE id=?').run(job.id);
+    sql.close();
+  }
 });
 
 test('real local account persists reviewed resume versions across reload and deletes them with account data', async ({
@@ -106,6 +181,7 @@ test('real local account persists reviewed resume versions across reload and del
 test('real email registration/verification and independent sessions synchronize account data', async ({
   page,
   browser,
+  baseURL,
 }, info) => {
   const email = `browser-${crypto.randomUUID()}@example.test`;
   await registerAndLogin(page, email);
@@ -123,13 +199,13 @@ test('real email registration/verification and independent sessions synchronize 
   await page.getByLabel('איך לקרוא לך?').fill('שם נשמר');
   await page.getByLabel('כותרת מקצועית').fill('QA Automation');
   await page.getByLabel('שנות ניסיון רלוונטי', { exact: true }).fill('4');
-  await page.getByLabel('מדינה נוכחית (קוד, למשל IL)', { exact: true }).fill('IL');
+  await page.getByLabel('מדינה נוכחית', { exact: true }).fill('IL');
   await page.getByRole('checkbox', { name: 'בדקתי ומאשר/ת את הפרטים האלה' }).check();
   await page.getByRole('button', { name: 'שמירת פרטים לבדיקת התאמה', exact: true }).click();
   await expect(page.getByText('הפרטים נשמרו. ההתאמות חושבו מחדש.', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'שמירת שם בחשבון' }).click();
   await expect(page.getByText('הפרטים נשמרו בחשבון.', { exact: true })).toBeVisible();
-  const other = await browser.newContext({ baseURL: 'http://127.0.0.1:4300' });
+  const other = await browser.newContext({ baseURL });
   const device = await other.newPage();
   await quietCookies(device);
   try {
@@ -141,9 +217,7 @@ test('real email registration/verification and independent sessions synchronize 
     await expect(device.getByRole('heading', { level: 1 })).toContainText('שם נשמר');
     await device.goto('/app/profile');
     await expect(device.getByLabel('שנות ניסיון רלוונטי', { exact: true })).toHaveValue('4');
-    await expect(device.getByLabel('מדינה נוכחית (קוד, למשל IL)', { exact: true })).toHaveValue(
-      'IL',
-    );
+    await expect(device.getByLabel('מדינה נוכחית', { exact: true })).toHaveValue('IL');
     await device.goto('/app/jobs');
     await expect(device.locator('niva-job-card')).toHaveCount(1);
     await expect(device.getByRole('button', { name: 'הסרת המשרה מהשמורות' })).toBeVisible();
