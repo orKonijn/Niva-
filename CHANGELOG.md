@@ -4,13 +4,24 @@
 
 No changes recorded.
 
-## 0.3.3 — 2026-10-28
+## 0.3.4 — 2026-10-28
 
 Release candidate; publication pending. Compatible résumé layout repair; no account-data migration or user action is required.
 
 ### Fixed
 
 - Compact résumé version rows now group the filename, active status and review state, with expiry and deletion alongside them on desktop and reflowed on mobile. The new-version and privacy sections have separate spacing, consistent disclosure controls and clearer open states in both themes. See [matched before/after views and verification](docs/screenshots/changes/resume-layout.md).
+
+## 0.3.3 — 2026-10-28
+
+Published as **Sites45** on 2026-10-28 from Sites source `51170daaf0bbabded2a705f3e1d2d8331818b314`. Compatible job-card UI repair; preserved in the following release.
+
+### Fixed
+
+- Make job cards easier to scan with larger titles, isolated English locations, consistent metadata rows and a full-width source application button. Keep actions and footers aligned across desktop cards and stack secondary actions on narrow screens.
+- Put repeated source/classification details and verification timestamps behind a labelled expandable section. Show check times in Israel local format while preserving the exact ISO timestamp; skill evidence and eligibility remain available separately. Existing application paths and saved-job actions are preserved.
+
+No schema, account-data or configuration changes are required. See [matching desktop/mobile captures](docs/job-card-layout-20261028.md). The previous GitHub-to-Sites source mapping belongs to the earlier release and is removed for this changed source; this release uses its own Sites source commit rather than claiming the old GitHub review applies.
 
 ## 0.3.2 — 2026-10-27
 

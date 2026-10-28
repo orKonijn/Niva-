@@ -1,6 +1,6 @@
 # Résumé versions layout
 
-Release candidate **0.3.3**, 2026-10-28; publication pending. Previous published application: **0.3.2 / Sites44**. This compatible visual repair changes no account data, API contract or configuration. Package and lockfile versions advance together.
+Release candidate **0.3.4**, 2026-10-28; publication pending. Previous published application: **0.3.3 / Sites45** (concurrent job-card repair, preserved). This compatible visual repair changes no account data, API contract or configuration. Package and lockfile versions advance together.
 
 The previous list stacked every field in a full-width panel, and adjacent disclosure panels touched. The updated layout groups each version into a compact row with an active badge, aligned expiry and delete action, and a mobile reflow. Disclosure panels have 16px separation, full-width keyboard-accessible summaries and down/up chevrons. Native details behavior, review/activation and deletion confirmation are preserved.
 
@@ -22,3 +22,5 @@ Verification: production build and browser-test TypeScript check passed. All 56 
 Reviewed template bindings, CSS cascade and scope, right-to-left placement, filename wrapping, status semantics, native disclosure keyboard behavior, focus visibility, disabled actions, deletion confirmation and unchanged review/activation logic. No blocking product findings were identified. Added a stress regression for 20 versions, long unbroken filenames at 320/700/768/1440px and empty-library creation. Its first run found an ambiguous test locator matching both version 0 and version 10; exact-name selection corrected the test. No product change was needed.
 
 Final review checks: 59 frontend unit tests, both frontend-test and browser-test TypeScript checks, and production build passed. On a dedicated preview of this checkout, 56 existing/layout checks passed; after correcting the test locator, all six layout/stress checks passed. The first attempted review run reused another checkout's local preview and was discarded. Review scope is this presentation change; backend/provider and hosted retention guarantees were not reassessed.
+
+Publication reconciliation: a concurrent job-card repair was published as application0.3.3 / Sites45 from source `51170daaf0bbabded2a705f3e1d2d8331818b314` during preparation. Its implementation, tests and historical visuals are preserved in this release, advancing the résumé patch to0.3.4. The combined production build, browser-test type check and all **62** layout/career/UI review/job-card browser checks passed on the dedicated preview. Changed files passed formatting checks. The native source helper rejected the earlier stale push; no force push or rollback was used.

@@ -1,4 +1,5 @@
 import { payLabel } from '../core/pay-label';
+import { localDate } from '../core/local-date';
 import { jobOpportunity } from '../core/job-opportunity';
 import { discoveryRank } from '../core/discovery-ranking';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
@@ -15,6 +16,7 @@ import { Icon } from './icon';
   styleUrl: './job-card.css',
 })
 export class JobCard {
+  readonly localDate = localDate;
   readonly jobOpportunity = jobOpportunity;
   readonly rankingReasons = computed(
     () =>

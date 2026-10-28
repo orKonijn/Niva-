@@ -1,6 +1,4 @@
-<article
-  class="job-card h-full bg-surface rounded-[18px] p-[23px] hover:border-muted max-[1200px]:p-[18px] max-[768px]:p-[21px]"
->
+<article class="job-card h-full bg-surface rounded-[18px] hover:border-muted">
   <div class="job-card-top flex items-center gap-[13px]">
     <span
       class="company-avatar inline-flex items-center justify-center shrink-[0]"
@@ -32,11 +30,15 @@
       <niva-icon name="heart" />
     </button>
   </div>
-  <div class="job-meta flex-wrap my-[20px_16px] text-muted">
-    <span
-      ><niva-icon name="pin" />{{ job().source?.location || districtLabel(job().district) }}</span
+  <div class="job-meta text-muted">
+    <span class="job-location"
+      ><niva-icon name="pin" /><bdi>{{
+        job().source?.location || districtLabel(job().district)
+      }}</bdi></span
     ><span><niva-icon name="briefcase" />{{ workStyleLabel(job().workStyle) }}</span
-    ><span><niva-icon name="clock" />{{ job().posted }}</span>
+    ><span class="job-posted"
+      ><niva-icon name="clock" /><bdi dir="auto">{{ job().posted }}</bdi></span
+    >
   </div>
   @if (!store.eligibleJobs().includes(job())) {
     <p class="form-hint flex items-start gap-[6px] text-muted leading-[1.8]">
@@ -45,11 +47,9 @@
       }}
     </p>
   }
-  <p
-    class="job-reason flex items-start gap-[7px] bg-pale p-[10px_11px] rounded-[9px] leading-[1.8]"
-  >
-    <niva-icon name="sparkles" />{{ job().reason }}
-  </p>
+  @if (!job().source) {
+    <p class="job-reason"><niva-icon name="sparkles" />{{ job().reason }}</p>
+  }
   @if (job().source) {
     @if (jobOpportunity(job()); as opportunity) {
       <p class="form-hint">
@@ -59,7 +59,7 @@
       </p>
     }
     @if (rankingReasons().length) {
-      <details class="mb-3 text-sm">
+      <details class="job-ranking">
         <summary>למה כדאי לבדוק את התוצאה?</summary>
         <ul>
           @for (reason of rankingReasons(); track reason) {
@@ -69,11 +69,9 @@
         <p>הסבר לסדר העדיפות בלבד. דרישות שלא חולצו, זכאות וזמינות דורשות בדיקה נפרדת.</p>
       </details>
     }
-    <p class="text-xs">
-      <bdi>{{ job().source!.name }}</bdi> · {{ job().source!.location }} · נבדק:
-      <bdi>{{ job().source!.lastVerifiedAt || job().source!.fetchedAt }}</bdi>
+    <p class="job-pay">
+      <span>שכר</span><bdi dir="auto">{{ payLabel(job()) }}</bdi>
     </p>
-    <p class="text-xs">שכר: {{ payLabel(job()) }}</p>
     @if (job().facts?.workArrangementConflict) {
       <p class="text-xs">אופן העבודה סותר בין פרטי המקור; נשאר לא ידוע עד לבירור.</p>
     }
@@ -81,32 +79,57 @@
       <p class="text-xs">מקור נתון השכר לא אומת כשכר שפרסם המעסיק; הוא אינו מוסיף נקודות התאמה.</p>
     }
     <niva-match-indicator [job]="job()" />
-    @if (job().source!.active) {
-      <a
-        class="account-button account-primary"
-        [href]="'/api/apply/' + job().id"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{
-          job().id.startsWith('jobicy-')
-            ? 'בדיקת הגשה ב־Jobicy (ייתכן שנדרש חשבון)'
-            : 'פתיחת המשרה והגשה באתר המקור (חלון חדש)'
-        }}</a
-      >
-    }
-    <p class="text-xs">
-      {{
-        job().id.startsWith('jsearch-')
-          ? 'תוצאה דרך JSearch. פתיחת הקישור אינה הגשת מועמדות; הזמינות ומסלול ההגשה דורשים בדיקה באתר המקור.'
-          : 'פתיחת הקישור אינה הגשת מועמדות. הזמינות נבדקת שוב כשהבדיקה ישנה מ־15 דקות.'
-      }}
-    </p>
-    <div class="job-card-actions">
-      <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
-        >שיחה על המשרה</a
-      ><a class="account-button" routerLink="/app/resumes" [queryParams]="{ job: job().id }"
-        >התאמת קורות חיים</a
-      >
+    <details class="job-source-details">
+      <summary>
+        מקור ועדכניות <bdi>{{ job().source!.name }}</bdi>
+      </summary>
+      <div class="job-source-content">
+        <p>{{ job().reason }}</p>
+        <p>
+          נבדק:
+          <time
+            [attr.datetime]="job().source!.lastVerifiedAt || job().source!.fetchedAt"
+            [title]="job().source!.lastVerifiedAt || job().source!.fetchedAt"
+            >{{ localDate(job().source!.lastVerifiedAt || job().source!.fetchedAt) }}</time
+          >
+        </p>
+        <p>
+          {{
+            job().id.startsWith('jsearch-')
+              ? 'תוצאה דרך JSearch. הזמינות ומסלול ההגשה דורשים בדיקה באתר המקור.'
+              : 'הזמינות נבדקת שוב כשהבדיקה ישנה מ־15 דקות.'
+          }}
+        </p>
+      </div>
+    </details>
+    <div class="job-action-area">
+      @if (job().source!.active) {
+        <a
+          class="account-button account-primary job-apply"
+          [href]="'/api/apply/' + job().id"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="
+            job().id.startsWith('jobicy-')
+              ? 'בדיקת הגשה ב־Jobicy (ייתכן שנדרש חשבון)'
+              : 'לצפייה ולהגשה באתר המקור — פתיחת המשרה והגשה באתר המקור (חלון חדש)'
+          "
+          >{{
+            job().id.startsWith('jobicy-')
+              ? 'בדיקת הגשה ב־Jobicy (ייתכן שנדרש חשבון)'
+              : 'לצפייה ולהגשה באתר המקור'
+          }}
+          <niva-icon name="external"
+        /></a>
+      }
+      <p class="job-apply-note">נפתח בחלון חדש · פתיחת הקישור אינה הגשת מועמדות</p>
+      <div class="job-card-actions">
+        <a class="account-button" routerLink="/app/assistant" [queryParams]="{ job: job().id }"
+          >שיחה על המשרה</a
+        ><a class="account-button" routerLink="/app/resumes" [queryParams]="{ job: job().id }"
+          >התאמת קורות חיים</a
+        >
+      </div>
     </div>
   }
   <div class="job-card-bottom flex items-center justify-between gap-[10px] pt-[15px]">
