@@ -4,6 +4,14 @@
 
 No changes recorded.
 
+## 0.3.3 — 2026-10-28
+
+Release candidate; publication pending. Compatible résumé layout repair; no account-data migration or user action is required.
+
+### Fixed
+
+- Compact résumé version rows now group the filename, active status and review state, with expiry and deletion alongside them on desktop and reflowed on mobile. The new-version and privacy sections have separate spacing, consistent disclosure controls and clearer open states in both themes. See [matched before/after views and verification](docs/screenshots/changes/resume-layout.md).
+
 ## 0.3.2 — 2026-10-27
 
 Published as **Sites44** at [getnivajobs.com](https://getnivajobs.com). [Publication receipt](docs/verification/publication-20261027-v44.json), [live reassessment](docs/live-reassessment-20261027-v44.md). Reviewed GitHub source `f1fd729` maps to Sites source `f83f5f0`; GitHub CI passed. Live search, regional filtering, source facts, pagination, saving and employer handoff were checked without submitting applications.

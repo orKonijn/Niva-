@@ -28,31 +28,55 @@
 @if (notice()) {
   <p role="status" class="account-panel">{{ notice() }}</p>
 }
-<section class="account-panel">
-  <h2>הגרסאות שלי</h2>
+<section class="account-panel resume-library" aria-labelledby="resume-library-title">
+  <h2 id="resume-library-title">הגרסאות שלי</h2>
   <p>
     אפשר לשמור עד 20 גרסאות. אחרי שמאשרים שהפרטים נכונים, בוחרים בנפרד איזו גרסה תשמש לחיפוש
     ולהתאמות.
   </p>
   @for (resume of career.resumes(); track resume.id) {
-    <div class="career-version">
-      <button
-        class="account-button"
-        [attr.aria-pressed]="selected()?.id === resume.id"
-        (click)="select(resume)"
-        [disabled]="busy()"
-      >
-        <bdi>{{ resume.name }}</bdi>
-      </button>
-      <p>
-        {{ resume.active ? 'פעילה · ' : ''
-        }}{{ resume.confirmed ? 'עובדות אושרו' : 'טיוטה לבדיקה' }} ·
-        {{ resume.kind === 'original' ? 'מקור' : resume.kind === 'tailored' ? 'התאמה' : 'עריכה' }}
-      </p>
-      <p>
+    <div class="career-version" [class.resume-version-active]="resume.active">
+      <div class="resume-version-main">
+        <button
+          class="account-button resume-version-name"
+          [attr.aria-pressed]="selected()?.id === resume.id"
+          (click)="select(resume)"
+          [disabled]="busy()"
+        >
+          <svg
+            class="resume-file-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path
+              d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M9 12h6M9 16h6"
+            />
+          </svg>
+          <bdi>{{ resume.name }}</bdi>
+        </button>
+        <p class="resume-version-meta">
+          @if (resume.active) {
+            <span class="resume-active-badge">פעילה</span>
+          }
+          <span
+            >{{ resume.confirmed ? 'עובדות אושרו' : 'טיוטה לבדיקה' }} ·
+            {{
+              resume.kind === 'original' ? 'מקור' : resume.kind === 'tailored' ? 'התאמה' : 'עריכה'
+            }}
+          </span>
+        </p>
+      </div>
+      <p class="resume-version-expiry">
         תוקף: <time [attr.title]="resume.expiresAt">{{ localDate(resume.expiresAt) }}</time>
       </p>
-      <button class="account-button" (click)="askDelete(resume.id, $event)" [disabled]="busy()">
+      <button
+        class="account-button resume-version-delete"
+        (click)="askDelete(resume.id, $event)"
+        [disabled]="busy()"
+      >
         מחיקת גרסה
       </button>
     </div>
@@ -133,7 +157,7 @@
   </section>
 }
 
-<details class="resume-create account-panel" [open]="!career.resumes().length">
+<details class="resume-create resume-disclosure account-panel" [open]="!career.resumes().length">
   <summary>הוספת גרסה חדשה</summary>
   <section class="pt-4">
     <h2>מתחילים מטקסט</h2>
@@ -171,7 +195,7 @@
     />
   </section>
 </details>
-<details class="account-panel resume-privacy">
+<details class="account-panel resume-privacy resume-disclosure">
   <summary>שמירה, פרטיות ותחזוקה</summary>
   <section class="account-panel" aria-label="שמירה ועיבוד קורות חיים">
     <h2>פרטיות ושליטה</h2>

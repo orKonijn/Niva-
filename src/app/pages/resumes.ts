@@ -21,6 +21,7 @@ import { ResumeFileInput } from '../shared/resume-file-input';
 @Component({
   imports: [FormsModule, RouterLink, ResumeFileInput],
   templateUrl: './resumes.html',
+  host: { class: 'resume-page' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Resumes {
