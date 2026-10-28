@@ -1,0 +1,208 @@
+<section class="account-panel candidate-panel" aria-label="פרטים לבדיקת התאמה">
+  <header class="candidate-heading">
+    <span class="section-kicker">לדיוק ההתאמות שלך</span>
+    <h2>הפרטים שעוזרים למצוא התאמה</h2>
+    <p>אפשר למלא רק מה שרלוונטי לך. רק פרטים שאישרת משמשים לבדיקה, ושדה ריק נשאר לא ידוע.</p>
+  </header>
+
+  <div class="candidate-sections">
+    <fieldset class="candidate-section">
+      <legend>ניסיון וכישורים</legend>
+      <p class="candidate-section-note">הניסיון והידע שרלוונטיים לתפקיד הבא.</p>
+      <div class="candidate-fields">
+        <label class="career-field"
+          >כישורים
+          <input
+            [(ngModel)]="skills"
+            maxlength="1000"
+            placeholder="למשל: Python, SQL, ניהול צוות"
+            aria-describedby="candidate-skills-hint"
+          />
+          <span class="candidate-hint" id="candidate-skills-hint"
+            >אפשר להפריד בין כישורים בפסיק</span
+          >
+        </label>
+        <label class="career-field"
+          >שנות ניסיון רלוונטי
+          <input
+            type="number"
+            min="0"
+            max="80"
+            [(ngModel)]="value.yearsExperience"
+            placeholder="למשל: 3"
+          />
+        </label>
+        <label class="career-field"
+          >שפות
+          <input [(ngModel)]="languages" maxlength="1000" placeholder="למשל: עברית, אנגלית" />
+        </label>
+        <label class="career-field"
+          >השכלה והסמכות
+          <input
+            [(ngModel)]="qualifications"
+            maxlength="1000"
+            placeholder="למשל: תואר במדעי המחשב, הסמכת QA"
+          />
+        </label>
+        <label class="career-field"
+          >רישיונות
+          <input [(ngModel)]="licenses" maxlength="1000" placeholder="למשל: רישיון נהיגה B" />
+        </label>
+        <label class="career-field"
+          >סיווג ביטחוני
+          <select [(ngModel)]="value.clearance">
+            <option value="unknown">לא נמסר</option>
+            <option value="none">אין סיווג</option>
+            <option value="held">יש סיווג (יש לבדוק סוג ותוקף)</option>
+          </select>
+        </label>
+      </div>
+      <p class="candidate-hint">בשפות, בהסמכות וברישיונות אפשר להפריד בין כמה פריטים בפסיק.</p>
+    </fieldset>
+
+    <fieldset class="candidate-section">
+      <legend>מגורים ואישורי עבודה</legend>
+      <p class="candidate-section-note">
+        אישור עבודה ואזרחות נבדקים בנפרד. לא מסיקים אישור עבודה מקורות החיים.
+      </p>
+      <div class="candidate-fields">
+        <label class="career-field"
+          >מדינה נוכחית
+          <input
+            [(ngModel)]="value.currentCountry"
+            maxlength="2"
+            dir="ltr"
+            placeholder="IL"
+            aria-describedby="candidate-country-hint"
+          />
+        </label>
+        <label class="career-field"
+          >מדינה לאישור העבודה
+          <input
+            [(ngModel)]="value.authorizationCountry"
+            maxlength="2"
+            dir="ltr"
+            placeholder="IL"
+            aria-describedby="candidate-country-hint"
+          />
+        </label>
+        <p class="candidate-hint candidate-wide" id="candidate-country-hint">
+          קוד מדינה בן שתי אותיות: למשל <bdi>IL</bdi> לישראל או <bdi>US</bdi> לארצות הברית.
+        </p>
+        <label class="career-field"
+          >אישור עבודה במדינה שצוינה
+          <select [(ngModel)]="value.workAuthorization">
+            <option value="unknown">לא ידוע / לא נמסר</option>
+            <option value="authorized">יש אישור</option>
+            <option value="not-authorized">אין אישור</option>
+          </select>
+        </label>
+        <label class="career-field"
+          >צורך בחסות אשרה
+          <select [(ngModel)]="value.sponsorship">
+            <option value="unknown">לא ידוע / לא נמסר</option>
+            <option value="needed">נדרשת חסות</option>
+            <option value="not-needed">לא נדרשת חסות</option>
+          </select>
+        </label>
+        <label class="candidate-check candidate-wide">
+          <input type="checkbox" [(ngModel)]="value.authorizationExclusive" />
+          <span>אישור העבודה שלי מוגבל למדינה שציינתי ואין לי אישור במדינות אחרות</span>
+        </label>
+        <label class="career-field"
+          >מדינה לבדיקת אזרחות
+          <input
+            [(ngModel)]="value.citizenshipCountry"
+            maxlength="2"
+            dir="ltr"
+            placeholder="IL"
+            aria-describedby="candidate-country-hint"
+          />
+        </label>
+        <label class="career-field"
+          >אזרחות במדינה שצוינה
+          <select [(ngModel)]="value.citizenshipStatus">
+            <option value="unknown">לא ידוע / לא נמסר</option>
+            <option value="citizen">יש אזרחות</option>
+            <option value="not-citizen">אין אזרחות</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="candidate-section">
+      <legend>תנאי העבודה שמתאימים לך</legend>
+      <p class="candidate-section-note">אפשר להוסיף ציפיות שכר והעדפות העסקה, אם יש לך כאלה.</p>
+      <div class="candidate-fields candidate-salary">
+        <label class="career-field"
+          >שכר מינימום מבוקש
+          <input type="number" min="0" [(ngModel)]="value.salaryMin" placeholder="למשל: 15000" />
+        </label>
+        <label class="career-field"
+          >מטבע
+          <input
+            [(ngModel)]="value.currency"
+            maxlength="3"
+            dir="ltr"
+            placeholder="ILS"
+            aria-describedby="candidate-currency-hint"
+          />
+          <span class="candidate-hint" id="candidate-currency-hint"
+            >למשל <bdi>ILS</bdi> לשקלים או <bdi>USD</bdi> לדולרים</span
+          >
+        </label>
+        <label class="career-field"
+          >תקופת שכר
+          <select [(ngModel)]="value.period">
+            <option [ngValue]="null">לא נמסר</option>
+            <option value="hour">שעה</option>
+            <option value="month">חודש</option>
+            <option value="year">שנה</option>
+          </select>
+        </label>
+      </div>
+      <div class="candidate-fields candidate-terms">
+        <label class="career-field"
+          >סוגי העסקה
+          <input
+            [(ngModel)]="employmentTypes"
+            maxlength="500"
+            dir="ltr"
+            placeholder="full-time, contract"
+            aria-describedby="candidate-employment-hint"
+          />
+          <span class="candidate-hint" id="candidate-employment-hint"
+            >סוגי העסקה באנגלית, מופרדים בפסיק. למשל משרה מלאה: <bdi>full-time</bdi>.</span
+          >
+        </label>
+        <label class="career-field"
+          >אזור זמן מועדף
+          <input
+            [(ngModel)]="value.timezone"
+            maxlength="80"
+            dir="ltr"
+            placeholder="Asia/Jerusalem"
+          />
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
+  <footer class="candidate-save">
+    <label class="candidate-check">
+      <input type="checkbox" [(ngModel)]="confirmed" />
+      <span>בדקתי ומאשר/ת את הפרטים האלה</span>
+    </label>
+    <button
+      type="button"
+      class="account-button account-primary"
+      [disabled]="!confirmed || store.busy() || !store.accountReady()"
+      (click)="save()"
+    >
+      שמירת פרטים לבדיקת התאמה
+    </button>
+  </footer>
+  @if (notice()) {
+    <p role="status" class="candidate-notice">{{ notice() }}</p>
+  }
+</section>

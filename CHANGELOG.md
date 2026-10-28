@@ -4,6 +4,14 @@
 
 No changes recorded.
 
+## 0.3.5 — 2026-10-28
+
+Release candidate; publication pending. Compatible candidate-profile form repair; no migration or user action is required.
+
+### Fixed
+
+- Group matching details into experience, location/work permissions and work preferences. Tighten field spacing, explain country codes in Hebrew, align salary/currency/pay period and separate the confirmation/save area. The form reflows into one column on mobile and uses the existing light/dark palette. All17 fields, unknown authorization defaults and explicit confirmation before saving are preserved. See [before/after views and checks](docs/screenshots/changes/candidate-layout.md).
+
 ## 0.3.4 — 2026-10-28
 
 Published as **Sites46** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v46.json). Reviewed GitHub source `27487c5` maps to Sites source `7212bf2`; the concurrent0.3.3 job-card repair is preserved. Compatible résumé layout repair; no account-data migration or user action is required.
