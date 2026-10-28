@@ -1,5 +1,14 @@
 @layer components {
+  :host {
+    display: block;
+    min-width: 0;
+    height: 100%;
+  }
   .job-card {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    min-width: 0;
     container: job-card / inline-size;
     border: 1px solid var(--line);
     transition:
@@ -11,7 +20,7 @@
   }
   .job-title h3 {
     font:
-      600 15px/1.5 Heebo,
+      600 17px/1.5 Heebo,
       Arial,
       sans-serif;
     letter-spacing: 0;
@@ -32,8 +41,14 @@
   }
   .job-meta {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-block: 20px 18px;
     font-size: 13px;
+    line-height: 1.7;
+  }
+  .job-meta .job-location {
+    flex-basis: 100%;
   }
   .job-meta span {
     display: flex;
@@ -44,8 +59,79 @@
   }
   .job-meta niva-icon {
     font-size: 12px;
+    flex-shrink: 0;
+  }
+  .job-ranking,
+  .job-source-details {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+  .job-ranking summary,
+  .job-source-details summary {
+    cursor: pointer;
+    padding-block: 8px;
+    min-height: 40px;
+  }
+  .job-ranking summary {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .job-ranking ul {
+    padding-inline-start: 22px;
+    margin-block: 6px;
+  }
+  .job-source-details summary bdi {
+    margin-inline-start: 6px;
+    font-size: 12px;
+  }
+  .job-source-content {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--pale);
+  }
+  .job-source-content p + p {
+    margin-block-start: 8px;
+  }
+  .job-pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-block: 10px 0;
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+  }
+  .job-pay > span {
+    color: var(--muted);
+  }
+  .job-action-area {
+    margin-block-start: auto;
+    padding-block-start: 20px;
+  }
+  .job-apply {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    min-height: 48px;
+    line-height: 1.6;
+  }
+  .job-apply niva-icon {
+    flex-shrink: 0;
+    font-size: 15px;
+  }
+  .job-apply-note {
+    margin-block: 8px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
   }
   .job-reason {
+    display: flex;
+    align-items: start;
+    gap: 8px;
     font-size: 13px;
     overflow-wrap: anywhere;
     color: var(--muted);
@@ -58,12 +144,17 @@
   }
   .job-card-bottom {
     border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+    min-height: 52px;
+  }
+  .job-card-bottom .status-badge {
+    font-size: 11px;
   }
   .job-card-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    margin-block: 16px 20px;
+    margin-block: 14px 18px;
   }
   .job-card-actions .account-button {
     min-width: 0;
@@ -74,6 +165,11 @@
   @container job-card (max-width: 360px) {
     .job-card-actions {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .job-card {
+      padding: 20px;
     }
   }
   .job-card-bottom .text-link {

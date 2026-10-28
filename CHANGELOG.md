@@ -20,6 +20,33 @@ No changes recorded.
 
 Development implementation; not published until a separate deployment receipt confirms it. No schema migration is required. Existing conversations remain AI conversations; switching modes starts a separate conversation to avoid sending guide history to a provider. See [assistant repair and visual evidence](docs/assistant-repair-20261028.md).
 
+## 0.3.5 — 2026-10-28
+
+Published as **Sites47** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v47.json). Reviewed GitHub source `dad063a` maps to Sites source `6eb2179`. Compatible candidate-profile form repair; no migration or user action is required.
+
+### Fixed
+
+- Group matching details into experience, location/work permissions and work preferences. Tighten field spacing, explain country codes in Hebrew, align salary/currency/pay period and separate the confirmation/save area. The form reflows into one column on mobile and uses the existing light/dark palette. All17 fields, unknown authorization defaults and explicit confirmation before saving are preserved. See [before/after views and checks](docs/screenshots/changes/candidate-layout.md).
+
+## 0.3.4 — 2026-10-28
+
+Published as **Sites46** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v46.json). Reviewed GitHub source `27487c5` maps to Sites source `7212bf2`; the concurrent0.3.3 job-card repair is preserved. Compatible résumé layout repair; no account-data migration or user action is required.
+
+### Fixed
+
+- Compact résumé version rows now group the filename, active status and review state, with expiry and deletion alongside them on desktop and reflowed on mobile. The new-version and privacy sections have separate spacing, consistent disclosure controls and clearer open states in both themes. See [matched before/after views and verification](docs/screenshots/changes/resume-layout.md).
+
+## 0.3.3 — 2026-10-28
+
+Published as **Sites45** on 2026-10-28 from Sites source `51170daaf0bbabded2a705f3e1d2d8331818b314`. Compatible job-card UI repair; preserved in the following release.
+
+### Fixed
+
+- Make job cards easier to scan with larger titles, isolated English locations, consistent metadata rows and a full-width source application button. Keep actions and footers aligned across desktop cards and stack secondary actions on narrow screens.
+- Put repeated source/classification details and verification timestamps behind a labelled expandable section. Show check times in Israel local format while preserving the exact ISO timestamp; skill evidence and eligibility remain available separately. Existing application paths and saved-job actions are preserved.
+
+No schema, account-data or configuration changes are required. See [matching desktop/mobile captures](docs/job-card-layout-20261028.md). The previous GitHub-to-Sites source mapping belongs to the earlier release and is removed for this changed source; this release uses its own Sites source commit rather than claiming the old GitHub review applies.
+
 ## 0.3.2 — 2026-10-27
 
 Published as **Sites44** at [getnivajobs.com](https://getnivajobs.com). [Publication receipt](docs/verification/publication-20261027-v44.json), [live reassessment](docs/live-reassessment-20261027-v44.md). Reviewed GitHub source `f1fd729` maps to Sites source `f83f5f0`; GitHub CI passed. Live search, regional filtering, source facts, pagination, saving and employer handoff were checked without submitting applications.

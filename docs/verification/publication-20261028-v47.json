@@ -1,0 +1,53 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.3.5",
+  "version": 47,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_42df8060318881919efbfe0c5080a02a",
+  "deploymentId": "appgdep_6ae1cfb7ae1881918e57bf47058ff793",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T10:34:47.225041+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "dad063a4bb816741210142d3bc41f5f45d7ac8f3",
+  "sitesCommit": "6eb21793fb65f85828b01c582e2d0c589c3c999b",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000029e0820aa51bc01a27a483ba",
+    "content_hash": "sha256:c216b21a752c4b42fc9d30dababd62903627c7cc4571da2885cc19dec4490439",
+    "size_bytes": 13721600,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 59,
+    "browser": 44,
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "productionBuild": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveForm": {
+      "fieldsets": 3,
+      "fields": 17,
+      "checkboxes": 2,
+      "fieldMarginBlock": "0px",
+      "horizontalOverflow": false,
+      "saveInitiallyDisabled": true
+    },
+    "report": "../screenshots/changes/candidate-layout.md"
+  },
+  "productionWrites": {
+    "profileEdits": 0,
+    "uploads": 0,
+    "deletions": 0
+  },
+  "limitations": [
+    "Scoped UI review, not a full security, provider or operational certification.",
+    "Synthetic screenshots are tracked; the user's live preview remains local.",
+    "Post-publication documentation is Git-only and does not imply another deployment."
+  ]
+}
