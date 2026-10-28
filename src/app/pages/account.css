@@ -1,0 +1,80 @@
+.account-summary-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-end: 20px;
+}
+.account-summary-heading h2 {
+  font-size: 21px;
+}
+.account-summary-heading .account-button {
+  font-size: 13px;
+}
+.account-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+}
+.account-data-grid > div {
+  min-width: 0;
+}
+.account-data-grid dt {
+  margin-block-end: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.account-data-grid dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.account-saved-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--blue);
+  font-size: 13px;
+}
+.account-saved-count {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  min-height: 36px;
+  padding-inline: 8px;
+  border-radius: 10px;
+  background: var(--pale);
+  font-size: 18px;
+  font-weight: 600;
+}
+.account-matching-summary {
+  margin-block-start: 24px;
+  padding-block-start: 12px;
+  border-block-start: 1px solid var(--line);
+}
+.account-matching-summary summary {
+  min-height: 44px;
+  padding-block: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.account-matching-summary p {
+  margin-block: 12px 16px;
+  font-size: 13px;
+}
+.account-matching-summary .account-data-grid dd {
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  .account-data-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .account-summary-heading .account-button {
+    padding-inline: 12px;
+  }
+}

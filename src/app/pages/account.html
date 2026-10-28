@@ -6,12 +6,94 @@
   <main id="main" tabindex="-1" class="mx-auto mt-10 max-w-3xl space-y-6">
     <h1 class="text-3xl">החשבון והנתונים שלי</h1>
     <p>
-      החיבור פעיל עבור <bdi class="break-all">{{ session.user()?.email }}</bdi
-      >. נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. קורות חיים ושיחות מנוהלים בנפרד, עם שמירה
-      מוגבלת ל־30 יום.
+      כאן מופיעים הפרטים והעדפות החיפוש שלך. נתוני החשבון נשמרים בשרת ומסתנכרנים בין מכשירים. קורות
+      חיים ושיחות מנוהלים בנפרד, עם שמירה מוגבלת ל־30 יום.
     </p>
     @if (store.accountLoading()) {
       <p role="status">טוענים את נתוני החשבון…</p>
+    }
+    <section class="account-panel account-overview" aria-label="פרטי החשבון">
+      <div class="account-summary-heading">
+        <h2>הפרטים שלי</h2>
+        <a class="account-button" routerLink="/app/profile">עריכת הפרופיל</a>
+      </div>
+      <dl class="account-data-grid">
+        <div>
+          <dt>שם לתצוגה</dt>
+          <dd>
+            <bdi>{{ displayName() }}</bdi>
+          </dd>
+        </div>
+        <div>
+          <dt>כתובת דוא״ל</dt>
+          <dd>
+            <bdi>{{ session.user()?.email }}</bdi>
+          </dd>
+        </div>
+        @if (store.accountReady()) {
+          <div>
+            <dt>כותרת מקצועית</dt>
+            <dd>
+              <bdi>{{ store.account().profile.headline || 'עוד לא הוגדרה כותרת מקצועית' }}</bdi>
+            </dd>
+          </div>
+          <div>
+            <dt>משרות שמורות</dt>
+            <dd>
+              <a class="account-saved-link" routerLink="/app/jobs" [queryParams]="{ saved: true }"
+                ><span class="account-saved-count">{{ store.account().saved.length }}</span
+                ><span>לרשימת המשרות ששמרתי</span></a
+              >
+            </dd>
+          </div>
+        }
+      </dl>
+    </section>
+    @if (store.accountReady()) {
+      <section class="account-panel account-overview" aria-label="החיפוש שלי">
+        <div class="account-summary-heading">
+          <h2>העדפות החיפוש שלי</h2>
+          <a class="account-button" routerLink="/app/preferences">עדכון ההעדפות</a>
+        </div>
+        <dl class="account-data-grid">
+          <div>
+            <dt>תחום שמעניין אותי</dt>
+            <dd>{{ categoryLabel(store.account().preferences.role) }}</dd>
+          </div>
+          <div>
+            <dt>מחוז מועדף</dt>
+            <dd>{{ districtLabel(store.account().preferences.district) }}</dd>
+          </div>
+          <div>
+            <dt>אופן העבודה</dt>
+            <dd>{{ workStylesLabel(store.account().preferences.workStyles) }}</dd>
+          </div>
+          <div>
+            <dt>חברות שבחרתי להסתיר</dt>
+            <dd>
+              <bdi>{{ store.account().preferences.exclusions || 'לא נבחרו חברות להסתרה' }}</bdi>
+            </dd>
+          </div>
+        </dl>
+        <details class="account-matching-summary">
+          <summary>פרטי ההתאמה ששמרתי</summary>
+          @if (matchingDetails().length) {
+            <p>הפרטים מוצגים כפי ששמרת אותם. מידע שלא נמסר נשאר לא ידוע.</p>
+            <dl class="account-data-grid">
+              @for (row of matchingDetails(); track row.label) {
+                <div>
+                  <dt>{{ row.label }}</dt>
+                  <dd>
+                    <bdi>{{ row.value }}</bdi>
+                  </dd>
+                </div>
+              }
+            </dl>
+          } @else {
+            <p>עוד לא נשמרו פרטים לבדיקת התאמה. אפשר להוסיף אותם בפרופיל שלך.</p>
+          }
+        </details>
+      </section>
     }
     <section class="account-panel">
       <h2 class="mb-4 text-xl">שיטות התחברות מחוברות</h2>
@@ -157,9 +239,9 @@
     @if (message()) {
       <p role="status" class="rounded-control bg-success-soft p-4 text-success">{{ message() }}</p>
     }
-    @if (error() || store.notice() || session.notice()) {
+    @if (error() || methodsError() || store.notice() || session.notice()) {
       <p role="alert" class="rounded-control bg-error-soft p-4 text-error">
-        {{ error() || store.notice() || session.notice() }}
+        {{ error() || methodsError() || store.notice() || session.notice() }}
       </p>
     }
   </main>

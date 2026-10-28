@@ -4,6 +4,14 @@
 
 No changes recorded.
 
+## 0.4.5 — 2026-10-28
+
+Release candidate; publication pending. Compatible account-data presentation repair; no migration or user action is required.
+
+### Fixed
+
+- Show the signed-in user's saved profile, email, professional headline, saved-job count and current search preferences on the account page, with direct edit links and expandable saved matching details. Distinguish loading/unavailable data from actual empty values and retain zero experience/salary entries. Connected sign-in methods refresh on account changes and ignore stale responses. Existing access, data export and deletion controls remain in place. See [comparison images and verification](docs/screenshots/changes/account-overview.md).
+
 ## 0.4.4 — 2026-10-28
 
 Published as **Sites 52** at [getnivajobs.com](https://getnivajobs.com). [Publication/live receipt](docs/verification/publication-20261028-v52.json). Reviewed GitHub source `ba6d9d5` maps to Sites source `dee3cd7`. No schema migration or configuration change.
