@@ -4,6 +4,9 @@ import type { CareerConfig, ResumeVersion } from './models/career';
 export const careerError = (code: string) =>
   (
     ({
+      GUIDE_UNAVAILABLE: 'המדריך אינו זמין כרגע. ההודעה נשמרה בשדה; אפשר לנסות שוב.',
+      CONVERSATION_MODE_CHANGED: 'סוג השיחה השתנה. יש להתחיל שיחה חדשה.',
+      CONSENT_REQUIRED: 'יש לאשר עיבוד נתונים לפני שליחה לשירות AI.',
       AI_NOT_CONFIGURED:
         'שירות הבינה המלאכותית טרם הוגדר. אין תשובה מדומה; אפשר להשתמש בחיפוש ובכלי קורות החיים.',
       AI_REJECTED:

@@ -1,5 +1,6 @@
 import { localDate } from '../core/local-date';
 import { AppStore } from '../core/app-store';
+import { Icon } from '../shared/icon';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,6 +9,9 @@ import {
   inject,
   signal,
   untracked,
+  ElementRef,
+  viewChild,
+  afterRenderEffect,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -15,8 +19,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CareerStore, careerError } from '../core/career-store';
 import type { Conversation, ChatMessage, JobReference } from '../core/models/career';
 @Component({
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, Icon],
   templateUrl: './assistant.html',
+  styleUrl: './assistant.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Assistant {
@@ -27,12 +32,25 @@ export class Assistant {
   readonly partial = signal('');
   readonly busy = signal(false);
   readonly error = signal('');
+  readonly historyError = signal('');
+  readonly historyLoading = signal(false);
+  readonly mode = signal<'guide' | 'ai'>('guide');
+  readonly guideAction = signal('search');
+  readonly composer = viewChild<ElementRef<HTMLTextAreaElement>>('composer');
+  readonly log = viewChild<ElementRef<HTMLElement>>('messageLog');
+  readonly deleteDialog = viewChild<ElementRef<HTMLDialogElement>>('deleteDialog');
+  private initialized = false;
+  displayText(text: string) {
+    return text.replace(/\[job:[^\]]+\]/g, '').trim();
+  }
   readonly conversations = signal<Conversation[]>([]);
   readonly jobs = signal<
     (Pick<JobReference, 'id' | 'title' | 'company'> & Partial<JobReference>)[]
   >([]);
   readonly conversationId = signal<string | null>(null);
   readonly deleteId = signal<string | null>(null);
+  readonly deleteError = signal('');
+  readonly deleting = signal(false);
   readonly query = toSignal(this.route.queryParamMap, {
     initialValue: this.route.snapshot.queryParamMap,
   });
@@ -53,7 +71,7 @@ export class Assistant {
         this.generation++;
         this.abort?.abort();
         this.busy.set(false);
-        this.fresh();
+        this.fresh(false);
         if (id && discovery) void this.store.ensureJob(id);
       });
     });
@@ -73,9 +91,17 @@ export class Assistant {
       this.busy.set(false);
       this.consent = false;
       this.includeResume = false;
+      this.initialized = false;
     });
     effect(() => {
-      if (this.career.ready()) untracked(() => void this.load());
+      if (this.career.ready())
+        untracked(() => {
+          if (!this.initialized) {
+            this.mode.set(this.career.config().ai ? 'ai' : 'guide');
+            this.initialized = true;
+          }
+          void this.load();
+        });
     });
     effect(() => {
       const change = this.career.changes();
@@ -92,10 +118,46 @@ export class Assistant {
         void this.load(true);
       });
     });
+    afterRenderEffect(() => {
+      this.messages();
+      this.partial();
+      this.busy();
+      const element = this.log()?.nativeElement;
+      if (element) element.scrollTop = element.scrollHeight;
+    });
+    afterRenderEffect(() => {
+      const dialog = this.deleteDialog()?.nativeElement;
+      if (this.deleteId() && dialog && !dialog.open) dialog.showModal();
+      else if (!this.deleteId() && dialog?.open) dialog.close();
+    });
+  }
+  get canSend() {
+    return (
+      this.career.ready() &&
+      !this.career.error() &&
+      !this.busy() &&
+      !!this.message.trim() &&
+      (this.mode() === 'guide' || (this.consent && this.career.config().ai))
+    );
+  }
+  switchMode(mode: 'guide' | 'ai') {
+    if (this.busy() || mode === this.mode() || (mode === 'ai' && !this.career.config().ai)) return;
+    this.fresh();
+    this.mode.set(mode);
+    this.message = '';
+    this.consent = false;
+    this.includeResume = false;
+  }
+  suggest(action: string, message: string) {
+    this.guideAction.set(action);
+    this.message = message;
+    this.composer()?.nativeElement.focus();
   }
   async load(reconcile = false) {
     const owner = this.career.session.userId();
     const generation = this.generation;
+    this.historyLoading.set(true);
+    this.historyError.set('');
     try {
       const conversations = await this.career.request<Conversation[]>('conversations');
       if (generation === this.generation && owner === this.career.session.userId()) {
@@ -109,7 +171,9 @@ export class Assistant {
       }
     } catch (e) {
       if (generation === this.generation && owner === this.career.session.userId())
-        this.error.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
+        this.historyError.set(e instanceof Error ? e.message : 'לא ניתן לטעון שיחות.');
+    } finally {
+      if (generation === this.generation) this.historyLoading.set(false);
     }
   }
   stop() {
@@ -119,17 +183,23 @@ export class Assistant {
     this.partial.set('');
     this.error.set('התשובה נעצרה ולא נשמרה. אפשר לנסות שוב.');
   }
-  fresh() {
-    if (this.busy()) this.stop();
+  fresh(clearDraft = true) {
+    this.generation++;
+    this.abort?.abort();
+    this.busy.set(false);
     this.conversationId.set(null);
     this.messages.set([]);
     this.partial.set('');
     this.jobs.set([]);
     this.error.set('');
     this.lastMessage = '';
+    if (clearDraft) this.message = '';
   }
   open(conversation: Conversation) {
     this.fresh();
+    this.mode.set(conversation.mode ?? 'ai');
+    this.consent = false;
+    this.includeResume = false;
     this.conversationId.set(conversation.id);
     this.messages.set(conversation.messages);
     this.jobs.set([
@@ -140,18 +210,28 @@ export class Assistant {
   }
   async remove() {
     const id = this.deleteId();
-    if (!id) return;
+    if (!id || this.deleting()) return;
+    this.deleting.set(true);
+    this.deleteError.set('');
     try {
       await this.career.request(`conversations/${id}/delete`, {});
       if (this.conversationId() === id) this.fresh();
       this.deleteId.set(null);
       await this.load();
     } catch (e) {
-      this.error.set(e instanceof Error ? e.message : 'המחיקה נכשלה.');
+      this.deleteError.set(e instanceof Error ? e.message : 'המחיקה נכשלה.');
+    } finally {
+      this.deleting.set(false);
     }
   }
   async send(retry = false) {
-    if (this.busy() || !this.consent) return;
+    if (
+      this.busy() ||
+      !this.career.ready() ||
+      this.career.error() ||
+      (this.mode() === 'ai' && (!this.consent || !this.career.config().ai))
+    )
+      return;
     const message = retry ? this.lastMessage : this.message.trim();
     if (!message) return;
     this.lastMessage = message;
@@ -172,13 +252,19 @@ export class Assistant {
           message,
           conversationId: this.conversationId() ?? undefined,
           jobId: this.jobId() || undefined,
-          aiConsent: true,
+          aiConsent: this.mode() === 'ai' && this.consent,
           includeResume: this.includeResume,
+          mode: this.mode(),
+          ...(this.mode() === 'guide'
+            ? {
+                action: this.guideAction(),
+              }
+            : {}),
         }),
         signal: AbortSignal.any([controller.signal, AbortSignal.timeout(50000)]),
       });
       if (!response.ok) {
-        const data = await response.json();
+        const data = await response.json().catch(() => ({ error: 'AI_UNAVAILABLE' }));
         throw new Error(careerError(data.error));
       }
       if (!response.body) throw new Error('לא התקבל זרם תשובה.');
@@ -234,7 +320,11 @@ export class Assistant {
       if (generation === this.generation) {
         this.partial.set('');
         this.jobs.set([]);
-        this.error.set(e instanceof Error ? e.message : 'השיחה לא הושלמה.');
+        this.error.set(
+          e instanceof Error && e.name !== 'TimeoutError' && e.name !== 'AbortError'
+            ? e.message
+            : 'הבקשה לא הושלמה בזמן. ההודעה נשמרה בשדה; אפשר לנסות שוב.',
+        );
       }
     } finally {
       if (generation === this.generation) this.busy.set(false);

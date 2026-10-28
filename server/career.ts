@@ -1,4 +1,5 @@
 import { applicationVisitor, limitedApplication } from './application-quota';
+import { guideIntent, guideQuery, guideReply } from './career-guide';
 import { verifyJob, reconcilePaths } from './job-verification';
 import { ingestJsearch } from './jsearch-source';
 import { trustedJobUrl } from './job-sources';
@@ -301,6 +302,7 @@ export function createCareer(deps: CareerDependencies) {
       revision: versionOf([current.epoch, current.active_resume_id, safe]),
       resumes: safe,
       config: {
+        guide: true,
         ai: !!(env.OPENAI_API_KEY && env.NIVA_AI_MODEL),
         uploads: !!(
           env.NIVA_RESUME_PROCESSOR_URL &&
@@ -316,6 +318,7 @@ export function createCareer(deps: CareerDependencies) {
   });
   app.get('/api/career/config', (c) =>
     c.json({
+      guide: true,
       ai: !!(env.OPENAI_API_KEY && env.NIVA_AI_MODEL),
       uploads: !!(
         env.NIVA_RESUME_PROCESSOR_URL &&
@@ -626,15 +629,17 @@ export function createCareer(deps: CareerDependencies) {
     return c.json({ ok: true });
   });
   app.post('/api/career/chat', async (c) => {
-    if (!env.OPENAI_API_KEY || !env.NIVA_AI_MODEL) throw new CareerError(503, 'AI_NOT_CONFIGURED');
     const owner = c.get('owner');
     const body = await c.req.json<Record<string, unknown>>();
-    if (body['aiConsent'] !== true) throw new CareerError(400, 'CONSENT_REQUIRED');
+    const guide = body['mode'] === 'guide';
+    if (!guide && (!env.OPENAI_API_KEY || !env.NIVA_AI_MODEL))
+      throw new CareerError(503, 'AI_NOT_CONFIGURED');
+    if (!guide && body['aiConsent'] !== true) throw new CareerError(400, 'CONSENT_REQUIRED');
     const message = body['message'];
     if (typeof message !== 'string' || !message.trim() || message.length > 2000)
       throw new CareerError(400, 'INVALID_MESSAGE');
-    await quota(db, `ai:${owner}`, 20);
-    await quota(db, 'ai:global', 100);
+    await quota(db, `${guide ? 'guide' : 'ai'}:${owner}`, guide ? 60 : 20);
+    await quota(db, guide ? 'guide:global' : 'ai:global', guide ? 1000 : 100);
     if (!body['conversationId'] && (await listRecords(db, owner, 'chat')).length >= 20)
       throw new CareerError(409, 'CONVERSATION_LIMIT');
     const id = typeof body['conversationId'] === 'string' ? body['conversationId'] : randomUUID();
@@ -645,10 +650,22 @@ export function createCareer(deps: CareerDependencies) {
           messages: [],
           createdAt: new Date().toISOString(),
           expiresAt: new Date(Date.now() + RETENTION_DAYS * 86400000).toISOString(),
+          mode: guide ? 'guide' : 'ai',
         };
+    if ((conversation.mode ?? 'ai') !== (guide ? 'guide' : 'ai'))
+      throw new CareerError(409, 'CONVERSATION_MODE_CHANGED');
     if (conversation.messages.length >= 20) throw new CareerError(409, 'CONVERSATION_LIMIT');
     const state = await deps.state(owner);
-    const page = await discoveryPage(db, secret, { limit: '8' }, state.preferences);
+    const intent = guideIntent(message, body['action']);
+    const query = guideQuery(message, body['search']);
+    const page = await discoveryPage(
+      db,
+      secret,
+      { limit: '8', sort: 'relevance', ...(guide && intent === 'search' ? { q: query } : {}) },
+      state.preferences,
+      state.saved,
+      state.profile.criteria,
+    );
     const jobId = typeof body['jobId'] === 'string' ? body['jobId'] : conversation.jobId;
     const candidateJob = jobId ? await catalogJob(db, jobId) : undefined;
     const selected = candidateJob?.source?.active ? candidateJob : undefined;
@@ -659,7 +676,7 @@ export function createCareer(deps: CareerDependencies) {
       body['includeResume'] === true ? await listRecords<ResumeVersion>(db, owner, 'resume') : [];
     const resume = resumes.find((r) => r.active && r.confirmed);
     const terms = skillEvidence(message);
-    const eligible = (await catalogJobs(db)).filter(
+    const eligible = (guide ? [] : await catalogJobs(db)).filter(
       (j) => preferenceMatch(j, state.preferences).eligible,
     );
     const ranked = eligible
@@ -673,7 +690,12 @@ export function createCareer(deps: CareerDependencies) {
       .slice(0, 8)
       .map((x) => x.job);
     const jobs = [
-      ...new Map([...(selected ? [selected] : []), ...ranked].map((j) => [j.id, j])).values(),
+      ...new Map(
+        [
+          ...(selected ? [selected] : []),
+          ...(guide ? (intent === 'search' ? page.jobs : []) : ranked),
+        ].map((j) => [j.id, j]),
+      ).values(),
     ];
     // All tool outputs are resolved with the authenticated owner and current DB; no client profile or job text accepted.
     const context = {
@@ -721,6 +743,59 @@ export function createCareer(deps: CareerDependencies) {
       c.req.raw.signal,
       AbortSignal.timeout(45000),
     ]);
+    if (guide) {
+      return streamSSE(c, async (stream) => {
+        stream.onAbort(() => controller.abort());
+        try {
+          const answer = guideReply({
+            intent,
+            query,
+            jobs: page.jobs,
+            selected,
+            total: page.total,
+            resume,
+            selectedConflict: selected
+              ? !preferenceMatch(selected, state.preferences).eligible
+              : false,
+          });
+          const cited = [...answer.matchAll(/\[job:([^\]]+)\]/g)].map((m) => m[1]);
+          const references: JobReference[] = jobs
+            .filter((j) => cited.includes(j.id))
+            .map((j) => ({
+              id: j.id,
+              title: j.title,
+              company: j.company,
+              version: j.source!.version!,
+              checkedAt: j.source!.fetchedAt,
+            }));
+          if (signal.aborted) return;
+          conversation.messages.push(
+            { role: 'user', text: message },
+            { role: 'assistant', text: answer, references },
+          );
+          await putRecord(db, owner, 'chat', id, conversation, false, c.get('epoch'));
+          await stream.writeSSE({
+            event: 'context',
+            data: JSON.stringify({ conversationId: id, jobs: references }),
+          });
+          await stream.writeSSE({ event: 'delta', data: JSON.stringify({ text: answer }) });
+          await stream.writeSSE({ event: 'done', data: JSON.stringify({ conversationId: id }) });
+        } catch {
+          if (!signal.aborted)
+            await stream.writeSSE({
+              event: 'failure',
+              data: JSON.stringify({ error: 'GUIDE_UNAVAILABLE' }),
+            });
+        } finally {
+          controller.abort();
+          await db.run(
+            'DELETE FROM niva_career_leases WHERE owner=? AND token=?',
+            owner,
+            leaseToken,
+          );
+        }
+      });
+    }
     let upstream: Response;
     try {
       upstream = await fetch('https://api.openai.com/v1/responses', {

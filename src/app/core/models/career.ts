@@ -17,6 +17,7 @@ export interface ResumeVersion {
   mime?: string;
 }
 export interface CareerConfig {
+  guide?: boolean;
   ai: boolean;
   uploads: boolean;
   processor: string;
@@ -39,6 +40,7 @@ export interface ChatMessage {
   references?: JobReference[];
 }
 export interface Conversation {
+  mode?: 'guide' | 'ai';
   id: string;
   messages: ChatMessage[];
   jobId?: string;

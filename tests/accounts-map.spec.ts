@@ -45,6 +45,35 @@ async function registerAndLogin(page: Page, email: string) {
 }
 test.beforeEach(async ({ page }) => quietCookies(page));
 
+test('real local guide searches catalog, persists and reopens a conversation, reviews a job and deletes only its test chat', async ({
+  page,
+}) => {
+  await registerAndLogin(page, `guide-${crypto.randomUUID()}@example.test`);
+  await page.goto('/app/assistant');
+  await page.getByRole('button', { name: /למצוא משרות/ }).click();
+  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('נמצאו');
+  await expect(page.getByRole('log')).toContainText('ללא בינה מלאכותית');
+  await expect(page.locator('.assistant-main > ul a').first()).toBeVisible();
+  await page.reload();
+  await page.getByRole('button', { name: 'QA', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('נמצאו');
+  await page.locator('.assistant-main > ul a').first().click();
+  await page.getByRole('link', { name: 'שיחה והכנה לריאיון', exact: true }).click();
+  await page.getByRole('button', { name: /להבין את המשרה/ }).click();
+  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('דרישות שחולצו מהמקור', { timeout: 15000 });
+  const remove = page.getByRole('button', { name: 'מחיקת שיחה', exact: true }).first();
+  await remove.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: 'ביטול', exact: true }).click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await remove.click();
+  await page.getByRole('button', { name: 'אישור מחיקה לצמיתות', exact: true }).click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(page.getByRole('button', { name: 'מחיקת שיחה', exact: true })).toHaveCount(1);
+});
+
 test('real local account persists reviewed resume versions across reload and deletes them with account data', async ({
   page,
 }) => {
