@@ -33,6 +33,31 @@ export class Resumes {
   readonly selected = signal<ResumeVersion | null>(null);
   readonly notice = signal('');
   readonly busy = signal(false);
+  readonly draftAttempted = signal(false);
+  readonly draftRequestError = signal('');
+  readonly draftSaved = signal(false);
+  readonly keepCreateOpen = signal(false);
+  readonly minimumTextLength = 20;
+  readonly maximumTextLength = 30000;
+  @ViewChild('draftTextInput') private draftTextInput?: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('draftNameInput') private draftNameInput?: ElementRef<HTMLInputElement>;
+  get draftNameError() {
+    return !this.name.trim() ? 'יש להזין שם לגרסה.' : '';
+  }
+  get draftTextError() {
+    if (!this.text.trim()) return 'יש להדביק את טקסט קורות החיים או לבחור קובץ לקריאה.';
+    if (this.text.trim().length < this.minimumTextLength)
+      return 'כדי לשמור טיוטה, יש להזין לפחות 20 תווים. רווחים בתחילת הטקסט ובסופו אינם נספרים.';
+    if (this.text.length > this.maximumTextLength)
+      return 'אפשר לשמור עד 30,000 תווים. יש לקצר את הטקסט.';
+    if (this.text.includes('\0'))
+      return 'הטקסט מכיל תו לא נתמך. יש להסיר אותו או להדביק טקסט מחדש.';
+    return '';
+  }
+  draftChanged() {
+    this.draftSaved.set(false);
+    this.draftRequestError.set('');
+  }
   readonly query = toSignal(this.route.queryParamMap, {
     initialValue: this.route.snapshot.queryParamMap,
   });
@@ -67,6 +92,10 @@ export class Resumes {
       this.text = '';
       this.editText = '';
       this.reviewed = false;
+      this.draftAttempted.set(false);
+      this.draftRequestError.set('');
+      this.draftSaved.set(false);
+      this.keepCreateOpen.set(false);
     });
     effect(() => {
       const versions = this.career.resumes();
@@ -109,6 +138,7 @@ export class Resumes {
     }
   }
   select(resume: ResumeVersion) {
+    this.draftSaved.set(false);
     if (!this.career.resumes().some((r) => r.id === resume.id)) return;
     const old = this.selected();
     if (old?.id === resume.id) {
@@ -124,17 +154,38 @@ export class Resumes {
     this.reviewed = false;
   }
   async create() {
+    if (this.busy()) return;
+    this.keepCreateOpen.set(true);
+    this.draftAttempted.set(true);
+    this.draftChanged();
+    if (this.draftNameError || this.draftTextError) {
+      (this.draftNameError ? this.draftNameInput : this.draftTextInput)?.nativeElement.focus();
+      return;
+    }
     await this.action(async () => {
-      const resume = await this.career.request<ResumeVersion>('resumes', {
-        name: this.name,
-        text: this.text,
-      });
-      await this.career.load(true);
-      this.select(resume);
-      this.text = '';
+      try {
+        const resume = await this.career.request<ResumeVersion>('resumes', {
+          name: this.name.trim(),
+          text: this.text,
+        });
+        await this.career.load(true);
+        this.select(resume);
+        this.text = '';
+        this.draftAttempted.set(false);
+        this.draftSaved.set(true);
+      } catch (e) {
+        const message =
+          e instanceof Error &&
+          !['SyntaxError', 'TypeError', 'TimeoutError', 'AbortError'].includes(e.name)
+            ? e.message
+            : 'לא ניתן לשמור את הטיוטה כרגע.';
+        this.draftRequestError.set(message);
+        throw new Error(message);
+      }
     });
   }
   importFile(value: { name: string; text: string }) {
+    this.draftChanged();
     this.name = value.name;
     this.text = value.text;
     this.notice.set('הטקסט נקרא מהקובץ. יש לבדוק ולתקן אותו, ואז לשמור טיוטה לבדיקה.');

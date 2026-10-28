@@ -85,7 +85,7 @@
   }
 </section>
 @if (selected(); as resume) {
-  <section class="account-panel" aria-label="בדיקה והשוואת גרסאות">
+  <section id="resume-review" tabindex="-1" class="account-panel" aria-label="בדיקה והשוואת גרסאות">
     <h2>
       בדיקת הגרסה: <bdi>{{ resume.name }}</bdi>
     </h2>
@@ -157,33 +157,66 @@
   </section>
 }
 
-<details class="resume-create resume-disclosure account-panel" [open]="!career.resumes().length">
+<details
+  class="resume-create resume-disclosure account-panel"
+  [open]="!career.resumes().length || keepCreateOpen()"
+>
   <summary>הוספת גרסה חדשה</summary>
   <section class="pt-4">
     <h2>מתחילים מטקסט</h2>
     <form (ngSubmit)="create()">
       <label class="career-field"
         >שם הגרסה<input
+          #draftNameInput
           name="resumeName"
           [disabled]="busy()"
           [(ngModel)]="name"
+          (ngModelChange)="draftChanged()"
+          [attr.aria-invalid]="draftAttempted() && draftNameError ? 'true' : null"
+          [attr.aria-describedby]="draftAttempted() && draftNameError ? 'draft-name-error' : null"
           maxlength="120"
           required
       /></label>
+      @if (draftAttempted() && draftNameError) {
+        <p id="draft-name-error" role="alert" class="field-error">{{ draftNameError }}</p>
+      }
       <label class="career-field"
         >טקסט קורות החיים<textarea
+          #draftTextInput
           name="resumeText"
           [disabled]="busy()"
           dir="auto"
           [(ngModel)]="text"
-          minlength="20"
-          maxlength="30000"
+          (ngModelChange)="draftChanged()"
+          [minlength]="minimumTextLength"
+          [maxlength]="maximumTextLength"
+          [attr.aria-invalid]="draftAttempted() && draftTextError ? 'true' : null"
+          [attr.aria-describedby]="
+            'draft-text-help draft-text-count' +
+            (draftAttempted() && draftTextError ? ' draft-text-error' : '')
+          "
+          placeholder="הדביקו כאן את טקסט קורות החיים — לפחות 20 תווים"
           rows="9"
           required
         ></textarea>
       </label>
-      <button class="account-button account-primary" [disabled]="busy() || text.trim().length < 20">
-        שמירת טיוטה לבדיקה
+      <p id="draft-text-help" class="field-note">
+        אפשר לשמור טיוטה עם 20–30,000 תווים. רווחים בתחילת הטקסט ובסופו אינם נספרים למינימום.
+      </p>
+      <p id="draft-text-count" class="field-note">{{ text.trim().length }} תווים · מינימום 20</p>
+      @if (draftAttempted() && draftTextError) {
+        <p id="draft-text-error" role="alert" class="field-error">{{ draftTextError }}</p>
+      }
+      @if (draftRequestError()) {
+        <p role="alert" class="field-note">
+          {{ draftRequestError() }} הטקסט נשאר כאן; אפשר לנסות שוב.
+        </p>
+      }
+      @if (draftSaved()) {
+        <p role="status">הטיוטה נשמרה בחשבון. <a href="#resume-review">מעבר לבדיקת הטיוטה</a></p>
+      }
+      <button type="submit" class="account-button account-primary" [disabled]="busy()">
+        {{ busy() ? 'שומרים…' : 'שמירת טיוטה לבדיקה' }}
       </button>
     </form>
     <hr class="my-5" />

@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-No changes recorded.
+### Fixed
+
+- Explain résumé draft validation instead of leaving Save silently disabled. Save now focuses invalid fields and describes the20-character minimum, trimmed-edge whitespace, blank names and size limits. A visible counter updates while typing; valid drafts retain the existing server checks. Saving shows progress, failures preserve the input with an inline retry explanation, and the form stays open to show successful saving and its review link. No résumé is automatically approved, activated or sent externally.
+
+Development fix targeting0.4.4; publication pending. [Verification and actual before/after UI](docs/resume-save-20261028.md).
 
 ## 0.4.2 — 2026-10-28
 
