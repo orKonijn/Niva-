@@ -4,7 +4,15 @@
 
 No changes recorded.
 
-## 0.4.0 — 2026-10-28 (publication pending)
+## 0.4.1 — 2026-10-28
+
+Release candidate; publication pending. Compatible search-preferences UI repair; no migration or user action is required.
+
+### Fixed
+
+- Make search preferences easier to scan with aligned fields, compact spacing and large selectable work-style tiles. Keep native multi-select checkboxes, clear selected states, mobile stacking and a separate save area. Changes are scoped to the preferences page; existing guest/account saving and filter behavior are preserved. See [matched before/after views and verification](docs/screenshots/changes/preferences-layout.md).
+
+## 0.4.0 — 2026-10-28
 
 ### Added
 
@@ -18,15 +26,7 @@ No changes recorded.
 
 - Replace the permanently blocked no-provider chat entry with the usable built-in guide. Explain provider availability and AI consent before sending, retain drafts on failure and job-context navigation, handle non-JSON gateway errors, and keep history-loading errors separate from a successful answer. New conversation explicitly clears its draft; route-context changes retain it.
 
-Development implementation; not published until a separate deployment receipt confirms it. No schema migration is required. Existing conversations remain AI conversations; switching modes starts a separate conversation to avoid sending guide history to a provider. See [assistant repair and visual evidence](docs/assistant-repair-20261028.md).
-
-## 0.3.6 — 2026-10-28
-
-Release candidate; publication pending. Compatible search-preferences UI repair; no migration or user action is required.
-
-### Fixed
-
-- Make search preferences easier to scan with aligned fields, compact spacing and large selectable work-style tiles. Keep native multi-select checkboxes, clear selected states, mobile stacking and a separate save area. Changes are scoped to the preferences page; existing guest/account saving and filter behavior are preserved. See [matched before/after views and verification](docs/screenshots/changes/preferences-layout.md).
+Published as **Sites48** from reviewed GitHub source `105de51` / Sites source `9237968`; confirmed by the hosting deployment and matching live build metadata. No schema migration is required. Existing conversations remain AI conversations; switching modes starts a separate conversation to avoid sending guide history to a provider. See [assistant repair and visual evidence](docs/assistant-repair-20261028.md).
 
 ## 0.3.5 — 2026-10-28
 
