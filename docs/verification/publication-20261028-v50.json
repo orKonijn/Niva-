@@ -1,0 +1,61 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.2",
+  "version": 50,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_841fb9f80ae8819190aa9e2750595f3f",
+  "deploymentId": "appgdep_6ae1d618bb888191bbb7376b912a3605",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T11:02:01.268618+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "1b127399cf849ff7df9b5b9fd786f27306fe9415",
+  "sitesCommit": "72f78f96957ccb772e517c6607d6a0644f2df3d2",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000e38c81f4ad56bd470717a258",
+    "content_hash": "sha256:e09539c9a4d12846eba12321eac40be6d681330e7340f9c55e755208db89b689",
+    "size_bytes": 13793280,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 59,
+    "chromiumBrowser": 28,
+    "focusedCrossBrowser": 12,
+    "engines": ["Chromium desktop/mobile emulation", "Firefox", "WebKit"],
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "productionBuild": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveDropdowns": {
+      "preferences": 2,
+      "profile": 5,
+      "jobs": 10,
+      "total": 17,
+      "allConsistent": true,
+      "trailingPaddingPx": 44,
+      "arrowInsetPx": 16
+    },
+    "nativeKeyboard": true,
+    "ltrPlacement": true,
+    "forcedColorsFallback": true,
+    "report": "../screenshots/changes/select-arrow.md"
+  },
+  "productionWrites": {
+    "preferences": 0,
+    "profile": 0,
+    "uploads": 0,
+    "deletions": 0
+  },
+  "limitations": [
+    "Browser tests emulate mobile; no physical-device popup inspection.",
+    "Multiple selects/list boxes and high-contrast platform arrows intentionally remain native.",
+    "Existing assistant stylesheet budget warning is unchanged.",
+    "Post-publication documentation is Git-only."
+  ]
+}
