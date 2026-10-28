@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.4.1 — 2026-10-28
 
-Release candidate; publication pending. Compatible search-preferences UI repair; no migration or user action is required.
+Published as **Sites49** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v49.json). Reviewed GitHub source `aaf24a5` maps to Sites source `9439f38`. Compatible search-preferences UI repair; no migration or user action is required. The published0.4.0 assistant capability is preserved.
 
 ### Fixed
 

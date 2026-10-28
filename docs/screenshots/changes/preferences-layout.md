@@ -1,6 +1,6 @@
 # Search preferences card
 
-Application0.4.1 release candidate, 2026-10-28; publication pending. Previous published release:0.4.0 / Sites48; its assistant capability is preserved. Compatible presentation repair; no data, API, configuration or migration change.
+Published application **0.4.1 / Sites49**, 2026-10-28. [Publication/live receipt](../../verification/publication-20261028-v49.json). Previous published release:0.4.0 / Sites48; its assistant capability is preserved. Compatible presentation repair; no data, API, configuration or migration change.
 
 The card uses compact field spacing, aligned category/district controls, larger work-style tiles with clear selected states and a separate save footer. Native checkboxes remain keyboard accessible and multi-select. Tiles stack on mobile. The page-specific stylesheet avoids changing the shared filter and onboarding components. An existing form-grid gap was adding space on top of header/footer margins; the page now uses a single spacing scheme. Its only new motion is a160ms tile color transition, disabled when reduced motion is requested.
 
@@ -22,3 +22,5 @@ Publication scope: an unpublished0.4.0 assistant capability update was added to 
 Publication reconciliation: the assistant update subsequently went live as0.4.0 / Sites48 before this patch could be pushed. Its source and backend are retained exactly; the preferences repair therefore becomes0.4.1. The earlier0.3.6 candidate was never published. The source helper rejected the stale push; no force push or rollback was used.
 
 Final integration verification: the0.4.1 production build, frontend-test/browser-test TypeScript checks,59 frontend unit tests and all54 browser checks passed again using a restarted preview of the combined source. All184 existing product files outside the preferences template/style import are byte-for-byte identical to the published Sites48 baseline, including assistant and server files. The build retains the existing assistant stylesheet budget warning. Before captures were taken on0.3.5;0.4.0 changed the assistant and left the preferences implementation unchanged. After captures are from the final0.4.1 build with matching synthetic settings and dimensions.
+
+Live verification: custom-domain build metadata matches reviewed GitHub source `aaf24a5` and Sites source `9439f38`. Chrome shows the updated card, three native checkboxes in53px-high clickable tiles, a separate save action and no horizontal overflow. No live preferences, profile, files or account data were changed. The live screenshot stays local; only synthetic comparison captures are tracked.

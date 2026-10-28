@@ -1,0 +1,62 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.1",
+  "version": 49,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_f0cf0fa5cb8c8191b737c84142d29b28",
+  "deploymentId": "appgdep_6ae1d3b3db008191bd467335affa7315",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T10:51:47.360088+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "aaf24a5c5ca348cb626694f1b40b54a3933f50c8",
+  "sitesCommit": "9439f38cfaf645584c859a14d9df3cd008d1e59e",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000dff481f4a6fbed763ecb54ec",
+    "content_hash": "sha256:fc5c7339ed51d627de81e2e2cd53fbef0cb1c5fe16a4320ee2168c221de74c48",
+    "size_bytes": 13783040,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 59,
+    "browser": 54,
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "productionBuild": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveCard": {
+      "nativeCheckboxes": 3,
+      "tileHeightsPx": [53, 53, 53],
+      "formDisplay": "block",
+      "horizontalOverflow": false,
+      "saveVisible": true
+    },
+    "preservedProductFiles": 184,
+    "report": "../screenshots/changes/preferences-layout.md"
+  },
+  "preservedRelease": {
+    "applicationVersion": "0.4.0",
+    "version": 48,
+    "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_517fdb2c8bc0819186f93f67b5afe2e2",
+    "sitesCommit": "9237968fc424ad5b0b4b01e95176d27210d1596b",
+    "deploymentId": "appgdep_6ae1d243c95c8191bc72398e3eaba04e"
+  },
+  "productionWrites": {
+    "preferenceEdits": 0,
+    "profileEdits": 0,
+    "uploads": 0,
+    "deletions": 0
+  },
+  "limitations": [
+    "Focused preferences/UI review, not a full security or operational certification.",
+    "Existing assistant stylesheet budget warning is unchanged.",
+    "The earlier 0.3.6 candidate was not published; the patch was rebased onto published 0.4.0.",
+    "Post-publication documentation is Git-only."
+  ]
+}
