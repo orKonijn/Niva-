@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.4.5 — 2026-10-28
 
-Release candidate; publication pending. Compatible account-data presentation repair; no migration or user action is required.
+Published as **Sites53** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v53.json). Reviewed GitHub source `f3cd2a4` maps to Sites source `5176829`. Compatible account-data presentation repair; no migration or user action is required.
 
 ### Fixed
 

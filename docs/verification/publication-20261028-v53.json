@@ -1,0 +1,60 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.5",
+  "version": 53,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_d303bd83fadc819183a2790258bbb94b",
+  "deploymentId": "appgdep_6ae1ddddaf1481918f4149e5d4bdf9c8",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T11:35:10.605950+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "f3cd2a47a75db494798a01ca22b946e02919e56a",
+  "sitesCommit": "51768298723f1338aa6f569cef610e1219f2b2c4",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000f6f481f4b135ef3d607ffffe",
+    "content_hash": "sha256:6d95ec663e7daa8e24f89f958ba53f34074eb3b80d1bacb8e92338b3c5a01191",
+    "size_bytes": 13824000,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 59,
+    "chromiumBrowser": 54,
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "productionBuild": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveAccount": {
+      "summaryCards": 2,
+      "profileFields": 4,
+      "preferencesFields": 4,
+      "matchingDetails": true,
+      "nonEmptyProfileFields": true,
+      "horizontalOverflow": false
+    },
+    "emptyLoadingFailureAndOwnerSwitch": true,
+    "realLocalRegistrationAndAccountFlows": true,
+    "noRenderingWritesInFixtures": true,
+    "report": "../screenshots/changes/account-overview.md"
+  },
+  "productionWrites": {
+    "accountCreation": 0,
+    "profileEdits": 0,
+    "preferenceEdits": 0,
+    "uploads": 0,
+    "deletions": 0
+  },
+  "limitations": [
+    "Live user values and private screenshots are not committed to the repository.",
+    "Mobile uses browser emulation; real OAuth/hosted data-retention and deletion guarantees were not reassessed.",
+    "The initial broader test run had a local mailbox/origin mismatch; the aligned complete run passed all54.",
+    "Existing assistant stylesheet budget warning is unchanged.",
+    "Post-publication documentation is Git-only."
+  ]
+}
