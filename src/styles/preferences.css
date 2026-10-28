@@ -1,0 +1,155 @@
+.preferences-panel {
+  display: block;
+  padding: clamp(20px, 3vw, 28px);
+}
+.preferences-panel > niva-preference-fields {
+  display: block;
+}
+.preferences-panel > niva-form-status:has([role='alert']) {
+  display: block;
+  margin-block-start: 16px;
+}
+.preferences-panel .panel-heading {
+  align-items: flex-start;
+  gap: 14px;
+  margin-block-end: 20px;
+  padding-block-end: 20px;
+  border-block-end: 1px solid var(--line);
+}
+.preferences-panel .panel-heading h2 {
+  font-size: 22px;
+  margin-block-end: 6px;
+}
+.preferences-panel .panel-heading p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.preferences-panel .round-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--pale);
+  color: var(--blue);
+}
+.preferences-panel .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.preferences-panel .field-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.preferences-panel .form-grid > label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.preferences-panel .form-grid > label > .muted {
+  display: contents;
+}
+.preferences-panel .form-grid input,
+.preferences-panel .form-grid select {
+  min-width: 0;
+  min-height: 46px;
+  width: 100%;
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 400;
+}
+.preferences-panel .form-grid input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.preferences-panel .form-grid small {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+.preferences-panel .work-style-fields {
+  border: 0;
+  padding: 0;
+}
+.preferences-panel .work-style-fields legend {
+  padding: 0;
+  margin-block-end: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.preferences-panel .work-style-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.preferences-panel .work-style-options .checkbox-label {
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-weight: 500;
+  cursor: pointer;
+}
+.preferences-panel .work-style-options .checkbox-label:has(input:checked) {
+  border-color: var(--blue);
+  background: var(--pale);
+}
+.preferences-panel .work-style-options .checkbox-label:hover {
+  border-color: var(--blue);
+}
+.preferences-panel .work-style-options input {
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  accent-color: var(--blue);
+}
+.preferences-panel .work-style-fields .form-hint {
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.preferences-panel .form-actions {
+  gap: 12px 20px;
+  margin-block-start: 24px;
+  padding-block-start: 20px;
+  border-block-start: 1px solid var(--line);
+}
+.preferences-panel .form-actions .button {
+  min-height: 46px;
+  padding: 12px 22px;
+  gap: 10px;
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .preferences-panel .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .preferences-panel .work-style-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .preferences-panel .form-actions .button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .preferences-panel .work-style-options .checkbox-label {
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+}

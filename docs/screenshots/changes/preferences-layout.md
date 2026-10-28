@@ -1,0 +1,20 @@
+# Search preferences card
+
+Application0.3.6 release candidate, 2026-10-28; publication pending. Previous published release:0.3.5 / Sites47. Compatible presentation repair; no data, API, configuration or migration change.
+
+The card uses compact field spacing, aligned category/district controls, larger work-style tiles with clear selected states and a separate save footer. Native checkboxes remain keyboard accessible and multi-select. Tiles stack on mobile. The page-specific stylesheet avoids changing the shared filter and onboarding components. An existing form-grid gap was adding space on top of header/footer margins; the page now uses a single spacing scheme. Its only new motion is a160ms tile color transition, disabled when reduced motion is requested.
+
+Actual running `/app/preferences` form captures use the same synthetic account and settings (QA automation, Tel Aviv district, all three work styles selected, no hidden companies), viewport, theme, zoom and data. Mobile viewport:390 ×664 at device scale factor3; desktop:1440 ×1000. Only the card is captured.
+
+| View          | Before                                                                                                                  | After                                                                                                                            |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Desktop dark  | ![Before: small work-style checkboxes and excessive vertical space](preferences-layout-desktop-dark/before.png)         | ![After: clear selectable work-style tiles, aligned fields and a compact save footer](preferences-layout-desktop-dark/after.png) |
+| Desktop light | ![Before: small work-style controls and loose field spacing in light mode](preferences-layout-desktop-light/before.png) | ![After: readable light-mode fields and selected work-style tiles](preferences-layout-desktop-light/after.png)                   |
+| Mobile dark   | ![Before: ungrouped work-style choices on a narrow card](preferences-layout-mobile-dark/before.png)                     | ![After: full-width work-style tiles and save action in dark mode](preferences-layout-mobile-dark/after.png)                     |
+| Mobile light  | ![Before: narrow work-style controls in light mode](preferences-layout-mobile-light/before.png)                         | ![After: stacked selection tiles and compact fields in light mode](preferences-layout-mobile-light/after.png)                    |
+
+Product changes: `src/app/pages/preferences.html`, `src/styles.css` and scoped `src/styles/preferences.css`. No save or preference-state implementation changed. `tests/preferences-layout.spec.ts` covers both themes, large label targets, overflow at320/700/768/1440px, accessibility, keyboard selection, account save payload and persistence after reload. Existing `preferences-theme.spec.ts` covers guest persistence, empty selection meaning all work styles, onboarding reuse and theme behavior. Only synthetic account writes are used in tests.
+
+Review and checks: no blocking product findings in CSS scope, selection semantics, focus visibility, touch target sizing, RTL placement or save behavior. Production build, both frontend-test/browser-test TypeScript checks,59 frontend unit tests and54 Chromium browser checks across the new layout, existing preferences/theme and existing UI review suites passed. Changed files passed formatting and whitespace checks. Mobile evidence uses browser emulation; physical devices and other browser engines were not reassessed.
+
+Publication scope: an unpublished0.4.0 assistant capability update was added to GitHub main during this task. Its source is preserved on main. This preferences release is prepared separately from the published0.3.5 baseline, so its checks and deployment do not claim to release or validate that separate assistant capability.

@@ -4,6 +4,14 @@
 
 No changes recorded.
 
+## 0.3.6 — 2026-10-28
+
+Release candidate; publication pending. Compatible search-preferences UI repair; no migration or user action is required.
+
+### Fixed
+
+- Make search preferences easier to scan with aligned fields, compact spacing and large selectable work-style tiles. Keep native multi-select checkboxes, clear selected states, mobile stacking and a separate save area. Changes are scoped to the preferences page; existing guest/account saving and filter behavior are preserved. See [matched before/after views and verification](docs/screenshots/changes/preferences-layout.md).
+
 ## 0.3.5 — 2026-10-28
 
 Published as **Sites47** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v47.json). Reviewed GitHub source `dad063a` maps to Sites source `6eb2179`. Compatible candidate-profile form repair; no migration or user action is required.
