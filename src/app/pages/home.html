@@ -7,16 +7,38 @@
       <a href="#how-it-works" (click)="menu.set(false)">איך זה עובד</a
       ><a href="#in-control" (click)="menu.set(false)">למה Niva</a
       ><a href="#faq" (click)="menu.set(false)">שאלות נפוצות</a>
+      @if (!session.loading()) {
+        <a
+          class="home-mobile-session-link"
+          [routerLink]="session.user() ? '/account' : '/login'"
+          (click)="menu.set(false)"
+        >
+          {{ session.user() ? 'החשבון שלי' : 'כניסה לחשבון' }}
+        </a>
+      }
     </nav>
     <div
       class="header-actions flex gap-[24px] items-center max-[1200px]:gap-[15px] max-[768px]:gap-[9px]"
     >
-      <a routerLink="/login" class="login-link text-[13px] text-muted">כניסה לחשבון</a
-      ><a
-        routerLink="/login"
-        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
-        >בואו נתחיל <niva-icon name="arrow" /></a
-      ><button
+      @if (session.loading()) {
+        <span class="home-session-pending text-[13px] text-muted" aria-hidden="true"
+          >בודקים את החיבור…</span
+        >
+      } @else {
+        <a
+          [routerLink]="session.user() ? '/account' : '/login'"
+          class="login-link text-[13px] text-muted"
+          >{{ session.user() ? 'החשבון שלי' : 'כניסה לחשבון' }}</a
+        ><a
+          [routerLink]="session.user() ? '/app' : startLink()"
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover button-small min-h-[44px] p-[10px_18px] text-[14px] gap-[9px]"
+          >{{
+            session.user() ? 'למרחב שלי' : session.config().accounts ? 'יצירת חשבון' : 'בואו נתחיל'
+          }}
+          <niva-icon name="arrow"
+        /></a>
+      }
+      <button
         class="icon-button justify-center items-center min-w-[44px] min-h-[44px] bg-transparent rounded-[11px] hover:bg-pale mobile-menu hidden max-[768px]:inline-flex"
         aria-label="פתיחת תפריט"
         [attr.aria-expanded]="menu()"
@@ -33,31 +55,54 @@
       <div class="hero-copy relative z-[1] max-[768px]:text-center max-[768px]:max-w-[550px]">
         <span
           class="eyebrow inline-flex items-center gap-[9px] rounded-[30px] p-[7px_13px] bg-pale text-[12px] text-muted font-medium max-[768px]:text-[12px] max-[768px]:p-[6px_12px]"
-          ><span class="live-dot w-[6px] h-[6px] rounded-[50%]"></span> עושה סדר בחיפוש העבודה
-          שלך</span
+          ><span class="live-dot w-[6px] h-[6px] rounded-[50%]"></span>
+          {{ session.user() ? 'המרחב שלך ב־Niva' : 'עושה סדר בחיפוש העבודה שלך' }}</span
         >
-        <h1>מחפשים עבודה?<br /><span>בואו נעשה סדר.</span></h1>
+        @if (session.user()) {
+          <h1>טוב שחזרת.<br /><span>נמשיך בחיפוש?</span></h1>
+        } @else {
+          <h1>מחפשים עבודה?<br /><span>בואו נעשה סדר.</span></h1>
+        }
         <p
           class="hero-description text-[18px] max-w-[475px] leading-[1.85] max-[1200px]:text-[16px] max-[768px]:text-[15px] max-[768px]:leading-[1.95] max-[768px]:mx-auto max-[768px]:max-w-[460px]"
         >
-          Niva מרכזת עבורך משרות ממעסיקים בישראל. בוחרים מה חשוב בעבודה הבאה, שומרים משרות שמעניינות
-          אותך ומגישים מועמדות באתר המעסיק.
+          @if (session.user()) {
+            המשרות ששמרת, קורות החיים והעדפות החיפוש שלך נמצאים במרחב האישי. אפשר לחזור אליהם או
+            להמשיך לבדוק משרות שמתאימות לך.
+          } @else {
+            Niva מרכזת עבורך משרות ממעסיקים בישראל. בוחרים מה חשוב בעבודה הבאה, שומרים משרות
+            שמעניינות אותך ומגישים מועמדות באתר המעסיק.
+          }
         </p>
         <div
           class="hero-actions flex gap-[24px] items-center mt-[29px] max-[1200px]:gap-[15px] max-[901px]:flex-wrap max-[768px]:justify-center max-[768px]:gap-[20px] max-[768px]:mt-[24px]"
         >
-          <a
-            class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
-            routerLink="/login"
-            >מתחילים לחפש עבודה <niva-icon name="arrow" /></a
-          ><a
-            href="#how-it-works"
-            class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
-            ><span class="play-circle w-[30px] h-[30px] grid place-items-center rounded-[50%]"
-              ><niva-icon name="play"
-            /></span>
-            איך זה עובד?</a
-          >
+          @if (session.loading()) {
+            <span class="home-session-pending text-muted" role="status">בודקים את החיבור…</span>
+          } @else {
+            <a
+              class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+              [routerLink]="session.user() ? '/app/jobs' : startLink()"
+              >{{ session.user() ? 'למשרות שמתאימות לי' : 'מתחילים לחפש עבודה' }}
+              <niva-icon name="arrow"
+            /></a>
+          }
+          @if (session.user()) {
+            <a
+              routerLink="/app"
+              class="text-link inline-flex items-center font-medium text-brand min-h-[44px] hover:text-brand-strong"
+              >למרחב שלי</a
+            >
+          } @else {
+            <a
+              href="#how-it-works"
+              class="text-link inline-flex items-center font-medium text-brand min-h-[36px] hover:text-brand-strong"
+              ><span class="play-circle w-[30px] h-[30px] grid place-items-center rounded-[50%]"
+                ><niva-icon name="play"
+              /></span>
+              איך זה עובד?</a
+            >
+          }
         </div>
         <p class="hero-demo-disclosure text-muted">
           את המשרות ששמרת אפשר למצוא בחשבון שלך. קורות החיים נשמרים רק לאחר אישורך, ולא נשלחים
@@ -347,10 +392,14 @@
       class="site-container w-[min(1240px,_calc(100%_-_88px))] mx-auto max-[1200px]:w-[calc(100%_-_56px)] max-[768px]:w-[calc(100%_-_40px)] final-cta relative overflow-hidden bg-pale rounded-[28px] p-[58px_24px] text-center max-[768px]:p-[40px_20px] max-[768px]:rounded-[21px]"
     >
       <span class="cta-spark absolute text-brand text-[60px] max-[768px]:hidden">✦</span
-      ><span class="section-kicker block font-semibold text-brand tracking-[0.02em]"
-        >מתחילים לחפש</span
-      >
-      <h2>מה חשוב לך<br />בעבודה הבאה?</h2>
+      ><span class="section-kicker block font-semibold text-brand tracking-[0.02em]">{{
+        session.user() ? 'החיפוש שלך ממשיך כאן' : 'מתחילים לחפש'
+      }}</span>
+      @if (session.user()) {
+        <h2>חוזרים לחיפוש<br />בקצב שלך.</h2>
+      } @else {
+        <h2>מה חשוב לך<br />בעבודה הבאה?</h2>
+      }
       <img
         class="cta-mascot"
         src="assets/niva-wave-cutout.webp"
@@ -360,12 +409,23 @@
         loading="lazy"
         decoding="async"
       />
-      <p>נכנסים לחשבון, בוחרים מה מחפשים ומתחילים לבדוק משרות.</p>
-      <a
-        class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
-        routerLink="/login"
-        >בואו נמצא משרות <niva-icon name="arrow" /></a
-      ><small>משרות ממעסיקים בישראל · שמירה בחשבון · הגשה באתר המעסיק</small>
+      <p>
+        {{
+          session.user()
+            ? 'משרות שמורות, קורות חיים והעדפות חיפוש — הכול במרחב האישי שלך.'
+            : 'נכנסים לחשבון, בוחרים מה מחפשים ומתחילים לבדוק משרות.'
+        }}
+      </p>
+      @if (session.loading()) {
+        <span class="home-session-pending text-muted" aria-hidden="true">בודקים את החיבור…</span>
+      } @else {
+        <a
+          class="button inline-flex items-center gap-[13px] rounded-[12px] bg-action text-on-action font-semibold leading-[1.5] enabled:hover:bg-action-hover"
+          [routerLink]="session.user() ? '/app' : startLink()"
+          >{{ session.user() ? 'בחזרה למרחב שלי' : 'בואו נמצא משרות' }} <niva-icon name="arrow"
+        /></a>
+      }
+      <small>משרות ממעסיקים בישראל · שמירה בחשבון · הגשה באתר המעסיק</small>
     </section>
   </main>
   <footer

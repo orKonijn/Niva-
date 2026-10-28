@@ -8,6 +8,14 @@
 
 Development fix targeting0.4.4; publication pending. [Verification and actual before/after UI](docs/resume-save-20261028.md).
 
+## 0.4.3 — 2026-10-28
+
+Published as **Sites51** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v51.json). Reviewed GitHub source `c02e388` maps to Sites source `d31370d`. Compatible homepage navigation repair; no migration or user action is required.
+
+### Fixed
+
+- Show visitor sign-up/login actions or signed-in workspace/jobs/account actions throughout the homepage header, hero, mobile menu and final call to action. Returning members see welcome-back copy instead of onboarding prompts. Wait for the initial session check before offering authentication actions and react to session changes from other tabs. Existing account-provider entry points and incomplete-account setup guards are preserved. See [visitor/member views and checks](docs/screenshots/changes/home-session.md).
+
 ## 0.4.2 — 2026-10-28
 
 Published as **Sites50** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v50.json). Reviewed GitHub source `1b12739` maps to Sites source `72f78f9`. Compatible dropdown presentation repair; no migration or user action is required.
