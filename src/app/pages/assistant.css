@@ -256,6 +256,7 @@
   line-height: 1.8;
 }
 .assistant-history {
+  display: block;
   padding: 12px 8px;
   border-radius: 10px;
 }

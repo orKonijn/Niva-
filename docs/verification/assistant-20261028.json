@@ -29,5 +29,17 @@
     "No AI provider credentials configured or real provider quality verified.",
     "Hosted private retention, independent identity isolation and restoration gates unchanged.",
     "Full suite was not repeated after the final narrow UI fixes; affected cases were rerun."
-  ]
+  ],
+  "mergedReleaseIntegration": {
+    "preservedReleases": ["0.3.3 / Sites45", "0.3.4 / Sites46", "0.3.5 / Sites47"],
+    "mergedRemoteCommit": "7474536",
+    "browserCases": 76,
+    "passed": 76,
+    "failed": 0,
+    "frontend": 59,
+    "typeChecks": 3,
+    "worker": 1,
+    "productionBuild": "passed with 5.58kB assistant CSS soft warning",
+    "serverSourceUnchangedByUpstreamMerge": true
+  }
 }
