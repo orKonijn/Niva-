@@ -1,0 +1,52 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.3.4",
+  "version": 46,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_0820192df7ac8191bb5de73a4aab1d6d",
+  "deploymentId": "appgdep_6ae1cc4805288191919c730fe411b4e5",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T10:20:09.723355+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "27487c5f0c4748968a3e6cae71dc9edc9f1c1f5c",
+  "sitesCommit": "7212bf21ef5b466171c028a3e7197d84efb7dd96",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000922c81f5b8d35d057c3f516c",
+    "content_hash": "sha256:7e9aa0bd9ee02c08043000bc9cb2cff7e7b1ff18833052c6b1f492e102c859f2",
+    "size_bytes": 13701120,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "review": "No blocking product findings; scope and results in docs/screenshots/changes/resume-layout.md",
+    "frontendUnit": 59,
+    "browser": 62,
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "build": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveLayout": {
+      "library": true,
+      "versionRowDisplay": "grid",
+      "disclosures": 2,
+      "gapsPx": [16, 16],
+      "horizontalOverflow": false
+    },
+    "preservedConcurrentRelease": {
+      "version": 45,
+      "applicationVersion": "0.3.3",
+      "sitesCommit": "51170daaf0bbabded2a705f3e1d2d8331818b314"
+    }
+  },
+  "limitations": [
+    "Focused UI review, not an independent security or full operational certification.",
+    "No resume contents or private live screenshots added to the repository.",
+    "Post-publication documentation is Git-only and does not imply another deployment."
+  ]
+}

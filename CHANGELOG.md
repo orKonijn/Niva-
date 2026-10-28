@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.3.4 — 2026-10-28
 
-Release candidate; publication pending. Compatible résumé layout repair; no account-data migration or user action is required.
+Published as **Sites46** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v46.json). Reviewed GitHub source `27487c5` maps to Sites source `7212bf2`; the concurrent0.3.3 job-card repair is preserved. Compatible résumé layout repair; no account-data migration or user action is required.
 
 ### Fixed
 

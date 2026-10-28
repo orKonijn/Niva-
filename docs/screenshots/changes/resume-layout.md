@@ -1,6 +1,6 @@
 # Résumé versions layout
 
-Release candidate **0.3.4**, 2026-10-28; publication pending. Previous published application: **0.3.3 / Sites45** (concurrent job-card repair, preserved). This compatible visual repair changes no account data, API contract or configuration. Package and lockfile versions advance together.
+Published **0.3.4 / Sites46**, 2026-10-28. [Deployment and live verification receipt](../../verification/publication-20261028-v46.json). Previous published application: **0.3.3 / Sites45** (concurrent job-card repair, preserved). This compatible visual repair changes no account data, API contract or configuration. Package and lockfile versions advance together.
 
 The previous list stacked every field in a full-width panel, and adjacent disclosure panels touched. The updated layout groups each version into a compact row with an active badge, aligned expiry and delete action, and a mobile reflow. Disclosure panels have 16px separation, full-width keyboard-accessible summaries and down/up chevrons. Native details behavior, review/activation and deletion confirmation are preserved.
 
@@ -15,7 +15,7 @@ All images show the running `/app/resumes` implementation with the same syntheti
 
 Changed product files: `src/app/pages/resumes.html`, `src/app/pages/resumes.ts`, `src/styles/career.css`. Layout verification: `tests/resume-layout.spec.ts`; existing résumé and UI review journeys cover review, draft switching, deletion focus and narrow-screen reflow. Screenshots are full-page captures; mobile files use device scale factor 3.
 
-Verification: production build and browser-test TypeScript check passed. All 56 browser checks across the layout, career and existing UI review suites passed on desktop and mobile. After the final disclosure sizing/chevron adjustment, the build and all four layout checks passed again, including both themes, overflow, keyboard disclosure operation, accessibility audit, version selection and cancellation of deletion. Historical screenshots produced by existing tests were restored. No hosted verification or publication was performed.
+Initial implementation verification: production build and browser-test TypeScript check passed. All 56 browser checks across the layout, career and existing UI review suites passed on desktop and mobile. After the final disclosure sizing/chevron adjustment, the build and all four layout checks passed again, including both themes, overflow, keyboard disclosure operation, accessibility audit, version selection and cancellation of deletion. Historical screenshots produced by existing tests were restored. Publication was performed after the review below.
 
 ## Pre-publication code review — 2026-10-28
 
@@ -24,3 +24,5 @@ Reviewed template bindings, CSS cascade and scope, right-to-left placement, file
 Final review checks: 59 frontend unit tests, both frontend-test and browser-test TypeScript checks, and production build passed. On a dedicated preview of this checkout, 56 existing/layout checks passed; after correcting the test locator, all six layout/stress checks passed. The first attempted review run reused another checkout's local preview and was discarded. Review scope is this presentation change; backend/provider and hosted retention guarantees were not reassessed.
 
 Publication reconciliation: a concurrent job-card repair was published as application0.3.3 / Sites45 from source `51170daaf0bbabded2a705f3e1d2d8331818b314` during preparation. Its implementation, tests and historical visuals are preserved in this release, advancing the résumé patch to0.3.4. The combined production build, browser-test type check and all **62** layout/career/UI review/job-card browser checks passed on the dedicated preview. Changed files passed formatting checks. The native source helper rejected the earlier stale push; no force push or rollback was used.
+
+Live verification after publication: the custom domain's build metadata matches reviewed GitHub source `27487c5` and Sites source `7212bf2`. Chrome shows the new résumé library, grid version row and two disclosures with16px separation and no horizontal overflow. No résumé edits, uploads, deletions, profile writes or employer submissions were performed. The live screenshot remains a local user preview; only synthetic before/after images are tracked here.
