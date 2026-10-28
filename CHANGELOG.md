@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.4.2 — 2026-10-28
 
-Release candidate; publication pending. Compatible dropdown presentation repair; no migration or user action is required.
+Published as **Sites50** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v50.json). Reviewed GitHub source `1b12739` maps to Sites source `72f78f9`. Compatible dropdown presentation repair; no migration or user action is required.
 
 ### Fixed
 
