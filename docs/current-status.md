@@ -1,6 +1,6 @@
 # Current capability and operational status — updated 28 October 2026
 
-Latest published release: **application0.3.4 / Sites46**, 28 October 2026. [Publication/live receipt](verification/publication-20261028-v46.json), [résumé UI review and visuals](screenshots/changes/resume-layout.md). Includes the concurrent0.3.3 job-card UI repair. The62 combined UI browser checks passed; live source mapping and résumé geometry verified. No account-data migration. Operational limits below remain unchanged.
+Latest published release: **application0.3.5 / Sites47**, 28 October 2026. [Publication/live receipt](verification/publication-20261028-v47.json), [matching-profile UI review and visuals](screenshots/changes/candidate-layout.md). Grouped fields, compact spacing and mobile reflow preserve all existing profile values and explicit confirmation. The44 UI browser checks passed; live source mapping and form structure verified. No account-data migration. Operational limits below remain unchanged.
 
 Prior job-finding assessment: **application0.3.2 / Sites44**, 27 October 2026. [Publication receipt](verification/publication-20261027-v44.json), [live evidence](verification/live-20261027-v44.json), [reassessment](live-reassessment-20261027-v44.md). Reviewed GitHub source `f1fd7292904df73bd46f1ffb5b9d0a07e8b2e0e9` maps to Sites source `f83f5f064eaeef1be0299e435164390f6df35df9`. CI passed; live build metadata matches. The job-finding assessment is7.3/10, not full operational/accessibility certification.
 

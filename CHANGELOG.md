@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.3.5 — 2026-10-28
 
-Release candidate; publication pending. Compatible candidate-profile form repair; no migration or user action is required.
+Published as **Sites47** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v47.json). Reviewed GitHub source `dad063a` maps to Sites source `6eb2179`. Compatible candidate-profile form repair; no migration or user action is required.
 
 ### Fixed
 
