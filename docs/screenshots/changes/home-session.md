@@ -1,6 +1,6 @@
 # Homepage for visitors and signed-in members
 
-Application0.4.3 release candidate, 2026-10-28; publication pending. Previous published release:0.4.2 / Sites50. Compatible navigation/presentation repair; no account, API, permission, schema or provider-configuration change.
+Published application **0.4.3 / Sites51**, 2026-10-28. [Publication/live receipt](../../verification/publication-20261028-v51.json). Previous published release:0.4.2 / Sites50. Compatible navigation/presentation repair; no account, API, permission, schema or provider-configuration change.
 
 The homepage previously displayed the same login/start prompts even with a verified session. It now reads the existing account-session signal:
 
@@ -26,3 +26,5 @@ Matching light-theme pairs: [visitor desktop before](home-session-visitor-deskto
 Product files: `src/app/pages/home.ts`, `home.html`, and scoped `home.css`. Session/auth/store/route-guard implementations are unchanged. `tests/home-session.spec.ts` covers both states/themes/viewports, mobile navigation, overflow at320/390/768/900/1440px, accessibility, delayed session initialization, cross-tab logout/login refresh, setup routing and standard-account registration. The pilot homepage assertion now expects the member jobs action when its fixture is signed in.
 
 Review and verification: no blocking findings in session gating, provider-aware destinations, signed-out fallback, mobile link visibility or setup-guard preservation. Production build, both frontend-test/browser-test TypeScript checks,59 frontend unit tests and50 Chromium browser checks across homepage session states, pilot authentication, existing journeys and UI/motion checks passed. Changed files passed formatting and whitespace checks. Mobile uses browser emulation; physical devices and additional browser engines were not reassessed. The existing assistant stylesheet budget warning is unchanged.
+
+Live verification: custom-domain build metadata matches reviewed GitHub source `c02e388` and Sites source `d31370d`. The existing signed-in homepage now shows the welcome-back message, header links to account/workspace, hero links to jobs/workspace, and a workspace final CTA with no signup/login prompts or horizontal overflow. Visitor behavior is covered by the synthetic browser sessions; the live user was not signed out. No account, profile or preference data were created or changed. Only synthetic comparison screenshots are tracked; the live preview stays local.

@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.4.3 — 2026-10-28
 
-Release candidate; publication pending. Compatible homepage navigation repair; no migration or user action is required.
+Published as **Sites51** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v51.json). Reviewed GitHub source `c02e388` maps to Sites source `d31370d`. Compatible homepage navigation repair; no migration or user action is required.
 
 ### Fixed
 

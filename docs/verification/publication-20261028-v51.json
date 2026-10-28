@@ -1,0 +1,59 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.3",
+  "version": 51,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_a6a73601e0548191afc3ee760c5849de",
+  "deploymentId": "appgdep_6ae1d9a6cb14819193315ac32d53e6f6",
+  "status": "succeeded",
+  "publishedAt": "2026-10-28T11:17:13.313498+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "c02e388c2ea5c8134993eb77db76b13493cec37e",
+  "sitesCommit": "d31370d8e540a89150579d177d4203501e367b6d",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000007f0081f5a24f093f0c038724",
+    "content_hash": "sha256:8bb620e61b8c76a0f1c251fdeda5030f698339abf94425f7d97bd89bd6e2ee48",
+    "size_bytes": 13793280,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 59,
+    "chromiumBrowser": 50,
+    "frontendTestTypes": true,
+    "browserTypes": true,
+    "productionBuild": true,
+    "changedFileFormatting": true,
+    "liveBuildMappingVerified": true,
+    "liveMemberHome": {
+      "header": ["/account", "/app"],
+      "hero": ["/app/jobs", "/app"],
+      "final": "/app",
+      "signupOrLoginPrompts": 0,
+      "horizontalOverflow": false
+    },
+    "visitorAndMemberFixtures": true,
+    "lightDarkAndMobile": true,
+    "delayedSessionAndCrossTabChanges": true,
+    "setupGuardAndRegistrationDestinations": true,
+    "report": "../screenshots/changes/home-session.md"
+  },
+  "productionWrites": {
+    "accountCreation": 0,
+    "profileEdits": 0,
+    "preferenceEdits": 0,
+    "uploads": 0,
+    "deletions": 0
+  },
+  "limitations": [
+    "Visitor behavior was verified with synthetic browser sessions; the live session was verified signed in without signing the user out.",
+    "Mobile uses browser emulation; no physical-device checks.",
+    "Existing assistant stylesheet budget warning is unchanged.",
+    "Post-publication documentation is Git-only."
+  ]
+}
