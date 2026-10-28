@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Brand } from '../shared/brand';
 import { Icon } from '../shared/icon';
@@ -9,6 +9,7 @@ import { Reveal } from '../shared/reveal';
 @Component({
   imports: [RouterLink, Brand, Icon, Reveal],
   templateUrl: './home.html',
+  styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
@@ -16,6 +17,13 @@ export class Home {
   readonly store = inject(AppStore);
   readonly cookies = inject(CookiePreferences);
   readonly menu = signal(false);
+  readonly startLink = computed(() =>
+    !this.session.config().accounts
+      ? '/signup'
+      : this.session.config().platform === 'sites'
+        ? '/login'
+        : '/register',
+  );
   readonly faqs = [
     {
       q: 'מה Niva עושה בשבילי?',

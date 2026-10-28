@@ -1,0 +1,18 @@
+.home-mobile-session-link {
+  display: none;
+}
+.home-session-pending {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+@media (max-width: 768px) {
+  .home-mobile-session-link {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+  }
+  .header-actions .home-session-pending {
+    display: none;
+  }
+}

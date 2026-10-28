@@ -77,8 +77,8 @@ test('hosted normal experience defaults to source jobs and keeps legacy demo dat
   );
   await page.goto('/');
   await expect(
-    page.getByRole('link', { name: 'מתחילים לחפש עבודה', exact: false }),
-  ).toHaveAttribute('href', '/login');
+    page.getByRole('link', { name: 'למשרות שמתאימות לי', exact: false }),
+  ).toHaveAttribute('href', '/app/jobs');
   await page.goto('/app');
   await expect(page.locator('niva-job-card')).toHaveCount(1);
   await expect(page.getByRole('link', { name: 'ההגשות שלי', exact: true })).toHaveCount(0);
