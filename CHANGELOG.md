@@ -4,6 +4,22 @@
 
 No changes recorded.
 
+## 0.4.0 — 2026-10-28 (publication pending)
+
+### Added
+
+- A built-in Niva guide works without an external AI provider: search the real catalog using saved preferences and the existing relevance ranking, inspect extracted requirements for a selected job, prepare with clearly labelled general interview questions, and compare an explicitly included active confirmed résumé. It uses fixed guidance and source facts, not generated AI answers; free-form AI still requires `OPENAI_API_KEY`, `NIVA_AI_MODEL` and explicit consent. No provider key, paid service or private-data processor has been activated.
+
+### Changed
+
+- Redesign the assistant with task cards, consistent icons, clear guide/AI mode labels, compact privacy details, visible job context, bounded transcript scrolling, conversation history and an accessible deletion dialog. Search still requires a role/company query; unknown job facts remain unknown and the guide cannot submit applications or change profile/preferences.
+
+### Fixed
+
+- Replace the permanently blocked no-provider chat entry with the usable built-in guide. Explain provider availability and AI consent before sending, retain drafts on failure and job-context navigation, handle non-JSON gateway errors, and keep history-loading errors separate from a successful answer. New conversation explicitly clears its draft; route-context changes retain it.
+
+Development implementation; not published until a separate deployment receipt confirms it. No schema migration is required. Existing conversations remain AI conversations; switching modes starts a separate conversation to avoid sending guide history to a provider. See [assistant repair and visual evidence](docs/assistant-repair-20261028.md).
+
 ## 0.3.2 — 2026-10-27
 
 Published as **Sites44** at [getnivajobs.com](https://getnivajobs.com). [Publication receipt](docs/verification/publication-20261027-v44.json), [live reassessment](docs/live-reassessment-20261027-v44.md). Reviewed GitHub source `f1fd729` maps to Sites source `f83f5f0`; GitHub CI passed. Live search, regional filtering, source facts, pagination, saving and employer handoff were checked without submitting applications.

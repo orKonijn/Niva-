@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-28",
+  "applicationVersion": "0.4.0",
+  "status": "local verification passed; publication pending",
+  "frontend": 59,
+  "server": 184,
+  "typeChecks": 3,
+  "worker": 1,
+  "provenance": 1,
+  "productionBuild": "passed with assistant CSS soft budget warning (5.57kB / 4kB)",
+  "broadBrowserRun": {
+    "total": 464,
+    "passed": 459,
+    "failed": 5,
+    "projects": ["desktop", "mobile", "firefox", "webkit"]
+  },
+  "finalAffectedAreaBrowserRun": {
+    "total": 44,
+    "passed": 44,
+    "failed": 0,
+    "coversAllPriorFailures": true
+  },
+  "finalFocusedServerRun": {
+    "total": 25,
+    "passed": 25
+  },
+  "limitations": [
+    "Built-in guide uses fixed guidance and database facts, not AI.",
+    "No AI provider credentials configured or real provider quality verified.",
+    "Hosted private retention, independent identity isolation and restoration gates unchanged.",
+    "Full suite was not repeated after the final narrow UI fixes; affected cases were rerun."
+  ]
+}

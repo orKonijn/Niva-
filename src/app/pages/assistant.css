@@ -1,0 +1,351 @@
+:host {
+  display: block;
+}
+.assistant-heading .section-kicker,
+.assistant-identity,
+.assistant-toolbar,
+.assistant-modes,
+.assistant-badge,
+.assistant-context,
+.assistant-next a,
+.assistant-sidebar h2,
+.assistant-main button,
+.assistant-heading button,
+.assistant-thinking,
+.chat-message h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.assistant-heading p {
+  color: var(--muted);
+  margin-block-start: 8px;
+  max-width: 62ch;
+}
+.assistant-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+  align-items: start;
+}
+.assistant-main {
+  padding: 24px;
+  min-width: 0;
+}
+.assistant-toolbar {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block-end: 20px;
+  border-block-end: 1px solid var(--line);
+}
+.assistant-toolbar h2,
+.assistant-sidebar h2 {
+  font-size: 19px;
+  line-height: 1.5;
+}
+.assistant-identity p,
+.assistant-muted {
+  color: var(--muted);
+  font-size: 13px;
+  margin-block-start: 3px;
+}
+.assistant-avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  color: var(--blue);
+  background: var(--pale);
+  flex-shrink: 0;
+}
+.assistant-avatar niva-icon {
+  width: 24px;
+  height: 24px;
+}
+.assistant-badge {
+  background: var(--pale);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.assistant-modes {
+  flex-wrap: wrap;
+  margin-block: 18px 12px;
+}
+.assistant-modes button {
+  font-size: 13px;
+}
+.assistant-modes [aria-pressed='true'],
+.assistant-prompts [aria-pressed='true'] {
+  border-color: var(--blue);
+  background: var(--pale);
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+.assistant-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--pale);
+  font-size: 13px;
+  line-height: 1.8;
+  margin-block: 12px;
+}
+.assistant-error {
+  border-inline-start: 3px solid var(--ink);
+}
+.assistant-context {
+  padding: 12px;
+  margin-block: 14px;
+  background: var(--pale);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  border: 1px solid var(--line);
+}
+.assistant-context span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.assistant-log {
+  min-height: 260px;
+  max-height: 520px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding-inline: 4px;
+}
+.assistant-welcome {
+  text-align: center;
+  max-width: 440px;
+  margin: 34px auto;
+}
+.assistant-welcome .assistant-avatar {
+  margin: 0 auto 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 19px;
+}
+.assistant-welcome h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.assistant-welcome p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-block-start: 8px;
+}
+.assistant-prompts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-block: 16px;
+}
+.assistant-prompts button {
+  text-align: start;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  min-height: 74px;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+  cursor: pointer;
+}
+.assistant-prompts button:hover {
+  background: var(--pale);
+}
+.assistant-prompts niva-icon {
+  color: var(--blue);
+}
+.assistant-prompts span {
+  font-weight: 600;
+  font-size: 14px;
+}
+.assistant-prompts small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+  margin-block-start: 4px;
+}
+.assistant-privacy {
+  padding-block: 4px 14px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.assistant-privacy .career-check {
+  margin-block: 8px;
+}
+.assistant-privacy > p {
+  color: var(--muted);
+}
+.assistant-privacy summary {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.assistant-privacy details p {
+  margin-block: 8px;
+  color: var(--muted);
+}
+.assistant-composer {
+  border-block-start: 1px solid var(--line);
+  padding-block-start: 8px;
+}
+.assistant-composer .career-field {
+  margin-block: 12px;
+  font-size: 13px;
+}
+.assistant-composer textarea {
+  min-height: 105px;
+}
+.assistant-composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.assistant-composer-footer p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  flex: 1 1 220px;
+}
+.assistant-composer-footer p span {
+  display: block;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  text-align: start;
+}
+.assistant-sidebar {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.assistant-sidebar .account-panel {
+  padding: 20px;
+}
+.assistant-history-empty {
+  color: var(--muted);
+  text-align: center;
+  padding-block: 32px;
+}
+.assistant-history-empty > niva-icon {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto 12px;
+}
+.assistant-history-empty small {
+  display: block;
+  margin-block-start: 6px;
+  line-height: 1.8;
+}
+.assistant-history {
+  padding: 12px 8px;
+  border-radius: 10px;
+}
+.assistant-history-active {
+  background: var(--pale);
+}
+.assistant-history-open {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  text-align: start;
+  min-height: 44px;
+  width: 100%;
+  cursor: pointer;
+}
+.assistant-history p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-block: 6px;
+}
+.assistant-history .assistant-delete {
+  font-size: 12px;
+}
+.assistant-next a {
+  min-height: 48px;
+  font-size: 14px;
+  border-block-end: 1px solid var(--line);
+}
+.assistant-next a niva-icon:last-child {
+  margin-inline-start: auto;
+}
+.assistant-next h2 {
+  margin-block-end: 10px;
+}
+.assistant-main > h3 {
+  margin-block-start: 24px;
+  font-weight: 600;
+}
+.assistant-main > ul {
+  line-height: 1.9;
+  margin-block-start: 12px;
+  overflow-wrap: anywhere;
+}
+.assistant-job-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding-block: 8px;
+}
+.assistant-main button:disabled {
+  cursor: not-allowed;
+}
+@media (max-width: 1100px) {
+  .assistant-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .assistant-sidebar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .assistant-main,
+  .assistant-sidebar .account-panel {
+    padding: 16px;
+  }
+  .assistant-prompts,
+  .assistant-sidebar {
+    grid-template-columns: 1fr;
+  }
+  .assistant-prompts button {
+    min-height: 64px;
+  }
+  .assistant-log {
+    min-height: 220px;
+    max-height: 420px;
+  }
+  .assistant-badge {
+    display: none;
+  }
+  .assistant-workspace {
+    gap: 16px;
+  }
+  .assistant-modes button {
+    flex: 1;
+    justify-content: center;
+  }
+}

@@ -574,6 +574,110 @@ describe('private resumes, versions and matching', () => {
   });
 });
 describe('grounded chat and failure recovery (provider is mocked)', () => {
+  it('uses only an explicitly included active confirmed resume in the built-in guide', async () => {
+    const { req, db } = setup();
+    mockSources();
+    await ingest(db);
+    const text = 'Synthetic candidate — Python SQL Playwright. Private marker: guide-opt-in.';
+    const original = await (
+      await req('career/resumes', { name: 'Synthetic guide CV', text })
+    ).json();
+    await req(`career/resumes/${original.id}/review`, { text, confirmed: true });
+    await req(`career/resumes/${original.id}/activate`, { confirmed: true });
+    const body = {
+      mode: 'guide',
+      action: 'resume',
+      message: 'Resume evidence',
+      jobId: 'greenhouse-appsflyer-101',
+    };
+    expect(await (await req('career/chat', body)).text()).toContain('לא צורפה גרסה');
+    const included = await (await req('career/chat', { ...body, includeResume: true })).text();
+    expect(included).toMatch(/עדויות שנמצאו: [^.]*Python/);
+    expect(included).not.toContain('guide-opt-in');
+  });
+  it('runs the built-in guide without a provider, persists history, and isolates owners', async () => {
+    const { req, db } = setup();
+    mockSources();
+    await ingest(db);
+    const external = vi.fn(async () => {
+      throw new Error('guide must not call a provider');
+    });
+    vi.stubGlobal('fetch', external);
+    const response = await req('career/chat', {
+      mode: 'guide',
+      action: 'search',
+      search: 'QA',
+      message: 'QA',
+    });
+    expect(response.status).toBe(200);
+    const stream = await response.text();
+    expect(stream).toContain('event: done');
+    expect(stream).toContain('QA Automation Engineer');
+    expect(stream).not.toContain('Workflow Automation Developer');
+    expect(stream).toContain('ללא בינה מלאכותית');
+    expect(external).not.toHaveBeenCalled();
+    const chats = await (await req('career/conversations')).json();
+    expect(chats[0].mode).toBe('guide');
+    expect(chats[0].messages).toHaveLength(2);
+    expect(chats[0].messages[1].references).toHaveLength(1);
+    expect(
+      (
+        await req(
+          'career/chat',
+          { mode: 'guide', message: 'help', conversationId: chats[0].id },
+          'bob',
+        )
+      ).status,
+    ).toBe(404);
+    await req(`career/conversations/${chats[0].id}/delete`, {});
+    expect(await (await req('career/conversations')).json()).toEqual([]);
+    expect(sqlite.prepare('SELECT * FROM niva_career_leases').all()).toHaveLength(0);
+  });
+  it('uses saved hard preferences and literal searches without relaxing empty results', async () => {
+    const { req, db, state } = setup();
+    mockSources();
+    await ingest(db);
+    state.preferences.exclusions = 'AppsFlyer';
+    const stream = await (
+      await req('career/chat', { mode: 'guide', action: 'search', search: 'QA', message: 'QA' })
+    ).text();
+    expect(stream).toContain('לא נמצאו משרות');
+    expect(stream).not.toContain('QA Automation Engineer');
+  });
+  it('guides selected-job review, requires opt-in for resume evidence and refuses mode mixing', async () => {
+    const { req, db } = setup();
+    mockSources();
+    await ingest(db);
+    const body = {
+      mode: 'guide',
+      message: 'requirements',
+      action: 'requirements',
+      jobId: 'greenhouse-appsflyer-101',
+    };
+    expect(await (await req('career/chat', body)).text()).toContain('דרישות שחולצו');
+    const chats = await (await req('career/conversations')).json();
+    expect(
+      await (
+        await req('career/chat', { ...body, action: 'resume', conversationId: chats[0].id })
+      ).text(),
+    ).toContain('לא צורפה גרסה');
+    expect(
+      await (
+        await req('career/chat', { ...body, action: 'interview', conversationId: chats[0].id })
+      ).text(),
+    ).toContain('שאלות הכנה כלליות');
+    expect(await (await req('career/chat', { mode: 'guide', message: 'hello' })).text()).toContain(
+      'אינו מופעל במצב המובנה',
+    );
+    const ai = setup({ OPENAI_API_KEY: 'test', NIVA_AI_MODEL: 'test' });
+    // The record remains a guide even if a provider is subsequently configured.
+    const conflict = await ai.req('career/chat', {
+      message: 'hello',
+      aiConsent: true,
+      conversationId: chats[0].id,
+    });
+    expect(conflict.status).toBe(409);
+  });
   it('reports missing configuration, enforces consent and never uses submitted account context', async () => {
     expect((await setup().req('career/chat', { message: 'hello', aiConsent: true })).status).toBe(
       503,

@@ -260,10 +260,9 @@ test('chat consent, grounded context, provider failure and retry are accessible'
   await expect(page.getByRole('alert')).toContainText('אינו זמין');
   await page.getByRole('button', { name: 'ניסיון חוזר', exact: true }).press('Enter');
   await expect(page.getByRole('log')).toContainText('תגובת בדיקת ספק מדומה');
-  await expect(page.getByRole('link', { name: /משרת בדיקת ממשק — QA Automation/ })).toHaveAttribute(
-    'href',
-    '/app/jobs/greenhouse-appsflyer-101',
-  );
+  await expect(
+    page.getByRole('link', { name: 'משרת בדיקת ממשק — QA Automation — AppsFlyer', exact: true }),
+  ).toHaveAttribute('href', '/app/jobs/greenhouse-appsflyer-101');
   await expect(page.getByRole('log').locator('a')).toHaveCount(0);
   for (const theme of ['light', 'dark']) {
     await page.evaluate((value) => (document.documentElement.dataset['theme'] = value), theme);
@@ -278,17 +277,20 @@ test('chat consent, grounded context, provider failure and retry are accessible'
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
   });
   await page.screenshot({
-    path: `docs/screenshots/career/chat-${info.project.name}.png`,
+    path: `docs/screenshots/changes/assistant28/${process.env['NIVA_CHAT_CAPTURE'] || 'after'}-${info.project.name}.png`,
     fullPage: true,
   });
 });
-test('missing AI configuration is explicit while local file import remains available', async ({
+test('built-in guide is available without AI configuration while local file import remains available', async ({
   page,
 }) => {
   await fixture(page);
   await page.goto('/app/assistant');
-  await expect(page.getByRole('status')).toContainText('טרם הוגדר');
-  await expect(page.getByRole('button', { name: 'שליחה', exact: true })).toBeDisabled();
+  await expect(page.getByRole('status').filter({ hasText: 'טרם הוגדר' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'שיחה חופשית עם AI', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: /למצוא משרות/ }).click();
+  await expect(page.getByLabel('ההודעה שלך', { exact: true })).toHaveValue('QA');
+  await expect(page.getByRole('button', { name: 'שליחה', exact: true })).toBeEnabled();
   await page.goto('/app/resumes');
   await page.getByText('הוספת גרסה חדשה', { exact: true }).click();
   await expect(page.getByText(/הקריאה נעשית במכשיר שלך/)).toBeVisible();
@@ -348,6 +350,113 @@ test('stopping chat aborts the request and preserves a retry without saving a pa
     'Please help with interview questions',
   );
   await expect(page.getByRole('button', { name: 'ניסיון חוזר', exact: true })).toBeEnabled();
+});
+
+test('built-in task cards send without AI consent, restore guide history, and clear drafts', async ({
+  page,
+}, info) => {
+  await fixture(page);
+  let saved = false;
+  await page.route('**/api/career/conversations', (r) =>
+    r.fulfill({
+      json: saved
+        ? [
+            {
+              id: 'guide-ui',
+              mode: 'guide',
+              createdAt: '2026-10-28T10:00:00Z',
+              expiresAt: '2026-11-27T10:00:00Z',
+              messages: [
+                { role: 'user', text: 'QA' },
+                {
+                  role: 'assistant',
+                  text: 'מדריך מובנה — נתוני ממשק סינתטיים בלבד',
+                  references: [jobs[0]],
+                },
+              ],
+            },
+          ]
+        : [],
+    }),
+  );
+  await page.route('**/api/career/chat', async (r) => {
+    expect(r.request().postDataJSON()).toMatchObject({
+      mode: 'guide',
+      action: 'search',
+      message: 'QA',
+      aiConsent: false,
+    });
+    saved = true;
+    await r.fulfill({
+      contentType: 'text/event-stream',
+      body:
+        'event: context\ndata: ' +
+        JSON.stringify({ conversationId: 'guide-ui', jobs: [jobs[0]] }) +
+        '\n\nevent: delta\ndata: {"text":"מדריך מובנה — נתוני ממשק סינתטיים בלבד"}\n\nevent: done\ndata: {}\n\n',
+    });
+  });
+  await page.goto('/app/assistant');
+  await expect(page.getByRole('button', { name: 'מדריך מובנה', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.screenshot({
+    path: `docs/screenshots/changes/assistant28/guide-empty-${info.project.name}.png`,
+    fullPage: true,
+  });
+  await page.getByRole('button', { name: /למצוא משרות/ }).click();
+  await expect(page.getByLabel('ההודעה שלך', { exact: true })).toBeFocused();
+  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('נתוני ממשק סינתטיים');
+  await page.getByRole('button', { name: 'שיחה חדשה', exact: true }).click();
+  await expect(page.getByLabel('ההודעה שלך', { exact: true })).toHaveValue('');
+  await page.getByRole('button', { name: 'QA', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('נתוני ממשק סינתטיים');
+  await expect(page.getByRole('button', { name: 'מדריך מובנה', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.reload();
+  await page.getByRole('button', { name: 'QA', exact: true }).click();
+  await expect(page.getByRole('log')).toContainText('נתוני ממשק סינתטיים');
+  for (const theme of ['light', 'dark']) {
+    await page.evaluate((v) => (document.documentElement.dataset['theme'] = v), theme);
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.evaluate(() => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    window.scrollTo(0, 0);
+  });
+  await page.screenshot({
+    path: `docs/screenshots/changes/assistant28/guide-${info.project.name}.png`,
+    fullPage: true,
+  });
+});
+
+test('chat handles non-JSON gateway errors and history failures without losing the draft', async ({
+  page,
+}) => {
+  await fixture(page, { ai: true });
+  await page.route('**/api/career/conversations', (r) =>
+    r.fulfill({ status: 503, json: { error: 'AI_UNAVAILABLE' } }),
+  );
+  await page.route('**/api/career/chat', (r) =>
+    r.fulfill({ status: 502, contentType: 'text/html', body: '<h1>Gateway failure</h1>' }),
+  );
+  await page.goto('/app/assistant');
+  await page.getByRole('checkbox', { name: /אני מסכים/ }).check();
+  await page.getByLabel('ההודעה שלך', { exact: true }).fill('Prepare me for an interview');
+  await page.getByRole('button', { name: 'שליחה', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'ניסיון חוזר', exact: true })).toBeVisible();
+  await expect(page.getByLabel('ההודעה שלך', { exact: true })).toHaveValue(
+    'Prepare me for an interview',
+  );
+  await expect(page.getByText(/Unexpected token/)).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'טעינת שיחות מחדש', exact: true })).toBeVisible();
 });
 
 test('resume switching and repeated selection preserve unsaved edits; tailoring requires saved facts', async ({
