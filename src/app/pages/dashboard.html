@@ -43,10 +43,13 @@
   class="stats-grid grid grid-cols-[repeat(3,_1fr)] gap-[18px] mb-[40px] max-[768px]:gap-[10px] max-[768px]:mb-[30px] max-[768px]:grid-cols-[repeat(auto-fit,_minmax(145px,_1fr))]"
   aria-label="סיכום הפעילות"
 >
-  <a routerLink="/app/jobs" class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
+  <a
+    routerLink="/app/jobs"
+    [queryParams]="{ scope: 'personal' }"
+    class="stat-card bg-surface flex-col max-[768px]:min-w-[0]"
     ><span class="round-icon items-center justify-center shrink-[0] blue"
       ><niva-icon name="search" /></span
-    ><span>משרות לפי ההעדפות שלך</span><strong>{{ store.eligibleJobs().length }}</strong
+    ><span>משרות לפי ההעדפות שלך</span><strong>{{ personalCount() }}</strong
     ><small>{{ store.catalogMode() === 'real' ? 'ממקור המעסיק' : 'מתוך מאגר ההדגמה' }}</small></a
   ><a
     routerLink="/app/jobs"

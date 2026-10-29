@@ -1,7 +1,10 @@
 import type { Job } from './models/job';
 import { matchesPreferences, type Preferences } from './preferences';
 import { requirementClauses } from './requirements';
-export const MATCH_VERSION = 'evidence-v5';
+export const MATCH_VERSION = 'evidence-v6';
+// Only recognized testing modifiers may connect “manual” to “testing”.
+const manualTestingList =
+  /\bmanual(?:\s*,\s*(?:and\s+)?(?:functional|regression|exploratory|integration|acceptance|smoke|sanity|UI\/UX)){1,6}\s+testing\b/i;
 export const SKILLS: Record<string, RegExp> = {
   JavaScript: /\bjavascript\b|ג׳אווהסקריפט/i,
   TypeScript: /\btypescript\b|טייפסקריפט/i,
@@ -19,7 +22,7 @@ export const SKILLS: Record<string, RegExp> = {
   Kubernetes: /\bkubernetes\b|\bk8s\b|קוברנטיס/i,
   AWS: /\baws\b|amazon web services/i,
   Azure: /\bazure\b/i,
-  'Manual QA': /manual (?:qa|testing)|בדיקות ידניות/i,
+  'Manual QA': new RegExp(`manual (?:qa|testing)|בדיקות ידניות|${manualTestingList.source}`, 'i'),
   'QA Automation': /test automation|qa automation|selenium|playwright|cypress|אוטומציית בדיקות/i,
   'Workflow Automation': /workflow automation|\bn8n\b|zapier|אוטומציית תהליכים/i,
   Figma: /\bfigma\b|פיגמה/i,
@@ -40,7 +43,18 @@ export function positiveEvidence(text: string): { skill: string; text: string }[
     c.split(/\bwhereas\b|(?<![\p{L}\p{M}])אך(?![\p{L}\p{M}])/iu),
   )) {
     let inheritedNegative = false;
-    for (const clause of contrast.split(/[,،]/)) {
+    const list = manualTestingList.exec(contrast);
+    // Keep a coordinated testing list together, including its preceding negation.
+    const boundaries = [...contrast.matchAll(/[,،]/g)]
+      .filter((m) => !list || m.index < list.index || m.index >= list.index + list[0].length)
+      .map((m) => m.index);
+    let start = 0;
+    const parts = [...boundaries, contrast.length].map((end) => {
+      const part = contrast.slice(start, end);
+      start = end + 1;
+      return part;
+    });
+    for (const clause of parts) {
       const scope = clause
         .normalize('NFD')
         .replace(/\p{M}/gu, '')

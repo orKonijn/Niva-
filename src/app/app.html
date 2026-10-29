@@ -4,6 +4,32 @@
   (click)="skipToContent($event)"
   >דילוג לתוכן</a
 >
+@if (navigationRecovery(); as destination) {
+  <section
+    class="fixed z-[60] top-[16px] inset-x-[16px] mx-auto max-w-[640px] rounded-[18px] border border-line bg-surface p-[20px] shadow-lg text-ink"
+    role="alert"
+    aria-label="לא הצלחנו לפתוח את העמוד"
+  >
+    <strong>לא הצלחנו לפתוח את העמוד</strong>
+    <p class="my-[12px]">
+      ייתכן שהאתר עודכן או שהחיבור נקטע. אפשר לטעון את העמוד מחדש כדי להמשיך. לפני המעבר, שמרו או
+      העתיקו שינויים שטרם נשמרו.
+    </p>
+    <div class="flex flex-wrap gap-[12px]">
+      <a
+        class="button inline-flex items-center rounded-[12px] bg-action text-on-action p-[12px_18px] font-semibold"
+        [href]="destination"
+        >טעינת העמוד והמשך</a
+      >
+      <button
+        class="button rounded-[12px] border border-line bg-surface text-ink p-[12px_18px]"
+        (click)="navigationRecovery.set(null)"
+      >
+        להישאר כאן
+      </button>
+    </div>
+  </section>
+}
 <router-outlet />
 @if (!cookies.decided()) {
   <section

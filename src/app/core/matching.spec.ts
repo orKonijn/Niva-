@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { preferenceMatch, resumeMatch, skillEvidence, tailorExtractive } from './matching';
+import {
+  positiveEvidence,
+  preferenceMatch,
+  resumeMatch,
+  skillEvidence,
+  tailorExtractive,
+} from './matching';
 import { JOBS } from './data/sample-jobs';
 import { defaultPreferences } from './preferences';
 const job = {
@@ -8,6 +14,31 @@ const job = {
   description: 'Python SQL test automation Playwright',
   skills: [],
 };
+it('recognizes coordinated testing lists without inventing manual experience', () => {
+  const text =
+    'Performed targeted manual, functional, regression, exploratory, and UI/UX testing for a web application';
+  expect(skillEvidence(text)).toContain('Manual QA');
+  const result = resumeMatch(
+    { ...job, title: 'QA Engineer', description: 'Manual testing and APIs required' },
+    text + '. Tested REST APIs',
+    true,
+  );
+  expect(result.strengths).toEqual(expect.arrayContaining(['Manual QA', 'APIs']));
+  expect(result.coverage).toBe(1);
+  expect(positiveEvidence(text).find((e) => e.skill === 'Manual QA')?.text).toBe(text);
+  for (const negative of ['No ', 'Maybe ', 'Without '])
+    expect(skillEvidence(negative + text)).not.toContain('Manual QA');
+  for (const other of [
+    'Manual data entry, functional testing',
+    'Manual operations. Regression testing',
+    'Manual, maybe functional, regression testing',
+    'No Python, manual, functional testing',
+  ])
+    expect(skillEvidence(other)).not.toContain('Manual QA');
+  expect(skillEvidence('No Python, I have manual, regression testing experience')).toContain(
+    'Manual QA',
+  );
+});
 describe('evidence matching', () => {
   it('recognizes Hebrew/English synonyms and separates manual QA, QA automation and business automation', () => {
     expect(skillEvidence('אנגולר ופייתון עם שאילתות')).toEqual(

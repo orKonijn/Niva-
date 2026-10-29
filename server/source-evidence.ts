@@ -1,6 +1,14 @@
 import type { Job } from '../src/app/core/models/job';
 import type { Evidence, JobFacts } from '../src/app/core/models/discovery';
-export const FACT_VERSION = 'source-sections-v6';
+export const FACT_VERSION = 'source-sections-v7';
+/** Keep excerpt edges at word boundaries; ellipses disclose omitted context. */
+function contextExcerpt(text: string, start: number, end: number): string {
+  let from = Math.max(0, start),
+    to = Math.min(text.length, end);
+  while (from > 0 && !/\s/.test(text[from - 1])) from--;
+  while (to < text.length && !/\s/.test(text[to])) to++;
+  return `${from ? '… ' : ''}${text.slice(from, to).trim()}${to < text.length ? ' …' : ''}`;
+}
 const countries: [RegExp, string][] = [
   [/\b(?:Israel|IL)\b/i, 'IL'],
   [/\b(?:United States|USA|U\.S\.|US)\b/i, 'US'],
@@ -123,7 +131,19 @@ export function arrangementEvidence(job: Job) {
     ],
   ] as const) {
     const m = re.exec(job.description);
-    if (m) add(value, job.description.slice(Math.max(0, m.index - 40), m.index + 180));
+    if (m) {
+      // Reindexing must replace the old cut excerpt, while retaining provider
+      // metadata and conflicting evidence for other arrangements.
+      for (let i = rows.length - 1; i >= 0; i--)
+        if (
+          rows[i].value === value &&
+          rows[i].provenance === 'extracted' &&
+          rows[i].quote !== job.source!.location &&
+          job.description.includes(rows[i].quote)
+        )
+          rows.splice(i, 1);
+      add(value, contextExcerpt(job.description, m.index - 40, m.index + 180));
+    }
   }
   const styles = [...new Set(rows.map((r) => r.value))];
   job.workStyle = styles.length === 1 ? styles[0] : 'unknown';

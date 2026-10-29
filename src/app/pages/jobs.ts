@@ -208,13 +208,24 @@ export class Jobs {
       return (y.score ?? -1) - (x.score ?? -1) || a.id.localeCompare(b.id);
     });
   });
+  private pendingFilters: Record<string, string | null> | null = null;
+  private filterRevision = 0;
   setFilter(queryParams: Record<string, string | null>, replaceUrl = false): void {
-    void this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams,
-      queryParamsHandling: 'merge',
-      replaceUrl,
-    });
+    const revision = ++this.filterRevision;
+    this.pendingFilters = {
+      ...(this.pendingFilters ?? this.route.snapshot.queryParams),
+      ...queryParams,
+    };
+    void this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: this.pendingFilters,
+        queryParamsHandling: 'replace',
+        replaceUrl,
+      })
+      .finally(() => {
+        if (revision === this.filterRevision) this.pendingFilters = null;
+      });
   }
   readonly qaSearch = computed(() =>
     /\bqa\b|sdet|test automation|quality assurance/i.test(this.query()),

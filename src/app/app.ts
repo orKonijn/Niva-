@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { afterNextRender, Injector } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationError, Router, RouterOutlet } from '@angular/router';
 import { CookiePreferences } from './core/cookie-preferences';
 import { AppStore } from './core/app-store';
+import { isModuleLoadError, recoveryPath } from './core/navigation-recovery';
 
 @Component({
   imports: [RouterOutlet],
@@ -15,11 +16,16 @@ export class App {
   private readonly injector = inject(Injector);
   private path = '';
   private focusRevision = 0;
+  readonly navigationRecovery = signal<string | null>(null);
   constructor() {
     inject(AppStore);
     const router = inject(Router);
     router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
+      if (event instanceof NavigationError && isModuleLoadError(event.error)) {
+        this.navigationRecovery.set(recoveryPath(event.url));
+      }
       if (event instanceof NavigationEnd) {
+        this.navigationRecovery.set(null);
         const path = event.urlAfterRedirects.split(/[?#]/)[0];
         if (path === this.path) return;
         this.path = path;

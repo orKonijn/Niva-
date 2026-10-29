@@ -4,6 +4,20 @@
 
 No changes recorded.
 
+## 0.4.6 — 2026-10-29
+
+Release candidate; publication pending. Compatible matching/navigation repairs; no schema migration, new provider, or user data edits.
+
+### Fixed
+
+- Recognize explicit coordinated manual-testing lists as résumé evidence while retaining negation and uncertainty checks. Coverage remains terminology evidence, not a qualification or eligibility guarantee.
+- Open personal search from the dashboard's preferences tile and display the personal feed's total rather than only the loaded page. Refresh against loaded account preferences and matching criteria.
+- Preserve rapid independent search/filter choices while URL navigation is pending.
+- Keep work-arrangement source excerpts on word boundaries and disclose omitted context with ellipses.
+- Offer explicit recovery when a stale or unavailable page module prevents navigation. Keep unsaved drafts intact until the user chooses to reload; existing unsaved-change warnings remain.
+
+See [verification and synthetic UI comparisons](docs/review-repairs-20261029.md). Existing résumé Save, account overview, homepage and assistant improvements remain included.
+
 ## 0.4.5 — 2026-10-28
 
 Published as **Sites53** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261028-v53.json). Reviewed GitHub source `f3cd2a4` maps to Sites source `5176829`. Compatible account-data presentation repair; no migration or user action is required.
