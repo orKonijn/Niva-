@@ -1,0 +1,73 @@
+{
+  "projectId": "appgprj_6adb68abcc248191b701ebaf63187944",
+  "applicationVersion": "0.4.6",
+  "version": 54,
+  "versionId": "appgprj_6adb68abcc248191b701ebaf63187944~appgver_f7de19ec6c488191aac636b75e7e8dbe",
+  "deploymentId": "appgdep_6ae357ebf7c88191beaac5a9c4a664bf",
+  "status": "succeeded",
+  "publishedAt": "2026-10-29T14:28:13.514312+00:00",
+  "url": "https://getnivajobs.com",
+  "generatedUrl": "https://niva-demo-ziv-20261023.ork77.chatgpt.site",
+  "reviewedGithubCommit": "9bb83b8f606c0317b80675a28dd4d29de0efe1e5",
+  "sitesCommit": "8717d3e35579544d5aa6b933bd9d63b292b425da",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000009e9481f5886a7303001a7eaa",
+    "content_hash": "sha256:abb7bde96cf3628199e485b22dade307e6c6d148a1774ce4fd4e19e750b8b720",
+    "size_bytes": 13834240,
+    "file_count": 303
+  },
+  "environmentRevision": 7,
+  "access": {
+    "mode": "public",
+    "revision": 2
+  },
+  "checks": {
+    "frontendUnit": 66,
+    "serverUnit": 186,
+    "chromiumFullRun": {
+      "passed": 286,
+      "failed": 2,
+      "isolatedRetryPassed": 2,
+      "total": 288,
+      "initialFailures": "Desktop local email login exceeded the existing 5-second wait; both passed unchanged in isolation."
+    },
+    "focusedFirefoxWebkit": 10,
+    "types": ["frontend tests", "server", "browser tests"],
+    "formatting": true,
+    "worker": true,
+    "provenance": true,
+    "productionBuild": true,
+    "live": {
+      "buildMappingVerified": true,
+      "cleanMappedBuild": true,
+      "personalDashboardHref": "/app/jobs?scope=personal",
+      "personalModeSelectedAfterTileClick": true,
+      "personalDashboardTotal": 4,
+      "personalSearchTotal": 4,
+      "canopyTerminologyCoverageBefore": 0.5,
+      "canopyTerminologyCoverageAfter": 1,
+      "eligibilityStillRequiresClarification": true,
+      "workArrangementExcerptStartsAtWordBoundary": true,
+      "resumeToProfileToPreferencesNavigation": true,
+      "desktopOverflow": false
+    }
+  },
+  "productionAccountWrites": {
+    "profile": 0,
+    "preferences": 0,
+    "resumes": 0,
+    "applications": 0
+  },
+  "preservedAutomations": true,
+  "limitations": [
+    "Mobile was emulated locally; live smoke verification used an authenticated desktop browser.",
+    "The first pre-existing in-app tab kept an older asset after reload; a fresh tab loaded the published release. Custom-domain HTML and cache-busted build metadata matched the release.",
+    "Existing provider freshness/coverage gaps and external employer upload limitations were not repaired or certified.",
+    "Existing assistant CSS warning remains.",
+    "The first save request had a mistyped commit identifier and was rejected before creating a version; only the verified clean build was saved/deployed.",
+    "Post-publication documentation is Git-only; no second deployment."
+  ],
+  "report": "../review-repairs-20261029.md",
+  "screenshot": "../screenshots/changes/review29-live-canopy.png"
+}

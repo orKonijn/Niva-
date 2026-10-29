@@ -6,7 +6,7 @@ No changes recorded.
 
 ## 0.4.6 — 2026-10-29
 
-Release candidate; publication pending. Compatible matching/navigation repairs; no schema migration, new provider, or user data edits.
+Published as **Sites54** at [getnivajobs.com](https://getnivajobs.com). [Publication and live verification receipt](docs/verification/publication-20261029-v54.json). Reviewed GitHub source `9bb83b8` maps to Sites source `8717d3e`. Compatible matching/navigation repairs; no schema migration, new provider, or user data edits. Reload an existing tab or open a fresh one to load the new release.
 
 ### Fixed
 
